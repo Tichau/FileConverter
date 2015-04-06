@@ -57,20 +57,23 @@ namespace FileConverter
             Diagnostics.Log("Retrieve arguments...");
             string[] args = Environment.GetCommandLineArgs();
 
+#if (DEBUG)
             if (args.Length <= 1)
             {
                 this.debugMode = true;
                 System.Array.Resize(ref args, 9);
                 args[1] = "--output-type";
-                args[2] = "mp3";
+                args[2] = "Flac";
                 args[3] = @"D:\Projects\FileConverter\TestFiles\Herbie Hancock - Speak Like A Child [RVG Edition].flac";
+                args[3] = @"D:\Projects\FileConverter\TestFiles\01 - Le Bruit Du Bang.wma";
                 args[4] = @"D:\Projects\FileConverter\TestFiles\test\Toccata.wav";
                 args[5] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (4).wav";
-                //// args[5] = "--verbose";
+                args[5] = "--verbose";
                 args[6] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (3).wav";
                 args[7] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (2).wav";
                 args[8] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (5).wav";
             }
+#endif
 
             for (int index = 0; index < args.Length; index++)
             {
@@ -109,6 +112,10 @@ namespace FileConverter
 
                                     case "ogg":
                                         outputType = OutputType.Ogg;
+                                        break;
+
+                                    case "wav":
+                                        outputType = OutputType.Wav;
                                         break;
 
                                     case "flac":
@@ -196,6 +203,24 @@ namespace FileConverter
             }
 
             Diagnostics.Log("End of job queue.");
+
+#if !DEBUG
+            bool allConversionsSucceed = true;
+            for (int index = 0; index < this.conversionJobs.Count; index++)
+            {
+                allConversionsSucceed &= this.conversionJobs[index].State == ConversionJob.ConversionState.Done;
+            }
+
+            if (allConversionsSucceed)
+            {
+                System.Threading.Thread.Sleep(3000);
+
+                Dispatcher.BeginInvoke((Action)delegate
+                {
+                    Application.Current.Shutdown();
+                });
+            }
+#endif
         }
     }
 }

@@ -9,5 +9,6 @@ namespace FileConverterExtension
         Mp3,
         Ogg,
         Flac,
+        Wav,
     }
 }

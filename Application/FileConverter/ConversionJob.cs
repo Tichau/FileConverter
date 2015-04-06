@@ -11,8 +11,8 @@ namespace FileConverter
 
     public class ConversionJob : INotifyPropertyChanged
     {
-        private readonly Regex durationRegex = new Regex(@"Duration: ([0-9][0-9]):([0-9][0-9]):([0-9][0-9])\.([0-9][0-9]), bitrate: ([0-9]+) kb\/s");
-        private readonly Regex progressRegex = new Regex(@"size=[ ]*([0-9]+)kB time=([0-9][0-9]):([0-9][0-9]):([0-9][0-9]).([0-9][0-9]) bitrate= ([0-9]+.[0-9])kbits\/s");
+        private readonly Regex durationRegex = new Regex(@"Duration:\s*([0-9][0-9]):([0-9][0-9]):([0-9][0-9])\.([0-9][0-9]),.*bitrate:\s*([0-9]+) kb\/s");
+        private readonly Regex progressRegex = new Regex(@"size=\s*([0-9]+)kB\s+time=([0-9][0-9]):([0-9][0-9]):([0-9][0-9]).([0-9][0-9])\s+bitrate=\s*([0-9]+.[0-9])kbits\/s");
 
         private TimeSpan fileDuration;
         private TimeSpan actualConvertedDuration;
@@ -151,16 +151,23 @@ namespace FileConverter
             switch (this.OutputType)
             {
                 case OutputType.Mp3:
-                    arguments = string.Format("-n -i \"{0}\" -stats -ar 44100 -ab 320k -map_metadata 0:s:0 -id3v2_version 3 -write_id3v1 1 \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                    arguments = string.Format("-n -stats -i \"{0}\" -qscale:a 5 \"{1}\"", this.InputFilePath, this.OutputFilePath);
                     break;
 
                 case OutputType.Ogg:
-                    arguments = string.Format("-n -i \"{0}\" -map_metadata 0:s:0 \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                    arguments = string.Format("-n -stats -i \"{0}\" -acodec libvorbis -qscale:a 5 \"{1}\"", this.InputFilePath, this.OutputFilePath);
                     break;
 
                 case OutputType.Flac:
-                    arguments = string.Format("-n -i \"{0}\" -map_metadata 0:s:0 \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                    arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
                     break;
+                        
+                case OutputType.Wav:
+                    arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                    break;
+
+                default:
+                    throw new NotImplementedException("Converter not implemented for output file type " + this.OutputType);
             }
 
             if (string.IsNullOrEmpty(arguments) || this.ffmpegProcessStartInfo == null)
@@ -198,12 +205,13 @@ namespace FileConverter
                 throw;
             }
 
-            if (this.progress < 1f)
+            if (!string.IsNullOrEmpty(this.ExitingMessage))
             {
                 this.State = ConversionState.Failed;
                 return;
             }
 
+            this.Progress = 1f;
             this.State = ConversionState.Done;
 
             Diagnostics.Log("\nDone!");

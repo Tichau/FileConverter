@@ -43,6 +43,9 @@ namespace FileConverterExtension
 
                     case "flac":
                         return true;
+
+                    case "wma":
+                        return true;
                 }
             }
 
@@ -60,9 +63,9 @@ namespace FileConverterExtension
 
             {
                 ToolStripMenuItem subItem = new ToolStripMenuItem
-                                                {
-                                                    Text = "To Ogg",
-                                                };
+                {
+                    Text = "To Ogg",
+                };
 
                 fileConverterItem.DropDownItems.Add(subItem);
                 subItem.Click += (sender, args) => this.ConvertFiles(FileType.Ogg);
@@ -88,6 +91,16 @@ namespace FileConverterExtension
                 subItem.Click += (sender, args) => this.ConvertFiles(FileType.Flac);
             }
 
+            {
+                ToolStripMenuItem subItem = new ToolStripMenuItem
+                {
+                    Text = "To Wav",
+                };
+
+                fileConverterItem.DropDownItems.Add(subItem);
+                subItem.Click += (sender, args) => this.ConvertFiles(FileType.Wav);
+            }
+
             menu.Items.Add(fileConverterItem);
 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
@@ -102,7 +115,6 @@ namespace FileConverterExtension
 
         private void ConvertFiles(FileType ouputType)
         {
-            this.fileConverterPath = @"D:\Projects\FileConverter\FileConverter\Application\FileConverter\bin\Debug\FileConverter.exe";
             if (string.IsNullOrEmpty(this.fileConverterPath))
             {
                 MessageBox.Show(string.Format("Can't retrieve the file converter executable path. You should try to reinstall the application."));
