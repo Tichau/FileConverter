@@ -21,7 +21,7 @@
             <ComponentGroupRef Id="ProductComponents" />
         </Feature>
         
-        <Feature Id="ShellExtensionFeature" Title="ShellExtension" Level="1">
+        <Feature Id="ShellExtensionFeature" Title="ShellExtension" Level="1" AllowAdvertise="no">
             <ComponentRef Id="FileConverterExtension.dll" />
         </Feature>
         
