@@ -16,6 +16,14 @@
         
         <UIRef Id="WixUI_InstallDir" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+
+        <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+        <!--<WixVariable Id="WixUIBannerBmp" Value="path\banner.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="path\dialog.bmp" />
+        <WixVariable Id="WixUIExclamationIco" Value="path\exclamation.ico" />
+        <WixVariable Id="WixUIInfoIco" Value="path\information.ico" />
+        <WixVariable Id="WixUINewIco" Value="path\new.ico" />
+        <WixVariable Id="WixUIUpIco" Value="path\up.ico" />-->
     </Product>
 
     <Fragment>
