@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?if $(var.Platform) = x64 ?>
+<?define ProductName = "File Converter (64 bit)" ?>
+<?define Win64 = "yes" ?>
+<?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+<?else ?>
+<?define ProductName = "File Converter" ?>
+<?define Win64 = "no" ?>
+<?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+<?endif ?>
+
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="File Converter" Language="1033" Version="0.1.0" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.1.0" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
         <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
 
         <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -11,7 +22,7 @@
         </Feature>
         
         <Feature Id="ShellExtensionFeature" Title="ShellExtension" Level="1">
-            <ComponentRef Id="FileConverterExtension.dll"/>
+            <ComponentRef Id="FileConverterExtension.dll" />
         </Feature>
         
         <UIRef Id="WixUI_InstallDir" />
@@ -28,8 +39,8 @@
 
     <Fragment>
         <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="ProgramFilesFolder">
-            <Directory Id="INSTALLFOLDER" Name="File Converter" />
+            <Directory Id="$(var.PlatformProgramFilesFolder)">
+                <Directory Id="INSTALLFOLDER" Name="File Converter" />
             </Directory>
         </Directory>
     </Fragment>
@@ -37,19 +48,19 @@
     <Fragment>
         <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
             <!-- Resources -->
-            <Component Guid="{9BF0AC45-A586-41C9-BA93-6048B46DA65F}">
+            <Component Guid="{9BF0AC45-A586-41C9-BA93-6048B46DA65F}" Win64="$(var.Win64)">
                 <File Id="SharpShell.dll" KeyPath="yes" Source="..\Middleware\SharpShell\SharpShell.dll" />
             </Component>
-            <Component Guid="{AA5EA6F7-C443-488B-8E48-7CF000B9AD2A}">
+            <Component Guid="{AA5EA6F7-C443-488B-8E48-7CF000B9AD2A}" Win64="$(var.Win64)">
                 <File Source="$(var.FileConverter.TargetPath)" KeyPath="yes" />
             </Component>
-            <Component Guid="{97A5208C-5135-43BD-88EF-151D0673D5D2}">
+            <Component Guid="{97A5208C-5135-43BD-88EF-151D0673D5D2}" Win64="$(var.Win64)">
                 <File Source="..\Application\FileConverter\bin\Debug\FileConverter.exe.config" KeyPath="yes" />
             </Component>
-            <Component Guid="{1790B82E-86BC-4B95-AA1D-9859FF3B6CA4}">
+            <Component Guid="{1790B82E-86BC-4B95-AA1D-9859FF3B6CA4}" Win64="$(var.Win64)">
                 <File Source="..\Middleware\ffmpeg.exe" KeyPath="yes" />
             </Component>
-            <Component Guid="{A5158756-A107-4010-9E2F-3C0333F5A5F6}">
+            <Component Guid="{A5158756-A107-4010-9E2F-3C0333F5A5F6}" Win64="$(var.Win64)">
                 <File Source="..\Application\FileConverter\readme.txt" KeyPath="yes" />
             </Component>
 
