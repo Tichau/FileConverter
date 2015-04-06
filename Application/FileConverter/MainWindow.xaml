@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="FileConverter.MainWindow"
         xmlns:local="clr-namespace:FileConverter"
-        x:Name="FileConverterMainWindow" Title="File Converter" Height="500" Width="950" MinHeight="250" MinWidth="450" WindowStartupLocation="CenterScreen">
+        x:Name="FileConverterMainWindow" Title="{Binding ApplicationName, ElementName=FileConverterMainWindow, Mode=OneWay}" Height="500" Width="950" MinHeight="250" MinWidth="450" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <local:ConversionStateToBrush x:Key="ConversionStateToColor" />

@@ -18,10 +18,17 @@ namespace FileConverter
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
     public partial class Application : System.Windows.Application
     {
+        public static readonly Version Version = new Version()
+                                            {
+                                                Major = 0, 
+                                                Minor = 1,
+                                            };
+
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
 
         private bool debugMode;
@@ -215,10 +222,7 @@ namespace FileConverter
             {
                 System.Threading.Thread.Sleep(3000);
 
-                Dispatcher.BeginInvoke((Action)delegate
-                {
-                    Application.Current.Shutdown();
-                });
+                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
             }
 #endif
         }

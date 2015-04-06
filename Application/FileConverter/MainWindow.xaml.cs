@@ -12,9 +12,13 @@ namespace FileConverter
     {
         private bool verboseMode;
 
+        private string applicationName;
+
         public MainWindow()
         {
             this.InitializeComponent();
+
+            this.ApplicationName = string.Format("File Converter v{0}", Application.Version.ToString());
 
             Application application = Application.Current as Application;
 
@@ -23,6 +27,20 @@ namespace FileConverter
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string ApplicationName
+        {
+            get
+            {
+                return this.applicationName;
+            }
+
+            private set
+            {
+                this.applicationName = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         public bool VerboseMode
         {
