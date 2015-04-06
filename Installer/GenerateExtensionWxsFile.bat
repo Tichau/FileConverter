@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Wix Toolset v3.9\bin\Heat.exe" file "..\Application\FileConverterExtension\bin\Debug\FileConverterExtension.dll" -dr INSTALLFOLDER -srd -gg -sfrag -suid -out "Extension.wxs" -b "..\Application\FileConverterExtension\bin\Debug\"

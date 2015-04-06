@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="*" Name="File Converter" Language="1033" Version="0.1.0" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
+        <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
+
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+        <MediaTemplate />
+
+        <Feature Id="ProductFeature" Title="Installer" Level="1">
+            <ComponentGroupRef Id="ProductComponents" />
+        </Feature>
+        
+        <Feature Id="ShellExtensionFeature" Title="ShellExtension" Level="1">
+            <ComponentRef Id="FileConverterExtension.dll"/>
+        </Feature>
+        
+        <UIRef Id="WixUI_InstallDir" />
+        <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    </Product>
+
+    <Fragment>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+            <Directory Id="INSTALLFOLDER" Name="File Converter" />
+            </Directory>
+        </Directory>
+    </Fragment>
+
+    <Fragment>
+        <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+            <!-- Resources -->
+            <Component Guid="{9BF0AC45-A586-41C9-BA93-6048B46DA65F}">
+                <File Id="SharpShell.dll" KeyPath="yes" Source="..\Middleware\SharpShell\SharpShell.dll" />
+            </Component>
+            <Component Guid="{AA5EA6F7-C443-488B-8E48-7CF000B9AD2A}">
+                <File Source="$(var.FileConverter.TargetPath)" KeyPath="yes" />
+            </Component>
+            <Component Guid="{97A5208C-5135-43BD-88EF-151D0673D5D2}">
+                <File Source="..\Application\FileConverter\bin\Debug\FileConverter.exe.config" KeyPath="yes" />
+            </Component>
+            <Component Guid="{1790B82E-86BC-4B95-AA1D-9859FF3B6CA4}">
+                <File Source="..\Middleware\ffmpeg.exe" KeyPath="yes" />
+            </Component>
+            <Component Guid="{A5158756-A107-4010-9E2F-3C0333F5A5F6}">
+                <File Source="..\Application\FileConverter\readme.txt" KeyPath="yes" />
+            </Component>
+
+            <!-- Registry entries -->
+            <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter" Action="createAndRemoveOnUninstall">
+                    <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
+                </RegistryKey>
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>
