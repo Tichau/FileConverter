@@ -13,12 +13,15 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.1.0" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
         <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
+        
+        <Icon Id="icon.ico" SourceFile="..\Resources\ApplicationIcon.ico"/>
+        <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
         <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
         <Media Id="1" Cabinet="CabFile.cab" EmbedCab="yes" />
 
         <Feature Id="ProductFeature" Title="Installer" Level="1">
-            <ComponentGroupRef Id="ProductComponents" />
+            <ComponentGroupRef Id="ProductComponents" /> 
         </Feature>
         
         <Feature Id="ShellExtensionFeature" Title="ShellExtension" Level="1" AllowAdvertise="no">
@@ -27,14 +30,14 @@
         
         <UIRef Id="WixUI_InstallDir" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
-
-        <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
-        <!--<WixVariable Id="WixUIBannerBmp" Value="path\banner.bmp" />
-        <WixVariable Id="WixUIDialogBmp" Value="path\dialog.bmp" />
-        <WixVariable Id="WixUIExclamationIco" Value="path\exclamation.ico" />
-        <WixVariable Id="WixUIInfoIco" Value="path\information.ico" />
-        <WixVariable Id="WixUINewIco" Value="path\new.ico" />
-        <WixVariable Id="WixUIUpIco" Value="path\up.ico" />-->
+ 
+        <WixVariable Id="WixUILicenseRtf" Value="License.rtf" /> 
+        <WixVariable Id="WixUIBannerBmp" Value="..\Resources\Installer\Banner.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="..\Resources\Installer\UI.bmp" /> 
+        <WixVariable Id="WixUIExclamationIco" Value="..\Resources\Installer\ErrorIcon.ico" />
+        <WixVariable Id="WixUIInfoIco" Value="..\Resources\Installer\WarningIcon.ico" />
+        <!--<WixVariable Id="WixUINewIco" Value="Icon16x16.ico" />
+        <WixVariable Id="WixUIUpIco" Value="Icon16x16.ico" />-->
     </Product>
 
     <Fragment>
