@@ -18,12 +18,11 @@ namespace FileConverter
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
     public partial class Application : System.Windows.Application
     {
-        public static readonly Version Version = new Version()
+        private static readonly Version Version = new Version()
                                             {
                                                 Major = 0, 
                                                 Minor = 1,
@@ -36,6 +35,8 @@ namespace FileConverter
 
         public Application()
         {
+            this.ConvertionJobs = this.conversionJobs.AsReadOnly();
+
             this.Initialize();
 
             if (this.initialized)
@@ -45,7 +46,21 @@ namespace FileConverter
             }
         }
 
+        public static Version ApplicationVersion
+        {
+            get
+            {
+                return Application.Version;
+            }
+        }
+
         public ReadOnlyCollection<ConversionJob> ConvertionJobs
+        {
+            get;
+            private set;
+        }
+
+        public Settings Settings
         {
             get;
             private set;
@@ -59,8 +74,12 @@ namespace FileConverter
 
         private void Initialize()
         {
-            this.ConvertionJobs = this.conversionJobs.AsReadOnly();
+            // Load settigns.
+            Diagnostics.Log("Retrieve arguments...");
+            this.Settings = new Settings();
+            this.Settings.Load();
 
+            // Retrieve arguments.
             Diagnostics.Log("Retrieve arguments...");
             string[] args = Environment.GetCommandLineArgs();
 
