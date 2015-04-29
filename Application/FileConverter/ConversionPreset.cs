@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace FileConverter
 {
+    using System.Xml.Serialization;
+
+    [XmlRoot]
+    [XmlType]
     public class ConversionPreset
     {
         public ConversionPreset()
@@ -39,14 +43,14 @@ namespace FileConverter
         public List<string> InputTypes
         {
             get;
-            private set;
+            set;
         }
 
-        [System.Xml.Serialization.XmlElement]
+        [System.Xml.Serialization.XmlIgnore]
         public Setting[] Settings
         {
             get;
-            private set;
+            set;
         }
 
         public class Setting

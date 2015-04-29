@@ -22,7 +22,7 @@ namespace FileConverter
             this.InitializeComponent();
             
             Application application = Application.Current as Application;
-            this.PresetList.ItemsSource = application.Settings.conversionPresets;
+            this.PresetList.ItemsSource = application.Settings.ConversionPresets;
 
             OutputType[] outputTypes = new[]
                                            {
@@ -78,6 +78,24 @@ namespace FileConverter
             string inputFormat = checkBox.Content as string;
 
             this.selectedPreset.InputTypes.Remove(inputFormat);
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Load previous preset in order to cancel changes.
+            Application application = Application.Current as Application;
+            application.Settings.Load();
+
+            this.Close();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Save changes.
+            Application application = Application.Current as Application;
+            application.Settings.Save();
+
+            this.Close();
         }
     }
 }

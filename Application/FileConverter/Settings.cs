@@ -4,17 +4,42 @@ namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
 
     public class Settings
     {
-        public List<ConversionPreset> conversionPresets = new List<ConversionPreset>();
+        public List<ConversionPreset> ConversionPresets = new List<ConversionPreset>();
 
         public void Load()
         {
-            // TODO: Load from file.
+            List<ConversionPreset> conversionPresets = this.ConversionPresets;
+            conversionPresets.Clear();
 
-            this.conversionPresets.Add(new ConversionPreset("To Flac", OutputType.Flac, new string[] { "Mp3", "Wav", "Ogg", "Wma" }));
-            this.conversionPresets.Add(new ConversionPreset("To Ogg", OutputType.Ogg, new string[] { "Mp3", "Wav", "Flac", "Wma" }));
+            string userFilePath = this.GetSettingsUserFilePath();
+
+            XmlHelpers.LoadFromFile<ConversionPreset>("Settings", userFilePath, ref conversionPresets);
+
+            // TODO: If user settings doesn't exist, load the default settings.
+        }
+
+        public void Save()
+        {
+            string userFilePath = this.GetSettingsUserFilePath();
+            XmlHelpers.SaveToFile("Settings", userFilePath, this.ConversionPresets);
+        }
+
+        private string GetSettingsUserFilePath()
+        {
+            string path = Environment.GetEnvironmentVariable("LocalAppData");
+            path = Path.Combine(path, "FileConverter");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            path = Path.Combine(path, "Settings.xml");
+            return path;
         }
     }
 }
