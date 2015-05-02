@@ -121,6 +121,11 @@ namespace FileConverter
 
                     switch (parameterTitle)
                     {
+                        case "apply-settings":
+                            Settings.ApplyTemporarySettings();
+                            Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                            return;
+
                         case "output-type":
                             {
                                 if (index >= args.Length - 1)
