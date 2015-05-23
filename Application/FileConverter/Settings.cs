@@ -9,14 +9,20 @@ namespace FileConverter
     using System.Reflection;
     using System.Security.Principal;
     using System.Windows;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
     using Microsoft.Win32;
 
-    public class Settings
-    {
-        public List<ConversionPreset> ConversionPresets = new List<ConversionPreset>();
+    using FileConverter.Annotations;
 
+    public class Settings : INotifyPropertyChanged
+    {
         private const char PresetSeparator = ';';
+
+        private List<ConversionPreset> conversionPresets = new List<ConversionPreset>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private static bool IsInAdmininstratorPrivileges
         {
@@ -24,6 +30,19 @@ namespace FileConverter
             {
                 return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
             }
+        }
+
+        public List<ConversionPreset> ConversionPresets
+        {
+            get { return this.conversionPresets; }
+            set { this.conversionPresets = value; }
+        }
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void Load()

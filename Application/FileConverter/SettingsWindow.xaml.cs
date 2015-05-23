@@ -2,7 +2,6 @@
 
 namespace FileConverter
 {
-    using System;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.ComponentModel;
@@ -96,6 +95,18 @@ namespace FileConverter
             application.Settings.Save();
 
             this.Close();
+        }
+
+        private void AddPresetButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application application = Application.Current as Application;
+            application.Settings.ConversionPresets.Add(new ConversionPreset("New preset", OutputType.None, new string[0]));
+        }
+
+        private void RemovePresetButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application application = Application.Current as Application;
+            application.Settings.ConversionPresets.Remove(this.selectedPreset);
         }
     }
 }
