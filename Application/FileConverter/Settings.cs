@@ -227,7 +227,7 @@ namespace FileConverter
                 List<string> inputTypes = conversionPreset.InputTypes;
                 for (int inputIndex = 0; inputIndex < inputTypes.Count; inputIndex++)
                 {
-                    string inputType = inputTypes[inputIndex];
+                    string inputType = inputTypes[inputIndex].ToLowerInvariant();
                     if (!registryEntries.ContainsKey(inputType))
                     {
                         registryEntries.Add(inputType, new List<string>());
