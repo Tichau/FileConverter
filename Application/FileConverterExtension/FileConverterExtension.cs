@@ -6,6 +6,7 @@ namespace FileConverterExtension
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Windows.Forms;
@@ -21,7 +22,7 @@ namespace FileConverterExtension
     {
         private string fileConverterPath;
         private RegistryKey fileConverterRegistryKey;
-        private List<string> presetList = new List<string>();
+        private List<PresetDefinition> presetList = new List<PresetDefinition>();
 
         private RegistryKey FileConverterRegistryKey
         {
@@ -99,14 +100,16 @@ namespace FileConverterExtension
 
             for (int index = 0; index < this.presetList.Count; index++)
             {
-                string presetName = this.presetList[index];
+                PresetDefinition preset = this.presetList[index];
+
                 ToolStripMenuItem subItem = new ToolStripMenuItem
                 {
-                    Text = presetName,
+                    Text = preset.Name,
+                    Enabled = preset.Enabled
                 };
 
                 fileConverterItem.DropDownItems.Add(subItem);
-                subItem.Click += (sender, args) => this.ConvertFiles(presetName);
+                subItem.Click += (sender, args) => this.ConvertFiles(preset.Name);
             }
 
             if (this.presetList.Count > 0)
@@ -131,8 +134,8 @@ namespace FileConverterExtension
 
         private void RefreshPresetList()
         {
-            this.presetList.Clear();
-            RegistryKey fileConverterKey = this.FileConverterRegistryKey;
+            // Retrieve selected files extensions.
+            List<string> extensions = new List<string>();
             foreach (string filePath in this.SelectedItemPaths)
             {
                 string extension = Path.GetExtension(filePath);
@@ -142,7 +145,20 @@ namespace FileConverterExtension
                 }
 
                 extension = extension.Substring(1).ToLowerInvariant();
+                if (extensions.Contains(extension))
+                {
+                    continue;
+                }
 
+                extensions.Add(extension);
+            }
+
+            // Compute preset list.
+            this.presetList.Clear();
+            RegistryKey fileConverterKey = this.FileConverterRegistryKey;
+            for (int extensionIndex = 0; extensionIndex < extensions.Count; extensionIndex++)
+            {
+                string extension = extensions[extensionIndex];
                 RegistryKey extensionKey = fileConverterKey.OpenSubKey(extension);
                 if (extensionKey == null)
                 {
@@ -156,15 +172,25 @@ namespace FileConverterExtension
                 }
 
                 string[] presets = presetsString.Split(';');
-                for (int index = 0; index < presets.Length; index++)
+                
+                for (int presetIndex = 0; presetIndex < presets.Length; presetIndex++)
                 {
-                    if (this.presetList.Contains(presets[index]))
+                    string presetName = presets[presetIndex];
+                    PresetDefinition presetDefinition = this.presetList.FirstOrDefault(match => match.Name == presetName);
+                    if (presetDefinition == null)
                     {
-                        continue;
+                        presetDefinition = new PresetDefinition(presetName);
+                        this.presetList.Add(presetDefinition);
                     }
 
-                    this.presetList.Add(presets[index]);
+                    presetDefinition.ExtensionRefCount++;
                 }
+            }
+
+            // Update enable states.
+            for (int index = 0; index < this.presetList.Count; index++)
+            {
+                this.presetList[index].Enabled = this.presetList[index].ExtensionRefCount == extensions.Count;
             }
         }
 
