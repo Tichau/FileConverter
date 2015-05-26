@@ -95,7 +95,7 @@ namespace FileConverter
             Application application = Application.Current as Application;
             application.Settings.Load();
 
-            this.Close();
+            this.Hide();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -104,7 +104,7 @@ namespace FileConverter
             Application application = Application.Current as Application;
             application.Settings.Save();
 
-            this.Close();
+            this.Hide();
         }
 
         private void AddPresetButton_Click(object sender, RoutedEventArgs e)

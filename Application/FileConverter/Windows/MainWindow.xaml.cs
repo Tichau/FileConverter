@@ -13,6 +13,9 @@ namespace FileConverter
     {
         private bool verboseMode;
 
+        private DiagnosticsWindow diagnosticsWindow;
+        private SettingsWindow settingsWindow;
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -22,16 +25,15 @@ namespace FileConverter
             this.ConverterJobsList.ItemsSource = application.ConvertionJobs;
             if (application.Verbose)
             {
-                DiagnosticsWindow window = new DiagnosticsWindow();
-                window.Show();
+                this.ShowDiagnosticsWindow();
             }
 
             if (application.ShowSettings)
             {
                 this.Hide();
-                SettingsWindow settingsWindow = new SettingsWindow();
-                settingsWindow.Show();
-                settingsWindow.Closed += SettingsWindow_Closed;
+
+                this.ShowSettingsWindow();
+                this.settingsWindow.Deactivated += this.SettingsWindow_Closed;
             }
         }
 
@@ -49,19 +51,46 @@ namespace FileConverter
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.Show();
+            this.ShowSettingsWindow();
         }
 
         private void SettingsWindow_Closed(object sender, System.EventArgs e)
         {
+            settingsWindow.Deactivated -= this.SettingsWindow_Closed;
             this.Close();
         }
 
         private void DiagnosticsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            DiagnosticsWindow window = new DiagnosticsWindow();
-            window.Show();
+            this.ShowDiagnosticsWindow();
+        }
+
+        private void ShowDiagnosticsWindow()
+        {
+            if (this.diagnosticsWindow != null && this.diagnosticsWindow.IsVisible)
+            {
+                return;
+            }
+            else
+            {
+                this.diagnosticsWindow = new DiagnosticsWindow();
+            }
+
+            this.diagnosticsWindow.Show();
+        }
+
+        private void ShowSettingsWindow()
+        {
+            if (this.settingsWindow != null && this.settingsWindow.IsVisible)
+            {
+                return;
+            }
+            else
+            {
+                this.settingsWindow = new SettingsWindow();
+            }
+
+            this.settingsWindow.Show();
         }
     }
 }
