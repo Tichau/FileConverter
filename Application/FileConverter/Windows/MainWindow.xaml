@@ -16,7 +16,6 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
-            <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -24,10 +23,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
 
             <Label Name="Title" Grid.Column="0" Content="Files to convert" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold"/>
-            <Button Name="SettingsButton"  Grid.Column="1" Content="Settings" Margin="0,3" Click="SettingsButton_OnClick"></Button>
+            <Button Name="DiagnosticsButton" Grid.Column="1" Content="Logs" Margin="3,3" Click="DiagnosticsButton_OnClick"/>
+            <Button Name="SettingsButton"  Grid.Column="2" Content="Settings" Margin="3,3" Click="SettingsButton_OnClick"/>
         </Grid>
 
         <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
@@ -67,16 +68,5 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-
-        <Grid Grid.Row="2" Visibility="{Binding VerboseMode, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=FileConverterMainWindow, Mode=OneWay}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Label  Grid.Row="0" Content="Log" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" />
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                <TextBlock Name="Diagnostics" TextWrapping="NoWrap" Text="{Binding Path=(local:Diagnostics.Content), Mode=OneWay}" FontFamily="Consolas" Foreground="#FF272727"/>
-            </ScrollViewer>
-        </Grid>
     </Grid>
 </Window>

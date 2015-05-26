@@ -1,7 +1,7 @@
 ﻿<Window x:Name="window" x:Class="FileConverter.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:FileConverter"
-         Height="350" Width="538" MinHeight="225" MinWidth="440"
+        Height="340" Width="520" MinHeight="340" MinWidth="440"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:InputTypesToBool x:Key="InputTypesToBool"/>
@@ -86,7 +86,7 @@
 
         <Button Name="AddPresetButton" Grid.Row="2" Content="+" HorizontalAlignment="Left" Width="28" Margin="18,4,0,0" Click="AddPresetButton_Click"/>
         <Button Name="RemovePresetButton" Grid.Row="2" Content="-" HorizontalAlignment="Left" Width="28" Margin="54,4,0,0" Click="RemovePresetButton_Click"/>
-        
+
         <Button Name="CloseButton" Grid.Row="2" Content="Close" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
         <Button Name="SaveButton" Grid.Row="2" Content="Save" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" Click="SaveButton_Click"/>
 

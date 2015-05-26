@@ -7,6 +7,7 @@ namespace FileConverter
     using System.Windows;
 
     using FileConverter.Annotations;
+    using FileConverter.Windows;
 
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
@@ -19,7 +20,11 @@ namespace FileConverter
             Application application = Application.Current as Application;
 
             this.ConverterJobsList.ItemsSource = application.ConvertionJobs;
-            this.VerboseMode = application.Verbose;
+            if (application.Verbose)
+            {
+                DiagnosticsWindow window = new DiagnosticsWindow();
+                window.Show();
+            }
 
             if (application.ShowSettings)
             {
@@ -31,21 +36,7 @@ namespace FileConverter
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public bool VerboseMode
-        {
-            get
-            {
-                return this.verboseMode;
-            }
-
-            set
-            {
-                this.verboseMode = value;
-                this.OnPropertyChanged();
-            }
-        }
-
+        
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -65,6 +56,12 @@ namespace FileConverter
         private void SettingsWindow_Closed(object sender, System.EventArgs e)
         {
             this.Close();
+        }
+
+        private void DiagnosticsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            DiagnosticsWindow window = new DiagnosticsWindow();
+            window.Show();
         }
     }
 }
