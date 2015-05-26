@@ -62,6 +62,11 @@ namespace FileConverter
 
         private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
         {
+            if (this.selectedPreset == null)
+            {
+                return;
+            }
+
             CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
             string inputFormat = checkBox.Content as string;
 
@@ -73,6 +78,11 @@ namespace FileConverter
 
         private void ToggleButton_OnUnchecked(object sender, RoutedEventArgs e)
         {
+            if (this.selectedPreset == null)
+            {
+                return;
+            }
+
             CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
             string inputFormat = checkBox.Content as string;
 
@@ -100,7 +110,11 @@ namespace FileConverter
         private void AddPresetButton_Click(object sender, RoutedEventArgs e)
         {
             Application application = Application.Current as Application;
-            application.Settings.ConversionPresets.Add(new ConversionPreset("New preset", OutputType.None, new string[0]));
+            ConversionPreset newPreset = new ConversionPreset("New preset", OutputType.None, new string[0]);
+            application.Settings.ConversionPresets.Add(newPreset);
+            this.SelectedPreset = newPreset;
+            this.PresetNameTextBox.Focus();
+            this.PresetNameTextBox.SelectAll();
         }
 
         private void RemovePresetButton_Click(object sender, RoutedEventArgs e)

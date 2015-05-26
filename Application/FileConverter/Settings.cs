@@ -4,6 +4,7 @@ namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
     using System.Reflection;
@@ -20,7 +21,7 @@ namespace FileConverter
     {
         private const char PresetSeparator = ';';
 
-        private List<ConversionPreset> conversionPresets = new List<ConversionPreset>();
+        private ObservableCollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,7 +33,7 @@ namespace FileConverter
             }
         }
 
-        public List<ConversionPreset> ConversionPresets
+        public ObservableCollection<ConversionPreset> ConversionPresets
         {
             get { return this.conversionPresets; }
             set { this.conversionPresets = value; }
@@ -47,13 +48,13 @@ namespace FileConverter
 
         public void Load()
         {
-            List<ConversionPreset> conversionPresets = this.ConversionPresets;
-            conversionPresets.Clear();
+            ICollection<ConversionPreset> presets = this.ConversionPresets;
+            presets.Clear();
 
             string userFilePath = Settings.GetUserSettingsFilePath();
             if (File.Exists(userFilePath))
             {
-                XmlHelpers.LoadFromFile<ConversionPreset>("Settings", userFilePath, ref conversionPresets);
+                XmlHelpers.LoadFromFile<ConversionPreset>("Settings", userFilePath, ref presets);
             }
             else
             {
@@ -61,7 +62,7 @@ namespace FileConverter
                 string defaultFilePath = Settings.GetDefaultSettingsFilePath();
                 if (File.Exists(defaultFilePath))
                 {
-                    XmlHelpers.LoadFromFile<ConversionPreset>("Settings", defaultFilePath, ref conversionPresets);
+                    XmlHelpers.LoadFromFile<ConversionPreset>("Settings", defaultFilePath, ref presets);
                 }
                 else
                 {
@@ -75,7 +76,7 @@ namespace FileConverter
             // Save the settings in a temporary files (we'll write the settings file when we'll succeed to write the registry keys).
             string temporaryFilePath = Settings.GetUserSettingsTemporaryFilePath();
             XmlHelpers.SaveToFile("Settings", temporaryFilePath, this.ConversionPresets);
-            
+
             // Compute the registry entries data from settings.
             Dictionary<string, List<string>> registryEntries = Settings.ComputeRegistryEntriesFromConvertionPresets(this.ConversionPresets);
 
@@ -121,7 +122,7 @@ namespace FileConverter
                 return;
             }
 
-            List<ConversionPreset> conversionPresets = new List<ConversionPreset>();
+            ICollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
             XmlHelpers.LoadFromFile("Settings", temporaryFilePath, ref conversionPresets);
 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
@@ -211,12 +212,12 @@ namespace FileConverter
             return true;
         }
 
-        private static Dictionary<string, List<string>> ComputeRegistryEntriesFromConvertionPresets(List<ConversionPreset> conversionPresets)
+        private static Dictionary<string, List<string>> ComputeRegistryEntriesFromConvertionPresets(ICollection<ConversionPreset> conversionPresets)
         {
             Dictionary<string, List<string>> registryEntries = new Dictionary<string, List<string>>();
-            for (int index = 0; index < conversionPresets.Count; index++)
+            
+            foreach (ConversionPreset conversionPreset in conversionPresets)
             {
-                ConversionPreset conversionPreset = conversionPresets[index];
                 List<string> inputTypes = conversionPreset.InputTypes;
                 for (int inputIndex = 0; inputIndex < inputTypes.Count; inputIndex++)
                 {
