@@ -1,8 +1,6 @@
-﻿using System;
+﻿// <copyright file="FileConverter.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileConverter
 {
@@ -25,29 +23,29 @@ namespace FileConverter
             this.InputTypes.AddRange(inputTypes);
         }
 
-        [System.Xml.Serialization.XmlAttribute]
+        [XmlAttribute]
         public string Name
         {
             get;
             set;
         }
 
-        [System.Xml.Serialization.XmlAttribute]
+        [XmlAttribute]
         public OutputType OutputType
         {
             get;
             set;
         }
 
-        [System.Xml.Serialization.XmlElement]
+        [XmlElement]
         public List<string> InputTypes
         {
             get;
             set;
         }
 
-        [System.Xml.Serialization.XmlIgnore]
-        public Setting[] Settings
+        [XmlIgnore]
+        public ConversionPreset.Setting[] Settings
         {
             get;
             set;
@@ -55,7 +53,6 @@ namespace FileConverter
 
         public class Setting
         {
-            
         }
     }
 }

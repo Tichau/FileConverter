@@ -106,8 +106,8 @@ namespace FileConverter
                 args[7] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (2).wav";
                 args[8] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (5).wav";
 
-                //System.Array.Resize(ref args, 2);
-                //args[1] = "--settings";
+                System.Array.Resize(ref args, 2);
+                args[1] = "--settings";
             }
 #endif
 
