@@ -11,6 +11,7 @@ namespace FileConverter
     using System.Security.Principal;
     using System.Windows;
     using System.ComponentModel;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using Microsoft.Win32;
@@ -44,6 +45,11 @@ namespace FileConverter
         {
             PropertyChangedEventHandler handler = this.PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public ConversionPreset GetPresetFromName(string presetName)
+        {
+            return this.conversionPresets.FirstOrDefault(match => match.Name == presetName);
         }
 
         public void Load()

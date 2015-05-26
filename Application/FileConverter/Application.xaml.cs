@@ -19,6 +19,7 @@ namespace FileConverter
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading;
+    using System.Windows;
 
     public partial class Application : System.Windows.Application
     {
@@ -94,8 +95,8 @@ namespace FileConverter
             {
                 this.debugMode = true;
                 System.Array.Resize(ref args, 9);
-                args[1] = "--output-type";
-                args[2] = "Flac";
+                args[1] = "--conversion-preset";
+                args[2] = "To Mp3";
                 args[3] = @"D:\Projects\FileConverter\TestFiles\Herbie Hancock - Speak Like A Child [RVG Edition].flac";
                 args[3] = @"D:\Projects\FileConverter\TestFiles\01 - Le Bruit Du Bang.wma";
                 args[4] = @"D:\Projects\FileConverter\TestFiles\test\Toccata.wav";
@@ -105,8 +106,8 @@ namespace FileConverter
                 args[7] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (2).wav";
                 args[8] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (5).wav";
 
-                System.Array.Resize(ref args, 2);
-                args[1] = "--settings";
+                //System.Array.Resize(ref args, 2);
+                //args[1] = "--settings";
             }
 #endif
 
@@ -118,8 +119,10 @@ namespace FileConverter
 
             Diagnostics.Log(string.Empty);
 
-            OutputType outputType = OutputType.None;
+            ConversionPreset conversionPreset = null;
             List<string> filePaths = new List<string>();
+
+            // Parse arguments.
             for (int index = 1; index < args.Length; index++)
             {
                 string argument = args[index];
@@ -139,42 +142,25 @@ namespace FileConverter
                             Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                             return;
 
-                        case "output-type":
+                        case "conversion-preset":
+                            if (index >= args.Length - 1)
                             {
-                                if (index >= args.Length - 1)
-                                {
-                                    Diagnostics.Log("ERROR ! Invalid format.");
-                                    return;
-                                }
-
-                                string outputTypeName = args[index + 1].ToLowerInvariant();
-                                switch (outputTypeName)
-                                {
-                                    case "mp3":
-                                        outputType = OutputType.Mp3;
-                                        break;
-
-                                    case "ogg":
-                                        outputType = OutputType.Ogg;
-                                        break;
-
-                                    case "wav":
-                                        outputType = OutputType.Wav;
-                                        break;
-
-                                    case "flac":
-                                        outputType = OutputType.Flac;
-                                        break;
-
-                                    default:
-                                        Diagnostics.Log("ERROR ! Unknown output type {0}.", outputType);
-                                        return;
-                                }
-
-                                index++;
-                                continue;
+                                MessageBox.Show(string.Format("ERROR ! Invalid format."), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                                return;
                             }
 
+                            conversionPreset = Settings.GetPresetFromName(args[index + 1]);
+                            if (conversionPreset == null)
+                            {
+                                MessageBox.Show(string.Format("Invalid conversion preset '{0}'.", args[index + 1]), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                                return;
+                            }
+
+                            index++;
+                            continue;
+                            
                         case "verbose":
                             {
                                 this.Verbose = true;
@@ -193,24 +179,17 @@ namespace FileConverter
                 }
             }
 
-            if (outputType == OutputType.None)
+            if (conversionPreset == null)
             {
-                Diagnostics.Log("ERROR ! Can't retrieve the output type from arguments.");
+                Diagnostics.Log("ERROR ! Can't retrieve the conversion preset from arguments.");
                 return;
             }
 
             // Create convertion jobs.
             for (int index = 0; index < filePaths.Count; index++)
             {
-                ConversionJob conversionJob = new ConversionJob();
-
                 string inputFilePath = filePaths[index];
-                string extension = System.IO.Path.GetExtension(inputFilePath);
-                string outputFilePath = inputFilePath.Substring(0, inputFilePath.Length - extension.Length) + "."
-                                        + outputType.ToString().ToLowerInvariant();
-
-                conversionJob.Initialize(outputType, inputFilePath, outputFilePath);
-
+                ConversionJob conversionJob = new ConversionJob(conversionPreset, inputFilePath);
                 this.conversionJobs.Add(conversionJob);
             }
 

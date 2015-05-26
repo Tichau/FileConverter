@@ -27,12 +27,23 @@ namespace FileConverter
 
         public ConversionJob()
         {
-            this.OutputType = OutputType.None;
+            this.ConversionPreset = null;
             this.progress = 0f;
             this.InputFilePath = string.Empty;
             this.OutputFilePath = string.Empty;
             this.State = ConversionState.Unknown;
             this.ExitingMessage = string.Empty;
+        }
+
+        public ConversionJob(ConversionPreset conversionPreset, string inputFilePath)
+        {
+            this.ConversionPreset = conversionPreset;
+            this.InputFilePath = inputFilePath;
+
+            string extension = System.IO.Path.GetExtension(inputFilePath);
+            this.OutputFilePath = inputFilePath.Substring(0, inputFilePath.Length - extension.Length) + "." + this.ConversionPreset.OutputType.ToString().ToLowerInvariant();
+
+            this.Initialize();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -47,6 +58,12 @@ namespace FileConverter
             Failed,
         }
 
+        public ConversionPreset ConversionPreset
+        {
+            get;
+            private set;
+        }
+
         public string InputFilePath
         {
             get;
@@ -58,13 +75,7 @@ namespace FileConverter
             get;
             private set;
         }
-
-        public OutputType OutputType
-        {
-            get;
-            private set;
-        }
-
+        
         public ConversionState State
         {
             get
@@ -107,67 +118,33 @@ namespace FileConverter
             }
         }
 
-        public void Initialize(OutputType outputType, string inputFileName, string outputFileName)
-        {
-            if (outputType == OutputType.None)
-            {
-                throw new ArgumentException("The output type must be valid.", "outputType");
-            }
-
-            this.OutputType = outputType;
-            this.ffmpegProcessStartInfo = null;
-
-            string applicationDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string ffmpegPath = string.Format("{0}\\ffmpeg.exe", applicationDirectory);
-            if (!System.IO.File.Exists(ffmpegPath))
-            {
-                Diagnostics.Log("Can't find ffmpeg executable ({0}). Try to reinstall the application.", ffmpegPath);
-                return;
-            }
-
-            this.ffmpegProcessStartInfo = new ProcessStartInfo(ffmpegPath);
-
-            this.ffmpegProcessStartInfo.CreateNoWindow = true;
-            this.ffmpegProcessStartInfo.UseShellExecute = false;
-            this.ffmpegProcessStartInfo.RedirectStandardOutput = true;
-            this.ffmpegProcessStartInfo.RedirectStandardError = true;
-
-            this.InputFilePath = inputFileName;
-            this.OutputFilePath = outputFileName;
-
-            this.State = ConversionState.Ready;
-        }
-
         public void StartConvertion()
         {
-            if (this.OutputType == OutputType.None)
+            if (this.ConversionPreset == null)
             {
-                throw new Exception("The converter is not initialized.");
+                throw new Exception("The conversion preset must be valid.");
             }
 
             Diagnostics.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
 
             string arguments = string.Empty;
-            switch (this.OutputType)
+            switch (this.ConversionPreset.OutputType)
             {
                 case OutputType.Mp3:
-                    arguments = string.Format("-n -stats -i \"{0}\" -qscale:a 5 \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                    arguments = string.Format("-n -stats -i \"{0}\" -qscale:a 2 \"{1}\"", this.InputFilePath, this.OutputFilePath);
                     break;
 
                 case OutputType.Ogg:
-                    arguments = string.Format("-n -stats -i \"{0}\" -acodec libvorbis -qscale:a 5 \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                    arguments = string.Format("-n -stats -i \"{0}\" -acodec libvorbis -qscale:a 2 \"{1}\"", this.InputFilePath, this.OutputFilePath);
                     break;
 
                 case OutputType.Flac:
-                    arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
-                    break;
-                        
                 case OutputType.Wav:
                     arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
                     break;
 
                 default:
-                    throw new NotImplementedException("Converter not implemented for output file type " + this.OutputType);
+                    throw new NotImplementedException("Converter not implemented for output file type " + this.ConversionPreset.OutputType);
             }
 
             if (string.IsNullOrEmpty(arguments) || this.ffmpegProcessStartInfo == null)
@@ -215,6 +192,33 @@ namespace FileConverter
             this.State = ConversionState.Done;
 
             Diagnostics.Log("\nDone!");
+        }
+
+        private void Initialize()
+        {
+            if (this.ConversionPreset == null)
+            {
+                throw new Exception("The conversion preset must be valid.");
+            }
+
+            this.ffmpegProcessStartInfo = null;
+
+            string applicationDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string ffmpegPath = string.Format("{0}\\ffmpeg.exe", applicationDirectory);
+            if (!System.IO.File.Exists(ffmpegPath))
+            {
+                Diagnostics.Log("Can't find ffmpeg executable ({0}). Try to reinstall the application.", ffmpegPath);
+                return;
+            }
+
+            this.ffmpegProcessStartInfo = new ProcessStartInfo(ffmpegPath);
+
+            this.ffmpegProcessStartInfo.CreateNoWindow = true;
+            this.ffmpegProcessStartInfo.UseShellExecute = false;
+            this.ffmpegProcessStartInfo.RedirectStandardOutput = true;
+            this.ffmpegProcessStartInfo.RedirectStandardError = true;
+
+            this.State = ConversionState.Ready;
         }
 
         private void ParseFFMPEGOutput(string input)
