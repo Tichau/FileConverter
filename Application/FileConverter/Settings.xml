@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ConversionPreset Name="To Ogg" OutputType="Ogg">
+        <InputTypes>Wav</InputTypes>
+        <InputTypes>Flac</InputTypes>
+        <InputTypes>Wma</InputTypes>
+        <InputTypes>Mp3</InputTypes>
+    </ConversionPreset>
+    <ConversionPreset Name="To Mp3" OutputType="Mp3">
+        <InputTypes>Flac</InputTypes>
+        <InputTypes>Ogg</InputTypes>
+        <InputTypes>Wav</InputTypes>
+        <InputTypes>Wma</InputTypes>
+    </ConversionPreset>
+    <ConversionPreset Name="To Flac" OutputType="Flac">
+        <InputTypes>Wav</InputTypes>
+    </ConversionPreset>
+    <ConversionPreset Name="To Wav" OutputType="Wav">
+        <InputTypes>Flac</InputTypes>
+        <InputTypes>Mp3</InputTypes>
+        <InputTypes>Ogg</InputTypes>
+        <InputTypes>Wma</InputTypes>
+    </ConversionPreset>
+</Settings>
