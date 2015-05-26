@@ -66,6 +66,12 @@ namespace FileConverter
             private set;
         }
 
+        public bool ShowSettings
+        {
+            get;
+            set;
+        }
+
         public bool Verbose
         {
             get;
@@ -98,6 +104,9 @@ namespace FileConverter
                 args[6] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (3).wav";
                 args[7] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (2).wav";
                 args[8] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (5).wav";
+
+                System.Array.Resize(ref args, 2);
+                args[1] = "--settings";
             }
 #endif
 
@@ -121,6 +130,10 @@ namespace FileConverter
 
                     switch (parameterTitle)
                     {
+                        case "settings":
+                            this.ShowSettings = true;
+                            return;
+
                         case "apply-settings":
                             Settings.ApplyTemporarySettings();
                             Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
