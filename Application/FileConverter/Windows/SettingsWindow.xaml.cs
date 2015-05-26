@@ -6,6 +6,7 @@ namespace FileConverter
     using System.Windows;
     using System.ComponentModel;
     using System.Windows.Controls;
+    using System.Windows.Input;
 
     using FileConverter.Annotations;
 
@@ -16,12 +17,15 @@ namespace FileConverter
     {
         private ConversionPreset selectedPreset;
 
+        private Settings settings;
+
         public SettingsWindow()
         {
             this.InitializeComponent();
             
             Application application = Application.Current as Application;
-            this.PresetList.ItemsSource = application.Settings.ConversionPresets;
+            settings = application.Settings;
+            this.PresetList.ItemsSource = settings.ConversionPresets;
 
             OutputType[] outputTypes = new[]
                                            {
@@ -53,11 +57,7 @@ namespace FileConverter
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
@@ -121,6 +121,11 @@ namespace FileConverter
         {
             Application application = Application.Current as Application;
             application.Settings.ConversionPresets.Remove(this.selectedPreset);
+        }
+
+        private void CanSaveSettings(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = this.settings != null && string.IsNullOrEmpty(this.settings.Error);
         }
     }
 }

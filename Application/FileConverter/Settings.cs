@@ -18,7 +18,7 @@ namespace FileConverter
 
     using FileConverter.Annotations;
 
-    public class Settings : INotifyPropertyChanged
+    public class Settings : INotifyPropertyChanged, IDataErrorInfo
     {
         private const char PresetSeparator = ';';
 
@@ -43,8 +43,7 @@ namespace FileConverter
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public ConversionPreset GetPresetFromName(string presetName)
@@ -357,6 +356,31 @@ namespace FileConverter
             {
                 MessageBox.Show("Can't apply settings in registry because the application has no administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                return this.Error;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                for (int index = 0; index < this.ConversionPresets.Count; index++)
+                {
+                    string error = this.ConversionPresets[index].Error;
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        return error;
+                    }
+                }
+
+                return string.Empty;
             }
         }
     }
