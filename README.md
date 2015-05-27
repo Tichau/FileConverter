@@ -6,6 +6,8 @@ This program uses [ffmpeg](https://www.ffmpeg.org/) as file conversion tool.
 
 You can convert files from formats **Ape, Mp3, Ogg, Wav, Flac, Wma** to formats **Mp3, Ogg, Wav, Flac**
 
+**Remove any previous installation of the application before installing the newer version.**
+
 ## Change Log
 v0.2
 - New: Add decode support for file format Ape
