@@ -73,6 +73,9 @@
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
                 </RegistryKey>
 
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\ape" Action="createAndRemoveOnUninstall">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\flac" Action="createAndRemoveOnUninstall">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Wav"/>
                 </RegistryKey>
