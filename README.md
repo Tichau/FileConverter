@@ -4,5 +4,14 @@
 File Converter is a very simple tool which allows you to convert one or several file(s) from one format to another using the context menu in windows explorer.
 This program uses [ffmpeg](https://www.ffmpeg.org/) as file conversion tool.
 
+You can convert files from formats **Ape, Mp3, Ogg, Wav, Flac, Wma** to formats **Mp3, Ogg, Wav, Flac**
+
+## Change Log
+v0.2
+New: Add decode support for file format Ape
+New: Add notion of conversion preset (in order to customize the conversion possibilities).
+
 v0.1
-You can convert files from formats **Mp3, Ogg, Wav, Flac, Wma** to formats **Mp3, Ogg, Wav, Flac**
+New: Add decode support for file formats Mp3, Ogg, Wav, Flac, Wma 
+New: Add encode support for file formats Mp3, Ogg, Wav, Flac
+New: UI to visualize the conversion progress
