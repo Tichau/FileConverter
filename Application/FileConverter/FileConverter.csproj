@@ -42,7 +42,7 @@
     <OutputPath>bin\x64\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ApplicationIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\ApplicationIcon-256x256.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -137,10 +137,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ApplicationIcon.ico" />
+    <Resource Include="Resources\ApplicationIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ApplicationIcon.png" />
+    <Resource Include="Resources\ApplicationIcon-16x16.ico" />
+    <Resource Include="Resources\ApplicationIcon-256x256.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
