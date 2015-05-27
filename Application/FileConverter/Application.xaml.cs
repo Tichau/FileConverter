@@ -33,6 +33,7 @@ namespace FileConverter
 
         private bool debugMode;
         private bool initialized;
+        private bool cancelAutoExit;
 
         public Application()
         {
@@ -77,6 +78,11 @@ namespace FileConverter
         {
             get;
             set;
+        }
+
+        public void CancelAutoExit()
+        {
+            this.cancelAutoExit = true;
         }
 
         private void Initialize()
@@ -237,6 +243,11 @@ namespace FileConverter
             if (allConversionsSucceed)
             {
                 System.Threading.Thread.Sleep(3000);
+
+                if (this.cancelAutoExit)
+                {
+                    return;
+                }
 
                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
             }

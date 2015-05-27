@@ -76,6 +76,8 @@ namespace FileConverter
                 this.diagnosticsWindow = new DiagnosticsWindow();
             }
 
+            Application application = Application.Current as Application;
+            application?.CancelAutoExit();
             this.diagnosticsWindow.Show();
         }
 
@@ -90,6 +92,8 @@ namespace FileConverter
                 this.settingsWindow = new SettingsWindow();
             }
 
+            Application application = Application.Current as Application;
+            application?.CancelAutoExit();
             this.settingsWindow.Show();
         }
     }
