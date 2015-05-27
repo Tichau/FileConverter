@@ -1,7 +1,7 @@
 ﻿<Window x:Name="window" x:Class="FileConverter.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:FileConverter"
-        Height="350" Width="520" MinHeight="350" MinWidth="440"
+        Height="370" Width="520" MinHeight="370" MinWidth="440"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico">
     <Window.Resources>
         <local:InputTypesToBool x:Key="InputTypesToBool"/>
@@ -92,6 +92,7 @@
 
                     <GroupBox Grid.Row="1" Grid.Column="0" Header="Input formats" Margin="5">
                         <StackPanel>
+                            <CheckBox Content="Ape" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ape', ElementName=window, Mode=OneWay}"/>
                             <CheckBox Content="Flac" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Flac', ElementName=window, Mode=OneWay}"/>
                             <CheckBox Content="Mp3" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Mp3', ElementName=window, Mode=OneWay}"/>
                             <CheckBox Content="Ogg" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ogg', ElementName=window, Mode=OneWay}"/>

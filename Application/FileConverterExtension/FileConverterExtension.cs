@@ -67,18 +67,11 @@ namespace FileConverterExtension
                 extension = extension.Substring(1).ToLowerInvariant();
                 switch (extension)
                 {
+                    case "ape":
                     case "mp3":
-                        return true;
-
                     case "wav":
-                        return true;
-
                     case "ogg":
-                        return true;
-
                     case "flac":
-                        return true;
-
                     case "wma":
                         return true;
                 }
