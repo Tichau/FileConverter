@@ -96,7 +96,7 @@ namespace FileConverterExtension
             ToolStripMenuItem fileConverterItem = new ToolStripMenuItem
             {
                 Text = "File Converter",
-                Image = Properties.Resource.ApplicationIcon_16x16.ToBitmap(),
+                Image = Properties.Resources.ApplicationIcon_16x16.ToBitmap(),
             };
 
             for (int index = 0; index < this.presetList.Count; index++)
