@@ -26,7 +26,7 @@ namespace FileConverter
         private static readonly Version Version = new Version()
                                             {
                                                 Major = 0, 
-                                                Minor = 1,
+                                                Minor = 2,
                                             };
 
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
