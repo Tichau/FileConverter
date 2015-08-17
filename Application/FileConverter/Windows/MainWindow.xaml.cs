@@ -33,7 +33,7 @@ namespace FileConverter
                 this.Hide();
 
                 this.ShowSettingsWindow();
-                this.settingsWindow.Deactivated += this.SettingsWindow_Closed;
+                this.settingsWindow.OnSettingsWindowHide += this.SettingsWindow_Closed;
             }
         }
 
@@ -56,7 +56,7 @@ namespace FileConverter
 
         private void SettingsWindow_Closed(object sender, System.EventArgs e)
         {
-            settingsWindow.Deactivated -= this.SettingsWindow_Closed;
+            settingsWindow.OnSettingsWindowHide -= this.SettingsWindow_Closed;
             this.Close();
         }
 

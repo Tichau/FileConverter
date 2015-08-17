@@ -1,11 +1,31 @@
 ﻿<Window x:Name="window" x:Class="FileConverter.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:FileConverter"
-        Height="370" Width="520" MinHeight="370" MinWidth="440"
+        xmlns:controls="clr-namespace:FileConverter.Controls"
+        xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
+        xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
+        Height="500" Width="700" MinHeight="370" MinWidth="440"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico">
     <Window.Resources>
-        <local:InputTypesToBool x:Key="InputTypesToBool"/>
-        <local:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
+        <generic:BoolToVisibility x:Key="BoolToVisibility"/>
+        <valueConverters:InputTypesToBool x:Key="InputTypesToBool"/>
+        <valueConverters:OutputTypeToVisibility x:Key="OutputTypeToVisibility"/>
+        <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
+
+        <generic:ValueConverterGroup x:Key="ConversionSettingsToEnum">
+            <valueConverters:ConversionSettingsToString/>
+            <generic:StringToEnum/>
+        </generic:ValueConverterGroup>
+
+        <generic:ValueConverterGroup x:Key="ConversionSettingsEquals">
+            <valueConverters:ConversionSettingsToString/>
+            <generic:EqualsConverter/>
+        </generic:ValueConverterGroup>
+
+        <generic:ValueConverterGroup x:Key="ConversionSettingsToValueType">
+            <valueConverters:ConversionSettingsToString/>
+            <generic:ObjectToValueType/>
+        </generic:ValueConverterGroup>
 
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
@@ -13,10 +33,10 @@
                     <ControlTemplate>
                         <DockPanel LastChildFill="true">
                             <Border Background="#F44336" DockPanel.Dock="right" Margin="5,0,0,0" Width="20" Height="20" CornerRadius="10"
-                                    ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                    ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=customAdorner}">
                                 <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white"/>
                             </Border>
-                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                            <AdornedElementPlaceholder x:Name="customAdorner" VerticalAlignment="Center" >
                                 <Border BorderBrush="#F44336" BorderThickness="1" />
                             </AdornedElementPlaceholder>
                         </DockPanel>
@@ -29,11 +49,11 @@
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
     </Window.Title>
 
-    <Grid Margin="10">
-        <Grid.CommandBindings>  
+    <Grid x:Name="grid" Margin="10">
+        <Grid.CommandBindings>
             <CommandBinding Command="New" CanExecute="CanSaveSettings" />
         </Grid.CommandBindings>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
@@ -91,19 +111,38 @@
                     <TextBox Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
 
                     <GroupBox Grid.Row="1" Grid.Column="0" Header="Input formats" Margin="5">
-                        <StackPanel>
-                            <CheckBox Content="Ape" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ape', ElementName=window, Mode=OneWay}"/>
-                            <CheckBox Content="Flac" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Flac', ElementName=window, Mode=OneWay}"/>
-                            <CheckBox Content="Mp3" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Mp3', ElementName=window, Mode=OneWay}"/>
-                            <CheckBox Content="Ogg" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ogg', ElementName=window, Mode=OneWay}"/>
-                            <CheckBox Content="Wav" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Wav', ElementName=window, Mode=OneWay}"/>
-                            <CheckBox Content="Wma" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Wma', ElementName=window, Mode=OneWay}"/>
-                        </StackPanel>
+                        <TreeView x:Name="treeView" Margin="5">
+                            <TreeViewItem Header="Audio" IsExpanded="True">
+                                <CheckBox Content="Ape" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ape', ElementName=window, Mode=OneWay}"/>
+                                <CheckBox Content="Flac" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Flac', ElementName=window, Mode=OneWay}"/>
+                                <CheckBox Content="Mp3" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Mp3', ElementName=window, Mode=OneWay}"/>
+                                <CheckBox Content="Ogg" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ogg', ElementName=window, Mode=OneWay}"/>
+                                <CheckBox Content="Wav" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Wav', ElementName=window, Mode=OneWay}"/>
+                                <CheckBox Content="Wma" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Wma', ElementName=window, Mode=OneWay}"/>
+                                <CheckBox Content="M4a" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='M4a', ElementName=window, Mode=OneWay}"/>
+                            </TreeViewItem>
+                            <TreeViewItem Header="Video" IsExpanded="True">
+                                <CheckBox Content="Avi" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Avi', ElementName=window, Mode=OneWay}"/>
+                                <CheckBox Content="Mp4" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Mp4', ElementName=window, Mode=OneWay}"/>
+                            </TreeViewItem>
+                        </TreeView>
                     </GroupBox>
 
                     <GroupBox Header="Output format" Grid.Row="1" Grid.Column="1" Margin="5">
-                        <ComboBox Name="OutputFormats" Grid.Row="1" Grid.Column="1" Margin="5" Height="25" VerticalAlignment="Top" SelectedItem="{Binding SelectedPreset.OutputType, ElementName=window, Mode=TwoWay}">
-                        </ComboBox>
+                        <StackPanel>
+                            <ComboBox Name="OutputFormats" Margin="5" Height="25" VerticalAlignment="Top" SelectedItem="{Binding SelectedPreset.OutputType, ElementName=window, Mode=TwoWay}"/>
+                            <StackPanel Margin="0,5,0,5" Visibility="{Binding SelectedPreset.OutputType, Converter={StaticResource OutputTypeToVisibility}, ConverterParameter='Mp3', ElementName=window, Mode=OneWay}">
+                                <DockPanel>
+                                    <Label Content="Encoding :" />
+                                    <RadioButton Name="VBRradioButton" Content="VBR" ToolTip="Variable bitrate encoding" Margin="5" Checked="EncodingTypeRadio_Checked" IsChecked="{Binding SelectedPreset, ConverterParameter=Encoding|VBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=OneWay}" />
+                                    <RadioButton Name="CBRradioButton" Content="CBR" ToolTip="Constant bitrate encoding" Margin="5" Checked="EncodingTypeRadio_Checked" IsChecked="{Binding SelectedPreset, ConverterParameter=Encoding|CBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=OneWay}"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <Label Content="Quality :" />
+                                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="{Binding SelectedPreset, Converter={StaticResource ConversionSettingsToEnum}, ConverterParameter='Encoding|FileConverter.EncodingMode', ElementName=window, Mode=OneWay}" Bitrate="{Binding SelectedPreset, Converter={StaticResource ConversionSettingsToValueType}, ConverterParameter='Bitrate|System.Double', ElementName=window, Mode=OneWay}" ValueChanged="EncodingQualitySlider_ValueChanged"/>
+                                </DockPanel>
+                            </StackPanel>
+                        </StackPanel>
                     </GroupBox>
                 </Grid>
             </GroupBox>

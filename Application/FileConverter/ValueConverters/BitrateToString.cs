@@ -3,27 +3,21 @@
 namespace FileConverter.ValueConverters
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.Windows.Data;
 
-    public class InputTypesToBool : IValueConverter
+    public class BitrateToString : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            List<string> intputTypes = value as List<string>;
-            if (intputTypes == null)
+            if (!(value is double))
             {
-                throw new ArgumentException("The value must be an list of string.");
+                throw new ArgumentException("The value must be a double value.");
             }
 
-            string referenceTypeName = parameter as string;
-            if (string.IsNullOrEmpty(referenceTypeName))
-            {
-                return false;
-            }
-
-            return intputTypes.Contains(referenceTypeName);
+            double bitrate = (double)value;
+            
+            return string.Format("{0} kbit/s", bitrate.ToString("0"));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

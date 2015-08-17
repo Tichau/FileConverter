@@ -1,4 +1,4 @@
-﻿// <copyright file="InputTypesToBool.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="OutputTypeToVisibility.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters
 {
@@ -7,23 +7,30 @@ namespace FileConverter.ValueConverters
     using System.Globalization;
     using System.Windows.Data;
 
-    public class InputTypesToBool : IValueConverter
+    public class OutputTypeToVisibility : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            List<string> intputTypes = value as List<string>;
-            if (intputTypes == null)
+            if (!(value is OutputType))
             {
-                throw new ArgumentException("The value must be an list of string.");
+                throw new ArgumentException("The value must be an output type enum value.");
             }
 
+            OutputType outputType = (OutputType)value;
+            
             string referenceTypeName = parameter as string;
             if (string.IsNullOrEmpty(referenceTypeName))
             {
                 return false;
             }
 
-            return intputTypes.Contains(referenceTypeName);
+            OutputType referenceType;
+            if (System.Enum.TryParse<OutputType>(referenceTypeName,out referenceType))
+            {
+                
+            }
+
+            return outputType == referenceType ? "Visible" : "Hidden";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

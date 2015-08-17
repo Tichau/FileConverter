@@ -174,7 +174,7 @@ namespace FileConverter
                 {
                     registryKey.DeleteSubKey(subKeyNames[index]);
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     MessageBox.Show("Can't apply settings in registry (ErrorCode=2).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
@@ -352,7 +352,7 @@ namespace FileConverter
                 process.Start();
                 process.WaitForExit();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 MessageBox.Show("Can't apply settings in registry because the application has no administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

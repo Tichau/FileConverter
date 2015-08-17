@@ -51,7 +51,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -71,10 +73,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
+      <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EncodingMode.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset.cs" />
+    <Compile Include="ValueConverters\BitrateToString.cs" />
+    <Compile Include="ValueConverters\Generic\BoolToVisibility.cs" />
+    <Compile Include="ValueConverters\ConversionSettingsToString.cs" />
+    <Compile Include="ValueConverters\Generic\EqualsConverter.cs" />
+    <Compile Include="ValueConverters\Generic\ObjectToValueType.cs" />
     <Compile Include="ValueConverters\InputTypesToBool.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="ValueConverters\OutputTypeToVisibility.cs" />
+    <Compile Include="ValueConverters\Generic\StringToEnum.cs" />
+    <Compile Include="ValueConverters\Generic\ValueConverterGroup.cs" />
     <Compile Include="Windows\DiagnosticsWindow.xaml.cs">
       <DependentUpon>DiagnosticsWindow.xaml</DependentUpon>
     </Compile>
@@ -83,6 +97,10 @@
     </Compile>
     <Compile Include="Version.cs" />
     <Compile Include="XmlHelpers.cs" />
+    <Page Include="Controls\EncodingQualitySliderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\DiagnosticsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +161,7 @@
     <Resource Include="Resources\ApplicationIcon-16x16.ico" />
     <Resource Include="Resources\ApplicationIcon-256x256.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

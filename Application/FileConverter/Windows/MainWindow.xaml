@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="FileConverter.MainWindow"
         xmlns:local="clr-namespace:FileConverter"
+        xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
         x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="450" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico">
     <Window.Resources>
-        <local:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <local:ConversionStateToBrush x:Key="ConversionStateToColor" />
+        <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
+        <valueConverters:ConversionStateToBrush x:Key="ConversionStateToColor" />
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>

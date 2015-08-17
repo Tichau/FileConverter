@@ -84,7 +84,7 @@ namespace FileConverter
         {
             this.cancelAutoExit = true;
         }
-
+        
         private void Initialize()
         {
             // Load settigns.

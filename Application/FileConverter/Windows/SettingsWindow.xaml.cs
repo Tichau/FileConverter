@@ -2,6 +2,7 @@
 
 namespace FileConverter
 {
+    using System;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.ComponentModel;
@@ -9,6 +10,7 @@ namespace FileConverter
     using System.Windows.Input;
 
     using FileConverter.Annotations;
+    using FileConverter.Controls;
 
     /// <summary>
     /// Interaction logic for Settings.xaml
@@ -39,6 +41,8 @@ namespace FileConverter
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public event System.EventHandler<System.EventArgs> OnSettingsWindowHide;
 
         public ConversionPreset SelectedPreset
         {
@@ -96,6 +100,8 @@ namespace FileConverter
             application.Settings.Load();
 
             this.Hide();
+
+            this.OnSettingsWindowHide?.Invoke(this, new EventArgs());
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -105,6 +111,8 @@ namespace FileConverter
             application.Settings.Save();
 
             this.Hide();
+
+            this.OnSettingsWindowHide?.Invoke(this, new EventArgs());
         }
 
         private void AddPresetButton_Click(object sender, RoutedEventArgs e)
@@ -126,6 +134,29 @@ namespace FileConverter
         private void CanSaveSettings(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = this.settings != null && string.IsNullOrEmpty(this.settings.Error);
+        }
+        
+        private void EncodingTypeRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton radioButton = sender as RadioButton;
+            string content = radioButton.Content as string;
+            if (content == "VBR")
+            {
+                this.SelectedPreset?.SetSettingsValue("Encoding", "VBR");
+            }
+            else if (content == "CBR")
+            {
+                this.SelectedPreset?.SetSettingsValue("Encoding", "CBR");
+            }
+            else
+            {
+                throw new Exception("Unknown encoding type.");
+            }
+        }
+
+        private void EncodingQualitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> eventArgs)
+        {
+            this.SelectedPreset?.SetSettingsValue("Bitrate", eventArgs.NewValue.ToString("0"));
         }
     }
 }
