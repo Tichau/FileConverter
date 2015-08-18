@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileConverter"
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
-        xmlns:ConversionJobs="clr-namespace:FileConverter.ConversionJobs" mc:Ignorable="d" x:Class="FileConverter.MainWindow"
+        xmlns:conversionJobs="clr-namespace:FileConverter.ConversionJobs" mc:Ignorable="d" x:Class="FileConverter.MainWindow"
         x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="450" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico">
     <Window.Resources>
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
@@ -54,7 +54,7 @@
                                         <TextBlock Text="Converted from " FontSize="11" FontStyle="Italic" />
                                         <TextBlock Text="{Binding InputFilePath}" FontSize="11" FontStyle="Italic" />
                                     </WrapPanel>
-                                    <TextBlock  Text="{Binding ExitingMessage}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" />
+                                    <TextBlock  Text="{Binding ErrorMessage}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" />
                                 </StackPanel>
 
                                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding State}" FontWeight="Bold" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" />
@@ -65,7 +65,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.DataContext>
-                    <ConversionJobs:ConversionJob/>
+                    <conversionJobs:ConversionJob/>
                 </ItemsControl.DataContext>
             </ItemsControl>
         </ScrollViewer>

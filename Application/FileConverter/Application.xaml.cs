@@ -197,7 +197,9 @@ namespace FileConverter
             for (int index = 0; index < filePaths.Count; index++)
             {
                 string inputFilePath = filePaths[index];
-                ConversionJob conversionJob = new ConversionJob(conversionPreset, inputFilePath);
+                ConversionJob conversionJob = ConversionJobFactory.Create(conversionPreset);
+                conversionJob.PrepareConversion(inputFilePath);
+
                 this.conversionJobs.Add(conversionJob);
             }
 

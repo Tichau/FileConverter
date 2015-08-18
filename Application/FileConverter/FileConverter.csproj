@@ -76,7 +76,8 @@
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConversionJobs\ConversionJob_MP3.cs" />
+    <Compile Include="ConversionJobs\ConversionJobFactory.cs" />
+    <Compile Include="ConversionJobs\ConversionJob_FFMPEG.cs" />
     <Compile Include="EncodingMode.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset.cs" />
