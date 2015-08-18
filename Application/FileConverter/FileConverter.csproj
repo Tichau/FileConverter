@@ -76,6 +76,7 @@
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConversionJobs\ConversionJob_MP3.cs" />
     <Compile Include="EncodingMode.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset.cs" />
@@ -114,7 +115,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ValueConverters\ConversionStateToBrush.cs" />
-    <Compile Include="ConversionJob.cs" />
+    <Compile Include="ConversionJobs\ConversionJob.cs" />
     <Compile Include="Diagnostics.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

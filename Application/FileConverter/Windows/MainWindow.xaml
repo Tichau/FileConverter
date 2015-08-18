@@ -1,9 +1,10 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="FileConverter.MainWindow"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileConverter"
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
+        xmlns:ConversionJobs="clr-namespace:FileConverter.ConversionJobs" mc:Ignorable="d" x:Class="FileConverter.MainWindow"
         x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="450" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico">
     <Window.Resources>
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
@@ -26,19 +27,16 @@
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
 
-            <Label Name="Title" Grid.Column="0" Content="Files to convert" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold"/>
-            <Button Name="DiagnosticsButton" Grid.Column="1" Content="Logs" Margin="3,3" Click="DiagnosticsButton_OnClick"/>
-            <Button Name="SettingsButton"  Grid.Column="2" Content="Settings" Margin="3,3" Click="SettingsButton_OnClick"/>
+            <Label x:Name="Title" Grid.Column="0" Content="Files to convert" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold"/>
+            <Button x:Name="DiagnosticsButton" Grid.Column="1" Content="Logs" Margin="3,3" Click="DiagnosticsButton_OnClick"/>
+            <Button x:Name="SettingsButton"  Grid.Column="2" Content="Settings" Margin="3,3" Click="SettingsButton_OnClick"/>
         </Grid>
 
         <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-            <ItemsControl Name="ConverterJobsList">
-                <ItemsControl.DataContext>
-                    <local:ConversionJob/>
-                </ItemsControl.DataContext>
+            <ItemsControl x:Name="ConverterJobsList">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <DockPanel Background="{Binding State, Converter={StaticResource ConversionStateToColor}, ConverterParameter='Background'}" Margin="0,4">
+                        <DockPanel Background="{Binding State, ConverterParameter=Background, Converter={StaticResource ConversionStateToColor}}" Margin="0,4">
                             <Grid Margin="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20" />
@@ -56,16 +54,19 @@
                                         <TextBlock Text="Converted from " FontSize="11" FontStyle="Italic" />
                                         <TextBlock Text="{Binding InputFilePath}" FontSize="11" FontStyle="Italic" />
                                     </WrapPanel>
-                                    <TextBlock  Text="{Binding ExitingMessage}" Foreground="{Binding State, Converter={StaticResource ConversionStateToColor}, ConverterParameter='Foreground'}" />
+                                    <TextBlock  Text="{Binding ExitingMessage}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" />
                                 </StackPanel>
 
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding State}" FontWeight="Bold" Foreground="{Binding State, Converter={StaticResource ConversionStateToColor}, ConverterParameter='Foreground'}" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding State}" FontWeight="Bold" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" />
 
-                                <ProgressBar Grid.Row="1" Grid.Column="1" Height="18" Width="Auto" Minimum="0" Maximum="1" SmallChange="0.001" Value="{Binding Progress, Mode=OneWay}" Foreground="{Binding State, Converter={StaticResource ConversionStateToColor}, ConverterParameter='Foreground'}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" MinWidth="100" LargeChange="0.1" />
+                                <ProgressBar Grid.Row="1" Grid.Column="1" Height="18" Width="Auto" Minimum="0" Maximum="1" SmallChange="0.001" Value="{Binding Progress, Mode=OneWay}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" MinWidth="100" LargeChange="0.1" />
                             </Grid>
                         </DockPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+                <ItemsControl.DataContext>
+                    <ConversionJobs:ConversionJob/>
+                </ItemsControl.DataContext>
             </ItemsControl>
         </ScrollViewer>
     </Grid>

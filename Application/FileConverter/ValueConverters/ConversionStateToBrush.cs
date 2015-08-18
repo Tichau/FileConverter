@@ -7,6 +7,8 @@ namespace FileConverter.ValueConverters
     using System.Windows.Data;
     using System.Windows.Media;
 
+    using FileConverter.ConversionJobs;
+
     public class ConversionStateToBrush : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

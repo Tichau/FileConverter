@@ -21,6 +21,8 @@ namespace FileConverter
     using System.Threading;
     using System.Windows;
 
+    using FileConverter.ConversionJobs;
+
     public partial class Application : System.Windows.Application
     {
         private static readonly Version Version = new Version()
