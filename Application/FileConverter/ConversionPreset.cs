@@ -164,6 +164,19 @@ namespace FileConverter
             return this.GetDefaultValue(settingsKey);
         }
 
+        public T GetSettingsValue<T>(string settingsKey)
+        {
+            string settingsValue = this.GetSettingsValue(settingsKey);
+
+            Type type = typeof(T);
+            if (type.IsEnum)
+            {
+                return (T)System.Enum.Parse(type, settingsValue);
+            }
+
+            return (T)System.Convert.ChangeType(settingsValue, type);
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

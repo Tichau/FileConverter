@@ -1,5 +1,7 @@
 ﻿// <copyright file="ConversionJob_FFMPEG.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
+using System.Windows.Markup.Localizer;
+
 namespace FileConverter.ConversionJobs
 {
     using System;
@@ -53,7 +55,24 @@ namespace FileConverter.ConversionJobs
             switch (this.ConversionPreset.OutputType)
             {
                 case OutputType.Mp3:
-                    arguments = string.Format("-n -stats -i \"{0}\" -qscale:a 2 \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                    string encoderArgs = string.Empty;
+                    EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>("Encoding");
+                    int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
+                    switch (encodingMode)
+                    {
+                        case EncodingMode.VBR:
+                            encoderArgs = string.Format("-codec:a libmp3lame -q:a {0}", this.VBRBitrateToQualityIndex(encodingQuality));
+                            break;
+
+                        case EncodingMode.CBR:
+                            encoderArgs = string.Format("-codec:a libmp3lame -b:a {0}k", encodingQuality);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     break;
 
                 case OutputType.Ogg:
@@ -75,6 +94,44 @@ namespace FileConverter.ConversionJobs
             }
 
             this.ffmpegProcessStartInfo.Arguments = arguments;
+        }
+
+        private int VBRBitrateToQualityIndex(int bitrate)
+        {
+            switch (bitrate)
+            {
+                case 245:
+                    return 0;
+
+                case 225:
+                    return 1;
+
+                case 190:
+                    return 2;
+
+                case 175:
+                    return 3;
+
+                case 165:
+                    return 4;
+
+                case 130:
+                    return 5;
+
+                case 115:
+                    return 6;
+
+                case 100:
+                    return 7;
+
+                case 85:
+                    return 8;
+
+                case 65:
+                    return 9;
+            }
+
+            throw new Exception("Unknown VBR bitrate.");
         }
 
         protected override void Convert()
