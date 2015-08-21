@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="ConversionJobs\ConversionJobFactory.cs" />
     <Compile Include="ConversionJobs\ConversionJob_FFMPEG.cs" />
+    <Compile Include="ConversionSettings.cs" />
     <Compile Include="EncodingMode.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset.cs" />

@@ -15,12 +15,12 @@ namespace FileConverter.ValueConverters
                 return null;
             }
 
-            if (!(value is ConversionPreset))
+            if (!(value is IConversionSettings))
             {
                 throw new ArgumentException("The value must be a conversion preset array.");
             }
 
-            ConversionPreset preset = (ConversionPreset)value;
+            IConversionSettings settings = (IConversionSettings)value;
 
             string parameterString = parameter as string;
             if (parameterString == null)
@@ -29,13 +29,24 @@ namespace FileConverter.ValueConverters
             }
 
             string[] parameters = parameterString.Split(',');
-            if (parameters.Length != 1)
+            if (parameters.Length < 1 || parameters.Length > 2)
             {
-                throw new ArgumentException("The parameter format must be 'SettingsKey'.");
+                throw new ArgumentException("The parameter format must be 'SettingsKey[,DefaultValue]'.");
             }
 
             string key = parameters[0];
-            return preset.GetSettingsValue(key);
+            string setting;
+            if (settings.TryGetValue(key, out setting))
+            {
+                return setting;
+            }
+
+            if (parameters.Length >= 2)
+            {
+                return parameters[1];
+            }
+
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

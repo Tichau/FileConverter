@@ -18,7 +18,7 @@ namespace FileConverter
         private string name;
         private OutputType outputType;
         private List<string> inputTypes;
-        private Dictionary<string, string> settings = new Dictionary<string, string>(); 
+        private ConversionSettings settings = new ConversionSettings(); 
 
         public ConversionPreset()
         {
@@ -61,6 +61,7 @@ namespace FileConverter
             set
             {
                 outputType = value;
+                this.InitializeDefaultSettings(outputType);
                 this.OnPropertyChanged();
             }
         }
@@ -80,8 +81,8 @@ namespace FileConverter
             }
         }
 
-        [XmlElement]
-        public ConversionSetting[] Settings
+        [XmlElement("Settings")]
+        public ConversionSetting[] XmlSerializableSettings
         {
             get
             {
@@ -98,7 +99,6 @@ namespace FileConverter
 
             set
             {
-                this.settings.Clear();
                 if (value != null)
                 {
                     for (int index = 0; index < value.Length; index++)
@@ -107,7 +107,15 @@ namespace FileConverter
                     }
                 }
 
-                this.OnPropertyChanged();
+                this.OnPropertyChanged("Settings");
+            }
+        }
+
+        public IConversionSettings Settings
+        {
+            get
+            {
+                return this.settings;
             }
         }
 
@@ -161,7 +169,7 @@ namespace FileConverter
                 return this.settings[settingsKey];
             }
 
-            return this.GetDefaultValue(settingsKey);
+            return null;
         }
 
         public T GetSettingsValue<T>(string settingsKey)
@@ -183,21 +191,33 @@ namespace FileConverter
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private string GetDefaultValue(string settingsKey)
+        private void InitializeDefaultSettings(OutputType outputType)
         {
-            if (this.OutputType == OutputType.Mp3)
+            if (outputType == OutputType.Mp3)
             {
-                switch (settingsKey)
-                {
-                    case "Encoding":
-                        return "VBR";
-
-                    case "Bitrate":
-                        return "190";
-                }
+                this.InitializeSettingsValue("Encoding", "VBR");
+                this.InitializeSettingsValue("Bitrate", "190");
             }
 
-            return null;
+            this.OnPropertyChanged("Settings");
+        }
+
+        private void InitializeSettingsValue(string settingsKey, string value)
+        {
+            if (string.IsNullOrEmpty(settingsKey))
+            {
+                throw new ArgumentNullException("key");
+            }
+
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException("value");
+            }
+
+            if (!this.settings.ContainsKey(settingsKey))
+            {
+                this.settings.Add(settingsKey, value);
+            }
         }
 
         private string Validate(string propertyName)
