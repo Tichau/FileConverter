@@ -98,13 +98,7 @@ namespace FileConverter
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            // Load previous preset in order to cancel changes.
-            Application application = Application.Current as Application;
-            application.Settings.Load();
-
-            this.Hide();
-
-            this.OnSettingsWindowHide?.Invoke(this, new EventArgs());
+            this.HideSettingsWindow();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -170,6 +164,24 @@ namespace FileConverter
             }
 
             this.SelectedPreset?.SetSettingsValue("Bitrate", bitrateValue.ToString("0"));
+        }
+
+        private void SettingsWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+
+            this.HideSettingsWindow();
+        }
+
+        private void HideSettingsWindow()
+        {
+            // Load previous preset in order to cancel changes.
+            Application application = Application.Current as Application;
+            application.Settings.Load();
+
+            this.Hide();
+
+            this.OnSettingsWindowHide?.Invoke(this, new EventArgs());
         }
     }
 }

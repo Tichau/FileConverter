@@ -5,7 +5,8 @@
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         Height="500" Width="700" MinHeight="370" MinWidth="440"
-        WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico">
+        WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico"
+        Closing="SettingsWindow_OnClosing">
     <Window.Resources>
         <generic:BoolToVisibility x:Key="BoolToVisibility"/>
         <valueConverters:InputTypesToBool x:Key="InputTypesToBool"/>
