@@ -139,7 +139,9 @@
                                 </DockPanel>
                                 <DockPanel>
                                     <Label Content="Quality :" />
-                                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|FileConverter.EncodingMode', Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" Bitrate="{Binding SelectedPreset.Settings, ConverterParameter='Bitrate|System.Double', Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay, TargetNullValue=190}" ValueChanged="EncodingQualitySlider_ValueChanged"/>
+                                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" BitrateValueChanged="EncodingQualitySlider_ValueChanged"
+                                                                           EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|FileConverter.EncodingMode', Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
+                                                                           Bitrate="{Binding SelectedPreset.Settings, ConverterParameter='Bitrate|System.Double', Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay, TargetNullValue=190}" />
                                 </DockPanel>
                             </StackPanel>
                         </StackPanel>

@@ -20,13 +20,14 @@ namespace FileConverter
         private ConversionPreset selectedPreset;
 
         private Settings settings;
+        private bool selectedPresetChangeInProgress;
 
         public SettingsWindow()
         {
             this.InitializeComponent();
             
             Application application = Application.Current as Application;
-            settings = application.Settings;
+            this.settings = application.Settings;
             this.PresetList.ItemsSource = settings.ConversionPresets;
 
             OutputType[] outputTypes = new[]
@@ -53,8 +54,10 @@ namespace FileConverter
 
             set
             {
+                this.selectedPresetChangeInProgress = true;
                 this.selectedPreset = value;
                 this.OnPropertyChanged();
+                this.selectedPresetChangeInProgress = false;
             }
         }
 
@@ -138,6 +141,11 @@ namespace FileConverter
         
         private void EncodingTypeRadio_Checked(object sender, RoutedEventArgs e)
         {
+            if (this.selectedPresetChangeInProgress)
+            {
+                return;
+            }
+
             RadioButton radioButton = sender as RadioButton;
             string content = radioButton.Content as string;
             if (content == "VBR")
@@ -154,9 +162,14 @@ namespace FileConverter
             }
         }
 
-        private void EncodingQualitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> eventArgs)
+        private void EncodingQualitySlider_ValueChanged(object sender, double bitrateValue)
         {
-            this.SelectedPreset?.SetSettingsValue("Bitrate", eventArgs.NewValue.ToString("0"));
+            if (this.selectedPresetChangeInProgress)
+            {
+                return;
+            }
+
+            this.SelectedPreset?.SetSettingsValue("Bitrate", bitrateValue.ToString("0"));
         }
     }
 }

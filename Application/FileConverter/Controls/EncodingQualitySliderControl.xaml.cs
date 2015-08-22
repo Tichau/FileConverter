@@ -3,48 +3,39 @@
 namespace FileConverter.Controls
 {
     using System;
+    using System.Diagnostics;
     using System.Windows;
     using System.Windows.Controls;
     using System.ComponentModel;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Interaction logic for EncodingQualitySliderControl.xaml
     /// </summary>
-    public partial class EncodingQualitySliderControl : UserControl, INotifyPropertyChanged
+    public partial class EncodingQualitySliderControl : UserControl
     {
-        public static readonly DependencyProperty EncodingModeProperty = DependencyProperty.Register(
-            "EncodingMode",
-            typeof(EncodingMode),
-            typeof(EncodingQualitySliderControl),
-            null);
-
         public static readonly DependencyProperty BitrateProperty = DependencyProperty.Register(
             "Bitrate",
             typeof(double),
             typeof(EncodingQualitySliderControl),
-            null);
+            new FrameworkPropertyMetadata(new PropertyChangedCallback(EncodingQualitySliderControl.OnBitrateValueChanged), new CoerceValueCallback(EncodingQualitySliderControl.CoerceBitrateValue)));
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public static readonly DependencyProperty EncodingModeProperty = DependencyProperty.Register(
+            "EncodingMode",
+            typeof(EncodingMode),
+            typeof(EncodingQualitySliderControl),
+            new PropertyMetadata(new PropertyChangedCallback(EncodingQualitySliderControl.OnEncodingModeValueChanged)));
 
         [Category("Behavior")]
-        public event RoutedPropertyChangedEventHandler<double> ValueChanged;
+        public event EventHandler<double> BitrateValueChanged;
         
         public EncodingQualitySliderControl()
         {
             this.InitializeComponent();
 
-            (this.Content as FrameworkElement).DataContext = this;
+            this.CoerceValue(EncodingQualitySliderControl.BitrateProperty);
 
-            this.Bitrate = this.GetNearestTickValue(this.Bitrate);
-
-            this.slider.ValueChanged += Slider_ValueChanged;
-
-            DependencyPropertyDescriptor encodingModeDescriptor = DependencyPropertyDescriptor.FromProperty(
-                EncodingQualitySliderControl.EncodingModeProperty,
-                typeof(EncodingQualitySliderControl));
-
-            encodingModeDescriptor.AddValueChanged(this, this.EncodingModeValueChanged);
+            Debug.Assert(this.slider != null);
+            this.slider.ValueChanged += this.Slider_ValueChanged;
         }
         
         public EncodingMode EncodingMode
@@ -56,7 +47,7 @@ namespace FileConverter.Controls
 
             set
             {
-                this.SetValueDependencyProperty(EncodingQualitySliderControl.EncodingModeProperty, value);
+                this.SetCurrentValue(EncodingQualitySliderControl.EncodingModeProperty, value);
             }
         }
 
@@ -69,77 +60,83 @@ namespace FileConverter.Controls
 
             set
             {
-                //this.SetValue(EncodingQualitySliderControl.BitrateProperty, value);
-                this.SetValueDependencyProperty(EncodingQualitySliderControl.BitrateProperty, value);
+                this.SetCurrentValue(EncodingQualitySliderControl.BitrateProperty, this.GetNearestTickValue(value));
             }
         }
-
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        
+        private static void OnBitrateValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs eventArgs)
         {
-            this.ValueChanged?.Invoke(this, e);
+            EncodingQualitySliderControl encodingQualitySliderControl = sender as EncodingQualitySliderControl;
+            encodingQualitySliderControl.slider.Value = (double)eventArgs.NewValue;
         }
 
-        private void SetValueDependencyProperty(DependencyProperty dependencyProperty, object value, [CallerMemberName] string propertyName = null)
+        private static object CoerceBitrateValue(DependencyObject sender, object basevalue)
         {
-            this.SetValue(dependencyProperty, value);
-
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            EncodingQualitySliderControl encodingQualitySliderControl = sender as EncodingQualitySliderControl;
+            return encodingQualitySliderControl.GetNearestTickValue((double)basevalue);
         }
 
-        private void EncodingModeValueChanged(object sender, EventArgs eventArgs)
+        private static void OnEncodingModeValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs eventArgs)
         {
-            double previousValue = this.Bitrate;
+            EncodingQualitySliderControl encodingQualitySliderControl = sender as EncodingQualitySliderControl;
+            Slider sliderControl = encodingQualitySliderControl.slider;
 
-            switch (this.EncodingMode)
+            switch (encodingQualitySliderControl.EncodingMode)
             {
                 case EncodingMode.VBR:
                     {
-                        this.slider.Minimum = 65;
-                        this.slider.Maximum = 245;
-                        this.slider.SelectionStart = 115;
-                        this.slider.SelectionEnd = 245;
-                        this.slider.Ticks.Clear();
-                        this.slider.Ticks.Add(65);
-                        this.slider.Ticks.Add(85);
-                        this.slider.Ticks.Add(100);
-                        this.slider.Ticks.Add(115);
-                        this.slider.Ticks.Add(130);
-                        this.slider.Ticks.Add(165);
-                        this.slider.Ticks.Add(175);
-                        this.slider.Ticks.Add(190);
-                        this.slider.Ticks.Add(225);
-                        this.slider.Ticks.Add(245);
+                        sliderControl.Minimum = 65;
+                        sliderControl.Maximum = 245;
+                        sliderControl.SelectionStart = 115;
+                        sliderControl.SelectionEnd = 245;
+                        sliderControl.Ticks.Clear();
+                        sliderControl.Ticks.Add(65);
+                        sliderControl.Ticks.Add(85);
+                        sliderControl.Ticks.Add(100);
+                        sliderControl.Ticks.Add(115);
+                        sliderControl.Ticks.Add(130);
+                        sliderControl.Ticks.Add(165);
+                        sliderControl.Ticks.Add(175);
+                        sliderControl.Ticks.Add(190);
+                        sliderControl.Ticks.Add(225);
+                        sliderControl.Ticks.Add(245);
                         break;
                     }
 
                 case EncodingMode.CBR:
                     {
-                        this.slider.Minimum = 8;
-                        this.slider.Maximum = 320;
-                        this.slider.SelectionStart = 128;
-                        this.slider.SelectionEnd = 256;
-                        this.slider.Ticks.Clear();
-                        this.slider.Ticks.Add(8);
-                        this.slider.Ticks.Add(16);
-                        this.slider.Ticks.Add(24);
-                        this.slider.Ticks.Add(32);
-                        this.slider.Ticks.Add(40);
-                        this.slider.Ticks.Add(48);
-                        this.slider.Ticks.Add(64);
-                        this.slider.Ticks.Add(80);
-                        this.slider.Ticks.Add(96);
-                        this.slider.Ticks.Add(112);
-                        this.slider.Ticks.Add(128);
-                        this.slider.Ticks.Add(160);
-                        this.slider.Ticks.Add(192);
-                        this.slider.Ticks.Add(224);
-                        this.slider.Ticks.Add(256);
-                        this.slider.Ticks.Add(320);
+                        sliderControl.Minimum = 8;
+                        sliderControl.Maximum = 320;
+                        sliderControl.SelectionStart = 128;
+                        sliderControl.SelectionEnd = 256;
+                        sliderControl.Ticks.Clear();
+                        sliderControl.Ticks.Add(8);
+                        sliderControl.Ticks.Add(16);
+                        sliderControl.Ticks.Add(24);
+                        sliderControl.Ticks.Add(32);
+                        sliderControl.Ticks.Add(40);
+                        sliderControl.Ticks.Add(48);
+                        sliderControl.Ticks.Add(64);
+                        sliderControl.Ticks.Add(80);
+                        sliderControl.Ticks.Add(96);
+                        sliderControl.Ticks.Add(112);
+                        sliderControl.Ticks.Add(128);
+                        sliderControl.Ticks.Add(160);
+                        sliderControl.Ticks.Add(192);
+                        sliderControl.Ticks.Add(224);
+                        sliderControl.Ticks.Add(256);
+                        sliderControl.Ticks.Add(320);
                         break;
                     }
             }
 
-            this.Bitrate = this.GetNearestTickValue(previousValue);
+            encodingQualitySliderControl.CoerceValue(EncodingQualitySliderControl.BitrateProperty);
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            this.SetCurrentValue(EncodingQualitySliderControl.BitrateProperty, e.NewValue);
+            this.BitrateValueChanged?.Invoke(this, e.NewValue);
         }
 
         private double GetNearestTickValue(double value)
