@@ -6,7 +6,7 @@ namespace FileConverter.ValueConverters.Generic
     using System.Globalization;
     using System.Windows.Data;
 
-    public class ObjectToValueType: IValueConverter
+    public class ObjectToValueType : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

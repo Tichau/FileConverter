@@ -1,7 +1,5 @@
 ﻿// <copyright file="ConversionJob_FFMPEG.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.Windows.Markup.Localizer;
-
 namespace FileConverter.ConversionJobs
 {
     using System;
@@ -96,6 +94,43 @@ namespace FileConverter.ConversionJobs
             this.ffmpegProcessStartInfo.Arguments = arguments;
         }
 
+        protected override void Convert()
+        {
+            if (this.ConversionPreset == null)
+            {
+                throw new Exception("The conversion preset must be valid.");
+            }
+
+            Diagnostics.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
+            Diagnostics.Log(string.Empty);
+            Diagnostics.Log("Execute command: {0} {1}.", this.ffmpegProcessStartInfo.FileName, this.ffmpegProcessStartInfo.Arguments);
+
+            try
+            {
+                using (Process exeProcess = Process.Start(this.ffmpegProcessStartInfo))
+                {
+                    using (StreamReader reader = exeProcess.StandardError)
+                    {
+                        while (!reader.EndOfStream)
+                        {
+                            string result = reader.ReadLine();
+
+                            this.ParseFFMPEGOutput(result);
+
+                            Diagnostics.Log("ffmpeg output: {0}", result);
+                        }
+                    }
+
+                    exeProcess.WaitForExit();
+                }
+            }
+            catch
+            {
+                this.ConvertionFailed("Failed to launch FFMPEG process.");
+                throw;
+            }
+        }
+
         private int VBRBitrateToQualityIndex(int bitrate)
         {
             switch (bitrate)
@@ -132,43 +167,6 @@ namespace FileConverter.ConversionJobs
             }
 
             throw new Exception("Unknown VBR bitrate.");
-        }
-
-        protected override void Convert()
-        {
-            if (this.ConversionPreset == null)
-            {
-                throw new Exception("The conversion preset must be valid.");
-            }
-
-            Diagnostics.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
-            Diagnostics.Log(string.Empty);
-            Diagnostics.Log("Execute command: {0} {1}.", this.ffmpegProcessStartInfo.FileName, this.ffmpegProcessStartInfo.Arguments);
-
-            try
-            {
-                using (Process exeProcess = Process.Start(this.ffmpegProcessStartInfo))
-                {
-                    using (StreamReader reader = exeProcess.StandardError)
-                    {
-                        while (!reader.EndOfStream)
-                        {
-                            string result = reader.ReadLine();
-
-                            this.ParseFFMPEGOutput(result);
-
-                            Diagnostics.Log("ffmpeg output: {0}", result);
-                        }
-                    }
-
-                    exeProcess.WaitForExit();
-                }
-            }
-            catch
-            {
-                this.ConvertionFailed("Failed to launch FFMPEG process.");
-                throw;
-            }
         }
 
         private void ParseFFMPEGOutput(string input)

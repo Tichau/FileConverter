@@ -11,8 +11,6 @@ namespace FileConverter
 
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private bool verboseMode;
-
         private DiagnosticsWindow diagnosticsWindow;
         private SettingsWindow settingsWindow;
 

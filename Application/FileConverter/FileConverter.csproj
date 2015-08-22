@@ -78,10 +78,11 @@
     </Compile>
     <Compile Include="ConversionJobs\ConversionJobFactory.cs" />
     <Compile Include="ConversionJobs\ConversionJob_FFMPEG.cs" />
-    <Compile Include="ConversionSettings.cs" />
+    <Compile Include="ConversionPreset\ConversionSettings.cs" />
     <Compile Include="EncodingMode.cs" />
+    <Compile Include="ConversionPreset\IConversionSettings.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
-    <Compile Include="ConversionPreset.cs" />
+    <Compile Include="ConversionPreset\ConversionPreset.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
     <Compile Include="ValueConverters\Generic\BoolToVisibility.cs" />
     <Compile Include="ValueConverters\ConversionSettingsToString.cs" />
@@ -130,9 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OutputType.cs" />
-    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -166,7 +170,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

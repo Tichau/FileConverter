@@ -1,75 +1,90 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Windows.Documents;
-using System.Xml;
-using System.Xml.Serialization;
+﻿// <copyright file="XmlHelpers.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using FileConverter;
-
-public class XmlHelpers
+namespace FileConverter
 {
-    public static void LoadFromFile<T>(string root, string path, ref ICollection<T> collection)
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.Serialization;
+
+    public class XmlHelpers
     {
-        if (string.IsNullOrEmpty(path))
+        public static void LoadFromFile<T>(string root, string path, ref ICollection<T> collection)
         {
-            throw new ArgumentNullException("path");
-        }
-
-        XmlRootAttribute xmlRoot = new XmlRootAttribute
-        {
-            ElementName = root
-        };
-
-        XmlSerializer serializer = new XmlSerializer(typeof(List<T>), xmlRoot);
-
-        try
-        {
-            using (StreamReader reader = new StreamReader(path))
-            using (XmlReader xmlReader = XmlReader.Create(reader, new XmlReaderSettings { IgnoreWhitespace = true, IgnoreComments = true }))
+            if (string.IsNullOrEmpty(path))
             {
-                List<T> elements = (List<T>)serializer.Deserialize(xmlReader);
-                foreach (T element in elements)
+                throw new ArgumentNullException("path");
+            }
+
+            XmlRootAttribute xmlRoot = new XmlRootAttribute
+            {
+                ElementName = root
+            };
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<T>), xmlRoot);
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(path))
                 {
-                    collection.Add(element);
+                    XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
+                    {
+                        IgnoreWhitespace = true, IgnoreComments = true
+                    };
+
+                    using (XmlReader xmlReader = XmlReader.Create(reader, xmlReaderSettings))
+                    {
+                        List<T> elements = (List<T>)serializer.Deserialize(xmlReader);
+                        for (int index = 0; index < elements.Count; index++)
+                        {
+                            collection.Add(elements[index]);
+                        }
+                    }
                 }
             }
-        }
-        catch (System.Exception exception)
-        {
-            Diagnostics.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
-        }
-    }
-
-    public static void SaveToFile<T>(string root, string path, ICollection<T> objectsToSerialize)
-    {
-        if (string.IsNullOrEmpty(path))
-        {
-            return;
-        }
-
-        List<T> list = new List<T>();
-        list.AddRange(objectsToSerialize);
-
-        XmlRootAttribute xmlRoot = new XmlRootAttribute
-        {
-            ElementName = root
-        };
-        
-        XmlSerializer serializer = new XmlSerializer(typeof(List<T>), xmlRoot);
-        
-        try
-        {
-            using (StreamWriter writer = new StreamWriter(path))
-            using (XmlWriter xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = true, IndentChars = "    " }))
+            catch (System.Exception exception)
             {
-                serializer.Serialize(xmlWriter, list);
+                Diagnostics.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
             }
         }
-        catch (System.Exception exception)
+
+        public static void SaveToFile<T>(string root, string path, ICollection<T> objectsToSerialize)
         {
-            Diagnostics.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
+            if (string.IsNullOrEmpty(path))
+            {
+                return;
+            }
+
+            List<T> list = new List<T>();
+            list.AddRange(objectsToSerialize);
+
+            XmlRootAttribute xmlRoot = new XmlRootAttribute
+            {
+                ElementName = root
+            };
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<T>), xmlRoot);
+
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(path))
+                {
+                    XmlWriterSettings xmlWriterSettings = new XmlWriterSettings
+                    {
+                        Indent = true, IndentChars = "    "
+                    };
+
+                    using (XmlWriter xmlWriter = XmlWriter.Create(writer, xmlWriterSettings))
+                    {
+                        serializer.Serialize(xmlWriter, list);
+                    }
+                }
+            }
+            catch (System.Exception exception)
+            {
+                Diagnostics.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
+            }
         }
     }
 }

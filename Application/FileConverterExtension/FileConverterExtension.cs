@@ -16,6 +16,9 @@ namespace FileConverterExtension
     using SharpShell.Attributes;
     using SharpShell.SharpContextMenu;
 
+    /// <summary>
+    /// File converter context menu extension class.
+    /// </summary>
     [ComVisible(true), Guid("AF9B72B5-F4E4-44B0-A3D9-B55B748EFE90")]
     [COMServerAssociation(AssociationType.AllFiles)]
     public class FileConverterExtension : SharpContextMenu

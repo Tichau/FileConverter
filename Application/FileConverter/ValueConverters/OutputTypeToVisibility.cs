@@ -3,7 +3,6 @@
 namespace FileConverter.ValueConverters
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.Windows.Data;
 
@@ -21,13 +20,13 @@ namespace FileConverter.ValueConverters
             string referenceTypeName = parameter as string;
             if (string.IsNullOrEmpty(referenceTypeName))
             {
-                return false;
+                return "Hidden";
             }
 
             OutputType referenceType;
-            if (System.Enum.TryParse<OutputType>(referenceTypeName,out referenceType))
+            if (!Enum.TryParse<OutputType>(referenceTypeName, out referenceType))
             {
-                
+                return "Hidden";
             }
 
             return outputType == referenceType ? "Visible" : "Hidden";
