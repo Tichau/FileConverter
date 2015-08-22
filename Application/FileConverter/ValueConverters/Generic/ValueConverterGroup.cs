@@ -35,7 +35,26 @@ namespace FileConverter.ValueConverters.Generic
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotImplementedException();
+            string parameterString = parameter as string;
+            if (parameterString == null)
+            {
+                throw new ArgumentException("The parameter must be a string value.");
+            }
+
+            string[] parameters = parameterString.Split('|');
+            if (parameters.Length != this.Count)
+            {
+                throw new ArgumentException("The parameter format must be 'Converter1Parameters|Converter2Parameters|...'.");
+            }
+
+            object result = value;
+            for (int index = this.Count - 1; index >= 0; index++)
+            {
+                IValueConverter converter = this[index];
+                result = converter.ConvertBack(result, targetType, parameters[index], culture);
+            }
+
+            return result;
         }
     }
 }
