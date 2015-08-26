@@ -4,6 +4,7 @@
         xmlns:controls="clr-namespace:FileConverter.Controls"
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
+        xmlns:windows="clr-namespace:FileConverter.Windows"
         Height="500" Width="700" MinHeight="370" MinWidth="440"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico"
         Closing="SettingsWindow_OnClosing">
@@ -45,6 +46,42 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <DataTemplate x:Key="EmptyDataTemplate">
+            <StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="Mp3SettingsDataTemplate">
+            <StackPanel>
+                <DockPanel>
+                    <Label Content="Encoding :" />
+                    <RadioButton Name="VBRradioButton" Content="VBR" ToolTip="Variable bitrate encoding" Margin="5" Checked="EncodingTypeRadio_Checked" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Mp3VBR', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=OneWay}" />
+                    <RadioButton Name="CBRradioButton" Content="CBR" ToolTip="Constant bitrate encoding" Margin="5" Checked="EncodingTypeRadio_Checked" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Mp3CBR', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=OneWay}"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Quality :" />
+                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" BitrateValueChanged="EncodingQualitySlider_ValueChanged"
+                        EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|FileConverter.EncodingMode', Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
+                        Bitrate="{Binding SelectedPreset.Settings, ConverterParameter='Bitrate|System.Double', Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay, TargetNullValue=190}" />
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OggSettingsDataTemplate">
+            <StackPanel>
+                <DockPanel>
+                    <Label Content="Quality :" />
+                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" BitrateValueChanged="EncodingQualitySlider_ValueChanged" EncodingMode="OggVBR" 
+                        Bitrate="{Binding SelectedPreset.Settings, ConverterParameter='Bitrate|System.Double', Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay, TargetNullValue=160}" />
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <windows:ConversionSettingsTemplateSelector x:Key="ConversionSettingsSelector"
+            DefaultDataTemplate="{StaticResource EmptyDataTemplate}"
+            Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
+            OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}" />
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
@@ -109,7 +146,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content="Preset name" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                    <TextBox Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
+                    <TextBox Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
 
                     <GroupBox Grid.Row="1" Grid.Column="0" Header="Input formats" Margin="5">
                         <TreeView x:Name="treeView" Margin="5">
@@ -132,19 +169,9 @@
                     <GroupBox Header="Output format" Grid.Row="1" Grid.Column="1" Margin="5">
                         <StackPanel>
                             <ComboBox Name="OutputFormats" Margin="5" Height="25" VerticalAlignment="Top" SelectedItem="{Binding SelectedPreset.OutputType, ElementName=window, Mode=TwoWay}"/>
-                            <StackPanel Margin="0,5,0,5" Visibility="{Binding SelectedPreset.OutputType, Converter={StaticResource OutputTypeToVisibility}, ConverterParameter='Mp3', ElementName=window, Mode=OneWay}">
-                                <DockPanel>
-                                    <Label Content="Encoding :" />
-                                    <RadioButton Name="VBRradioButton" Content="VBR" ToolTip="Variable bitrate encoding" Margin="5" Checked="EncodingTypeRadio_Checked" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|VBR', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=OneWay}" />
-                                    <RadioButton Name="CBRradioButton" Content="CBR" ToolTip="Constant bitrate encoding" Margin="5" Checked="EncodingTypeRadio_Checked" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|CBR', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=OneWay}"/>
-                                </DockPanel>
-                                <DockPanel>
-                                    <Label Content="Quality :" />
-                                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" BitrateValueChanged="EncodingQualitySlider_ValueChanged"
-                                                                           EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|FileConverter.EncodingMode', Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
-                                                                           Bitrate="{Binding SelectedPreset.Settings, ConverterParameter='Bitrate|System.Double', Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay, TargetNullValue=190}" />
-                                </DockPanel>
-                            </StackPanel>
+                            
+                            <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
+                                            Content="{Binding SelectedPreset.OutputType, UpdateSourceTrigger=PropertyChanged, ElementName=window}" />
                         </StackPanel>
                     </GroupBox>
                 </Grid>

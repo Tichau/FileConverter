@@ -58,11 +58,11 @@ namespace FileConverter.ConversionJobs
                     int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
                     switch (encodingMode)
                     {
-                        case EncodingMode.VBR:
+                        case EncodingMode.Mp3VBR:
                             encoderArgs = string.Format("-codec:a libmp3lame -q:a {0}", this.VBRBitrateToQualityIndex(encodingQuality));
                             break;
 
-                        case EncodingMode.CBR:
+                        case EncodingMode.Mp3CBR:
                             encoderArgs = string.Format("-codec:a libmp3lame -b:a {0}k", encodingQuality);
                             break;
 

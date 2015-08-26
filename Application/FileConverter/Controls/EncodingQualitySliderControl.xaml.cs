@@ -83,7 +83,7 @@ namespace FileConverter.Controls
 
             switch (encodingQualitySliderControl.EncodingMode)
             {
-                case EncodingMode.VBR:
+                case EncodingMode.Mp3VBR:
                     {
                         sliderControl.Minimum = 65;
                         sliderControl.Maximum = 245;
@@ -103,7 +103,7 @@ namespace FileConverter.Controls
                         break;
                     }
 
-                case EncodingMode.CBR:
+                case EncodingMode.Mp3CBR:
                     {
                         sliderControl.Minimum = 8;
                         sliderControl.Maximum = 320;
@@ -126,6 +126,29 @@ namespace FileConverter.Controls
                         sliderControl.Ticks.Add(224);
                         sliderControl.Ticks.Add(256);
                         sliderControl.Ticks.Add(320);
+                        break;
+                    }
+
+                case EncodingMode.OggVBR:
+                    {
+                        sliderControl.Minimum = 32;
+                        sliderControl.Maximum = 500;
+                        sliderControl.SelectionStart = 80;
+                        sliderControl.SelectionEnd = 192;
+                        sliderControl.Ticks.Clear();
+                        sliderControl.Ticks.Add(32);
+                        sliderControl.Ticks.Add(48);
+                        sliderControl.Ticks.Add(64);
+                        sliderControl.Ticks.Add(80);
+                        sliderControl.Ticks.Add(96);
+                        sliderControl.Ticks.Add(112);
+                        sliderControl.Ticks.Add(128);
+                        sliderControl.Ticks.Add(160);
+                        sliderControl.Ticks.Add(192);
+                        sliderControl.Ticks.Add(224);
+                        sliderControl.Ticks.Add(256);
+                        sliderControl.Ticks.Add(320);
+                        sliderControl.Ticks.Add(500);
                         break;
                     }
             }

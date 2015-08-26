@@ -55,12 +55,12 @@ namespace FileConverter
         {
             get
             {
-                return outputType;
+                return this.outputType;
             }
 
             set
             {
-                outputType = value;
+                this.outputType = value;
                 this.InitializeDefaultSettings(outputType);
                 this.OnPropertyChanged();
             }
@@ -71,12 +71,12 @@ namespace FileConverter
         {
             get
             {
-                return inputTypes;
+                return this.inputTypes;
             }
 
             set
             {
-                inputTypes = value;
+                this.inputTypes = value;
                 this.OnPropertyChanged();
             }
         }
@@ -147,6 +147,11 @@ namespace FileConverter
                 throw new ArgumentNullException("value");
             }
 
+            if (!this.IsRelevantSetting(settingsKey))
+            {
+                return;
+            }
+
             if (!this.settings.ContainsKey(settingsKey))
             {
                 this.settings.Add(settingsKey, value);
@@ -191,12 +196,44 @@ namespace FileConverter
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private bool IsRelevantSetting(string settingsKey)
+        {
+            switch (this.OutputType)
+            {
+                case OutputType.Mp3:
+                    switch (settingsKey)
+                    {
+                        case "Encoding":
+                        case "Bitrate":
+                            return true;
+                    }
+
+                    break;
+
+                case OutputType.Ogg:
+                    switch (settingsKey)
+                    {
+                        case "Bitrate":
+                            return true;
+                    }
+
+                    break;
+            }
+
+            return false;
+        }
+
         private void InitializeDefaultSettings(OutputType outputType)
         {
             if (outputType == OutputType.Mp3)
             {
-                this.InitializeSettingsValue("Encoding", "VBR");
+                this.InitializeSettingsValue("Encoding", EncodingMode.Mp3VBR.ToString());
                 this.InitializeSettingsValue("Bitrate", "190");
+            }
+
+            if (outputType == OutputType.Ogg)
+            {
+                this.InitializeSettingsValue("Bitrate", "160");
             }
 
             this.OnPropertyChanged("Settings");

@@ -144,11 +144,11 @@ namespace FileConverter
             string content = radioButton.Content as string;
             if (content == "VBR")
             {
-                this.SelectedPreset?.SetSettingsValue("Encoding", "VBR");
+                this.SelectedPreset?.SetSettingsValue("Encoding", EncodingMode.Mp3VBR.ToString());
             }
             else if (content == "CBR")
             {
-                this.SelectedPreset?.SetSettingsValue("Encoding", "CBR");
+                this.SelectedPreset?.SetSettingsValue("Encoding", EncodingMode.Mp3CBR.ToString());
             }
             else
             {

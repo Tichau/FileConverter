@@ -96,6 +96,7 @@
     <Compile Include="Windows\DiagnosticsWindow.xaml.cs">
       <DependentUpon>DiagnosticsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ConversionSettingsTemplateSelector.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>

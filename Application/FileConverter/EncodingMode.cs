@@ -4,7 +4,9 @@ namespace FileConverter
 {
     public enum EncodingMode
     {
-        VBR,
-        CBR,
+        Mp3VBR,
+        Mp3CBR,
+
+        OggVBR,
     }
 }
