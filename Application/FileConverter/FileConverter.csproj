@@ -86,6 +86,7 @@
     <Compile Include="ValueConverters\BitrateToString.cs" />
     <Compile Include="ValueConverters\Generic\BoolToVisibility.cs" />
     <Compile Include="ValueConverters\ConversionSettingsToString.cs" />
+    <Compile Include="ValueConverters\Generic\BoolInverterConverter.cs" />
     <Compile Include="ValueConverters\Generic\EqualsConverter.cs" />
     <Compile Include="ValueConverters\Generic\ObjectToValueType.cs" />
     <Compile Include="ValueConverters\InputTypesToBool.cs" />

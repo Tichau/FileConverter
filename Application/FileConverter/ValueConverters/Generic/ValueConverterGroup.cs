@@ -11,16 +11,24 @@ namespace FileConverter.ValueConverters.Generic
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            string parameterString = parameter as string;
-            if (parameterString == null)
+            string[] parameters = null;
+            if (parameter == null)
             {
-                throw new ArgumentException("The parameter must be a string value.");
+                parameters = new string[this.Count];
             }
-
-            string[] parameters = parameterString.Split('|');
-            if (parameters.Length != this.Count)
+            else
             {
-                throw new ArgumentException("The parameter format must be 'Converter1Parameters|Converter2Parameters|...'.");
+                string parameterString = parameter as string;
+                if (parameterString == null)
+                {
+                    throw new ArgumentException("The parameter must be a string value.");
+                }
+
+                parameters = parameterString.Split('|');
+                if (parameters.Length != this.Count)
+                {
+                    throw new ArgumentException("The parameter format must be 'Converter1Parameters|Converter2Parameters|...'.");
+                }
             }
 
             object result = value;

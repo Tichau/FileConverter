@@ -29,6 +29,12 @@
             <generic:ObjectToValueType/>
         </generic:ValueConverterGroup>
 
+        <generic:ValueConverterGroup x:Key="ReferenceToVisibility">
+            <generic:EqualsConverter/>
+            <generic:BoolInverterConverter/>
+            <generic:BoolToVisibility/>
+        </generic:ValueConverterGroup>
+        
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
@@ -134,8 +140,7 @@
             </ListBox>
 
             <!-- Preset settings -->
-            <GroupBox Header="Preset 
-                      " Margin="5,5,0,0" Grid.Column="1">
+            <GroupBox Header="Preset" Margin="5,5,0,0" Grid.Column="1" Visibility="{Binding SelectedPreset, Converter={StaticResource ReferenceToVisibility}, ElementName=window}">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
