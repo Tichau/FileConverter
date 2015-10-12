@@ -153,7 +153,7 @@ namespace FileConverter
                         case "conversion-preset":
                             if (index >= args.Length - 1)
                             {
-                                MessageBox.Show(string.Format("ERROR ! Invalid format."), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show(string.Format("Invalid format. (code 0x01)"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                                 return;
                             }
@@ -161,7 +161,7 @@ namespace FileConverter
                             conversionPreset = Settings.GetPresetFromName(args[index + 1]);
                             if (conversionPreset == null)
                             {
-                                MessageBox.Show(string.Format("Invalid conversion preset '{0}'.", args[index + 1]), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show(string.Format("Invalid conversion preset '{0}'. (code 0x02)", args[index + 1]), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                                 return;
                             }

@@ -133,7 +133,7 @@ namespace FileConverter
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
             if (registryKey == null)
             {
-                MessageBox.Show("Can't apply settings in registry.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Can't apply settings in registry. (code 0x03)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -155,14 +155,14 @@ namespace FileConverter
         {
             if (!Settings.IsInAdmininstratorPrivileges)
             {
-                MessageBox.Show("Can't apply settings in registry because the application is not in administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Can't apply settings in registry because the application is not in administrator privileges. (code 0x04)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter", RegistryKeyPermissionCheck.ReadWriteSubTree);
             if (registryKey == null)
             {
-                MessageBox.Show("Can't apply settings in registry (ErrorCode=1).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Can't apply settings in registry. (code 0x05)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -176,7 +176,7 @@ namespace FileConverter
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Can't apply settings in registry (ErrorCode=2).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Can't apply settings in registry. (code 0x06)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
             }
@@ -207,7 +207,7 @@ namespace FileConverter
 
                 if (subKey == null)
                 {
-                    MessageBox.Show("Can't apply settings in registry (ErrorCode=3).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Can't apply settings in registry. (code 0x07)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
 
@@ -354,7 +354,7 @@ namespace FileConverter
             }
             catch (Exception)
             {
-                MessageBox.Show("Can't apply settings in registry because the application has no administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Can't apply settings in registry because the application has no administrator privileges. (code 0x08)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
