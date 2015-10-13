@@ -27,7 +27,9 @@ namespace FileConverter.Controls
 
         [Category("Behavior")]
         public event EventHandler<double> BitrateValueChanged;
-        
+
+        private bool dontPropagateSliderValueChanged;
+
         public EncodingQualitySliderControl()
         {
             this.InitializeComponent();
@@ -67,7 +69,9 @@ namespace FileConverter.Controls
         private static void OnBitrateValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs eventArgs)
         {
             EncodingQualitySliderControl encodingQualitySliderControl = sender as EncodingQualitySliderControl;
+            encodingQualitySliderControl.dontPropagateSliderValueChanged = true;
             encodingQualitySliderControl.slider.Value = (double)eventArgs.NewValue;
+            encodingQualitySliderControl.dontPropagateSliderValueChanged = false;
         }
 
         private static object CoerceBitrateValue(DependencyObject sender, object basevalue)
@@ -80,7 +84,7 @@ namespace FileConverter.Controls
         {
             EncodingQualitySliderControl encodingQualitySliderControl = sender as EncodingQualitySliderControl;
             Slider sliderControl = encodingQualitySliderControl.slider;
-
+            
             switch (encodingQualitySliderControl.EncodingMode)
             {
                 case EncodingMode.Mp3VBR:
@@ -158,8 +162,18 @@ namespace FileConverter.Controls
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (this.Bitrate == e.NewValue)
+            {
+                return;
+            }
+
             this.SetCurrentValue(EncodingQualitySliderControl.BitrateProperty, e.NewValue);
-            this.BitrateValueChanged?.Invoke(this, e.NewValue);
+
+            if (!this.dontPropagateSliderValueChanged)
+            {
+                // Only send the bitrate value changed event if the value change come from the slider.
+                this.BitrateValueChanged?.Invoke(this, e.NewValue);
+            }
         }
 
         private double GetNearestTickValue(double value)
