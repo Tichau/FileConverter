@@ -25,11 +25,6 @@ namespace FileConverter.Controls
             typeof(EncodingQualitySliderControl),
             new PropertyMetadata(new PropertyChangedCallback(EncodingQualitySliderControl.OnEncodingModeValueChanged)));
 
-        [Category("Behavior")]
-        public event EventHandler<double> BitrateValueChanged;
-
-        private bool dontPropagateSliderValueChanged;
-
         public EncodingQualitySliderControl()
         {
             this.InitializeComponent();
@@ -69,9 +64,7 @@ namespace FileConverter.Controls
         private static void OnBitrateValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs eventArgs)
         {
             EncodingQualitySliderControl encodingQualitySliderControl = sender as EncodingQualitySliderControl;
-            encodingQualitySliderControl.dontPropagateSliderValueChanged = true;
             encodingQualitySliderControl.slider.Value = (double)eventArgs.NewValue;
-            encodingQualitySliderControl.dontPropagateSliderValueChanged = false;
         }
 
         private static object CoerceBitrateValue(DependencyObject sender, object basevalue)
@@ -168,12 +161,6 @@ namespace FileConverter.Controls
             }
 
             this.SetCurrentValue(EncodingQualitySliderControl.BitrateProperty, e.NewValue);
-
-            if (!this.dontPropagateSliderValueChanged)
-            {
-                // Only send the bitrate value changed event if the value change come from the slider.
-                this.BitrateValueChanged?.Invoke(this, e.NewValue);
-            }
         }
 
         private double GetNearestTickValue(double value)

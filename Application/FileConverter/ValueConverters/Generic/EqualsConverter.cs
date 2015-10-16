@@ -20,7 +20,18 @@ namespace FileConverter.ValueConverters.Generic
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (!(value is bool))
+            {
+                throw new ArgumentException("value");
+            }
+
+            bool equals = (bool)value;
+            if (equals)
+            {
+                return parameter;
+            }
+
+            return null;
         }
     }
 }

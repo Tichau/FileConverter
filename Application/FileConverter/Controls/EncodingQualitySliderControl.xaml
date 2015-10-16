@@ -19,8 +19,9 @@
             <ColumnDefinition Width="65"/>
         </Grid.ColumnDefinitions>
 
-        <Slider Grid.Column="0" x:Name="slider" Margin="0,2,0,0" VerticalAlignment="Top" Maximum="245" AutoToolTipPlacement="TopLeft" SmallChange="8" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="115" SelectionEnd="245" Minimum="65" TickPlacement="BottomRight" LargeChange="32" TickFrequency="8" Ticks="65 85 100 115 130 165 175 190 225 245" Foreground="#004B82"/>
-        <Label Grid.Column="1" Content="{Binding Value, Converter={StaticResource BitrateToString}, ElementName=slider}" Width="65" />
-        <Label Grid.Column="0" Grid.Row="1" Content="Recommended bitrate range in blue" Foreground="#E5004B82" FontSize="10.667" />
+        <Slider Grid.Column="0" x:Name="slider" Margin="0,2,0,0" VerticalAlignment="Top" Maximum="245" AutoToolTipPlacement="TopLeft" SmallChange="8" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="115" SelectionEnd="245" Minimum="65" TickPlacement="BottomRight" LargeChange="32" TickFrequency="8" Ticks="65 85 100 115 130 165 175 190 225 245" Foreground="#004B82"
+                />
+        <Label Grid.Column="1" Content="{Binding Value, Converter={StaticResource BitrateToString}, ElementName=slider, Mode=OneWay}" Width="65" />
+        <Label Grid.Column="0" Grid.Row="1" Content="Recommended bitrate range in blue" Foreground="#E5004B82" FontSize="11" />
     </Grid>
 </UserControl>

@@ -51,7 +51,26 @@ namespace FileConverter.ValueConverters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value == null)
+            {
+                return null;
+            }
+
+            if (!(value is string))
+            {
+                throw new ArgumentException("value");
+            }
+
+            string settingsValue = (string)value;
+
+            if (!(parameter is string))
+            {
+                throw new ArgumentException("parameter");
+            }
+
+            string settingsKey = (string)parameter;
+
+            return new ConversionSettingsOverride(settingsKey, settingsValue);
         }
     }
 }

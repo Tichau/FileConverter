@@ -1,4 +1,4 @@
-﻿// <copyright file="ObjectToValueType.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="StringToValueType.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters.Generic
 {
@@ -6,7 +6,7 @@ namespace FileConverter.ValueConverters.Generic
     using System.Globalization;
     using System.Windows.Data;
 
-    public class ObjectToValueType : IValueConverter
+    public class StringToValueType : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -32,7 +32,12 @@ namespace FileConverter.ValueConverters.Generic
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value == null)
+            {
+                return null;
+            }
+
+            return value.ToString();
         }
     }
 }

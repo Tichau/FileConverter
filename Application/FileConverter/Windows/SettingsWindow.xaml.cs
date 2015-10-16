@@ -130,29 +130,6 @@ namespace FileConverter
             e.CanExecute = this.settings != null && string.IsNullOrEmpty(this.settings.Error);
         }
         
-        private void EncodingTypeRadio_Checked(object sender, RoutedEventArgs e)
-        {
-            RadioButton radioButton = sender as RadioButton;
-            string content = radioButton.Content as string;
-            if (content == "VBR")
-            {
-                this.SelectedPreset?.SetSettingsValue("Encoding", EncodingMode.Mp3VBR.ToString());
-            }
-            else if (content == "CBR")
-            {
-                this.SelectedPreset?.SetSettingsValue("Encoding", EncodingMode.Mp3CBR.ToString());
-            }
-            else
-            {
-                throw new Exception("Unknown encoding type.");
-            }
-        }
-
-        private void EncodingQualitySlider_ValueChanged(object sender, double bitrateValue)
-        {
-            this.SelectedPreset?.SetSettingsValue("Bitrate", bitrateValue.ToString("0"));
-        }
-
         private void SettingsWindow_OnClosing(object sender, CancelEventArgs e)
         {
             e.Cancel = true;

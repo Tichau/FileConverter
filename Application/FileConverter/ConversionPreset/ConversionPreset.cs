@@ -111,11 +111,34 @@ namespace FileConverter
             }
         }
 
+        [XmlIgnore]
         public IConversionSettings Settings
         {
             get
             {
                 return this.settings;
+            }
+
+            set
+            {
+                if (value == null)
+                {
+                    return;
+                }
+
+                foreach (KeyValuePair<string, string> conversionSetting in value)
+                {
+                    if (!this.settings.ContainsKey(conversionSetting.Key))
+                    {
+                        this.settings.Add(conversionSetting.Key, conversionSetting.Value);
+                    }
+                    else
+                    {
+                        this.settings[conversionSetting.Key] = conversionSetting.Value;
+                    }
+                }
+
+                this.OnPropertyChanged();
             }
         }
 
