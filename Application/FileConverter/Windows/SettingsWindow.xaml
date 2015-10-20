@@ -57,6 +57,18 @@
             <StackPanel>
             </StackPanel>
         </DataTemplate>
+        
+        <DataTemplate x:Key="WavSettingsDataTemplate">
+            <StackPanel>
+                <DockPanel>
+                    <Label Content="Encoding :" />
+                    <RadioButton Name="WAV8radioButton" Content="8-bits" ToolTip="PCM signed 8-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Wav8', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Name="WAV16radioButton" Content="16-bits" ToolTip="PCM signed 16-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Wav16', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton Name="WAV24radioButton" Content="24-bits" ToolTip="PCM signed 24-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Wav24', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton Name="WAV32radioButton" Content="32-bits" ToolTip="PCM signed 32-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Wav32', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
 
         <DataTemplate x:Key="Mp3SettingsDataTemplate">
             <StackPanel>
@@ -86,6 +98,7 @@
 
         <windows:ConversionSettingsTemplateSelector x:Key="ConversionSettingsSelector"
             DefaultDataTemplate="{StaticResource EmptyDataTemplate}"
+            WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
             Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
             OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}" />
     </Window.Resources>

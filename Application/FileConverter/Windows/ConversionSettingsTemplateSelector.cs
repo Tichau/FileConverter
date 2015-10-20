@@ -13,6 +13,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate WavSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public DataTemplate Mp3SettingsDataTemplate
         {
             get;
@@ -36,6 +42,9 @@ namespace FileConverter.Windows
            
             switch (outputType)
             {
+                case OutputType.Wav:
+                    return this.WavSettingsDataTemplate;
+
                 case OutputType.Mp3:
                     return this.Mp3SettingsDataTemplate;
 

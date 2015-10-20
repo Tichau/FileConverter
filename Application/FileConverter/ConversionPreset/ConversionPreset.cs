@@ -223,6 +223,15 @@ namespace FileConverter
         {
             switch (this.OutputType)
             {
+                case OutputType.Wav:
+                    switch (settingsKey)
+                    {
+                        case "Encoding":
+                            return true;
+                    }
+
+                    break;
+
                 case OutputType.Mp3:
                     switch (settingsKey)
                     {
@@ -248,6 +257,11 @@ namespace FileConverter
 
         private void InitializeDefaultSettings(OutputType outputType)
         {
+            if (outputType == OutputType.Wav)
+            {
+                this.InitializeSettingsValue("Encoding", "Wav16");
+            }
+
             if (outputType == OutputType.Mp3)
             {
                 this.InitializeSettingsValue("Encoding", EncodingMode.Mp3VBR.ToString());
