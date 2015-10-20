@@ -52,45 +52,54 @@ namespace FileConverter.ConversionJobs
             string arguments = string.Empty;
             switch (this.ConversionPreset.OutputType)
             {
-                case OutputType.Mp3:
-                {
-                    string encoderArgs = string.Empty;
-                    EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>("Encoding");
-                    int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
-                    switch (encodingMode)
+                case OutputType.Wav:
                     {
-                        case EncodingMode.Mp3VBR:
-                            encoderArgs = string.Format("-codec:a libmp3lame -q:a {0}",
-                                this.MP3VBRBitrateToQualityIndex(encodingQuality));
-                            break;
-
-                        case EncodingMode.Mp3CBR:
-                            encoderArgs = string.Format("-codec:a libmp3lame -b:a {0}k", encodingQuality);
-                            break;
-
-                        default:
-                            break;
+                        EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>("Encoding");
+                        string encoderArgs = string.Format("-acodec {0}", this.WAVEncodingToCodecArgument(encodingMode));
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"",
+                            this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
 
-                    arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", 
-                        this.InputFilePath, this.OutputFilePath, encoderArgs);
-                }
+                    break;
+
+                case OutputType.Mp3:
+                    {
+                        string encoderArgs = string.Empty;
+                        EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>("Encoding");
+                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
+                        switch (encodingMode)
+                        {
+                            case EncodingMode.Mp3VBR:
+                                encoderArgs = string.Format("-codec:a libmp3lame -q:a {0}",
+                                    this.MP3VBRBitrateToQualityIndex(encodingQuality));
+                                break;
+
+                            case EncodingMode.Mp3CBR:
+                                encoderArgs = string.Format("-codec:a libmp3lame -b:a {0}k", encodingQuality);
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", 
+                            this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
 
                 break;
 
                 case OutputType.Ogg:
-                {
-                    int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
-                    string encoderArgs = string.Format("-codec:a libvorbis -qscale:a {0}",
-                            this.OGGVBRBitrateToQualityIndex(encodingQuality));
-                    arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"",
-                        this.InputFilePath, this.OutputFilePath, encoderArgs);
-                }
+                    {
+                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
+                        string encoderArgs = string.Format("-codec:a libvorbis -qscale:a {0}",
+                                this.OGGVBRBitrateToQualityIndex(encodingQuality));
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"",
+                            this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
 
                 break;
 
                 case OutputType.Flac:
-                case OutputType.Wav:
                     arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
                     break;
 
@@ -232,6 +241,32 @@ namespace FileConverter.ConversionJobs
             }
 
             throw new Exception("Unknown VBR bitrate.");
+        }
+
+        /// <summary>
+        /// Convert encoding mode setting to ffmpeg argument option.
+        /// </summary>
+        /// <param name="encoding">The encoding mode setting.</param>
+        /// <returns>Returns the ffmpeg argument corresponding to the given envoding mode.</returns>
+        /// https://trac.ffmpeg.org/wiki/audio%20types
+        private string WAVEncodingToCodecArgument(EncodingMode encoding)
+        {
+            switch (encoding)
+            {
+                case EncodingMode.Wav8:
+                    return "pcm_s8le";
+
+                case EncodingMode.Wav16:
+                    return "pcm_s16le";
+
+                case EncodingMode.Wav24:
+                    return "pcm_s24le";
+
+                case EncodingMode.Wav32:
+                    return "pcm_s32le";
+            }
+
+            throw new Exception("Unknown Wav encoding.");
         }
 
         private void ParseFFMPEGOutput(string input)
