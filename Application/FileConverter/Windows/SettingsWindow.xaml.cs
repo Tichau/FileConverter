@@ -10,7 +10,6 @@ namespace FileConverter
     using System.Windows.Input;
 
     using FileConverter.Annotations;
-    using FileConverter.Controls;
 
     /// <summary>
     /// Interaction logic for Settings.xaml

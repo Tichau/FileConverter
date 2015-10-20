@@ -53,13 +53,15 @@ namespace FileConverter.ConversionJobs
             switch (this.ConversionPreset.OutputType)
             {
                 case OutputType.Mp3:
+                {
                     string encoderArgs = string.Empty;
                     EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>("Encoding");
                     int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
                     switch (encodingMode)
                     {
                         case EncodingMode.Mp3VBR:
-                            encoderArgs = string.Format("-codec:a libmp3lame -q:a {0}", this.VBRBitrateToQualityIndex(encodingQuality));
+                            encoderArgs = string.Format("-codec:a libmp3lame -q:a {0}",
+                                this.MP3VBRBitrateToQualityIndex(encodingQuality));
                             break;
 
                         case EncodingMode.Mp3CBR:
@@ -70,12 +72,22 @@ namespace FileConverter.ConversionJobs
                             break;
                     }
 
-                    arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
-                    break;
+                    arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", 
+                        this.InputFilePath, this.OutputFilePath, encoderArgs);
+                }
+
+                break;
 
                 case OutputType.Ogg:
-                    arguments = string.Format("-n -stats -i \"{0}\" -acodec libvorbis -qscale:a 2 \"{1}\"", this.InputFilePath, this.OutputFilePath);
-                    break;
+                {
+                    int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
+                    string encoderArgs = string.Format("-codec:a libvorbis -qscale:a {0}",
+                            this.OGGVBRBitrateToQualityIndex(encodingQuality));
+                    arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"",
+                        this.InputFilePath, this.OutputFilePath, encoderArgs);
+                }
+
+                break;
 
                 case OutputType.Flac:
                 case OutputType.Wav:
@@ -131,7 +143,7 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        private int VBRBitrateToQualityIndex(int bitrate)
+        private int MP3VBRBitrateToQualityIndex(int bitrate)
         {
             switch (bitrate)
             {
@@ -164,6 +176,59 @@ namespace FileConverter.ConversionJobs
 
                 case 65:
                     return 9;
+            }
+
+            throw new Exception("Unknown VBR bitrate.");
+        }
+
+        /// <summary>
+        /// Convert bitrate in vorbis encoder quality index.
+        /// </summary>
+        /// <param name="bitrate">Wanted bitrate value.</param>
+        /// <returns>The vorbis encoder quality index assotiated to the given bitrate value.</returns>
+        /// http://wiki.hydrogenaud.io/index.php?title=Recommended_Ogg_Vorbis
+        private int OGGVBRBitrateToQualityIndex(int bitrate)
+        {
+            switch (bitrate)
+            {
+                case 500:
+                    return 10;
+
+                case 320:
+                    return 9;
+
+                case 256:
+                    return 8;
+
+                case 224:
+                    return 7;
+
+                case 192:
+                    return 6;
+
+                case 160:
+                    return 5;
+
+                case 128:
+                    return 4;
+
+                case 112:
+                    return 3;
+
+                case 96:
+                    return 2;
+
+                case 80:
+                    return 1;
+
+                case 64:
+                    return 0;
+
+                case 48:
+                    return -1;
+
+                case 32:
+                    return -2;
             }
 
             throw new Exception("Unknown VBR bitrate.");
