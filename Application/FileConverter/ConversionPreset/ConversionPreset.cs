@@ -18,7 +18,8 @@ namespace FileConverter
         private string name;
         private OutputType outputType;
         private List<string> inputTypes;
-        private ConversionSettings settings = new ConversionSettings(); 
+        private ConversionSettings settings = new ConversionSettings();
+        private string outputFileNameTemplate;
 
         public ConversionPreset()
         {
@@ -108,6 +109,21 @@ namespace FileConverter
                 }
 
                 this.OnPropertyChanged("Settings");
+            }
+        }
+
+        [XmlElement]
+        public string OutputFileNameTemplate
+        {
+            get
+            {
+                return this.outputFileNameTemplate;
+            }
+
+            set
+            {
+                this.outputFileNameTemplate = value;
+                this.OnPropertyChanged();
             }
         }
 

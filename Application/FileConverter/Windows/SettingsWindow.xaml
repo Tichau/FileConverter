@@ -5,10 +5,12 @@
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         xmlns:windows="clr-namespace:FileConverter.Windows"
+        xmlns:project="clr-namespace:FileConverter.Properties"
         Height="500" Width="700" MinHeight="370" MinWidth="440"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico"
         Closing="SettingsWindow_OnClosing">
     <Window.Resources>
+        <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
         <generic:BoolToVisibility x:Key="BoolToVisibility"/>
         <valueConverters:InputTypesToBool x:Key="InputTypesToBool"/>
         <valueConverters:OutputTypeToVisibility x:Key="OutputTypeToVisibility"/>
@@ -34,7 +36,7 @@
             <generic:BoolInverterConverter/>
             <generic:BoolToVisibility/>
         </generic:ValueConverterGroup>
-        
+
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
@@ -54,18 +56,17 @@
         </Style>
 
         <DataTemplate x:Key="EmptyDataTemplate">
-            <StackPanel>
-            </StackPanel>
+            <StackPanel/>
         </DataTemplate>
-        
+
         <DataTemplate x:Key="WavSettingsDataTemplate">
             <StackPanel>
                 <DockPanel>
                     <Label Content="Encoding :" />
-                    <RadioButton Name="WAV8radioButton" Content="8-bits" ToolTip="PCM signed 8-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Wav8', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
-                    <RadioButton Name="WAV16radioButton" Content="16-bits" ToolTip="PCM signed 16-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Wav16', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
-                    <RadioButton Name="WAV24radioButton" Content="24-bits" ToolTip="PCM signed 24-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Wav24', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
-                    <RadioButton Name="WAV32radioButton" Content="32-bits" ToolTip="PCM signed 32-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Wav32', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton x:Name="WAV8radioButton" Content="8-bits" ToolTip="PCM signed 8-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Wav8, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton x:Name="WAV16radioButton" Content="16-bits" ToolTip="PCM signed 16-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Wav16, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton x:Name="WAV24radioButton" Content="24-bits" ToolTip="PCM signed 24-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Wav24, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton x:Name="WAV32radioButton" Content="32-bits" ToolTip="PCM signed 32-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Wav32, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
@@ -74,14 +75,14 @@
             <StackPanel>
                 <DockPanel>
                     <Label Content="Encoding :" />
-                    <RadioButton Name="VBRradioButton" Content="VBR" ToolTip="Variable bitrate encoding" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Mp3VBR', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
-                    <RadioButton Name="CBRradioButton" Content="CBR" ToolTip="Constant bitrate encoding" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|Mp3CBR', Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton x:Name="VBRradioButton" Content="VBR" ToolTip="Variable bitrate encoding" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Mp3VBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton x:Name="CBRradioButton" Content="CBR" ToolTip="Constant bitrate encoding" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Mp3CBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                 </DockPanel>
                 <DockPanel>
                     <Label Content="Quality :" />
                     <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider"
-                        EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter='Encoding|FileConverter.EncodingMode', Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
-                        Bitrate="{Binding SelectedPreset.Settings, ConverterParameter='Bitrate|System.Double', Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=190}" />
+                        EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|FileConverter.EncodingMode, Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
+                        Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=Bitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=190}" />
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
@@ -91,7 +92,7 @@
                 <DockPanel>
                     <Label Content="Quality :" />
                     <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="OggVBR" 
-                        Bitrate="{Binding SelectedPreset.Settings, ConverterParameter='Bitrate|System.Double', Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=160}" />
+                        Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=Bitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=160}" />
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
@@ -187,9 +188,39 @@
                     <GroupBox Header="Output format" Grid.Row="1" Grid.Column="1" Margin="5">
                         <StackPanel>
                             <ComboBox Name="OutputFormats" Margin="5" Height="25" VerticalAlignment="Top" SelectedItem="{Binding SelectedPreset.OutputType, ElementName=window, Mode=TwoWay}"/>
-                            
+
                             <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
                                             Content="{Binding SelectedPreset.OutputType, UpdateSourceTrigger=PropertyChanged, ElementName=window}" />
+
+                            <Separator/>
+                            
+                            <!-- Output file name template -->
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="23"/>
+                                    <RowDefinition Height="23"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="File name template" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                                <TextBox Name="FileNameTemplateTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,5,2" Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
+                                <Label Content="Input example" Grid.Row="1" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                <Label Content="{x:Static project:Resources.OuputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10"/>
+                                <Label Content="Output" Grid.Row="2" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                <Label x:Name="label" Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10">
+                                    <Label.Content>
+                                        <MultiBinding Converter="{StaticResource FileNameConverter}">
+                                            <Binding Source="{x:Static project:Resources.OuputFileNameTemplateSample}"/>
+                                            <Binding ElementName="window" Path="SelectedPreset.OutputType" Mode="OneWay"/>
+                                            <Binding ElementName="window" Path="SelectedPreset.OutputFileNameTemplate" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </Label.Content>
+                                </Label>
+                                <!--Content="{Binding Source={x:Static project:Resources.OuputFileNameTemplateSample}, Converter={StaticResource FileNameConverter}}"/>-->
+                            </Grid>
                         </StackPanel>
                     </GroupBox>
                 </Grid>

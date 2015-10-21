@@ -82,9 +82,15 @@
     <Compile Include="ConversionPreset\ConversionSettings.cs" />
     <Compile Include="EncodingMode.cs" />
     <Compile Include="ConversionPreset\IConversionSettings.cs" />
+    <Compile Include="Properties\Resources.en.Designer.cs">
+      <DependentUpon>Resources.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset\ConversionPreset.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
+    <Compile Include="ValueConverters\FileNameConverter.cs" />
     <Compile Include="ValueConverters\Generic\BoolToVisibility.cs" />
     <Compile Include="ValueConverters\ConversionSettingsToString.cs" />
     <Compile Include="ValueConverters\Generic\BoolInverterConverter.cs" />
@@ -151,8 +157,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

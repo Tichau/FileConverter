@@ -56,7 +56,7 @@ namespace FileConverter
                 this.OnPropertyChanged();
             }
         }
-
+        
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
