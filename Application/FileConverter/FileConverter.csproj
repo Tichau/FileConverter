@@ -82,6 +82,7 @@
     <Compile Include="ConversionPreset\ConversionSettings.cs" />
     <Compile Include="EncodingMode.cs" />
     <Compile Include="ConversionPreset\IConversionSettings.cs" />
+    <Compile Include="PathHelpers.cs" />
     <Compile Include="Properties\Resources.en.Designer.cs">
       <DependentUpon>Resources.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>

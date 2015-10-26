@@ -211,6 +211,11 @@ namespace FileConverter
             for (int index = 0; index < this.conversionJobs.Count; index++)
             {
                 ConversionJob conversionJob = this.conversionJobs[index];
+                if (conversionJob.State != ConversionJob.ConversionState.Ready)
+                {
+                    continue;
+                }
+
                 conversionJob.StartConvertion();
 
                 if (System.IO.File.Exists(conversionJob.OutputFilePath))

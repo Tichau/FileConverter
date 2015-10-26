@@ -6,7 +6,7 @@
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         xmlns:windows="clr-namespace:FileConverter.Windows"
         xmlns:project="clr-namespace:FileConverter.Properties"
-        Height="500" Width="700" MinHeight="370" MinWidth="440"
+        Height="500" Width="700" MinHeight="400" MinWidth="600"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico"
         Closing="SettingsWindow_OnClosing">
     <Window.Resources>
@@ -157,7 +157,7 @@
             <GroupBox Header="Preset" Margin="5,5,0,0" Grid.Column="1" Visibility="{Binding SelectedPreset, Converter={StaticResource ReferenceToVisibility}, ElementName=window}">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="160"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -165,7 +165,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content="Preset name" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                    <TextBox Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
+                    <TextBox Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
 
                     <GroupBox Grid.Row="1" Grid.Column="0" Header="Input formats" Margin="5">
                         <TreeView x:Name="treeView" Margin="5">
@@ -206,7 +206,7 @@
                                     <RowDefinition Height="23"/>
                                 </Grid.RowDefinitions>
                                 <Label Content="File name template" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                                <TextBox Name="FileNameTemplateTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,5,2" Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
+                                <TextBox Name="FileNameTemplateTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
                                 <Label Content="Input example" Grid.Row="1" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
                                 <Label Content="{x:Static project:Resources.OuputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10"/>
                                 <Label Content="Output" Grid.Row="2" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>

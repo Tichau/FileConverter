@@ -1,5 +1,7 @@
 ﻿// <copyright file="FileConverter.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
+using FileConverter.ValueConverters;
+
 namespace FileConverter
 {
     using System;
@@ -20,6 +22,7 @@ namespace FileConverter
         private List<string> inputTypes;
         private ConversionSettings settings = new ConversionSettings();
         private string outputFileNameTemplate;
+        FileNameConverter outputFileNameConverter = new FileNameConverter();
 
         public ConversionPreset()
         {
@@ -32,6 +35,7 @@ namespace FileConverter
             this.OutputType = outputType;
             this.InputTypes = new List<string>();
             this.InputTypes.AddRange(inputTypes);
+            this.outputFileNameTemplate = "(p)(f)";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -170,8 +174,25 @@ namespace FileConverter
         {
             get
             {
-                return this.Validate("Name");
+                string errorString = this.Validate("Name");
+                if (!string.IsNullOrEmpty(errorString))
+                {
+                    return errorString;
+                }
+
+                errorString = this.Validate("OutputFileNameTemplate");
+                if (!string.IsNullOrEmpty(errorString))
+                {
+                    return errorString;
+                }
+
+                return string.Empty;
             }
+        }
+
+        public string GenerateOutputFilePath(string inputFilePath)
+        {
+            return (string)this.outputFileNameConverter.Convert(new object[] {inputFilePath, this.OutputType, this.OutputFileNameTemplate}, typeof (string), null, null);
         }
 
         public void SetSettingsValue(string settingsKey, string value)
@@ -335,6 +356,71 @@ namespace FileConverter
                             {
                                 return "The preset name is already used.";
                             }
+                        }
+                    }
+
+                    break;
+
+                case "OutputFileNameTemplate":
+                    {
+                        string sampleOutputFilePath = this.GenerateOutputFilePath(FileConverter.Properties.Resources.OuputFileNameTemplateSample);
+                        if (string.IsNullOrEmpty(sampleOutputFilePath))
+                        {
+                            return "The output filename template must produce a non empty result.";
+                        }
+
+                        if (!PathHelpers.IsPathValid(sampleOutputFilePath))
+                        {
+                            // Diagnostic to feedback purpose.
+                            // Drive letter.
+                            if (!PathHelpers.IsPathDriveLetterValid(sampleOutputFilePath))
+                            {
+                                return "The output filename template must define a root (for example c:\\, use (p) to use the input file path).";
+                            }
+
+                            // File name.
+                            string filename = PathHelpers.GetFileName(sampleOutputFilePath);
+                            if (filename == null)
+                            {
+                                return "The output file name must not be empty (use (f) to use the name of the input file).";
+                            }
+
+                            char[] invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
+                            for (int index = 0; index < invalidFileNameChars.Length; index++)
+                            {
+                                if (filename.Contains(invalidFileNameChars[index]))
+                                {
+                                    return "The output file name must not contains the character '" + invalidFileNameChars[index] + "'.";
+                                }
+                            }
+
+                            // Directory names.
+                            string path = sampleOutputFilePath.Substring(3, sampleOutputFilePath.Length - 3 - filename.Length);
+                            char[] invalidPathChars = System.IO.Path.GetInvalidPathChars();
+                            for (int index = 0; index < invalidPathChars.Length; index++)
+                            {
+                                if (string.IsNullOrEmpty(path))
+                                {
+                                    return "The output directory name must not be empty (use (d0), (d1), ... to use the name of the parent directories of the input file).";
+                                }
+
+                                if (path.Contains(invalidPathChars[index]))
+                                {
+                                    return "The output directory name must not contains the character '" + invalidPathChars[index] + "'.";
+                                }
+                            }
+
+                            string[] directories = path.Split('\\');
+                            for (int index = 0; index < directories.Length; ++index)
+                            {
+                                string directoryName = directories[index];
+                                if (string.IsNullOrEmpty(directoryName))
+                                {
+                                    return "The output directory name must not be empty (use (d0), (d1), ... to use the name of the parent directories of the input file).";
+                                }
+                            }
+
+                            return "The output filename template is invalid";
                         }
                     }
 

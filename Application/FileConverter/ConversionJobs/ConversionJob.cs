@@ -114,7 +114,14 @@ namespace FileConverter.ConversionJobs
             }
 
             this.InputFilePath = inputFilePath;
-            this.OutputFilePath = this.GenerateOutputPath(this.InputFilePath);
+            this.OutputFilePath = this.ConversionPreset.GenerateOutputFilePath(inputFilePath);
+            string presetError = this.ConversionPreset.Error;
+            if (!string.IsNullOrEmpty(presetError))
+            {
+                this.State = ConversionState.Failed;
+                this.ErrorMessage = presetError;
+                return;
+            }
 
             this.Initialize();
 
@@ -159,17 +166,6 @@ namespace FileConverter.ConversionJobs
         protected void ConvertionFailed(string exitingMessage)
         {
             this.State = ConversionState.Failed;
-        }
-        
-        protected virtual string GenerateOutputPath(string inputFilePath)
-        {
-            if (this.ConversionPreset == null)
-            {
-                throw new Exception("The conversion preset must be valid.");
-            }
-
-            string extension = System.IO.Path.GetExtension(inputFilePath);
-            return inputFilePath.Substring(0, inputFilePath.Length - extension.Length) + "." + this.ConversionPreset.OutputType.ToString().ToLowerInvariant();
         }
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
