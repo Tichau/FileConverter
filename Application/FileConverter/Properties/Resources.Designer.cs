@@ -68,5 +68,21 @@ namespace FileConverter.Properties {
                 return ResourceManager.GetString("OuputFileNameTemplateSample", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (p): input file path
+        ///(f): input filename
+        ///(o): output extension type
+        ///(i): input extension type
+        ///(d0): input parent folder
+        ///(d1): input sub parent folder
+        ///...
+        ///use maj for uppercase version.
+        /// </summary>
+        public static string OutputFilePathTemplateHelp {
+            get {
+                return ResourceManager.GetString("OutputFilePathTemplateHelp", resourceCulture);
+            }
+        }
     }
 }

@@ -65,6 +65,7 @@ namespace FileConverter.ValueConverters
             for (int index = 0; index < directories.Length; index++)
             {
                 outputPath = outputPath.Replace(string.Format("(d{0})", directories.Length - index - 1), directories[index]);
+                outputPath = outputPath.Replace(string.Format("(D{0})", directories.Length - index - 1), directories[index].ToUpperInvariant());
             }
 
             outputPath += "." + outputExtension;

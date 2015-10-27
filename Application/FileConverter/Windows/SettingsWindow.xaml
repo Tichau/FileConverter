@@ -206,19 +206,19 @@
                                     <RowDefinition Height="23"/>
                                 </Grid.RowDefinitions>
                                 <Label Content="File name template" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                                <TextBox Name="FileNameTemplateTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
-                                <Label Content="Input example" Grid.Row="1" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
-                                <Label Content="{x:Static project:Resources.OuputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10"/>
-                                <Label Content="Output" Grid.Row="2" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
-                                <Label x:Name="label" Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10">
-                                    <Label.Content>
+                                <TextBox Name="FileNameTemplateTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}" />
+                                <Label Content="Input example" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                <TextBlock Text="{x:Static project:Resources.OuputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center"/>
+                                <Label Content="Output" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center">
+                                    <TextBlock.Text>
                                         <MultiBinding Converter="{StaticResource FileNameConverter}">
                                             <Binding Source="{x:Static project:Resources.OuputFileNameTemplateSample}"/>
                                             <Binding ElementName="window" Path="SelectedPreset.OutputType" Mode="OneWay"/>
                                             <Binding ElementName="window" Path="SelectedPreset.OutputFileNameTemplate" Mode="OneWay"/>
                                         </MultiBinding>
-                                    </Label.Content>
-                                </Label>
+                                    </TextBlock.Text>
+                                </TextBlock>
                                 <!--Content="{Binding Source={x:Static project:Resources.OuputFileNameTemplateSample}, Converter={StaticResource FileNameConverter}}"/>-->
                             </Grid>
                         </StackPanel>
