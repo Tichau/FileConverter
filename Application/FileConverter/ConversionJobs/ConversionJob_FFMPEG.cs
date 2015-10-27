@@ -27,6 +27,8 @@ namespace FileConverter.ConversionJobs
 
         protected override void Initialize()
         {
+            base.Initialize();
+
             if (this.ConversionPreset == null)
             {
                 throw new Exception("The conversion preset must be valid.");
@@ -38,6 +40,7 @@ namespace FileConverter.ConversionJobs
             string ffmpegPath = string.Format("{0}\\ffmpeg.exe", applicationDirectory);
             if (!System.IO.File.Exists(ffmpegPath))
             {
+                this.ConvertionFailed("Can't find ffmpeg executable. You should try to reinstall the application.");
                 Diagnostics.Log("Can't find ffmpeg executable ({0}). Try to reinstall the application.", ffmpegPath);
                 return;
             }

@@ -102,20 +102,14 @@ namespace FileConverter
             if (args.Length <= 1)
             {
                 this.debugMode = true;
-                System.Array.Resize(ref args, 9);
+                System.Array.Resize(ref args, 5);
                 args[1] = "--conversion-preset";
                 args[2] = "To Mp3";
-                args[3] = @"D:\Projects\FileConverter\TestFiles\Herbie Hancock - Speak Like A Child [RVG Edition].flac";
-                args[3] = @"D:\Projects\FileConverter\TestFiles\01 - Le Bruit Du Bang.wma";
-                args[4] = @"D:\Projects\FileConverter\TestFiles\test\Toccata.wav";
-                args[5] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (4).wav";
-                args[5] = "--verbose";
-                args[6] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (3).wav";
-                args[7] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (2).wav";
-                args[8] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (5).wav";
+                args[3] = "--verbose";
+                args[4] = @"D:\Test\10 - Get around town (lp version).ogg";
 
-                System.Array.Resize(ref args, 2);
-                args[1] = "--settings";
+                //System.Array.Resize(ref args, 2);
+                //args[1] = "--settings";
             }
 #endif
 
@@ -227,7 +221,7 @@ namespace FileConverter
                         Diagnostics.Log("Delete file {0}.", conversionJob.OutputFilePath);
                         try
                         {
-                            System.IO.File.Delete(conversionJob.OutputFilePath);
+                            //System.IO.File.Delete(conversionJob.OutputFilePath);
                         }
                         catch
                         {
