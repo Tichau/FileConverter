@@ -146,5 +146,33 @@ namespace FileConverter
 
             this.OnSettingsWindowHide?.Invoke(this, new EventArgs());
         }
+
+        private void MovePresetUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            ConversionPreset presetToMove = this.SelectedPreset;
+            if (presetToMove == null)
+            {
+                return;
+            }
+            
+            int indexOfSelectedPreset = this.settings.ConversionPresets.IndexOf(presetToMove);
+            int newIndexOfSelectedPreset = System.Math.Max(0, indexOfSelectedPreset - 1);
+            
+            this.settings.ConversionPresets.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
+        }
+
+        private void MovePresetDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            ConversionPreset presetToMove = this.SelectedPreset;
+            if (presetToMove == null)
+            {
+                return;
+            }
+
+            int indexOfSelectedPreset = this.settings.ConversionPresets.IndexOf(presetToMove);
+            int newIndexOfSelectedPreset = System.Math.Min(this.settings.ConversionPresets.Count - 1, indexOfSelectedPreset + 1);
+
+            this.settings.ConversionPresets.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
+        }
     }
 }

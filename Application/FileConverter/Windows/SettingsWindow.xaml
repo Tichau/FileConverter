@@ -6,7 +6,7 @@
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         xmlns:windows="clr-namespace:FileConverter.Windows"
         xmlns:project="clr-namespace:FileConverter.Properties"
-        Height="500" Width="700" MinHeight="400" MinWidth="600"
+        Height="600" Width="800" MinHeight="400" MinWidth="600"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico"
         Closing="SettingsWindow_OnClosing">
     <Window.Resources>
@@ -136,28 +136,44 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="122"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Presets" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="100" Grid.ColumnSpan="2"/>
-            <ListBox Name="PresetList" HorizontalAlignment="Left" Margin="0,36,0,0" Width="100" Grid.ColumnSpan="2"
-                     Grid.Column="0" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedPreset, ElementName=window}">
-                <ItemsControl.DataContext>
-                    <local:ConversionPreset/>
-                </ItemsControl.DataContext>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Label Content="{Binding Name}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ListBox>
+            <Grid x:Name="PresetListGrid" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Content="Presets" Grid.Row="0" VerticalAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}" />
+                <ListBox Name="PresetList" Grid.Row="1" HorizontalAlignment="Left" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedPreset, ElementName=window}" Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
+                    <ItemsControl.DataContext>
+                        <local:ConversionPreset/>
+                    </ItemsControl.DataContext>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListBox>
+
+                <DockPanel Grid.Row="2" Margin="0,5,0,0">
+                    <Button Name="MoveUpPresetButton" Content="^" HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" Click="MovePresetUpButton_Click"/>
+                    <Button Name="AddPresetButton" Content="+" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="AddPresetButton_Click"/>
+                    <Button Name="RemovePresetButton" Content="-" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="RemovePresetButton_Click"/>
+                    <Button Name="MoveDownPresetButton" Content="v" HorizontalAlignment="Left" Width="25" Margin="2,0,0,0" Click="MovePresetDownButton_Click"/>
+                </DockPanel>
+            </Grid>
 
             <!-- Preset settings -->
             <GroupBox Header="Preset" Margin="5,5,0,0" Grid.Column="1" Visibility="{Binding SelectedPreset, Converter={StaticResource ReferenceToVisibility}, ElementName=window}">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="*" MaxWidth="240"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -168,21 +184,40 @@
                     <TextBox Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, Mode=TwoWay, ElementName=window, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
 
                     <GroupBox Grid.Row="1" Grid.Column="0" Header="Input formats" Margin="5">
-                        <TreeView x:Name="treeView" Margin="5">
-                            <TreeViewItem Header="Audio" IsExpanded="True">
-                                <CheckBox Content="Ape" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ape', ElementName=window, Mode=OneWay}"/>
-                                <CheckBox Content="Flac" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Flac', ElementName=window, Mode=OneWay}"/>
-                                <CheckBox Content="Mp3" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Mp3', ElementName=window, Mode=OneWay}"/>
-                                <CheckBox Content="Ogg" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ogg', ElementName=window, Mode=OneWay}"/>
-                                <CheckBox Content="Wav" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Wav', ElementName=window, Mode=OneWay}"/>
-                                <CheckBox Content="Wma" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Wma', ElementName=window, Mode=OneWay}"/>
-                                <CheckBox Content="M4a" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='M4a', ElementName=window, Mode=OneWay}"/>
-                            </TreeViewItem>
-                            <TreeViewItem Header="Video" IsExpanded="True">
-                                <CheckBox Content="Avi" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Avi', ElementName=window, Mode=OneWay}"/>
-                                <CheckBox Content="Mp4" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Mp4', ElementName=window, Mode=OneWay}"/>
-                            </TreeViewItem>
-                        </TreeView>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+
+                            <TreeView x:Name="treeView">
+                                <TreeViewItem Header="Audio" IsExpanded="True">
+                                    <CheckBox Content="Ape" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ape', ElementName=window, Mode=OneWay}"/>
+                                    <CheckBox Content="Flac" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Flac', ElementName=window, Mode=OneWay}"/>
+                                    <CheckBox Content="Mp3" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Mp3', ElementName=window, Mode=OneWay}"/>
+                                    <CheckBox Content="Ogg" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Ogg', ElementName=window, Mode=OneWay}"/>
+                                    <CheckBox Content="Wav" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Wav', ElementName=window, Mode=OneWay}"/>
+                                    <CheckBox Content="Wma" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Wma', ElementName=window, Mode=OneWay}"/>
+                                    <CheckBox Content="M4a" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='M4a', ElementName=window, Mode=OneWay}"/>
+                                </TreeViewItem>
+                                <TreeViewItem Header="Video" IsExpanded="True">
+                                    <CheckBox Content="Avi" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Avi', ElementName=window, Mode=OneWay}"/>
+                                    <CheckBox Content="Mp4" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked" IsChecked="{Binding SelectedPreset.InputTypes, Converter={StaticResource InputTypesToBool}, ConverterParameter='Mp4', ElementName=window, Mode=OneWay}"/>
+                                </TreeViewItem>
+                            </TreeView>
+
+                            <Label Grid.Row="1" Content="Action when conversion succeed"/>
+                            <ComboBox Grid.Row="2">
+                                <Label Content="None"/>
+                                <Label Content="Move in an archive folder"/>
+                                <Label Content="Delete"/>
+                            </ComboBox>
+
+                        </Grid>
                     </GroupBox>
 
                     <GroupBox Header="Output format" Grid.Row="1" Grid.Column="1" Margin="5">
@@ -193,7 +228,7 @@
                                             Content="{Binding SelectedPreset.OutputType, UpdateSourceTrigger=PropertyChanged, ElementName=window}" />
 
                             <Separator/>
-                            
+
                             <!-- Output file name template -->
                             <Grid Margin="5">
                                 <Grid.ColumnDefinitions>
@@ -219,16 +254,13 @@
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
-                                <!--Content="{Binding Source={x:Static project:Resources.OuputFileNameTemplateSample}, Converter={StaticResource FileNameConverter}}"/>-->
                             </Grid>
+
                         </StackPanel>
                     </GroupBox>
                 </Grid>
             </GroupBox>
         </Grid>
-
-        <Button Name="AddPresetButton" Grid.Row="2" Content="+" HorizontalAlignment="Left" Width="28" Margin="18,4,0,0" Click="AddPresetButton_Click"/>
-        <Button Name="RemovePresetButton" Grid.Row="2" Content="-" HorizontalAlignment="Left" Width="28" Margin="54,4,0,0" Click="RemovePresetButton_Click"/>
 
         <Button Name="CloseButton" Grid.Row="2" Content="Close" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
         <Button Name="SaveButton" Grid.Row="2" Content="Save" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" Click="SaveButton_Click" Command="New"/>
