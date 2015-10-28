@@ -20,6 +20,7 @@ namespace FileConverter
         private string name;
         private OutputType outputType;
         private List<string> inputTypes;
+        private InputPostConversionAction inputPostConversionAction;
         private ConversionSettings settings = new ConversionSettings();
         private string outputFileNameTemplate;
         FileNameConverter outputFileNameConverter = new FileNameConverter();
@@ -82,6 +83,21 @@ namespace FileConverter
             set
             {
                 this.inputTypes = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        [XmlElement]
+        public InputPostConversionAction InputPostConversionAction
+        {
+            get
+            {
+                return this.inputPostConversionAction;
+            }
+
+            set
+            {
+                this.inputPostConversionAction = value;
                 this.OnPropertyChanged();
             }
         }

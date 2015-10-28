@@ -37,6 +37,15 @@ namespace FileConverter
                                            };
 
             this.OutputFormats.ItemsSource = outputTypes;
+
+            InputPostConversionAction[] postConversionActions = new[]
+                                           {
+                                               InputPostConversionAction.None,
+                                               InputPostConversionAction.MoveInArchiveFolder,
+                                               InputPostConversionAction.Delete,
+                                           };
+
+            this.PostConversionActionComboBox.ItemsSource = postConversionActions;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

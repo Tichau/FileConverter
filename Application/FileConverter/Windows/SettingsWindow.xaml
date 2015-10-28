@@ -211,11 +211,7 @@
                             </TreeView>
 
                             <Label Grid.Row="1" Content="Action when conversion succeed"/>
-                            <ComboBox Grid.Row="2">
-                                <Label Content="None"/>
-                                <Label Content="Move in an archive folder"/>
-                                <Label Content="Delete"/>
-                            </ComboBox>
+                            <ComboBox Grid.Row="2" Name="PostConversionActionComboBox" SelectedItem="{Binding SelectedPreset.InputPostConversionAction, ElementName=window, Mode=TwoWay}" />
 
                         </Grid>
                     </GroupBox>
