@@ -148,6 +148,15 @@ namespace FileConverter
         }
 
         [XmlIgnore]
+        public string ConversionArchiveFolderName
+        {
+            get
+            {
+                return "Conversion Archives";
+            }
+        }
+
+        [XmlIgnore]
         public IConversionSettings Settings
         {
             get

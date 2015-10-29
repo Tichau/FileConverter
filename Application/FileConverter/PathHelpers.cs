@@ -44,5 +44,19 @@ namespace FileConverter
                 yield return matchGroup.Captures[index].Value;
             }
         }
+
+        public static string GenerateUniquePath(string path)
+        {
+            string baseExtension = System.IO.Path.GetExtension(path);
+            string basePath = path.Substring(0, path.Length - baseExtension.Length);
+            int index = 2;
+            while (System.IO.File.Exists(path))
+            {
+                path = string.Format("{0} ({1}){2}", basePath, index, baseExtension);
+                index++;
+            }
+
+            return path;
+        }
     }
 }
