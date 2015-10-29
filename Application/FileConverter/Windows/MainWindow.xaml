@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:FileConverter"
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
         xmlns:conversionJobs="clr-namespace:FileConverter.ConversionJobs" mc:Ignorable="d" x:Class="FileConverter.MainWindow"
-        x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="450" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico">
+        x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="450" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
     <Window.Resources>
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <valueConverters:ConversionStateToBrush x:Key="ConversionStateToColor" />
