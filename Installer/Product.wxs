@@ -76,11 +76,20 @@
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\ape">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
                 </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\avi">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\flac">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Wav"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\m4a">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Wav"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\mp3">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\mp4">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\ogg">
                     <RegistryValue Name="Presets" Type="string" Value="To Mp3;To Wav"/>
