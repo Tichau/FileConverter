@@ -63,6 +63,7 @@ namespace FileConverter
         {
             switch (extension)
             {
+                case "aiff":
                 case "ape":
                 case "flac":
                 case "mp3":
