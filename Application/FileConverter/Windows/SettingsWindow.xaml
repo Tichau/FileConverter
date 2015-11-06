@@ -196,10 +196,17 @@
                             <TreeView x:Name="InputTypesTreeView" ItemsSource="{Binding InputCategories, ElementName=window}" >
                                 <TreeView.Resources>
                                     <HierarchicalDataTemplate DataType="{x:Type local:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
-                                        <TextBlock Text="{Binding Name}" Height="20" Margin="2"/>
+                                        <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeCategoryChecked" Unchecked="OnInputTypeCategoryUnchecked" IsThreeState="True" >
+                                            <CheckBox.IsChecked>
+                                                <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
+                                                    <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>
+                                                    <Binding Path="InputExtensionNames" Mode="OneWay"/>
+                                                </MultiBinding>
+                                            </CheckBox.IsChecked>
+                                        </CheckBox>
                                     </HierarchicalDataTemplate>
                                     <DataTemplate DataType="{x:Type local:InputExtension}">
-                                        <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked">
+                                        <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeChecked" Unchecked="OnInputTypeUnchecked">
                                             <CheckBox.IsChecked>
                                                 <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
                                                     <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>

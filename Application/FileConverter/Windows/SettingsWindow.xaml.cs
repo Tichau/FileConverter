@@ -92,7 +92,7 @@ namespace FileConverter
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
+        private void OnInputTypeChecked(object sender, RoutedEventArgs e)
         {
             if (this.selectedPreset == null)
             {
@@ -102,13 +102,44 @@ namespace FileConverter
             CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
             string inputFormat = (checkBox.Content as string).ToLowerInvariant();
 
-            if (!this.selectedPreset.InputTypes.Contains(inputFormat))
+            this.selectedPreset.AddInputType(inputFormat);
+        }
+
+        private void OnInputTypeUnchecked(object sender, RoutedEventArgs e)
+        {
+            if (this.selectedPreset == null)
             {
-                this.selectedPreset.InputTypes.Add(inputFormat);
+                return;
+            }
+
+            CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
+            string inputFormat = (checkBox.Content as string).ToLowerInvariant();
+
+            this.selectedPreset.RemoveInputType(inputFormat);
+        }
+
+        private void OnInputTypeCategoryChecked(object sender, RoutedEventArgs e)
+        {
+            if (this.selectedPreset == null)
+            {
+                return;
+            }
+
+            CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
+            string categoryName = checkBox.Content as string;
+            InputExtensionCategory category = System.Array.Find(this.inputCategories, match => match.Name == categoryName);
+            if (category == null)
+            {
+                return;
+            }
+
+            foreach (string inputExtension in category.InputExtensionNames)
+            {
+                this.selectedPreset.AddInputType(inputExtension);
             }
         }
 
-        private void ToggleButton_OnUnchecked(object sender, RoutedEventArgs e)
+        private void OnInputTypeCategoryUnchecked(object sender, RoutedEventArgs e)
         {
             if (this.selectedPreset == null)
             {
@@ -116,9 +147,17 @@ namespace FileConverter
             }
 
             CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
-            string inputFormat = (checkBox.Content as string).ToLowerInvariant();
+            string categoryName = checkBox.Content as string;
+            InputExtensionCategory category = System.Array.Find(this.inputCategories, match => match.Name == categoryName);
+            if (category == null)
+            {
+                return;
+            }
 
-            this.selectedPreset.InputTypes.Remove(inputFormat);
+            foreach (string inputExtension in category.InputExtensionNames)
+            {
+                this.selectedPreset.RemoveInputType(inputExtension);
+            }
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

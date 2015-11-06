@@ -39,7 +39,18 @@ namespace FileConverter
             {
                 return this.inputExtensions;
             }
-        } 
+        }
+
+        public IEnumerable<string> InputExtensionNames
+        {
+            get
+            {
+                foreach (InputExtension inputExtension in this.inputExtensions)
+                {
+                    yield return inputExtension.Name;
+                }
+            }
+        }
 
         public void AddExtension(string extension)
         {
@@ -49,6 +60,7 @@ namespace FileConverter
                 inputExtension = new InputExtension(extension);
                 this.inputExtensions.Add(inputExtension);
                 this.OnPropertyChanged("InputExtensions");
+                this.OnPropertyChanged("InputExtensionNames");
             }
         }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace FileConverter.ValueConverters.Generic
@@ -27,10 +28,39 @@ namespace FileConverter.ValueConverters.Generic
                 return false;
             }
 
-            ICollection<string> collection = values[0] as ICollection<string>;
-            string objectToFind = values[1] as string;
+            bool? result = null;
+            if (values[1] is IEnumerable<string>)
+            {
+                ICollection<string> collection = values[0] as ICollection<string>;
+                IEnumerable<string> objectsToFind = values[1] as IEnumerable<string>;
+                
+                bool all = true;
+                bool none = true;
+                foreach (string objectToFind in objectsToFind)
+                {
+                    bool contains = collection.Contains(objectToFind);
+                    all &= contains;
+                    none &= !contains;
+                }
 
-            return collection.Contains(objectToFind);
+                if (all)
+                {
+                    result = true;
+                }
+                else if (none)
+                {
+                    result = false;
+                }
+            }
+            else
+            {
+                ICollection<string> collection = values[0] as ICollection<string>;
+                string objectToFind = values[1] as string;
+
+                result = collection.Contains(objectToFind);
+            }
+
+            return result;
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
