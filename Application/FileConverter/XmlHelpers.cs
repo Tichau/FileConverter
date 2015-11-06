@@ -38,7 +38,14 @@ namespace FileConverter
                         List<T> elements = (List<T>)serializer.Deserialize(xmlReader);
                         for (int index = 0; index < elements.Count; index++)
                         {
-                            collection.Add(elements[index]);
+                            T item = elements[index];
+
+                            if (item is IXmlSerializable)
+                            {
+                                (item as IXmlSerializable).OnDeserializationComplete();
+                            }
+
+                            collection.Add(item);
                         }
                     }
                 }
