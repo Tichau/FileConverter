@@ -83,6 +83,7 @@
     <Compile Include="EncodingMode.cs" />
     <Compile Include="ConversionPreset\IConversionSettings.cs" />
     <Compile Include="InputPostConversionAction.cs" />
+    <Compile Include="IXmlSerializable.cs" />
     <Compile Include="PathHelpers.cs" />
     <Compile Include="Properties\Resources.en.Designer.cs">
       <DependentUpon>Resources.en.resx</DependentUpon>
@@ -97,6 +98,7 @@
     <Compile Include="ValueConverters\ConversionSettingsToString.cs" />
     <Compile Include="ValueConverters\Generic\BoolInverterConverter.cs" />
     <Compile Include="ValueConverters\Generic\EqualsConverter.cs" />
+    <Compile Include="ValueConverters\Generic\CollectionContainsElementToBool.cs" />
     <Compile Include="ValueConverters\Generic\StringToValueType.cs" />
     <Compile Include="ValueConverters\InputTypesToBool.cs" />
     <Compile Include="Settings.cs" />
@@ -107,6 +109,8 @@
       <DependentUpon>DiagnosticsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ConversionSettingsTemplateSelector.cs" />
+    <Compile Include="Windows\InputExtension.cs" />
+    <Compile Include="Windows\InputExtensionCategory.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>

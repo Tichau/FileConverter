@@ -58,5 +58,26 @@ namespace FileConverter
 
             return path;
         }
+
+        public static string GetExtensionCategory(string extension)
+        {
+            switch (extension)
+            {
+                case "ape":
+                case "flac":
+                case "mp3":
+                case "m4a":
+                case "ogg":
+                case "wav":
+                case "wma":
+                    return "Audio";
+
+                case "avi":
+                case "mp4":
+                    return "Video";
+            }
+
+            return "Misc";
+        }
     }
 }

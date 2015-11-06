@@ -2,7 +2,9 @@
 
 namespace FileConverter
 {
+    using Microsoft.Win32;
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.ComponentModel;
@@ -19,6 +21,8 @@ namespace FileConverter
         private ConversionPreset selectedPreset;
 
         private Settings settings;
+
+        private InputExtensionCategory[] inputCategories;
 
         public SettingsWindow()
         {
@@ -46,6 +50,8 @@ namespace FileConverter
                                            };
 
             this.PostConversionActionComboBox.ItemsSource = postConversionActions;
+
+            this.InitializeCompatibleInputExtensions();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -65,7 +71,21 @@ namespace FileConverter
                 this.OnPropertyChanged();
             }
         }
-        
+
+        public InputExtensionCategory[] InputCategories
+        {
+            get
+            {
+                return this.inputCategories;
+            }
+
+            set
+            {
+                this.inputCategories = value;
+                this.OnPropertyChanged();
+            }
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -80,7 +100,7 @@ namespace FileConverter
             }
 
             CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
-            string inputFormat = checkBox.Content as string;
+            string inputFormat = (checkBox.Content as string).ToLowerInvariant();
 
             if (!this.selectedPreset.InputTypes.Contains(inputFormat))
             {
@@ -96,7 +116,7 @@ namespace FileConverter
             }
 
             CheckBox checkBox = sender as System.Windows.Controls.CheckBox;
-            string inputFormat = checkBox.Content as string;
+            string inputFormat = (checkBox.Content as string).ToLowerInvariant();
 
             this.selectedPreset.InputTypes.Remove(inputFormat);
         }
@@ -182,6 +202,42 @@ namespace FileConverter
             int newIndexOfSelectedPreset = System.Math.Min(this.settings.ConversionPresets.Count - 1, indexOfSelectedPreset + 1);
 
             this.settings.ConversionPresets.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
+        }
+
+        private void InitializeCompatibleInputExtensions()
+        {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
+            if (registryKey == null)
+            {
+                MessageBox.Show("Can't retrieve the list of compatible input extensions. (code 0x09)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            string registryValue = registryKey.GetValue("CompatibleInputExtensions") as string;
+            if (registryValue == null)
+            {
+                MessageBox.Show("Can't retrieve the list of compatible input extensions. (code 0x0A)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            string[] compatibleInputExtensions = registryValue.Split(';');
+
+            List<InputExtensionCategory> categories = new List<InputExtensionCategory>();
+            for (int index = 0; index < compatibleInputExtensions.Length; index++)
+            {
+                string compatibleInputExtension = compatibleInputExtensions[index];
+                string extensionCategory = PathHelpers.GetExtensionCategory(compatibleInputExtension);
+                InputExtensionCategory category = categories.Find(match => match.Name == extensionCategory);
+                if (category == null)
+                {
+                    category = new InputExtensionCategory(extensionCategory);
+                    categories.Add(category);
+                }
+
+                category.AddExtension(compatibleInputExtension);
+            }
+
+            this.InputCategories = categories.ToArray();
         }
     }
 }

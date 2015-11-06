@@ -1,7 +1,5 @@
 ﻿// <copyright file="FileConverter.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using FileConverter.ValueConverters;
-
 namespace FileConverter
 {
     using System;
@@ -12,10 +10,11 @@ namespace FileConverter
     using System.Xml.Serialization;
 
     using FileConverter.Annotations;
+    using FileConverter.ValueConverters;
 
     [XmlRoot]
     [XmlType]
-    public class ConversionPreset : INotifyPropertyChanged, IDataErrorInfo
+    public class ConversionPreset : INotifyPropertyChanged, IDataErrorInfo, IXmlSerializable
     {
         private string name;
         private OutputType outputType;
@@ -34,8 +33,10 @@ namespace FileConverter
         {
             this.Name = name;
             this.OutputType = outputType;
-            this.InputTypes = new List<string>();
-            this.InputTypes.AddRange(inputTypes);
+            List<string> inputTypeList = new List<string>();
+            inputTypeList.AddRange(inputTypes);
+            this.InputTypes = inputTypeList;
+            
             this.outputFileNameTemplate = "(p)(f)";
         }
 
@@ -83,6 +84,11 @@ namespace FileConverter
             set
             {
                 this.inputTypes = value;
+                for (int index = 0; index < this.inputTypes.Count; index++)
+                {
+                    this.inputTypes[index] = this.inputTypes[index].ToLowerInvariant();
+                }
+
                 this.OnPropertyChanged();
             }
         }
@@ -212,6 +218,14 @@ namespace FileConverter
                 }
 
                 return string.Empty;
+            }
+        }
+
+        public void OnDeserializationComplete()
+        {
+            for (int index = 0; index < this.InputTypes.Count; index++)
+            {
+                this.InputTypes[index] = this.InputTypes[index].ToLowerInvariant();
             }
         }
 
