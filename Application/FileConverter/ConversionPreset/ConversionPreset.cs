@@ -229,6 +229,25 @@ namespace FileConverter
             }
         }
 
+        public void AddInputType(string inputType)
+        {
+            if (this.inputTypes.Contains(inputType))
+            {
+                return;
+            }
+
+            this.inputTypes.Add(inputType);
+            this.OnPropertyChanged("InputTypes");
+        }
+
+        public void RemoveInputType(string inputType)
+        {
+            if (this.inputTypes.Remove(inputType))
+            {
+                this.OnPropertyChanged("InputTypes");
+            }
+        }
+
         public string GenerateOutputFilePath(string inputFilePath)
         {
             return (string)this.outputFileNameConverter.Convert(new object[] {inputFilePath, this.OutputType, this.OutputFileNameTemplate}, typeof (string), null, null);
