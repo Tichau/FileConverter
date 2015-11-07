@@ -7,7 +7,7 @@
         xmlns:windows="clr-namespace:FileConverter.Windows"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="window" x:Class="FileConverter.SettingsWindow"
-        Height="600" Width="800" MinHeight="400" MinWidth="600"
+        Height="600" Width="800" MinHeight="480" MinWidth="640"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         Closing="SettingsWindow_OnClosing">
     <Window.Resources>
@@ -17,7 +17,6 @@
         <valueConverters:OutputTypeToVisibility x:Key="OutputTypeToVisibility"/>
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
-        
 
         <generic:ValueConverterGroup x:Key="ConversionSettingsToEnum">
             <valueConverters:ConversionSettingsToString/>
@@ -129,8 +128,12 @@
             </Grid.ColumnDefinitions>
 
             <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="..\Resources\ApplicationIcon.png" />
-            <Label Content="Settings" FontSize="20" Margin="4" Grid.Column="1" VerticalAlignment="Center" />
-            <Label HorizontalAlignment="Right" FontStyle="Italic" FontSize="14" Grid.Column="2" VerticalAlignment="Center" Content="{Binding (local:Application.ApplicationVersion), Converter={StaticResource ApplicationVersionToApplicationName}, Mode=OneWay}"/>
+            <Label Grid.Column="1" Content="Settings" FontSize="20" Margin="4" VerticalAlignment="Center" />
+            <Label Grid.Column="2" HorizontalAlignment="Right" FontStyle="Italic" FontSize="14" VerticalAlignment="Center">
+	            <Label.Content>
+		            <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
+	            </Label.Content>
+            </Label>
         </Grid>
 
         <Grid Grid.Row="1">

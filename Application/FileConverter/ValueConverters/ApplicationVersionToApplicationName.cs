@@ -10,12 +10,12 @@ namespace FileConverter.ValueConverters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is Version))
+            if (!(value is FileConverter.Version))
             {
                 return "File Converter";
             }
 
-            Version version = (Version)value;
+            FileConverter.Version version = (FileConverter.Version)value;
 
             return string.Format("File Converter v{0}", version.ToString());
         }
