@@ -74,6 +74,9 @@
                     <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="aiff;ape;avi;flac;m4a;mp3;mp4;ogg;wav;wma"/>
                 </RegistryKey>
 
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\aiff">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\ape">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
                 </RegistryKey>
