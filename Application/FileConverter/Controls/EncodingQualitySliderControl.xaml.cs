@@ -1,15 +1,13 @@
-﻿// <copyright file="EncodingQualitySliderControl.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="EncodingQualitySliderControl.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.Controls
 {
-    using System;
     using System.Diagnostics;
     using System.Windows;
     using System.Windows.Controls;
-    using System.ComponentModel;
 
     /// <summary>
-    /// Interaction logic for EncodingQualitySliderControl.xaml
+    /// Interaction logic for EncodingQualitySliderControl.
     /// </summary>
     public partial class EncodingQualitySliderControl : UserControl
     {
@@ -31,7 +29,6 @@ namespace FileConverter.Controls
 
             this.CoerceValue(EncodingQualitySliderControl.BitrateProperty);
 
-            Debug.Assert(this.slider != null);
             this.slider.ValueChanged += this.Slider_ValueChanged;
         }
         

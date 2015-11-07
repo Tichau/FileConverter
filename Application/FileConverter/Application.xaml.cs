@@ -215,18 +215,6 @@ namespace FileConverter
                 if (System.IO.File.Exists(conversionJob.OutputFilePath))
                 {
                     Diagnostics.Log("Success!");
-
-                    if (this.debugMode)
-                    {
-                        Diagnostics.Log("Delete file {0}.", conversionJob.OutputFilePath);
-                        try
-                        {
-                            //System.IO.File.Delete(conversionJob.OutputFilePath);
-                        }
-                        catch
-                        {
-                        }
-                    }
                 }
                 else
                 {

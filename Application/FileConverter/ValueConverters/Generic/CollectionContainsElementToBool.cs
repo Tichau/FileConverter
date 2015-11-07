@@ -1,17 +1,12 @@
 ﻿// <copyright file="CollectionContainsElementToBool.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-
 namespace FileConverter.ValueConverters.Generic
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Windows.Data;
+
     public class CollectionContainsElementToBool : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
@@ -21,8 +16,8 @@ namespace FileConverter.ValueConverters.Generic
                 throw new ArgumentException("The values must contains the collection of elements and the researched element.");
             }
 
-            // TODO: Make this converter generic.
-
+            //// TODO: Make this converter generic.
+            
             if (!(values[0] is ICollection<string>))
             {
                 return false;

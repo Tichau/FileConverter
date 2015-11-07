@@ -1,21 +1,22 @@
-// <copyright file="SettingsWindow.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="InputExtension.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+
     using FileConverter.Annotations;
 
     public class InputExtension : INotifyPropertyChanged
     {
-        public string name;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        private string name;
 
         public InputExtension(string name)
         {
             this.Name = name;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name
         {

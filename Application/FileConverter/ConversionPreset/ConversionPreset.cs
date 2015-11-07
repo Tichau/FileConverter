@@ -1,4 +1,4 @@
-﻿// <copyright file="FileConverter.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="ConversionPreset.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter
 {
@@ -22,7 +22,7 @@ namespace FileConverter
         private InputPostConversionAction inputPostConversionAction;
         private ConversionSettings settings = new ConversionSettings();
         private string outputFileNameTemplate;
-        FileNameConverter outputFileNameConverter = new FileNameConverter();
+        private FileNameConverter outputFileNameConverter = new FileNameConverter();
 
         public ConversionPreset()
         {
@@ -68,7 +68,7 @@ namespace FileConverter
             set
             {
                 this.outputType = value;
-                this.InitializeDefaultSettings(outputType);
+                this.InitializeDefaultSettings(this.outputType);
                 this.OnPropertyChanged();
             }
         }
@@ -193,14 +193,6 @@ namespace FileConverter
             }
         }
 
-        public string this[string columnName]
-        {
-            get
-            {
-                return this.Validate(columnName);
-            }
-        }
-
         public string Error
         {
             get
@@ -218,6 +210,14 @@ namespace FileConverter
                 }
 
                 return string.Empty;
+            }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                return this.Validate(columnName);
             }
         }
 
@@ -250,7 +250,7 @@ namespace FileConverter
 
         public string GenerateOutputFilePath(string inputFilePath)
         {
-            return (string)this.outputFileNameConverter.Convert(new object[] {inputFilePath, this.OutputType, this.OutputFileNameTemplate}, typeof (string), null, null);
+            return (string)this.outputFileNameConverter.Convert(new object[] { inputFilePath, this.OutputType, this.OutputFileNameTemplate }, typeof(string), null, null);
         }
 
         public void SetSettingsValue(string settingsKey, string value)
@@ -403,17 +403,14 @@ namespace FileConverter
 
                         if (this.Name.Contains(";"))
                         {
-                            return  "The preset name can't contains the character ';'.";
+                            return "The preset name can't contains the character ';'.";
                         }
 
                         Application application = Application.Current as Application;
-                        if (application?.Settings != null)
+                        int? count = application?.Settings?.ConversionPresets?.Count(match => match?.name == this.Name);
+                        if (count > 1)
                         {
-                            int count = application.Settings.ConversionPresets.Count(match => match.name == this.Name);
-                            if (count > 1)
-                            {
-                                return "The preset name is already used.";
-                            }
+                            return "The preset name is already used.";
                         }
                     }
 

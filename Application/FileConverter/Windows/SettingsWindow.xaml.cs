@@ -2,19 +2,19 @@
 
 namespace FileConverter
 {
-    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows;
-    using System.ComponentModel;
     using System.Windows.Controls;
     using System.Windows.Input;
 
     using FileConverter.Annotations;
+    using Microsoft.Win32;
 
     /// <summary>
-    /// Interaction logic for Settings.xaml
+    /// Interaction logic for Settings.
     /// </summary>
     public partial class SettingsWindow : Window, INotifyPropertyChanged
     {
@@ -30,7 +30,7 @@ namespace FileConverter
             
             Application application = Application.Current as Application;
             this.settings = application.Settings;
-            this.PresetList.ItemsSource = settings.ConversionPresets;
+            this.PresetList.ItemsSource = this.settings.ConversionPresets;
 
             OutputType[] outputTypes = new[]
                                            {

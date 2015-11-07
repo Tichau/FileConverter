@@ -59,8 +59,7 @@ namespace FileConverter.ConversionJobs
                     {
                         EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>("Encoding");
                         string encoderArgs = string.Format("-acodec {0}", this.WAVEncodingToCodecArgument(encodingMode));
-                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"",
-                            this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
 
                     break;
@@ -73,8 +72,7 @@ namespace FileConverter.ConversionJobs
                         switch (encodingMode)
                         {
                             case EncodingMode.Mp3VBR:
-                                encoderArgs = string.Format("-codec:a libmp3lame -q:a {0}",
-                                    this.MP3VBRBitrateToQualityIndex(encodingQuality));
+                                encoderArgs = string.Format("-codec:a libmp3lame -q:a {0}", this.MP3VBRBitrateToQualityIndex(encodingQuality));
                                 break;
 
                             case EncodingMode.Mp3CBR:
@@ -85,8 +83,7 @@ namespace FileConverter.ConversionJobs
                                 break;
                         }
 
-                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", 
-                            this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
 
                 break;
@@ -94,10 +91,8 @@ namespace FileConverter.ConversionJobs
                 case OutputType.Ogg:
                     {
                         int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
-                        string encoderArgs = string.Format("-codec:a libvorbis -qscale:a {0}",
-                                this.OGGVBRBitrateToQualityIndex(encodingQuality));
-                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"",
-                            this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string encoderArgs = string.Format("-codec:a libvorbis -qscale:a {0}", this.OGGVBRBitrateToQualityIndex(encodingQuality));
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
 
                 break;
@@ -194,10 +189,10 @@ namespace FileConverter.ConversionJobs
         }
 
         /// <summary>
-        /// Convert bitrate in vorbis encoder quality index.
+        /// Convert bitrate in <c>vorbis</c> encoder quality index.
         /// </summary>
         /// <param name="bitrate">Wanted bitrate value.</param>
-        /// <returns>The vorbis encoder quality index assotiated to the given bitrate value.</returns>
+        /// <returns>The <c>vorbis</c> encoder quality index associated to the given bitrate value.</returns>
         /// http://wiki.hydrogenaud.io/index.php?title=Recommended_Ogg_Vorbis
         private int OGGVBRBitrateToQualityIndex(int bitrate)
         {
@@ -247,10 +242,10 @@ namespace FileConverter.ConversionJobs
         }
 
         /// <summary>
-        /// Convert encoding mode setting to ffmpeg argument option.
+        /// Convert encoding mode setting to <c>ffmpeg</c> argument option.
         /// </summary>
         /// <param name="encoding">The encoding mode setting.</param>
-        /// <returns>Returns the ffmpeg argument corresponding to the given envoding mode.</returns>
+        /// <returns>Returns the <c>ffmpeg</c> argument corresponding to the given encoding mode.</returns>
         /// https://trac.ffmpeg.org/wiki/audio%20types
         private string WAVEncodingToCodecArgument(EncodingMode encoding)
         {

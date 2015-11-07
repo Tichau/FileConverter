@@ -54,7 +54,7 @@ namespace FileConverter
 
         private void SettingsWindow_Closed(object sender, System.EventArgs e)
         {
-            settingsWindow.OnSettingsWindowHide -= this.SettingsWindow_Closed;
+            this.settingsWindow.OnSettingsWindowHide -= this.SettingsWindow_Closed;
             this.Close();
         }
 

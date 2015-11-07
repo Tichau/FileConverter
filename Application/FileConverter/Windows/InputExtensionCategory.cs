@@ -1,23 +1,24 @@
 // <copyright file="InputExtensionCategory.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using FileConverter.Annotations;
-
 namespace FileConverter
 {
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
+    using FileConverter.Annotations;
+
     public class InputExtensionCategory : INotifyPropertyChanged
     {
         private string name;
         private List<InputExtension> inputExtensions = new List<InputExtension>();
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public InputExtensionCategory(string name)
         {
             this.Name = name;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name
         {

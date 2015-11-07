@@ -1,4 +1,4 @@
-﻿// <copyright file="ConversionSettingsTemplateSelector.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="ConversionSettingsTemplateSelector.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.Windows
 {

@@ -5,7 +5,7 @@ namespace FileConverter.Windows
     using System.Windows;
 
     /// <summary>
-    /// Interaction logic for DiagnosticsWindow.xaml
+    /// Interaction logic for DiagnosticsWindow.
     /// </summary>
     public partial class DiagnosticsWindow : Window
     {
