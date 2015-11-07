@@ -42,7 +42,7 @@
     <OutputPath>bin\x64\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\ApplicationIcon-256x256.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\ApplicationIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -51,7 +51,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -71,18 +73,53 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
+      <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConversionJobs\ConversionJobFactory.cs" />
+    <Compile Include="ConversionJobs\ConversionJob_FFMPEG.cs" />
+    <Compile Include="ConversionPreset\ConversionSettingsOverride.cs" />
+    <Compile Include="ConversionPreset\ConversionSettings.cs" />
+    <Compile Include="EncodingMode.cs" />
+    <Compile Include="ConversionPreset\IConversionSettings.cs" />
+    <Compile Include="InputPostConversionAction.cs" />
+    <Compile Include="IXmlSerializable.cs" />
+    <Compile Include="PathHelpers.cs" />
+    <Compile Include="Properties\Resources.en.Designer.cs">
+      <DependentUpon>Resources.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
-    <Compile Include="ConversionPreset.cs" />
+    <Compile Include="ConversionPreset\ConversionPreset.cs" />
+    <Compile Include="ValueConverters\BitrateToString.cs" />
+    <Compile Include="ValueConverters\FileNameConverter.cs" />
+    <Compile Include="ValueConverters\Generic\BoolToVisibility.cs" />
+    <Compile Include="ValueConverters\ConversionSettingsToString.cs" />
+    <Compile Include="ValueConverters\Generic\BoolInverterConverter.cs" />
+    <Compile Include="ValueConverters\Generic\EqualsConverter.cs" />
+    <Compile Include="ValueConverters\Generic\CollectionContainsElementToBool.cs" />
+    <Compile Include="ValueConverters\Generic\StringToValueType.cs" />
     <Compile Include="ValueConverters\InputTypesToBool.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="ValueConverters\OutputTypeToVisibility.cs" />
+    <Compile Include="ValueConverters\Generic\StringToEnum.cs" />
+    <Compile Include="ValueConverters\Generic\ValueConverterGroup.cs" />
     <Compile Include="Windows\DiagnosticsWindow.xaml.cs">
       <DependentUpon>DiagnosticsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ConversionSettingsTemplateSelector.cs" />
+    <Compile Include="Windows\InputExtension.cs" />
+    <Compile Include="Windows\InputExtensionCategory.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Version.cs" />
     <Compile Include="XmlHelpers.cs" />
+    <Page Include="Controls\EncodingQualitySliderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\DiagnosticsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,7 +133,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ValueConverters\ConversionStateToBrush.cs" />
-    <Compile Include="ConversionJob.cs" />
+    <Compile Include="ConversionJobs\ConversionJob.cs" />
     <Compile Include="Diagnostics.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -109,9 +146,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OutputType.cs" />
-    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -123,8 +163,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -140,11 +184,10 @@
     <Resource Include="Resources\ApplicationIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ApplicationIcon-16x16.ico" />
-    <Resource Include="Resources\ApplicationIcon-256x256.ico" />
+    <Resource Include="Resources\ApplicationIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

@@ -4,9 +4,6 @@ namespace FileConverterExtension
 {
     public class PresetDefinition
     {
-        public bool Enabled;
-        public int ExtensionRefCount;
-
         public PresetDefinition(string name)
         {
             this.Name = name;
@@ -16,6 +13,18 @@ namespace FileConverterExtension
         {
             get;
             private set;
+        }
+
+        public bool Enabled
+        {
+            get;
+            set;
+        }
+
+        public int ExtensionRefCount
+        {
+            get;
+            set;
         }
     }
 }

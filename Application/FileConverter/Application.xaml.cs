@@ -21,12 +21,14 @@ namespace FileConverter
     using System.Threading;
     using System.Windows;
 
+    using FileConverter.ConversionJobs;
+
     public partial class Application : System.Windows.Application
     {
         private static readonly Version Version = new Version()
                                             {
                                                 Major = 0, 
-                                                Minor = 2,
+                                                Minor = 3,
                                             };
 
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
@@ -84,7 +86,7 @@ namespace FileConverter
         {
             this.cancelAutoExit = true;
         }
-
+        
         private void Initialize()
         {
             // Load settigns.
@@ -100,17 +102,11 @@ namespace FileConverter
             if (args.Length <= 1)
             {
                 this.debugMode = true;
-                System.Array.Resize(ref args, 9);
+                System.Array.Resize(ref args, 5);
                 args[1] = "--conversion-preset";
                 args[2] = "To Mp3";
-                args[3] = @"D:\Projects\FileConverter\TestFiles\Herbie Hancock - Speak Like A Child [RVG Edition].flac";
-                args[3] = @"D:\Projects\FileConverter\TestFiles\01 - Le Bruit Du Bang.wma";
-                args[4] = @"D:\Projects\FileConverter\TestFiles\test\Toccata.wav";
-                args[5] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (4).wav";
-                args[5] = "--verbose";
-                args[6] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (3).wav";
-                args[7] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (2).wav";
-                args[8] = @"D:\Projects\FileConverter\TestFiles\test\Toccata - Copie (5).wav";
+                args[3] = "--verbose";
+                args[4] = @"D:\Test\10 - Get around town (lp version).ogg";
 
                 System.Array.Resize(ref args, 2);
                 args[1] = "--settings";
@@ -151,7 +147,7 @@ namespace FileConverter
                         case "conversion-preset":
                             if (index >= args.Length - 1)
                             {
-                                MessageBox.Show(string.Format("ERROR ! Invalid format."), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show(string.Format("Invalid format. (code 0x01)"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                                 return;
                             }
@@ -159,7 +155,7 @@ namespace FileConverter
                             conversionPreset = Settings.GetPresetFromName(args[index + 1]);
                             if (conversionPreset == null)
                             {
-                                MessageBox.Show(string.Format("Invalid conversion preset '{0}'.", args[index + 1]), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show(string.Format("Invalid conversion preset '{0}'. (code 0x02)", args[index + 1]), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                                 return;
                             }
@@ -195,7 +191,9 @@ namespace FileConverter
             for (int index = 0; index < filePaths.Count; index++)
             {
                 string inputFilePath = filePaths[index];
-                ConversionJob conversionJob = new ConversionJob(conversionPreset, inputFilePath);
+                ConversionJob conversionJob = ConversionJobFactory.Create(conversionPreset);
+                conversionJob.PrepareConversion(inputFilePath);
+
                 this.conversionJobs.Add(conversionJob);
             }
 
@@ -207,23 +205,16 @@ namespace FileConverter
             for (int index = 0; index < this.conversionJobs.Count; index++)
             {
                 ConversionJob conversionJob = this.conversionJobs[index];
+                if (conversionJob.State != ConversionJob.ConversionState.Ready)
+                {
+                    continue;
+                }
+
                 conversionJob.StartConvertion();
 
                 if (System.IO.File.Exists(conversionJob.OutputFilePath))
                 {
                     Diagnostics.Log("Success!");
-
-                    if (this.debugMode)
-                    {
-                        Diagnostics.Log("Delete file {0}.", conversionJob.OutputFilePath);
-                        try
-                        {
-                            System.IO.File.Delete(conversionJob.OutputFilePath);
-                        }
-                        catch
-                        {
-                        }
-                    }
                 }
                 else
                 {

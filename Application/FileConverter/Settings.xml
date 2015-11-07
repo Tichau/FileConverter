@@ -1,28 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <ConversionPreset Name="To Ogg" OutputType="Ogg">
-        <InputTypes>Wav</InputTypes>
-        <InputTypes>Flac</InputTypes>
-        <InputTypes>Wma</InputTypes>
-        <InputTypes>Mp3</InputTypes>
-        <InputTypes>Ape</InputTypes>
+        <InputTypes>flac</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>wma</InputTypes>
+        <InputTypes>m4a</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mp3</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="Bitrate" Value="128" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Mp3" OutputType="Mp3">
-        <InputTypes>Flac</InputTypes>
-        <InputTypes>Ogg</InputTypes>
-        <InputTypes>Wav</InputTypes>
-        <InputTypes>Wma</InputTypes>
-        <InputTypes>Ape</InputTypes>
+        <InputTypes>ogg</InputTypes>
+        <InputTypes>flac</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>wma</InputTypes>
+        <InputTypes>m4a</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="Encoding" Value="Mp3VBR" />
+        <Settings Key="Bitrate" Value="175" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Flac" OutputType="Flac">
-        <InputTypes>Wav</InputTypes>
-        <InputTypes>Ape</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Wav" OutputType="Wav">
-        <InputTypes>Flac</InputTypes>
-        <InputTypes>Mp3</InputTypes>
-        <InputTypes>Ogg</InputTypes>
-        <InputTypes>Wma</InputTypes>
-        <InputTypes>Ape</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>flac</InputTypes>
+        <InputTypes>mp3</InputTypes>
+        <InputTypes>ogg</InputTypes>
+        <InputTypes>wma</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>m4a</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="Encoding" Value="Wav16" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
 </Settings>

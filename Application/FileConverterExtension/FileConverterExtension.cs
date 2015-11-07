@@ -16,6 +16,9 @@ namespace FileConverterExtension
     using SharpShell.Attributes;
     using SharpShell.SharpContextMenu;
 
+    /// <summary>
+    /// File converter context menu extension class.
+    /// </summary>
     [ComVisible(true), Guid("AF9B72B5-F4E4-44B0-A3D9-B55B748EFE90")]
     [COMServerAssociation(AssociationType.AllFiles)]
     public class FileConverterExtension : SharpContextMenu
@@ -23,6 +26,7 @@ namespace FileConverterExtension
         private string fileConverterPath;
         private RegistryKey fileConverterRegistryKey;
         private List<PresetDefinition> presetList = new List<PresetDefinition>();
+        private List<string> compatibleInputExtensions = new List<string>(); 
 
         private RegistryKey FileConverterRegistryKey
         {
@@ -54,6 +58,27 @@ namespace FileConverterExtension
             }
         }
 
+        private IEnumerable<string> CompatibleInputExtensions
+        {
+            get
+            {
+                if (this.compatibleInputExtensions != null && this.compatibleInputExtensions.Count > 0)
+                {
+                    return this.compatibleInputExtensions;
+                }
+
+                this.compatibleInputExtensions.Clear();
+                string registryValue = this.FileConverterRegistryKey.GetValue("CompatibleInputExtensions") as string;
+                string[] extensions = registryValue.Split(';');
+                for (int index = 0; index < extensions.Length; index++)
+                {
+                    this.compatibleInputExtensions.Add(extensions[index]);
+                }
+
+                return this.compatibleInputExtensions;
+            }
+        } 
+
         protected override bool CanShowMenu()
         {
             foreach (string filePath in this.SelectedItemPaths)
@@ -65,15 +90,9 @@ namespace FileConverterExtension
                 }
 
                 extension = extension.Substring(1).ToLowerInvariant();
-                switch (extension)
+                if (this.CompatibleInputExtensions.Contains(extension))
                 {
-                    case "ape":
-                    case "mp3":
-                    case "wav":
-                    case "ogg":
-                    case "flac":
-                    case "wma":
-                        return true;
+                    return true;
                 }
             }
 

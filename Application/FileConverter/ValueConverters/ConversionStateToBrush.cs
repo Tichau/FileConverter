@@ -1,11 +1,13 @@
 ﻿// <copyright file="ConversionStateToBrush.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-namespace FileConverter
+namespace FileConverter.ValueConverters
 {
     using System;
     using System.Globalization;
     using System.Windows.Data;
     using System.Windows.Media;
+
+    using FileConverter.ConversionJobs;
 
     public class ConversionStateToBrush : IValueConverter
     {

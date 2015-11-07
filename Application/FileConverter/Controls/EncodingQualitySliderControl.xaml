@@ -1,0 +1,26 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters" x:Name="userControl"
+             x:Class="FileConverter.Controls.EncodingQualitySliderControl"
+             mc:Ignorable="d" d:DesignWidth="300" Height="50">
+    <UserControl.Resources>
+        <valueConverters:BitrateToString x:Key="BitrateToString"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="65"/>
+        </Grid.ColumnDefinitions>
+
+        <Slider Grid.Column="0" x:Name="slider" Margin="0,2,0,0" VerticalAlignment="Top" Maximum="245" AutoToolTipPlacement="TopLeft" SmallChange="8" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="115" SelectionEnd="245" Minimum="65" TickPlacement="BottomRight" LargeChange="32" TickFrequency="8" Ticks="65 85 100 115 130 165 175 190 225 245" Foreground="#004B82" />
+        <Label Grid.Column="1" Content="{Binding Value, Converter={StaticResource BitrateToString}, ElementName=slider, Mode=OneWay}" Width="65" />
+        <Label Grid.Column="0" Grid.Row="1" Content="Recommended bitrate range in blue" Foreground="#E5004B82" FontSize="11" />
+    </Grid>
+</UserControl>

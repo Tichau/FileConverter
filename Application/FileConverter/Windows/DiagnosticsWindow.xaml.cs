@@ -1,27 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿// <copyright file="DiagnosticsWindow.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.Windows
 {
+    using System.Windows;
+
     /// <summary>
-    /// Interaction logic for DiagnosticsWindow.xaml
+    /// Interaction logic for DiagnosticsWindow.
     /// </summary>
     public partial class DiagnosticsWindow : Window
     {
         public DiagnosticsWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

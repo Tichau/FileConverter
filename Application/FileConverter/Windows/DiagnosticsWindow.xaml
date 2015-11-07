@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FileConverter.Windows"
         xmlns:fileConverter="clr-namespace:FileConverter"
         mc:Ignorable="d"
-        Title="Diagnostics" Height="600" Width="800" Icon="/FileConverter;component/Resources/ApplicationIcon-16x16.ico">
+        Title="Diagnostics" Height="600" Width="800" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />

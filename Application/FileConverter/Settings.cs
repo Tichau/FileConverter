@@ -5,18 +5,17 @@ namespace FileConverter
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Security.Principal;
     using System.Windows;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-
-    using Microsoft.Win32;
 
     using FileConverter.Annotations;
+    using Microsoft.Win32;
 
     public class Settings : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -26,6 +25,29 @@ namespace FileConverter
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ObservableCollection<ConversionPreset> ConversionPresets
+        {
+            get { return this.conversionPresets; }
+            set { this.conversionPresets = value; }
+        }
+        
+        public string Error
+        {
+            get
+            {
+                for (int index = 0; index < this.ConversionPresets.Count; index++)
+                {
+                    string error = this.ConversionPresets[index].Error;
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        return error;
+                    }
+                }
+
+                return string.Empty;
+            }
+        }
+
         private static bool IsInAdmininstratorPrivileges
         {
             get
@@ -34,16 +56,45 @@ namespace FileConverter
             }
         }
 
-        public ObservableCollection<ConversionPreset> ConversionPresets
+        public string this[string columnName]
         {
-            get { return this.conversionPresets; }
-            set { this.conversionPresets = value; }
+            get
+            {
+                return this.Error;
+            }
         }
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public static void ApplyTemporarySettings()
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            // Load temporary settings.
+            string temporaryFilePath = Settings.GetUserSettingsTemporaryFilePath();
+            if (!File.Exists(temporaryFilePath))
+            {
+                return;
+            }
+
+            ICollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
+            XmlHelpers.LoadFromFile("Settings", temporaryFilePath, ref conversionPresets);
+
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
+            if (registryKey == null)
+            {
+                MessageBox.Show("Can't apply settings in registry. (code 0x03)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Compute the registry entries data from settings.
+            Dictionary<string, List<string>> registryEntries = ComputeRegistryEntriesFromConvertionPresets(conversionPresets);
+
+            bool succeed = Settings.ApplyRegistryModifications(registryEntries);
+
+            if (succeed)
+            {
+                // Copy temporary settings file to the real settings file.
+                string userFilePath = Settings.GetUserSettingsFilePath();
+                File.Copy(temporaryFilePath, userFilePath, true);
+                File.Delete(temporaryFilePath);
+            }
         }
 
         public ConversionPreset GetPresetFromName(string presetName)
@@ -118,51 +169,18 @@ namespace FileConverter
             }
         }
 
-        public static void ApplyTemporarySettings()
-        {
-            // Load temporary settings.
-            string temporaryFilePath = Settings.GetUserSettingsTemporaryFilePath();
-            if (!File.Exists(temporaryFilePath))
-            {
-                return;
-            }
-
-            ICollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
-            XmlHelpers.LoadFromFile("Settings", temporaryFilePath, ref conversionPresets);
-
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
-            if (registryKey == null)
-            {
-                MessageBox.Show("Can't apply settings in registry.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            // Compute the registry entries data from settings.
-            Dictionary<string, List<string>> registryEntries = ComputeRegistryEntriesFromConvertionPresets(conversionPresets);
-
-            bool succeed = Settings.ApplyRegistryModifications(registryEntries);
-
-            if (succeed)
-            {
-                // Copy temporary settings file to the real settings file.
-                string userFilePath = Settings.GetUserSettingsFilePath();
-                File.Copy(temporaryFilePath, userFilePath, true);
-                File.Delete(temporaryFilePath);
-            }
-        }
-
         private static bool ApplyRegistryModifications(Dictionary<string, List<string>> registryEntries)
         {
             if (!Settings.IsInAdmininstratorPrivileges)
             {
-                MessageBox.Show("Can't apply settings in registry because the application is not in administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Can't apply settings in registry because the application is not in administrator privileges. (code 0x04)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter", RegistryKeyPermissionCheck.ReadWriteSubTree);
             if (registryKey == null)
             {
-                MessageBox.Show("Can't apply settings in registry (ErrorCode=1).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Can't apply settings in registry. (code 0x05)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -174,9 +192,9 @@ namespace FileConverter
                 {
                     registryKey.DeleteSubKey(subKeyNames[index]);
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
-                    MessageBox.Show("Can't apply settings in registry (ErrorCode=2).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Can't apply settings in registry. (code 0x06)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
             }
@@ -207,7 +225,7 @@ namespace FileConverter
 
                 if (subKey == null)
                 {
-                    MessageBox.Show("Can't apply settings in registry (ErrorCode=3).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Can't apply settings in registry. (code 0x07)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
 
@@ -352,36 +370,17 @@ namespace FileConverter
                 process.Start();
                 process.WaitForExit();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageBox.Show("Can't apply settings in registry because the application has no administrator privileges.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Can't apply settings in registry because the application has no administrator privileges. (code 0x08)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
 
-        public string this[string columnName]
+        [NotifyPropertyChangedInvocator]
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            get
-            {
-                return this.Error;
-            }
-        }
-
-        public string Error
-        {
-            get
-            {
-                for (int index = 0; index < this.ConversionPresets.Count; index++)
-                {
-                    string error = this.ConversionPresets[index].Error;
-                    if (!string.IsNullOrEmpty(error))
-                    {
-                        return error;
-                    }
-                }
-
-                return string.Empty;
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

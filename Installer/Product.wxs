@@ -11,7 +11,7 @@
 <?endif ?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.2.0" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.3.0" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
         <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
         
         <Icon Id="icon.ico" SourceFile="..\Resources\ApplicationIcon-256x256.ico"/>
@@ -69,26 +69,39 @@
 
             <!-- Registry entries -->
             <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
-                <RegistryKey Root="HKCU" Key="Software\FileConverter" Action="createAndRemoveOnUninstall">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
+                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="aiff;ape;avi;flac;m4a;mp3;mp4;ogg;wav;wma"/>
                 </RegistryKey>
 
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\ape" Action="createAndRemoveOnUninstall">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\aiff">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
                 </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\flac" Action="createAndRemoveOnUninstall">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\ape">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\avi">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\flac">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Wav"/>
                 </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\mp3" Action="createAndRemoveOnUninstall">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\m4a">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Wav"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\mp3">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav"/>
                 </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\ogg" Action="createAndRemoveOnUninstall">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\mp4">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\ogg">
                     <RegistryValue Name="Presets" Type="string" Value="To Mp3;To Wav"/>
                 </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\wav" Action="createAndRemoveOnUninstall">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\wav">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac"/>
                 </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\wma" Action="createAndRemoveOnUninstall">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\wma">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Wav"/>
                 </RegistryKey>
             </Component>

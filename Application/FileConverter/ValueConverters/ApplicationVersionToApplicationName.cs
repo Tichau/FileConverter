@@ -1,6 +1,6 @@
 ﻿// <copyright file="ApplicationVersionToApplicationName.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-namespace FileConverter
+namespace FileConverter.ValueConverters
 {
     using System;
     using System.Globalization;
@@ -10,12 +10,12 @@ namespace FileConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is Version))
+            if (!(value is FileConverter.Version))
             {
                 return "File Converter";
             }
 
-            Version version = (Version)value;
+            FileConverter.Version version = (FileConverter.Version)value;
 
             return string.Format("File Converter v{0}", version.ToString());
         }
