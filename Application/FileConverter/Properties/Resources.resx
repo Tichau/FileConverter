@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OuputFileNameTemplateSample" xml:space="preserve">
-    <value>C:\Data\MyFolder\Default.wav</value>
+    <value>C:\Music\Artist\Album\Song.wav</value>
   </data>
   <data name="OutputFilePathTemplateHelp" xml:space="preserve">
     <value>(p): input file path
