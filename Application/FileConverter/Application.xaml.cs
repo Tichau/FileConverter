@@ -108,8 +108,8 @@ namespace FileConverter
                 args[3] = "--verbose";
                 args[4] = @"D:\Test\10 - Get around town (lp version).ogg";
 
-                //System.Array.Resize(ref args, 2);
-                //args[1] = "--settings";
+                System.Array.Resize(ref args, 2);
+                args[1] = "--settings";
             }
 #endif
 
