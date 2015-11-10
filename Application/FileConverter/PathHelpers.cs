@@ -74,7 +74,9 @@ namespace FileConverter
                     return "Audio";
 
                 case "avi":
+                case "flv":
                 case "mp4":
+                case "mkv":
                     return "Video";
             }
 
