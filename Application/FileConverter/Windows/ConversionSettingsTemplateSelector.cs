@@ -31,6 +31,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate MkvSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (item == null)
@@ -50,6 +56,9 @@ namespace FileConverter.Windows
 
                 case OutputType.Ogg:
                     return this.OggSettingsDataTemplate;
+
+                case OutputType.Mkv:
+                    return this.MkvSettingsDataTemplate;
             }
 
             return this.DefaultDataTemplate;

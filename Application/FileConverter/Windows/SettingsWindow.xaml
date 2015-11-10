@@ -99,11 +99,47 @@
             </StackPanel>
         </DataTemplate>
 
+
+        <DataTemplate x:Key="MkvSettingsDataTemplate">
+            <StackPanel>
+                <Label Content="Video" FontWeight="Bold" />
+                <DockPanel>
+                    <Label Content="Quality :" />
+                    <Slider x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=23}"
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="23" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="3" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
+                </DockPanel>
+                <Label Content="Recommended quality range in blue" Foreground="#E5004B82" FontSize="11" />
+
+                <DockPanel>
+                    <Label Content="Encoding speed :" />
+                    <ComboBox SelectedValue="{Binding SelectedPreset.Settings, ConverterParameter=VideoEncodingSpeed|System.String, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=veryslow}">
+                        <System:String>Ultra Fast</System:String>
+                        <System:String>Super Fast</System:String>
+                        <System:String>Very Fast</System:String>
+                        <System:String>Faster</System:String>
+                        <System:String>Fast</System:String>
+                        <System:String>Medium</System:String>
+                        <System:String>Slow</System:String>
+                        <System:String>Slower</System:String>
+                        <System:String>Very Slow</System:String>
+                    </ComboBox>
+                </DockPanel>
+
+                <Label Content="Audio" FontWeight="Bold" />
+                <DockPanel>
+                    <Label Content="Quality :" />
+                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="AacVBR" 
+        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=Bitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=52}" />
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
+
         <windows:ConversionSettingsTemplateSelector x:Key="ConversionSettingsSelector"
             DefaultDataTemplate="{StaticResource EmptyDataTemplate}"
             WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
             Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
-            OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}" />
+            OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}"
+            MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" />
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>

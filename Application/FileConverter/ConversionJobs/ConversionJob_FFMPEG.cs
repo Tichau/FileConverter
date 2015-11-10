@@ -98,7 +98,21 @@ namespace FileConverter.ConversionJobs
                 break;
 
                 case OutputType.Flac:
-                    arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                    {
+                        arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                    }
+
+                    break;
+
+                case OutputType.Mkv:
+                    {
+                        int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>("VideoQuality");
+                        string videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<string>("VideoEncodingSpeed");
+                        int audioEncodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
+                        string encoderArgs = string.Format("-c:v libx264 -preset {0} -crf {1} -c:a aac -q:a {2} -strict experimental", this.H264EncodingSpeedToPreset(videoEncodingSpeed), this.H264QualityToCRF(videoEncodingQuality), this.AACBitrateToQualityIndex(audioEncodingQuality));
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
                     break;
 
                 default:
@@ -265,6 +279,82 @@ namespace FileConverter.ConversionJobs
             }
 
             throw new Exception("Unknown Wav encoding.");
+        }
+
+        /// <summary>
+        /// Convert video quality index to H264 constant rate factor.
+        /// </summary>
+        /// <param name="quality">The quality index.</param>
+        /// <returns>Returns the H264 constant rate factor.</returns>
+        /// The range of the quantizer scale is 0-51: where 0 is lossless, 23 is default, and 51 is worst possible. 
+        /// A lower value is a higher quality and a subjectively sane range is 18-28. 
+        /// https://trac.ffmpeg.org/wiki/Encode/H.264
+        private int H264QualityToCRF(int quality)
+        {
+            return 51 - quality;
+        }
+
+        /// <summary>
+        /// Convert video encoding speed to H264 preset.
+        /// </summary>
+        /// <param name="encodingSpeed">The encoding speed.</param>
+        /// <returns>The H264 preset.</returns>
+        private string H264EncodingSpeedToPreset(string encodingSpeed)
+        {
+            switch (encodingSpeed)
+            {
+                case "Ultra Fast":
+                    return "ultrafast";
+
+                case "Super Fast":
+                    return "superfast";
+
+                case "Very Fast":
+                    return "veryfast";
+
+                case "Faster":
+                    return "faster";
+
+                case "Fast":
+                    return "fast";
+
+                case "Medium":
+                    return "medium";
+
+                case "Slow":
+                    return "slow";
+
+                case "Slower":
+                    return "slower";
+
+                case "Very Slow":
+                    return "veryslow";
+            }
+
+            throw new Exception("Unknown H264 encoding speed.");
+        }
+
+        private int AACBitrateToQualityIndex(int bitrate)
+        {
+            switch (bitrate)
+            {
+                case 52:
+                    return 1;
+
+                case 72:
+                    return 2;
+
+                case 104:
+                    return 3;
+
+                case 136:
+                    return 4;
+
+                case 208:
+                    return 5;
+            }
+
+            throw new Exception("Unknown VBR bitrate.");
         }
 
         private void ParseFFMPEGOutput(string input)

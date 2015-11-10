@@ -13,5 +13,7 @@ namespace FileConverter
         Mp3CBR,
 
         OggVBR,
+
+        AacVBR,
     }
 }

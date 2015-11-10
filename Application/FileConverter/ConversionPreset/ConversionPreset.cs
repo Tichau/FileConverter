@@ -345,6 +345,17 @@ namespace FileConverter
                     }
 
                     break;
+
+                case OutputType.Mkv:
+                    switch (settingsKey)
+                    {
+                        case "Bitrate":
+                        case "VideoQuality":
+                        case "VideoEncodingSpeed":
+                            return true;
+                    }
+
+                    break;
             }
 
             return false;
@@ -354,7 +365,7 @@ namespace FileConverter
         {
             if (outputType == OutputType.Wav)
             {
-                this.InitializeSettingsValue("Encoding", "Wav16");
+                this.InitializeSettingsValue("Encoding", EncodingMode.Wav16.ToString());
             }
 
             if (outputType == OutputType.Mp3)
@@ -366,6 +377,17 @@ namespace FileConverter
             if (outputType == OutputType.Ogg)
             {
                 this.InitializeSettingsValue("Bitrate", "160");
+            }
+
+            if (outputType == OutputType.Flac)
+            {
+            }
+
+            if (outputType == OutputType.Mkv)
+            {
+                this.InitializeSettingsValue("VideoQuality", "28");
+                this.InitializeSettingsValue("VideoEncodingSpeed", "veryslow");
+                this.InitializeSettingsValue("Bitrate", "104");
             }
 
             this.OnPropertyChanged("Settings");

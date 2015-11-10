@@ -5,6 +5,7 @@ namespace FileConverter
     public enum OutputType
     {
         None,
+        Mkv,
         Mp3,
         Ogg,
         Flac,

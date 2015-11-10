@@ -145,6 +145,21 @@ namespace FileConverter.Controls
                         sliderControl.Ticks.Add(500);
                         break;
                     }
+
+                case EncodingMode.AacVBR:
+                    {
+                        sliderControl.Minimum = 52;
+                        sliderControl.Maximum = 208;
+                        sliderControl.SelectionStart = 72;
+                        sliderControl.SelectionEnd = 136;
+                        sliderControl.Ticks.Clear();
+                        sliderControl.Ticks.Add(52);
+                        sliderControl.Ticks.Add(72);
+                        sliderControl.Ticks.Add(104);
+                        sliderControl.Ticks.Add(136);
+                        sliderControl.Ticks.Add(208);
+                        break;
+                    }
             }
 
             encodingQualitySliderControl.CoerceValue(EncodingQualitySliderControl.BitrateProperty);
