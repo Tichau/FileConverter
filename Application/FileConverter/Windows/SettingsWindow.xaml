@@ -65,10 +65,10 @@
             <StackPanel>
                 <DockPanel>
                     <Label Content="Encoding :" />
-                    <RadioButton x:Name="WAV8radioButton" Content="8-bits" ToolTip="PCM signed 8-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Wav8, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
-                    <RadioButton x:Name="WAV16radioButton" Content="16-bits" ToolTip="PCM signed 16-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Wav16, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
-                    <RadioButton x:Name="WAV24radioButton" Content="24-bits" ToolTip="PCM signed 24-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Wav24, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
-                    <RadioButton x:Name="WAV32radioButton" Content="32-bits" ToolTip="PCM signed 32-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Wav32, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton x:Name="WAV8radioButton" Content="8-bits" ToolTip="PCM signed 8-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav8, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton x:Name="WAV16radioButton" Content="16-bits" ToolTip="PCM signed 16-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav16, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton x:Name="WAV24radioButton" Content="24-bits" ToolTip="PCM signed 24-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav24, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton x:Name="WAV32radioButton" Content="32-bits" ToolTip="PCM signed 32-bit little-endian" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav32, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
@@ -77,14 +77,14 @@
             <StackPanel>
                 <DockPanel>
                     <Label Content="Encoding :" />
-                    <RadioButton x:Name="VBRradioButton" Content="VBR" ToolTip="Variable bitrate encoding" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Mp3VBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
-                    <RadioButton x:Name="CBRradioButton" Content="CBR" ToolTip="Constant bitrate encoding" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|Mp3CBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton x:Name="VBRradioButton" Content="VBR" ToolTip="Variable bitrate encoding" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Mp3VBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton x:Name="CBRradioButton" Content="CBR" ToolTip="Constant bitrate encoding" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Mp3CBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                 </DockPanel>
                 <DockPanel>
                     <Label Content="Quality :" />
                     <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider"
-        				EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter=Encoding|FileConverter.EncodingMode, Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
-        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=Bitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=190}" />
+        				EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|FileConverter.EncodingMode, Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
+        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=190}" />
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
@@ -94,7 +94,7 @@
                 <DockPanel>
                     <Label Content="Quality :" />
                     <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="OggVBR" 
-        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=Bitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=160}" />
+        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=160}" />
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
@@ -129,7 +129,7 @@
                 <DockPanel>
                     <Label Content="Quality :" />
                     <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="AacVBR" 
-        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=Bitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=52}" />
+        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=52}" />
                 </DockPanel>
             </StackPanel>
         </DataTemplate>

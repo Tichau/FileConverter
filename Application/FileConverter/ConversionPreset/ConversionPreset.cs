@@ -130,6 +130,20 @@ namespace FileConverter
                 {
                     for (int index = 0; index < value.Length; index++)
                     {
+                        // Compatibility issues.
+                        if (value[index].Key == "Bitrate")
+                        {
+                            this.SetSettingsValue(ConversionSettingKeys.AudioBitrate, value[index].Value);
+                            continue;
+                        }
+
+                        if (value[index].Key == "Encoding")
+                        {
+                            this.SetSettingsValue(ConversionSettingKeys.AudioEncodingMode, value[index].Value);
+                            continue;
+                        }
+
+                        // Load settings.
                         this.SetSettingsValue(value[index].Key, value[index].Value);
                     }
                 }
@@ -506,7 +520,7 @@ namespace FileConverter
 
             return string.Empty;
         }
-
+        
         public struct ConversionSetting
         {
             public ConversionSetting(KeyValuePair<string, string> keyValuePair)
@@ -532,8 +546,8 @@ namespace FileConverter
 
         public struct ConversionSettingKeys
         {
-            public const string AudioEncodingMode = "Encoding";
-            public const string AudioBitrate = "Bitrate";
+            public const string AudioEncodingMode = "AudioEncodingMode";
+            public const string AudioBitrate = "AudioBitrate";
             public const string VideoQuality = "VideoQuality";
             public const string VideoEncodingSpeed = "VideoEncodingSpeed";
         }
