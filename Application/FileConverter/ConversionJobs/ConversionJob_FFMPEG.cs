@@ -57,7 +57,7 @@ namespace FileConverter.ConversionJobs
             {
                 case OutputType.Wav:
                     {
-                        EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>("Encoding");
+                        EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>(ConversionPreset.ConversionSettingKeys.AudioEncodingMode);
                         string encoderArgs = string.Format("-acodec {0}", this.WAVEncodingToCodecArgument(encodingMode));
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
@@ -67,8 +67,8 @@ namespace FileConverter.ConversionJobs
                 case OutputType.Mp3:
                     {
                         string encoderArgs = string.Empty;
-                        EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>("Encoding");
-                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
+                        EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>(ConversionPreset.ConversionSettingKeys.AudioEncodingMode);
+                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
                         switch (encodingMode)
                         {
                             case EncodingMode.Mp3VBR:
@@ -90,7 +90,7 @@ namespace FileConverter.ConversionJobs
 
                 case OutputType.Ogg:
                     {
-                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
+                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
                         string encoderArgs = string.Format("-codec:a libvorbis -qscale:a {0}", this.OGGVBRBitrateToQualityIndex(encodingQuality));
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
@@ -108,7 +108,7 @@ namespace FileConverter.ConversionJobs
                     {
                         int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>("VideoQuality");
                         string videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<string>("VideoEncodingSpeed");
-                        int audioEncodingQuality = this.ConversionPreset.GetSettingsValue<int>("Bitrate");
+                        int audioEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
                         string encoderArgs = string.Format("-c:v libx264 -preset {0} -crf {1} -c:a aac -q:a {2} -strict experimental", this.H264EncodingSpeedToPreset(videoEncodingSpeed), this.H264QualityToCRF(videoEncodingQuality), this.AACBitrateToQualityIndex(audioEncodingQuality));
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
