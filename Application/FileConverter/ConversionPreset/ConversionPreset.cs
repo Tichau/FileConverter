@@ -401,7 +401,7 @@ namespace FileConverter
             {
                 this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
                 this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Very Slow");
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "104");
+                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
             }
 
             this.OnPropertyChanged("Settings");

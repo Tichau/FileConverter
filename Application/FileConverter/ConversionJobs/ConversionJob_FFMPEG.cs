@@ -106,10 +106,10 @@ namespace FileConverter.ConversionJobs
 
                 case OutputType.Mkv:
                     {
-                        int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>("VideoQuality");
-                        string videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<string>("VideoEncodingSpeed");
-                        int audioEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
-                        string encoderArgs = string.Format("-c:v libx264 -preset {0} -crf {1} -c:a aac -q:a {2} -strict experimental", this.H264EncodingSpeedToPreset(videoEncodingSpeed), this.H264QualityToCRF(videoEncodingQuality), this.AACBitrateToQualityIndex(audioEncodingQuality));
+                        int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
+                        string videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<string>(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed);
+                        int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
+                        string encoderArgs = string.Format("-c:v libx264 -preset {0} -crf {1} -c:a aac -q:a {2} -strict experimental", this.H264EncodingSpeedToPreset(videoEncodingSpeed), this.H264QualityToCRF(videoEncodingQuality), this.AACBitrateToQualityIndex(audioEncodingBitrate));
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
 
@@ -334,24 +334,51 @@ namespace FileConverter.ConversionJobs
             throw new Exception("Unknown H264 encoding speed.");
         }
 
-        private int AACBitrateToQualityIndex(int bitrate)
+        private string AACBitrateToQualityIndex(int bitrate)
         {
             switch (bitrate)
             {
-                case 52:
-                    return 1;
+                case 460:
+                    return "3.9";
 
-                case 72:
-                    return 2;
+                case 340:
+                    return "3";
 
-                case 104:
-                    return 3;
+                case 256:
+                    return "2.2";
 
-                case 136:
-                    return 4;
+                case 224:
+                    return "1.9";
 
-                case 208:
-                    return 5;
+                case 192:
+                    return "1.6";
+
+                case 155:
+                    return "1.3";
+
+                case 128:
+                    return "1";
+
+                case 112:
+                    return "0.9";
+
+                case 96:
+                    return "0.75";
+
+                case 80:
+                    return "0.6";
+
+                case 64:
+                    return "0.45";
+
+                case 48:
+                    return "0.3";
+
+                case 32:
+                    return "0.2";
+
+                case 16:
+                    return "0.1";
             }
 
             throw new Exception("Unknown VBR bitrate.");

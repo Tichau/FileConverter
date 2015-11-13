@@ -148,16 +148,25 @@ namespace FileConverter.Controls
 
                 case EncodingMode.AacVBR:
                     {
-                        sliderControl.Minimum = 52;
-                        sliderControl.Maximum = 208;
-                        sliderControl.SelectionStart = 72;
-                        sliderControl.SelectionEnd = 136;
+                        sliderControl.Minimum = 16;
+                        sliderControl.Maximum = 460;
+                        sliderControl.SelectionStart = 96;
+                        sliderControl.SelectionEnd = 256;
                         sliderControl.Ticks.Clear();
-                        sliderControl.Ticks.Add(52);
-                        sliderControl.Ticks.Add(72);
-                        sliderControl.Ticks.Add(104);
-                        sliderControl.Ticks.Add(136);
-                        sliderControl.Ticks.Add(208);
+                        sliderControl.Ticks.Add(16);
+                        sliderControl.Ticks.Add(32);
+                        sliderControl.Ticks.Add(48);
+                        sliderControl.Ticks.Add(64);
+                        sliderControl.Ticks.Add(80);
+                        sliderControl.Ticks.Add(96);
+                        sliderControl.Ticks.Add(112);
+                        sliderControl.Ticks.Add(128);
+                        sliderControl.Ticks.Add(155);
+                        sliderControl.Ticks.Add(192);
+                        sliderControl.Ticks.Add(224);
+                        sliderControl.Ticks.Add(256);
+                        sliderControl.Ticks.Add(340);
+                        sliderControl.Ticks.Add(460);
                         break;
                     }
             }
