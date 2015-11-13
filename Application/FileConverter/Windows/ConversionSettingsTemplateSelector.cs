@@ -31,6 +31,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate AacSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public DataTemplate MkvSettingsDataTemplate
         {
             get;
@@ -56,6 +62,9 @@ namespace FileConverter.Windows
 
                 case OutputType.Ogg:
                     return this.OggSettingsDataTemplate;
+
+                case OutputType.Aac:
+                    return this.AacSettingsDataTemplate;
 
                 case OutputType.Mkv:
                     return this.MkvSettingsDataTemplate;

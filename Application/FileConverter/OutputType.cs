@@ -5,10 +5,12 @@ namespace FileConverter
     public enum OutputType
     {
         None,
+
+        Aac,
+        Flac,
         Mkv,
         Mp3,
         Ogg,
-        Flac,
         Wav,
     }
 }

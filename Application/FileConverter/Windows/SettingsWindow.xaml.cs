@@ -34,11 +34,12 @@ namespace FileConverter
 
             OutputType[] outputTypes = new[]
                                            {
-                                               OutputType.Flac, 
-                                               OutputType.Mkv,
-                                               OutputType.Mp3,
                                                OutputType.Ogg, 
+                                               OutputType.Mp3,
+                                               OutputType.Aac, 
+                                               OutputType.Flac,
                                                OutputType.Wav, 
+                                               OutputType.Mkv,
                                            };
 
             this.OutputFormats.ItemsSource = outputTypes;

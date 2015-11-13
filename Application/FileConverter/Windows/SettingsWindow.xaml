@@ -99,6 +99,16 @@
             </StackPanel>
         </DataTemplate>
 
+        
+        <DataTemplate x:Key="AacSettingsDataTemplate">
+            <StackPanel>
+                <DockPanel>
+                    <Label Content="Quality :" />
+                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="AacVBR" 
+        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=128}" />
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
 
         <DataTemplate x:Key="MkvSettingsDataTemplate">
             <StackPanel>
@@ -139,7 +149,8 @@
             WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
             Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
             OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}"
-            MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" />
+            MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
+            AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}" />
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
