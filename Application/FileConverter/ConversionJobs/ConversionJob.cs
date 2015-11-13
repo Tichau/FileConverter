@@ -115,6 +115,15 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("The conversion preset must be valid.");
             }
 
+            string extension = System.IO.Path.GetExtension(inputFilePath);
+            extension = extension.Substring(1, extension.Length - 1);
+            string extensionCategory = PathHelpers.GetExtensionCategory(extension);
+            if (!PathHelpers.IsOutputTypeCompatibleWithCategory(this.ConversionPreset.OutputType, extensionCategory))
+            {
+                this.ConvertionFailed("The input file type is not compatible with the output file type.");
+                return;
+            }
+
             this.initialInputPath = inputFilePath;
             this.InputFilePath = inputFilePath;
             this.OutputFilePath = this.ConversionPreset.GenerateOutputFilePath(inputFilePath);

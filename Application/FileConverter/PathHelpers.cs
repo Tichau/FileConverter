@@ -72,16 +72,48 @@ namespace FileConverter
                 case "ogg":
                 case "wav":
                 case "wma":
-                    return "Audio";
+                    return InputCategoryNames.Audio;
 
                 case "avi":
                 case "flv":
                 case "mp4":
                 case "mkv":
-                    return "Video";
+                    return InputCategoryNames.Video;
             }
 
-            return "Misc";
+            return InputCategoryNames.Misc;
+        }
+
+        public static bool IsOutputTypeCompatibleWithCategory(OutputType outputType, string category)
+        {
+            if (category == InputCategoryNames.Misc)
+            {
+                // Misc category contains unsorted input extensions, so we consider that they are compatible to be tolerant.
+                return true;
+            }
+
+            switch (outputType)
+            {
+                case OutputType.Aac:
+                case OutputType.Flac:
+                case OutputType.Mp3:
+                case OutputType.Ogg:
+                case OutputType.Wav:
+                    return category == InputCategoryNames.Audio || category == InputCategoryNames.Video;
+
+                case OutputType.Mkv:
+                    return category == InputCategoryNames.Video;
+
+                default:
+                    return false;
+            }
+        }
+
+        public static class InputCategoryNames
+        {
+            public const string Audio = "Audio";
+            public const string Video = "Video";
+            public const string Misc = "Misc";
         }
     }
 }
