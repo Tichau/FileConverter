@@ -70,6 +70,7 @@ namespace FileConverter
                 this.outputType = value;
                 this.InitializeDefaultSettings(this.outputType);
                 this.OnPropertyChanged();
+                this.CoerceInputTypes();
             }
         }
 
@@ -88,7 +89,7 @@ namespace FileConverter
                 {
                     this.inputTypes[index] = this.inputTypes[index].ToLowerInvariant();
                 }
-
+                
                 this.OnPropertyChanged();
             }
         }
@@ -241,6 +242,8 @@ namespace FileConverter
             {
                 this.InputTypes[index] = this.InputTypes[index].ToLowerInvariant();
             }
+
+            this.CoerceInputTypes();
         }
 
         public void AddInputType(string inputType)
@@ -326,6 +329,20 @@ namespace FileConverter
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void CoerceInputTypes()
+        {
+            for (int index = 0; index < this.inputTypes.Count; index++)
+            {
+                string inputType = this.inputTypes[index];
+                string inputCategory = PathHelpers.GetExtensionCategory(inputType);
+                if (!PathHelpers.IsOutputTypeCompatibleWithCategory(this.OutputType, inputCategory))
+                {
+                    this.RemoveInputType(inputType);
+                    index--;
+                }
+            }
         }
 
         private bool IsRelevantSetting(string settingsKey)

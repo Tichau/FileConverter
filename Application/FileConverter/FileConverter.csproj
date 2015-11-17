@@ -103,6 +103,7 @@
     <Compile Include="ValueConverters\Generic\StringToValueType.cs" />
     <Compile Include="ValueConverters\InputTypesToBool.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="ValueConverters\IsOutputTypeCompatibleWithCategoryConverter.cs" />
     <Compile Include="ValueConverters\OutputTypeToVisibility.cs" />
     <Compile Include="ValueConverters\Generic\StringToEnum.cs" />
     <Compile Include="ValueConverters\Generic\ValueConverterGroup.cs" />
