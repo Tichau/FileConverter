@@ -77,6 +77,7 @@ namespace FileConverter
                 case "avi":
                 case "flv":
                 case "mp4":
+                case "mov":
                 case "mkv":
                     return InputCategoryNames.Video;
             }
