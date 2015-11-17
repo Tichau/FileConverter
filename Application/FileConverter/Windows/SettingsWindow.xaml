@@ -17,7 +17,6 @@
         <valueConverters:OutputTypeToVisibility x:Key="OutputTypeToVisibility"/>
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
-        <valueConverters:IsOutputTypeCompatibleWithCategoryConverter x:Key="IsOutputTypeCompatibleWithCategory"/>
 
         <generic:ValueConverterGroup x:Key="ConversionSettingsToEnum">
             <valueConverters:ConversionSettingsToString/>
@@ -248,12 +247,6 @@
                                 <TreeView.Resources>
                                     <HierarchicalDataTemplate DataType="{x:Type local:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
                                         <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeCategoryChecked" Unchecked="OnInputTypeCategoryUnchecked" IsThreeState="True" >
-                                            <CheckBox.IsEnabled>
-                                                <MultiBinding Converter="{StaticResource IsOutputTypeCompatibleWithCategory}" ConverterParameter="Category" Mode="OneWay">
-                                                    <Binding ElementName="window" Path="SelectedPreset.OutputType" Mode="OneWay"/>
-                                                    <Binding Path="Name" Mode="OneWay"/>
-                                                </MultiBinding>
-                                            </CheckBox.IsEnabled>
                                             <CheckBox.IsChecked>
                                                 <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
                                                     <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>
@@ -264,12 +257,6 @@
                                     </HierarchicalDataTemplate>
                                     <DataTemplate DataType="{x:Type local:InputExtension}">
                                         <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeChecked" Unchecked="OnInputTypeUnchecked">
-                                            <CheckBox.IsEnabled>
-                                                <MultiBinding Converter="{StaticResource IsOutputTypeCompatibleWithCategory}" ConverterParameter="InputType" Mode="OneWay">
-                                                    <Binding ElementName="window" Path="SelectedPreset.OutputType" Mode="OneWay"/>
-                                                    <Binding Path="Name" Mode="OneWay"/>
-                                                </MultiBinding>
-                                            </CheckBox.IsEnabled>
                                             <CheckBox.IsChecked>
                                                 <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
                                                     <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>
@@ -281,14 +268,7 @@
                                 </TreeView.Resources>
                                 <TreeView.ItemContainerStyle>
                                     <Style TargetType="TreeViewItem">
-                                        <Setter Property="IsExpanded">
-                                            <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource IsOutputTypeCompatibleWithCategory}" ConverterParameter="Category" Mode="OneWay">
-                                                    <Binding ElementName="window" Path="SelectedPreset.OutputType" Mode="OneWay"/>
-                                                    <Binding Path="Name" Mode="OneWay"/>
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
+                                        <Setter Property="IsExpanded" Value="True"/>
                                     </Style>
                                 </TreeView.ItemContainerStyle>
                             </TreeView>
