@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter", "FileConverter.csproj", "{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter", "Application\FileConverter\FileConverter.csproj", "{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "..\..\Installer\Installer.wixproj", "{F14673DF-DF38-44B4-AB1D-99A59182C24C}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "Installer\Installer.wixproj", "{F14673DF-DF38-44B4-AB1D-99A59182C24C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverterExtension", "..\FileConverterExtension\FileConverterExtension.csproj", "{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverterExtension", "Application\FileConverterExtension\FileConverterExtension.csproj", "{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
