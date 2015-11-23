@@ -37,6 +37,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate JpgSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public DataTemplate MkvSettingsDataTemplate
         {
             get;
@@ -68,6 +74,9 @@ namespace FileConverter.Windows
 
                 case OutputType.Mkv:
                     return this.MkvSettingsDataTemplate;
+
+                case OutputType.Jpg:
+                    return this.JpgSettingsDataTemplate;
             }
 
             return this.DefaultDataTemplate;

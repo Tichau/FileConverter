@@ -55,11 +55,19 @@ namespace FileConverter.ConversionJobs
             string arguments = string.Empty;
             switch (this.ConversionPreset.OutputType)
             {
-                case OutputType.Wav:
+                case OutputType.Aac:
                     {
-                        EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>(ConversionPreset.ConversionSettingKeys.AudioEncodingMode);
-                        string encoderArgs = string.Format("-acodec {0}", this.WAVEncodingToCodecArgument(encodingMode));
+                        // https://trac.ffmpeg.org/wiki/Encode/AAC
+                        int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
+                        string encoderArgs = string.Format("-c:a aac -q:a {0} -strict experimental", this.AACBitrateToQualityIndex(audioEncodingBitrate));
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
+                    break;
+
+                case OutputType.Flac:
+                    {
+                        arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
                     }
 
                     break;
@@ -88,24 +96,10 @@ namespace FileConverter.ConversionJobs
 
                 break;
 
-                case OutputType.Ogg:
-                    {
-                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
-                        string encoderArgs = string.Format("-codec:a libvorbis -qscale:a {0}", this.OGGVBRBitrateToQualityIndex(encodingQuality));
-                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
-                    }
-
-                break;
-
-                case OutputType.Flac:
-                    {
-                        arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
-                    }
-
-                    break;
-
                 case OutputType.Mkv:
                     {
+                        // https://trac.ffmpeg.org/wiki/Encode/H.264
+                        // https://trac.ffmpeg.org/wiki/Encode/AAC
                         int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
                         string videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<string>(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed);
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
@@ -115,10 +109,37 @@ namespace FileConverter.ConversionJobs
 
                     break;
 
-                case OutputType.Aac:
+                case OutputType.Ogg:
                     {
-                        int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
-                        string encoderArgs = string.Format("-c:a aac -q:a {0} -strict experimental", this.AACBitrateToQualityIndex(audioEncodingBitrate));
+                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
+                        string encoderArgs = string.Format("-codec:a libvorbis -qscale:a {0}", this.OGGVBRBitrateToQualityIndex(encodingQuality));
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
+                    break;
+
+                case OutputType.Png:
+                    {
+                        // http://www.howtogeek.com/203979/is-the-png-format-lossless-since-it-has-a-compression-parameter/
+                        string encoderArgs = string.Format("-compression_level 100");
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
+                    break;
+
+                case OutputType.Jpg:
+                    {
+                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                        string encoderArgs = string.Format("-q:v {0}", this.JPGQualityToQualityIndex(encodingQuality));
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
+                    break;
+
+                case OutputType.Wav:
+                    {
+                        EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>(ConversionPreset.ConversionSettingKeys.AudioEncodingMode);
+                        string encoderArgs = string.Format("-acodec {0}", this.WAVEncodingToCodecArgument(encodingMode));
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
 

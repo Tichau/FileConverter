@@ -40,8 +40,10 @@ namespace FileConverter
                                                OutputType.Mp3,
                                                OutputType.Aac, 
                                                OutputType.Flac,
-                                               OutputType.Wav, 
+                                               OutputType.Wav,
                                                OutputType.Mkv,
+                                               OutputType.Jpg,
+                                               OutputType.Png,
                                            };
 
             this.OutputFormats.ItemsSource = outputTypes;

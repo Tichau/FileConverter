@@ -66,6 +66,7 @@ namespace FileConverter
                 case "aac":
                 case "aiff":
                 case "ape":
+                case "cda":
                 case "flac":
                 case "mp3":
                 case "m4a":
@@ -80,6 +81,14 @@ namespace FileConverter
                 case "mov":
                 case "mkv":
                     return InputCategoryNames.Video;
+
+                case "bmp":
+                case "jpg":
+                case "jpeg":
+                case "png":
+                case "tiff":
+                    return InputCategoryNames.Image;
+
             }
 
             return InputCategoryNames.Misc;
@@ -105,6 +114,10 @@ namespace FileConverter
                 case OutputType.Mkv:
                     return category == InputCategoryNames.Video;
 
+                case OutputType.Png:
+                case OutputType.Jpg:
+                    return category == InputCategoryNames.Image;
+
                 default:
                     return false;
             }
@@ -114,6 +127,7 @@ namespace FileConverter
         {
             public const string Audio = "Audio";
             public const string Video = "Video";
+            public const string Image = "Image";
             public const string Misc = "Misc";
         }
     }

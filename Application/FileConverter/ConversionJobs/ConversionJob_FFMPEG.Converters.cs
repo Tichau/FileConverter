@@ -143,6 +143,18 @@ namespace FileConverter.ConversionJobs
         }
 
         /// <summary>
+        /// Convert image quality index to JPG quality index.
+        /// </summary>
+        /// <param name="quality">The quality index.</param>
+        /// <returns>Returns the JPG quality index.</returns>
+        /// The range of the quantizer scale is 1-31: where 1 is better quality, and 31 is worst possible. 
+        /// http://superuser.com/questions/318845/improve-quality-of-ffmpeg-created-jpgs
+        private int JPGQualityToQualityIndex(int quality)
+        {
+            return 31 - quality;
+        }
+
+        /// <summary>
         /// Convert video encoding speed to H264 preset.
         /// </summary>
         /// <param name="encodingSpeed">The encoding speed.</param>

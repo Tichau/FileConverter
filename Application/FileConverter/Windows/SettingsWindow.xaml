@@ -144,13 +144,25 @@
             </StackPanel>
         </DataTemplate>
 
+
+        <DataTemplate x:Key="JpgSettingsDataTemplate">
+            <StackPanel>
+                <DockPanel>
+                    <Label Content="Quality :" />
+                    <Slider x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=25}"
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="30" Minimum="0" Maximum="30" TickPlacement="BottomRight" SmallChange="3" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
+                </DockPanel>
+            </StackPanel>
+        </DataTemplate>
+
         <windows:ConversionSettingsTemplateSelector x:Key="ConversionSettingsSelector"
             DefaultDataTemplate="{StaticResource EmptyDataTemplate}"
             WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
             Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
             OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}"
             MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
-            AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}" />
+            AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}"
+            JpgSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" />
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>

@@ -71,7 +71,7 @@
             <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
                 <RegistryKey Root="HKCU" Key="Software\FileConverter">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
-                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="aac;aiff;ape;avi;flac;flv;m4a;mkv;mov;mp3;mp4;ogg;wav;wma"/>
+                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="aac;aiff;ape;avi;bmp;flac;flv;jpg;jpeg;m4a;mkv;mov;mp3;mp4;ogg;png;tiff;wav;wma"/>
                 </RegistryKey>
 
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\aiff">

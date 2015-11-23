@@ -333,6 +333,11 @@ namespace FileConverter
 
         private void CoerceInputTypes()
         {
+            if (this.inputTypes == null)
+            {
+                return;
+            }
+
             for (int index = 0; index < this.inputTypes.Count; index++)
             {
                 string inputType = this.inputTypes[index];
@@ -387,6 +392,15 @@ namespace FileConverter
                     }
 
                     break;
+
+                case OutputType.Jpg:
+                    switch (settingsKey)
+                    {
+                        case ConversionPreset.ConversionSettingKeys.ImageQuality:
+                            return true;
+                    }
+
+                    break;
             }
 
             return false;
@@ -419,6 +433,15 @@ namespace FileConverter
                 this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
                 this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Very Slow");
                 this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
+            }
+
+            if (outputType == OutputType.Png)
+            {
+            }
+
+            if (outputType == OutputType.Jpg)
+            {
+                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "25");
             }
 
             this.OnPropertyChanged("Settings");
@@ -565,6 +588,7 @@ namespace FileConverter
         {
             public const string AudioEncodingMode = "AudioEncodingMode";
             public const string AudioBitrate = "AudioBitrate";
+            public const string ImageQuality = "ImageQuality";
             public const string VideoQuality = "VideoQuality";
             public const string VideoEncodingSpeed = "VideoEncodingSpeed";
         }
