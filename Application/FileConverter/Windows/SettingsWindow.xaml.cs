@@ -221,7 +221,24 @@ namespace FileConverter
         private void AddPresetButton_Click(object sender, RoutedEventArgs e)
         {
             Application application = Application.Current as Application;
-            ConversionPreset newPreset = new ConversionPreset("New preset", OutputType.None, new string[0]);
+            string presetName = "New preset";
+            int index = 1;
+            while (application.Settings.ConversionPresets.Any(match => match.Name == presetName))
+            {
+                index++;
+                presetName = string.Format("New preset ({0})", index);
+            }
+
+            ConversionPreset newPreset = null;
+            if (this.SelectedPreset != null)
+            {
+                newPreset = new ConversionPreset(presetName, this.SelectedPreset);
+            }
+            else
+            {
+                newPreset = new ConversionPreset(presetName, OutputType.Mkv, new string[0]);
+            }
+
             application.Settings.ConversionPresets.Add(newPreset);
             this.SelectedPreset = newPreset;
             this.PresetNameTextBox.Focus();

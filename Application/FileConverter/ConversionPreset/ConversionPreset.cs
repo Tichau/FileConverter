@@ -36,8 +36,28 @@ namespace FileConverter
             List<string> inputTypeList = new List<string>();
             inputTypeList.AddRange(inputTypes);
             this.InputTypes = inputTypeList;
-            
+
             this.outputFileNameTemplate = "(p)(f)";
+        }
+
+        public ConversionPreset(string name, ConversionPreset source)
+        {
+            this.Name = name;
+            this.OutputType = source.outputType;
+            List<string> inputTypeList = new List<string>();
+            if (source.inputTypes != null)
+            {
+                inputTypeList.AddRange(source.inputTypes);
+            }
+
+            this.InputTypes = inputTypeList;
+
+            this.outputFileNameTemplate = source.OutputFileNameTemplate;
+
+            foreach (KeyValuePair<string, string> conversionSetting in source.settings)
+            {
+                this.SetSettingsValue(conversionSetting.Key, conversionSetting.Value);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
