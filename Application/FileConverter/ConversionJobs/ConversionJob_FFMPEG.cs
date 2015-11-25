@@ -40,7 +40,7 @@ namespace FileConverter.ConversionJobs
             string ffmpegPath = string.Format("{0}\\ffmpeg.exe", applicationDirectory);
             if (!System.IO.File.Exists(ffmpegPath))
             {
-                this.ConvertionFailed("Can't find ffmpeg executable. You should try to reinstall the application.");
+                this.ConversionFailed("Can't find ffmpeg executable. You should try to reinstall the application.");
                 Diagnostics.Log("Can't find ffmpeg executable ({0}). Try to reinstall the application.", ffmpegPath);
                 return;
             }
@@ -164,9 +164,10 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("The conversion preset must be valid.");
             }
 
-            Diagnostics.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
-            Diagnostics.Log(string.Empty);
+            this.UserState = "Conversion";
+
             Diagnostics.Log("Execute command: {0} {1}.", this.ffmpegProcessStartInfo.FileName, this.ffmpegProcessStartInfo.Arguments);
+            Diagnostics.Log(string.Empty);
 
             try
             {
@@ -189,7 +190,7 @@ namespace FileConverter.ConversionJobs
             }
             catch
             {
-                this.ConvertionFailed("Failed to launch FFMPEG process.");
+                this.ConversionFailed("Failed to launch FFMPEG process.");
                 throw;
             }
         }
@@ -227,7 +228,7 @@ namespace FileConverter.ConversionJobs
 
             if (input.Contains("Exiting."))
             {
-                this.ConvertionFailed(input);
+                this.ConversionFailed(input);
             }
         }
     }

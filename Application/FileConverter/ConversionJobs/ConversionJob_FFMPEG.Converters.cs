@@ -249,6 +249,5 @@ namespace FileConverter.ConversionJobs
 
             throw new Exception("Unknown VBR bitrate.");
         }
-
     }
 }

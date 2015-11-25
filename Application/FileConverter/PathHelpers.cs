@@ -8,6 +8,7 @@ namespace FileConverter
     public static class PathHelpers
     {
         private static Regex driveLetterRegex = new Regex(@"[a-zA-Z]:\\");
+        private static Regex cdaTrackNumberRegex = new Regex(@"[a-zA-Z]:\\Track([0-9]+)\.cda");
         private static Regex pathRegex = new Regex(@"^[a-zA-Z]:\\(?:[^\\/:*?""<>|\r\n]+\\)*[^\.\\/:*?""<>|\r\n][^\\/:*?""<>|\r\n]*$");
         private static Regex filenameRegex = new Regex(@"[^\\]*", RegexOptions.RightToLeft);
         private static Regex directoryRegex = new Regex(@"(?:([^\\]*)\\)*");
@@ -15,6 +16,18 @@ namespace FileConverter
         public static bool IsPathDriveLetterValid(string path)
         {
             return PathHelpers.driveLetterRegex.IsMatch(path);
+        }
+
+        public static string GetPathDriveLetter(string path)
+        {
+            return PathHelpers.driveLetterRegex.Match(path).Groups[0].Value;
+        }
+
+        public static int GetCDATrackNumber(string path)
+        {
+            Match match = PathHelpers.cdaTrackNumberRegex.Match(path);
+            string stringNumber = match.Groups[1].Value;
+            return int.Parse(stringNumber);
         }
 
         public static bool IsPathValid(string path)
@@ -88,7 +101,6 @@ namespace FileConverter
                 case "png":
                 case "tiff":
                     return InputCategoryNames.Image;
-
             }
 
             return InputCategoryNames.Misc;
