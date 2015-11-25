@@ -2,7 +2,6 @@
 
 ## Description
 **File Converter** is a very simple tool which allows you to convert one or several file(s) from one format to another using the context menu in windows explorer.
-This program uses [ffmpeg](https://www.ffmpeg.org/) as file conversion software.
 
 You can convert files from formats **Aiff, Ape, Avi, Flac, M4a, Mp3, Mp4, Ogg, Wav, Wma** to formats **Mp3, Ogg, Wav, Flac**.
 
@@ -58,6 +57,19 @@ File path customization:
 	Input: C:\Music\Artist\Album\Song.wav
 	Template: D:\(o)\(d1)\(f)
 	Generated output: D:\mp3\Artist\Song.mp3
+	
+## Thanks
+
+File converter uses the following middleware:
+
+**ffmpeg** as file conversion software.
+Thanks to ffmpeg devs for this awesome open source file convesion tool. [Web site link](https://www.ffmpeg.org/)
+
+**SharpShell** to easily create windows context menu extensions.
+Thanks to Dave Kerr for his work on SharpShell. [CodePlex link](https://sharpshell.codeplex.com/)
+
+**Ripper** and **yeti.mmedia** for CD Audio extraction.
+Thanks to Idael Cardoso for his work on CD Audio ripper. [Code project link](http://www.codeproject.com/Articles/5458/C-Sharp-Ripper)
 
 ## Change Log
 v0.3
