@@ -12,6 +12,8 @@ You can convert files from formats **Aiff, Ape, Avi, Flac, M4a, Mp3, Mp4, Ogg, W
 This application is under GPL version 3 licence. 
 For more informations check the LICENSE file in your installation folder or the [gnu website](http://www.gnu.org/licenses/gpl.html).
 
+You can download it here: [http://tichau.github.io/FileConverter](http://tichau.github.io/FileConverter).
+
 ## Input file post conversion actions
 
 This actions allow you to chose what you want to do with your input files if the conversion succeed.
