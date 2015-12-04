@@ -28,6 +28,8 @@ namespace FileConverter
 
     public partial class Application : System.Windows.Application
     {
+        private int numberOfConversionThread = 1;
+
         private static readonly Version Version = new Version()
                                             {
                                                 Major = 0, 
@@ -92,6 +94,9 @@ namespace FileConverter
         
         private void Initialize()
         {
+            Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", Environment.ProcessorCount);
+            this.numberOfConversionThread = Environment.ProcessorCount;
+
             // Load settigns.
             Debug.Log("Load settings...");
             this.Settings = new Settings();
@@ -118,13 +123,21 @@ namespace FileConverter
                 args[6] = @"D:\Test\Track03.mp3";
                 args[7] = @"D:\Test\Track04.mp3";
 
-                //System.Array.Resize(ref args, 2);
-                //args[1] = "--settings";
+                System.Array.Resize(ref args, 2);
+                args[1] = "--settings";
 
                 //System.Array.Resize(ref args, 4);
                 //args[1] = "--conversion-preset";
                 //args[2] = "To Ogg";
                 //args[3] = "--verbose";
+
+                System.Array.Resize(ref args, 6);
+                args[1] = "--conversion-preset";
+                args[2] = "Extract CDA To Ogg";
+                args[3] = "--verbose";
+
+                args[4] = @"E:\Track01.cda";
+                args[5] = @"E:\Track02.cda";
             }
 #endif
 
@@ -235,27 +248,40 @@ namespace FileConverter
 
         private void ConvertFiles()
         {
-            for (int index = 0; index < this.conversionJobs.Count; index++)
+            Thread[] jobThreads = new Thread[this.numberOfConversionThread];
+
+            // TODO: add dependency between conversion jobs.
+
+            for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
             {
-                ConversionJob conversionJob = this.conversionJobs[index];
+                ConversionJob conversionJob = this.conversionJobs[jobIndex];
                 if (conversionJob.State != ConversionJob.ConversionState.Ready)
                 {
                     continue;
                 }
 
-                conversionJob.StartConvertion();
+                Thread jobThread = null;
+                while (jobThread == null)
+                {
+                    for (int threadIndex = 0; threadIndex < jobThreads.Length; threadIndex++)
+                    {
+                        Thread thread = jobThreads[threadIndex];
+                        if (thread == null || !thread.IsAlive)
+                        {
+                            jobThread = new Thread(this.ExecuteConversionJob);
+                            jobThreads[threadIndex] = jobThread;
+                            break;
+                        }
+                    }
 
-                if (System.IO.File.Exists(conversionJob.OutputFilePath))
-                {
-                    Debug.Log("Success!");
+                    if (jobThread == null)
+                    {
+                        Thread.Sleep(50);
+                    }
                 }
-                else
-                {
-                    Debug.Log("Fail!");
-                }
+
+                jobThread.Start(conversionJob);
             }
-
-            Debug.Log("End of job queue.");
 
 #if !DEBUG
             bool allConversionsSucceed = true;
@@ -266,7 +292,6 @@ namespace FileConverter
 
             if (allConversionsSucceed)
             {
-                Debug.Log("All conversions succeed.");
                 System.Threading.Thread.Sleep(3000);
 
                 if (this.cancelAutoExit)
@@ -277,6 +302,32 @@ namespace FileConverter
                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
             }
 #endif
+        }
+
+        private void ExecuteConversionJob(object parameter)
+        {
+            ConversionJob conversionJob = parameter as ConversionJob;
+            if (conversionJob == null)
+            {
+                throw new System.ArgumentException("The parameter must be a conversion job.", "parameter");
+            }
+
+            if (conversionJob.State != ConversionJob.ConversionState.Ready)
+            {
+                Debug.LogError("Fail to execute conversion job.");
+                return;
+            }
+
+            conversionJob.StartConvertion();
+
+            if (System.IO.File.Exists(conversionJob.OutputFilePath))
+            {
+                Debug.Log("Conversion job succeed.");
+            }
+            else
+            {
+                Debug.Log("Conversion job failed.");
+            }
         }
     }
 }
