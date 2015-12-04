@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileConverter.Windows"
         xmlns:fileConverter="clr-namespace:FileConverter"
+        xmlns:diagnostics="clr-namespace:FileConverter.Diagnostics"
         mc:Ignorable="d"
         Title="Diagnostics" Height="600" Width="800" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
     <Grid>
@@ -13,8 +14,20 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label  Grid.Row="0" Content="Logs" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" />
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-            <TextBlock Name="Diagnostics" TextWrapping="NoWrap" Text="{Binding Path=(fileConverter:Diagnostics.Content), Mode=OneWay}" FontFamily="Consolas" Foreground="#FF272727"/>
-        </ScrollViewer>
+
+        <TabControl Grid.Row="1" Margin="5" ItemsSource="{Binding Path=(diagnostics:Debug.Data), Mode=OneWay}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+                        <TextBlock Name="Diagnostics" TextWrapping="NoWrap" Text="{Binding Content}" FontFamily="Consolas" Foreground="#FF272727" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"/>
+                    </ScrollViewer>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
     </Grid>
 </Window>

@@ -11,6 +11,8 @@ namespace FileConverter.ConversionJobs
     using WaveLib;
     using Yeti.MMedia;
 
+    using FileConverter.Diagnostics;
+
     public class ConversionJob_ExtractCDA : ConversionJob
     {
         private Ripper.CDDrive cdDrive;
@@ -112,7 +114,7 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("The conversion preset must be valid.");
             }
 
-            Diagnostics.Log("Starting CDA extraction.");
+            Debug.Log("Starting CDA extraction.");
 
             this.UserState = "Extraction";
 
@@ -154,9 +156,9 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            Diagnostics.Log("CDA extracted to {0}.", this.intermediateFilePath);
-            Diagnostics.Log(string.Empty);
-            Diagnostics.Log("Start compression.");
+            Debug.Log("CDA extracted to {0}.", this.intermediateFilePath);
+            Debug.Log(string.Empty);
+            Debug.Log("Start compression.");
 
             this.UserState = "Conversion";
 
@@ -174,8 +176,8 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            Diagnostics.Log(string.Empty);
-            Diagnostics.Log("Delete intermediate file {0}.", this.intermediateFilePath);
+            Debug.Log(string.Empty);
+            Debug.Log("Delete intermediate file {0}.", this.intermediateFilePath);
 
             File.Delete(this.intermediateFilePath);
         }

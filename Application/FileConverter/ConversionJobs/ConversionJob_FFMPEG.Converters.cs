@@ -100,7 +100,7 @@ namespace FileConverter.ConversionJobs
                     return -2;
             }
 
-            throw new Exception("Unknown VBR bitrate.");
+            throw new Exception("Unknown Ogg VBR bitrate.");
         }
 
         /// <summary>

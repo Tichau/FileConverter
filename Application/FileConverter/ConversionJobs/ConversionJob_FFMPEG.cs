@@ -7,6 +7,8 @@ namespace FileConverter.ConversionJobs
     using System.IO;
     using System.Text.RegularExpressions;
 
+    using FileConverter.Diagnostics;
+
     public partial class ConversionJob_FFMPEG : ConversionJob
     {
         private readonly Regex durationRegex = new Regex(@"Duration:\s*([0-9][0-9]):([0-9][0-9]):([0-9][0-9])\.([0-9][0-9]),.*bitrate:\s*([0-9]+) kb\/s");
@@ -41,7 +43,7 @@ namespace FileConverter.ConversionJobs
             if (!System.IO.File.Exists(ffmpegPath))
             {
                 this.ConversionFailed("Can't find ffmpeg executable. You should try to reinstall the application.");
-                Diagnostics.Log("Can't find ffmpeg executable ({0}). Try to reinstall the application.", ffmpegPath);
+                Diagnostics.Debug.Log("Can't find ffmpeg executable ({0}). Try to reinstall the application.", ffmpegPath);
                 return;
             }
 
@@ -166,8 +168,8 @@ namespace FileConverter.ConversionJobs
 
             this.UserState = "Conversion";
 
-            Diagnostics.Log("Execute command: {0} {1}.", this.ffmpegProcessStartInfo.FileName, this.ffmpegProcessStartInfo.Arguments);
-            Diagnostics.Log(string.Empty);
+            Diagnostics.Debug.Log("Execute command: {0} {1}.", this.ffmpegProcessStartInfo.FileName, this.ffmpegProcessStartInfo.Arguments);
+            Diagnostics.Debug.Log(string.Empty);
 
             try
             {
@@ -181,7 +183,7 @@ namespace FileConverter.ConversionJobs
 
                             this.ParseFFMPEGOutput(result);
 
-                            Diagnostics.Log("ffmpeg output: {0}", result);
+                            Diagnostics.Debug.Log("ffmpeg output: {0}", result);
                         }
                     }
 

@@ -14,8 +14,10 @@ namespace FileConverter
     using System.Security.Principal;
     using System.Windows;
 
-    using FileConverter.Annotations;
     using Microsoft.Win32;
+
+    using FileConverter.Annotations;
+    using FileConverter.Diagnostics;
 
     public class Settings : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -122,7 +124,7 @@ namespace FileConverter
                 }
                 else
                 {
-                    Diagnostics.Log("Default settings not found. You should try to reinstall the application.");
+                    Diagnostics.Debug.Log("Default settings not found. You should try to reinstall the application.");
                 }
             }
         }
@@ -220,7 +222,7 @@ namespace FileConverter
                 }
                 catch (Exception exception)
                 {
-                    Diagnostics.Log(exception.Message);
+                    Diagnostics.Debug.Log(exception.Message);
                 }
 
                 if (subKey == null)
@@ -273,28 +275,14 @@ namespace FileConverter
 
         private static string GetUserSettingsFilePath()
         {
-            string path = Environment.GetEnvironmentVariable("LocalAppData");
-            path = Path.Combine(path, "FileConverter");
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
+            string path = PathHelpers.GetUserDataFolderPath();
             path = Path.Combine(path, "Settings.user.xml");
             return path;
         }
 
         private static string GetUserSettingsTemporaryFilePath()
         {
-            string path = Environment.GetEnvironmentVariable("LocalAppData");
-            path = Path.Combine(path, "FileConverter");
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
+            string path = PathHelpers.GetUserDataFolderPath();
             path = Path.Combine(path, "Settings.temp.xml");
             return path;
         }

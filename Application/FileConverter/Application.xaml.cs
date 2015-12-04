@@ -13,6 +13,8 @@
     You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System.Diagnostics;
+
 namespace FileConverter
 {
     using System;
@@ -22,6 +24,7 @@ namespace FileConverter
     using System.Windows;
 
     using FileConverter.ConversionJobs;
+    using FileConverter.Diagnostics;
 
     public partial class Application : System.Windows.Application
     {
@@ -90,36 +93,48 @@ namespace FileConverter
         private void Initialize()
         {
             // Load settigns.
-            Diagnostics.Log("Retrieve arguments...");
+            Debug.Log("Load settings...");
             this.Settings = new Settings();
             this.Settings.Load();
 
             // Retrieve arguments.
-            Diagnostics.Log("Retrieve arguments...");
+            Debug.Log("Retrieve arguments...");
             string[] args = Environment.GetCommandLineArgs();
 
 #if (DEBUG)
             if (args.Length <= 1)
             {
                 this.debugMode = true;
-                System.Array.Resize(ref args, 5);
+                System.Array.Resize(ref args, 8);
                 args[1] = "--conversion-preset";
-                args[2] = "To Mp3";
+                args[2] = "To Ogg";
                 args[3] = "--verbose";
-                args[4] = @"D:\Test\10 - Get around town (lp version).ogg";
+                
+                args[4] = @"D:\Test\TrailerV2 compressed.mkv";
+                args[4] = @"D:\Test\image.png";
+                args[4] = @"E:\Track01.cda";
+                args[4] = @"D:\Test\Track01.mp3";
+                args[5] = @"D:\Test\Track02.mp3";
+                args[6] = @"D:\Test\Track03.mp3";
+                args[7] = @"D:\Test\Track04.mp3";
 
-                System.Array.Resize(ref args, 2);
-                args[1] = "--settings";
+                //System.Array.Resize(ref args, 2);
+                //args[1] = "--settings";
+
+                //System.Array.Resize(ref args, 4);
+                //args[1] = "--conversion-preset";
+                //args[2] = "To Ogg";
+                //args[3] = "--verbose";
             }
 #endif
 
             for (int index = 0; index < args.Length; index++)
             {
                 string argument = args[index];
-                Diagnostics.Log("Arg{0}: {1}", index, argument);
+                Debug.Log("Arg{0}: {1}", index, argument);
             }
 
-            Diagnostics.Log(string.Empty);
+            Debug.Log(string.Empty);
 
             ConversionPreset conversionPreset = null;
             List<string> filePaths = new List<string>();
@@ -147,15 +162,15 @@ namespace FileConverter
                         case "conversion-preset":
                             if (index >= args.Length - 1)
                             {
-                                MessageBox.Show(string.Format("Invalid format. (code 0x01)"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                Debug.LogError("Invalid format. (code 0x01)");
                                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                                 return;
                             }
 
-                            conversionPreset = Settings.GetPresetFromName(args[index + 1]);
+                            conversionPreset = this.Settings.GetPresetFromName(args[index + 1]);
                             if (conversionPreset == null)
                             {
-                                MessageBox.Show(string.Format("Invalid conversion preset '{0}'. (code 0x02)", args[index + 1]), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                Debug.LogError("Invalid conversion preset '{0}'. (code 0x02)", args[index + 1]);
                                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                                 return;
                             }
@@ -171,7 +186,7 @@ namespace FileConverter
                             break;
 
                         default:
-                            Diagnostics.Log("ERROR ! Unknown option {0}.", parameterTitle);
+                            Debug.LogError("Unknown option {0}.", parameterTitle);
                             return;
                     }
                 }
@@ -183,21 +198,39 @@ namespace FileConverter
 
             if (conversionPreset == null)
             {
-                Diagnostics.Log("ERROR ! Can't retrieve the conversion preset from arguments.");
+                Debug.LogError("Can't retrieve the conversion preset from arguments.");
                 return;
             }
 
             // Create convertion jobs.
-            for (int index = 0; index < filePaths.Count; index++)
+            Debug.Log("Create jobs for conversion preset: '{0}'", conversionPreset.Name);
+            try
             {
-                string inputFilePath = filePaths[index];
-                ConversionJob conversionJob = ConversionJobFactory.Create(conversionPreset);
-                conversionJob.PrepareConversion(inputFilePath);
+                for (int index = 0; index < filePaths.Count; index++)
+                {
+                    string inputFilePath = filePaths[index];
+                    ConversionJob conversionJob = ConversionJobFactory.Create(conversionPreset, inputFilePath);
+                    conversionJob.PrepareConversion(inputFilePath);
 
-                this.conversionJobs.Add(conversionJob);
+                    this.conversionJobs.Add(conversionJob);
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError(exception.Message);
+                throw;
             }
 
             this.initialized = true;
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+
+            Debug.Log("Exit application.");
+
+            Debug.Release();
         }
 
         private void ConvertFiles()
@@ -214,15 +247,15 @@ namespace FileConverter
 
                 if (System.IO.File.Exists(conversionJob.OutputFilePath))
                 {
-                    Diagnostics.Log("Success!");
+                    Debug.Log("Success!");
                 }
                 else
                 {
-                    Diagnostics.Log("Fail!");
+                    Debug.Log("Fail!");
                 }
             }
 
-            Diagnostics.Log("End of job queue.");
+            Debug.Log("End of job queue.");
 
 #if !DEBUG
             bool allConversionsSucceed = true;
@@ -233,6 +266,7 @@ namespace FileConverter
 
             if (allConversionsSucceed)
             {
+                Debug.Log("All conversions succeed.");
                 System.Threading.Thread.Sleep(3000);
 
                 if (this.cancelAutoExit)

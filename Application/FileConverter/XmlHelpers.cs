@@ -52,7 +52,7 @@ namespace FileConverter
             }
             catch (System.Exception exception)
             {
-                Diagnostics.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
+                Diagnostics.Debug.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
             }
         }
 
@@ -90,7 +90,7 @@ namespace FileConverter
             }
             catch (System.Exception exception)
             {
-                Diagnostics.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
+                Diagnostics.Debug.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
             }
         }
     }

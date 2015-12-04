@@ -135,6 +135,19 @@ namespace FileConverter
             }
         }
 
+        public static string GetUserDataFolderPath()
+        {
+            string path = System.Environment.GetEnvironmentVariable("LocalAppData");
+            path = System.IO.Path.Combine(path, "FileConverter");
+
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+
+            return path;
+        }
+
         public static class InputCategoryNames
         {
             public const string Audio = "Audio";

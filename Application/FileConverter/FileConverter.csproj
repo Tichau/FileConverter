@@ -89,6 +89,7 @@
     <Compile Include="ConversionJobs\ConversionJob_FFMPEG.cs" />
     <Compile Include="ConversionPreset\ConversionSettingsOverride.cs" />
     <Compile Include="ConversionPreset\ConversionSettings.cs" />
+    <Compile Include="Diagnostics\DiagnosticsData.cs" />
     <Compile Include="EncodingMode.cs" />
     <Compile Include="ConversionPreset\IConversionSettings.cs" />
     <Compile Include="InputPostConversionAction.cs" />
@@ -143,7 +144,7 @@
     </Compile>
     <Compile Include="ValueConverters\ConversionStateToBrush.cs" />
     <Compile Include="ConversionJobs\ConversionJob.cs" />
-    <Compile Include="Diagnostics.cs" />
+    <Compile Include="Diagnostics\Debug.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
