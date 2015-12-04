@@ -46,9 +46,9 @@ namespace FileConverter.Diagnostics
             get
             {
                 this.stringBuilder.Clear();
-                foreach (string logMessage in this.LogMessages)
+                for (int index = 0; index < this.LogMessages.Count; index++)
                 {
-                    this.stringBuilder.AppendLine(logMessage);
+                    this.stringBuilder.AppendLine(this.LogMessages[index]);
                 }
 
                 return this.stringBuilder.ToString();

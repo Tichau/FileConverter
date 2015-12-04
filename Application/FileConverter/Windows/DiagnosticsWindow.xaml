@@ -24,7 +24,7 @@
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                        <TextBlock Name="Diagnostics" TextWrapping="NoWrap" Text="{Binding Content}" FontFamily="Consolas" Foreground="#FF272727" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"/>
+                        <TextBlock Name="Diagnostics" TextWrapping="NoWrap" Text="{Binding Content}" FontFamily="Consolas" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False"/>
                     </ScrollViewer>
                 </DataTemplate>
             </TabControl.ContentTemplate>
