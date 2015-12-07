@@ -38,6 +38,11 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        public override bool CanStartConversion(ConversionFlags conversionFlags)
+        {
+            return (conversionFlags & ConversionFlags.CdaExtraction) == 0;
+        }
+
         protected override void Initialize()
         {
             base.Initialize();
@@ -105,6 +110,8 @@ namespace FileConverter.ConversionJobs
             this.compressionConversionJob = ConversionJobFactory.Create(this.ConversionPreset, this.intermediateFilePath);
             this.compressionConversionJob.PrepareConversion(this.intermediateFilePath, this.OutputFilePath);
             this.compressionThread = new Thread(this.CompressAsync);
+
+            this.StateFlags = ConversionFlags.CdaExtraction;
         }
 
         protected override void Convert()
@@ -149,6 +156,8 @@ namespace FileConverter.ConversionJobs
             this.cdDrive.UnLockCD();
 
             this.cdDrive.Close();
+
+            this.StateFlags = ConversionFlags.None;
 
             if (!File.Exists(this.intermediateFilePath))
             {

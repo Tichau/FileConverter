@@ -249,38 +249,59 @@ namespace FileConverter
         private void ConvertFiles()
         {
             Thread[] jobThreads = new Thread[this.numberOfConversionThread];
-
-            // TODO: add dependency between conversion jobs.
-
-            for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
+            
+            while (true)
             {
-                ConversionJob conversionJob = this.conversionJobs[jobIndex];
-                if (conversionJob.State != ConversionJob.ConversionState.Ready)
+                // Compute conversion flags.
+                ConversionFlags conversionFlags = ConversionFlags.None;
+                bool allJobAreFinished = true;
+                for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
                 {
-                    continue;
+                    ConversionJob conversionJob = this.conversionJobs[jobIndex];
+                    allJobAreFinished &= !(conversionJob.State == ConversionJob.ConversionState.Ready ||
+                                         conversionJob.State == ConversionJob.ConversionState.InProgress);
+
+                    if (conversionJob.State == ConversionJob.ConversionState.InProgress)
+                    {
+                        conversionFlags |= conversionJob.StateFlags;
+                    }
                 }
 
-                Thread jobThread = null;
-                while (jobThread == null)
+                if (allJobAreFinished)
                 {
-                    for (int threadIndex = 0; threadIndex < jobThreads.Length; threadIndex++)
+                    break;
+                }
+
+                // Start job if possible.
+                for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
+                {
+                    ConversionJob conversionJob = this.conversionJobs[jobIndex];
+                    if (conversionJob.State == ConversionJob.ConversionState.Ready &&
+                        conversionJob.CanStartConversion(conversionFlags))
                     {
-                        Thread thread = jobThreads[threadIndex];
-                        if (thread == null || !thread.IsAlive)
+                        // Find a thread to execute the job.
+                        Thread jobThread = null;
+                        for (int threadIndex = 0; threadIndex < jobThreads.Length; threadIndex++)
                         {
-                            jobThread = new Thread(this.ExecuteConversionJob);
-                            jobThreads[threadIndex] = jobThread;
-                            break;
+                            Thread thread = jobThreads[threadIndex];
+                            if (thread == null || !thread.IsAlive)
+                            {
+                                jobThread = new Thread(this.ExecuteConversionJob);
+                                jobThreads[threadIndex] = jobThread;
+                                break;
+                            }
                         }
-                    }
 
-                    if (jobThread == null)
-                    {
-                        Thread.Sleep(50);
+                        if (jobThread != null)
+                        {
+                            jobThread.Start(conversionJob);
+                        }
+
+                        break;
                     }
                 }
 
-                jobThread.Start(conversionJob);
+                Thread.Sleep(50);
             }
 
 #if !DEBUG

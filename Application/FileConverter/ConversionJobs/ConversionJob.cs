@@ -120,6 +120,12 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        public ConversionFlags StateFlags
+        {
+            get;
+            protected set;
+        }
+
         protected virtual InputPostConversionAction InputPostConversionAction
         {
             get
@@ -131,6 +137,11 @@ namespace FileConverter.ConversionJobs
 
                 return this.ConversionPreset.InputPostConversionAction;
             }
+        }
+
+        public virtual bool CanStartConversion(ConversionFlags conversionFlags)
+        {
+            return true;
         }
 
         public void PrepareConversion(string inputFilePath, string outputFilePath = null)
