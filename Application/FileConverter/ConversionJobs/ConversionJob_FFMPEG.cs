@@ -7,7 +7,7 @@ namespace FileConverter.ConversionJobs
     using System.IO;
     using System.Text.RegularExpressions;
 
-    using FileConverter.Diagnostics;
+    using FileConverter.Controls;
 
     public partial class ConversionJob_FFMPEG : ConversionJob
     {

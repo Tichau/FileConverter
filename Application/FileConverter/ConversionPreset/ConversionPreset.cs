@@ -10,6 +10,7 @@ namespace FileConverter
     using System.Xml.Serialization;
 
     using FileConverter.Annotations;
+    using FileConverter.Controls;
     using FileConverter.ValueConverters;
 
     [XmlRoot]
