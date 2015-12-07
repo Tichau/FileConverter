@@ -1,5 +1,7 @@
 ﻿// <copyright file="Diagnostics.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
+using System.Linq;
+
 namespace FileConverter.Diagnostics
 {
     using System;
@@ -12,7 +14,6 @@ namespace FileConverter.Diagnostics
 
     public static class Debug
     {
-        private static StringBuilder workingStringBuilder = new StringBuilder();
         private static string diagnosticsFolderPath;
         private static Dictionary<int, DiagnosticsData> diagnosticsDataById = new Dictionary<int, DiagnosticsData>();
         private static int threadCount = 0;
@@ -41,32 +42,11 @@ namespace FileConverter.Diagnostics
             Directory.CreateDirectory(Debug.diagnosticsFolderPath);
         }
 
-        public static IEnumerable<DiagnosticsData> Data
+        public static DiagnosticsData[] Data
         {
             get
             {
-                return Debug.diagnosticsDataById.Values;
-            }
-        }
-
-        public static string Content
-        {
-            get
-            {
-                DiagnosticsData diagnosticsData;
-                int threadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
-                if (!Debug.diagnosticsDataById.TryGetValue(threadId, out diagnosticsData))
-                {
-                    return string.Empty;
-                }
-
-                workingStringBuilder.Clear();
-                foreach (string logMessage in diagnosticsData.LogMessages)
-                {
-                    workingStringBuilder.AppendLine(logMessage);
-                }
-
-                return workingStringBuilder.ToString();
+                return Debug.diagnosticsDataById.Values.ToArray();
             }
         }
 
@@ -83,15 +63,12 @@ namespace FileConverter.Diagnostics
                     diagnosticsData.Initialize(Debug.diagnosticsFolderPath, threadId);
                     Debug.diagnosticsDataById.Add(threadId, diagnosticsData);
                     Debug.threadCount++;
+
+                    StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs("Data"));
                 }
             }
 
             diagnosticsData.Log(message, arguments);
-            
-            if (StaticPropertyChanged != null)
-            {
-                StaticPropertyChanged(null, new PropertyChangedEventArgs("Content"));
-            }
         }
 
         public static void LogError(string message, params object[] arguments)
