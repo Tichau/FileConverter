@@ -112,16 +112,19 @@
 
         <DataTemplate x:Key="MkvSettingsDataTemplate">
             <StackPanel>
-                <Label Content="Video" FontWeight="Bold" />
                 <DockPanel>
-                    <Label Content="Quality :" />
+                    <Label Content="Video" FontWeight="Bold" />
+                    <Label Content="(H.264)" FontWeight="Light" Foreground="#004B82" />
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Quality :" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}"/>
                     <Slider x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=23}"
                             Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="23" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="3" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
                 </DockPanel>
                 <Label Content="Recommended quality range in blue" Foreground="#E5004B82" FontSize="11" />
 
                 <DockPanel>
-                    <Label Content="Encoding speed :" />
+                    <Label Content="Encoding speed :" ToolTip="{x:Static project:Resources.VideoEncodingSpeedTooltip}" />
                     <ComboBox SelectedValue="{Binding SelectedPreset.Settings, ConverterParameter=VideoEncodingSpeed|System.String, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=veryslow}">
                         <System:String>Ultra Fast</System:String>
                         <System:String>Super Fast</System:String>
@@ -135,7 +138,10 @@
                     </ComboBox>
                 </DockPanel>
 
-                <Label Content="Audio" FontWeight="Bold" />
+                <DockPanel>
+                    <Label Content="Audio" FontWeight="Bold" />
+                    <Label Content="(AAC)" FontWeight="Light" Foreground="#004B82" />
+                </DockPanel>
                 <DockPanel>
                     <Label Content="Quality :" />
                     <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="AacVBR" 
@@ -197,7 +203,7 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="122"/>
+                <ColumnDefinition Width="130"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 

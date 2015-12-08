@@ -90,5 +90,23 @@ namespace FileConverter.Properties {
                 return ResourceManager.GetString("OutputFilePathTemplateHelp", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Define the ratio &apos;file size&apos; versus &apos;video quality&apos;. A lower value will give you a smaller file, a greater value give you a better video quality..
+        /// </summary>
+        public static string VideoEncodingQualityTooltip {
+            get {
+                return ResourceManager.GetString("VideoEncodingQualityTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Define the ratio &apos;file size&apos; versus &apos;compression duration&apos;. A slow compression will give you a smaller file (for the same video quality) than a faster compression..
+        /// </summary>
+        public static string VideoEncodingSpeedTooltip {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedTooltip", resourceCulture);
+            }
+        }
     }
 }

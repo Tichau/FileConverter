@@ -136,4 +136,10 @@ Special paths:
 (p:v): my videos path
 (p:p): my pictures path</value>
   </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</value>
+  </data>
 </root>
