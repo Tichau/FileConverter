@@ -61,7 +61,7 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Data\MyFolder\Default.wav.
+        ///   Looks up a localized string similar to C:\Music\Artist\Album\Song.wav.
         /// </summary>
         public static string OuputFileNameTemplateSample {
             get {
@@ -77,7 +77,13 @@ namespace FileConverter.Properties {
         ///(d0): input parent folder
         ///(d1): input sub parent folder
         ///...
-        ///use maj for uppercase version.
+        ///use maj for uppercase version
+        ///
+        ///Special paths:
+        ///(p:d): my documents path
+        ///(p:m): my music path
+        ///(p:v): my videos path
+        ///(p:p): my pictures path.
         /// </summary>
         public static string OutputFilePathTemplateHelp {
             get {

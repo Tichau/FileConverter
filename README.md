@@ -32,6 +32,10 @@ You have access to the following informations:
 Pattern	| Description					| Example (with input path: *C:\Music\Artist\Album\Song.wav*)
 --------|-------------------------------|-----------------------------------------------------------------
 (p)   	| Input file path				| C:\Music\Artist\Album\
+(p:d) 	| My documents folder path		| C:\Users\UserName\Documents\
+(p:m)	| My music folder path			| C:\Users\UserName\Music\
+(p:v)	| My videos folder path			| C:\Users\UserName\Videos\
+(p:p)	| My pictures path				| C:\Users\UserName\Pictures\
 (f)  	| Input file name				| Song
 (o)		| Output file format			| mp3
 (i)		| Input file format				| wav
@@ -59,6 +63,12 @@ File path customization:
 	Input: C:\Music\Artist\Album\Song.wav
 	Template: D:\(o)\(d1)\(f)
 	Generated output: D:\mp3\Artist\Song.mp3
+
+CDA extraction:
+		
+	Input: E:\Track01.cda
+	Template: (p:m)CDA Extraction\(f)
+	Generated output: C:\Users\UserName\Music\CDA Extraction\Track01.mp3
 	
 ## Thanks
 
