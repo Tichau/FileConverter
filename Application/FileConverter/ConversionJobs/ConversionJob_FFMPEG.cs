@@ -74,6 +74,14 @@ namespace FileConverter.ConversionJobs
 
                     break;
 
+                case OutputType.Ico:
+                    {
+                        string encoderArgs = string.Empty;
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
+                    break;
+
                 case OutputType.Mp3:
                     {
                         string encoderArgs = string.Empty;
@@ -195,6 +203,8 @@ namespace FileConverter.ConversionJobs
                 this.ConversionFailed("Failed to launch FFMPEG process.");
                 throw;
             }
+
+            Diagnostics.Debug.Log("");
         }
 
         private void ParseFFMPEGOutput(string input)
@@ -228,7 +238,7 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            if (input.Contains("Exiting."))
+            if (input.Contains("Exiting.") || input.Contains("Error") || input.Contains("Unsupported dimensions") || input.Contains("No such file or directory"))
             {
                 this.ConversionFailed(input);
             }

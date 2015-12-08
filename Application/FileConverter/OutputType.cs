@@ -8,6 +8,7 @@ namespace FileConverter
 
         Aac,
         Flac,
+        Ico,
         Jpg,
         Mkv,
         Mp3,

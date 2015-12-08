@@ -89,6 +89,7 @@ namespace FileConverter
                     return InputCategoryNames.Audio;
 
                 case "avi":
+                case "bik":
                 case "flv":
                 case "mp4":
                 case "mov":
@@ -96,6 +97,7 @@ namespace FileConverter
                     return InputCategoryNames.Video;
 
                 case "bmp":
+                case "ico":
                 case "jpg":
                 case "jpeg":
                 case "png":
@@ -125,7 +127,8 @@ namespace FileConverter
 
                 case OutputType.Mkv:
                     return category == InputCategoryNames.Video;
-
+                    
+                case OutputType.Ico:
                 case OutputType.Png:
                 case OutputType.Jpg:
                     return category == InputCategoryNames.Image;

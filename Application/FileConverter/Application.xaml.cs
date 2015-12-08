@@ -341,13 +341,13 @@ namespace FileConverter
 
             conversionJob.StartConvertion();
 
-            if (System.IO.File.Exists(conversionJob.OutputFilePath))
+            if (conversionJob.State == ConversionJob.ConversionState.Done && !System.IO.File.Exists(conversionJob.OutputFilePath))
             {
-                Debug.Log("Conversion job succeed.");
+                Debug.LogError("Can't find the output file.");
             }
-            else
+            else if (conversionJob.State == ConversionJob.ConversionState.Failed && System.IO.File.Exists(conversionJob.OutputFilePath))
             {
-                Debug.Log("Conversion job failed.");
+                Debug.Log("The conversion job failed but there is an output file that does exists.");
             }
         }
     }

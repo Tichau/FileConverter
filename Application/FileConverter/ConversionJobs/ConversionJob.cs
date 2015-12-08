@@ -255,7 +255,11 @@ namespace FileConverter.ConversionJobs
             
             this.Convert();
 
-            if (this.State != ConversionState.Failed)
+            if (this.State == ConversionState.Failed)
+            {
+                this.OnConversionFailed();
+            }
+            else
             {
                 this.OnConversionSucceed();
             }
@@ -267,6 +271,16 @@ namespace FileConverter.ConversionJobs
 
         protected virtual void Initialize()
         {
+        }
+
+        protected virtual void OnConversionFailed()
+        {
+            Debug.Log("Conversion Failed.");
+
+            if (System.IO.File.Exists(this.OutputFilePath))
+            {
+                System.IO.File.Delete(this.OutputFilePath);
+            }
         }
 
         protected virtual void OnConversionSucceed()
@@ -309,6 +323,12 @@ namespace FileConverter.ConversionJobs
 
         protected void ConversionFailed(string exitingMessage)
         {
+            if (this.State == ConversionState.Failed)
+            {
+                // Already failed, don't override informations.
+                return;    
+            }
+
             this.State = ConversionState.Failed;
             this.UserState = "Failed";
             this.ErrorMessage = exitingMessage;
