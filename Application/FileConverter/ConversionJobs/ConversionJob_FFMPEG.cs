@@ -69,7 +69,9 @@ namespace FileConverter.ConversionJobs
 
                 case OutputType.Flac:
                     {
-                        arguments = string.Format("-n -stats -i \"{0}\" \"{1}\"", this.InputFilePath, this.OutputFilePath);
+                        // http://taer-naguur.blogspot.fr/2013/11/flac-audio-encoding-with-ffmpeg.html
+                        string encoderArgs = string.Format("-compression_level 12");
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
 
                     break;

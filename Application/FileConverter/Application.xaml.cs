@@ -125,11 +125,11 @@ namespace FileConverter
                 System.Array.Resize(ref args, 2);
                 args[1] = "--settings";
 
-                //System.Array.Resize(ref args, 5);
-                //args[1] = "--conversion-preset";
-                //args[2] = "To Png";
-                //args[3] = "--verbose";
-                //args[4] = @"D:\Test\ApplicationIcon.ico";
+                System.Array.Resize(ref args, 5);
+                args[1] = "--conversion-preset";
+                args[2] = "To Flac";
+                args[3] = "--verbose";
+                args[4] = @"D:\Test\02 - Corn on the Cob.mp3";
 
                 //System.Array.Resize(ref args, 6);
                 //args[1] = "--conversion-preset";
