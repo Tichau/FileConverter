@@ -10,11 +10,16 @@ namespace FileConverter
 
     public class XmlHelpers
     {
-        public static void LoadFromFile<T>(string root, string path, ref ICollection<T> collection)
+        public static void LoadFromFile<T>(string root, string path, ref T deserializedObject)
         {
             if (string.IsNullOrEmpty(path))
             {
                 throw new ArgumentNullException("path");
+            }
+
+            if (deserializedObject == null)
+            {
+                throw new ArgumentNullException("deserializedObject");
             }
 
             XmlRootAttribute xmlRoot = new XmlRootAttribute
@@ -22,7 +27,7 @@ namespace FileConverter
                 ElementName = root
             };
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<T>), xmlRoot);
+            XmlSerializer serializer = new XmlSerializer(typeof(T), xmlRoot);
 
             try
             {
@@ -30,48 +35,46 @@ namespace FileConverter
                 {
                     XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
                     {
-                        IgnoreWhitespace = true, IgnoreComments = true
+                        IgnoreWhitespace = true,
+                        IgnoreComments = true
                     };
 
                     using (XmlReader xmlReader = XmlReader.Create(reader, xmlReaderSettings))
                     {
-                        List<T> elements = (List<T>)serializer.Deserialize(xmlReader);
-                        for (int index = 0; index < elements.Count; index++)
-                        {
-                            T item = elements[index];
-
-                            if (item is IXmlSerializable)
-                            {
-                                (item as IXmlSerializable).OnDeserializationComplete();
-                            }
-
-                            collection.Add(item);
-                        }
+                        deserializedObject = (T)serializer.Deserialize(xmlReader);
                     }
                 }
             }
             catch (System.Exception exception)
             {
-                Diagnostics.Debug.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
+                Diagnostics.Debug.LogError("Fail to load asset of type '" + typeof(T) + "'. The following exception was raised:\n " + exception.Message);
+            }
+
+            IXmlSerializable xmlSerializableObject = deserializedObject as IXmlSerializable;
+            if (xmlSerializableObject != null)
+            {
+                xmlSerializableObject.OnDeserializationComplete();
             }
         }
-
-        public static void SaveToFile<T>(string root, string path, ICollection<T> objectsToSerialize)
+        
+        public static void SaveToFile<T>(string root, string path, T objectToSerialize)
         {
             if (string.IsNullOrEmpty(path))
             {
-                return;
+                throw new ArgumentNullException("path");
             }
 
-            List<T> list = new List<T>();
-            list.AddRange(objectsToSerialize);
-
+            if (objectToSerialize == null)
+            {
+                throw new ArgumentNullException("objectToSerialize");
+            }
+            
             XmlRootAttribute xmlRoot = new XmlRootAttribute
             {
                 ElementName = root
             };
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<T>), xmlRoot);
+            XmlSerializer serializer = new XmlSerializer(typeof(T), xmlRoot);
 
             try
             {
@@ -79,18 +82,19 @@ namespace FileConverter
                 {
                     XmlWriterSettings xmlWriterSettings = new XmlWriterSettings
                     {
-                        Indent = true, IndentChars = "    "
+                        Indent = true,
+                        IndentChars = "    "
                     };
 
                     using (XmlWriter xmlWriter = XmlWriter.Create(writer, xmlWriterSettings))
                     {
-                        serializer.Serialize(xmlWriter, list);
+                        serializer.Serialize(xmlWriter, objectToSerialize);
                     }
                 }
             }
             catch (System.Exception exception)
             {
-                Diagnostics.Debug.Log("The database of type '" + typeof(T) + "' failed to load the asset. The following exception was raised:\n " + exception.Message);
+                Diagnostics.Debug.LogError("Fail to save asset of type '" + typeof(T) + "'. The following exception was raised:\n " + exception.Message);
             }
         }
     }

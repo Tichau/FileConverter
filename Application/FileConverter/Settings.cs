@@ -12,27 +12,22 @@ namespace FileConverter
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Security.Principal;
+    using System.Xml.Serialization;
     using System.Windows;
 
     using Microsoft.Win32;
 
     using FileConverter.Annotations;
-    using FileConverter.Diagnostics;
 
-    public class Settings : INotifyPropertyChanged, IDataErrorInfo
+    [XmlRoot]
+    [XmlType]
+    public partial class Settings : INotifyPropertyChanged, IDataErrorInfo
     {
         private const char PresetSeparator = ';';
 
-        private ObservableCollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<ConversionPreset> ConversionPresets
-        {
-            get { return this.conversionPresets; }
-            set { this.conversionPresets = value; }
-        }
-        
+        [XmlIgnore]
         public string Error
         {
             get
@@ -58,6 +53,7 @@ namespace FileConverter
             }
         }
 
+        [XmlIgnore]
         public string this[string columnName]
         {
             get
@@ -75,18 +71,18 @@ namespace FileConverter
                 return;
             }
 
-            ICollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
-            XmlHelpers.LoadFromFile("Settings", temporaryFilePath, ref conversionPresets);
+            Settings settings = new Settings();
+            XmlHelpers.LoadFromFile("Settings", temporaryFilePath, ref settings);
 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
             if (registryKey == null)
             {
-                MessageBox.Show("Can't apply settings in registry. (code 0x03)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Diagnostics.Debug.LogError("Can't apply settings in registry. (code 0x03)");
                 return;
             }
 
             // Compute the registry entries data from settings.
-            Dictionary<string, List<string>> registryEntries = ComputeRegistryEntriesFromConvertionPresets(conversionPresets);
+            Dictionary<string, List<string>> registryEntries = ComputeRegistryEntriesFromConvertionPresets(settings.ConversionPresets);
 
             bool succeed = Settings.ApplyRegistryModifications(registryEntries);
 
@@ -99,20 +95,13 @@ namespace FileConverter
             }
         }
 
-        public ConversionPreset GetPresetFromName(string presetName)
+        public static Settings Load()
         {
-            return this.conversionPresets.FirstOrDefault(match => match.Name == presetName);
-        }
-
-        public void Load()
-        {
-            ICollection<ConversionPreset> presets = this.ConversionPresets;
-            presets.Clear();
-
+            Settings settings = new Settings();
             string userFilePath = Settings.GetUserSettingsFilePath();
             if (File.Exists(userFilePath))
             {
-                XmlHelpers.LoadFromFile<ConversionPreset>("Settings", userFilePath, ref presets);
+                XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, ref settings);
             }
             else
             {
@@ -120,20 +109,29 @@ namespace FileConverter
                 string defaultFilePath = Settings.GetDefaultSettingsFilePath();
                 if (File.Exists(defaultFilePath))
                 {
-                    XmlHelpers.LoadFromFile<ConversionPreset>("Settings", defaultFilePath, ref presets);
+                    XmlHelpers.LoadFromFile<Settings>("FileConverter", defaultFilePath, ref settings);
                 }
                 else
                 {
-                    Diagnostics.Debug.Log("Default settings not found. You should try to reinstall the application.");
+                    Diagnostics.Debug.LogError("Default settings not found. You should try to reinstall the application.");
                 }
             }
+
+            return settings;
         }
 
+        public ConversionPreset GetPresetFromName(string presetName)
+        {
+            return this.conversionPresets.FirstOrDefault(match => match.Name == presetName);
+        }
+        
         public void Save()
         {
+            this.Clean();
+
             // Save the settings in a temporary files (we'll write the settings file when we'll succeed to write the registry keys).
             string temporaryFilePath = Settings.GetUserSettingsTemporaryFilePath();
-            XmlHelpers.SaveToFile("Settings", temporaryFilePath, this.ConversionPresets);
+            XmlHelpers.SaveToFile("Settings", temporaryFilePath, this);
 
             // Compute the registry entries data from settings.
             Dictionary<string, List<string>> registryEntries = Settings.ComputeRegistryEntriesFromConvertionPresets(this.ConversionPresets);
@@ -168,6 +166,14 @@ namespace FileConverter
                 string userFilePath = Settings.GetUserSettingsFilePath();
                 File.Copy(temporaryFilePath, userFilePath, true);
                 File.Delete(temporaryFilePath);
+            }
+        }
+
+        public void Clean()
+        {
+            for (int index = 0; index < this.ConversionPresets.Count; index++)
+            {
+                this.ConversionPresets[index].Clean();
             }
         }
 

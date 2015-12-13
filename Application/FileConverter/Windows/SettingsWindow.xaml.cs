@@ -268,7 +268,7 @@ namespace FileConverter
         {
             // Load previous preset in order to cancel changes.
             Application application = Application.Current as Application;
-            application.Settings.Load();
+            application.Settings = Settings.Load();
 
             this.Hide();
 

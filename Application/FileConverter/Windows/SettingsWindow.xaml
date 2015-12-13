@@ -83,7 +83,7 @@
                 <DockPanel>
                     <Label Content="Quality :" />
                     <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider"
-        				EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|FileConverter.EncodingMode, Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
+        				EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|FileConverter.Controls.EncodingMode, Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
         				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=190}" />
                 </DockPanel>
             </StackPanel>
@@ -119,7 +119,7 @@
                 <DockPanel>
                     <Label Content="Quality :" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}"/>
                     <Slider x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=23}"
-                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="23" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="3" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="23" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="1" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
                 </DockPanel>
                 <Label Content="Recommended quality range in blue" Foreground="#E5004B82" FontSize="11" />
 

@@ -257,6 +257,24 @@ namespace FileConverter
             }
         }
 
+        public void Clean()
+        {
+            // Remove unrelevant settings.
+            List<string> settingsToRemove = new List<string>();
+            foreach (string settingsKey in this.settings.Keys)
+            {
+                if (!this.IsRelevantSetting(settingsKey))
+                {
+                    settingsToRemove.Add(settingsKey);
+                }
+            }
+
+            for (int index = 0; index < settingsToRemove.Count; index++)
+            {
+                this.settings.Remove(settingsToRemove[index]);
+            }
+        }
+
         public void OnDeserializationComplete()
         {
             for (int index = 0; index < this.InputTypes.Count; index++)
@@ -431,12 +449,12 @@ namespace FileConverter
         {
             if (outputType == OutputType.Wav)
             {
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Wav16.ToString());
+                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Wav16.ToString(), true);
             }
 
             if (outputType == OutputType.Mp3)
             {
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Mp3VBR.ToString());
+                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Mp3VBR.ToString(), true);
                 this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
             }
 
@@ -468,7 +486,7 @@ namespace FileConverter
             this.OnPropertyChanged("Settings");
         }
 
-        private void InitializeSettingsValue(string settingsKey, string value)
+        private void InitializeSettingsValue(string settingsKey, string value, bool force = false)
         {
             if (string.IsNullOrEmpty(settingsKey))
             {
@@ -483,6 +501,10 @@ namespace FileConverter
             if (!this.settings.ContainsKey(settingsKey))
             {
                 this.settings.Add(settingsKey, value);
+            }
+            else if (force)
+            {
+                this.settings[settingsKey] = value;
             }
         }
 

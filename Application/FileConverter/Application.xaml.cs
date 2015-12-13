@@ -72,7 +72,7 @@ namespace FileConverter
         public Settings Settings
         {
             get;
-            private set;
+            set;
         }
 
         public bool ShowSettings
@@ -99,8 +99,7 @@ namespace FileConverter
 
             // Load settigns.
             Debug.Log("Load settings...");
-            this.Settings = new Settings();
-            this.Settings.Load();
+            this.Settings = Settings.Load();
 
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
@@ -123,21 +122,22 @@ namespace FileConverter
                 args[6] = @"D:\Test\Track03.mp3";
                 args[7] = @"D:\Test\Track04.mp3";
 
-                System.Array.Resize(ref args, 2);
-                args[1] = "--settings";
+                //System.Array.Resize(ref args, 2);
+                //args[1] = "--settings";
 
-                //System.Array.Resize(ref args, 4);
+                //System.Array.Resize(ref args, 5);
                 //args[1] = "--conversion-preset";
-                //args[2] = "To Ogg";
+                //args[2] = "To Png";
+                //args[3] = "--verbose";
+                //args[4] = @"D:\Test\ApplicationIcon.ico";
+
+                //System.Array.Resize(ref args, 6);
+                //args[1] = "--conversion-preset";
+                //args[2] = "Extract CDA To Ogg";
                 //args[3] = "--verbose";
 
-                System.Array.Resize(ref args, 6);
-                args[1] = "--conversion-preset";
-                args[2] = "Extract CDA To Ogg";
-                args[3] = "--verbose";
-
-                args[4] = @"E:\Track01.cda";
-                args[5] = @"E:\Track02.cda";
+                //args[4] = @"E:\Track01.cda";
+                //args[5] = @"E:\Track02.cda";
             }
 #endif
 
@@ -304,25 +304,26 @@ namespace FileConverter
                 Thread.Sleep(50);
             }
 
-#if !DEBUG
-            bool allConversionsSucceed = true;
-            for (int index = 0; index < this.conversionJobs.Count; index++)
+            if (this.Settings.QuitApplicationWhenConversionsFinished)
             {
-                allConversionsSucceed &= this.conversionJobs[index].State == ConversionJob.ConversionState.Done;
-            }
-
-            if (allConversionsSucceed)
-            {
-                System.Threading.Thread.Sleep(3000);
-
-                if (this.cancelAutoExit)
+                bool allConversionsSucceed = true;
+                for (int index = 0; index < this.conversionJobs.Count; index++)
                 {
-                    return;
+                    allConversionsSucceed &= this.conversionJobs[index].State == ConversionJob.ConversionState.Done;
                 }
 
-                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                if (allConversionsSucceed)
+                {
+                    System.Threading.Thread.Sleep((int)this.Settings.DurationBetweenEndOfConversionsAndApplicationQuit * 1000);
+
+                    if (this.cancelAutoExit)
+                    {
+                        return;
+                    }
+
+                    Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                }
             }
-#endif
         }
 
         private void ExecuteConversionJob(object parameter)
