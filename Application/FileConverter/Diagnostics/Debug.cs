@@ -24,7 +24,7 @@ namespace FileConverter.Diagnostics
         {
             string path = PathHelpers.GetUserDataFolderPath();
 
-            // Delete old diagnostics folder.
+            // Delete old diagnostics folder (1 day).
             DateTime expirationDate = DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0));
             string[] diagnosticsDirectories = Directory.GetDirectories(path, "Diagnostics.*");
             for (int index = 0; index < diagnosticsDirectories.Length; index++)

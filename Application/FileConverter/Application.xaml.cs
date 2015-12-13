@@ -122,8 +122,8 @@ namespace FileConverter
                 args[6] = @"D:\Test\Track03.mp3";
                 args[7] = @"D:\Test\Track04.mp3";
 
-                //System.Array.Resize(ref args, 2);
-                //args[1] = "--settings";
+                System.Array.Resize(ref args, 2);
+                args[1] = "--settings";
 
                 //System.Array.Resize(ref args, 5);
                 //args[1] = "--conversion-preset";
@@ -304,7 +304,7 @@ namespace FileConverter
                 Thread.Sleep(50);
             }
 
-            if (this.Settings.QuitApplicationWhenConversionsFinished)
+            if (this.Settings.ExitApplicationWhenConversionsFinished)
             {
                 bool allConversionsSucceed = true;
                 for (int index = 0; index < this.conversionJobs.Count; index++)
@@ -314,7 +314,7 @@ namespace FileConverter
 
                 if (allConversionsSucceed)
                 {
-                    System.Threading.Thread.Sleep((int)this.Settings.DurationBetweenEndOfConversionsAndApplicationQuit * 1000);
+                    System.Threading.Thread.Sleep((int)this.Settings.DurationBetweenEndOfConversionsAndApplicationExit * 1000);
 
                     if (this.cancelAutoExit)
                     {

@@ -7,15 +7,14 @@
         xmlns:windows="clr-namespace:FileConverter.Windows"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="window" x:Class="FileConverter.SettingsWindow"
-        Width="800" Height="600" MinWidth="640" MinHeight="480" 
+        MinWidth="640" MinHeight="480" 
+        Width="800" Height="600"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         Closing="SettingsWindow_OnClosing">
     <Window.Resources>
         <generic:DoubleToTimeString x:Key="DoubleToTimeString"/>
         <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
         <generic:BoolToVisibility x:Key="BoolToVisibility"/>
-        <valueConverters:InputTypesToBool x:Key="InputTypesToBool"/>
-        <valueConverters:OutputTypeToVisibility x:Key="OutputTypeToVisibility"/>
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
 
@@ -175,7 +174,7 @@
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
     </Window.Title>
 
-    <Grid x:Name="grid" Margin="10">
+    <Grid x:Name="MainGrid" Margin="10">
         <Grid.CommandBindings>
             <CommandBinding Command="New" CanExecute="CanSaveSettings" />
         </Grid.CommandBindings>
@@ -207,8 +206,8 @@
         <!-- Conversion presets settings -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="130"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
 
             <Grid x:Name="PresetListGrid" Margin="5">
@@ -232,7 +231,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <DockPanel Grid.Row="2" Margin="0,5,0,0">
+                <DockPanel Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Center">
                     <Button x:Name="MoveUpPresetButton" Content="^" HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" Click="MovePresetUpButton_Click"/>
                     <Button x:Name="AddPresetButton" Content="+" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="AddPresetButton_Click"/>
                     <Button x:Name="RemovePresetButton" Content="-" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="RemovePresetButton_Click"/>
@@ -345,10 +344,10 @@
 
         <!-- Application settings -->
         <StackPanel x:Name="ApplicationSettingsPanel" Grid.Row="2" Margin="5,10,5,5">
-            <CheckBox x:Name="QuitAtEndCheckBox" Content="Automaticaly exit when all conversions finished" IsChecked="{Binding ApplicationSettings.QuitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}"  />
+            <CheckBox x:Name="QuitAtEndCheckBox" Content="Automaticaly exit when all conversions finished" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}"  />
             <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
                 <Label Content="Waiting duration :"/>
-                <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationQuit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
+                <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationExit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
                 <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
             </DockPanel>
         </StackPanel>

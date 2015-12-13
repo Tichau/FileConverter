@@ -10,14 +10,16 @@
 <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
 <?endif ?>
 
+<!-- Upgrade documentation: http://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.3.0" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.3.2" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
         <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
         
         <Icon Id="icon.ico" SourceFile="..\Resources\ApplicationIcon-256x256.ico"/>
         <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
-        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+        <MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
+        
         <Media Id="1" Cabinet="CabFile.cab" EmbedCab="yes" />
 
         <Feature Id="ProductFeature" Title="Installer" Level="1">
@@ -80,35 +82,71 @@
                     <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="aac;aiff;ape;avi;bik;bmp;cda;flac;flv;ico;jpg;jpeg;m4a;mkv;mov;mp3;mp4;ogg;png;tiff;wav;wma"/>
                 </RegistryKey>
 
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\aac">
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3"/>
+                </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\aiff">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3;To Aac"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\ape">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\avi">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Ogg;To Flac;To Wav;To Mp3;To Aac;To Mkv (low quality)"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\bik">
+                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Ogg;To Flac;To Wav;To Mp3;To Aac;To Mkv (low quality)"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\bmp">
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg;To Ico (max 256x256)"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\cda">
+                    <RegistryValue Name="Presets" Type="string" Value="Extract CDA to Flac;Extract CDA to Ogg;Extract CDA to Mp3"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\flac">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Wav"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3;To Aac"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\flv">
+                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\ico">
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\jpeg">
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Ico (max 256x256)"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\jpg">
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Ico (max 256x256)"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\m4a">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Wav"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3;To Aac"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\mkv">
+                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\mov">
+                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\mp3">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Aac"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\mp4">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac;To Wav"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\ogg">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mp3;To Wav"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Wav;To Mp3;To Aac"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\png">
+                    <RegistryValue Name="Presets" Type="string" Value="To Jpg;To Ico (max 256x256)"/>
+                </RegistryKey>
+                <RegistryKey Root="HKCU" Key="Software\FileConverter\tiff">
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg;To Ico (max 256x256)"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\wav">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Flac"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Flac;To Mp3;To Aac"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\wma">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Mp3;To Wav"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3;To Aac"/>
                 </RegistryKey>
             </Component>
         </ComponentGroup>

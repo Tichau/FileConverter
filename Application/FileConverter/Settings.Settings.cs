@@ -1,18 +1,26 @@
 ﻿// <copyright file="Settings.Settings.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.Linq;
-
 namespace FileConverter
 {
+    using System.Linq;
     using System.Collections.ObjectModel;
     using System.Xml.Serialization;
 
     public partial class Settings : IXmlSerializable
     {
-        private bool quitApplicationWhenConversionsFinished = true;
-        private float durationBetweenEndOfConversionsAndApplicationQuit = 3f;
+        private double settingsWindowHeight = 640;
+        private double settingsWindowWidth = 800;
+        private bool exitApplicationWhenConversionsFinished = true;
+        private float durationBetweenEndOfConversionsAndApplicationExit = 3f;
         private ObservableCollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
-        
+
+        [XmlAttribute]
+        public int SerializationVersion
+        {
+            get;
+            set;
+        } = 0;
+
         [XmlIgnore]
         public ObservableCollection<ConversionPreset> ConversionPresets
         {
@@ -27,33 +35,33 @@ namespace FileConverter
                 this.OnPropertyChanged();
             }
         }
-
+        
         [XmlElement]
-        public bool QuitApplicationWhenConversionsFinished
+        public bool ExitApplicationWhenConversionsFinished
         {
             get
             {
-                return this.quitApplicationWhenConversionsFinished;
+                return this.exitApplicationWhenConversionsFinished;
             }
 
             set
             {
-                this.quitApplicationWhenConversionsFinished = value;
+                this.exitApplicationWhenConversionsFinished = value;
                 this.OnPropertyChanged();
             }
         }
 
         [XmlElement]
-        public float DurationBetweenEndOfConversionsAndApplicationQuit
+        public float DurationBetweenEndOfConversionsAndApplicationExit
         {
             get
             {
-                return this.durationBetweenEndOfConversionsAndApplicationQuit;
+                return this.durationBetweenEndOfConversionsAndApplicationExit;
             }
 
             set
             {
-                this.durationBetweenEndOfConversionsAndApplicationQuit = value;
+                this.durationBetweenEndOfConversionsAndApplicationExit = value;
                 this.OnPropertyChanged();
             }
         }
@@ -77,6 +85,8 @@ namespace FileConverter
 
         public void OnDeserializationComplete()
         {
+            this.DurationBetweenEndOfConversionsAndApplicationExit = System.Math.Max(0, System.Math.Min(10, this.DurationBetweenEndOfConversionsAndApplicationExit));
+
             for (int index = 0; index < this.ConversionPresets.Count; index++)
             {
                 this.ConversionPresets[index].OnDeserializationComplete();
