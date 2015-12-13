@@ -7,10 +7,11 @@
         xmlns:windows="clr-namespace:FileConverter.Windows"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="window" x:Class="FileConverter.SettingsWindow"
-        Height="600" Width="800" MinHeight="480" MinWidth="640"
+        Width="800" Height="600" MinWidth="640" MinHeight="480" 
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         Closing="SettingsWindow_OnClosing">
     <Window.Resources>
+        <generic:DoubleToTimeString x:Key="DoubleToTimeString"/>
         <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
         <generic:BoolToVisibility x:Key="BoolToVisibility"/>
         <valueConverters:InputTypesToBool x:Key="InputTypesToBool"/>
@@ -99,7 +100,7 @@
             </StackPanel>
         </DataTemplate>
 
-        
+
         <DataTemplate x:Key="AacSettingsDataTemplate">
             <StackPanel>
                 <DockPanel>
@@ -182,9 +183,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="{Binding Height, ElementName=ApplicationSettingsPanel, Mode=OneWay}"/>
             <RowDefinition Height="28"/>
         </Grid.RowDefinitions>
 
+        <!-- Header -->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="48"/>
@@ -195,12 +198,13 @@
             <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="..\Resources\ApplicationIcon.png" />
             <Label Grid.Column="1" Content="Settings" FontSize="20" Margin="4" VerticalAlignment="Center" />
             <Label Grid.Column="2" HorizontalAlignment="Right" FontStyle="Italic" FontSize="14" VerticalAlignment="Center">
-	            <Label.Content>
-		            <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
-	            </Label.Content>
+                <Label.Content>
+                    <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
+                </Label.Content>
             </Label>
         </Grid>
 
+        <!-- Conversion presets settings -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="130"/>
@@ -339,8 +343,18 @@
             </GroupBox>
         </Grid>
 
-        <Button x:Name="CloseButton" Grid.Row="2" Content="Close" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
-        <Button x:Name="SaveButton" Grid.Row="2" Content="Save" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" Click="SaveButton_Click" Command="New"/>
+        <!-- Application settings -->
+        <StackPanel x:Name="ApplicationSettingsPanel" Grid.Row="2" Margin="5,10,5,5">
+            <CheckBox x:Name="QuitAtEndCheckBox" Content="Automaticaly exit when all conversions finished" IsChecked="{Binding ApplicationSettings.QuitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}"  />
+            <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
+                <Label Content="Waiting duration :"/>
+                <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationQuit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
+                <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
+            </DockPanel>
+        </StackPanel>
+
+        <Button x:Name="CloseButton" Grid.Row="3" Content="Close" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
+        <Button x:Name="SaveButton" Grid.Row="3" Content="Save" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" Click="SaveButton_Click" Command="New"/>
 
     </Grid>
 </Window>

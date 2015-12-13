@@ -109,6 +109,7 @@
     <Compile Include="ValueConverters\Generic\BoolToVisibility.cs" />
     <Compile Include="ValueConverters\ConversionSettingsToString.cs" />
     <Compile Include="ValueConverters\Generic\BoolInverterConverter.cs" />
+    <Compile Include="ValueConverters\Generic\DoubleToTimeString.cs" />
     <Compile Include="ValueConverters\Generic\EqualsConverter.cs" />
     <Compile Include="ValueConverters\Generic\CollectionContainsElementToBool.cs" />
     <Compile Include="ValueConverters\Generic\StringToValueType.cs" />

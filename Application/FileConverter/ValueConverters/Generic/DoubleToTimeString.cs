@@ -1,4 +1,4 @@
-﻿// <copyright file="BoolToVisibility.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="DoubleToTimeString.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters.Generic
 {
@@ -6,22 +6,18 @@ namespace FileConverter.ValueConverters.Generic
     using System.Globalization;
     using System.Windows.Data;
 
-    public class BoolToVisibility : IValueConverter
+    public class DoubleToTimeString : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is bool))
+            if (!(value is double))
             {
                 throw new ArgumentException("The value must be a boolean.");
             }
 
-            string stringParameter = parameter as string;
-
-            string falseResult = stringParameter ?? "Hidden";
-
-            bool booleanValue = (bool)value;
-
-            return booleanValue ? "Visible" : falseResult;
+            double doubleValue = (double)value;
+            
+            return string.Format("{0} second{1}", doubleValue.ToString("0.#"), doubleValue >= 2 ? "s" : string.Empty);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

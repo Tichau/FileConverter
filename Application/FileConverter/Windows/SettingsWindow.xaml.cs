@@ -31,7 +31,7 @@ namespace FileConverter
             this.InitializeComponent();
             
             Application application = Application.Current as Application;
-            this.settings = application.Settings;
+            this.ApplicationSettings = application.Settings;
             this.PresetList.ItemsSource = this.settings.ConversionPresets;
 
             OutputType[] outputTypes = new[]
@@ -96,6 +96,20 @@ namespace FileConverter
             if (e.PropertyName == "OutputType")
             {
                 this.OnPropertyChanged("InputCategories");
+            }
+        }
+
+        public Settings ApplicationSettings
+        {
+            get
+            {
+                return this.settings;
+            }
+
+            set
+            {
+                this.settings = value;
+                this.OnPropertyChanged();
             }
         }
 
