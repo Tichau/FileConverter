@@ -13,8 +13,6 @@
     You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using System.Diagnostics;
-
 namespace FileConverter
 {
     using System;
@@ -33,7 +31,7 @@ namespace FileConverter
         private static readonly Version Version = new Version()
                                             {
                                                 Major = 0, 
-                                                Minor = 3,
+                                                Minor = 4,
                                             };
 
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
@@ -125,11 +123,11 @@ namespace FileConverter
                 System.Array.Resize(ref args, 2);
                 args[1] = "--settings";
 
-                System.Array.Resize(ref args, 5);
-                args[1] = "--conversion-preset";
-                args[2] = "To Flac";
-                args[3] = "--verbose";
-                args[4] = @"D:\Test\02 - Corn on the Cob.mp3";
+                //System.Array.Resize(ref args, 5);
+                //args[1] = "--conversion-preset";
+                //args[2] = "To Flac";
+                //args[3] = "--verbose";
+                //args[4] = @"D:\Test\02 - Corn on the Cob.mp3";
 
                 //System.Array.Resize(ref args, 6);
                 //args[1] = "--conversion-preset";
