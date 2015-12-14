@@ -47,7 +47,7 @@ namespace FileConverter
             }
             catch (System.Exception exception)
             {
-                Diagnostics.Debug.LogError("Fail to load asset of type '" + typeof(T) + "'. The following exception was raised:\n " + exception.Message);
+                throw;
             }
 
             IXmlSerializable xmlSerializableObject = deserializedObject as IXmlSerializable;

@@ -43,6 +43,11 @@ namespace FileConverter
         public Application()
         {
             this.ConvertionJobs = this.conversionJobs.AsReadOnly();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
 
             this.Initialize();
 
@@ -98,6 +103,12 @@ namespace FileConverter
             // Load settigns.
             Debug.Log("Load settings...");
             this.Settings = Settings.Load();
+            if (this.Settings == null)
+            {
+                Diagnostics.Debug.LogError("The application will now shutdown. If you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
+                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                return;
+            }
 
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
@@ -120,8 +131,8 @@ namespace FileConverter
                 args[6] = @"D:\Test\Track03.mp3";
                 args[7] = @"D:\Test\Track04.mp3";
 
-                System.Array.Resize(ref args, 2);
-                args[1] = "--settings";
+                //System.Array.Resize(ref args, 2);
+                //args[1] = "--settings";
 
                 //System.Array.Resize(ref args, 5);
                 //args[1] = "--conversion-preset";

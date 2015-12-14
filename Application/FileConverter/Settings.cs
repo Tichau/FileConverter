@@ -101,7 +101,28 @@ namespace FileConverter
             string userFilePath = Settings.GetUserSettingsFilePath();
             if (File.Exists(userFilePath))
             {
-                XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, ref settings);
+                try
+                {
+                    XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, ref settings);
+                }
+                catch (Exception exception)
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("Can't load file converter user settings. Do you want to fall back to default settings ?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                    if (messageBoxResult == MessageBoxResult.Yes)
+                    {
+                        System.IO.File.Delete(userFilePath);
+                        return Settings.Load();
+                    }
+                    else if (messageBoxResult == MessageBoxResult.No)
+                    {
+                        return null;
+                    }
+                }
+
+                if (settings.SerializationVersion != Version)
+                {
+                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", settings.SerializationVersion, Version);
+                }
             }
             else
             {
@@ -109,7 +130,14 @@ namespace FileConverter
                 string defaultFilePath = Settings.GetDefaultSettingsFilePath();
                 if (File.Exists(defaultFilePath))
                 {
-                    XmlHelpers.LoadFromFile<Settings>("Settings", defaultFilePath, ref settings);
+                    try
+                    {
+                        XmlHelpers.LoadFromFile<Settings>("Settings", defaultFilePath, ref settings);
+                    }
+                    catch (Exception exception)
+                    {
+                        Diagnostics.Debug.LogError("Fail to load file converter default settings. {0}", exception.Message);
+                    }
                 }
                 else
                 {

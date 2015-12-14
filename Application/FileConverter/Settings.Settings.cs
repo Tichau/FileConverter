@@ -8,6 +8,8 @@ namespace FileConverter
 
     public partial class Settings : IXmlSerializable
     {
+        public const int Version = 1;
+
         private double settingsWindowHeight = 640;
         private double settingsWindowWidth = 800;
         private bool exitApplicationWhenConversionsFinished = true;
@@ -19,7 +21,7 @@ namespace FileConverter
         {
             get;
             set;
-        } = 0;
+        } = Version;
 
         [XmlIgnore]
         public ObservableCollection<ConversionPreset> ConversionPresets
