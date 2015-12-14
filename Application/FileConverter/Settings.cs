@@ -330,7 +330,7 @@ namespace FileConverter
 
                     for (int presetIndex = 0; presetIndex < presets.Length; presetIndex++)
                     {
-                        if (!presetsList.Contains(presets[presetIndex]))
+                        if (presetsList[presetIndex] != presets[presetIndex])
                         {
                             return true;
                         }
