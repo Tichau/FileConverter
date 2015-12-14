@@ -118,10 +118,9 @@
                 </DockPanel>
                 <DockPanel>
                     <Label Content="Quality :" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}"/>
-                    <Slider x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=23}"
-                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="23" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="1" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
+                    <Slider x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="1" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
                 </DockPanel>
-                <Label Content="Recommended quality range in blue" Foreground="#E5004B82" FontSize="11" />
 
                 <DockPanel>
                     <Label Content="Encoding speed :" ToolTip="{x:Static project:Resources.VideoEncodingSpeedTooltip}" />
