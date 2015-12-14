@@ -109,11 +109,11 @@ namespace FileConverter
                 string defaultFilePath = Settings.GetDefaultSettingsFilePath();
                 if (File.Exists(defaultFilePath))
                 {
-                    XmlHelpers.LoadFromFile<Settings>("FileConverter", defaultFilePath, ref settings);
+                    XmlHelpers.LoadFromFile<Settings>("Settings", defaultFilePath, ref settings);
                 }
                 else
                 {
-                    Diagnostics.Debug.LogError("Default settings not found. You should try to reinstall the application.");
+                    Diagnostics.Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", defaultFilePath);
                 }
             }
 
