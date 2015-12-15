@@ -11,188 +11,46 @@
   </head>
   <body>
     <section class="page-header">
+      <a href="index.html"><img src="images/application-icon.png" height="128" width="128" /></a>
       <h1 class="project-name">File Converter</h1>
       <h2 class="project-tagline">File Converter is a very simple tool who allows you to convert one or several file(s) from one format to another using the context menu in windows explorer.</h2>
+      <a href="https://github.com/Tichau/FileConverter/releases/download/v0.3/FileConverter-0.3-x64-setup.msi" class="btn">Download (64 bits)</a>
       <a href="https://github.com/Tichau/FileConverter" class="btn">View on GitHub</a>
-      <a href="https://github.com/Tichau/FileConverter/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/Tichau/FileConverter/tarball/master" class="btn">Download .tar.gz</a>
+      <a href="documentation.html" class="btn">Documentation</a>
     </section>
 
     <section class="main-content">
       <h2>
 <a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h2>
 
-<p><strong>File Converter</strong> is a very simple tool which allows you to convert one or several file(s) from one format to another using the context menu in windows explorer.
-This program uses <a href="https://www.ffmpeg.org/">ffmpeg</a> as file conversion software.</p>
+<p><strong>File Converter</strong> is a very simple tool which allows you to convert one or several file(s) from one format to another using the context menu in windows explorer.</p>
+
+<img src="images/screenshot1.png" />
 
 <p>You can convert files from formats <strong>Aiff, Ape, Avi, Flac, M4a, Mp3, Mp4, Ogg, Wav, Wma</strong> to formats <strong>Mp3, Ogg, Wav, Flac</strong>.</p>
 
-<p><em>Note: If your source file is a video, the conversion to an audio format will extract the audio part of the video.</em></p>
+<p>The interface is designed to be as light as possible to keep the application pleasant to use.</p>
 
-<p><strong><em>Remove any previous installation of the application before installing the newer version.</em></strong></p>
+<img src="images/screenshot2.png" />
 
-<p>This application is under GPL version 3 licence. 
-For more informations check the LICENSE file in your installation folder or the <a href="http://www.gnu.org/licenses/gpl.html">gnu website</a>.</p>
+<p>You can heavily customize the application configuration to add or remove conversion presets into the files context menus.</p>
 
-<h2>
-<a id="input-file-post-conversion-actions" class="anchor" href="#input-file-post-conversion-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Input file post conversion actions</h2>
+<img src="images/screenshot3.png" />
 
-<p>This actions allow you to chose what you want to do with your input files if the conversion succeed.</p>
+<p>I hope this application will help you :)</p>
+<p>It is open source (GLP v3), free and without any adds so you just have to enjoy it!<p>
 
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>None</strong></td>
-<td>Don't modify the input file. If the output file name conflict with the input, it will be renamed.</td>
-</tr>
-<tr>
-<td><strong>Move in archive folder</strong></td>
-<td>Move the input file in a folder named <em>Conversion Archives</em> if the conversion is a success.</td>
-</tr>
-<tr>
-<td><strong>Delete</strong></td>
-<td>Delete the input file if the conversion is a success (be careful no warning will be prompted).</td>
-</tr>
-</tbody>
-</table>
-
-<h2>
-<a id="output-file-path-template" class="anchor" href="#output-file-path-template" aria-hidden="true"><span class="octicon octicon-link"></span></a>Output file path template</h2>
-
-<p>This template allow you to define how you want to generate the output file path (depending on the input file path).
-You have access to the following informations:</p>
-
-<table>
-<thead>
-<tr>
-<th>Pattern</th>
-<th>Description</th>
-<th>Example (with input path: <em>C:\Music\Artist\Album\Song.wav</em>)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>(p)</td>
-<td>Input file path</td>
-<td>C:\Music\Artist\Album\</td>
-</tr>
-<tr>
-<td>(f)</td>
-<td>Input file name</td>
-<td>Song</td>
-</tr>
-<tr>
-<td>(o)</td>
-<td>Output file format</td>
-<td>mp3</td>
-</tr>
-<tr>
-<td>(i)</td>
-<td>Input file format</td>
-<td>wav</td>
-</tr>
-<tr>
-<td>(d0)</td>
-<td>Input parent folder name</td>
-<td>Album</td>
-</tr>
-<tr>
-<td>(d1)</td>
-<td>Input sub parent folder name</td>
-<td>Artist</td>
-</tr>
-</tbody>
-</table>
-
-<p>*Tips: You can use uppercase to retrieve caps lock informations. Example: (f) -&gt; Default / (F) -&gt; DEFAULT *</p>
-
-<h3>
-<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h3>
-
-<p>Simple default template (just change the extension): </p>
-
-<pre><code>Input: C:\Music\Artist\Album\Song.wav
-Template: (p)(f)
-Generated output: C:\Music\Artist\Album\Song.mp3
-</code></pre>
-
-<p>File name customization:</p>
-
-<pre><code>Input: C:\Music\Artist\Album\Song.wav
-Template: (p)(O)_(f) (from (i))
-Generated output: C:\Music\Artist\Album\MP3_Song (from wav).mp3
-</code></pre>
-
-<p>File path customization:</p>
-
-<pre><code>Input: C:\Music\Artist\Album\Song.wav
-Template: D:\(o)\(d1)\(f)
-Generated output: D:\mp3\Artist\Song.mp3
-</code></pre>
-
-<h2>
-<a id="change-log" class="anchor" href="#change-log" aria-hidden="true"><span class="octicon octicon-link"></span></a>Change Log</h2>
-
-<p>v0.3</p>
-
-<ul>
-<li>New: Possibility to extract audio from videos.</li>
-<li>New: Support new input file formats: aiff, m4a, avi, mp4.</li>
-<li>New: Quality settings for Mp3 (Encoding mode vbr/cbr and bitrate).</li>
-<li>New: Quality settings for Ogg (Bitrate).</li>
-<li>New: Quality settings for Wav (bits per sample: 8, 16, 24 or 32).</li>
-<li>New: Add output file path template system.</li>
-<li>New: Add button to move up or down a preset.</li>
-<li>New: Add input files post conversion action (No action, move in archive folder or delete).</li>
-<li>New: Add categories on input file extensions.</li>
-<li>Fixed: Lose focus of main window don't terminate the application.</li>
-<li>Fixed: The application icon now have a correct resolution at any size.</li>
-<li>Tech: Add error codes on error messages.</li>
-</ul>
-
-<p>v0.2</p>
-
-<ul>
-<li>New: Support new input file format: ape.</li>
-<li>New: Add notion of conversion preset (in order to customize the conversion possibilities).</li>
-<li>New: Add settings window to edit conversion presets.</li>
-<li>New: Add application icon.</li>
-<li>New: Customize application installer.</li>
-<li>New: Add diagnostic window to read the application logs.</li>
-</ul>
-
-<p>v0.1</p>
-
-<ul>
-<li>New: Add decode support for file formats Mp3, Ogg, Wav, Flac, Wma </li>
-<li>New: Add encode support for file formats Mp3, Ogg, Wav, Flac</li>
-<li>New: UI to visualize the conversion progress</li>
-</ul>
+<p><a href="https://github.com/Tichau/FileConverter/releases/download/v0.3/FileConverter-0.3-x64-setup.msi">Windows 64 bits Installer</a></p>
+<p><a href="https://github.com/Tichau/FileConverter/tarball/master">Sources archive</a></p>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/Tichau/FileConverter">File Converter</a> is maintained by <a href="https://github.com/Tichau">Tichau</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/Tichau/FileConverter">File Converter</a> is maintained by <a href="https://github.com/Tichau">Adrien Allard</a>.</span>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using a customized version of the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
 
     </section>
 
-            <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-71411543-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
+  
   </body>
 </html>
