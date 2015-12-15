@@ -78,7 +78,7 @@ CDA extraction:
 	
 ## Thanks
 
-File converter uses the following middleware:
+File converter uses the following middlewares:
 
 **ffmpeg** as file conversion software.
 Thanks to ffmpeg devs for this awesome open source file convesion tool. [Web site link](https://www.ffmpeg.org/)
