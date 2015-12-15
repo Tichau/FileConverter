@@ -90,7 +90,7 @@ Thanks to Dave Kerr for his work on SharpShell. [CodePlex link](https://sharpshe
 Thanks to Idael Cardoso for his work on CD Audio ripper. [Code project link](http://www.codeproject.com/Articles/5458/C-Sharp-Ripper)
 
 ## Change Log
-v0.4
+### v0.4
 - New: Possibility to encode videos (mkv output file format) using H.264 video codec and AAC audio codec.
 - New: Possibility to extract Audio CD content.
 - New: Possibility to encode audio in aac format.
@@ -107,7 +107,7 @@ v0.4
 - Tech: Improve diagnostics system (compatibility with logs from multiple threads, dump files in AppData folder and error messages).
 - Tech: Update ffmpeg version.
 
-v0.3
+### v0.3
 - New: Possibility to extract audio from videos.
 - New: Support new input file formats: aiff, m4a, avi, mp4.
 - New: Quality settings for Mp3 (Encoding mode vbr/cbr and bitrate).
@@ -121,7 +121,7 @@ v0.3
 - Fixed: The application icon now have a correct resolution at any size.
 - Tech: Add error codes on error messages.
 
-v0.2
+### v0.2
 - New: Support new input file format: ape.
 - New: Add notion of conversion preset (in order to customize the conversion possibilities).
 - New: Add settings window to edit conversion presets.
@@ -129,7 +129,7 @@ v0.2
 - New: Customize application installer.
 - New: Add diagnostic window to read the application logs.
 
-v0.1
+### v0.1
 - New: Add decode support for file formats Mp3, Ogg, Wav, Flac, Wma 
 - New: Add encode support for file formats Mp3, Ogg, Wav, Flac
 - New: UI to visualize the conversion progress
