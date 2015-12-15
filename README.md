@@ -3,16 +3,22 @@
 ## Description
 **File Converter** is a very simple tool which allows you to convert one or several file(s) from one format to another using the context menu in windows explorer.
 
-You can convert files from formats **Aiff, Ape, Avi, Flac, M4a, Mp3, Mp4, Ogg, Wav, Wma** to formats **Mp3, Ogg, Wav, Flac**.
-
-*Note: If your source file is a video, the conversion to an audio format will extract the audio part of the video.*
-
-***Remove any previous installation of the application before installing the newer version.***
-
 This application is under GPL version 3 licence. 
 For more informations check the LICENSE file in your installation folder or the [gnu website](http://www.gnu.org/licenses/gpl.html).
 
 You can download it here: [http://tichau.github.io/FileConverter](http://tichau.github.io/FileConverter).
+
+## Supported file formats
+
+Category 	| Supported output formats	| Compatible input formats
+------------|---------------------------|----------------------------------------------------------------------------
+ Audio		| FLAC, AAC, OGG, MP3, WAV	| aiff, ape, avi, bik, cda, flac, flv, m4a, mkv, mov, mp3, mp4, ogg, wav, wma
+ Video		| MKV						| avi, bik, flv, mkv, mov
+ Image		| PNG, JPG, ICO				| bmp, ico, jpg, jpeg, png, tiff
+
+*Note: If your source file is a video, the conversion to an audio format will extract the audio part of the video.*
+
+*Note 2: The mkv output file format encodes video using H.264 encoder for video and AAC encoder for audio.*
 
 ## Input file post conversion actions
 
@@ -84,6 +90,23 @@ Thanks to Dave Kerr for his work on SharpShell. [CodePlex link](https://sharpshe
 Thanks to Idael Cardoso for his work on CD Audio ripper. [Code project link](http://www.codeproject.com/Articles/5458/C-Sharp-Ripper)
 
 ## Change Log
+v0.4
+- New: Possibility to encode videos (mkv output file format) using H.264 video codec and AAC audio codec.
+- New: Possibility to extract Audio CD content.
+- New: Possibility to encode audio in aac format.
+- New: Possibility to encode images (png, jpg and ico formats).
+- New: Support new audio input file format: aac
+- New: Support new video input file formats: bik, flv, mov, mkv
+- New: Support new image input file formats: bmp, tiff, png, jpg and ico.
+- New: Multi-thread conversion (file converter will now start multiple conversions at the time depending on your number of cores).
+- New: Copy the currently selected preset when clicking on the add preset button.
+- New: Add "My Documents", "My Music", "My Videos" and "My Pictures" folder to output file name generator.
+- New: Possibily to chose if the application quit after succeeded conversions.
+- Fixed: Reordering presets does not update the registry. 
+- Tech: Handle incorrect user settings case.
+- Tech: Improve diagnostics system (compatibility with logs from multiple threads, dump files in AppData folder and error messages).
+- Tech: Update ffmpeg version.
+
 v0.3
 - New: Possibility to extract audio from videos.
 - New: Support new input file formats: aiff, m4a, avi, mp4.
