@@ -1,0 +1,5 @@
+obj/
+.vs/
+.vscode/
+Application/
+Installer/
