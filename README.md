@@ -6,7 +6,7 @@
 This application is under GPL version 3 licence. 
 For more informations check the LICENSE file in your installation folder or the [gnu website](http://www.gnu.org/licenses/gpl.html).
 
-You can download it here: [http://tichau.github.io/FileConverter](http://tichau.github.io/FileConverter).
+You can download it here: [www.file-converter.org](http://file-converter.org).
 
 ## Supported file formats
 
