@@ -447,40 +447,42 @@ namespace FileConverter
 
         private void InitializeDefaultSettings(OutputType outputType)
         {
-            if (outputType == OutputType.Wav)
+            switch (outputType)
             {
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Wav16.ToString(), true);
-            }
+                case OutputType.Aac:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
+                    break;
 
-            if (outputType == OutputType.Mp3)
-            {
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Mp3VBR.ToString(), true);
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
-            }
+                case OutputType.Flac:
+                case OutputType.Ico:
+                case OutputType.Png:
+                    break;
 
-            if (outputType == OutputType.Ogg)
-            {
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
-            }
+                case OutputType.Jpg:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "25");
+                    break;
 
-            if (outputType == OutputType.Flac)
-            {
-            }
+                case OutputType.Mkv:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Very Slow");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
+                    break;
 
-            if (outputType == OutputType.Mkv)
-            {
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Very Slow");
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
-            }
+                case OutputType.Mp3:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Mp3VBR.ToString(), true);
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
+                    break;
 
-            if (outputType == OutputType.Png)
-            {
-            }
+                case OutputType.Ogg:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
+                    break;
 
-            if (outputType == OutputType.Jpg)
-            {
-                this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "25");
+                case OutputType.Wav:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Wav16.ToString(), true);
+                    break;
+
+                default:
+                    throw new System.Exception("Missing default settings for type " + outputType);
             }
 
             this.OnPropertyChanged("Settings");
