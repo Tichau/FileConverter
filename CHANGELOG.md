@@ -11,8 +11,9 @@
 - New: Multi-thread conversion (file converter will now start multiple conversions at the time depending on your number of cores).
 - New: Copy the currently selected preset when clicking on the add preset button.
 - New: Add "My Documents", "My Music", "My Videos" and "My Pictures" folder to output file name generator.
-- New: Possibily to chose if the application quit after succeeded conversions.
+- New: Possibility to choose if the application quit after succeeded conversions.
 - Fixed: Reordering presets does not update the registry. 
+- Fixed: Merge default settings with user settings to prevent errors when upgrading the application. 
 - Tech: Handle incorrect user settings case.
 - Tech: Improve diagnostics system (compatibility with logs from multiple threads, dump files in AppData folder and error messages).
 - Tech: Update ffmpeg version.
