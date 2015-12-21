@@ -10,16 +10,11 @@ namespace FileConverter
 
     public class XmlHelpers
     {
-        public static void LoadFromFile<T>(string root, string path, ref T deserializedObject)
+        public static void LoadFromFile<T>(string root, string path, out T deserializedObject)
         {
             if (string.IsNullOrEmpty(path))
             {
                 throw new ArgumentNullException("path");
-            }
-
-            if (deserializedObject == null)
-            {
-                throw new ArgumentNullException("deserializedObject");
             }
 
             XmlRootAttribute xmlRoot = new XmlRootAttribute

@@ -4,7 +4,6 @@ namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
@@ -71,8 +70,8 @@ namespace FileConverter
                 return;
             }
 
-            Settings settings = new Settings();
-            XmlHelpers.LoadFromFile("Settings", temporaryFilePath, ref settings);
+            Settings settings = null;
+            XmlHelpers.LoadFromFile("Settings", temporaryFilePath, out settings);
 
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
             if (registryKey == null)
@@ -97,13 +96,33 @@ namespace FileConverter
 
         public static Settings Load()
         {
-            Settings settings = new Settings();
+            Settings defaultSettings = null;
+
+            // Load the default settings.
+            string defaultFilePath = Settings.GetDefaultSettingsFilePath();
+            if (File.Exists(defaultFilePath))
+            {
+                try
+                {
+                    XmlHelpers.LoadFromFile<Settings>("Settings", defaultFilePath, out defaultSettings);
+                }
+                catch (Exception exception)
+                {
+                    Diagnostics.Debug.LogError("Fail to load file converter default settings. {0}", exception.Message);
+                }
+            }
+            else
+            {
+                Diagnostics.Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", defaultFilePath);
+            }
+
+            Settings userSettings = null;
             string userFilePath = Settings.GetUserSettingsFilePath();
             if (File.Exists(userFilePath))
             {
                 try
                 {
-                    XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, ref settings);
+                    XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, out userSettings);
                 }
                 catch (Exception exception)
                 {
@@ -119,33 +138,13 @@ namespace FileConverter
                     }
                 }
 
-                if (settings.SerializationVersion != Version)
+                if (userSettings != null && userSettings.SerializationVersion != Version)
                 {
-                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", settings.SerializationVersion, Version);
-                }
-            }
-            else
-            {
-                // If user settings doesn't exist, load the default settings.
-                string defaultFilePath = Settings.GetDefaultSettingsFilePath();
-                if (File.Exists(defaultFilePath))
-                {
-                    try
-                    {
-                        XmlHelpers.LoadFromFile<Settings>("Settings", defaultFilePath, ref settings);
-                    }
-                    catch (Exception exception)
-                    {
-                        Diagnostics.Debug.LogError("Fail to load file converter default settings. {0}", exception.Message);
-                    }
-                }
-                else
-                {
-                    Diagnostics.Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", defaultFilePath);
+                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
                 }
             }
 
-            return settings;
+            return userSettings != null ? userSettings.Merge(defaultSettings) : defaultSettings;
         }
 
         public ConversionPreset GetPresetFromName(string presetName)
@@ -403,6 +402,27 @@ namespace FileConverter
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private Settings Merge(Settings settings)
+        {
+            if (settings == null)
+            {
+                return this;
+            }
+
+            for (int index = 0; index < settings.conversionPresets.Count; index++)
+            {
+                ConversionPreset conversionPreset = settings.conversionPresets[index];
+                if (this.conversionPresets.Any(match => match.Name == conversionPreset.Name))
+                {
+                    continue;
+                }
+
+                this.conversionPresets.Add(conversionPreset);
+            }
+
+            return this;
         }
     }
 }
