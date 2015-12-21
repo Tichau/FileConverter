@@ -22,7 +22,7 @@ Category 	| Supported output formats	| Compatible input formats
 File converter uses the following middlewares:
 
 **ffmpeg** as file conversion software.
-Thanks to ffmpeg devs for this awesome open source file convesion tool. [Web site link](https://www.ffmpeg.org/)
+Thanks to ffmpeg devs for this awesome open source file conversion tool. [Web site link](https://www.ffmpeg.org/)
 
 **SharpShell** to easily create windows context menu extensions.
 Thanks to Dave Kerr for his work on SharpShell. [CodePlex link](https://sharpshell.codeplex.com/)
@@ -33,4 +33,4 @@ Thanks to Idael Cardoso for his work on CD Audio ripper. [Code project link](htt
 ## License
 
 File Converter is licensed under the GPL version 3 License.
-For more informations check the LICENSE.md file in your installation folder or the [gnu website](http://www.gnu.org/licenses/gpl.html).
+For more information check the LICENSE.md file in your installation folder or the [gnu website](http://www.gnu.org/licenses/gpl.html).
