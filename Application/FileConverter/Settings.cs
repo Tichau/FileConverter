@@ -11,12 +11,11 @@ namespace FileConverter
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Security.Principal;
-    using System.Xml.Serialization;
     using System.Windows;
-
-    using Microsoft.Win32;
+    using System.Xml.Serialization;
 
     using FileConverter.Annotations;
+    using Microsoft.Win32;
 
     [XmlRoot]
     [XmlType]
@@ -124,7 +123,7 @@ namespace FileConverter
                 {
                     XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, out userSettings);
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     MessageBoxResult messageBoxResult = MessageBox.Show("Can't load file converter user settings. Do you want to fall back to default settings ?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                     if (messageBoxResult == MessageBoxResult.Yes)

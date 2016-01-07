@@ -206,7 +206,7 @@ namespace FileConverter.ConversionJobs
                 throw;
             }
 
-            Diagnostics.Debug.Log("");
+            Diagnostics.Debug.Log(string.Empty);
         }
 
         private void ParseFFMPEGOutput(string input)

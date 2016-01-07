@@ -1,12 +1,11 @@
 ﻿// <copyright file="SettingsWindow.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.Linq;
-
 namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
@@ -57,7 +56,7 @@ namespace FileConverter
                                            };
 
             this.PostConversionActionComboBox.ItemsSource = postConversionActions;
-
+            
             this.InitializeCompatibleInputExtensions();
         }
 
@@ -87,14 +86,6 @@ namespace FileConverter
                 }
 
                 this.OnPropertyChanged();
-                this.OnPropertyChanged("InputCategories");
-            }
-        }
-
-        private void SelectedPresetPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "OutputType")
-            {
                 this.OnPropertyChanged("InputCategories");
             }
         }
@@ -137,6 +128,14 @@ namespace FileConverter
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void SelectedPresetPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "OutputType")
+            {
+                this.OnPropertyChanged("InputCategories");
+            }
         }
 
         private void OnInputTypeChecked(object sender, RoutedEventArgs e)

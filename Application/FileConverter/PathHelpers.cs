@@ -140,7 +140,7 @@ namespace FileConverter
 
         public static string GetUserDataFolderPath()
         {
-            string path = System.Environment.GetFolderPath((System.Environment.SpecialFolder.LocalApplicationData));
+            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
             path = System.IO.Path.Combine(path, "FileConverter");
 
             if (!System.IO.Directory.Exists(path))
