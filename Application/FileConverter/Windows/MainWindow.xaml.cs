@@ -13,6 +13,7 @@ namespace FileConverter
     {
         private DiagnosticsWindow diagnosticsWindow;
         private SettingsWindow settingsWindow;
+        private UpgradeWindow upgradeWindow;
 
         public MainWindow()
         {
@@ -36,7 +37,13 @@ namespace FileConverter
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
+        public void OnNewVersionReleased(UpgradeVersionDescription upgradeVersionDescription)
+        {
+            this.ShowUpgradeWindow();
+            this.upgradeWindow.VersionDescription = upgradeVersionDescription;
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -93,6 +100,22 @@ namespace FileConverter
             Application application = Application.Current as Application;
             application?.CancelAutoExit();
             this.settingsWindow.Show();
+        }
+
+        private void ShowUpgradeWindow()
+        {
+            if (this.upgradeWindow != null && this.upgradeWindow.IsVisible)
+            {
+                return;
+            }
+            else
+            {
+                this.upgradeWindow = new UpgradeWindow();
+            }
+
+            Application application = Application.Current as Application;
+            application?.CancelAutoExit();
+            this.upgradeWindow.Show();
         }
     }
 }

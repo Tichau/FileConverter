@@ -1,7 +1,7 @@
 # File Converter
 
 ## Description
-**File Converter** is a very simple tool which allows you to convert one or several file(s) from one format to another using the context menu in windows explorer.
+**File Converter** is a very simple tool which allows you to convert and compress one or several file(s) from one format to another using the context menu in windows explorer.
 
 You can download it here: [www.file-converter.org](http://file-converter.org).
 
@@ -29,6 +29,9 @@ Thanks to Dave Kerr for his work on SharpShell. [CodePlex link](https://sharpshe
 
 **Ripper** and **yeti.mmedia** for CD Audio extraction.
 Thanks to Idael Cardoso for his work on CD Audio ripper. [Code project link](http://www.codeproject.com/Articles/5458/C-Sharp-Ripper)
+
+**Markdown.XAML** for markdown rendering in the wpf application.
+Thanks to Bevan Arps for his work on Markdown.XAML. [GitHub link](https://github.com/theunrepentantgeek/Markdown.XAML)
 
 ## License
 

@@ -1,0 +1,95 @@
+﻿<Window x:Name="window" x:Class="FileConverter.Windows.UpgradeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileConverter.Windows"
+        xmlns:fileConverter="clr-namespace:FileConverter"
+        xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
+        xmlns:xaml="clr-namespace:Markdown.Xaml;assembly=Markdown.Xaml"
+        mc:Ignorable="d"
+        Title="File Converter Updates"
+        WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
+        MinHeight="300" MinWidth="450"
+        Height="450" Width="450" WindowStyle="ToolWindow">
+    <Window.Resources>
+        <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
+
+        <Style TargetType="FlowDocument" x:Key="DocumentStyle">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="#786C71" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="LineHeight" Value="9"/>
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+
+        <Style x:Key="PageHeader" TargetType="Paragraph">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Foreground" Value="#1E6BB8" />
+        </Style>
+
+        <Style x:Key="SubHeader"
+               TargetType="Paragraph">
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Foreground"
+                    Value="#DF3900" />
+        </Style>
+
+        <Style x:Key="SubHeaderSecondary"
+               TargetType="Paragraph">
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Foreground"
+                    Value="#DF3900" />
+        </Style>
+
+        <xaml:Markdown x:Key="Markdown"
+                        DocumentStyle="{StaticResource DocumentStyle}"
+                        Heading1Style="{StaticResource PageHeader}"
+                        Heading2Style="{StaticResource SubHeader}"
+                        Heading3Style="{StaticResource SubHeaderSecondary}"/>
+
+        <xaml:TextToFlowDocumentConverter x:Key="TextToFlowDocumentConverter" Markdown="{StaticResource Markdown}"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <!--<RowDefinition Height="{Binding Height, ElementName=ApplicationSettingsPanel, Mode=OneWay}"/>-->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Margin="5"
+            Text="An update for File Converter is available. It is strongly recommended that you install it as soon as possible!" TextWrapping="Wrap"/>
+
+        <!--<Label Grid.Row="1" Margin="5" 
+               Content="{Binding VersionDescription.LatestVersion, Converter={StaticResource ApplicationVersionToApplicationName}, ElementName=window}" FontWeight="Bold" FontSize="14.667"/>-->
+
+        <FlowDocumentScrollViewer Grid.Row="2" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+                                  Document="{Binding ReleaseNote, Converter={StaticResource TextToFlowDocumentConverter}, ElementName=window}"/>
+
+        <Button Background="WhiteSmoke" Grid.Row="3" Padding="10,5,10,5" Margin="5" HorizontalContentAlignment="Left" Click="OnInstallButtonClick" >
+            <Button.Content>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="64"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/FileConverter;component/Resources/DownloadIcon.png" Stretch="Fill"/>
+                    <Grid Grid.Column="1" Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="Install when I exit File Converter" FontSize="14.667"/>
+                        <TextBlock Grid.Row="1" Text="The update will be downloaded in background, and installed once you exit File Converter." TextWrapping="Wrap" FontSize="10.667"/>
+                    </Grid>
+                </Grid>
+            </Button.Content>
+        </Button>
+    </Grid>
+</Window>

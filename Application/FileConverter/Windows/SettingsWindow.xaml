@@ -343,12 +343,13 @@
 
         <!-- Application settings -->
         <StackPanel x:Name="ApplicationSettingsPanel" Grid.Row="2" Margin="5,10,5,5">
-            <CheckBox x:Name="QuitAtEndCheckBox" Content="Automaticaly exit when all conversions finished" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}"  />
+            <CheckBox x:Name="QuitAtEndCheckBox" Content="Automatically exit when all conversions finished" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}"  />
             <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
                 <Label Content="Waiting duration :"/>
                 <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationExit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
                 <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
             </DockPanel>
+            <CheckBox Content="Automatically check for updates when File Converter starts" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}"  />
         </StackPanel>
 
         <Button x:Name="CloseButton" Grid.Row="3" Content="Close" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
