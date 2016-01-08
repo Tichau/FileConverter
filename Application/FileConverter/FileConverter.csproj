@@ -117,6 +117,7 @@
     <Compile Include="ValueConverters\Generic\DoubleToTimeString.cs" />
     <Compile Include="ValueConverters\Generic\EqualsConverter.cs" />
     <Compile Include="ValueConverters\Generic\CollectionContainsElementToBool.cs" />
+    <Compile Include="ValueConverters\Generic\FormatStringConverter.cs" />
     <Compile Include="ValueConverters\Generic\StringToValueType.cs" />
     <Compile Include="ValueConverters\InputTypesToBool.cs" />
     <Compile Include="Settings.cs" />

@@ -436,6 +436,16 @@ namespace FileConverter
                     switch (settingsKey)
                     {
                         case ConversionPreset.ConversionSettingKeys.ImageQuality:
+                        case ConversionPreset.ConversionSettingKeys.ImageScale:
+                            return true;
+                    }
+
+                    break;
+
+                case OutputType.Png:
+                    switch (settingsKey)
+                    {
+                        case ConversionPreset.ConversionSettingKeys.ImageScale:
                             return true;
                     }
 
@@ -453,13 +463,17 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
                     break;
 
-                case OutputType.Flac:
                 case OutputType.Ico:
+                case OutputType.Flac:
+                    break;
+
                 case OutputType.Png:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
                     break;
 
                 case OutputType.Jpg:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "25");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
                     break;
 
                 case OutputType.Mkv:
@@ -634,6 +648,7 @@ namespace FileConverter
             public const string AudioEncodingMode = "AudioEncodingMode";
             public const string AudioBitrate = "AudioBitrate";
             public const string ImageQuality = "ImageQuality";
+            public const string ImageScale = "ImageScale";
             public const string VideoQuality = "VideoQuality";
             public const string VideoEncodingSpeed = "VideoEncodingSpeed";
         }
