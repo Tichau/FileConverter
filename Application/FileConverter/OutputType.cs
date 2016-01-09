@@ -7,6 +7,7 @@ namespace FileConverter
         None,
 
         Aac,
+        Avi,
         Flac,
         Ico,
         Jpg,

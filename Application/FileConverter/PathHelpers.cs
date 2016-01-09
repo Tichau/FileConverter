@@ -128,6 +128,7 @@ namespace FileConverter
                 case OutputType.Wav:
                     return category == InputCategoryNames.Audio || category == InputCategoryNames.Video;
 
+                case OutputType.Avi:
                 case OutputType.Mkv:
                     return category == InputCategoryNames.Video;
                     

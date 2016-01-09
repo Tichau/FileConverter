@@ -132,6 +132,18 @@ namespace FileConverter.ConversionJobs
         }
 
         /// <summary>
+        /// Convert video quality index to MPEG4 video quality level.
+        /// </summary>
+        /// <param name="quality">The quality index.</param>
+        /// <returns>Returns the H264 constant rate factor.</returns>
+        /// The range of the video quality level is 1-31: where 1 is the highest quality/largest filesize, 31 being the lowest quality/smallest filesize.
+        /// https://trac.ffmpeg.org/wiki/Encode/MPEG-4
+        private int MPEG4QualityToQualityIndex(int quality)
+        {
+            return 31 - quality;
+        }
+
+        /// <summary>
         /// Convert video quality index to H264 constant rate factor.
         /// </summary>
         /// <param name="quality">The quality index.</param>

@@ -109,6 +109,25 @@ namespace FileConverter.ConversionJobs
 
                 break;
 
+                case OutputType.Avi:
+                    {
+                        // https://trac.ffmpeg.org/wiki/Encode/MPEG-4
+                        int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
+                        int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
+
+                        float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);
+                        string scaleArgs = string.Empty;
+                        if (Math.Abs(scaleFactor - 1f) >= 0.005f)
+                        {
+                            scaleArgs = string.Format("-vf scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+                        }
+
+                        string encoderArgs = string.Format("-c:v mpeg4 -vtag xvid -qscale:v {0} -c:a libmp3lame -qscale:a {1} {2}", this.MPEG4QualityToQualityIndex(videoEncodingQuality), this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate), scaleArgs);
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
+                    break;
+
                 case OutputType.Mkv:
                     {
                         // https://trac.ffmpeg.org/wiki/Encode/H.264

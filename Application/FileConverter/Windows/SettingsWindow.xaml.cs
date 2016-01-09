@@ -37,10 +37,11 @@ namespace FileConverter
                                            {
                                                OutputType.Ogg, 
                                                OutputType.Mp3,
-                                               OutputType.Aac, 
+                                               OutputType.Aac,
                                                OutputType.Flac,
                                                OutputType.Wav,
                                                OutputType.Mkv,
+                                               OutputType.Avi,
                                                OutputType.Ico,
                                                OutputType.Jpg,
                                                OutputType.Png,

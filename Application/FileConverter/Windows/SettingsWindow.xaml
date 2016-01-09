@@ -100,7 +100,6 @@
             </StackPanel>
         </DataTemplate>
 
-
         <DataTemplate x:Key="AacSettingsDataTemplate">
             <StackPanel>
                 <DockPanel>
@@ -111,6 +110,57 @@
             </StackPanel>
         </DataTemplate>
 
+        <DataTemplate x:Key="AviSettingsDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel Grid.Row="0" Grid.Column="0">
+                    <Label Content="Video" FontWeight="Bold" />
+                    <Label Content="(Xvid)" FontWeight="Light" Foreground="#004B82" />
+                </DockPanel>
+
+                <Label Content="Quality :" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
+                <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="28" Minimum="0" Maximum="30" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" TickFrequency="1" Foreground="#004B82" />
+
+                <Label Content="Scale :" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+                <Grid Grid.Row="2" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.01" Maximum="2" SmallChange="0.01" LargeChange="0.1" TickFrequency="0.01" Foreground="#004B82"/>
+                    <Label Grid.Column="1">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
+                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+
+                <DockPanel Grid.Row="3" Grid.Column="0" >
+                    <Label Content="Audio" FontWeight="Bold" />
+                    <Label Content="(Mp3)" FontWeight="Light" Foreground="#004B82" />
+                </DockPanel>
+
+                <Label Content="Quality :" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right"/>
+                <controls:EncodingQualitySliderControl Grid.Row="4" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="Mp3VBR" 
+        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
+            </Grid>
+        </DataTemplate>
+        
         <DataTemplate x:Key="MkvSettingsDataTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -175,7 +225,6 @@
         				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=128}" />
             </Grid>
         </DataTemplate>
-
 
         <DataTemplate x:Key="JpgSettingsDataTemplate">
             <Grid>
@@ -242,13 +291,14 @@
 
         <windows:ConversionSettingsTemplateSelector x:Key="ConversionSettingsSelector"
             DefaultDataTemplate="{StaticResource EmptyDataTemplate}"
-            WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
+            AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}"
+            AviSettingsDataTemplate="{StaticResource AviSettingsDataTemplate}"
+            JpgSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" 
+            MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
             Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
             OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}"
-            MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
-            AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}"
-            JpgSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" 
-            PngSettingsDataTemplate="{StaticResource PngSettingsDataTemplate}" />
+            PngSettingsDataTemplate="{StaticResource PngSettingsDataTemplate}"
+            WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}" />
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
