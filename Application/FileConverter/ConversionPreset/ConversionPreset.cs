@@ -426,6 +426,7 @@ namespace FileConverter
                     {
                         case ConversionPreset.ConversionSettingKeys.AudioBitrate:
                         case ConversionPreset.ConversionSettingKeys.VideoQuality:
+                        case ConversionPreset.ConversionSettingKeys.VideoScale:
                         case ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed:
                             return true;
                     }
@@ -479,6 +480,7 @@ namespace FileConverter
                 case OutputType.Mkv:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Very Slow");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
                     break;
 
@@ -651,6 +653,7 @@ namespace FileConverter
             public const string ImageScale = "ImageScale";
             public const string VideoQuality = "VideoQuality";
             public const string VideoEncodingSpeed = "VideoEncodingSpeed";
+            public const string VideoScale = "VideoScale";
         }
     }
 }
