@@ -90,10 +90,13 @@ namespace FileConverter
 
                 case "avi":
                 case "bik":
+                case "3gp":
                 case "flv":
                 case "mp4":
                 case "mov":
                 case "mkv":
+                case "webm":
+                case "wmv":
                     return InputCategoryNames.Video;
 
                 case "bmp":
