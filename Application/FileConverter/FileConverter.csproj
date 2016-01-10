@@ -124,6 +124,9 @@
     <Compile Include="ValueConverters\OutputTypeToVisibility.cs" />
     <Compile Include="ValueConverters\Generic\StringToEnum.cs" />
     <Compile Include="ValueConverters\Generic\ValueConverterGroup.cs" />
+    <Compile Include="Windows\ApplicationStartHelp.xaml.cs">
+      <DependentUpon>ApplicationStartHelp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DiagnosticsWindow.xaml.cs">
       <DependentUpon>DiagnosticsWindow.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
     </Compile>
     <Compile Include="XmlHelpers.cs" />
     <Page Include="Controls\EncodingQualitySliderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ApplicationStartHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\DownloadIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ContextMenuScreenshot.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -22,6 +22,12 @@ namespace FileConverter
             Application application = Application.Current as Application;
 
             this.ConverterJobsList.ItemsSource = application.ConvertionJobs;
+
+            if (application.HideMainWindow)
+            {
+                this.Hide();
+            }
+
             if (application.Verbose)
             {
                 this.ShowDiagnosticsWindow();
@@ -29,8 +35,6 @@ namespace FileConverter
 
             if (application.ShowSettings)
             {
-                this.Hide();
-
                 this.ShowSettingsWindow();
                 this.settingsWindow.OnSettingsWindowHide += this.SettingsWindow_Closed;
             }

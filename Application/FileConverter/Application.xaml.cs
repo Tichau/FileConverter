@@ -25,6 +25,7 @@ namespace FileConverter
     using FileConverter.ConversionJobs;
     using FileConverter.Diagnostics;
     using FileConverter.Upgrade;
+    using FileConverter.Windows;
 
     public partial class Application : System.Windows.Application
     {
@@ -68,6 +69,12 @@ namespace FileConverter
         }
 
         public bool ShowSettings
+        {
+            get;
+            set;
+        }
+
+        public bool HideMainWindow
         {
             get;
             set;
@@ -180,7 +187,7 @@ namespace FileConverter
                 //args[6] = @"D:\Test\Track03.mp3";
                 //args[7] = @"D:\Test\Track04.mp3";
 
-                System.Array.Resize(ref args, 2);
+                System.Array.Resize(ref args, 1);
                 args[1] = "--settings";
 
                 //System.Array.Resize(ref args, 5);
@@ -201,7 +208,11 @@ namespace FileConverter
 
             if (args.Length == 1)
             {
-                // TODO: Help windows to explain that this application is a context menu extension.
+                // Diplay help windows to explain that this application is a context menu extension.
+                ApplicationStartHelp applicationStartHelp = new ApplicationStartHelp();
+                applicationStartHelp.Show();
+                this.HideMainWindow = true;
+                return;
             }
 
             ConversionPreset conversionPreset = null;
@@ -225,6 +236,7 @@ namespace FileConverter
 
                         case "settings":
                             this.ShowSettings = true;
+                            this.HideMainWindow = true;
                             break;
 
                         case "apply-settings":
