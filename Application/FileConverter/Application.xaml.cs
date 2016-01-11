@@ -283,7 +283,14 @@ namespace FileConverter
 
             if (this.Settings.CheckUpgradeAtStartup)
             {
-                Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+                long fileTime = Registry.GetValue<long>(Registry.Keys.LastUpdateCheckDate);
+                DateTime lastUpdateDateTime = DateTime.FromFileTime(fileTime);
+
+                TimeSpan durationSinceLastUpdate = DateTime.Now.Subtract(lastUpdateDateTime);
+                if (durationSinceLastUpdate > new TimeSpan(1, 0, 0, 0))
+                {
+                    Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+                }
             }
 
             if (conversionPreset != null)
@@ -423,6 +430,8 @@ namespace FileConverter
             {
                 return;
             }
+            
+            Registry.SetValue(Registry.Keys.LastUpdateCheckDate, DateTime.Now.ToFileTime());
 
             if (upgradeVersionDescription.LatestVersion <= ApplicationVersion)
             {
