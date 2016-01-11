@@ -104,6 +104,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Registry.cs" />
     <Compile Include="Settings.Settings.cs" />
     <Compile Include="Upgrade\Helpers.cs" />
     <Compile Include="Upgrade\UpgradeVersionDescription.cs" />
