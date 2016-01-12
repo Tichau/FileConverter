@@ -1,12 +1,12 @@
 # Change Log
 
 ## Version 0.5
-- New: Software update system. The application now check if a new version of File Converter is available.
+- New: Software update system. The application now checks if a new version of File Converter is available.
 - New: Possibility to scale images and videos. 
 - New: Possibility to encode videos (avi output file format) using Xvid video codec and Mp3 audio codec.
 - New: Support new video input file formats: 3gp, webm and wmv.
-- New: Add an some help to explain how file converter works when you launch it without using the context menu.
-- Fixed: Problem to convert images when accentuated characters was present in their path.
+- New: Add a help window to explain how file converter works when you launch it without using the context menu.
+- Fixed: Problem to convert images when accentuated characters were present in their path.
 - Tech: Update ffmpeg version (aac encoding is not anymore experimental).
 
 ## Version 0.4
