@@ -11,12 +11,11 @@ namespace FileConverter
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Security.Principal;
-    using System.Xml.Serialization;
     using System.Windows;
-
-    using Microsoft.Win32;
+    using System.Xml.Serialization;
 
     using FileConverter.Annotations;
+    using Microsoft.Win32;
 
     [XmlRoot]
     [XmlType]
@@ -73,7 +72,7 @@ namespace FileConverter
             Settings settings = null;
             XmlHelpers.LoadFromFile("Settings", temporaryFilePath, out settings);
 
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
+            RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
             if (registryKey == null)
             {
                 Diagnostics.Debug.LogError("Can't apply settings in registry. (code 0x03)");
@@ -124,7 +123,7 @@ namespace FileConverter
                 {
                     XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, out userSettings);
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     MessageBoxResult messageBoxResult = MessageBox.Show("Can't load file converter user settings. Do you want to fall back to default settings ?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                     if (messageBoxResult == MessageBoxResult.Yes)
@@ -212,7 +211,7 @@ namespace FileConverter
                 return false;
             }
 
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter", RegistryKeyPermissionCheck.ReadWriteSubTree);
+            RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\FileConverter", RegistryKeyPermissionCheck.ReadWriteSubTree);
             if (registryKey == null)
             {
                 MessageBox.Show("Can't apply settings in registry. (code 0x05)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -323,7 +322,7 @@ namespace FileConverter
         private static bool IsRegistryNeedModifications(Dictionary<string, List<string>> registryEntries)
         {
             // Compare to registry entries.
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
+            RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
             if (registryKey == null)
             {
                 return true;

@@ -40,7 +40,7 @@ namespace FileConverter
                     }
                 }
             }
-            catch (System.Exception exception)
+            catch (System.Exception)
             {
                 throw;
             }

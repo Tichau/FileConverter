@@ -2,19 +2,18 @@
 
 namespace FileConverter
 {
-    using System.Linq;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Xml.Serialization;
 
     public partial class Settings : IXmlSerializable
     {
         public const int Version = 1;
-
-        private double settingsWindowHeight = 640;
-        private double settingsWindowWidth = 800;
+        
         private bool exitApplicationWhenConversionsFinished = true;
         private float durationBetweenEndOfConversionsAndApplicationExit = 3f;
         private ObservableCollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
+        private bool checkUpgradeAtStartup = true;
 
         [XmlAttribute]
         public int SerializationVersion
@@ -82,6 +81,21 @@ namespace FileConverter
                 {
                     this.ConversionPresets.Add(value[index]);
                 }
+            }
+        }
+
+        [XmlElement]
+        public bool CheckUpgradeAtStartup
+        {
+            get
+            {
+                return this.checkUpgradeAtStartup;
+            }
+
+            set
+            {
+                this.checkUpgradeAtStartup = value;
+                this.OnPropertyChanged();
             }
         }
 

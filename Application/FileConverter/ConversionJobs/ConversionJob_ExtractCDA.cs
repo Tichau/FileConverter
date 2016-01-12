@@ -6,12 +6,10 @@ namespace FileConverter.ConversionJobs
     using System.IO;
     using System.Threading;
 
+    using Diagnostics;
     using Ripper;
-
     using WaveLib;
     using Yeti.MMedia;
-
-    using FileConverter.Diagnostics;
 
     public class ConversionJob_ExtractCDA : ConversionJob
     {

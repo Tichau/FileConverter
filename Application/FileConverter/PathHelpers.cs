@@ -90,10 +90,13 @@ namespace FileConverter
 
                 case "avi":
                 case "bik":
+                case "3gp":
                 case "flv":
                 case "mp4":
                 case "mov":
                 case "mkv":
+                case "webm":
+                case "wmv":
                     return InputCategoryNames.Video;
 
                 case "bmp":
@@ -125,6 +128,7 @@ namespace FileConverter
                 case OutputType.Wav:
                     return category == InputCategoryNames.Audio || category == InputCategoryNames.Video;
 
+                case OutputType.Avi:
                 case OutputType.Mkv:
                     return category == InputCategoryNames.Video;
                     
@@ -140,7 +144,7 @@ namespace FileConverter
 
         public static string GetUserDataFolderPath()
         {
-            string path = System.Environment.GetFolderPath((System.Environment.SpecialFolder.LocalApplicationData));
+            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
             path = System.IO.Path.Combine(path, "FileConverter");
 
             if (!System.IO.Directory.Exists(path))

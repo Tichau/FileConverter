@@ -46,6 +46,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="Markdown.Xaml">
+      <HintPath>..\..\Middleware\Markdown.Xaml.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
     <Reference Include="Ripper, Version=1.0.5806.33932, Culture=neutral, processorArchitecture=MSIL">
@@ -101,7 +104,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Registry.cs" />
     <Compile Include="Settings.Settings.cs" />
+    <Compile Include="Upgrade\Helpers.cs" />
+    <Compile Include="Upgrade\UpgradeVersionDescription.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset\ConversionPreset.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
@@ -112,12 +118,16 @@
     <Compile Include="ValueConverters\Generic\DoubleToTimeString.cs" />
     <Compile Include="ValueConverters\Generic\EqualsConverter.cs" />
     <Compile Include="ValueConverters\Generic\CollectionContainsElementToBool.cs" />
+    <Compile Include="ValueConverters\Generic\FormatStringConverter.cs" />
     <Compile Include="ValueConverters\Generic\StringToValueType.cs" />
     <Compile Include="ValueConverters\InputTypesToBool.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ValueConverters\OutputTypeToVisibility.cs" />
     <Compile Include="ValueConverters\Generic\StringToEnum.cs" />
     <Compile Include="ValueConverters\Generic\ValueConverterGroup.cs" />
+    <Compile Include="Windows\ApplicationStartHelp.xaml.cs">
+      <DependentUpon>ApplicationStartHelp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DiagnosticsWindow.xaml.cs">
       <DependentUpon>DiagnosticsWindow.xaml</DependentUpon>
     </Compile>
@@ -128,8 +138,15 @@
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Version.cs" />
+    <Compile Include="Windows\UpgradeWindow.xaml.cs">
+      <DependentUpon>UpgradeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XmlHelpers.cs" />
     <Page Include="Controls\EncodingQualitySliderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ApplicationStartHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,6 +170,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UpgradeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,7 +220,17 @@
   <ItemGroup>
     <Resource Include="Resources\ApplicationIcon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DownloadIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ContextMenuScreenshot.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"
+copy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)Settings.xml"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

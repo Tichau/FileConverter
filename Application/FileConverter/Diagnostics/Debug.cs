@@ -1,6 +1,5 @@
-﻿// <copyright file="Diagnostics.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="Debug.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.Linq;
 
 namespace FileConverter.Diagnostics
 {
@@ -9,7 +8,7 @@ namespace FileConverter.Diagnostics
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
-    using System.Text;
+    using System.Linq;
     using System.Windows;
 
     public static class Debug
@@ -17,8 +16,6 @@ namespace FileConverter.Diagnostics
         private static string diagnosticsFolderPath;
         private static Dictionary<int, DiagnosticsData> diagnosticsDataById = new Dictionary<int, DiagnosticsData>();
         private static int threadCount = 0;
-
-        public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
 
         static Debug()
         {
@@ -41,6 +38,8 @@ namespace FileConverter.Diagnostics
             Debug.diagnosticsFolderPath = PathHelpers.GenerateUniquePath(Debug.diagnosticsFolderPath);
             Directory.CreateDirectory(Debug.diagnosticsFolderPath);
         }
+
+        public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
 
         public static DiagnosticsData[] Data
         {
@@ -91,6 +90,5 @@ namespace FileConverter.Diagnostics
 
             Debug.diagnosticsDataById.Clear();
         }
-        
     }
 }

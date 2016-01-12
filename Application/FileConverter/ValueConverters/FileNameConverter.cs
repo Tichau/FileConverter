@@ -62,19 +62,19 @@ namespace FileConverter.ValueConverters
             outputPath = outputPath.Replace("(i)", inputExtension);
             outputPath = outputPath.Replace("(I)", inputExtension.ToUpperInvariant());
 
-            string myDocumentsFolder = System.Environment.GetFolderPath((System.Environment.SpecialFolder.MyDocuments)) + "\\";
+            string myDocumentsFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "\\";
             outputPath = outputPath.Replace("(p:d)", myDocumentsFolder);
             outputPath = outputPath.Replace("(p:documents)", myDocumentsFolder);
 
-            string myMusicFolder = System.Environment.GetFolderPath((System.Environment.SpecialFolder.MyMusic)) + "\\";
+            string myMusicFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic) + "\\";
             outputPath = outputPath.Replace("(p:m)", myMusicFolder);
             outputPath = outputPath.Replace("(p:music)", myMusicFolder);
 
-            string myVideoFolder = System.Environment.GetFolderPath((System.Environment.SpecialFolder.MyVideos)) + "\\";
+            string myVideoFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyVideos) + "\\";
             outputPath = outputPath.Replace("(p:v)", myVideoFolder);
             outputPath = outputPath.Replace("(p:videos)", myVideoFolder);
 
-            string myPictureFolder = System.Environment.GetFolderPath((System.Environment.SpecialFolder.MyPictures)) + "\\";
+            string myPictureFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures) + "\\";
             outputPath = outputPath.Replace("(p:p)", myPictureFolder);
             outputPath = outputPath.Replace("(p:pictures)", myPictureFolder);
 

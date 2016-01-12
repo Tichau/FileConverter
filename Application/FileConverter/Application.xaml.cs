@@ -19,43 +19,33 @@ namespace FileConverter
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows;
 
     using FileConverter.ConversionJobs;
     using FileConverter.Diagnostics;
+    using FileConverter.Windows;
 
     public partial class Application : System.Windows.Application
     {
-        private int numberOfConversionThread = 1;
-
         private static readonly Version Version = new Version()
                                             {
                                                 Major = 0, 
-                                                Minor = 4,
+                                                Minor = 5,
+                                                Patch = 0,
                                             };
 
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
 
-        private bool debugMode;
-        private bool initialized;
+        private int numberOfConversionThread = 1;
+
+        private bool needToRunConversionThread;
         private bool cancelAutoExit;
+        private UpgradeVersionDescription upgradeVersionDescription = null;
 
         public Application()
         {
             this.ConvertionJobs = this.conversionJobs.AsReadOnly();
-        }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-
-            this.Initialize();
-
-            if (this.initialized)
-            {
-                Thread fileConvertionThread = new Thread(this.ConvertFiles);
-                fileConvertionThread.Start();
-            }
         }
 
         public static Version ApplicationVersion
@@ -84,6 +74,12 @@ namespace FileConverter
             set;
         }
 
+        public bool HideMainWindow
+        {
+            get;
+            set;
+        }
+
         public bool Verbose
         {
             get;
@@ -94,7 +90,68 @@ namespace FileConverter
         {
             this.cancelAutoExit = true;
         }
-        
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            this.Initialize();
+
+            if (this.needToRunConversionThread)
+            {
+                Thread fileConvertionThread = new Thread(this.ConvertFiles);
+                fileConvertionThread.Start();
+            }
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+
+            Debug.Log("Exit application.");
+
+            if (this.upgradeVersionDescription != null && this.upgradeVersionDescription.NeedToUpgrade)
+            {
+                Debug.Log("A new version of file converter has been found: {0}.", this.upgradeVersionDescription.LatestVersion);
+
+                if (string.IsNullOrEmpty(this.upgradeVersionDescription.InstallerPath))
+                {
+                    Debug.LogError("Invalid installer path.");
+                }
+                else
+                {
+                    Debug.Log("Wait for the end of the installer download.");
+                    while (this.upgradeVersionDescription.InstallerDownloadInProgress)
+                    {
+                        Thread.Sleep(1000);
+                    }
+
+                    string installerPath = this.upgradeVersionDescription.InstallerPath;
+                    if (!System.IO.File.Exists(installerPath))
+                    {
+                        Debug.LogError("Can't find upgrade installer ({0}). Try to restart the application.", installerPath);
+                        return;
+                    }
+
+                    // Start process.
+                    Debug.Log("Start file converter upgrade from version {0} to {1}.", ApplicationVersion, this.upgradeVersionDescription.LatestVersion);
+
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(installerPath);
+                    startInfo.UseShellExecute = true;
+
+                    Debug.Log("Start upgrade process: {0}{1}.", System.IO.Path.GetFileName(startInfo.FileName), startInfo.Arguments);
+                    System.Diagnostics.Process process = new System.Diagnostics.Process
+                    {
+                        StartInfo = startInfo
+                    };
+
+                    process.Start();
+                }
+            }
+
+            Debug.Release();
+        }
+
         private void Initialize()
         {
             Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", Environment.ProcessorCount);
@@ -109,7 +166,7 @@ namespace FileConverter
                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                 return;
             }
-
+            
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
             string[] args = Environment.GetCommandLineArgs();
@@ -117,28 +174,27 @@ namespace FileConverter
 #if (DEBUG)
             if (args.Length <= 1)
             {
-                this.debugMode = true;
-                System.Array.Resize(ref args, 8);
-                args[1] = "--conversion-preset";
-                args[2] = "To Ogg";
-                args[3] = "--verbose";
-                
-                args[4] = @"D:\Test\TrailerV2 compressed.mkv";
-                args[4] = @"D:\Test\image.png";
-                args[4] = @"E:\Track01.cda";
-                args[4] = @"D:\Test\Track01.mp3";
-                args[5] = @"D:\Test\Track02.mp3";
-                args[6] = @"D:\Test\Track03.mp3";
-                args[7] = @"D:\Test\Track04.mp3";
+                //System.Array.Resize(ref args, 8);
+                //args[1] = "--conversion-preset";
+                //args[2] = "To Ogg";
+                //args[3] = "--verbose";
 
-                //System.Array.Resize(ref args, 2);
-                //args[1] = "--settings";
+                //args[4] = @"D:\Test\TrailerV2 compressed.mkv";
+                //args[4] = @"D:\Test\image.png";
+                //args[4] = @"E:\Track01.cda";
+                //args[4] = @"D:\Test\Track01.mp3";
+                //args[5] = @"D:\Test\Track02.mp3";
+                //args[6] = @"D:\Test\Track03.mp3";
+                //args[7] = @"D:\Test\Track04.mp3";
 
-                System.Array.Resize(ref args, 5);
-                args[1] = "--conversion-preset";
-                args[2] = "To Aac";
-                args[3] = "--verbose";
-                args[4] = @"D:\Test\02 - Corn on the Cob.flac";
+                System.Array.Resize(ref args, 2);
+                args[1] = "--settings";
+
+                //System.Array.Resize(ref args, 5);
+                //args[1] = "--conversion-preset";
+                //args[2] = "To Jpg";
+                //args[3] = "--verbose";
+                //args[4] = @"D:\Test\Test avec accents héhé\imagé.png";
             }
 #endif
 
@@ -149,6 +205,15 @@ namespace FileConverter
             }
 
             Debug.Log(string.Empty);
+
+            if (args.Length == 1)
+            {
+                // Diplay help windows to explain that this application is a context menu extension.
+                ApplicationStartHelp applicationStartHelp = new ApplicationStartHelp();
+                applicationStartHelp.Show();
+                this.HideMainWindow = true;
+                return;
+            }
 
             ConversionPreset conversionPreset = null;
             List<string> filePaths = new List<string>();
@@ -164,9 +229,15 @@ namespace FileConverter
 
                     switch (parameterTitle)
                     {
+                        case "version":
+                            Console.Write(ApplicationVersion.ToString());
+                            Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                            return;
+
                         case "settings":
                             this.ShowSettings = true;
-                            return;
+                            this.HideMainWindow = true;
+                            break;
 
                         case "apply-settings":
                             Settings.ApplyTemporarySettings();
@@ -191,7 +262,7 @@ namespace FileConverter
 
                             index++;
                             continue;
-                            
+
                         case "verbose":
                             {
                                 this.Verbose = true;
@@ -200,7 +271,7 @@ namespace FileConverter
                             break;
 
                         default:
-                            Debug.LogError("Unknown option {0}.", parameterTitle);
+                            Debug.LogError("Unknown application argument: '--{0}'.", parameterTitle);
                             return;
                     }
                 }
@@ -210,41 +281,41 @@ namespace FileConverter
                 }
             }
 
-            if (conversionPreset == null)
+            if (this.Settings.CheckUpgradeAtStartup)
             {
-                Debug.LogError("Can't retrieve the conversion preset from arguments.");
-                return;
-            }
+                long fileTime = Registry.GetValue<long>(Registry.Keys.LastUpdateCheckDate);
+                DateTime lastUpdateDateTime = DateTime.FromFileTime(fileTime);
 
-            // Create convertion jobs.
-            Debug.Log("Create jobs for conversion preset: '{0}'", conversionPreset.Name);
-            try
-            {
-                for (int index = 0; index < filePaths.Count; index++)
+                TimeSpan durationSinceLastUpdate = DateTime.Now.Subtract(lastUpdateDateTime);
+                if (durationSinceLastUpdate > new TimeSpan(1, 0, 0, 0))
                 {
-                    string inputFilePath = filePaths[index];
-                    ConversionJob conversionJob = ConversionJobFactory.Create(conversionPreset, inputFilePath);
-                    conversionJob.PrepareConversion(inputFilePath);
-
-                    this.conversionJobs.Add(conversionJob);
+                    Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
                 }
             }
-            catch (Exception exception)
+
+            if (conversionPreset != null)
             {
-                Debug.LogError(exception.Message);
-                throw;
+                // Create convertion jobs.
+                Debug.Log("Create jobs for conversion preset: '{0}'", conversionPreset.Name);
+                try
+                {
+                    for (int index = 0; index < filePaths.Count; index++)
+                    {
+                        string inputFilePath = filePaths[index];
+                        ConversionJob conversionJob = ConversionJobFactory.Create(conversionPreset, inputFilePath);
+                        conversionJob.PrepareConversion(inputFilePath);
+
+                        this.conversionJobs.Add(conversionJob);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogError(exception.Message);
+                    throw;
+                }
+
+                this.needToRunConversionThread = true;
             }
-
-            this.initialized = true;
-        }
-
-        protected override void OnExit(ExitEventArgs e)
-        {
-            base.OnExit(e);
-
-            Debug.Log("Exit application.");
-
-            Debug.Release();
         }
 
         private void ConvertFiles()
@@ -351,6 +422,24 @@ namespace FileConverter
             {
                 Debug.Log("The conversion job failed but there is an output file that does exists.");
             }
+        }
+
+        private void OnGetLatestVersionDescription(UpgradeVersionDescription upgradeVersionDescription)
+        {
+            if (upgradeVersionDescription == null)
+            {
+                return;
+            }
+            
+            Registry.SetValue(Registry.Keys.LastUpdateCheckDate, DateTime.Now.ToFileTime());
+
+            if (upgradeVersionDescription.LatestVersion <= ApplicationVersion)
+            {
+                return;
+            }
+
+            this.upgradeVersionDescription = upgradeVersionDescription;
+            (this.MainWindow as MainWindow).OnNewVersionReleased(upgradeVersionDescription);
         }
     }
 }

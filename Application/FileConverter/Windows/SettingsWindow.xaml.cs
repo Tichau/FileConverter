@@ -1,12 +1,11 @@
 ﻿// <copyright file="SettingsWindow.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.Linq;
-
 namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
@@ -38,10 +37,11 @@ namespace FileConverter
                                            {
                                                OutputType.Ogg, 
                                                OutputType.Mp3,
-                                               OutputType.Aac, 
+                                               OutputType.Aac,
                                                OutputType.Flac,
                                                OutputType.Wav,
                                                OutputType.Mkv,
+                                               OutputType.Avi,
                                                OutputType.Ico,
                                                OutputType.Jpg,
                                                OutputType.Png,
@@ -57,7 +57,7 @@ namespace FileConverter
                                            };
 
             this.PostConversionActionComboBox.ItemsSource = postConversionActions;
-
+            
             this.InitializeCompatibleInputExtensions();
         }
 
@@ -87,14 +87,6 @@ namespace FileConverter
                 }
 
                 this.OnPropertyChanged();
-                this.OnPropertyChanged("InputCategories");
-            }
-        }
-
-        private void SelectedPresetPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "OutputType")
-            {
                 this.OnPropertyChanged("InputCategories");
             }
         }
@@ -137,6 +129,14 @@ namespace FileConverter
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void SelectedPresetPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "OutputType")
+            {
+                this.OnPropertyChanged("InputCategories");
+            }
         }
 
         private void OnInputTypeChecked(object sender, RoutedEventArgs e)
@@ -319,7 +319,7 @@ namespace FileConverter
 
         private void InitializeCompatibleInputExtensions()
         {
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
+            RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
             if (registryKey == null)
             {
                 MessageBox.Show("Can't retrieve the list of compatible input extensions. (code 0x09)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

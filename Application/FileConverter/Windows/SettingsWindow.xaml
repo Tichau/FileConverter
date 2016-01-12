@@ -8,7 +8,7 @@
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="window" x:Class="FileConverter.SettingsWindow"
         MinWidth="640" MinHeight="480" 
-        Width="800" Height="600"
+        Width="900" Height="675"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         Closing="SettingsWindow_OnClosing">
     <Window.Resources>
@@ -17,6 +17,7 @@
         <generic:BoolToVisibility x:Key="BoolToVisibility"/>
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
+        <generic:FormatStringConverter x:Key="FormatStringConverter"/>
 
         <generic:ValueConverterGroup x:Key="ConversionSettingsToEnum">
             <valueConverters:ConversionSettingsToString/>
@@ -99,7 +100,6 @@
             </StackPanel>
         </DataTemplate>
 
-
         <DataTemplate x:Key="AacSettingsDataTemplate">
             <StackPanel>
                 <DockPanel>
@@ -110,64 +110,195 @@
             </StackPanel>
         </DataTemplate>
 
+        <DataTemplate x:Key="AviSettingsDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel Grid.Row="0" Grid.Column="0">
+                    <Label Content="Video" FontWeight="Bold" />
+                    <Label Content="(Xvid)" FontWeight="Light" Foreground="#004B82" />
+                </DockPanel>
+
+                <Label Content="Quality :" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
+                <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="28" Minimum="0" Maximum="30" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" TickFrequency="1" Foreground="#004B82" />
+
+                <Label Content="Scale :" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+                <Grid Grid.Row="2" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.01" Maximum="2" SmallChange="0.01" LargeChange="0.1" TickFrequency="0.01" Foreground="#004B82"/>
+                    <Label Grid.Column="1">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
+                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+
+                <DockPanel Grid.Row="3" Grid.Column="0" >
+                    <Label Content="Audio" FontWeight="Bold" />
+                    <Label Content="(Mp3)" FontWeight="Light" Foreground="#004B82" />
+                </DockPanel>
+
+                <Label Content="Quality :" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right"/>
+                <controls:EncodingQualitySliderControl Grid.Row="4" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="Mp3VBR" 
+        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
+            </Grid>
+        </DataTemplate>
+        
         <DataTemplate x:Key="MkvSettingsDataTemplate">
-            <StackPanel>
-                <DockPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel Grid.Row="0" Grid.Column="0">
                     <Label Content="Video" FontWeight="Bold" />
                     <Label Content="(H.264)" FontWeight="Light" Foreground="#004B82" />
                 </DockPanel>
-                <DockPanel>
-                    <Label Content="Quality :" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}"/>
-                    <Slider x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
+
+                <Label Content="Quality :" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
+                <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
                             Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="1" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
-                </DockPanel>
 
-                <DockPanel>
-                    <Label Content="Encoding speed :" ToolTip="{x:Static project:Resources.VideoEncodingSpeedTooltip}" />
-                    <ComboBox SelectedValue="{Binding SelectedPreset.Settings, ConverterParameter=VideoEncodingSpeed|System.String, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=veryslow}">
-                        <System:String>Ultra Fast</System:String>
-                        <System:String>Super Fast</System:String>
-                        <System:String>Very Fast</System:String>
-                        <System:String>Faster</System:String>
-                        <System:String>Fast</System:String>
-                        <System:String>Medium</System:String>
-                        <System:String>Slow</System:String>
-                        <System:String>Slower</System:String>
-                        <System:String>Very Slow</System:String>
-                    </ComboBox>
-                </DockPanel>
+                <Label Content="Encoding speed :" Grid.Row="2" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingSpeedTooltip}" HorizontalContentAlignment="Right"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" SelectedValue="{Binding SelectedPreset.Settings, ConverterParameter=VideoEncodingSpeed|System.String, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=veryslow}">
+                    <System:String>Ultra Fast</System:String>
+                    <System:String>Super Fast</System:String>
+                    <System:String>Very Fast</System:String>
+                    <System:String>Faster</System:String>
+                    <System:String>Fast</System:String>
+                    <System:String>Medium</System:String>
+                    <System:String>Slow</System:String>
+                    <System:String>Slower</System:String>
+                    <System:String>Very Slow</System:String>
+                </ComboBox>
 
-                <DockPanel>
+                <Label Content="Scale :" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"/>
+                <Grid Grid.Row="3" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.01" Maximum="2" SmallChange="0.01" LargeChange="0.1" TickFrequency="0.01" Foreground="#004B82"/>
+                    <Label Grid.Column="1">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
+                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+
+                <DockPanel Grid.Row="4" Grid.Column="0" >
                     <Label Content="Audio" FontWeight="Bold" />
                     <Label Content="(AAC)" FontWeight="Light" Foreground="#004B82" />
                 </DockPanel>
-                <DockPanel>
-                    <Label Content="Quality :" />
-                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="AacVBR" 
+
+                <Label Content="Quality :" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right"/>
+                <controls:EncodingQualitySliderControl Grid.Row="5" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="AacVBR" 
         				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=128}" />
-                </DockPanel>
-            </StackPanel>
+            </Grid>
         </DataTemplate>
 
-
         <DataTemplate x:Key="JpgSettingsDataTemplate">
-            <StackPanel>
-                <DockPanel>
-                    <Label Content="Quality :" />
-                    <Slider x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=25}"
-                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="30" Minimum="0" Maximum="30" TickPlacement="BottomRight" SmallChange="3" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
-                </DockPanel>
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--Quality-->
+                <Label Content="Quality :" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"/>
+                <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=25}"
+                        Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="30" Minimum="0" Maximum="30" TickPlacement="BottomRight" SmallChange="3" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
+                <!--Scale-->
+                <Label Content="Scale :" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.01" Maximum="2" SmallChange="0.01" LargeChange="0.1" TickFrequency="0.01" Foreground="#004B82"/>
+                    <Label Grid.Column="1">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
+                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PngSettingsDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--Scale-->
+                <Label Content="Scale :" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"/>
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.01" Maximum="2" SmallChange="0.01" LargeChange="0.1" TickFrequency="0.01" Foreground="#004B82"/>
+                    <Label Grid.Column="1">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
+                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+            </Grid>
         </DataTemplate>
 
         <windows:ConversionSettingsTemplateSelector x:Key="ConversionSettingsSelector"
             DefaultDataTemplate="{StaticResource EmptyDataTemplate}"
-            WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
+            AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}"
+            AviSettingsDataTemplate="{StaticResource AviSettingsDataTemplate}"
+            JpgSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" 
+            MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
             Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
             OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}"
-            MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
-            AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}"
-            JpgSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" />
+            PngSettingsDataTemplate="{StaticResource PngSettingsDataTemplate}"
+            WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}" />
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
@@ -206,7 +337,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3.5*"/>
             </Grid.ColumnDefinitions>
 
             <Grid x:Name="PresetListGrid" Margin="5">
@@ -243,7 +374,7 @@
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" MaxWidth="240"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2.5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
@@ -343,16 +474,16 @@
 
         <!-- Application settings -->
         <StackPanel x:Name="ApplicationSettingsPanel" Grid.Row="2" Margin="5,10,5,5">
-            <CheckBox x:Name="QuitAtEndCheckBox" Content="Automaticaly exit when all conversions finished" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}"  />
+            <CheckBox x:Name="QuitAtEndCheckBox" Content="Automatically exit when all conversions finished" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}"  />
             <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
                 <Label Content="Waiting duration :"/>
                 <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationExit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
                 <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
             </DockPanel>
+            <CheckBox Content="Automatically check for updates when File Converter starts" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}"  />
         </StackPanel>
 
         <Button x:Name="CloseButton" Grid.Row="3" Content="Close" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
         <Button x:Name="SaveButton" Grid.Row="3" Content="Save" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" Click="SaveButton_Click" Command="New"/>
-
     </Grid>
 </Window>

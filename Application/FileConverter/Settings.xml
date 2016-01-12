@@ -9,9 +9,13 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="VideoQuality" Value="30" />
-        <Settings Key="VideoEncodingSpeed" Value="Very Slow" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="1" />
         <Settings Key="AudioBitrate" Value="155" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
@@ -22,10 +26,30 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="VideoQuality" Value="20" />
-        <Settings Key="VideoEncodingSpeed" Value="Very Slow" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="1" />
         <Settings Key="AudioBitrate" Value="96" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="To Avi" OutputType="Avi">
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="VideoQuality" Value="27" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="AudioBitrate" Value="190" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Ogg" OutputType="Ogg">
@@ -43,6 +67,9 @@
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
         <InputTypes>wav</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioBitrate" Value="160" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
@@ -56,6 +83,9 @@
         <InputTypes>mp4</InputTypes>
         <InputTypes>wav</InputTypes>
         <InputTypes>ape</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
@@ -74,6 +104,9 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioEncodingMode" Value="Wav16" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
@@ -93,6 +126,9 @@
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
         <InputTypes>wav</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioEncodingMode" Value="Mp3VBR" />
         <Settings Key="AudioBitrate" Value="190" />
@@ -113,6 +149,9 @@
         <InputTypes>mp4</InputTypes>
         <InputTypes>wav</InputTypes>
         <InputTypes>flac</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
@@ -141,6 +180,7 @@
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageScale" Value="1" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Jpg" OutputType="Jpg">
@@ -150,6 +190,7 @@
         <InputTypes>ico</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="25" />
+        <Settings Key="ImageScale" Value="1" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Ico (max 256x256)" OutputType="Ico">
@@ -161,4 +202,15 @@
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
+    <ConversionPreset Name="To small Png" OutputType="Png">
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageScale" Value="0,2" />
+        <OutputFileNameTemplate>(p)(f)-small</OutputFileNameTemplate>
+    </ConversionPreset>
+    <CheckUpgradeAtStartup>true</CheckUpgradeAtStartup>
 </Settings>

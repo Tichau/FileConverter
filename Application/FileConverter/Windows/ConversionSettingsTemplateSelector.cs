@@ -13,6 +13,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate AviSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public DataTemplate WavSettingsDataTemplate
         {
             get;
@@ -42,6 +48,12 @@ namespace FileConverter.Windows
             get;
             set;
         }
+        
+        public DataTemplate PngSettingsDataTemplate
+        {
+            get;
+            set;
+        }
 
         public DataTemplate MkvSettingsDataTemplate
         {
@@ -60,8 +72,17 @@ namespace FileConverter.Windows
            
             switch (outputType)
             {
-                case OutputType.Wav:
-                    return this.WavSettingsDataTemplate;
+                case OutputType.Aac:
+                    return this.AacSettingsDataTemplate;
+
+                case OutputType.Avi:
+                    return this.AviSettingsDataTemplate;
+
+                case OutputType.Jpg:
+                    return this.JpgSettingsDataTemplate;
+
+                case OutputType.Mkv:
+                    return this.MkvSettingsDataTemplate;
 
                 case OutputType.Mp3:
                     return this.Mp3SettingsDataTemplate;
@@ -69,14 +90,11 @@ namespace FileConverter.Windows
                 case OutputType.Ogg:
                     return this.OggSettingsDataTemplate;
 
-                case OutputType.Aac:
-                    return this.AacSettingsDataTemplate;
+                case OutputType.Png:
+                    return this.PngSettingsDataTemplate;
 
-                case OutputType.Mkv:
-                    return this.MkvSettingsDataTemplate;
-
-                case OutputType.Jpg:
-                    return this.JpgSettingsDataTemplate;
+                case OutputType.Wav:
+                    return this.WavSettingsDataTemplate;
             }
 
             return this.DefaultDataTemplate;
