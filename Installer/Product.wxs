@@ -12,7 +12,7 @@
 
 <!-- Upgrade documentation: http://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.4.0" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.5.0" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
         <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
         
         <Icon Id="icon.ico" SourceFile="..\Resources\ApplicationIcon.ico"/>
