@@ -202,9 +202,8 @@
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Png (scale 20%)" OutputType="Png">
+    <ConversionPreset Name="To small Png" OutputType="Png">
         <InputTypes>bmp</InputTypes>
-        <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
         <InputTypes>png</InputTypes>

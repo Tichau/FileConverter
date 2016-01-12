@@ -110,7 +110,7 @@
                     <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\bmp">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg;To Ico (max 256x256);To Png (scale 20%)"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg;To Ico (max 256x256);To small Png"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\cda">
                     <RegistryValue Name="Presets" Type="string" Value="Extract CDA to Flac;Extract CDA to Ogg;Extract CDA to Mp3"/>
@@ -122,13 +122,13 @@
                     <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\ico">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg;To Png (scale 20%)"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\jpeg">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Ico (max 256x256);To Png (scale 20%)"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Ico (max 256x256);To small Png"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\jpg">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Ico (max 256x256);To Png (scale 20%)"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Ico (max 256x256);To small Png"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\m4a">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3;To Aac"/>
@@ -149,10 +149,10 @@
                     <RegistryValue Name="Presets" Type="string" Value="To Wav;To Mp3;To Aac"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\png">
-                    <RegistryValue Name="Presets" Type="string" Value="To Jpg;To Ico (max 256x256);To Png (scale 20%)"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Jpg;To Ico (max 256x256);To small Png"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\tiff">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg;To Ico (max 256x256);To Png (scale 20%)"/>
+                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg;To Ico (max 256x256);To small Png"/>
                 </RegistryKey>
                 <RegistryKey Root="HKCU" Key="Software\FileConverter\wav">
                     <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Flac;To Mp3;To Aac"/>
