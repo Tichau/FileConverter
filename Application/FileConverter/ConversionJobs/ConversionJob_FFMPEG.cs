@@ -28,6 +28,15 @@ namespace FileConverter.ConversionJobs
         {
         }
 
+        protected virtual string FfmpegPath
+        {
+            get
+            {
+                string applicationDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                return System.IO.Path.Combine(applicationDirectory, "ffmpeg.exe");
+            }
+        }
+
         protected override void Initialize()
         {
             base.Initialize();
@@ -39,8 +48,7 @@ namespace FileConverter.ConversionJobs
 
             this.ffmpegProcessStartInfo = null;
 
-            string applicationDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string ffmpegPath = string.Format("{0}\\ffmpeg.exe", applicationDirectory);
+            string ffmpegPath = this.FfmpegPath;
             if (!System.IO.File.Exists(ffmpegPath))
             {
                 this.ConversionFailed("Can't find ffmpeg executable. You should try to reinstall the application.");

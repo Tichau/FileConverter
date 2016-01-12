@@ -24,7 +24,6 @@ namespace FileConverter
 
     using FileConverter.ConversionJobs;
     using FileConverter.Diagnostics;
-    using FileConverter.Upgrade;
     using FileConverter.Windows;
 
     public partial class Application : System.Windows.Application
@@ -174,7 +173,7 @@ namespace FileConverter
 #if (DEBUG)
             if (args.Length <= 1)
             {
-                System.Array.Resize(ref args, 8);
+                //System.Array.Resize(ref args, 8);
                 //args[1] = "--conversion-preset";
                 //args[2] = "To Ogg";
                 //args[3] = "--verbose";
@@ -187,14 +186,14 @@ namespace FileConverter
                 //args[6] = @"D:\Test\Track03.mp3";
                 //args[7] = @"D:\Test\Track04.mp3";
 
-                System.Array.Resize(ref args, 1);
+                System.Array.Resize(ref args, 2);
                 args[1] = "--settings";
 
                 //System.Array.Resize(ref args, 5);
                 //args[1] = "--conversion-preset";
-                //args[2] = "To Wav";
+                //args[2] = "To Jpg";
                 //args[3] = "--verbose";
-                //args[4] = @"D:\Test\Track01.mp3";
+                //args[4] = @"D:\Test\Test avec accents héhé\imagé.png";
             }
 #endif
 

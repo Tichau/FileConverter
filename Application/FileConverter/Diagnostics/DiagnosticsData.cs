@@ -1,14 +1,13 @@
 // <copyright file="DiagnosticsData.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.Collections.ObjectModel;
-
 namespace FileConverter.Diagnostics
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IO;
-    using System.Text;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using FileConverter.Annotations;
 
@@ -19,13 +18,13 @@ namespace FileConverter.Diagnostics
         private System.IO.TextWriter logFileWriter;
         private string name;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public DiagnosticsData(string name)
         {
             this.Name = name;
             this.LogMessages = new ReadOnlyCollection<string>(this.logMessages);
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name
         {
