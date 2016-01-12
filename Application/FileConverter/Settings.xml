@@ -211,7 +211,7 @@
         <InputTypes>tiff</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="0,2" />
-        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+        <OutputFileNameTemplate>(p)(f)-small</OutputFileNameTemplate>
     </ConversionPreset>
     <CheckUpgradeAtStartup>true</CheckUpgradeAtStartup>
 </Settings>

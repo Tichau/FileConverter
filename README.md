@@ -1,7 +1,7 @@
 # File Converter
 
 ## Description
-**File Converter** is a very simple tool which allows you to convert and compress one or several file(s) from one format to another using the context menu of windows explorer.
+**File Converter** is a very simple tool which allows you to convert and compress one or several file(s) using the context menu of windows explorer.
 
 You can download it here: [www.file-converter.org](http://file-converter.org/?from=readme.md).
 
