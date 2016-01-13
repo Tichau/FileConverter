@@ -301,7 +301,7 @@ namespace FileConverter
                 Directory.CreateDirectory(path);
             }
 
-            path = Path.Combine(path, "Settings.xml");
+            path = Path.Combine(path, "Settings.default.xml");
             return path;
         }
 

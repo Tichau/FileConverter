@@ -229,7 +229,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"
-copy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)Settings.xml"</PostBuildEvent>
+copy /Y "$(ProjectDir)Settings.default.xml" "$(TargetDir)Settings.default.xml"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -66,7 +66,7 @@
                 <File Source="..\Middleware\ffmpeg.exe" KeyPath="yes" />
             </Component>
             <Component Guid="{86AEF5B3-C25B-4662-BAEF-20969D1821A5}" Win64="$(var.Win64)">
-                <File Source="..\Application\FileConverter\Settings.xml" KeyPath="yes" />
+                <File Source="..\Application\FileConverter\Settings.default.xml" KeyPath="yes" />
             </Component>
             <Component Guid="{A5158756-A107-4010-9E2F-3C0333F5A5F6}" Win64="$(var.Win64)">
                 <File Source="..\README.md" KeyPath="yes" />
