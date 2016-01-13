@@ -156,16 +156,6 @@ namespace FileConverter
         {
             Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", Environment.ProcessorCount);
             this.numberOfConversionThread = Environment.ProcessorCount;
-
-            // Load settigns.
-            Debug.Log("Load settings...");
-            this.Settings = Settings.Load();
-            if (this.Settings == null)
-            {
-                Diagnostics.Debug.LogError("The application will now shutdown. If you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
-                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-                return;
-            }
             
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
@@ -198,6 +188,7 @@ namespace FileConverter
             }
 #endif
 
+            // Log arguments.
             for (int index = 0; index < args.Length; index++)
             {
                 string argument = args[index];
@@ -215,10 +206,9 @@ namespace FileConverter
                 return;
             }
 
-            ConversionPreset conversionPreset = null;
-            List<string> filePaths = new List<string>();
-
             // Parse arguments.
+            List<string> filePaths = new List<string>();
+            string conversionPresetName = null;
             for (int index = 1; index < args.Length; index++)
             {
                 string argument = args[index];
@@ -229,6 +219,11 @@ namespace FileConverter
 
                     switch (parameterTitle)
                     {
+                        case "post-install-init":
+                            Settings.PostInstallationInitialization();
+                            Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                            return;
+
                         case "version":
                             Console.Write(ApplicationVersion.ToString());
                             Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
@@ -252,14 +247,7 @@ namespace FileConverter
                                 return;
                             }
 
-                            conversionPreset = this.Settings.GetPresetFromName(args[index + 1]);
-                            if (conversionPreset == null)
-                            {
-                                Debug.LogError("Invalid conversion preset '{0}'. (code 0x02)", args[index + 1]);
-                                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-                                return;
-                            }
-
+                            conversionPresetName = args[index + 1];
                             index++;
                             continue;
 
@@ -281,6 +269,17 @@ namespace FileConverter
                 }
             }
 
+            // Load settigns.
+            Debug.Log("Load settings...");
+            this.Settings = Settings.Load();
+            if (this.Settings == null)
+            {
+                Diagnostics.Debug.LogError("The application will now shutdown. If you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
+                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                return;
+            }
+
+            // Check upgrade.
             if (this.Settings.CheckUpgradeAtStartup)
             {
                 long fileTime = Registry.GetValue<long>(Registry.Keys.LastUpdateCheckDate);
@@ -290,6 +289,18 @@ namespace FileConverter
                 if (durationSinceLastUpdate > new TimeSpan(1, 0, 0, 0))
                 {
                     Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+                }
+            }
+
+            ConversionPreset conversionPreset = null;
+            if (!string.IsNullOrEmpty(conversionPresetName))
+            {
+                conversionPreset = this.Settings.GetPresetFromName(conversionPresetName);
+                if (conversionPreset == null)
+                {
+                    Debug.LogError("Invalid conversion preset '{0}'. (code 0x02)", conversionPresetName);
+                    Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                    return;
                 }
             }
 

@@ -29,6 +29,11 @@
         <Feature Id="ShellExtensionFeature" Title="ShellExtension" Level="1" AllowAdvertise="no">
             <ComponentRef Id="FileConverterExtension.dll" />
         </Feature>
+
+        <CustomAction Id='LaunchFile' FileKey='FileConverter.exe' ExeCommand='--post-install-init' Return='asyncNoWait' />
+        <InstallExecuteSequence>
+            <Custom Action="LaunchFile" After="InstallFinalize">NOT Installed</Custom>
+        </InstallExecuteSequence>
         
         <UIRef Id="WixUI_InstallDir" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
@@ -53,17 +58,23 @@
     <Fragment>
         <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
             <!-- Resources -->
+            <Component Guid="{AA5EA6F7-C443-488B-8E48-7CF000B9AD2A}" Win64="$(var.Win64)">
+                <File Id="FileConverter.exe" Source="$(var.FileConverter.TargetPath)" KeyPath="yes" />
+            </Component>
+            <Component Guid="{1790B82E-86BC-4B95-AA1D-9859FF3B6CA4}" Win64="$(var.Win64)">
+                <File Source="..\Middleware\ffmpeg.exe" KeyPath="yes" />
+            </Component>
             <Component Guid="{9BF0AC45-A586-41C9-BA93-6048B46DA65F}" Win64="$(var.Win64)">
                 <File Id="SharpShell.dll" KeyPath="yes" Source="..\Middleware\SharpShell\SharpShell.dll" />
             </Component>
             <Component Guid="{E1B1C09C-B089-40D8-859B-0E55F640CAE1}" Win64="$(var.Win64)">
                 <File Id="Markdown.Xaml.dll" KeyPath="yes" Source="..\Middleware\Markdown.Xaml.dll" />
             </Component>
-            <Component Guid="{AA5EA6F7-C443-488B-8E48-7CF000B9AD2A}" Win64="$(var.Win64)">
-                <File Source="$(var.FileConverter.TargetPath)" KeyPath="yes" />
+            <Component Guid="{55CD0B47-D5B0-4F0C-A54E-3E11DF345B48}" Win64="$(var.Win64)">
+                <File Id="Ripper.dll" KeyPath="yes" Source="..\Middleware\Ripper.dll" />
             </Component>
-            <Component Guid="{1790B82E-86BC-4B95-AA1D-9859FF3B6CA4}" Win64="$(var.Win64)">
-                <File Source="..\Middleware\ffmpeg.exe" KeyPath="yes" />
+            <Component Guid="{3CE6CF1B-431C-41FD-8381-3F73EDAF7B8A}" Win64="$(var.Win64)">
+                <File Id="yeti.mmedia.dll" KeyPath="yes" Source="..\Middleware\yeti.mmedia.dll" />
             </Component>
             <Component Guid="{86AEF5B3-C25B-4662-BAEF-20969D1821A5}" Win64="$(var.Win64)">
                 <File Source="..\Application\FileConverter\Settings.default.xml" KeyPath="yes" />
@@ -77,94 +88,12 @@
             <Component Guid="{6378238B-E44F-414B-A7AE-7E72CFA8616D}" Win64="$(var.Win64)">
                 <File Source="..\LICENSE.md" KeyPath="yes" />
             </Component>
-            <Component Guid="{55CD0B47-D5B0-4F0C-A54E-3E11DF345B48}" Win64="$(var.Win64)">
-                <File Id="Ripper.dll" KeyPath="yes" Source="..\Middleware\Ripper.dll" />
-            </Component>
-            <Component Guid="{3CE6CF1B-431C-41FD-8381-3F73EDAF7B8A}" Win64="$(var.Win64)">
-                <File Id="yeti.mmedia.dll" KeyPath="yes" Source="..\Middleware\yeti.mmedia.dll" />
-            </Component>
 
             <!-- Registry entries -->
             <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
-                <RegistryKey Root="HKCU" Key="Software\FileConverter">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter" Action="createAndRemoveOnUninstall">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
                     <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;flac;flv;ico;jpg;jpeg;m4a;mkv;mov;mp3;mp4;ogg;png;tiff;wav;webm;wma;wmv"/>
-                </RegistryKey>
-
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\3gp">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\aac">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\aiff">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\ape">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\avi">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\bik">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\bmp">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg;To Ico (max 256x256);To small Png"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\cda">
-                    <RegistryValue Name="Presets" Type="string" Value="Extract CDA to Flac;Extract CDA to Ogg;Extract CDA to Mp3"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\flac">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\flv">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\ico">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\jpeg">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Ico (max 256x256);To small Png"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\jpg">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Ico (max 256x256);To small Png"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\m4a">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\mkv">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\mov">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\mp3">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\mp4">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\ogg">
-                    <RegistryValue Name="Presets" Type="string" Value="To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\png">
-                    <RegistryValue Name="Presets" Type="string" Value="To Jpg;To Ico (max 256x256);To small Png"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\tiff">
-                    <RegistryValue Name="Presets" Type="string" Value="To Png;To Jpg;To Ico (max 256x256);To small Png"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\wav">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Flac;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\webm">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\wma">
-                    <RegistryValue Name="Presets" Type="string" Value="To Ogg;To Wav;To Mp3;To Aac"/>
-                </RegistryKey>
-                <RegistryKey Root="HKCU" Key="Software\FileConverter\wmv">
-                    <RegistryValue Name="Presets" Type="string" Value="To Mkv;To Mkv (low quality);To Avi;To Ogg;To Flac;To Wav;To Mp3;To Aac"/>
                 </RegistryKey>
             </Component>
         </ComponentGroup>

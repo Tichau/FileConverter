@@ -93,7 +93,7 @@ namespace FileConverter
             }
         }
 
-        public static Settings Load()
+        public static void PostInstallationInitialization()
         {
             Settings defaultSettings = null;
 
@@ -115,6 +115,7 @@ namespace FileConverter
                 Diagnostics.Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", defaultFilePath);
             }
 
+            // Load user settings if exists.
             Settings userSettings = null;
             string userFilePath = Settings.GetUserSettingsFilePath();
             if (File.Exists(userFilePath))
@@ -125,7 +126,37 @@ namespace FileConverter
                 }
                 catch (Exception)
                 {
-                    MessageBoxResult messageBoxResult = MessageBox.Show("Can't load file converter user settings. Do you want to fall back to default settings ?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                    System.IO.File.Delete(userFilePath);
+                }
+
+                if (userSettings != null && userSettings.SerializationVersion != Version)
+                {
+                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
+                }
+            }
+
+            Settings settings = userSettings != null ? userSettings.Merge(defaultSettings) : defaultSettings;
+            settings.Save();
+        }
+
+        public static Settings Load()
+        {
+            Settings settings = null;
+            string userFilePath = Settings.GetUserSettingsFilePath();
+            if (File.Exists(userFilePath))
+            {
+                Settings userSettings = null;
+                try
+                {
+                    XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, out userSettings);
+                    settings = userSettings;
+                }
+                catch (Exception)
+                {
+                    MessageBoxResult messageBoxResult =
+                        MessageBox.Show(
+                            "Can't load file converter user settings. Do you want to fall back to default settings ?",
+                            "Error", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                     if (messageBoxResult == MessageBoxResult.Yes)
                     {
                         System.IO.File.Delete(userFilePath);
@@ -139,11 +170,34 @@ namespace FileConverter
 
                 if (userSettings != null && userSettings.SerializationVersion != Version)
                 {
-                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
+                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.",
+                        userSettings.SerializationVersion, Version);
+                }
+            }
+            else
+            {
+                // Load the default settings.
+                string defaultFilePath = Settings.GetDefaultSettingsFilePath();
+                if (File.Exists(defaultFilePath))
+                {
+                    Settings defaultSettings = null;
+                    try
+                    {
+                        XmlHelpers.LoadFromFile<Settings>("Settings", defaultFilePath, out defaultSettings);
+                        settings = defaultSettings;
+                    }
+                    catch (Exception exception)
+                    {
+                        Diagnostics.Debug.LogError("Fail to load file converter default settings. {0}", exception.Message);
+                    }
+                }
+                else
+                {
+                    Diagnostics.Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", defaultFilePath);
                 }
             }
 
-            return userSettings != null ? userSettings.Merge(defaultSettings) : defaultSettings;
+            return settings;
         }
 
         public ConversionPreset GetPresetFromName(string presetName)
@@ -170,7 +224,7 @@ namespace FileConverter
                 // Write the settings in registry.
                 if (Settings.IsInAdmininstratorPrivileges)
                 {
-                    // We are in admin mode, write reigstry ...
+                    // We are in admin mode, write registry ...
                     bool succeed = Settings.ApplyRegistryModifications(registryEntries);
                     if (succeed)
                     {
