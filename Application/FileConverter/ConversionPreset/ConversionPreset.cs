@@ -11,6 +11,7 @@ namespace FileConverter
 
     using FileConverter.Annotations;
     using FileConverter.Controls;
+    using FileConverter.Diagnostics;
     using FileConverter.ValueConverters;
 
     [XmlRoot]
@@ -393,10 +394,47 @@ namespace FileConverter
         {
             switch (this.OutputType)
             {
-                case OutputType.Wav:
+                case OutputType.Aac:
                     switch (settingsKey)
                     {
-                        case ConversionPreset.ConversionSettingKeys.AudioEncodingMode:
+                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
+                            return true;
+                    }
+
+                    break;
+
+                case OutputType.Avi:
+                    switch (settingsKey)
+                    {
+                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
+                        case ConversionPreset.ConversionSettingKeys.VideoQuality:
+                        case ConversionPreset.ConversionSettingKeys.VideoScale:
+                            return true;
+                    }
+
+                    break;
+
+                case OutputType.Flac:
+                case OutputType.Ico:
+                    break;
+
+                case OutputType.Jpg:
+                    switch (settingsKey)
+                    {
+                        case ConversionPreset.ConversionSettingKeys.ImageQuality:
+                        case ConversionPreset.ConversionSettingKeys.ImageScale:
+                            return true;
+                    }
+
+                    break;
+
+                case OutputType.Mkv:
+                    switch (settingsKey)
+                    {
+                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
+                        case ConversionPreset.ConversionSettingKeys.VideoQuality:
+                        case ConversionPreset.ConversionSettingKeys.VideoScale:
+                        case ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed:
                             return true;
                     }
 
@@ -421,39 +459,6 @@ namespace FileConverter
 
                     break;
 
-                case OutputType.Avi:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
-                        case ConversionPreset.ConversionSettingKeys.VideoQuality:
-                        case ConversionPreset.ConversionSettingKeys.VideoScale:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Mkv:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
-                        case ConversionPreset.ConversionSettingKeys.VideoQuality:
-                        case ConversionPreset.ConversionSettingKeys.VideoScale:
-                        case ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Jpg:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.ImageQuality:
-                        case ConversionPreset.ConversionSettingKeys.ImageScale:
-                            return true;
-                    }
-
-                    break;
-
                 case OutputType.Png:
                     switch (settingsKey)
                     {
@@ -461,6 +466,19 @@ namespace FileConverter
                             return true;
                     }
 
+                    break;
+
+                case OutputType.Wav:
+                    switch (settingsKey)
+                    {
+                        case ConversionPreset.ConversionSettingKeys.AudioEncodingMode:
+                            return true;
+                    }
+
+                    break;
+
+                default:
+                    Debug.LogError("Relevant settings are not define for output type {0}.", this.OutputType);
                     break;
             }
 
