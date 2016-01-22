@@ -46,8 +46,9 @@
     </DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SharpShell">
-      <HintPath>..\..\Middleware\SharpShell\SharpShell.dll</HintPath>
+    <Reference Include="SharpShell, Version=2.2.0.0, Culture=neutral, PublicKeyToken=f14dc899472fe6fb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpShell.2.2.0.0\lib\net40\SharpShell.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,7 +64,7 @@
     <Compile Include="FileConverterExtension.cs" />
     <Compile Include="PresetDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
-        <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -82,6 +83,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\ApplicationIcon-16x16.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
