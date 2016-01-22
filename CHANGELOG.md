@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 0.5.1
+- Fixed: Issue where the installer detect the utilisation of the extension dll in explorer, ask to the user to restart it and fail to do it.
+- Fixed: Issue where it is impossible to delete a conversion preset define in default settings.
+- Fixed: Issue where the windows context menu does not contains user preset after an application upgrade.
+- Fixed: Issue where some registry keys remains after file converter uninstallation.
+- Fixed: Issue where aac bitrate was not saved.
+
 ## Version 0.5
 - New: Software update system. The application now checks if a new version of File Converter is available.
 - New: Possibility to scale images and videos. 
