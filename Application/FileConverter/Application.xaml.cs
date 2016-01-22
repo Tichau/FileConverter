@@ -32,7 +32,7 @@ namespace FileConverter
                                             {
                                                 Major = 0, 
                                                 Minor = 5,
-                                                Patch = 0,
+                                                Patch = 1,
                                             };
 
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
@@ -136,8 +136,10 @@ namespace FileConverter
                     // Start process.
                     Debug.Log("Start file converter upgrade from version {0} to {1}.", ApplicationVersion, this.upgradeVersionDescription.LatestVersion);
 
-                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(installerPath);
-                    startInfo.UseShellExecute = true;
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(installerPath)
+                        {
+                            UseShellExecute = true,
+                        };
 
                     Debug.Log("Start upgrade process: {0}{1}.", System.IO.Path.GetFileName(startInfo.FileName), startInfo.Arguments);
                     System.Diagnostics.Process process = new System.Diagnostics.Process
@@ -154,6 +156,7 @@ namespace FileConverter
 
         private void Initialize()
         {
+            Diagnostics.Debug.Log(ApplicationVersion.ToString());
             Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", Environment.ProcessorCount);
             this.numberOfConversionThread = Environment.ProcessorCount;
             

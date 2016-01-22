@@ -30,7 +30,6 @@
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Extension.wxs" />
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
