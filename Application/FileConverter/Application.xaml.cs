@@ -165,29 +165,12 @@ namespace FileConverter
             string[] args = Environment.GetCommandLineArgs();
 
 #if (DEBUG)
-            if (args.Length <= 1)
             {
-                //System.Array.Resize(ref args, 8);
-                //args[1] = "--conversion-preset";
-                //args[2] = "To Ogg";
-                //args[3] = "--verbose";
-
-                //args[4] = @"D:\Test\TrailerV2 compressed.mkv";
-                //args[4] = @"D:\Test\image.png";
-                //args[4] = @"E:\Track01.cda";
-                //args[4] = @"D:\Test\Track01.mp3";
-                //args[5] = @"D:\Test\Track02.mp3";
-                //args[6] = @"D:\Test\Track03.mp3";
-                //args[7] = @"D:\Test\Track04.mp3";
-
-                System.Array.Resize(ref args, 2);
-                args[1] = "--settings";
-
-                //System.Array.Resize(ref args, 5);
-                //args[1] = "--conversion-preset";
-                //args[2] = "To Jpg";
-                //args[3] = "--verbose";
-                //args[4] = @"D:\Test\Test avec accents héhé\imagé.png";
+                System.Array.Resize(ref args, 5);
+                args[1] = "--conversion-preset";
+                args[2] = "To Ico";
+                args[3] = "--verbose";
+                args[4] = @"D:\Test\images\ApplicationIcon.svg";
             }
 #endif
 
@@ -426,7 +409,14 @@ namespace FileConverter
                 return;
             }
 
-            conversionJob.StartConvertion();
+            try
+            {
+                conversionJob.StartConvertion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             if (conversionJob.State == ConversionJob.ConversionState.Done && !System.IO.File.Exists(conversionJob.OutputFilePath))
             {

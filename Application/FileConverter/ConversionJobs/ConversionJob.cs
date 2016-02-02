@@ -252,8 +252,15 @@ namespace FileConverter.ConversionJobs
             Debug.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
 
             this.State = ConversionState.InProgress;
-            
-            this.Convert();
+
+            try
+            {
+                this.Convert();
+            }
+            catch (Exception exception)
+            {
+                this.ConversionFailed(exception.Message);
+            }
 
             if (this.State == ConversionState.Failed)
             {
@@ -323,6 +330,8 @@ namespace FileConverter.ConversionJobs
 
         protected void ConversionFailed(string exitingMessage)
         {
+            Debug.Log("Fail: {0}", exitingMessage);
+
             if (this.State == ConversionState.Failed)
             {
                 // Already failed, don't override informations.
