@@ -501,6 +501,8 @@ namespace FileConverter
 
                 case OutputType.Png:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
                     break;
 
                 case OutputType.Jpg:
