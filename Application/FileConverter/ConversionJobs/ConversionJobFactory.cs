@@ -12,14 +12,20 @@ namespace FileConverter.ConversionJobs
             extension = extension.ToLowerInvariant().Substring(1, extension.Length - 1);
             if (extension == "cda")
             {
-                conversionJob = new ConversionJob_ExtractCDA(conversionPreset);    
-            }
-            else
-            {
-                conversionJob = new ConversionJob_FFMPEG(conversionPreset);
+                return new ConversionJob_ExtractCDA(conversionPreset);    
             }
 
-            return conversionJob;
+            if (conversionPreset.OutputType == OutputType.Ico)
+            {
+                return new ConversionJob_Ico(conversionPreset);
+            }
+
+            if (PathHelpers.GetExtensionCategory(extension) == PathHelpers.InputCategoryNames.Image)
+            {
+                return new ConversionJob_ImageMagick(conversionPreset);
+            }
+
+            return new ConversionJob_FFMPEG(conversionPreset);
         }
     }
 }

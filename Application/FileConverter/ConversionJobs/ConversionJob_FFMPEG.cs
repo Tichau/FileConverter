@@ -76,6 +76,25 @@ namespace FileConverter.ConversionJobs
 
                     break;
 
+                case OutputType.Avi:
+                    {
+                        // https://trac.ffmpeg.org/wiki/Encode/MPEG-4
+                        int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
+                        int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
+
+                        float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);
+                        string scaleArgs = string.Empty;
+                        if (Math.Abs(scaleFactor - 1f) >= 0.005f)
+                        {
+                            scaleArgs = string.Format("-vf scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+                        }
+
+                        string encoderArgs = string.Format("-c:v mpeg4 -vtag xvid -qscale:v {0} -c:a libmp3lame -qscale:a {1} {2}", this.MPEG4QualityToQualityIndex(videoEncodingQuality), this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate), scaleArgs);
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
+                    break;
+
                 case OutputType.Flac:
                     {
                         // http://taer-naguur.blogspot.fr/2013/11/flac-audio-encoding-with-ffmpeg.html
@@ -88,6 +107,24 @@ namespace FileConverter.ConversionJobs
                 case OutputType.Ico:
                     {
                         string encoderArgs = string.Empty;
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
+                    break;
+
+                case OutputType.Jpg:
+                    {
+                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+
+                        float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
+                        string scaleArgs = string.Empty;
+                        if (Math.Abs(scaleFactor - 1f) >= 0.005f)
+                        {
+                            scaleArgs = string.Format("-vf scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+                        }
+
+                        string encoderArgs = string.Format("-q:v {0} {1}", this.JPGQualityToQualityIndex(encodingQuality), scaleArgs);
+
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
 
@@ -116,25 +153,6 @@ namespace FileConverter.ConversionJobs
                     }
 
                 break;
-
-                case OutputType.Avi:
-                    {
-                        // https://trac.ffmpeg.org/wiki/Encode/MPEG-4
-                        int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
-                        int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
-
-                        float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);
-                        string scaleArgs = string.Empty;
-                        if (Math.Abs(scaleFactor - 1f) >= 0.005f)
-                        {
-                            scaleArgs = string.Format("-vf scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
-                        }
-
-                        string encoderArgs = string.Format("-c:v mpeg4 -vtag xvid -qscale:v {0} -c:a libmp3lame -qscale:a {1} {2}", this.MPEG4QualityToQualityIndex(videoEncodingQuality), this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate), scaleArgs);
-                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
-                    }
-
-                    break;
 
                 case OutputType.Mkv:
                     {
@@ -177,24 +195,6 @@ namespace FileConverter.ConversionJobs
 
                         // http://www.howtogeek.com/203979/is-the-png-format-lossless-since-it-has-a-compression-parameter/
                         string encoderArgs = string.Format("-compression_level 100 {0}", scaleArgs);
-
-                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
-                    }
-
-                    break;
-
-                case OutputType.Jpg:
-                    {
-                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
-                        
-                        float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
-                        string scaleArgs = string.Empty;
-                        if (Math.Abs(scaleFactor - 1f) >= 0.005f)
-                        {
-                            scaleArgs = string.Format("-vf scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
-                        }
-
-                        string encoderArgs = string.Format("-q:v {0} {1}", this.JPGQualityToQualityIndex(encodingQuality), scaleArgs);
 
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }

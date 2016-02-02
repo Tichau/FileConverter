@@ -104,7 +104,11 @@ namespace FileConverter
                 case "jpg":
                 case "jpeg":
                 case "png":
+                case "psd":
+                case "tga":
                 case "tiff":
+                case "svg":
+                case "xcf":
                     return InputCategoryNames.Image;
             }
 

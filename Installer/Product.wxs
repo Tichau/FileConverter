@@ -80,6 +80,12 @@
             <Component Guid="{1790B82E-86BC-4B95-AA1D-9859FF3B6CA4}" Win64="$(var.Win64)">
                 <File Source="..\Middleware\ffmpeg.exe" KeyPath="yes" />
             </Component>
+            <Component Guid="{C59B7F72-D8D6-47A3-B1D9-515CBC9FCE6F}" Win64="$(var.Win64)">
+                <File Id="Magick.NET.Core.dll" KeyPath="yes" Source="..\Application\FileConverter\bin\Release\Magick.NET.Core.dll" />
+            </Component>
+            <Component Guid="{44A21468-4DC2-4FCB-BBAB-9F053F691846}" Win64="$(var.Win64)">
+                <File Id="Magick.NET-AnyCPU.dll" KeyPath="yes" Source="..\Application\FileConverter\bin\Release\Magick.NET-AnyCPU.dll" />
+            </Component>
             <Component Guid="{E1B1C09C-B089-40D8-859B-0E55F640CAE1}" Win64="$(var.Win64)">
                 <File Id="Markdown.Xaml.dll" KeyPath="yes" Source="..\Middleware\Markdown.Xaml.dll" />
             </Component>
@@ -108,7 +114,7 @@
             <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
                 <RegistryKey Root="HKCU" Key="Software\FileConverter" Action="createAndRemoveOnUninstall">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
-                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;flac;flv;ico;jpg;jpeg;m4a;mkv;mov;mp3;mp4;ogg;png;tiff;wav;webm;wma;wmv"/>
+                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;flac;flv;ico;jpg;jpeg;pdf;m4a;mkv;mov;mp3;mp4;ogg;png;psd;svg;tga;tiff;wav;webm;wma;wmv"/>
                 </RegistryKey>
             </Component>
         </ComponentGroup>
