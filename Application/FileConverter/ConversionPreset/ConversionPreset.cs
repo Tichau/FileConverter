@@ -463,6 +463,8 @@ namespace FileConverter
                     switch (settingsKey)
                     {
                         case ConversionPreset.ConversionSettingKeys.ImageScale:
+                        case ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2:
+                        case ConversionPreset.ConversionSettingKeys.ImageMaximumSize:
                             return true;
                     }
 
@@ -686,6 +688,8 @@ namespace FileConverter
             public const string AudioBitrate = "AudioBitrate";
             public const string ImageQuality = "ImageQuality";
             public const string ImageScale = "ImageScale";
+            public const string ImageClampSizePowerOf2 = "ImageClampSizePowerOf2";
+            public const string ImageMaximumSize = "ImageMaximumSize";
             public const string VideoQuality = "VideoQuality";
             public const string VideoEncodingSpeed = "VideoEncodingSpeed";
             public const string VideoScale = "VideoScale";
