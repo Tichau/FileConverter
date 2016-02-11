@@ -36,6 +36,7 @@ namespace FileConverter.ConversionJobs
 
             using (MagickImage image = new MagickImage(this.InputFilePath))
             {
+                image.Progress += this.Image_Progress;
                 Debug.Log("Load image {0} succeed.", this.InputFilePath);
 
                 float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
@@ -85,11 +86,18 @@ namespace FileConverter.ConversionJobs
 
                     default:
                         this.ConversionFailed(string.Format("Unsupported output format {0}.", this.ConversionPreset.OutputType));
+                        image.Progress -= this.Image_Progress;
                         return;
                 }
-
+                
                 image.Write(this.OutputFilePath);
+                image.Progress -= this.Image_Progress;
             }
+        }
+
+        private void Image_Progress(object sender, ProgressEventArgs eventArgs)
+        {
+            this.Progress = (float)eventArgs.Progress.ToDouble() / 100f;
         }
     }
 }
