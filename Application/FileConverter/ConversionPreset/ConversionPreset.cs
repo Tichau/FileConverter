@@ -423,6 +423,7 @@ namespace FileConverter
                     {
                         case ConversionPreset.ConversionSettingKeys.ImageQuality:
                         case ConversionPreset.ConversionSettingKeys.ImageScale:
+                        case ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2:
                             return true;
                     }
 
@@ -508,6 +509,7 @@ namespace FileConverter
                 case OutputType.Jpg:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "25");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
                     break;
 
                 case OutputType.Avi:
