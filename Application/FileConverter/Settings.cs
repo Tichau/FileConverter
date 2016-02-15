@@ -171,8 +171,7 @@ namespace FileConverter
 
                 if (userSettings != null && userSettings.SerializationVersion != Version)
                 {
-                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.",
-                        userSettings.SerializationVersion, Version);
+                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
                     userSettings.SerializationVersion = Version;
                     userSettings.Save();
                 }

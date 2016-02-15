@@ -1,10 +1,10 @@
 ﻿// <copyright file="ConversionJob_ImageMagick.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using FileConverter.Diagnostics;
-
 namespace FileConverter.ConversionJobs
 {
     using System;
+
+    using FileConverter.Diagnostics;
     using ImageMagick;
 
     public class ConversionJob_ImageMagick : ConversionJob

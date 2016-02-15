@@ -197,7 +197,7 @@ namespace FileConverter
 
         public static class Keys
         {
-            public static string LastUpdateCheckDate = "LastUpdateCheckDate";
+            public static readonly string LastUpdateCheckDate = "LastUpdateCheckDate";
         }
     }
 }
