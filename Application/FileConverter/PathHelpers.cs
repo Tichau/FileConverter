@@ -101,6 +101,7 @@ namespace FileConverter
                     return InputCategoryNames.Video;
 
                 case "bmp":
+                case "exr":
                 case "ico":
                 case "jpg":
                 case "jpeg":
