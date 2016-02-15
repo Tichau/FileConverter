@@ -92,6 +92,7 @@ namespace FileConverter
                 case "bik":
                 case "3gp":
                 case "flv":
+                case "m4v":
                 case "mp4":
                 case "mov":
                 case "mkv":

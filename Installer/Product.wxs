@@ -114,7 +114,7 @@
             <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
                 <RegistryKey Root="HKCU" Key="Software\FileConverter" Action="createAndRemoveOnUninstall">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
-                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;flac;flv;ico;jpg;jpeg;pdf;m4a;mkv;mov;mp3;mp4;ogg;png;psd;svg;tga;tiff;wav;webm;wma;wmv"/>
+                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;flac;flv;ico;jpg;jpeg;pdf;m4a;m4v;mkv;mov;mp3;mp4;ogg;png;psd;svg;tga;tiff;wav;webm;wma;wmv"/>
                 </RegistryKey>
             </Component>
         </ComponentGroup>
