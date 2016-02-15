@@ -134,6 +134,7 @@ namespace FileConverter
 
                 case OutputType.Avi:
                 case OutputType.Mkv:
+                case OutputType.Mp4:
                     return category == InputCategoryNames.Video;
                     
                 case OutputType.Ico:

@@ -13,6 +13,7 @@ namespace FileConverter
         Jpg,
         Mkv,
         Mp3,
+        Mp4,
         Ogg,
         Png,
         Wav,

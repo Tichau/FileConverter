@@ -451,6 +451,18 @@ namespace FileConverter
 
                     break;
 
+                case OutputType.Mp4:
+                    switch (settingsKey)
+                    {
+                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
+                        case ConversionPreset.ConversionSettingKeys.VideoQuality:
+                        case ConversionPreset.ConversionSettingKeys.VideoScale:
+                        case ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed:
+                            return true;
+                    }
+
+                    break;
+
                 case OutputType.Ogg:
                     switch (settingsKey)
                     {
@@ -481,7 +493,7 @@ namespace FileConverter
                     break;
 
                 default:
-                    Debug.LogError("Relevant settings are not define for output type {0}.", this.OutputType);
+                    Debug.LogError("Relevant settings '{1}' are not define for output type {0}.", this.OutputType, settingsKey);
                     break;
             }
 
@@ -528,6 +540,13 @@ namespace FileConverter
                 case OutputType.Mp3:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Mp3VBR.ToString(), true);
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
+                    break;
+
+                case OutputType.Mp4:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Medium");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
                     break;
 
                 case OutputType.Ogg:

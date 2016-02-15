@@ -31,6 +31,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate Mp4SettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public DataTemplate OggSettingsDataTemplate
         {
             get;
@@ -86,6 +92,9 @@ namespace FileConverter.Windows
 
                 case OutputType.Mp3:
                     return this.Mp3SettingsDataTemplate;
+
+                case OutputType.Mp4:
+                    return this.Mp4SettingsDataTemplate;
 
                 case OutputType.Ogg:
                     return this.OggSettingsDataTemplate;

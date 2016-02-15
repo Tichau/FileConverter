@@ -306,6 +306,7 @@
             JpgSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" 
             MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
             Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
+            Mp4SettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}"
             OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}"
             PngSettingsDataTemplate="{StaticResource PngSettingsDataTemplate}"
             WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}" />

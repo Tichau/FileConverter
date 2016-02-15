@@ -155,6 +155,7 @@ namespace FileConverter.ConversionJobs
                 break;
 
                 case OutputType.Mkv:
+                case OutputType.Mp4:
                     {
                         // https://trac.ffmpeg.org/wiki/Encode/H.264
                         // https://trac.ffmpeg.org/wiki/Encode/AAC
