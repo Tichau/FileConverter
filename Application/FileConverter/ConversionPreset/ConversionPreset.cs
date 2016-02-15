@@ -356,6 +356,11 @@ namespace FileConverter
         {
             string settingsValue = this.GetSettingsValue(settingsKey);
 
+            if (settingsValue == null)
+            {
+                return default(T);
+            }
+
             Type type = typeof(T);
             if (type.IsEnum)
             {
@@ -519,9 +524,10 @@ namespace FileConverter
                     break;
 
                 case OutputType.Jpg:
-                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "25");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "90");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
                     break;
 
                 case OutputType.Avi:

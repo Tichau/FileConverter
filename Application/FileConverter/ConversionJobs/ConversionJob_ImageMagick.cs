@@ -81,7 +81,7 @@ namespace FileConverter.ConversionJobs
                         break;
 
                     case OutputType.Jpg:
-                        image.Quality = 100;
+                        image.Quality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
                         break;
 
                     default:

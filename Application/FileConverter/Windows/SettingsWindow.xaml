@@ -239,7 +239,7 @@
                 <!--Quality-->
                 <Label Content="Quality :" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"/>
                 <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=25}"
-                        Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="30" Minimum="0" Maximum="30" TickPlacement="BottomRight" SmallChange="3" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
+                        Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="30" SelectionEnd="100" Minimum="0" Maximum="100" TickPlacement="BottomRight" SmallChange="5" LargeChange="15" TickFrequency="5" Foreground="#004B82" />
                 <!--Scale-->
                 <Label Content="Scale :" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
                 <Grid Grid.Row="1" Grid.Column="1">
