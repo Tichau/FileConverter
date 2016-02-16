@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° counter clockwise rotation</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>180° rotation</value>
+  </data>
   <data name="OuputFileNameTemplateSample" xml:space="preserve">
     <value>C:\Music\Artist\Album\Song.wav</value>
   </data>
@@ -136,10 +142,16 @@ Special paths:
 (p:v): my videos path
 (p:p): my pictures path</value>
   </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° clockwise rotation</value>
+  </data>
   <data name="VideoEncodingQualityTooltip" xml:space="preserve">
     <value>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</value>
   </data>
   <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
     <value>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>No rotation</value>
   </data>
 </root>

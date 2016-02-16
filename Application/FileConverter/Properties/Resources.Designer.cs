@@ -61,6 +61,24 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 90° counter clockwise rotation.
+        /// </summary>
+        public static string NinetyDegreesRotationTooltip {
+            get {
+                return ResourceManager.GetString("NinetyDegreesRotationTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 180° rotation.
+        /// </summary>
+        public static string OneEightyDegreesRotationTooltip {
+            get {
+                return ResourceManager.GetString("OneEightyDegreesRotationTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C:\Music\Artist\Album\Song.wav.
         /// </summary>
         public static string OuputFileNameTemplateSample {
@@ -92,6 +110,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 90° clockwise rotation.
+        /// </summary>
+        public static string TwoSeventyDegreesRotationTooltip {
+            get {
+                return ResourceManager.GetString("TwoSeventyDegreesRotationTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Define the ratio &apos;file size&apos; versus &apos;video quality&apos;. A lower value will give you a smaller file, a greater value give you a better video quality..
         /// </summary>
         public static string VideoEncodingQualityTooltip {
@@ -106,6 +133,15 @@ namespace FileConverter.Properties {
         public static string VideoEncodingSpeedTooltip {
             get {
                 return ResourceManager.GetString("VideoEncodingSpeedTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No rotation.
+        /// </summary>
+        public static string ZeroDegreesRotationTooltip {
+            get {
+                return ResourceManager.GetString("ZeroDegreesRotationTooltip", resourceCulture);
             }
         }
     }

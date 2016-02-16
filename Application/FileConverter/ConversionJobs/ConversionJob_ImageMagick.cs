@@ -47,6 +47,14 @@ namespace FileConverter.ConversionJobs
                     image.Scale(new Percentage(scaleFactor * 100f));
                 }
 
+                float rotateAngleInDegrees = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageRotation);
+                if (Math.Abs(rotateAngleInDegrees - 0f) >= 0.05f)
+                {
+                    Debug.Log("Apply rotation: {0}°.", rotateAngleInDegrees);
+
+                    image.Rotate(rotateAngleInDegrees);
+                }
+
                 bool clampSizeToPowerOf2 = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2);
                 if (clampSizeToPowerOf2)
                 {

@@ -414,6 +414,7 @@ namespace FileConverter
                         case ConversionPreset.ConversionSettingKeys.AudioBitrate:
                         case ConversionPreset.ConversionSettingKeys.VideoQuality:
                         case ConversionPreset.ConversionSettingKeys.VideoScale:
+                        case ConversionPreset.ConversionSettingKeys.VideoRotation:
                             return true;
                     }
 
@@ -428,6 +429,7 @@ namespace FileConverter
                     {
                         case ConversionPreset.ConversionSettingKeys.ImageQuality:
                         case ConversionPreset.ConversionSettingKeys.ImageScale:
+                        case ConversionPreset.ConversionSettingKeys.ImageRotation:
                         case ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2:
                             return true;
                     }
@@ -440,6 +442,7 @@ namespace FileConverter
                         case ConversionPreset.ConversionSettingKeys.AudioBitrate:
                         case ConversionPreset.ConversionSettingKeys.VideoQuality:
                         case ConversionPreset.ConversionSettingKeys.VideoScale:
+                        case ConversionPreset.ConversionSettingKeys.VideoRotation:
                         case ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed:
                             return true;
                     }
@@ -462,6 +465,7 @@ namespace FileConverter
                         case ConversionPreset.ConversionSettingKeys.AudioBitrate:
                         case ConversionPreset.ConversionSettingKeys.VideoQuality:
                         case ConversionPreset.ConversionSettingKeys.VideoScale:
+                        case ConversionPreset.ConversionSettingKeys.VideoRotation:
                         case ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed:
                             return true;
                     }
@@ -481,6 +485,7 @@ namespace FileConverter
                     switch (settingsKey)
                     {
                         case ConversionPreset.ConversionSettingKeys.ImageScale:
+                        case ConversionPreset.ConversionSettingKeys.ImageRotation:
                         case ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2:
                         case ConversionPreset.ConversionSettingKeys.ImageMaximumSize:
                             return true;
@@ -519,6 +524,7 @@ namespace FileConverter
 
                 case OutputType.Png:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
                     break;
@@ -526,6 +532,7 @@ namespace FileConverter
                 case OutputType.Jpg:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "90");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
                     break;
@@ -533,6 +540,7 @@ namespace FileConverter
                 case OutputType.Avi:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "20");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
                     break;
 
@@ -540,6 +548,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Medium");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
                     break;
 
@@ -552,6 +561,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Medium");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
                     break;
 
@@ -717,11 +727,13 @@ namespace FileConverter
             public const string AudioBitrate = "AudioBitrate";
             public const string ImageQuality = "ImageQuality";
             public const string ImageScale = "ImageScale";
+            public const string ImageRotation = "ImageRotation";
             public const string ImageClampSizePowerOf2 = "ImageClampSizePowerOf2";
             public const string ImageMaximumSize = "ImageMaximumSize";
             public const string VideoQuality = "VideoQuality";
             public const string VideoEncodingSpeed = "VideoEncodingSpeed";
             public const string VideoScale = "VideoScale";
+            public const string VideoRotation = "VideoRotation";
         }
     }
 }

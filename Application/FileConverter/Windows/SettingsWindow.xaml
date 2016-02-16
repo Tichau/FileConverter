@@ -122,6 +122,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <DockPanel Grid.Row="0" Grid.Column="0">
@@ -133,6 +134,7 @@
                 <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
                             Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="28" Minimum="0" Maximum="30" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" TickFrequency="1" Foreground="#004B82" />
 
+                <!-- Scale -->
                 <Label Content="Scale :" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
                 <Grid Grid.Row="2" Grid.Column="1">
                     <Grid.ColumnDefinitions>
@@ -150,13 +152,22 @@
                     </Label>
                 </Grid>
 
-                <DockPanel Grid.Row="3" Grid.Column="0" >
+                <!--Rotate-->
+                <Label Content="Rotate :" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton Content="None" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"/>
+                    <RadioButton Content="90°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|90, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="180°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|180, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="270°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"/>
+                </StackPanel>
+
+                <DockPanel Grid.Row="4" Grid.Column="0" >
                     <Label Content="Audio" FontWeight="Bold" />
                     <Label Content="(Mp3)" FontWeight="Light" Foreground="#004B82" />
                 </DockPanel>
 
-                <Label Content="Quality :" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right"/>
-                <controls:EncodingQualitySliderControl Grid.Row="4" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="Mp3VBR" 
+                <Label Content="Quality :" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right"/>
+                <controls:EncodingQualitySliderControl Grid.Row="5" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="Mp3VBR" 
         				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
             </Grid>
         </DataTemplate>
@@ -168,6 +179,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -215,13 +227,22 @@
                     </Label>
                 </Grid>
 
-                <DockPanel Grid.Row="4" Grid.Column="0" >
+                <!--Rotate-->
+                <Label Content="Rotate :" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton Content="None" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"/>
+                    <RadioButton Content="90°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|90, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="180°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|180, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="270°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"/>
+                </StackPanel>
+
+                <DockPanel Grid.Row="5" Grid.Column="0" >
                     <Label Content="Audio" FontWeight="Bold" />
                     <Label Content="(AAC)" FontWeight="Light" Foreground="#004B82" />
                 </DockPanel>
 
-                <Label Content="Quality :" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right"/>
-                <controls:EncodingQualitySliderControl Grid.Row="5" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="AacVBR" 
+                <Label Content="Quality :" Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Right"/>
+                <controls:EncodingQualitySliderControl Grid.Row="6" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="AacVBR" 
         				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=128}" />
             </Grid>
         </DataTemplate>
@@ -233,6 +254,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -262,6 +284,14 @@
                     </Label>
                     <CheckBox Grid.Row="1" Grid.Column="0" Content="Clamp to lowest power of 2 size" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageClampSizePowerOf2|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
                 </Grid>
+                <!--Rotate-->
+                <Label Content="Rotate :" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton Content="None" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"/>
+                    <RadioButton Content="90°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|90, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="180°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|180, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="270°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"/>
+                </StackPanel>
             </Grid>
         </DataTemplate>
 
@@ -272,6 +302,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <!--Scale-->
@@ -296,6 +327,14 @@
                     </Label>
                     <CheckBox Grid.Row="1" Grid.Column="0" Content="Clamp to lowest power of 2 size" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageClampSizePowerOf2|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
                 </Grid>
+                <!--Rotate-->
+                <Label Content="Rotate :" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton Content="None" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"/>
+                    <RadioButton Content="90°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|90, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="180°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|180, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="270°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"/>
+                </StackPanel>
             </Grid>
         </DataTemplate>
 
