@@ -1,11 +1,18 @@
 # Change Log
 
-## Version 0.5.1
+## Version 0.6
+- New: Possibility to encode videos using H.264 video codec and AAC audio codec in a mp4 container (more portable than mkv).
+- New: Support new image input file formats: psd, tga, svg and exr.
+- New: Support new video input file format: m4v.
+- New: Possibility to rotate images and videos.
+- New: Remove restriction on image size to convert on ico file format (it is now possible to convert all images to ico).
+- New: Add "Clamp to power of 2 size" option in image conversion.
 - Fixed: Issue where the installer detect the utilisation of the extension dll in explorer, ask to the user to restart it and fail to do it.
 - Fixed: Issue where it is impossible to delete a conversion preset define in default settings.
-- Fixed: Issue where the windows context menu does not contains user preset after an application upgrade.
+- Fixed: Issue where the Windows context menu does not contains user preset after an application upgrade.
 - Fixed: Issue where some registry keys remains after file converter uninstallation.
 - Fixed: Issue where aac bitrate was not saved.
+- Fixed: Issue where settings serialialization version was not updated.
 
 ## Version 0.5
 - New: Software update system. The application now checks if a new version of File Converter is available.
