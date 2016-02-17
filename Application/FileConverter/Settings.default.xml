@@ -336,7 +336,7 @@
         <Settings Key="ImageClampSizePowerOf2" Value="False" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Ico (max 256x256)" OutputType="Ico">
+    <ConversionPreset Name="To Ico" OutputType="Ico">
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
