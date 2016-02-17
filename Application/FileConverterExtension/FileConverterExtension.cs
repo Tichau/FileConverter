@@ -133,7 +133,7 @@ namespace FileConverterExtension
             {
                 ToolStripMenuItem subItem = new ToolStripMenuItem
                 {
-                    Text = "Settings",
+                    Text = "Configure presets...",
                 };
 
                 fileConverterItem.DropDownItems.Add(subItem);
