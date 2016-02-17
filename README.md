@@ -5,19 +5,7 @@
 
 You can download it here: [www.file-converter.org](http://file-converter.org/?from=readme.md).
 
-## Supported file formats
-
-Category 	| Supported output formats	| Compatible input formats
-------------|---------------------------|--------------------------------------------------------------------------------------------
- Audio		| aac, flac, mp3, ogg, wav	| 3gp, aiff, ape, avi, bik, cda, flac, flv, m4a, mkv, mov, mp3, mp4, ogg, wav, wma, webm, wmv
- Video		| avi, mkv					| 3gp, avi, bik, flv, mkv, mov, mp4, webm, wmv
- Image		| ico, jpg, png,			| bmp, ico, jpg, jpeg, png, tiff
-
-*Note: If your source file is a video, the conversion to an audio format will extract the audio part of the video.*
-
-*Note 2: The mkv output file format encodes video using H.264 encoder for video and AAC encoder for audio.*
-
-*Note 3: The avi output file format encodes video using Xvid encoder for video and Mp3 encoder for audio.*
+You can find more information about what's in File converter and how to use it on the [wiki](https://github.com/Tichau/FileConverter/wiki).
 
 ## Thanks
 
@@ -25,6 +13,10 @@ File converter uses the following middlewares:
 
 **ffmpeg** as file conversion software.
 Thanks to ffmpeg devs for this awesome open source file conversion tool. [Web site link](https://www.ffmpeg.org/)
+
+**ImageMagick** as image edition and conversion software.
+Thanks to image magick devs for this awesome open source image edition software suite.  [Web site link](http://imagemagick.net/)
+And thanks to dlemstra for the C# wrapper of this software. [CodePlex link](https://magick.codeplex.com/)
 
 **SharpShell** to easily create windows context menu extensions.
 Thanks to Dave Kerr for his work on SharpShell. [CodePlex link](https://sharpshell.codeplex.com/)
