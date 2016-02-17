@@ -141,7 +141,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.01" Maximum="2" SmallChange="0.01" LargeChange="0.1" TickFrequency="0.01" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -216,11 +216,11 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.01" Maximum="2" SmallChange="0.01" LargeChange="0.1" TickFrequency="0.01" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
-                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <MultiBinding.ConverterParameter>{0:P1}</MultiBinding.ConverterParameter>
                                 <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
                             </MultiBinding>
                         </Label.Content>
@@ -273,11 +273,11 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.01" Maximum="2" SmallChange="0.01" LargeChange="0.1" TickFrequency="0.01" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
-                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <MultiBinding.ConverterParameter>{0:P1}</MultiBinding.ConverterParameter>
                                 <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
                             </MultiBinding>
                         </Label.Content>
@@ -316,16 +316,17 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.01" Maximum="2" SmallChange="0.01" LargeChange="0.1" TickFrequency="0.01" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
-                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <MultiBinding.ConverterParameter>{0:P1}</MultiBinding.ConverterParameter>
                                 <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
                             </MultiBinding>
                         </Label.Content>
                     </Label>
-                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Clamp to lowest power of 2 size" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageClampSizePowerOf2|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
+                    
+                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Clamp to lowest power of 2 size" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageClampSizePowerOf2|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
                 </Grid>
                 <!--Rotate-->
                 <Label Content="Rotate :" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
