@@ -157,7 +157,10 @@ namespace FileConverter
                     MessageBoxResult messageBoxResult =
                         MessageBox.Show(
                             "Can't load file converter user settings. Do you want to fall back to default settings ?",
-                            "Error", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                            "Error", 
+                            MessageBoxButton.YesNo, 
+                            MessageBoxImage.Exclamation);
+
                     if (messageBoxResult == MessageBoxResult.Yes)
                     {
                         System.IO.File.Delete(userFilePath);

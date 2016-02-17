@@ -166,11 +166,11 @@ namespace FileConverter
 
 #if (DEBUG)
             {
-                System.Array.Resize(ref args, 5);
-                args[1] = "--conversion-preset";
-                args[2] = "To Ico";
-                args[3] = "--verbose";
-                args[4] = @"D:\Test\images\ApplicationIcon.svg";
+                ////System.Array.Resize(ref args, 5);
+                ////args[1] = "--conversion-preset";
+                ////args[2] = "To Png";
+                ////args[3] = "--verbose";
+                ////args[4] = @"D:\Test\images\Mario Big.png";
             }
 #endif
 
