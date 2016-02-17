@@ -81,10 +81,7 @@
                 <File Source="..\Middleware\ffmpeg.exe" KeyPath="yes" />
             </Component>
             <Component Guid="{C59B7F72-D8D6-47A3-B1D9-515CBC9FCE6F}" Win64="$(var.Win64)">
-                <File Id="Magick.NET.Core.dll" KeyPath="yes" Source="..\Application\FileConverter\bin\Release\Magick.NET.Core.dll" />
-            </Component>
-            <Component Guid="{44A21468-4DC2-4FCB-BBAB-9F053F691846}" Win64="$(var.Win64)">
-                <File Id="Magick.NET-AnyCPU.dll" KeyPath="yes" Source="..\Application\FileConverter\bin\Release\Magick.NET-AnyCPU.dll" />
+                <File Id="Magick.NET.dll" KeyPath="yes" Source="..\Application\FileConverter\bin\$(var.Configuration)\Magick.NET-Q16-AnyCPU.dll" />
             </Component>
             <Component Guid="{E1B1C09C-B089-40D8-859B-0E55F640CAE1}" Win64="$(var.Win64)">
                 <File Id="Markdown.Xaml.dll" KeyPath="yes" Source="..\Middleware\Markdown.Xaml.dll" />
