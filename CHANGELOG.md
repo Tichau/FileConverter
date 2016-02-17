@@ -7,12 +7,14 @@
 - New: Possibility to rotate images and videos.
 - New: Remove restriction on image size to convert on ico file format (it is now possible to convert all images to ico).
 - New: Add "Clamp to power of 2 size" option in image conversion.
+- New: Support input images encoded in 16 bits or 32 bits per color channel.
 - Fixed: Issue where the installer detect the utilisation of the extension dll in explorer, ask to the user to restart it and fail to do it.
 - Fixed: Issue where it is impossible to delete a conversion preset define in default settings.
 - Fixed: Issue where the Windows context menu does not contains user preset after an application upgrade.
 - Fixed: Issue where some registry keys remains after file converter uninstallation.
 - Fixed: Issue where aac bitrate was not saved.
 - Fixed: Issue where settings serialialization version was not updated.
+- Change: Allow the user to scale images until 1600% size (useful to scale pixel art images).
 
 ## Version 0.5
 - New: Software update system. The application now checks if a new version of File Converter is available.
