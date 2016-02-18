@@ -3,3 +3,6 @@ obj/
 .vscode/
 Application/
 Installer/
+packages/
+
+*.user
