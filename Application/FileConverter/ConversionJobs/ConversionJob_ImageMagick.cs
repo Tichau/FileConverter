@@ -60,7 +60,7 @@ namespace FileConverter.ConversionJobs
                 {
                     int referenceSize = System.Math.Min(image.Width, image.Height);
                     int size = 2;
-                    while (size * 2 < referenceSize)
+                    while (size * 2 <= referenceSize)
                     {
                         size *= 2;
                     }
