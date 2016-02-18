@@ -41,11 +41,20 @@ namespace FileConverter
 
         private bool needToRunConversionThread;
         private bool cancelAutoExit;
+        private bool isSessionEnding;
         private UpgradeVersionDescription upgradeVersionDescription = null;
 
         public Application()
         {
             this.ConvertionJobs = this.conversionJobs.AsReadOnly();
+        }
+
+        protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
+        {
+            base.OnSessionEnding(e);
+
+            this.isSessionEnding = true;
+            this.Shutdown();
         }
 
         public static Version ApplicationVersion
@@ -109,8 +118,8 @@ namespace FileConverter
             base.OnExit(e);
 
             Debug.Log("Exit application.");
-
-            if (this.upgradeVersionDescription != null && this.upgradeVersionDescription.NeedToUpgrade)
+            
+            if (!this.isSessionEnding && this.upgradeVersionDescription != null && this.upgradeVersionDescription.NeedToUpgrade)
             {
                 Debug.Log("A new version of file converter has been found: {0}.", this.upgradeVersionDescription.LatestVersion);
 
