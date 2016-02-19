@@ -49,14 +49,6 @@ namespace FileConverter
             this.ConvertionJobs = this.conversionJobs.AsReadOnly();
         }
 
-        protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
-        {
-            base.OnSessionEnding(e);
-
-            this.isSessionEnding = true;
-            this.Shutdown();
-        }
-
         public static Version ApplicationVersion
         {
             get
@@ -161,6 +153,14 @@ namespace FileConverter
             }
 
             Debug.Release();
+        }
+
+        protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
+        {
+            base.OnSessionEnding(e);
+
+            this.isSessionEnding = true;
+            this.Shutdown();
         }
 
         private void Initialize()
