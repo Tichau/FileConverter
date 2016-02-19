@@ -17,5 +17,6 @@ namespace FileConverter
         Ogg,
         Png,
         Wav,
+        Webm,
     }
 }

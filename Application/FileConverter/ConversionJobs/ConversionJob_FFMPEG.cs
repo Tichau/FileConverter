@@ -82,62 +82,7 @@ namespace FileConverter.ConversionJobs
                         int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
 
-                        float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);
-                        string scaleArgs = string.Empty;
-                        if (Math.Abs(scaleFactor - 1f) >= 0.005f)
-                        {
-                            scaleArgs = string.Format("scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
-                        }
-                        
-                        float rotationAngleInDegrees = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoRotation);
-                        string rotationArgs = string.Empty;
-                        if (Math.Abs(rotationAngleInDegrees - 0f) >= 0.05f)
-                        {
-                            // Transpose:
-                            // 0: 90 CounterClockwise and vertical flip
-                            // 1: 90 Clockwise
-                            // 2: 90 CounterClockwise 
-                            // 3: 90 Clockwise and vertical flip
-                            if (Math.Abs(rotationAngleInDegrees - 90f) <= 0.05f)
-                            {
-                                rotationArgs = "transpose=2";
-                            }
-                            else if (Math.Abs(rotationAngleInDegrees - 180f) <= 0.05f)
-                            {
-                                rotationArgs = "vflip,hflip";
-                            }
-                            else if (Math.Abs(rotationAngleInDegrees - 270f) <= 0.05f)
-                            {
-                                rotationArgs = "transpose=1";
-                            }
-                            else
-                            {
-                                Diagnostics.Debug.LogError("Unsupported rotation: {0}°", rotationAngleInDegrees);
-                            }
-                        }
-
-                        // Build vf args (-vf "scale=..., transpose=...")
-                        string transformArgs = string.Empty;
-                        if (!string.IsNullOrEmpty(scaleArgs) || !string.IsNullOrEmpty(rotationArgs))
-                        {
-                            transformArgs = "-vf \"";
-                            if (!string.IsNullOrEmpty(scaleArgs))
-                            {
-                                transformArgs += scaleArgs;
-                            }
-
-                            if (!string.IsNullOrEmpty(rotationArgs))
-                            {
-                                if (!string.IsNullOrEmpty(scaleArgs))
-                                {
-                                    transformArgs += ",";
-                                }
-
-                                transformArgs += rotationArgs;
-                            }
-
-                            transformArgs += "\"";
-                        }
+                        string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
 
                         // Compute final arguments.
                         string encoderArgs = string.Format("-c:v mpeg4 -vtag xvid -qscale:v {0} -c:a libmp3lame -qscale:a {1} {2}", this.MPEG4QualityToQualityIndex(videoEncodingQuality), this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate), transformArgs);
@@ -214,62 +159,7 @@ namespace FileConverter.ConversionJobs
                         string videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<string>(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed);
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
 
-                        float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);
-                        string scaleArgs = string.Empty;
-                        if (Math.Abs(scaleFactor - 1f) >= 0.005f)
-                        {
-                            scaleArgs = string.Format("scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
-                        }
-
-                        float rotationAngleInDegrees = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoRotation);
-                        string rotationArgs = string.Empty;
-                        if (Math.Abs(rotationAngleInDegrees - 0f) >= 0.05f)
-                        {
-                            // Transpose:
-                            // 0: 90 CounterClockwise and vertical flip
-                            // 1: 90 Clockwise
-                            // 2: 90 CounterClockwise 
-                            // 3: 90 Clockwise and vertical flip
-                            if (Math.Abs(rotationAngleInDegrees - 90f) <= 0.05f)
-                            {
-                                rotationArgs = "transpose=2";
-                            }
-                            else if (Math.Abs(rotationAngleInDegrees - 180f) <= 0.05f)
-                            {
-                                rotationArgs = "vflip,hflip";
-                            }
-                            else if (Math.Abs(rotationAngleInDegrees - 270f) <= 0.05f)
-                            {
-                                rotationArgs = "transpose=1";
-                            }
-                            else
-                            {
-                                Diagnostics.Debug.LogError("Unsupported rotation: {0}°", rotationAngleInDegrees);
-                            }
-                        }
-
-                        // Build vf args (-vf "scale=..., transpose=...")
-                        string transformArgs = string.Empty;
-                        if (!string.IsNullOrEmpty(scaleArgs) || !string.IsNullOrEmpty(rotationArgs))
-                        {
-                            transformArgs = "-vf \"";
-                            if (!string.IsNullOrEmpty(scaleArgs))
-                            {
-                                transformArgs += scaleArgs;
-                            }
-
-                            if (!string.IsNullOrEmpty(rotationArgs))
-                            {
-                                if (!string.IsNullOrEmpty(scaleArgs))
-                                {
-                                    transformArgs += ",";
-                                }
-
-                                transformArgs += rotationArgs;
-                            }
-
-                            transformArgs += "\"";
-                        }
+                        string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
 
                         string encoderArgs = string.Format("-c:v libx264 -preset {0} -crf {1} -c:a aac -q:a {2} {3}", this.H264EncodingSpeedToPreset(videoEncodingSpeed), this.H264QualityToCRF(videoEncodingQuality), this.AACBitrateToQualityIndex(audioEncodingBitrate), transformArgs);
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
@@ -307,6 +197,31 @@ namespace FileConverter.ConversionJobs
                     {
                         EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>(ConversionPreset.ConversionSettingKeys.AudioEncodingMode);
                         string encoderArgs = string.Format("-acodec {0}", this.WAVEncodingToCodecArgument(encodingMode));
+                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                    }
+
+                    break;
+
+                case OutputType.Webm:
+                    {
+                        // https://trac.ffmpeg.org/wiki/Encode/VP9
+                        int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
+                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
+
+                        string encodingArgs = string.Empty;
+                        if (videoEncodingQuality == 63)
+                        {
+                            // Replace maximum quality settings by lossless compression.
+                            encodingArgs = "-lossless 1";
+                        }
+                        else
+                        {
+                            encodingArgs = string.Format("-crf {0} -b:v 0", this.WebmQualityToCRF(videoEncodingQuality));
+                        }
+
+                        string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
+
+                        string encoderArgs = string.Format("-c:v libvpx-vp9 {0} -c:a libvorbis -q:a {1} {2}", encodingArgs, this.OGGVBRBitrateToQualityIndex(encodingQuality), transformArgs);
                         arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
                     }
 
@@ -385,7 +300,7 @@ namespace FileConverter.ConversionJobs
                 int hours = int.Parse(match.Groups[2].Value);
                 int minutes = int.Parse(match.Groups[3].Value);
                 int seconds = int.Parse(match.Groups[4].Value);
-                int milliseconds = int.Parse(match.Groups[5].Value);
+                int milliseconds = int.Parse(match.Groups[5].Value) * 10;
                 float bitrate = 0f;
                 float.TryParse(match.Groups[6].Value, out bitrate);
 

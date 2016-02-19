@@ -42,6 +42,7 @@ namespace FileConverter
                                                OutputType.Wav,
                                                OutputType.Mkv,
                                                OutputType.Mp4,
+                                               OutputType.Webm,
                                                OutputType.Avi,
                                                OutputType.Ico,
                                                OutputType.Jpg,

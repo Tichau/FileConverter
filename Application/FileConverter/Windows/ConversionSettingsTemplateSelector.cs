@@ -67,6 +67,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate WebmSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (item == null)
@@ -104,6 +110,9 @@ namespace FileConverter.Windows
 
                 case OutputType.Wav:
                     return this.WavSettingsDataTemplate;
+
+                case OutputType.Webm:
+                    return this.WebmSettingsDataTemplate;
             }
 
             return this.DefaultDataTemplate;

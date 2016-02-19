@@ -5,9 +5,72 @@ namespace FileConverter.ConversionJobs
     using System;
 
     using FileConverter.Controls;
+    using System.Globalization;
 
     public partial class ConversionJob_FFMPEG
     {
+        private static string ComputeTransformArgs(ConversionPreset conversionPreset)
+        {
+            float scaleFactor = conversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);
+            string scaleArgs = string.Empty;
+            if (Math.Abs(scaleFactor - 1f) >= 0.005f)
+            {
+                scaleArgs = string.Format("scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+            }
+
+            float rotationAngleInDegrees = conversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoRotation);
+            string rotationArgs = string.Empty;
+            if (Math.Abs(rotationAngleInDegrees - 0f) >= 0.05f)
+            {
+                // Transpose:
+                // 0: 90 CounterClockwise and vertical flip
+                // 1: 90 Clockwise
+                // 2: 90 CounterClockwise 
+                // 3: 90 Clockwise and vertical flip
+                if (Math.Abs(rotationAngleInDegrees - 90f) <= 0.05f)
+                {
+                    rotationArgs = "transpose=2";
+                }
+                else if (Math.Abs(rotationAngleInDegrees - 180f) <= 0.05f)
+                {
+                    rotationArgs = "vflip,hflip";
+                }
+                else if (Math.Abs(rotationAngleInDegrees - 270f) <= 0.05f)
+                {
+                    rotationArgs = "transpose=1";
+                }
+                else
+                {
+                    Diagnostics.Debug.LogError("Unsupported rotation: {0}°", rotationAngleInDegrees);
+                }
+            }
+
+            // Build vf args (-vf "scale=..., transpose=...")
+            string transformArgs = string.Empty;
+            if (!string.IsNullOrEmpty(scaleArgs) || !string.IsNullOrEmpty(rotationArgs))
+            {
+                transformArgs = "-vf \"";
+                if (!string.IsNullOrEmpty(scaleArgs))
+                {
+                    transformArgs += scaleArgs;
+                }
+
+                if (!string.IsNullOrEmpty(rotationArgs))
+                {
+                    if (!string.IsNullOrEmpty(scaleArgs))
+                    {
+                        transformArgs += ",";
+                    }
+
+                    transformArgs += rotationArgs;
+                }
+
+                transformArgs += "\"";
+            }
+
+            return transformArgs;
+        }
+
         /// <summary>
         /// Convert bitrate in <c>mp3</c> encoder quality index.
         /// </summary>
@@ -262,6 +325,18 @@ namespace FileConverter.ConversionJobs
             }
 
             throw new Exception("Unknown VBR bitrate.");
+        }
+
+        /// <summary>
+        /// Convert video quality index to H264 constant rate factor.
+        /// </summary>
+        /// <param name="quality">The quality index.</param>
+        /// <returns>Returns the H264 constant rate factor.</returns>
+        /// The range of the quantizer scale is 0-63: lower values mean better quality.
+        /// https://trac.ffmpeg.org/wiki/Encode/VP9
+        private int WebmQualityToCRF(int quality)
+        {
+            return 63 - quality;
         }
     }
 }

@@ -247,6 +247,68 @@
             </Grid>
         </DataTemplate>
 
+        <DataTemplate x:Key="WebmSettingsDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel Grid.Row="0" Grid.Column="0">
+                    <Label Content="Video" FontWeight="Bold" />
+                    <Label Content="(vp9)" FontWeight="Light" Foreground="#004B82" />
+                </DockPanel>
+
+                <Label Content="Quality :" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
+                <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="40" Minimum="0" Maximum="63" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" TickFrequency="1" Foreground="#004B82" />
+
+                <!-- Scale -->
+                <Label Content="Scale :" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+                <Grid Grid.Row="2" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
+                    <Label Grid.Column="1">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
+                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+
+                <!--Rotate-->
+                <Label Content="Rotate :" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton Content="None" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"/>
+                    <RadioButton Content="90°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|90, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="180°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|180, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="270°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"/>
+                </StackPanel>
+
+                <DockPanel Grid.Row="4" Grid.Column="0" >
+                    <Label Content="Audio" FontWeight="Bold" />
+                    <Label Content="(Ogg vorbis)" FontWeight="Light" Foreground="#004B82" />
+                </DockPanel>
+
+                <Label Content="Quality :" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right"/>
+                <controls:EncodingQualitySliderControl Grid.Row="5" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="OggVBR" 
+        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
+            </Grid>
+        </DataTemplate>
+
         <DataTemplate x:Key="JpgSettingsDataTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -349,7 +411,8 @@
             Mp4SettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}"
             OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}"
             PngSettingsDataTemplate="{StaticResource PngSettingsDataTemplate}"
-            WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}" />
+            WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
+            WebmSettingsDataTemplate="{StaticResource WebmSettingsDataTemplate}" />
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>

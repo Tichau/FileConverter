@@ -137,6 +137,7 @@ namespace FileConverter
                 case OutputType.Avi:
                 case OutputType.Mkv:
                 case OutputType.Mp4:
+                case OutputType.Webm:
                     return category == InputCategoryNames.Video;
                     
                 case OutputType.Ico:

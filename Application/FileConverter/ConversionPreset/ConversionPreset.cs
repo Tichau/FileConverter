@@ -502,6 +502,18 @@ namespace FileConverter
 
                     break;
 
+                case OutputType.Webm:
+                    switch (settingsKey)
+                    {
+                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
+                        case ConversionPreset.ConversionSettingKeys.VideoQuality:
+                        case ConversionPreset.ConversionSettingKeys.VideoScale:
+                        case ConversionPreset.ConversionSettingKeys.VideoRotation:
+                            return true;
+                    }
+
+                    break;
+
                 default:
                     Debug.LogError("Relevant settings '{1}' are not define for output type {0}.", this.OutputType, settingsKey);
                     break;
@@ -571,6 +583,13 @@ namespace FileConverter
 
                 case OutputType.Wav:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Wav16.ToString(), true);
+                    break;
+
+                case OutputType.Webm:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "40");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     break;
 
                 default:
