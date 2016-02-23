@@ -395,21 +395,24 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            match = this.progressRegex.Match(input);
-            if (match.Success && match.Groups.Count >= 7)
+            if (this.fileDuration.Ticks > 0)
             {
-                int size = int.Parse(match.Groups[1].Value);
-                int hours = int.Parse(match.Groups[2].Value);
-                int minutes = int.Parse(match.Groups[3].Value);
-                int seconds = int.Parse(match.Groups[4].Value);
-                int milliseconds = int.Parse(match.Groups[5].Value) * 10;
-                float bitrate = 0f;
-                float.TryParse(match.Groups[6].Value, out bitrate);
+                match = this.progressRegex.Match(input);
+                if (match.Success && match.Groups.Count >= 7)
+                {
+                    int size = int.Parse(match.Groups[1].Value);
+                    int hours = int.Parse(match.Groups[2].Value);
+                    int minutes = int.Parse(match.Groups[3].Value);
+                    int seconds = int.Parse(match.Groups[4].Value);
+                    int milliseconds = int.Parse(match.Groups[5].Value) * 10;
+                    float bitrate = 0f;
+                    float.TryParse(match.Groups[6].Value, out bitrate);
 
-                this.actualConvertedDuration = new TimeSpan(0, hours, minutes, seconds, milliseconds);
+                    this.actualConvertedDuration = new TimeSpan(0, hours, minutes, seconds, milliseconds);
 
-                this.Progress = this.actualConvertedDuration.Ticks / (float)this.fileDuration.Ticks;
-                return;
+                    this.Progress = this.actualConvertedDuration.Ticks / (float)this.fileDuration.Ticks;
+                    return;
+                }
             }
 
             if (input.Contains("Exiting.") || input.Contains("Error") || input.Contains("Unsupported dimensions") || input.Contains("No such file or directory"))
