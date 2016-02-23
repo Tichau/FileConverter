@@ -9,6 +9,16 @@ namespace FileConverter.ConversionJobs
 
     public partial class ConversionJob_FFMPEG
     {
+        private static string Encapsulate(string optionName, string args)
+        {
+            if (string.IsNullOrEmpty(args))
+            {
+                return string.Empty;
+            }
+
+            return string.Format("{0} \"{1}\"", optionName, args);
+        }
+
         private static string ComputeTransformArgs(ConversionPreset conversionPreset)
         {
             float scaleFactor = conversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);

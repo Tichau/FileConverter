@@ -94,7 +94,8 @@ namespace FileConverter.ConversionJobs
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
 
                         // Compute final arguments.
-                        string encoderArgs = string.Format("-c:v mpeg4 -vtag xvid -qscale:v {0} -c:a libmp3lame -qscale:a {1} -vf \"{2}\"", this.MPEG4QualityToQualityIndex(videoEncodingQuality), this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate), transformArgs);
+                        string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
+                        string encoderArgs = string.Format("-c:v mpeg4 -vtag xvid -qscale:v {0} -c:a libmp3lame -qscale:a {1} {2}", this.MPEG4QualityToQualityIndex(videoEncodingQuality), this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate), videoFilteringArgs);
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
@@ -162,8 +163,7 @@ namespace FileConverter.ConversionJobs
                         string scaleArgs = string.Empty;
                         if (Math.Abs(scaleFactor - 1f) >= 0.005f)
                         {
-                            scaleArgs = string.Format("-vf scale=iw*{0}:ih*{0}",
-                                scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+                            scaleArgs = string.Format("-vf scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
                         }
 
                         string encoderArgs = string.Format("-q:v {0} {1}", this.JPGQualityToQualityIndex(encodingQuality), scaleArgs);
@@ -211,10 +211,15 @@ namespace FileConverter.ConversionJobs
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
 
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
+                        string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
 
-                        string encoderArgs = string.Format("-c:v libx264 -preset {0} -crf {1} -c:a aac -q:a {2} -vf\"{3}\"",
-                            this.H264EncodingSpeedToPreset(videoEncodingSpeed), this.H264QualityToCRF(videoEncodingQuality),
-                            this.AACBitrateToQualityIndex(audioEncodingBitrate), transformArgs);
+                        string encoderArgs = string.Format(
+                            "-c:v libx264 -preset {0} -crf {1} -c:a aac -q:a {2} {3}",
+                            this.H264EncodingSpeedToPreset(videoEncodingSpeed), 
+                            this.H264QualityToCRF(videoEncodingQuality),
+                            this.AACBitrateToQualityIndex(audioEncodingBitrate), 
+                            videoFilteringArgs);
+
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
@@ -281,9 +286,14 @@ namespace FileConverter.ConversionJobs
                         }
 
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
+                        string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
 
-                        string encoderArgs = string.Format("-c:v libvpx-vp9 {0} -c:a libvorbis -q:a {1} -vf \"{2}\"", encodingArgs,
-                            this.OGGVBRBitrateToQualityIndex(encodingQuality), transformArgs);
+                        string encoderArgs = string.Format(
+                            "-c:v libvpx-vp9 {0} -c:a libvorbis -q:a {1} {2}", 
+                            encodingArgs,
+                            this.OGGVBRBitrateToQualityIndex(encodingQuality), 
+                            videoFilteringArgs);
+
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
