@@ -47,6 +47,7 @@ namespace FileConverter
                                                OutputType.Ico,
                                                OutputType.Jpg,
                                                OutputType.Png,
+                                               OutputType.Gif,
                                            };
 
             this.OutputFormats.ItemsSource = outputTypes;

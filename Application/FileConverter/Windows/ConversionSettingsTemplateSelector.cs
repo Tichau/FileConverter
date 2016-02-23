@@ -49,6 +49,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate GifSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public DataTemplate JpgSettingsDataTemplate
         {
             get;
@@ -89,6 +95,9 @@ namespace FileConverter.Windows
 
                 case OutputType.Avi:
                     return this.AviSettingsDataTemplate;
+
+                case OutputType.Gif:
+                    return this.GifSettingsDataTemplate;
 
                 case OutputType.Jpg:
                     return this.JpgSettingsDataTemplate;

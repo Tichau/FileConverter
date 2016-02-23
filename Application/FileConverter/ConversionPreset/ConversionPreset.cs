@@ -424,6 +424,17 @@ namespace FileConverter
                 case OutputType.Ico:
                     break;
 
+                case OutputType.Gif:
+                    switch (settingsKey)
+                    {
+                        case ConversionPreset.ConversionSettingKeys.VideoScale:
+                        case ConversionPreset.ConversionSettingKeys.VideoRotation:
+                        case ConversionPreset.ConversionSettingKeys.VideoFramesPerSecond:
+                            return true;
+                    }
+
+                    break;
+
                 case OutputType.Jpg:
                     switch (settingsKey)
                     {
@@ -532,6 +543,12 @@ namespace FileConverter
 
                 case OutputType.Ico:
                 case OutputType.Flac:
+                    break;
+
+                case OutputType.Gif:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoFramesPerSecond, "15");
                     break;
 
                 case OutputType.Png:
@@ -753,6 +770,7 @@ namespace FileConverter
             public const string VideoEncodingSpeed = "VideoEncodingSpeed";
             public const string VideoScale = "VideoScale";
             public const string VideoRotation = "VideoRotation";
+            public const string VideoFramesPerSecond = "VideoFramesPerSecond";
         }
     }
 }

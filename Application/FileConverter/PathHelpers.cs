@@ -88,9 +88,9 @@ namespace FileConverter
                 case "wma":
                     return InputCategoryNames.Audio;
 
+                case "3gp":
                 case "avi":
                 case "bik":
-                case "3gp":
                 case "flv":
                 case "m4v":
                 case "mp4":
@@ -112,6 +112,9 @@ namespace FileConverter
                 case "svg":
                 case "xcf":
                     return InputCategoryNames.Image;
+
+                case "gif":
+                    return InputCategoryNames.AnimatedImage;
             }
 
             return InputCategoryNames.Misc;
@@ -138,12 +141,15 @@ namespace FileConverter
                 case OutputType.Mkv:
                 case OutputType.Mp4:
                 case OutputType.Webm:
-                    return category == InputCategoryNames.Video;
-                    
+                    return category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
+
                 case OutputType.Ico:
-                case OutputType.Png:
                 case OutputType.Jpg:
+                case OutputType.Png:
                     return category == InputCategoryNames.Image;
+
+                case OutputType.Gif:
+                    return category == InputCategoryNames.Image || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
 
                 default:
                     return false;
@@ -168,6 +174,8 @@ namespace FileConverter
             public const string Audio = "Audio";
             public const string Video = "Video";
             public const string Image = "Image";
+            public const string AnimatedImage = "Animated Image";
+
             public const string Misc = "Misc";
         }
     }

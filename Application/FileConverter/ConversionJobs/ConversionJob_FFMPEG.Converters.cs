@@ -45,27 +45,21 @@ namespace FileConverter.ConversionJobs
                 }
             }
 
-            // Build vf args (-vf "scale=..., transpose=...")
+            // Build vf args content (scale=..., transpose=...)
             string transformArgs = string.Empty;
-            if (!string.IsNullOrEmpty(scaleArgs) || !string.IsNullOrEmpty(rotationArgs))
+            if (!string.IsNullOrEmpty(scaleArgs))
             {
-                transformArgs = "-vf \"";
-                if (!string.IsNullOrEmpty(scaleArgs))
+                transformArgs += scaleArgs;
+            }
+
+            if (!string.IsNullOrEmpty(rotationArgs))
+            {
+                if (!string.IsNullOrEmpty(transformArgs))
                 {
-                    transformArgs += scaleArgs;
+                    transformArgs += ",";
                 }
 
-                if (!string.IsNullOrEmpty(rotationArgs))
-                {
-                    if (!string.IsNullOrEmpty(scaleArgs))
-                    {
-                        transformArgs += ",";
-                    }
-
-                    transformArgs += rotationArgs;
-                }
-
-                transformArgs += "\"";
+                transformArgs += rotationArgs;
             }
 
             return transformArgs;

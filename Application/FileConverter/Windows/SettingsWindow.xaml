@@ -109,6 +109,52 @@
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
+        
+        <DataTemplate x:Key="GifSettingsDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Frames per second :" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right"/>
+                <Slider x:Name="QualitySlider" Grid.Row="0" Grid.Column="1" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoFramesPerSecond|System.Int32, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="10" SelectionEnd="20" Minimum="1" Maximum="30" TickPlacement="BottomRight" SmallChange="1" LargeChange="4" TickFrequency="1" Foreground="#004B82" />
+
+                <!-- Scale -->
+                <Label Content="Scale :" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
+                    <Label Grid.Column="1">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
+                                <MultiBinding.ConverterParameter>{0:P0}</MultiBinding.ConverterParameter>
+                                <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+
+                <!--Rotate-->
+                <Label Content="Rotate :" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton Content="None" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"/>
+                    <RadioButton Content="90°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|90, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="180°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|180, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"/>
+                    <RadioButton Content="270°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
 
         <DataTemplate x:Key="AviSettingsDataTemplate">
             <Grid>
@@ -405,6 +451,7 @@
             DefaultDataTemplate="{StaticResource EmptyDataTemplate}"
             AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}"
             AviSettingsDataTemplate="{StaticResource AviSettingsDataTemplate}"
+            GifSettingsDataTemplate="{StaticResource GifSettingsDataTemplate}" 
             JpgSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" 
             MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
             Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"

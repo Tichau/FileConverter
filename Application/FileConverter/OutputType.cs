@@ -9,6 +9,7 @@ namespace FileConverter
         Aac,
         Avi,
         Flac,
+        Gif,
         Ico,
         Jpg,
         Mkv,
