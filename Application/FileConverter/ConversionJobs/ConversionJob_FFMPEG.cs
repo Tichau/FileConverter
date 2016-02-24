@@ -93,9 +93,15 @@ namespace FileConverter.ConversionJobs
 
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
 
+                        string audioArgs = "-an";
+                        if (this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableAudio))
+                        {
+                            audioArgs = string.Format("-c:a libmp3lame -qscale:a {0}", this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate));
+                        }
+
                         // Compute final arguments.
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
-                        string encoderArgs = string.Format("-c:v mpeg4 -vtag xvid -qscale:v {0} -c:a libmp3lame -qscale:a {1} {2}", this.MPEG4QualityToQualityIndex(videoEncodingQuality), this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate), videoFilteringArgs);
+                        string encoderArgs = string.Format("-c:v mpeg4 -vtag xvid -qscale:v {0} {1} {2}", this.MPEG4QualityToQualityIndex(videoEncodingQuality), audioArgs, videoFilteringArgs);
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));

@@ -172,7 +172,7 @@
                 </Grid.RowDefinitions>
 
                 <DockPanel Grid.Row="0" Grid.Column="0">
-                    <Label Content="Video" FontWeight="Bold" />
+                    <Label Content="Video" FontWeight="Bold" Margin="17,0,0,0" />
                     <Label Content="(Xvid)" FontWeight="Light" Foreground="#004B82" />
                 </DockPanel>
 
@@ -207,13 +207,14 @@
                     <RadioButton Content="270°" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"/>
                 </StackPanel>
 
-                <DockPanel Grid.Row="4" Grid.Column="0" >
-                    <Label Content="Audio" FontWeight="Bold" />
-                    <Label Content="(Mp3)" FontWeight="Light" Foreground="#004B82" />
+                <DockPanel Grid.Row="4" Grid.Column="0">
+                    <CheckBox IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,6,0,0" />
+                    <Label Content="Audio" FontWeight="Bold" IsEnabled="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay}"/>
+                    <Label Content="(Mp3)" FontWeight="Light" Foreground="#004B82" IsEnabled="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay}"/>
                 </DockPanel>
 
-                <Label Content="Quality :" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right"/>
-                <controls:EncodingQualitySliderControl Grid.Row="5" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="Mp3VBR" 
+                <Label Content="Quality :" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay}"/>
+                <controls:EncodingQualitySliderControl Grid.Row="5" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="Mp3VBR" IsEnabled="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay}"
         				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
             </Grid>
         </DataTemplate>
