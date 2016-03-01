@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 0.6.1
+- New: Possibility to encode videos using VP9 video codec and Ogg vorbis audio codec in a webm container.
+- Fixed: Issue where "Clamp to power of 2 size" option didn't work well with image that already have a power of 2 size.
+- Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg). 
+
 ## Version 0.6
 - New: Possibility to encode videos using H.264 video codec and AAC audio codec in a mp4 container (more portable than mkv).
 - New: Support new image input file formats: psd, tga, svg and exr.
