@@ -242,7 +242,7 @@ namespace FileConverter.ConversionJobs
                 case OutputType.Ogg:
                     {
                         int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
-                        string encoderArgs = string.Format("-codec:a libvorbis -qscale:a {0}", this.OGGVBRBitrateToQualityIndex(encodingQuality));
+                        string encoderArgs = string.Format("-vn -codec:a libvorbis -qscale:a {0}", this.OGGVBRBitrateToQualityIndex(encodingQuality));
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
