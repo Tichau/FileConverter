@@ -219,11 +219,17 @@ namespace FileConverter.ConversionJobs
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
 
+                        string audioArgs = "-an";
+                        if (this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableAudio))
+                        {
+                            audioArgs = string.Format("-c:a aac -qscale:a {0}", this.AACBitrateToQualityIndex(audioEncodingBitrate));
+                        }
+
                         string encoderArgs = string.Format(
-                            "-c:v libx264 -preset {0} -crf {1} -c:a aac -q:a {2} {3}",
+                            "-c:v libx264 -preset {0} -crf {1} {2} {3}",
                             this.H264EncodingSpeedToPreset(videoEncodingSpeed), 
                             this.H264QualityToCRF(videoEncodingQuality),
-                            this.AACBitrateToQualityIndex(audioEncodingBitrate), 
+                            audioArgs, 
                             videoFilteringArgs);
 
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
@@ -278,7 +284,7 @@ namespace FileConverter.ConversionJobs
                     {
                         // https://trac.ffmpeg.org/wiki/Encode/VP9
                         int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
-                        int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
+                        int audioEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
 
                         string encodingArgs = string.Empty;
                         if (videoEncodingQuality == 63)
@@ -294,10 +300,16 @@ namespace FileConverter.ConversionJobs
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
 
+                        string audioArgs = "-an";
+                        if (this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableAudio))
+                        {
+                            audioArgs = string.Format("-c:a libvorbis -qscale:a {0}", this.OGGVBRBitrateToQualityIndex(audioEncodingQuality));
+                        }
+
                         string encoderArgs = string.Format(
-                            "-c:v libvpx-vp9 {0} -c:a libvorbis -q:a {1} {2}", 
+                            "-c:v libvpx-vp9 {0} {1} {2}", 
                             encodingArgs,
-                            this.OGGVBRBitrateToQualityIndex(encodingQuality), 
+                            audioArgs, 
                             videoFilteringArgs);
 
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
