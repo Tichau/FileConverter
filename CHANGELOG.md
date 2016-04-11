@@ -2,8 +2,11 @@
 
 ## Version 0.6.1
 - New: Possibility to encode videos using VP9 video codec and Ogg vorbis audio codec in a webm container.
+- New: Possibility to remove audio from video files (mkv, mp4, avi and webm output file formats).
+- New: Add feedback to indicate that the application will automatically terminate (after conversions) (github issue #1).
 - Fixed: Issue where "Clamp to power of 2 size" option didn't work well with image that already have a power of 2 size.
-- Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg). 
+- Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg).
+- Fixed: Issue where converting a video into the ogg format didn't extract audio in an ogg file correctly.
 
 ## Version 0.6
 - New: Possibility to encode videos using H.264 video codec and AAC audio codec in a mp4 container (more portable than mkv).
