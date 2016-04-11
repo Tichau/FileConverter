@@ -27,7 +27,10 @@
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="Title" Grid.Column="0" Content="Files to convert" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold"/>
+            <DockPanel Grid.Column="0">
+                <Label Content="Files to convert" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold"/>
+                <Label Content="{Binding InformationMessage, ElementName=FileConverterMainWindow}" VerticalAlignment="Top" Height="30" FontSize="13.333" HorizontalAlignment="Right"/>
+            </DockPanel>
             <Button x:Name="DiagnosticsButton" Grid.Column="1" Content="Logs" Margin="3,3" Click="DiagnosticsButton_OnClick"/>
             <Button x:Name="SettingsButton"  Grid.Column="2" Content="Settings" Margin="3,3" Click="SettingsButton_OnClick"/>
         </Grid>

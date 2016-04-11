@@ -57,6 +57,8 @@ namespace FileConverter
             }
         }
 
+        public event System.EventHandler<ApplicationTerminateArgs> OnApplicationTerminate;
+
         public ReadOnlyCollection<ConversionJob> ConvertionJobs
         {
             get;
@@ -90,6 +92,11 @@ namespace FileConverter
         public void CancelAutoExit()
         {
             this.cancelAutoExit = true;
+
+            if (this.OnApplicationTerminate != null)
+            {
+                this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(float.NaN));
+            }
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -390,13 +397,33 @@ namespace FileConverter
                     allConversionsSucceed &= this.conversionJobs[index].State == ConversionJob.ConversionState.Done;
                 }
 
+                if (this.cancelAutoExit)
+                {
+                    return;
+                }
+
                 if (allConversionsSucceed)
                 {
-                    System.Threading.Thread.Sleep((int)this.Settings.DurationBetweenEndOfConversionsAndApplicationExit * 1000);
-
-                    if (this.cancelAutoExit)
+                    float remainingTime = this.Settings.DurationBetweenEndOfConversionsAndApplicationExit;
+                    while (remainingTime > 0f)
                     {
-                        return;
+                        if (this.OnApplicationTerminate != null)
+                        {
+                            this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(remainingTime));
+                        }
+
+                        System.Threading.Thread.Sleep(1000);
+                        remainingTime--;
+
+                        if (this.cancelAutoExit)
+                        {
+                            return;
+                        }
+                    }
+
+                    if (this.OnApplicationTerminate != null)
+                    {
+                        this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(remainingTime));
                     }
 
                     Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
