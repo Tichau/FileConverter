@@ -96,6 +96,13 @@ namespace FileConverter
             }
         }
 
+        [XmlAttribute]
+        public bool IsDefaultSettings
+        {
+            get;
+            set;
+        } = false;
+
         [XmlElement]
         public List<string> InputTypes
         {

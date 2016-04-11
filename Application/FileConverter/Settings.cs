@@ -129,10 +129,25 @@ namespace FileConverter
                     System.IO.File.Delete(userFilePath);
                 }
 
-                if (userSettings != null && userSettings.SerializationVersion != Version)
+                if (userSettings != null)
                 {
-                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
-                    userSettings.SerializationVersion = Version;
+                    if (userSettings.SerializationVersion != Version)
+                    {
+                        Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
+                        userSettings.SerializationVersion = Version;
+                    }
+
+                    // Remove default settings.
+                    if (userSettings.ConversionPresets != null)
+                    {
+                        for (int index = userSettings.ConversionPresets.Count - 1; index >= 0; index--)
+                        {
+                            if (userSettings.ConversionPresets[index].IsDefaultSettings)
+                            {
+                                userSettings.ConversionPresets.RemoveAt(index);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -468,7 +483,7 @@ namespace FileConverter
             {
                 return this;
             }
-
+            
             for (int index = 0; index < settings.conversionPresets.Count; index++)
             {
                 ConversionPreset conversionPreset = settings.conversionPresets[index];

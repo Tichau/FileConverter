@@ -2,7 +2,7 @@
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SerializationVersion="1">
     <ExitApplicationWhenConversionsFinished>true</ExitApplicationWhenConversionsFinished>
     <DurationBetweenEndOfConversionsAndApplicationExit>3</DurationBetweenEndOfConversionsAndApplicationExit>
-    <ConversionPreset Name="To Mkv" OutputType="Mkv">
+    <ConversionPreset Name="To Mkv" OutputType="Mkv" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
@@ -21,7 +21,7 @@
         <Settings Key="AudioBitrate" Value="155" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Mp4" OutputType="Mp4">
+    <ConversionPreset Name="To Mp4" OutputType="Mp4" IsDefaultSettings="true">
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -40,7 +40,7 @@
         <Settings Key="AudioBitrate" Value="155" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Mp4 (low quality)" OutputType="Mp4">
+    <ConversionPreset Name="To Mp4 (low quality)" OutputType="Mp4" IsDefaultSettings="true">
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -59,7 +59,7 @@
         <Settings Key="AudioBitrate" Value="96" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Mp4 (rotate left)" OutputType="Mp4">
+    <ConversionPreset Name="To Mp4 (rotate left)" OutputType="Mp4" IsDefaultSettings="true">
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -78,7 +78,7 @@
         <Settings Key="AudioBitrate" Value="155" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Mp4 (rotate right)" OutputType="Mp4">
+    <ConversionPreset Name="To Mp4 (rotate right)" OutputType="Mp4" IsDefaultSettings="true">
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -97,7 +97,7 @@
         <Settings Key="AudioBitrate" Value="155" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Avi" OutputType="Avi">
+    <ConversionPreset Name="To Avi" OutputType="Avi" IsDefaultSettings="true">
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -115,7 +115,7 @@
         <Settings Key="AudioBitrate" Value="190" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Ogg" OutputType="Ogg">
+    <ConversionPreset Name="To Ogg" OutputType="Ogg" IsDefaultSettings="true">
         <InputTypes>aac</InputTypes>
         <InputTypes>aiff</InputTypes>
         <InputTypes>ape</InputTypes>
@@ -138,7 +138,7 @@
         <Settings Key="AudioBitrate" Value="160" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Flac" OutputType="Flac">
+    <ConversionPreset Name="To Flac" OutputType="Flac" IsDefaultSettings="true">
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -155,7 +155,7 @@
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Wav" OutputType="Wav">
+    <ConversionPreset Name="To Wav" OutputType="Wav" IsDefaultSettings="true">
         <InputTypes>aac</InputTypes>
         <InputTypes>aiff</InputTypes>
         <InputTypes>ape</InputTypes>
@@ -178,7 +178,7 @@
         <Settings Key="AudioEncodingMode" Value="Wav16" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Mp3" OutputType="Mp3">
+    <ConversionPreset Name="To Mp3" OutputType="Mp3" IsDefaultSettings="true">
         <InputTypes>aac</InputTypes>
         <InputTypes>aiff</InputTypes>
         <InputTypes>ape</InputTypes>
@@ -202,7 +202,7 @@
         <Settings Key="AudioBitrate" Value="190" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Aac" OutputType="Aac">
+    <ConversionPreset Name="To Aac" OutputType="Aac" IsDefaultSettings="true">
         <InputTypes>aiff</InputTypes>
         <InputTypes>ape</InputTypes>
         <InputTypes>m4a</InputTypes>
@@ -225,25 +225,25 @@
         <Settings Key="AudioBitrate" Value="128" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="Extract CDA to Flac" OutputType="Flac">
+    <ConversionPreset Name="Extract CDA to Flac" OutputType="Flac" IsDefaultSettings="true">
         <InputTypes>cda</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p:m)CDA Extraction\(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="Extract CDA to Ogg" OutputType="Ogg">
+    <ConversionPreset Name="Extract CDA to Ogg" OutputType="Ogg" IsDefaultSettings="true">
         <InputTypes>cda</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioBitrate" Value="192" />
         <OutputFileNameTemplate>(p:m)CDA Extraction\(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="Extract CDA to Mp3" OutputType="Mp3">
+    <ConversionPreset Name="Extract CDA to Mp3" OutputType="Mp3" IsDefaultSettings="true">
         <InputTypes>cda</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioEncodingMode" Value="Mp3VBR" />
         <Settings Key="AudioBitrate" Value="225" />
         <OutputFileNameTemplate>(p:m)CDA Extraction\(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Png" OutputType="Png">
+    <ConversionPreset Name="To Png" OutputType="Png" IsDefaultSettings="true">
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
@@ -262,7 +262,7 @@
         <Settings Key="ImageMaximumSize" Value="0" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To small Png (25%)" OutputType="Png">
+    <ConversionPreset Name="To small Png (25%)" OutputType="Png" IsDefaultSettings="true">
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
@@ -281,7 +281,7 @@
         <Settings Key="ImageMaximumSize" Value="0" />
         <OutputFileNameTemplate>(p)(f)-small</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Png (rotate left)" OutputType="Png">
+    <ConversionPreset Name="To Png (rotate left)" OutputType="Png" IsDefaultSettings="true">
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
@@ -299,7 +299,7 @@
         <Settings Key="ImageMaximumSize" Value="0" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Png (rotate right)" OutputType="Png">
+    <ConversionPreset Name="To Png (rotate right)" OutputType="Png" IsDefaultSettings="true">
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
@@ -317,7 +317,7 @@
         <Settings Key="ImageMaximumSize" Value="0" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Jpg" OutputType="Jpg">
+    <ConversionPreset Name="To Jpg" OutputType="Jpg" IsDefaultSettings="true">
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
@@ -336,7 +336,7 @@
         <Settings Key="ImageClampSizePowerOf2" Value="False" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Ico" OutputType="Ico">
+    <ConversionPreset Name="To Ico" OutputType="Ico" IsDefaultSettings="true">
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
