@@ -435,7 +435,7 @@ namespace FileConverter.ConversionJobs
 
             if (input.Contains("Exiting.") || input.Contains("Error") || input.Contains("Unsupported dimensions") || input.Contains("No such file or directory"))
             {
-                if (input == "Error while decoding stream #0:1: Invalid data found when processing input")
+                if (input.StartsWith("Error while decoding stream") && input.EndsWith("Invalid data found when processing input"))
                 {
                     // It is normal for a transport stream to start with a broken frame.
                     // https://trac.ffmpeg.org/ticket/1622
