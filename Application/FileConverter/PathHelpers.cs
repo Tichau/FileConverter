@@ -23,6 +23,28 @@ namespace FileConverter
             return PathHelpers.driveLetterRegex.Match(path).Groups[0].Value;
         }
 
+        public static bool IsOnCDDrive(string path)
+        {
+            string pathDriveLetter = GetPathDriveLetter(path);
+            if (string.IsNullOrEmpty(pathDriveLetter))
+            {
+                return false;
+            }
+
+            char driveLetter = pathDriveLetter[0];
+
+            char[] driveLetters = Ripper.CDDrive.GetCDDriveLetters();
+            for (int index = 0; index < driveLetters.Length; index++)
+            {
+                if (driveLetters[index] == driveLetter)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static int GetCDATrackNumber(string path)
         {
             Match match = PathHelpers.cdaTrackNumberRegex.Match(path);

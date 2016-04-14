@@ -141,7 +141,7 @@ namespace FileConverter.ConversionJobs
 
         public virtual bool CanStartConversion(ConversionFlags conversionFlags)
         {
-            return true;
+            return (conversionFlags & ConversionFlags.CdDriveExtraction) == 0;
         }
 
         public void PrepareConversion(string inputFilePath, string outputFilePath = null)
@@ -225,6 +225,12 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
+            // Check if the input file is located on a cd drive.
+            if (PathHelpers.IsOnCDDrive(this.InputFilePath))
+            {
+                this.StateFlags = ConversionFlags.CdDriveExtraction;
+            }
+
             this.Initialize();
 
             if (this.State == ConversionState.Unknown)
@@ -252,7 +258,7 @@ namespace FileConverter.ConversionJobs
             Debug.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
 
             this.State = ConversionState.InProgress;
-
+            
             try
             {
                 this.Convert();
@@ -261,6 +267,8 @@ namespace FileConverter.ConversionJobs
             {
                 this.ConversionFailed(exception.Message);
             }
+
+            this.StateFlags = ConversionFlags.None;
 
             if (this.State == ConversionState.Failed)
             {

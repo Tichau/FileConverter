@@ -9,6 +9,6 @@ namespace FileConverter.ConversionJobs
     {
         None = 0x00,
 
-        CdaExtraction = 0x01,
+        CdDriveExtraction = 0x01,
     }
 }

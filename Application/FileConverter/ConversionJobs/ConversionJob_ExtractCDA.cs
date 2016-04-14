@@ -35,12 +35,7 @@ namespace FileConverter.ConversionJobs
                 return InputPostConversionAction.None;
             }
         }
-
-        public override bool CanStartConversion(ConversionFlags conversionFlags)
-        {
-            return (conversionFlags & ConversionFlags.CdaExtraction) == 0;
-        }
-
+        
         protected override void Initialize()
         {
             base.Initialize();
@@ -108,8 +103,6 @@ namespace FileConverter.ConversionJobs
             this.compressionConversionJob = ConversionJobFactory.Create(this.ConversionPreset, this.intermediateFilePath);
             this.compressionConversionJob.PrepareConversion(this.intermediateFilePath, this.OutputFilePath);
             this.compressionThread = new Thread(this.CompressAsync);
-
-            this.StateFlags = ConversionFlags.CdaExtraction;
         }
 
         protected override void Convert()
