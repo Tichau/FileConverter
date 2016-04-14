@@ -83,6 +83,7 @@ namespace FileConverter
                 case "flac":
                 case "mp3":
                 case "m4a":
+                case "oga":
                 case "ogg":
                 case "wav":
                 case "wma":
@@ -96,6 +97,8 @@ namespace FileConverter
                 case "mp4":
                 case "mov":
                 case "mkv":
+                case "ogv":
+                case "vob":
                 case "webm":
                 case "wmv":
                     return InputCategoryNames.Video;
