@@ -23,7 +23,13 @@ namespace FileConverter.ConversionJobs
         {
             float scaleFactor = conversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);
             string scaleArgs = string.Empty;
-            if (Math.Abs(scaleFactor - 1f) >= 0.005f)
+
+            if (conversionPreset.OutputType == OutputType.Mkv || conversionPreset.OutputType == OutputType.Mp4)
+            {
+                // This presets use h264 codec, the size of the video need to be divisible by 2.
+                scaleArgs = string.Format("scale=trunc(iw*{0}/2)*2:trunc(ih*{0}/2)*2", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+            }
+            else if (Math.Abs(scaleFactor - 1f) >= 0.005f)
             {
                 scaleArgs = string.Format("scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
             }
