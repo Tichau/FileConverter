@@ -13,6 +13,7 @@
 - Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg).
 - Fixed: Issue where converting a video into the ogg format did not extract audio in an ogg file correctly.
 - Fixed: Issue where simultaneous read on the same CD drive was performed when files from differents conversions come from the same drive (other than cda extraction preset).
+- Fixed: Issue where the path generator was unable to create a valid path if the input file was at the root of a drive.
 - Tech: Annotate the conversion presets to know if there are default preset or user preset in order to improve the upgrade process.
 
 ## Version 0.6

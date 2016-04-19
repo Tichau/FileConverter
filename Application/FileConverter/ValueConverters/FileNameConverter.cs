@@ -41,8 +41,12 @@ namespace FileConverter.ValueConverters
 
             string fileName = System.IO.Path.GetFileName(inputPathWithoutExtension);
             string parentDirectory = System.IO.Path.GetDirectoryName(inputPathWithoutExtension);
-            string[] directories = parentDirectory.Split(System.IO.Path.DirectorySeparatorChar);
-            parentDirectory += System.IO.Path.DirectorySeparatorChar;
+            if (!parentDirectory.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+            {
+                parentDirectory += System.IO.Path.DirectorySeparatorChar;
+            }
+
+            string[] directories = parentDirectory.Substring(0, parentDirectory.Length - 1).Split(System.IO.Path.DirectorySeparatorChar);
 
             // Generate output path from template.
             string outputPath = outputFileTemplate;
