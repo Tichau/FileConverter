@@ -6,7 +6,8 @@
 - New: Possibility to convert gif files to videos.
 - New: Possibility to remove audio from video files (mkv, mp4, avi and webm output file formats).
 - New: Add feedback to indicate that the application will automatically terminate (after conversions) (github issue #1).
-- New: Support new input formats: ogv and oga.
+- New: Support new video input formats: ogv and mpeg.
+- New: Support new audio input format: oga.
 - Fixed: Issue where video can't be compressed using H.264 codec (mp4 or mkv presets) when its size (width or height) is not divisible by 2 (append a lot when the user try to scale a video) (github issue #2).
 - Fixed: Issue where "Clamp to power of 2 size" option didn't work well with image that already have a power of 2 size.
 - Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg).

@@ -117,6 +117,7 @@ namespace FileConverter
                 case "flv":
                 case "m4v":
                 case "mp4":
+                case "mpeg":
                 case "mov":
                 case "mkv":
                 case "ogv":
