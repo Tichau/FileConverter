@@ -3,9 +3,9 @@
 namespace FileConverter.ConversionJobs
 {
     using System;
+    using System.Globalization;
 
     using FileConverter.Controls;
-    using System.Globalization;
 
     public partial class ConversionJob_FFMPEG
     {

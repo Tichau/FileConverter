@@ -1,11 +1,10 @@
-﻿// <copyright file="ConversionJob_Ico.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
-
-using System.Threading.Tasks;
+﻿// <copyright file="ConversionJob_Gif.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ConversionJobs
 {
     using System;
     using System.IO;
+    using System.Threading.Tasks;
 
     public class ConversionJob_Gif : ConversionJob
     {

@@ -23,7 +23,7 @@ namespace FileConverter
 
             Application application = Application.Current as Application;
 
-            application.OnApplicationTerminate += Application_OnApplicationTerminate;
+            application.OnApplicationTerminate += this.Application_OnApplicationTerminate;
 
             this.ConverterJobsList.ItemsSource = application.ConvertionJobs;
 
@@ -158,6 +158,7 @@ namespace FileConverter
             {
                 this.InformationMessage = string.Format("The application will automatically terminate in {0} second.", remaingingSeconds);
             }
+
             if (remaingingSeconds <= 0)
             {
                 this.InformationMessage = string.Format("The application is terminating.");

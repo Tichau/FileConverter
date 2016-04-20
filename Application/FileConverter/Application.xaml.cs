@@ -49,6 +49,8 @@ namespace FileConverter
             this.ConvertionJobs = this.conversionJobs.AsReadOnly();
         }
 
+        public event EventHandler<ApplicationTerminateArgs> OnApplicationTerminate;
+
         public static Version ApplicationVersion
         {
             get
@@ -56,8 +58,6 @@ namespace FileConverter
                 return Application.Version;
             }
         }
-
-        public event System.EventHandler<ApplicationTerminateArgs> OnApplicationTerminate;
 
         public ReadOnlyCollection<ConversionJob> ConvertionJobs
         {

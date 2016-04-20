@@ -105,7 +105,6 @@
     <Compile Include="Diagnostics\DiagnosticsData.cs" />
     <Compile Include="Controls\EncodingMode.cs" />
     <Compile Include="ConversionPreset\IConversionSettings.cs" />
-    <Compile Include="IfoFile.cs" />
     <Compile Include="InputPostConversionAction.cs" />
     <Compile Include="IXmlSerializable.cs" />
     <Compile Include="PathHelpers.cs" />
@@ -113,6 +112,7 @@
       <DependentUpon>Resources.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Registry.cs" />
     <Compile Include="Settings.Settings.cs" />
