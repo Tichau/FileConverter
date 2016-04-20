@@ -91,6 +91,7 @@
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConversionJobs\CancelConversionJobCommand.cs" />
     <Compile Include="ConversionJobs\ConversionFlags.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ExtractCDA.cs" />
     <Compile Include="ConversionJobs\ConversionJobFactory.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Diagnostics\DiagnosticsData.cs" />
     <Compile Include="Controls\EncodingMode.cs" />
     <Compile Include="ConversionPreset\IConversionSettings.cs" />
+    <Compile Include="IfoFile.cs" />
     <Compile Include="InputPostConversionAction.cs" />
     <Compile Include="IXmlSerializable.cs" />
     <Compile Include="PathHelpers.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="ValueConverters\Generic\EqualsConverter.cs" />
     <Compile Include="ValueConverters\Generic\CollectionContainsElementToBool.cs" />
     <Compile Include="ValueConverters\Generic\FormatStringConverter.cs" />
+    <Compile Include="ValueConverters\Generic\ValueToString.cs" />
     <Compile Include="ValueConverters\Generic\StringToValueType.cs" />
     <Compile Include="ValueConverters\InputTypesToBool.cs" />
     <Compile Include="Settings.cs" />

@@ -16,6 +16,7 @@ namespace FileConverter.ConversionJobs
         private string errorMessage = string.Empty;
         private string initialInputPath = string.Empty;
         private string userState = string.Empty;
+        private CancelConversionJobCommand cancelCommand;
 
         public ConversionJob()
         {
@@ -124,6 +125,31 @@ namespace FileConverter.ConversionJobs
         {
             get;
             protected set;
+        }
+
+        public CancelConversionJobCommand CancelCommand
+        {
+            get
+            {
+                if (this.cancelCommand == null)
+                {
+                    this.cancelCommand = new CancelConversionJobCommand(this);
+                }
+
+                return this.cancelCommand;
+            }
+        }
+
+        public bool IsCancelable
+        {
+            get;
+            protected set;
+        }
+
+        protected bool CancelIsRequested
+        {
+            get;
+            private set;
         }
 
         protected virtual InputPostConversionAction InputPostConversionAction
@@ -278,6 +304,17 @@ namespace FileConverter.ConversionJobs
             {
                 this.OnConversionSucceed();
             }
+        }
+
+        public virtual void Cancel()
+        {
+            if (!this.IsCancelable || this.State != ConversionState.InProgress)
+            {
+                return;
+            }
+
+            this.CancelIsRequested = true;
+            this.ConversionFailed("Canceled.");
         }
 
         protected virtual void Convert()

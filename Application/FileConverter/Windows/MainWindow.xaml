@@ -4,11 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileConverter"
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
-        xmlns:conversionJobs="clr-namespace:FileConverter.ConversionJobs" mc:Ignorable="d" x:Class="FileConverter.MainWindow"
-        x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="450" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
+        xmlns:conversionJobs="clr-namespace:FileConverter.ConversionJobs"
+        xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
+        mc:Ignorable="d" x:Class="FileConverter.MainWindow"
+        x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
     <Window.Resources>
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <valueConverters:ConversionStateToBrush x:Key="ConversionStateToColor" />
+
+        <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">
+            <generic:ValueToString/>
+            <generic:EqualsConverter/>
+            <!--<generic:BoolInverterConverter/>-->
+            <generic:BoolToVisibility/>
+        </generic:ValueConverterGroup>
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
@@ -39,8 +48,13 @@
             <ItemsControl x:Name="ConverterJobsList">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <DockPanel Background="{Binding State, ConverterParameter=Background, Converter={StaticResource ConversionStateToColor}}" Margin="0,4">
-                            <Grid Margin="10">
+                        <Grid Background="{Binding State, ConverterParameter=Background, Converter={StaticResource ConversionStateToColor}}" Margin="0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Margin="10" Grid.Column="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="Auto" />
@@ -64,7 +78,9 @@
 
                                 <ProgressBar Grid.Row="1" Grid.Column="1" Height="18" Width="Auto" Minimum="0" Maximum="1" SmallChange="0.001" Value="{Binding Progress, Mode=OneWay}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" MinWidth="100" LargeChange="0.1" />
                             </Grid>
-                        </DockPanel>
+
+                            <Button Content="Cancel" Margin="5" Grid.Column="1" Width="80" Background="WhiteSmoke" Foreground="#FF3E3E3E" Visibility="{Binding State, Converter={StaticResource EnumEqualsToVisibility}, ConverterParameter=|InProgress|Collapsed}" Command="{Binding CancelCommand}" />
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.DataContext>

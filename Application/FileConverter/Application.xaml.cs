@@ -214,6 +214,11 @@ namespace FileConverter
             for (int index = 1; index < args.Length; index++)
             {
                 string argument = args[index];
+                if (string.IsNullOrEmpty(argument))
+                {
+                    continue;
+                }
+
                 if (argument.StartsWith("--"))
                 {
                     // This is an optional parameter.

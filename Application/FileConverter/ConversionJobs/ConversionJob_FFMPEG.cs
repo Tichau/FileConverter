@@ -25,12 +25,14 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_FFMPEG() : base()
         {
+            this.IsCancelable = true;
         }
 
         public ConversionJob_FFMPEG(ConversionPreset conversionPreset) : base(conversionPreset)
         {
+            this.IsCancelable = true;
         }
-
+        
         protected virtual string FfmpegPath
         {
             get
@@ -363,6 +365,11 @@ namespace FileConverter.ConversionJobs
                         {
                             while (!reader.EndOfStream)
                             {
+                                if (this.CancelIsRequested && !exeProcess.HasExited)
+                                {
+                                    exeProcess.Kill();
+                                }
+
                                 string result = reader.ReadLine();
 
                                 this.ParseFFMPEGOutput(result);
