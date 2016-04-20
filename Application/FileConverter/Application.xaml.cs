@@ -31,7 +31,7 @@ namespace FileConverter
         private static readonly Version Version = new Version()
                                             {
                                                 Major = 0, 
-                                                Minor = 6,
+                                                Minor = 7,
                                                 Patch = 0,
                                             };
 
