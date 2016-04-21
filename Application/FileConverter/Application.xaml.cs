@@ -173,8 +173,8 @@ namespace FileConverter
         private void Initialize()
         {
             Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString());
-            Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", Environment.ProcessorCount);
-            this.numberOfConversionThread = Environment.ProcessorCount;
+            this.numberOfConversionThread = System.Math.Max(1, Environment.ProcessorCount / 2);
+            Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", this.numberOfConversionThread);
             
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
