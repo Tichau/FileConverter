@@ -12,7 +12,6 @@ namespace FileConverter.ConversionJobs
         public CancelConversionJobCommand(ConversionJob conversionJob)
         {
             this.conversionJob = conversionJob;
-            this.conversionJob.PropertyChanged += this.ConversionJob_PropertyChanged;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -30,16 +29,6 @@ namespace FileConverter.ConversionJobs
         public void Execute(object parameter)
         {
             this.conversionJob?.Cancel();
-        }
-
-        private void ConversionJob_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs eventArgs)
-        {
-            if (eventArgs.PropertyName != "State")
-            {
-                return;
-            }
-
-            this.CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }
