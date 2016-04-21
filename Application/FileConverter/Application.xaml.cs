@@ -454,8 +454,9 @@ namespace FileConverter
             {
                 conversionJob.StartConvertion();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Debug.LogError(exception.ToString() + "\n" + exception.StackTrace.ToString());
                 throw;
             }
 
