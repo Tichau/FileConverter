@@ -9,8 +9,8 @@
 - New: Support new video input formats: ogv and mpeg.
 - New: Support new audio input format: oga.
 - New: Possibility to cancel some conversion jobs (gif/cda and image conversion jobs are not cancelable for now).
-- Fixed: Issue where video can't be compressed using H.264 codec (mp4 or mkv presets) when its size (width or height) is not divisible by 2 (append a lot when the user try to scale a video) (github issue #2).
-- Fixed: Issue where "Clamp to power of 2 size" option didn't work well with image that already have a power of 2 size.
+- Fixed: Issue where video can't be compressed using H.264 codec (mp4 or mkv presets) when its size (width or height) is not divisible by 2 (append a lot when the user tries to scale a video) (github issue #2).
+- Fixed: Issue where "Clamp to power of 2 size" option didn't work well with images that already have a power of 2 size.
 - Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg).
 - Fixed: Issue where converting a video into the ogg format did not extract audio in an ogg file correctly.
 - Fixed: Issue where simultaneous read on the same CD drive was performed when files from differents conversions come from the same drive (other than cda extraction preset).
