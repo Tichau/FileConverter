@@ -456,8 +456,7 @@ namespace FileConverter
             }
             catch (Exception exception)
             {
-                Debug.LogError(exception.ToString() + "\n" + exception.StackTrace.ToString());
-                throw;
+                Debug.LogError("Failure during conversion: {0}", exception.ToString());
             }
 
             if (conversionJob.State == ConversionJob.ConversionState.Done && !System.IO.File.Exists(conversionJob.OutputFilePath))

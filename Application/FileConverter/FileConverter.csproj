@@ -238,6 +238,15 @@
   <ItemGroup>
     <Resource Include="Resources\ContextMenuScreenshot.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CancelIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SuccessIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FailIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"

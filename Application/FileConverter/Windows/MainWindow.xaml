@@ -51,7 +51,7 @@
                         <Grid Background="{Binding State, ConverterParameter=Background, Converter={StaticResource ConversionStateToColor}}" Margin="0,4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="70"/>
                             </Grid.ColumnDefinitions>
 
                             <Grid Margin="10" Grid.Column="0">
@@ -79,7 +79,13 @@
                                 <ProgressBar Grid.Row="1" Grid.Column="1" Height="18" Width="Auto" Minimum="0" Maximum="1" SmallChange="0.001" Value="{Binding Progress, Mode=OneWay}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" MinWidth="100" LargeChange="0.1" />
                             </Grid>
 
-                            <Button Content="Cancel" Margin="5" Grid.Column="1" Width="80" Background="WhiteSmoke" Foreground="#FF3E3E3E" Visibility="{Binding State, Converter={StaticResource EnumEqualsToVisibility}, ConverterParameter=|InProgress|Collapsed}" Command="{Binding CancelCommand}" />
+                            <Button Margin="5" Grid.Column="1" Background="WhiteSmoke" Foreground="#FF3E3E3E" Visibility="{Binding State, Converter={StaticResource EnumEqualsToVisibility}, ConverterParameter=|InProgress|Collapsed}" Command="{Binding CancelCommand}" ToolTip="Cancel">
+                                <Button.Content>
+                                    <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" />
+                                </Button.Content>
+                            </Button>
+                            <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/SuccessIcon.png" Width="48" Height="48" Visibility="{Binding State, Converter={StaticResource EnumEqualsToVisibility}, ConverterParameter=|Done|Collapsed}"/>
+                            <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/FailIcon.png" Width="48" Height="48" Visibility="{Binding State, Converter={StaticResource EnumEqualsToVisibility}, ConverterParameter=|Failed|Collapsed}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

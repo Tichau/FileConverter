@@ -329,9 +329,17 @@ namespace FileConverter.ConversionJobs
         {
             Debug.Log("Conversion Failed.");
 
-            if (System.IO.File.Exists(this.OutputFilePath))
+            try
             {
-                System.IO.File.Delete(this.OutputFilePath);
+                if (System.IO.File.Exists(this.OutputFilePath))
+                {
+                    System.IO.File.Delete(this.OutputFilePath);
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.Log("Can't delete file '{0}' after conversion job failure.", this.OutputFilePath);
+                Debug.Log("An exception as been thrown: {0}.", exception.ToString());
             }
         }
 
