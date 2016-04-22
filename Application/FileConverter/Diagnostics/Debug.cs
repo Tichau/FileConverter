@@ -22,7 +22,7 @@ namespace FileConverter.Diagnostics
 
             // Delete old diagnostics folder (1 day).
             DateTime expirationDate = DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0));
-            string[] diagnosticsDirectories = Directory.GetDirectories(path, "Diagnostics.*");
+            string[] diagnosticsDirectories = Directory.GetDirectories(path, "Diagnostics-*");
             for (int index = 0; index < diagnosticsDirectories.Length; index++)
             {
                 string directory = diagnosticsDirectories[index];
@@ -33,7 +33,9 @@ namespace FileConverter.Diagnostics
                 }
             }
 
-            Debug.diagnosticsFolderPath = Path.Combine(path, "Diagnostics." + Process.GetCurrentProcess().Id);
+            string diagnosticsFolderName = $"Diagnostics-{DateTime.Now.Hour}h{DateTime.Now.Minute}m{DateTime.Now.Second}s";
+            
+            Debug.diagnosticsFolderPath = Path.Combine(path, diagnosticsFolderName);
             Debug.diagnosticsFolderPath = PathHelpers.GenerateUniquePath(Debug.diagnosticsFolderPath);
             Directory.CreateDirectory(Debug.diagnosticsFolderPath);
         }
