@@ -29,7 +29,7 @@
         
         <CustomAction Id="InstallShell" FileKey="srm.exe" ExeCommand='install "[INSTALLFOLDER]\FileConverterExtension.dll" -codebase' Execute="deferred" Return="check" Impersonate="no" />
         <CustomAction Id="UninstallShell" FileKey="srm.exe" ExeCommand='uninstall "[INSTALLFOLDER]\FileConverterExtension.dll"' Execute="deferred" Return="check" Impersonate="no" />
-        <CustomAction Id='PostInstallInit' FileKey='FileConverter.exe' ExeCommand='--post-install-init' Return='asyncNoWait' />
+        <CustomAction Id='PostInstallInit' FileKey='FileConverter.exe' ExeCommand='--post-install-init' Return='asyncWait' />
         
         <InstallExecuteSequence>
             <Custom Action="InstallShell" After="InstallFiles">NOT Installed</Custom>
