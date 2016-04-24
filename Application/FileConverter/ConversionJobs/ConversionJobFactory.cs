@@ -18,6 +18,11 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_Ico(conversionPreset);
             }
 
+            if (conversionPreset.OutputType == OutputType.Gif)
+            {
+                return new ConversionJob_Gif(conversionPreset);
+            }
+
             if (PathHelpers.GetExtensionCategory(extension) == PathHelpers.InputCategoryNames.Image)
             {
                 return new ConversionJob_ImageMagick(conversionPreset);

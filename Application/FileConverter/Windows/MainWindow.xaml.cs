@@ -15,11 +15,15 @@ namespace FileConverter
         private SettingsWindow settingsWindow;
         private UpgradeWindow upgradeWindow;
 
+        private string informationMessage;
+
         public MainWindow()
         {
             this.InitializeComponent();
 
             Application application = Application.Current as Application;
+
+            application.OnApplicationTerminate += this.Application_OnApplicationTerminate;
 
             this.ConverterJobsList.ItemsSource = application.ConvertionJobs;
 
@@ -41,6 +45,20 @@ namespace FileConverter
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string InformationMessage
+        {
+            get
+            {
+                return this.informationMessage;
+            }
+
+            private set
+            {
+                this.informationMessage = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         public void OnNewVersionReleased(UpgradeVersionDescription upgradeVersionDescription)
         {
@@ -120,6 +138,31 @@ namespace FileConverter
             Application application = Application.Current as Application;
             application?.CancelAutoExit();
             this.upgradeWindow.Show();
+        }
+
+        private void Application_OnApplicationTerminate(object sender, ApplicationTerminateArgs eventArgs)
+        {
+            if (float.IsNaN(eventArgs.RemainingTimeBeforeTermination))
+            {
+                this.InformationMessage = string.Empty;
+                return;
+            }
+
+            int remaingingSeconds = (int)eventArgs.RemainingTimeBeforeTermination;
+
+            if (remaingingSeconds >= 2)
+            {
+                this.InformationMessage = string.Format("The application will automatically terminate in {0} seconds.", remaingingSeconds);
+            }
+            else if (remaingingSeconds == 1)
+            {
+                this.InformationMessage = string.Format("The application will automatically terminate in {0} second.", remaingingSeconds);
+            }
+
+            if (remaingingSeconds <= 0)
+            {
+                this.InformationMessage = string.Format("The application is terminating.");
+            }
         }
     }
 }

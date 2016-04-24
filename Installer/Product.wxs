@@ -12,12 +12,13 @@
 
 <!-- Upgrade documentation: http://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.6" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="0.7" Manufacturer="AAllard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
         <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
         
         <Icon Id="icon.ico" SourceFile="..\Resources\ApplicationIcon.ico"/>
         <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-
+        <SetProperty Id="ARPINSTALLLOCATION" Value="[ApplicationFolder]" After="CostFinalize" />
+      
         <MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
         
         <Media Id="1" Cabinet="CabFile.cab" EmbedCab="yes" />
@@ -28,7 +29,7 @@
         
         <CustomAction Id="InstallShell" FileKey="srm.exe" ExeCommand='install "[INSTALLFOLDER]\FileConverterExtension.dll" -codebase' Execute="deferred" Return="check" Impersonate="no" />
         <CustomAction Id="UninstallShell" FileKey="srm.exe" ExeCommand='uninstall "[INSTALLFOLDER]\FileConverterExtension.dll"' Execute="deferred" Return="check" Impersonate="no" />
-        <CustomAction Id='PostInstallInit' FileKey='FileConverter.exe' ExeCommand='--post-install-init' Return='asyncNoWait' />
+        <CustomAction Id='PostInstallInit' FileKey='FileConverter.exe' ExeCommand='--post-install-init' Return='asyncWait' />
         
         <InstallExecuteSequence>
             <Custom Action="InstallShell" After="InstallFiles">NOT Installed</Custom>
@@ -40,7 +41,7 @@
         <Property Id="MSIUSEREALADMINDETECTION" Value="1" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
         <Property Id="MSIRESTARTMANAGERCONTROL" Value="Disable" /> <!-- This avoid an issue where the installer detect the utilisation of the extension dll in explorer and then, ask to the user to restart these applications. The restart fails. -->
- 
+      
         <WixVariable Id="WixUILicenseRtf" Value="License.rtf" /> 
         <WixVariable Id="WixUIBannerBmp" Value="..\Resources\Installer\Banner.bmp" />
         <WixVariable Id="WixUIDialogBmp" Value="..\Resources\Installer\UI.bmp" /> 
@@ -111,7 +112,7 @@
             <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
                 <RegistryKey Root="HKCU" Key="Software\FileConverter" Action="createAndRemoveOnUninstall">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
-                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;exr;flac;flv;ico;jpg;jpeg;m4a;m4v;mkv;mov;mp3;mp4;ogg;png;psd;svg;tga;tiff;wav;webm;wma;wmv"/>
+                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;exr;flac;flv;gif;ico;jpg;jpeg;m4a;m4v;mkv;mov;mp3;mp4;mpeg;oga;ogg;ogv;png;psd;svg;tga;tiff;vob;wav;webm;wma;wmv"/>
                 </RegistryKey>
             </Component>
         </ComponentGroup>

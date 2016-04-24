@@ -87,14 +87,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationTerminateArgs.cs" />
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConversionJobs\CancelConversionJobCommand.cs" />
     <Compile Include="ConversionJobs\ConversionFlags.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ExtractCDA.cs" />
     <Compile Include="ConversionJobs\ConversionJobFactory.cs" />
     <Compile Include="ConversionJobs\ConversionJob_FFMPEG.Converters.cs" />
     <Compile Include="ConversionJobs\ConversionJob_FFMPEG.cs" />
+    <Compile Include="ConversionJobs\ConversionJob_Gif.cs" />
     <Compile Include="ConversionJobs\ConversionJob_Ico.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ImageMagick.cs" />
     <Compile Include="ConversionPreset\ConversionSettingsOverride.cs" />
@@ -109,6 +112,7 @@
       <DependentUpon>Resources.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Registry.cs" />
     <Compile Include="Settings.Settings.cs" />
@@ -125,6 +129,7 @@
     <Compile Include="ValueConverters\Generic\EqualsConverter.cs" />
     <Compile Include="ValueConverters\Generic\CollectionContainsElementToBool.cs" />
     <Compile Include="ValueConverters\Generic\FormatStringConverter.cs" />
+    <Compile Include="ValueConverters\Generic\ValueToString.cs" />
     <Compile Include="ValueConverters\Generic\StringToValueType.cs" />
     <Compile Include="ValueConverters\InputTypesToBool.cs" />
     <Compile Include="Settings.cs" />
@@ -232,6 +237,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ContextMenuScreenshot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CancelIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SuccessIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FailIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

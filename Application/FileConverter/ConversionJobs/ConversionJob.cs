@@ -16,6 +16,7 @@ namespace FileConverter.ConversionJobs
         private string errorMessage = string.Empty;
         private string initialInputPath = string.Empty;
         private string userState = string.Empty;
+        private CancelConversionJobCommand cancelCommand;
 
         public ConversionJob()
         {
@@ -126,6 +127,31 @@ namespace FileConverter.ConversionJobs
             protected set;
         }
 
+        public CancelConversionJobCommand CancelCommand
+        {
+            get
+            {
+                if (this.cancelCommand == null)
+                {
+                    this.cancelCommand = new CancelConversionJobCommand(this);
+                }
+
+                return this.cancelCommand;
+            }
+        }
+
+        public bool IsCancelable
+        {
+            get;
+            protected set;
+        }
+
+        protected bool CancelIsRequested
+        {
+            get;
+            private set;
+        }
+
         protected virtual InputPostConversionAction InputPostConversionAction
         {
             get
@@ -141,7 +167,7 @@ namespace FileConverter.ConversionJobs
 
         public virtual bool CanStartConversion(ConversionFlags conversionFlags)
         {
-            return true;
+            return (conversionFlags & ConversionFlags.CdDriveExtraction) == 0;
         }
 
         public void PrepareConversion(string inputFilePath, string outputFilePath = null)
@@ -225,6 +251,12 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
+            // Check if the input file is located on a cd drive.
+            if (PathHelpers.IsOnCDDrive(this.InputFilePath))
+            {
+                this.StateFlags = ConversionFlags.CdDriveExtraction;
+            }
+
             this.Initialize();
 
             if (this.State == ConversionState.Unknown)
@@ -252,7 +284,7 @@ namespace FileConverter.ConversionJobs
             Debug.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
 
             this.State = ConversionState.InProgress;
-
+            
             try
             {
                 this.Convert();
@@ -262,6 +294,8 @@ namespace FileConverter.ConversionJobs
                 this.ConversionFailed(exception.Message);
             }
 
+            this.StateFlags = ConversionFlags.None;
+
             if (this.State == ConversionState.Failed)
             {
                 this.OnConversionFailed();
@@ -270,6 +304,17 @@ namespace FileConverter.ConversionJobs
             {
                 this.OnConversionSucceed();
             }
+        }
+
+        public virtual void Cancel()
+        {
+            if (!this.IsCancelable || this.State != ConversionState.InProgress)
+            {
+                return;
+            }
+
+            this.CancelIsRequested = true;
+            this.ConversionFailed("Canceled.");
         }
 
         protected virtual void Convert()
@@ -284,9 +329,17 @@ namespace FileConverter.ConversionJobs
         {
             Debug.Log("Conversion Failed.");
 
-            if (System.IO.File.Exists(this.OutputFilePath))
+            try
             {
-                System.IO.File.Delete(this.OutputFilePath);
+                if (System.IO.File.Exists(this.OutputFilePath))
+                {
+                    System.IO.File.Delete(this.OutputFilePath);
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.Log("Can't delete file '{0}' after conversion job failure.", this.OutputFilePath);
+                Debug.Log("An exception as been thrown: {0}.", exception.ToString());
             }
         }
 

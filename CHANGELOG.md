@@ -1,5 +1,22 @@
 # Change Log
 
+## Version 0.7
+- New: Possibility to encode videos using VP9 video codec and Ogg vorbis audio codec in a webm container.
+- New: Possibility to convert videos and images to gif.
+- New: Possibility to convert gif files to videos.
+- New: Possibility to remove audio from video files (mkv, mp4, avi and webm output file formats).
+- New: Add feedback to indicate that the application will automatically terminate (after conversions) (github issue #1).
+- New: Support new video input formats: ogv and mpeg.
+- New: Support new audio input format: oga.
+- New: Possibility to cancel some conversion jobs (gif/cda and image conversion jobs are not cancelable for now).
+- Fixed: Issue where video can't be compressed using H.264 codec (mp4 or mkv presets) when its size (width or height) is not divisible by 2 (append a lot when the user tries to scale a video) (github issue #2).
+- Fixed: Issue where "Clamp to power of 2 size" option didn't work well with images that already have a power of 2 size.
+- Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg).
+- Fixed: Issue where converting a video into the ogg format did not extract audio in an ogg file correctly.
+- Fixed: Issue where simultaneous read on the same CD drive was performed when files from differents conversions come from the same drive (other than cda extraction preset).
+- Fixed: Issue where the path generator was unable to create a valid path if the input file was at the root of a drive.
+- Tech: Annotate the conversion presets to know if there are default preset or user preset in order to improve the upgrade process.
+
 ## Version 0.6
 - New: Possibility to encode videos using H.264 video codec and AAC audio codec in a mp4 container (more portable than mkv).
 - New: Support new image input file formats: psd, tga, svg and exr.

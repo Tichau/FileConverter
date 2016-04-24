@@ -96,6 +96,13 @@ namespace FileConverter
             }
         }
 
+        [XmlAttribute]
+        public bool IsDefaultSettings
+        {
+            get;
+            set;
+        } = false;
+
         [XmlElement]
         public List<string> InputTypes
         {
@@ -397,121 +404,13 @@ namespace FileConverter
 
         private bool IsRelevantSetting(string settingsKey)
         {
-            switch (this.OutputType)
-            {
-                case OutputType.Aac:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Avi:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
-                        case ConversionPreset.ConversionSettingKeys.VideoQuality:
-                        case ConversionPreset.ConversionSettingKeys.VideoScale:
-                        case ConversionPreset.ConversionSettingKeys.VideoRotation:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Flac:
-                case OutputType.Ico:
-                    break;
-
-                case OutputType.Jpg:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.ImageQuality:
-                        case ConversionPreset.ConversionSettingKeys.ImageScale:
-                        case ConversionPreset.ConversionSettingKeys.ImageRotation:
-                        case ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Mkv:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
-                        case ConversionPreset.ConversionSettingKeys.VideoQuality:
-                        case ConversionPreset.ConversionSettingKeys.VideoScale:
-                        case ConversionPreset.ConversionSettingKeys.VideoRotation:
-                        case ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Mp3:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.AudioEncodingMode:
-                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Mp4:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
-                        case ConversionPreset.ConversionSettingKeys.VideoQuality:
-                        case ConversionPreset.ConversionSettingKeys.VideoScale:
-                        case ConversionPreset.ConversionSettingKeys.VideoRotation:
-                        case ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Ogg:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.AudioBitrate:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Png:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.ImageScale:
-                        case ConversionPreset.ConversionSettingKeys.ImageRotation:
-                        case ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2:
-                        case ConversionPreset.ConversionSettingKeys.ImageMaximumSize:
-                            return true;
-                    }
-
-                    break;
-
-                case OutputType.Wav:
-                    switch (settingsKey)
-                    {
-                        case ConversionPreset.ConversionSettingKeys.AudioEncodingMode:
-                            return true;
-                    }
-
-                    break;
-
-                default:
-                    Debug.LogError("Relevant settings '{1}' are not define for output type {0}.", this.OutputType, settingsKey);
-                    break;
-            }
-
-            return false;
+            return this.Settings.ContainsKey(settingsKey);
         }
 
         private void InitializeDefaultSettings(OutputType outputType)
         {
+            this.settings.Clear();
+
             switch (outputType)
             {
                 case OutputType.Aac:
@@ -520,6 +419,12 @@ namespace FileConverter
 
                 case OutputType.Ico:
                 case OutputType.Flac:
+                    break;
+
+                case OutputType.Gif:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoFramesPerSecond, "15");
                     break;
 
                 case OutputType.Png:
@@ -538,6 +443,7 @@ namespace FileConverter
                     break;
 
                 case OutputType.Avi:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableAudio, "True");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "20");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
@@ -545,6 +451,7 @@ namespace FileConverter
                     break;
 
                 case OutputType.Mkv:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableAudio, "True");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Medium");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
@@ -558,6 +465,7 @@ namespace FileConverter
                     break;
 
                 case OutputType.Mp4:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableAudio, "True");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "28");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed, "Medium");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
@@ -571,6 +479,14 @@ namespace FileConverter
 
                 case OutputType.Wav:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Wav16.ToString(), true);
+                    break;
+
+                case OutputType.Webm:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableAudio, "True");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "40");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     break;
 
                 default:
@@ -734,6 +650,10 @@ namespace FileConverter
             public const string VideoEncodingSpeed = "VideoEncodingSpeed";
             public const string VideoScale = "VideoScale";
             public const string VideoRotation = "VideoRotation";
+            public const string VideoFramesPerSecond = "VideoFramesPerSecond";
+
+            public const string EnableAudio = "EnableAudio";
+            public const string EnableVideo = "EnableVideo";
         }
     }
 }

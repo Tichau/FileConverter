@@ -23,6 +23,28 @@ namespace FileConverter
             return PathHelpers.driveLetterRegex.Match(path).Groups[0].Value;
         }
 
+        public static bool IsOnCDDrive(string path)
+        {
+            string pathDriveLetter = GetPathDriveLetter(path);
+            if (string.IsNullOrEmpty(pathDriveLetter))
+            {
+                return false;
+            }
+
+            char driveLetter = pathDriveLetter[0];
+
+            char[] driveLetters = Ripper.CDDrive.GetCDDriveLetters();
+            for (int index = 0; index < driveLetters.Length; index++)
+            {
+                if (driveLetters[index] == driveLetter)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static int GetCDATrackNumber(string path)
         {
             Match match = PathHelpers.cdaTrackNumberRegex.Match(path);
@@ -83,19 +105,23 @@ namespace FileConverter
                 case "flac":
                 case "mp3":
                 case "m4a":
+                case "oga":
                 case "ogg":
                 case "wav":
                 case "wma":
                     return InputCategoryNames.Audio;
 
+                case "3gp":
                 case "avi":
                 case "bik":
-                case "3gp":
                 case "flv":
                 case "m4v":
                 case "mp4":
+                case "mpeg":
                 case "mov":
                 case "mkv":
+                case "ogv":
+                case "vob":
                 case "webm":
                 case "wmv":
                     return InputCategoryNames.Video;
@@ -112,6 +138,9 @@ namespace FileConverter
                 case "svg":
                 case "xcf":
                     return InputCategoryNames.Image;
+
+                case "gif":
+                    return InputCategoryNames.AnimatedImage;
             }
 
             return InputCategoryNames.Misc;
@@ -137,12 +166,16 @@ namespace FileConverter
                 case OutputType.Avi:
                 case OutputType.Mkv:
                 case OutputType.Mp4:
-                    return category == InputCategoryNames.Video;
-                    
+                case OutputType.Webm:
+                    return category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
+
                 case OutputType.Ico:
-                case OutputType.Png:
                 case OutputType.Jpg:
+                case OutputType.Png:
                     return category == InputCategoryNames.Image;
+
+                case OutputType.Gif:
+                    return category == InputCategoryNames.Image || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
 
                 default:
                     return false;
@@ -167,6 +200,8 @@ namespace FileConverter
             public const string Audio = "Audio";
             public const string Video = "Video";
             public const string Image = "Image";
+            public const string AnimatedImage = "Animated Image";
+
             public const string Misc = "Misc";
         }
     }

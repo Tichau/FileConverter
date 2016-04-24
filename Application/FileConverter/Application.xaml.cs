@@ -31,7 +31,7 @@ namespace FileConverter
         private static readonly Version Version = new Version()
                                             {
                                                 Major = 0, 
-                                                Minor = 6,
+                                                Minor = 7,
                                                 Patch = 0,
                                             };
 
@@ -41,12 +41,15 @@ namespace FileConverter
 
         private bool needToRunConversionThread;
         private bool cancelAutoExit;
+        private bool isSessionEnding;
         private UpgradeVersionDescription upgradeVersionDescription = null;
 
         public Application()
         {
             this.ConvertionJobs = this.conversionJobs.AsReadOnly();
         }
+
+        public event EventHandler<ApplicationTerminateArgs> OnApplicationTerminate;
 
         public static Version ApplicationVersion
         {
@@ -89,6 +92,11 @@ namespace FileConverter
         public void CancelAutoExit()
         {
             this.cancelAutoExit = true;
+
+            if (this.OnApplicationTerminate != null)
+            {
+                this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(float.NaN));
+            }
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -109,8 +117,8 @@ namespace FileConverter
             base.OnExit(e);
 
             Debug.Log("Exit application.");
-
-            if (this.upgradeVersionDescription != null && this.upgradeVersionDescription.NeedToUpgrade)
+            
+            if (!this.isSessionEnding && this.upgradeVersionDescription != null && this.upgradeVersionDescription.NeedToUpgrade)
             {
                 Debug.Log("A new version of file converter has been found: {0}.", this.upgradeVersionDescription.LatestVersion);
 
@@ -154,11 +162,19 @@ namespace FileConverter
             Debug.Release();
         }
 
+        protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
+        {
+            base.OnSessionEnding(e);
+
+            this.isSessionEnding = true;
+            this.Shutdown();
+        }
+
         private void Initialize()
         {
             Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString());
-            Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", Environment.ProcessorCount);
-            this.numberOfConversionThread = Environment.ProcessorCount;
+            this.numberOfConversionThread = System.Math.Max(1, Environment.ProcessorCount / 2);
+            Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", this.numberOfConversionThread);
             
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
@@ -198,6 +214,11 @@ namespace FileConverter
             for (int index = 1; index < args.Length; index++)
             {
                 string argument = args[index];
+                if (string.IsNullOrEmpty(argument))
+                {
+                    continue;
+                }
+
                 if (argument.StartsWith("--"))
                 {
                     // This is an optional parameter.
@@ -381,13 +402,33 @@ namespace FileConverter
                     allConversionsSucceed &= this.conversionJobs[index].State == ConversionJob.ConversionState.Done;
                 }
 
+                if (this.cancelAutoExit)
+                {
+                    return;
+                }
+
                 if (allConversionsSucceed)
                 {
-                    System.Threading.Thread.Sleep((int)this.Settings.DurationBetweenEndOfConversionsAndApplicationExit * 1000);
-
-                    if (this.cancelAutoExit)
+                    float remainingTime = this.Settings.DurationBetweenEndOfConversionsAndApplicationExit;
+                    while (remainingTime > 0f)
                     {
-                        return;
+                        if (this.OnApplicationTerminate != null)
+                        {
+                            this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(remainingTime));
+                        }
+
+                        System.Threading.Thread.Sleep(1000);
+                        remainingTime--;
+
+                        if (this.cancelAutoExit)
+                        {
+                            return;
+                        }
+                    }
+
+                    if (this.OnApplicationTerminate != null)
+                    {
+                        this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(remainingTime));
                     }
 
                     Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
@@ -413,9 +454,9 @@ namespace FileConverter
             {
                 conversionJob.StartConvertion();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                throw;
+                Debug.LogError("Failure during conversion: {0}", exception.ToString());
             }
 
             if (conversionJob.State == ConversionJob.ConversionState.Done && !System.IO.File.Exists(conversionJob.OutputFilePath))
