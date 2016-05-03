@@ -12,6 +12,8 @@ namespace FileConverter
     using System.Windows.Input;
 
     using FileConverter.Annotations;
+    using FileConverter.Commands;
+    using FileConverter.Upgrade;
     using Microsoft.Win32;
 
     /// <summary>
@@ -24,6 +26,11 @@ namespace FileConverter
         private Settings settings;
 
         private InputExtensionCategory[] inputCategories;
+        private string releaseNoteContent;
+
+        private OpenUrlCommand openUrlCommand;
+        private DelegateCommand getChangeLogContentCommand;
+        private bool displaySeeChangeLogLink = true;
 
         public SettingsWindow()
         {
@@ -67,6 +74,32 @@ namespace FileConverter
         public event PropertyChangedEventHandler PropertyChanged;
 
         public event System.EventHandler<System.EventArgs> OnSettingsWindowHide;
+
+        public ICommand OpenUrlCommand
+        {
+            get
+            {
+                if (this.openUrlCommand == null)
+                {
+                    this.openUrlCommand = new OpenUrlCommand();
+                }
+
+                return this.openUrlCommand;
+            }
+        }
+
+        public ICommand GetChangeLogContentCommand
+        {
+            get
+            {
+                if (this.getChangeLogContentCommand == null)
+                {
+                    this.getChangeLogContentCommand = new DelegateCommand(this.DownloadChangeLogAction);
+                }
+
+                return this.getChangeLogContentCommand;
+            }
+        }
 
         public ConversionPreset SelectedPreset
         {
@@ -128,10 +161,54 @@ namespace FileConverter
             }
         }
 
+        public string AboutSectionContent
+        {
+            get
+            {
+                return "**This program is free software**.\n You can redistribute it and/or modify it under the terms of the GNU General Public License.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.\n\n" + this.releaseNoteContent;
+            }
+
+            set
+            {
+                this.releaseNoteContent = value;
+
+                this.OnPropertyChanged();
+            }
+        }
+
+        public bool DisplaySeeChangeLogLink
+        {
+            get
+            {
+                return this.displaySeeChangeLogLink;
+            }
+
+            private set
+            {
+                this.displaySeeChangeLogLink = value;
+
+                this.OnPropertyChanged();
+            }
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void DownloadChangeLogAction()
+        {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            Helpers.GetChangeLogAsync(new UpgradeVersionDescription(), this.OnChangeLogRetrieved);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            this.AboutSectionContent = "###Downloading change log ...";
+            this.DisplaySeeChangeLogLink = false;
+        }
+
+        private void OnChangeLogRetrieved(UpgradeVersionDescription description)
+        {
+            this.AboutSectionContent = description.ChangeLog;
         }
 
         private void SelectedPresetPropertyChanged(object sender, PropertyChangedEventArgs e)

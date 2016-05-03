@@ -6,12 +6,123 @@
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         xmlns:windows="clr-namespace:FileConverter.Windows"
         xmlns:project="clr-namespace:FileConverter.Properties"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="window" x:Class="FileConverter.SettingsWindow"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:xaml="clr-namespace:Markdown.Xaml;assembly=Markdown.Xaml"
+        x:Name="window" x:Class="FileConverter.SettingsWindow"
         MinWidth="640" MinHeight="480" 
         Width="900" Height="675"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         Closing="SettingsWindow_OnClosing">
     <Window.Resources>
+        <!-- Donation button style -->
+
+        <Style x:Key="DonateFocusVisual">
+            <Setter Property="Control.Background" Value="#037F4D"></Setter>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Control}">
+                        <Grid Margin="3 2">
+                            <Rectangle Name="r1" StrokeThickness="1" Stroke="Black" StrokeDashArray="2 2"/>
+                            <Border Name="border" Width="{TemplateBinding ActualWidth}" Height="{TemplateBinding ActualHeight}"  CornerRadius="2" BorderThickness="1" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ShadowStyle">
+            <Setter Property="Control.Foreground" Value="LightGray" />
+        </Style>
+
+        <Style x:Key="DonateButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource DonateFocusVisual}" />
+            <Setter Property="Background" Value="#009E61"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="1" Padding="4,2" BorderBrush="#026B38" CornerRadius="3" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="contentShadow" Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#015129" />
+                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                                <Setter Property="Background" Value="#037F4D"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#016332" />
+                                <Setter Property="Background" Value="#049156"/>
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.7" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Markdown style -->
+        <Style TargetType="FlowDocument" x:Key="DocumentStyle">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="#786C71" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="LineHeight" Value="9"/>
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+
+        <Style x:Key="PageHeader" TargetType="Paragraph">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Foreground" Value="#1E6BB8" />
+        </Style>
+
+        <Style x:Key="SubHeader"
+               TargetType="Paragraph">
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Foreground"
+                    Value="#DF3900" />
+        </Style>
+
+        <Style x:Key="SubHeaderSecondary"
+               TargetType="Paragraph">
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Foreground"
+                    Value="#DF3900" />
+        </Style>
+
+        <xaml:Markdown x:Key="Markdown"
+                        DocumentStyle="{StaticResource DocumentStyle}"
+                        Heading1Style="{StaticResource PageHeader}"
+                        Heading2Style="{StaticResource SubHeader}"
+                        Heading3Style="{StaticResource SubHeaderSecondary}"/>
+        
+        <xaml:TextToFlowDocumentConverter x:Key="TextToFlowDocumentConverter" Markdown="{StaticResource Markdown}"/>
+        
         <generic:DoubleToTimeString x:Key="DoubleToTimeString"/>
         <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
         <generic:BoolToVisibility x:Key="BoolToVisibility"/>
@@ -474,14 +585,13 @@
         </Grid.CommandBindings>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
+            <RowDefinition Height="53"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="{Binding Height, ElementName=ApplicationSettingsPanel, Mode=OneWay}"/>
             <RowDefinition Height="28"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid>
+        <Grid Margin="0,0,0,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="48"/>
                 <ColumnDefinition Width="*"/>
@@ -496,158 +606,240 @@
                 </Label.Content>
             </Label>
         </Grid>
-
-        <!-- Conversion presets settings -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="3.5*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid x:Name="PresetListGrid" Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="30"/>
-                </Grid.RowDefinitions>
-                <Label Content="Presets" Grid.Row="0" VerticalAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}" />
-                <ListBox x:Name="PresetList" Grid.Row="1" HorizontalAlignment="Left" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedPreset, ElementName=window}" Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
-                    <ListBox.DataContext>
-                        <local:ConversionPreset/>
-                    </ListBox.DataContext>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Name}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <DockPanel Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Center">
-                    <Button x:Name="MoveUpPresetButton" Content="^" HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" Click="MovePresetUpButton_Click"/>
-                    <Button x:Name="AddPresetButton" Content="+" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="AddPresetButton_Click"/>
-                    <Button x:Name="RemovePresetButton" Content="-" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="RemovePresetButton_Click"/>
-                    <Button x:Name="MoveDownPresetButton" Content="v" HorizontalAlignment="Left" Width="25" Margin="2,0,0,0" Click="MovePresetDownButton_Click"/>
-                </DockPanel>
-            </Grid>
-
-            <!-- Preset settings -->
-            <GroupBox Header="Preset" Margin="5,5,0,0" Grid.Column="1" Visibility="{Binding SelectedPreset, Converter={StaticResource ReferenceToVisibility}, ElementName=window}">
-                <Grid Margin="5">
+        
+        <TabControl Grid.Row="1">
+            
+            <!-- Conversion presets settings -->
+            <TabItem Header="Conversion Presets">
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" MaxWidth="240"/>
-                        <ColumnDefinition Width="2.5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3.5*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Preset name" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                    <TextBox x:Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
 
-                    <GroupBox Grid.Row="1" Grid.Column="0" Header="Input formats" Margin="5">
+                    <Grid x:Name="PresetListGrid" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="PresetList" Grid.Row="0" HorizontalAlignment="Left" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedPreset, ElementName=window}" Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
+                            <ListBox.DataContext>
+                                <local:ConversionPreset/>
+                            </ListBox.DataContext>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Name}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <DockPanel Grid.Row="1" Margin="0,5,0,0" HorizontalAlignment="Center">
+                            <Button x:Name="MoveUpPresetButton" Content="^" HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" Click="MovePresetUpButton_Click"/>
+                            <Button x:Name="AddPresetButton" Content="+" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="AddPresetButton_Click"/>
+                            <Button x:Name="RemovePresetButton" Content="-" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="RemovePresetButton_Click"/>
+                            <Button x:Name="MoveDownPresetButton" Content="v" HorizontalAlignment="Left" Width="25" Margin="2,0,0,0" Click="MovePresetDownButton_Click"/>
+                        </DockPanel>
+                    </Grid>
+
+                    <!-- Preset settings -->
+                    <GroupBox Header="Preset" Margin="5,5,0,0" Grid.Column="1" Visibility="{Binding SelectedPreset, Converter={StaticResource ReferenceToVisibility}, ElementName=window}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" MaxWidth="240"/>
+                                <ColumnDefinition Width="2.5*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
                             </Grid.RowDefinitions>
+                            <Label Content="Preset name" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                            <TextBox x:Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
 
-                            <TreeView x:Name="InputTypesTreeView" ItemsSource="{Binding InputCategories, ElementName=window}" >
-                                <TreeView.Resources>
-                                    <HierarchicalDataTemplate DataType="{x:Type local:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
-                                        <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeCategoryChecked" Unchecked="OnInputTypeCategoryUnchecked" IsThreeState="True" >
-                                            <CheckBox.IsChecked>
-                                                <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
-                                                    <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>
-                                                    <Binding Path="InputExtensionNames" Mode="OneWay"/>
-                                                </MultiBinding>
-                                            </CheckBox.IsChecked>
-                                        </CheckBox>
-                                    </HierarchicalDataTemplate>
-                                    <DataTemplate DataType="{x:Type local:InputExtension}">
-                                        <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeChecked" Unchecked="OnInputTypeUnchecked">
-                                            <CheckBox.IsChecked>
-                                                <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
-                                                    <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>
-                                                    <Binding Path="Name" Mode="OneWay"/>
-                                                </MultiBinding>
-                                            </CheckBox.IsChecked>
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </TreeView.Resources>
-                                <TreeView.ItemContainerStyle>
-                                    <Style TargetType="TreeViewItem">
-                                        <Setter Property="IsExpanded" Value="True"/>
-                                    </Style>
-                                </TreeView.ItemContainerStyle>
-                            </TreeView>
+                            <GroupBox Grid.Row="1" Grid.Column="0" Header="Input formats" Margin="5">
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="22"/>
+                                    </Grid.RowDefinitions>
 
-                            <Label Grid.Row="1" Content="Action when conversion succeed"/>
-                            <ComboBox Grid.Row="2" x:Name="PostConversionActionComboBox" SelectedItem="{Binding SelectedPreset.InputPostConversionAction, ElementName=window, Mode=TwoWay}" />
+                                    <TreeView x:Name="InputTypesTreeView" ItemsSource="{Binding InputCategories, ElementName=window}" >
+                                        <TreeView.Resources>
+                                            <HierarchicalDataTemplate DataType="{x:Type local:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
+                                                <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeCategoryChecked" Unchecked="OnInputTypeCategoryUnchecked" IsThreeState="True" >
+                                                    <CheckBox.IsChecked>
+                                                        <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
+                                                            <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>
+                                                            <Binding Path="InputExtensionNames" Mode="OneWay"/>
+                                                        </MultiBinding>
+                                                    </CheckBox.IsChecked>
+                                                </CheckBox>
+                                            </HierarchicalDataTemplate>
+                                            <DataTemplate DataType="{x:Type local:InputExtension}">
+                                                <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeChecked" Unchecked="OnInputTypeUnchecked">
+                                                    <CheckBox.IsChecked>
+                                                        <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
+                                                            <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>
+                                                            <Binding Path="Name" Mode="OneWay"/>
+                                                        </MultiBinding>
+                                                    </CheckBox.IsChecked>
+                                                </CheckBox>
+                                            </DataTemplate>
+                                        </TreeView.Resources>
+                                        <TreeView.ItemContainerStyle>
+                                            <Style TargetType="TreeViewItem">
+                                                <Setter Property="IsExpanded" Value="True"/>
+                                            </Style>
+                                        </TreeView.ItemContainerStyle>
+                                    </TreeView>
 
-                        </Grid>
-                    </GroupBox>
+                                    <Label Grid.Row="1" Content="Action when conversion succeed"/>
+                                    <ComboBox Grid.Row="2" x:Name="PostConversionActionComboBox" SelectedItem="{Binding SelectedPreset.InputPostConversionAction, ElementName=window, Mode=TwoWay}" />
 
-                    <GroupBox Header="Output format" Grid.Row="1" Grid.Column="1" Margin="5">
-                        <StackPanel>
-                            <ComboBox x:Name="OutputFormats" Margin="5" Height="25" VerticalAlignment="Top" SelectedItem="{Binding SelectedPreset.OutputType, ElementName=window, Mode=TwoWay}"/>
+                                    <TextBlock Grid.Row="3" Margin="0,5,0,0">
+                                        <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8">help ?</Hyperlink>
+                                    </TextBlock>
+                                </Grid>
+                            </GroupBox>
 
-                            <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
+                            <GroupBox Header="Output format" Grid.Row="1" Grid.Column="1" Margin="5">
+                                <StackPanel>
+                                    <ComboBox x:Name="OutputFormats" Margin="5" Height="25" VerticalAlignment="Top" SelectedItem="{Binding SelectedPreset.OutputType, ElementName=window, Mode=TwoWay}"/>
+
+                                    <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
 								Content="{Binding SelectedPreset.OutputType, ElementName=window, UpdateSourceTrigger=PropertyChanged}" />
 
-                            <Separator/>
+                                    <Separator/>
 
-                            <!-- Output file name template -->
-                            <Grid Margin="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="23"/>
-                                    <RowDefinition Height="23"/>
-                                </Grid.RowDefinitions>
-                                <Label Content="File name template" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                                <TextBox x:Name="FileNameTemplateTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.OutputFileNameTemplate, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}" />
-                                <Label Content="Input example" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
-                                <TextBlock Text="{x:Static project:Resources.OuputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center"/>
-                                <Label Content="Output" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center">
-                                    <TextBlock.Text>
-                                        <MultiBinding Converter="{StaticResource FileNameConverter}">
-                                            <Binding Source="{x:Static project:Resources.OuputFileNameTemplateSample}"/>
-                                            <Binding ElementName="window" Path="SelectedPreset.OutputType" Mode="OneWay"/>
-                                            <Binding ElementName="window" Path="SelectedPreset.OutputFileNameTemplate" Mode="OneWay"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </Grid>
+                                    <!-- Output file name template -->
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="23"/>
+                                            <RowDefinition Height="23"/>
+                                            <RowDefinition Height="23"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Content="File name template" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                                        <TextBox x:Name="FileNameTemplateTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.OutputFileNameTemplate, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}" />
+                                        <Label Content="Input example" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                        <TextBlock Text="{x:Static project:Resources.OuputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center"/>
+                                        <Label Content="Output" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center">
+                                            <TextBlock.Text>
+                                                <MultiBinding Converter="{StaticResource FileNameConverter}">
+                                                    <Binding Source="{x:Static project:Resources.OuputFileNameTemplateSample}"/>
+                                                    <Binding ElementName="window" Path="SelectedPreset.OutputType" Mode="OneWay"/>
+                                                    <Binding ElementName="window" Path="SelectedPreset.OutputFileNameTemplate" Mode="OneWay"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
+                                            <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8">help ?</Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
 
-                        </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </Grid>
                     </GroupBox>
                 </Grid>
-            </GroupBox>
-        </Grid>
+            </TabItem>
 
-        <!-- Application settings -->
-        <StackPanel x:Name="ApplicationSettingsPanel" Grid.Row="2" Margin="5,10,5,5">
-            <CheckBox x:Name="QuitAtEndCheckBox" Content="Automatically exit when all conversions finished" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}"  />
-            <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
-                <Label Content="Waiting duration :"/>
-                <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationExit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
-                <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
-            </DockPanel>
-            <CheckBox Content="Automatically check for updates when File Converter starts" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}"  />
-        </StackPanel>
+            <!-- Application settings -->
+            <TabItem Header="Application">
+                <StackPanel Margin="5,10,5,5">
+                    <CheckBox x:Name="QuitAtEndCheckBox" Content="Automatically exit when all conversions finished" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}" Margin="0,0,0,5" />
+                    <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
+                        <Label Content="Waiting duration :"/>
+                        <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationExit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
+                        <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
+                    </DockPanel>
+                    <CheckBox Content="Automatically check for updates when File Converter starts" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}"  />
+                </StackPanel>
+            </TabItem>
+            
+            <!-- About -->
+            <TabItem Header="About">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="256"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
 
-        <Button x:Name="CloseButton" Grid.Row="3" Content="Close" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
-        <Button x:Name="SaveButton" Grid.Row="3" Content="Save" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" Click="SaveButton_Click" Command="New"/>
+                    <DockPanel Grid.Row="0" Grid.Column="0">
+                        <Label FontSize="28">
+                            <Label.Content>
+                                <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
+                            </Label.Content>
+                        </Label>
+                        <TextBlock Margin="5" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+                            <Hyperlink Foreground="#1E6BB8"  Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://www.file-converter.org?from=about">www.file-converter.org</Hyperlink>
+                        </TextBlock>
+                    </DockPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                        <Button ToolTip="Open GitHub project page" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/?from=about">
+                            <Button.Content>
+                                <Image Source="/FileConverter;component/Resources/GitHub-Icon.png"></Image>
+                            </Button.Content>
+                        </Button>
+                        <Button ToolTip="Report an issue" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/issues?from=about">
+                            <Button.Content>
+                                <Image Source="/FileConverter;component/Resources/GitHub-Issue-Icon.png"></Image>
+                            </Button.Content>
+                        </Button>
+                        <Button ToolTip="Open documentation" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/wiki?from=about">
+                            <Button.Content>
+                                <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+
+                    <DockPanel Grid.Row="1" Grid.Column="0" Margin="0,0,5,0">
+                        <FlowDocumentScrollViewer Grid.Row="0" Grid.Column="0" Margin="5,10,5,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                                          Document="{Binding AboutSectionContent, Converter={StaticResource TextToFlowDocumentConverter}, ElementName=window}" DockPanel.Dock="Top"/>
+
+                        <TextBlock Grid.Row="1" Margin="5" DockPanel.Dock="Top" FontSize="14" HorizontalAlignment="Center" Visibility="{Binding DisplaySeeChangeLogLink, ElementName=window, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">
+                                <Hyperlink Foreground="#1E6BB8" Command="{Binding GetChangeLogContentCommand, ElementName=window, Mode=OneWay}">See change log ...</Hyperlink>
+                        </TextBlock>
+                    </DockPanel>
+
+                    <Image Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"  Source="/FileConverter;component/Resources/ApplicationIcon.ico"></Image>
+                        
+                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Don't forget to reward my work if you like it :)" VerticalAlignment="Center"/>
+                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://pledgie.com?from=about">
+                            <Button.Content>
+                                <DockPanel>
+                                    <Image Source="/FileConverter;component/Resources/Pledge-icon.png"></Image>
+                                    <Label Margin="5,0,5,0" Content="Donate" Foreground="WhiteSmoke" FontWeight="Bold" FontSize="14"/>
+                                </DockPanel>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2016, Adrien Allard. All right reserved." Foreground="#FF4D4D4D" Margin="0,2,0,2"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <Button x:Name="CloseButton" Grid.Row="2" Content="Close" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
+        <Button x:Name="SaveButton" Grid.Row="2" Content="Save" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" Click="SaveButton_Click" Command="New"/>
     </Grid>
 </Window>

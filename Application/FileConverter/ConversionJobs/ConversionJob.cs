@@ -7,6 +7,7 @@ namespace FileConverter.ConversionJobs
     using System.Runtime.CompilerServices;
     using System.Text;
 
+    using FileConverter.Commands;
     using FileConverter.Diagnostics;
 
     public class ConversionJob : INotifyPropertyChanged

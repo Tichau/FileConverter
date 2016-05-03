@@ -88,10 +88,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationTerminateArgs.cs" />
+    <Compile Include="Commands\GetChangeLogContent.cs" />
+    <Compile Include="Commands\OpenUrlCommand.cs" />
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConversionJobs\CancelConversionJobCommand.cs" />
+    <Compile Include="Commands\CancelConversionJobCommand.cs" />
     <Compile Include="ConversionJobs\ConversionFlags.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ExtractCDA.cs" />
     <Compile Include="ConversionJobs\ConversionJobFactory.cs" />
@@ -246,6 +248,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\FailIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\GitHub-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\GitHub-Issue-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\GitHub-Documentation-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Pledge-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,9 +1,10 @@
 // <copyright file="CancelConversionJobCommand.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-namespace FileConverter.ConversionJobs
+namespace FileConverter.Commands
 {
     using System;
     using System.Windows.Input;
+    using FileConverter.ConversionJobs;
 
     public class CancelConversionJobCommand : ICommand
     {
