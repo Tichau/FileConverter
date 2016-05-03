@@ -84,49 +84,9 @@
             </Setter>
         </Style>
 
-        <!-- Markdown style -->
-        <Style TargetType="FlowDocument" x:Key="DocumentStyle">
-            <Setter Property="FontFamily" Value="Segoe UI" />
-            <Setter Property="TextAlignment" Value="Left" />
-            <Setter Property="Foreground" Value="#786C71" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="LineHeight" Value="9"/>
-            <Setter Property="FontSize" Value="13" />
-        </Style>
-
-        <Style x:Key="PageHeader" TargetType="Paragraph">
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="Foreground" Value="#1E6BB8" />
-        </Style>
-
-        <Style x:Key="SubHeader"
-               TargetType="Paragraph">
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="Foreground"
-                    Value="#DF3900" />
-        </Style>
-
-        <Style x:Key="SubHeaderSecondary"
-               TargetType="Paragraph">
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="Foreground"
-                    Value="#DF3900" />
-        </Style>
-
-        <xaml:Markdown x:Key="Markdown"
-                        DocumentStyle="{StaticResource DocumentStyle}"
-                        Heading1Style="{StaticResource PageHeader}"
-                        Heading2Style="{StaticResource SubHeader}"
-                        Heading3Style="{StaticResource SubHeaderSecondary}"/>
-        
-        <xaml:TextToFlowDocumentConverter x:Key="TextToFlowDocumentConverter" Markdown="{StaticResource Markdown}"/>
-        
         <generic:DoubleToTimeString x:Key="DoubleToTimeString"/>
         <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
         <generic:BoolToVisibility x:Key="BoolToVisibility"/>
-        <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
         <generic:FormatStringConverter x:Key="FormatStringConverter"/>
 

@@ -9,7 +9,6 @@
         mc:Ignorable="d" x:Class="FileConverter.MainWindow"
         x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
     <Window.Resources>
-        <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <valueConverters:ConversionStateToBrush x:Key="ConversionStateToColor" />
 
         <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">

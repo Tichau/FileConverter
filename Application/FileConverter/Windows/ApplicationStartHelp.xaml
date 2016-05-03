@@ -9,7 +9,6 @@
         mc:Ignorable="d"
         Height="480" Width="640" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize">
     <Window.Resources>
-        <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(fileConverter:Application.ApplicationVersion)"/>

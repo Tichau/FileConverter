@@ -88,7 +88,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationTerminateArgs.cs" />
-    <Compile Include="Commands\GetChangeLogContent.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\OpenUrlCommand.cs" />
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
