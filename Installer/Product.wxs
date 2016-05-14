@@ -30,7 +30,7 @@
         <CustomAction Id="InstallShell" FileKey="srm.exe" ExeCommand='install "[INSTALLFOLDER]\FileConverterExtension.dll" -codebase' Execute="deferred" Return="check" Impersonate="no" />
         <CustomAction Id="UninstallShell" FileKey="srm.exe" ExeCommand='uninstall "[INSTALLFOLDER]\FileConverterExtension.dll"' Execute="deferred" Return="check" Impersonate="no" />
         <CustomAction Id='PostInstallInit' FileKey='FileConverter.exe' ExeCommand='--post-install-init' Return='asyncWait' />
-        
+            
         <InstallExecuteSequence>
             <Custom Action="InstallShell" After="InstallFiles">NOT Installed</Custom>
             <Custom Action="UninstallShell" Before="RemoveFiles">(NOT UPGRADINGPRODUCTCODE) AND (REMOVE="ALL")</Custom>
@@ -110,7 +110,7 @@
 
             <!-- Registry entries -->
             <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
-                <RegistryKey Root="HKCU" Key="Software\FileConverter" Action="createAndRemoveOnUninstall">
+                <RegistryKey Root="HKCU" Key="Software\FileConverter" ForceDeleteOnUninstall="yes">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
                     <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;exr;flac;flv;gif;ico;jpg;jpeg;m4a;m4v;mkv;mov;mp3;mp4;mpeg;oga;ogg;ogv;png;psd;svg;tga;tiff;vob;wav;webm;wma;wmv"/>
                 </RegistryKey>
