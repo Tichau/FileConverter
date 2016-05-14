@@ -5,7 +5,9 @@
 
 You can download it here: [www.file-converter.org](http://file-converter.org/?from=readme.md).
 
-You can find more information about what's in File converter and how to use it on the [wiki](https://github.com/Tichau/FileConverter/wiki).
+You can find more information about what's in File converter and how to use it on the [wiki](http://github.com/Tichau/FileConverter/wiki).
+
+You can help this project by contributing on [Github](http://github.com/Tichau/FileConverter/) or by making a donation on [Pledgie](http://pledgie.com/campaigns/31615) :).
 
 ## Thanks
 
