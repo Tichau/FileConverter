@@ -219,6 +219,9 @@ namespace FileConverter.ConversionJobs
             // Create output folder that doesn't exist.
             {
                 StringBuilder path = new StringBuilder(this.OutputFilePath.Length);
+                string drive = PathHelpers.GetDrive(this.OutputFilePath);
+                path.Append(drive);
+
                 foreach (string directory in PathHelpers.GetDirectories(this.OutputFilePath))
                 {
                     path.Append(directory);

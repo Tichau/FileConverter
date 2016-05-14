@@ -9,9 +9,9 @@ namespace FileConverter
     {
         private static Regex driveLetterRegex = new Regex(@"[a-zA-Z]:\\");
         private static Regex cdaTrackNumberRegex = new Regex(@"[a-zA-Z]:\\Track([0-9]+)\.cda");
-        private static Regex pathRegex = new Regex(@"^[a-zA-Z]:\\(?:[^\\/:*?""<>|\r\n]+\\)*[^\.\\/:*?""<>|\r\n][^\\/:*?""<>|\r\n]*$");
+        private static Regex pathRegex = new Regex(@"^(?:\\\\[^\\/:*?""<>|\r\n]+\\|[a-zA-Z]:\\)(?:[^\\/:*?""<>|\r\n]+\\)*[^\.\\/:*?""<>|\r\n][^\\/:*?""<>|\r\n]*$");
         private static Regex filenameRegex = new Regex(@"[^\\]*", RegexOptions.RightToLeft);
-        private static Regex directoryRegex = new Regex(@"(?:([^\\]*)\\)*");
+        private static Regex directoryRegex = new Regex(@"^(?<drive>\\\\[^\\/:*?""""<>|\r\n]+\\|[A-Za-z]:\\)(?:(?<folders>[^\\]*)\\)*");
 
         public static bool IsPathDriveLetterValid(string path)
         {
@@ -63,17 +63,27 @@ namespace FileConverter
             Match filenameMatch = matchCollection.Count > 0 ? matchCollection[0] : null;
             return filenameMatch?.Groups[0].Value;
         }
-        
+
+        public static string GetDrive(string path)
+        {
+            MatchCollection matchCollection = PathHelpers.directoryRegex.Matches(path);
+            Match match = matchCollection.Count > 0 ? matchCollection[0] : null;
+
+            Group matchGroup = match?.Groups["drive"];
+            return matchGroup?.Captures[0].Value;
+        }
+
         public static IEnumerable<string> GetDirectories(string path)
         {
             MatchCollection matchCollection = PathHelpers.directoryRegex.Matches(path);
             Match match = matchCollection.Count > 0 ? matchCollection[0] : null;
-            if (match == null || match.Groups.Count < 2)
+
+            Group matchGroup = match?.Groups["folders"];
+            if (matchGroup == null)
             {
                 yield break;
             }
 
-            Group matchGroup = match.Groups[1];
             for (int index = 0; index < matchGroup.Captures.Count; index++)
             {
                 yield return matchGroup.Captures[index].Value;
