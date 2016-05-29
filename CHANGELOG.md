@@ -4,6 +4,7 @@
 - New: File Converter is now certified by Microsoft Authenticode. 
 - New: Add an about section that contains information on the software development (change log, documentation link, report issue link).
 - New: Split conversion preset settings and application settings to improve ergonomy.
+- New: Add help shortcut in the conversion preset edition interface that links directly to the corresponding documentation page.
 - New: Add shortcuts in start menu.
 - New: Create a donation campaign on Pledgie and linked it in the about section.
 - Fixed: Issue with Avast antivirus where File Converter and Windows explorer was frozen when the user tried to use File Converter.
