@@ -1,5 +1,14 @@
 # Change Log
 
+## Version 1.0
+- New: File Converter is now certified by Microsoft Authenticode. 
+- New: Add an about section that contains information on the software development (change log, documentation link, report issue link).
+- New: Split conversion preset settings and application settings to improve ergonomy.
+- New: Add shortcuts in start menu.
+- New: Create a donation campaign on Pledgie and linked it in the about section.
+- Fixed: Issue with Avast antivirus where File Converter and Windows explorer was frozen when the user tried to use File Converter.
+- Fixed: Issue where it was impossible to convert files from a network path.
+
 ## Version 0.7
 - New: Possibility to encode videos using VP9 video codec and Ogg vorbis audio codec in a webm container.
 - New: Possibility to convert videos and images to gif.
