@@ -6,7 +6,6 @@ namespace FileConverter.Upgrade
     using System.IO;
     using System.Net;
     using System.Text.RegularExpressions;
-    using System.Threading;
     using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Serialization;
@@ -14,12 +13,13 @@ namespace FileConverter.Upgrade
     public static class Helpers
     {
 #if DEBUG
-        private const string BaseURI = "https://raw.githubusercontent.com/Tichau/FileConverter/development/";
+        private const string BaseURI = "http://raw.githubusercontent.com/Tichau/FileConverter/development/";
 #else
-        private const string BaseURI = "https://raw.githubusercontent.com/Tichau/FileConverter/master/";
+        private const string BaseURI = "http://raw.githubusercontent.com/Tichau/FileConverter/master/";
 #endif
 
         private static WebClient webClient = new WebClient();
+        private static UpgradeVersionDescription currentlyDownloadedVersionDescription;
 
         public delegate void OnUpgradeOperationCompletedEventHandler(UpgradeVersionDescription upgradeVersionDescription);
 
@@ -87,19 +87,16 @@ namespace FileConverter.Upgrade
             return upgradeVersionDescription.ChangeLog;
         }
 
-        public static void DownloadInstallerAsync(UpgradeVersionDescription upgradeVersionDescription)
+        public static async Task DownloadInstallerAsync(UpgradeVersionDescription upgradeVersionDescription)
         {
-            Thread thread = new Thread(Helpers.DownloadInstallerAsync);
-            thread.Start(upgradeVersionDescription);
-        }
-
-        private static void DownloadInstallerAsync(object parameter)
-        {
-            UpgradeVersionDescription upgradeVersionDescription = parameter as UpgradeVersionDescription;
-
             if (upgradeVersionDescription == null)
             {
                 throw new ArgumentNullException("upgradeVersionDescription");
+            }
+
+            if (Helpers.currentlyDownloadedVersionDescription != null)
+            {
+                throw new Exception("The installer download is currently in progress.");
             }
 
             Uri uri = new Uri(upgradeVersionDescription.InstallerURL);
@@ -121,10 +118,34 @@ namespace FileConverter.Upgrade
 
             upgradeVersionDescription.InstallerPath = installerPath;
             upgradeVersionDescription.InstallerDownloadInProgress = true;
+            upgradeVersionDescription.InstallerDownloadProgress = 0;
 
-            Helpers.webClient.DownloadFile(uri, installerPath);
+            Helpers.currentlyDownloadedVersionDescription = upgradeVersionDescription;
 
-            upgradeVersionDescription.InstallerDownloadInProgress = false;
+            Helpers.webClient.DownloadProgressChanged += Helpers.WebClient_DownloadProgressChanged;
+            Helpers.webClient.DownloadFileCompleted += Helpers.WebClient_DownloadFileCompleted; ;
+            Task downloadTask = Helpers.webClient.DownloadFileTaskAsync(uri, installerPath);
+        }
+
+        private static void WebClient_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            Helpers.webClient.DownloadProgressChanged -= WebClient_DownloadProgressChanged;
+            Helpers.webClient.DownloadFileCompleted -= WebClient_DownloadFileCompleted;
+
+            if (Helpers.currentlyDownloadedVersionDescription != null)
+            {
+                Helpers.currentlyDownloadedVersionDescription.InstallerDownloadProgress = 100;
+                Helpers.currentlyDownloadedVersionDescription.InstallerDownloadInProgress = false;
+                Helpers.currentlyDownloadedVersionDescription = null;
+            }
+        }
+
+        private static void WebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs eventArgs)
+        {
+            if (Helpers.currentlyDownloadedVersionDescription != null)
+            {
+                Helpers.currentlyDownloadedVersionDescription.InstallerDownloadProgress = eventArgs.ProgressPercentage;
+            }
         }
     }
 }

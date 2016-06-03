@@ -76,6 +76,20 @@ namespace FileConverter
             }
         }
 
+        protected override void OnClosing(CancelEventArgs eventArgs)
+        {
+            base.OnClosing(eventArgs);
+
+            Application application = Application.Current as Application;
+
+            if (application.UpgradeVersionDescription != null && application.UpgradeVersionDescription.NeedToUpgrade && !application.UpgradeVersionDescription.InstallerDownloadDone)
+            {
+                eventArgs.Cancel = true;
+                this.ShowUpgradeWindow();
+                this.upgradeWindow.VersionDescription = application.UpgradeVersionDescription;
+            }
+        }
+
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
             this.ShowSettingsWindow();
@@ -130,14 +144,30 @@ namespace FileConverter
             {
                 return;
             }
-            else
+            else if (this.upgradeWindow == null)
             {
                 this.upgradeWindow = new UpgradeWindow();
+                this.upgradeWindow.Closed += UpgradeWindow_Closed;
             }
-
+            
             Application application = Application.Current as Application;
             application?.CancelAutoExit();
             this.upgradeWindow.Show();
+        }
+
+        private void UpgradeWindow_Closed(object sender, System.EventArgs e)
+        {
+            Application application = Application.Current as Application;
+
+            if (this.IsVisible)
+            {
+                return;
+            }
+
+            if (application.UpgradeVersionDescription != null && application.UpgradeVersionDescription.NeedToUpgrade && application.UpgradeVersionDescription.InstallerDownloadDone)
+            {
+                this.Close();
+            }
         }
 
         private void Application_OnApplicationTerminate(object sender, ApplicationTerminateArgs eventArgs)

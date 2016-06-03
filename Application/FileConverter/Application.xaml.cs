@@ -42,8 +42,7 @@ namespace FileConverter
         private bool needToRunConversionThread;
         private bool cancelAutoExit;
         private bool isSessionEnding;
-        private UpgradeVersionDescription upgradeVersionDescription = null;
-
+        
         public Application()
         {
             this.ConvertionJobs = this.conversionJobs.AsReadOnly();
@@ -83,6 +82,12 @@ namespace FileConverter
             set;
         }
 
+        public UpgradeVersionDescription UpgradeVersionDescription
+        {
+            get;
+            private set;
+        }
+
         public bool Verbose
         {
             get;
@@ -118,23 +123,23 @@ namespace FileConverter
 
             Debug.Log("Exit application.");
             
-            if (!this.isSessionEnding && this.upgradeVersionDescription != null && this.upgradeVersionDescription.NeedToUpgrade)
+            if (!this.isSessionEnding && this.UpgradeVersionDescription != null && this.UpgradeVersionDescription.NeedToUpgrade)
             {
-                Debug.Log("A new version of file converter has been found: {0}.", this.upgradeVersionDescription.LatestVersion);
+                Debug.Log("A new version of file converter has been found: {0}.", this.UpgradeVersionDescription.LatestVersion);
 
-                if (string.IsNullOrEmpty(this.upgradeVersionDescription.InstallerPath))
+                if (string.IsNullOrEmpty(this.UpgradeVersionDescription.InstallerPath))
                 {
                     Debug.LogError("Invalid installer path.");
                 }
                 else
                 {
                     Debug.Log("Wait for the end of the installer download.");
-                    while (this.upgradeVersionDescription.InstallerDownloadInProgress)
+                    while (this.UpgradeVersionDescription.InstallerDownloadInProgress)
                     {
                         Thread.Sleep(1000);
                     }
 
-                    string installerPath = this.upgradeVersionDescription.InstallerPath;
+                    string installerPath = this.UpgradeVersionDescription.InstallerPath;
                     if (!System.IO.File.Exists(installerPath))
                     {
                         Debug.LogError("Can't find upgrade installer ({0}). Try to restart the application.", installerPath);
@@ -142,7 +147,7 @@ namespace FileConverter
                     }
 
                     // Start process.
-                    Debug.Log("Start file converter upgrade from version {0} to {1}.", ApplicationVersion, this.upgradeVersionDescription.LatestVersion);
+                    Debug.Log("Start file converter upgrade from version {0} to {1}.", ApplicationVersion, this.UpgradeVersionDescription.LatestVersion);
 
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(installerPath)
                         {
@@ -289,6 +294,9 @@ namespace FileConverter
             // Check upgrade.
             if (this.Settings.CheckUpgradeAtStartup)
             {
+#if DEBUG
+                Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+#else
                 long fileTime = Registry.GetValue<long>(Registry.Keys.LastUpdateCheckDate);
                 DateTime lastUpdateDateTime = DateTime.FromFileTime(fileTime);
 
@@ -297,6 +305,7 @@ namespace FileConverter
                 {
                     Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
                 }
+#endif
             }
 
             ConversionPreset conversionPreset = null;
@@ -483,7 +492,7 @@ namespace FileConverter
                 return;
             }
 
-            this.upgradeVersionDescription = upgradeVersionDescription;
+            this.UpgradeVersionDescription = upgradeVersionDescription;
             (this.MainWindow as MainWindow).OnNewVersionReleased(upgradeVersionDescription);
         }
     }

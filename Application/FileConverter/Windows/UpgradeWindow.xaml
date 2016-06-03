@@ -33,7 +33,10 @@
         <FlowDocumentScrollViewer Grid.Row="2" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
                                   Document="{Binding ReleaseNote, Converter={StaticResource TextToFlowDocumentConverter}, ElementName=window}"/>
 
-        <Button Background="WhiteSmoke" Grid.Row="3" Padding="10,5,10,5" Margin="5" HorizontalContentAlignment="Left" Click="OnInstallButtonClick" >
+        
+        <!-- Download button -->
+        <Button Background="WhiteSmoke" Grid.Row="3" Padding="10,5,10,5" Margin="5" HorizontalContentAlignment="Left" Command="{Binding DownloadInstallerCommand, ElementName=window}" 
+                Visibility="{Binding VersionDescription.InstallerDownloadNotStarted, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=window}">
             <Button.Content>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -48,6 +51,47 @@
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Content="Install when I exit File Converter" FontSize="14.667"/>
                         <TextBlock Grid.Row="1" Text="The update will be downloaded in background, and installed once you exit File Converter." TextWrapping="Wrap" FontSize="10.667"/>
+                    </Grid>
+                </Grid>
+            </Button.Content>
+        </Button>
+
+        <!-- Download in progress -->
+        <Grid Grid.Row="3" Margin="5" 
+              Visibility="{Binding VersionDescription.InstallerDownloadInProgress, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=window}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/FileConverter;component/Resources/DownloadIcon.png" Stretch="Fill"/>
+            <Grid Grid.Column="1" Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Upgrade download in progress..." FontSize="14.667"/>
+                <ProgressBar Grid.Row="1" Margin="5" Height="30" Foreground="#004B82" Minimum="0" Maximum="100"
+                     Value="{Binding VersionDescription.InstallerDownloadProgress, ElementName=window}"/>
+            </Grid>
+        </Grid>
+
+        <!-- Install button -->
+        <Button Background="WhiteSmoke" Grid.Row="3" Padding="10,5,10,5" Margin="5" HorizontalContentAlignment="Left" Command="{Binding LaunchInstallerCommand, ElementName=window}" 
+                Visibility="{Binding VersionDescription.InstallerDownloadDone, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=window}">
+            <Button.Content>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="64"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/FileConverter;component/Resources/ApplicationIcon.png" Stretch="Fill"/>
+                    <Grid Grid.Column="1" Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="Install File Converter Now" FontSize="14.667"/>
+                        <TextBlock Grid.Row="1" Text="The update has been downloaded. Exit File Converter and install the update now." TextWrapping="Wrap" FontSize="10.667"/>
                     </Grid>
                 </Grid>
             </Button.Content>

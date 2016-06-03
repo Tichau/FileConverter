@@ -86,7 +86,6 @@
 
         <generic:DoubleToTimeString x:Key="DoubleToTimeString"/>
         <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
-        <generic:BoolToVisibility x:Key="BoolToVisibility"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
         <generic:FormatStringConverter x:Key="FormatStringConverter"/>
 
