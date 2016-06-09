@@ -151,6 +151,60 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Files to convert.
+        /// </summary>
+        public static string ConversionQueueTitle {
+            get {
+                return ResourceManager.GetString("ConversionQueueTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Converted from.
+        /// </summary>
+        public static string ConvertedFrom {
+            get {
+                return ResourceManager.GetString("ConvertedFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logs.
+        /// </summary>
+        public static string Diagnostics {
+            get {
+                return ResourceManager.GetString("Diagnostics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logs.
+        /// </summary>
+        public static string DiagnosticsButtonTitle {
+            get {
+                return ResourceManager.GetString("DiagnosticsButtonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update will be downloaded in background, and installed once you exit File Converter..
+        /// </summary>
+        public static string DownloadAndInstallButtonDescription {
+            get {
+                return ResourceManager.GetString("DownloadAndInstallButtonDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install when I exit File Converter.
+        /// </summary>
+        public static string DownloadAndInstallButtonTitle {
+            get {
+                return ResourceManager.GetString("DownloadAndInstallButtonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Encoding :.
         /// </summary>
         public static string Encoding {
@@ -165,6 +219,33 @@ namespace FileConverter.Properties {
         public static string EncodingSpeed {
             get {
                 return ResourceManager.GetString("EncodingSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Converter is a shell extension..
+        /// </summary>
+        public static string FileConverterStartHelp1 {
+            get {
+                return ResourceManager.GetString("FileConverterStartHelp1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That means it is integrated into the Windows explorer..
+        /// </summary>
+        public static string FileConverterStartHelp2 {
+            get {
+                return ResourceManager.GetString("FileConverterStartHelp2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the readme file to see the list of compatible file formats)..
+        /// </summary>
+        public static string FileConverterStartHelp3 {
+            get {
+                return ResourceManager.GetString("FileConverterStartHelp3", resourceCulture);
             }
         }
         
@@ -210,6 +291,24 @@ namespace FileConverter.Properties {
         public static string InputFormats {
             get {
                 return ResourceManager.GetString("InputFormats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The update has been downloaded. Exit File Converter and install the update now..
+        /// </summary>
+        public static string InstallButtonDescription {
+            get {
+                return ResourceManager.GetString("InstallButtonDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install when I exit File Converter.
+        /// </summary>
+        public static string InstallButtonTitle {
+            get {
+                return ResourceManager.GetString("InstallButtonTitle", resourceCulture);
             }
         }
         
@@ -264,6 +363,15 @@ namespace FileConverter.Properties {
         public static string NinetyDegreesRotationTooltip {
             get {
                 return ResourceManager.GetString("NinetyDegreesRotationTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
@@ -416,6 +524,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsButtonTitle {
+            get {
+                return ResourceManager.GetString("SettingsButtonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 270°.
         /// </summary>
         public static string TwoSeventyDegreesRotationTitle {
@@ -430,6 +547,33 @@ namespace FileConverter.Properties {
         public static string TwoSeventyDegreesRotationTooltip {
             get {
                 return ResourceManager.GetString("TwoSeventyDegreesRotationTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An update for File Converter is available. It is strongly recommended that you install it as soon as possible!.
+        /// </summary>
+        public static string UpgradeAvailable {
+            get {
+                return ResourceManager.GetString("UpgradeAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade download in progress....
+        /// </summary>
+        public static string UpgradeDownloadInProgress {
+            get {
+                return ResourceManager.GetString("UpgradeDownloadInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Converter Updates.
+        /// </summary>
+        public static string UpgradeWindowTitle {
+            get {
+                return ResourceManager.GetString("UpgradeWindowTitle", resourceCulture);
             }
         }
         

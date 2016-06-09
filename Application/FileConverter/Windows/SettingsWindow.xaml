@@ -136,7 +136,7 @@
         <DataTemplate x:Key="WavSettingsDataTemplate">
             <StackPanel>
                 <DockPanel>
-                    <Label Content="Encoding :" />
+                    <Label Content="{x:Static project:Resources.Encoding}" />
                     <RadioButton x:Name="WAV8radioButton" Content="8-bits" ToolTip="{x:Static project:Resources.Wav8bitsDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav8, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
                     <RadioButton x:Name="WAV16radioButton" Content="16-bits" ToolTip="{x:Static project:Resources.Wav16bitsDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav16, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                     <RadioButton x:Name="WAV24radioButton" Content="24-bits" ToolTip="{x:Static project:Resources.Wav24bitsDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav24, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>

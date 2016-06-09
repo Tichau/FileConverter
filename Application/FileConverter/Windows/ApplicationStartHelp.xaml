@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FileConverter.Windows"
         xmlns:fileConverter="clr-namespace:FileConverter"
-        xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
+        xmlns:project="clr-namespace:FileConverter.Properties"
         mc:Ignorable="d"
         Height="480" Width="640" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize">
     <Window.Resources>
@@ -14,10 +13,10 @@
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(fileConverter:Application.ApplicationVersion)"/>
     </Window.Title>
     <StackPanel Margin="5">
-        <TextBlock Margin="0,0,0,4"  Text="File Converter is a shell extension." TextWrapping="Wrap" FontWeight="Bold" FontSize="13.333"/>
-        <TextBlock Text="That means it is integrated into the Windows explorer." TextWrapping="Wrap"/>
-        <TextBlock Text="To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the readme file to see the list of compatible file formats)." TextWrapping="Wrap" />
+        <TextBlock Margin="0,0,0,4"  Text="{x:Static project:Resources.FileConverterStartHelp1}" TextWrapping="Wrap" FontWeight="Bold" FontSize="13.333"/>
+        <TextBlock Text="{x:Static project:Resources.FileConverterStartHelp2}" TextWrapping="Wrap"/>
+        <TextBlock Text="{x:Static project:Resources.FileConverterStartHelp3}" TextWrapping="Wrap" />
         <Image Margin="0,7,0,7" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Source="/FileConverter;component/Resources/ContextMenuScreenshot.png" Stretch="None"/>
-        <Button Content="Ok" Height="28" Click="OkButton_Click"/>
+        <Button Content="{x:Static project:Resources.Ok}" Height="28" Click="OkButton_Click"/>
     </StackPanel>
 </Window>

@@ -147,11 +147,38 @@
   <data name="ConversionPresets" xml:space="preserve">
     <value>Conversion Presets</value>
   </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>Files to convert</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>Converted from</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="DiagnosticsButtonTitle" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>The update will be downloaded in background, and installed once you exit File Converter.</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>Install when I exit File Converter</value>
+  </data>
   <data name="Encoding" xml:space="preserve">
     <value>Encoding :</value>
   </data>
   <data name="EncodingSpeed" xml:space="preserve">
     <value>Encoding speed :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter is a shell extension.</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>That means it is integrated into the Windows explorer.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the readme file to see the list of compatible file formats).</value>
   </data>
   <data name="FileNameTemplate" xml:space="preserve">
     <value>File name template</value>
@@ -167,6 +194,12 @@
   </data>
   <data name="InputFormats" xml:space="preserve">
     <value>Input formats</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>The update has been downloaded. Exit File Converter and install the update now.</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>Install when I exit File Converter</value>
   </data>
   <data name="MoveDownSelectedPreset" xml:space="preserve">
     <value>Move down selected preset</value>
@@ -185,6 +218,9 @@
   </data>
   <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
     <value>90° counter clockwise rotation</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
   </data>
   <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
     <value>180°</value>
@@ -244,11 +280,23 @@ Special paths:
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SettingsButtonTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
     <value>270°</value>
   </data>
   <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
     <value>90° clockwise rotation</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>An update for File Converter is available. It is strongly recommended that you install it as soon as possible!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>Upgrade download in progress...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>File Converter Updates</value>
   </data>
   <data name="VideoEncodingQualityTooltip" xml:space="preserve">
     <value>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</value>
