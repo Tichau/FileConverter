@@ -117,6 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Allow you to chose what you want to do with your input files if the conversion succeed</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Action when conversion succeed</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Add new preset (duplicate selected preset)</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>Automatically check for updates when File Converter starts</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Automatically exit when all conversions finished</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Conversion Presets</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>File name template</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>help ?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Input example</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Input formats</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>Move down selected preset</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>Move up selected preset</value>
+  </data>
   <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
     <value>90° counter clockwise rotation</value>
   </data>
@@ -125,6 +170,9 @@
   </data>
   <data name="OuputFileNameTemplateSample" xml:space="preserve">
     <value>C:\Music\Artist\Album\Song.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>Output</value>
   </data>
   <data name="OutputFilePathTemplateHelp" xml:space="preserve">
     <value>(p): input file path
@@ -141,6 +189,27 @@ Special paths:
 (p:m): my music path
 (p:v): my videos path
 (p:p): my pictures path</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Output format</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Preset</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Preset Name</value>
+  </data>
+  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+    <value>Recommended bitrate range in blue</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>Remove selected preset</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
     <value>90° clockwise rotation</value>

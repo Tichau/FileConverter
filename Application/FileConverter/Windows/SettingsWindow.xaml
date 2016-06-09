@@ -558,7 +558,7 @@
             </Grid.ColumnDefinitions>
 
             <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="..\Resources\ApplicationIcon.png" />
-            <Label Grid.Column="1" Content="Settings" FontSize="20" Margin="4" VerticalAlignment="Center" />
+            <Label Grid.Column="1" Content="{x:Static project:Resources.Settings}" FontSize="20" Margin="4" VerticalAlignment="Center" />
             <Label Grid.Column="2" HorizontalAlignment="Right" FontStyle="Italic" FontSize="14" VerticalAlignment="Center">
                 <Label.Content>
                     <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
@@ -569,7 +569,7 @@
         <TabControl Grid.Row="1">
             
             <!-- Conversion presets settings -->
-            <TabItem Header="Conversion Presets">
+            <TabItem Header="{x:Static project:Resources.ConversionPresets}">
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -596,15 +596,15 @@
                         </ListBox>
 
                         <DockPanel Grid.Row="1" Margin="0,5,0,0" HorizontalAlignment="Center">
-                            <Button x:Name="MoveUpPresetButton" Content="^" HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" Click="MovePresetUpButton_Click"/>
-                            <Button x:Name="AddPresetButton" Content="+" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="AddPresetButton_Click"/>
-                            <Button x:Name="RemovePresetButton" Content="-" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="RemovePresetButton_Click"/>
-                            <Button x:Name="MoveDownPresetButton" Content="v" HorizontalAlignment="Left" Width="25" Margin="2,0,0,0" Click="MovePresetDownButton_Click"/>
+                            <Button x:Name="MoveUpPresetButton" Content="^" ToolTip="{x:Static project:Resources.MoveUpSelectedPreset}" HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" Click="MovePresetUpButton_Click"/>
+                            <Button x:Name="AddPresetButton" Content="+" ToolTip="{x:Static project:Resources.AddNewPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="AddPresetButton_Click"/>
+                            <Button x:Name="RemovePresetButton" Content="-" ToolTip="{x:Static project:Resources.RemoveSelectedPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="RemovePresetButton_Click"/>
+                            <Button x:Name="MoveDownPresetButton" Content="v" ToolTip="{x:Static project:Resources.MoveDownSelectedPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0,0,0" Click="MovePresetDownButton_Click"/>
                         </DockPanel>
                     </Grid>
 
                     <!-- Preset settings -->
-                    <GroupBox Header="Preset" Margin="5,5,0,0" Grid.Column="1" Visibility="{Binding SelectedPreset, Converter={StaticResource ReferenceToVisibility}, ElementName=window}">
+                    <GroupBox Header="{x:Static project:Resources.Preset}" Margin="5,5,0,0" Grid.Column="1" Visibility="{Binding SelectedPreset, Converter={StaticResource ReferenceToVisibility}, ElementName=window}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" MaxWidth="240"/>
@@ -614,10 +614,11 @@
                                 <RowDefinition Height="30"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Label Content="Preset name" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+
+                            <Label Content="{x:Static project:Resources.PresetName}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
                             <TextBox x:Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
 
-                            <GroupBox Grid.Row="1" Grid.Column="0" Header="Input formats" Margin="5">
+                            <GroupBox Grid.Row="1" Grid.Column="0" Header="{x:Static project:Resources.InputFormats}" Margin="5">
                                 <Grid Margin="5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -659,21 +660,21 @@
                                         </TreeView.ItemContainerStyle>
                                     </TreeView>
 
-                                    <Label Grid.Row="1" Content="Action when conversion succeed"/>
+                                    <Label Grid.Row="1" Content="{x:Static project:Resources.ActionWhenConversionSucceedTitle}" ToolTip="{x:Static project:Resources.ActionWhenConversionSucceedDescription}" />
                                     <ComboBox Grid.Row="2" x:Name="PostConversionActionComboBox" SelectedItem="{Binding SelectedPreset.InputPostConversionAction, ElementName=window, Mode=TwoWay}" />
 
                                     <TextBlock Grid.Row="3" Margin="0,5,0,0">
-                                        <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8">help ?</Hyperlink>
+                                        <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                     </TextBlock>
                                 </Grid>
                             </GroupBox>
 
-                            <GroupBox Header="Output format" Grid.Row="1" Grid.Column="1" Margin="5">
+                            <GroupBox Header="{x:Static project:Resources.OutputFormat}" Grid.Row="1" Grid.Column="1" Margin="5">
                                 <StackPanel>
                                     <ComboBox x:Name="OutputFormats" Margin="5" Height="25" VerticalAlignment="Top" SelectedItem="{Binding SelectedPreset.OutputType, ElementName=window, Mode=TwoWay}"/>
 
                                     <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
-								Content="{Binding SelectedPreset.OutputType, ElementName=window, UpdateSourceTrigger=PropertyChanged}" />
+								        Content="{Binding SelectedPreset.OutputType, ElementName=window, UpdateSourceTrigger=PropertyChanged}" />
 
                                     <Separator/>
 
@@ -689,11 +690,11 @@
                                             <RowDefinition Height="23"/>
                                             <RowDefinition Height="23"/>
                                         </Grid.RowDefinitions>
-                                        <Label Content="File name template" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                                        <Label Content="{x:Static project:Resources.FileNameTemplate}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
                                         <TextBox x:Name="FileNameTemplateTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.OutputFileNameTemplate, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}" />
-                                        <Label Content="Input example" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                        <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
                                         <TextBlock Text="{x:Static project:Resources.OuputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center"/>
-                                        <Label Content="Output" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                        <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
                                         <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center">
                                             <TextBlock.Text>
                                                 <MultiBinding Converter="{StaticResource FileNameConverter}">
@@ -704,7 +705,7 @@
                                             </TextBlock.Text>
                                         </TextBlock>
                                         <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
-                                            <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8">help ?</Hyperlink>
+                                            <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                         </TextBlock>
                                     </Grid>
 
@@ -716,20 +717,20 @@
             </TabItem>
 
             <!-- Application settings -->
-            <TabItem Header="Application">
+            <TabItem Header="{x:Static project:Resources.Application}">
                 <StackPanel Margin="5,10,5,5">
-                    <CheckBox x:Name="QuitAtEndCheckBox" Content="Automatically exit when all conversions finished" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}" Margin="0,0,0,5" />
+                    <CheckBox x:Name="QuitAtEndCheckBox" Content="{x:Static project:Resources.AutomaticallyExitWhenAllConversionsFinished}" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}" Margin="0,0,0,5" />
                     <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
                         <Label Content="Waiting duration :"/>
                         <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationExit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
                         <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
                     </DockPanel>
-                    <CheckBox Content="Automatically check for updates when File Converter starts" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}"  />
+                    <CheckBox Content="{x:Static project:Resources.AutomaticallyCheckForUpdates}" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}"  />
                 </StackPanel>
             </TabItem>
             
             <!-- About -->
-            <TabItem Header="About">
+            <TabItem Header="{x:Static project:Resources.About}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -798,7 +799,7 @@
             </TabItem>
         </TabControl>
 
-        <Button x:Name="CloseButton" Grid.Row="2" Content="Close" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
-        <Button x:Name="SaveButton" Grid.Row="2" Content="Save" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" Click="SaveButton_Click" Command="New"/>
+        <Button x:Name="CloseButton" Grid.Row="2" Content="{x:Static project:Resources.Close}" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0" Click="CloseButton_Click" />
+        <Button x:Name="SaveButton" Grid.Row="2" Content="{x:Static project:Resources.Save}" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" Click="SaveButton_Click" Command="New"/>
     </Grid>
 </Window>
