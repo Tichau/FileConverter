@@ -106,6 +106,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio.
+        /// </summary>
+        public static string AudioTitle {
+            get {
+                return ResourceManager.GetString("AudioTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatically check for updates when File Converter starts.
         /// </summary>
         public static string AutomaticallyCheckForUpdates {
@@ -142,11 +151,38 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Encoding :.
+        /// </summary>
+        public static string Encoding {
+            get {
+                return ResourceManager.GetString("Encoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encoding speed :.
+        /// </summary>
+        public static string EncodingSpeed {
+            get {
+                return ResourceManager.GetString("EncodingSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File name template.
         /// </summary>
         public static string FileNameTemplate {
             get {
                 return ResourceManager.GetString("FileNameTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Frames per second :.
+        /// </summary>
+        public static string FramesPerSecond {
+            get {
+                return ResourceManager.GetString("FramesPerSecond", resourceCulture);
             }
         }
         
@@ -196,11 +232,47 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Constant bitrate encoding.
+        /// </summary>
+        public static string Mp3CbrDescrption {
+            get {
+                return ResourceManager.GetString("Mp3CbrDescrption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variable bitrate encoding.
+        /// </summary>
+        public static string Mp3VbrDescription {
+            get {
+                return ResourceManager.GetString("Mp3VbrDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 90°.
+        /// </summary>
+        public static string NinetyDegreesRotationTitle {
+            get {
+                return ResourceManager.GetString("NinetyDegreesRotationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 90° counter clockwise rotation.
         /// </summary>
         public static string NinetyDegreesRotationTooltip {
             get {
                 return ResourceManager.GetString("NinetyDegreesRotationTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 180°.
+        /// </summary>
+        public static string OneEightyDegreesRotationTitle {
+            get {
+                return ResourceManager.GetString("OneEightyDegreesRotationTitle", resourceCulture);
             }
         }
         
@@ -281,6 +353,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quality :.
+        /// </summary>
+        public static string Quality {
+            get {
+                return ResourceManager.GetString("Quality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recommended bitrate range in blue.
         /// </summary>
         public static string RecommendeBitrateRangeInBlue {
@@ -299,6 +380,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rotate :.
+        /// </summary>
+        public static string Rotate {
+            get {
+                return ResourceManager.GetString("Rotate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -308,11 +398,29 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scale :.
+        /// </summary>
+        public static string Scale {
+            get {
+                return ResourceManager.GetString("Scale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 270°.
+        /// </summary>
+        public static string TwoSeventyDegreesRotationTitle {
+            get {
+                return ResourceManager.GetString("TwoSeventyDegreesRotationTitle", resourceCulture);
             }
         }
         
@@ -340,6 +448,60 @@ namespace FileConverter.Properties {
         public static string VideoEncodingSpeedTooltip {
             get {
                 return ResourceManager.GetString("VideoEncodingSpeedTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Video.
+        /// </summary>
+        public static string VideoTitle {
+            get {
+                return ResourceManager.GetString("VideoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PCM signed 16-bit little-endian.
+        /// </summary>
+        public static string Wav16bitsDescription {
+            get {
+                return ResourceManager.GetString("Wav16bitsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PCM signed 24-bit little-endian.
+        /// </summary>
+        public static string Wav24bitsDescription {
+            get {
+                return ResourceManager.GetString("Wav24bitsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PCM signed 32-bit little-endian.
+        /// </summary>
+        public static string Wav32bitsDescription {
+            get {
+                return ResourceManager.GetString("Wav32bitsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PCM signed 8-bit little-endian.
+        /// </summary>
+        public static string Wav8bitsDescription {
+            get {
+                return ResourceManager.GetString("Wav8bitsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string ZeroDegreesRotationTitle {
+            get {
+                return ResourceManager.GetString("ZeroDegreesRotationTitle", resourceCulture);
             }
         }
         
