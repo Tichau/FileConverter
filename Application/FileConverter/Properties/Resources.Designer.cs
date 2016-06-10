@@ -187,6 +187,33 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open documentation.
+        /// </summary>
+        public static string DocumentationButtonDescription {
+            get {
+                return ResourceManager.GetString("DocumentationButtonDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Donate.
+        /// </summary>
+        public static string DonateButtonTitle {
+            get {
+                return ResourceManager.GetString("DonateButtonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t forget to reward my work if you like it :).
+        /// </summary>
+        public static string DonateDescription {
+            get {
+                return ResourceManager.GetString("DonateDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The update will be downloaded in background, and installed once you exit File Converter..
         /// </summary>
         public static string DownloadAndInstallButtonDescription {
@@ -268,6 +295,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open GitHub project page.
+        /// </summary>
+        public static string GitHubButtonDescription {
+            get {
+                return ResourceManager.GetString("GitHubButtonDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to help ?.
         /// </summary>
         public static string Help {
@@ -309,6 +345,15 @@ namespace FileConverter.Properties {
         public static string InstallButtonTitle {
             get {
                 return ResourceManager.GetString("InstallButtonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report an issue.
+        /// </summary>
+        public static string IssueButtonDescription {
+            get {
+                return ResourceManager.GetString("IssueButtonDescription", resourceCulture);
             }
         }
         
@@ -511,6 +556,15 @@ namespace FileConverter.Properties {
         public static string Scale {
             get {
                 return ResourceManager.GetString("Scale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See change log ....
+        /// </summary>
+        public static string SeeChangeLog {
+            get {
+                return ResourceManager.GetString("SeeChangeLog", resourceCulture);
             }
         }
         

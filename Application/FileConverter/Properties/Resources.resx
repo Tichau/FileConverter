@@ -159,6 +159,15 @@
   <data name="DiagnosticsButtonTitle" xml:space="preserve">
     <value>Logs</value>
   </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Open documentation</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Don't forget to reward my work if you like it :)</value>
+  </data>
   <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
     <value>The update will be downloaded in background, and installed once you exit File Converter.</value>
   </data>
@@ -186,6 +195,9 @@
   <data name="FramesPerSecond" xml:space="preserve">
     <value>Frames per second :</value>
   </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>Open GitHub project page</value>
+  </data>
   <data name="Help" xml:space="preserve">
     <value>help ?</value>
   </data>
@@ -200,6 +212,9 @@
   </data>
   <data name="InstallButtonTitle" xml:space="preserve">
     <value>Install when I exit File Converter</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>Report an issue</value>
   </data>
   <data name="MoveDownSelectedPreset" xml:space="preserve">
     <value>Move down selected preset</value>
@@ -276,6 +291,9 @@ Special paths:
   </data>
   <data name="Scale" xml:space="preserve">
     <value>Scale :</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>See change log ...</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>

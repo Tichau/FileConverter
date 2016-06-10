@@ -790,17 +790,17 @@
                         </TextBlock>
                     </DockPanel>
                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
-                        <Button ToolTip="Open GitHub project page" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/?from=about">
+                        <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Icon.png"></Image>
                             </Button.Content>
                         </Button>
-                        <Button ToolTip="Report an issue" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/issues?from=about">
+                        <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/issues?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Issue-Icon.png"></Image>
                             </Button.Content>
                         </Button>
-                        <Button ToolTip="Open documentation" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/wiki?from=about">
+                        <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/wiki?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
                             </Button.Content>
@@ -812,19 +812,19 @@
                                           Document="{Binding AboutSectionContent, Converter={StaticResource TextToFlowDocumentConverter}, ElementName=window}" DockPanel.Dock="Top"/>
 
                         <TextBlock Grid.Row="1" Margin="5" DockPanel.Dock="Top" FontSize="14" HorizontalAlignment="Center" Visibility="{Binding DisplaySeeChangeLogLink, ElementName=window, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">
-                                <Hyperlink Foreground="#1E6BB8" Command="{Binding GetChangeLogContentCommand, ElementName=window, Mode=OneWay}">See change log ...</Hyperlink>
+                            <Hyperlink Foreground="#1E6BB8" Command="{Binding GetChangeLogContentCommand, ElementName=window, Mode=OneWay}"><x:Static Member="project:Resources.SeeChangeLog" /></Hyperlink>
                         </TextBlock>
                     </DockPanel>
 
                     <Image Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"  Source="/FileConverter;component/Resources/ApplicationIcon.ico"></Image>
                         
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label Content="Don't forget to reward my work if you like it :)" VerticalAlignment="Center"/>
+                        <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center"/>
                         <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://pledgie.com/campaigns/31615?from=about">
                             <Button.Content>
                                 <DockPanel>
                                     <Image Source="/FileConverter;component/Resources/Pledge-icon.png"></Image>
-                                    <Label Margin="5,0,5,0" Content="Donate" Foreground="WhiteSmoke" FontWeight="Bold" FontSize="14"/>
+                                    <Label Content="{x:Static project:Resources.DonateButtonTitle}" Margin="5,0,5,0" Foreground="WhiteSmoke" FontWeight="Bold" FontSize="14"/>
                                 </DockPanel>
                             </Button.Content>
                         </Button>
