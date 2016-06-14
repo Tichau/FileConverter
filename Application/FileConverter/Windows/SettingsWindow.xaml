@@ -755,6 +755,11 @@
             <!-- Application settings -->
             <TabItem Header="{x:Static project:Resources.Application}">
                 <StackPanel Margin="5,10,5,5">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Content="Language :"/>
+                        <ComboBox Name="LanguageComboBox" SelectedValue="{Binding ApplicationSettings.ApplicationLanguage, ElementName=window, Mode=TwoWay}"/>
+                    </StackPanel>
+                    
                     <CheckBox x:Name="QuitAtEndCheckBox" Content="{x:Static project:Resources.AutomaticallyExitWhenAllConversionsFinished}" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}" Margin="0,0,0,5" />
                     <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
                         <Label Content="Waiting duration :"/>

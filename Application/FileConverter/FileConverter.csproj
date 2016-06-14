@@ -107,14 +107,14 @@
     <Compile Include="Diagnostics\DiagnosticsData.cs" />
     <Compile Include="Controls\EncodingMode.cs" />
     <Compile Include="ConversionPreset\IConversionSettings.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="InputPostConversionAction.cs" />
     <Compile Include="IXmlSerializable.cs" />
     <Compile Include="PathHelpers.cs" />
-    <Compile Include="Properties\Resources.en.Designer.cs">
-      <DependentUpon>Resources.en.resx</DependentUpon>
+    <Compile Include="Properties\Resources.fr1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+      <DependentUpon>Resources.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Registry.cs" />
     <Compile Include="Settings.Settings.cs" />
@@ -210,9 +210,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.en.resx">
+    <EmbeddedResource Include="Properties\Resources.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.fr1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -1,10 +1,12 @@
 ﻿// <copyright file="SettingsWindow.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
+
 namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Windows;
@@ -13,7 +15,6 @@ namespace FileConverter
 
     using FileConverter.Annotations;
     using FileConverter.Commands;
-    using FileConverter.Upgrade;
     using Microsoft.Win32;
 
     /// <summary>
@@ -69,11 +70,19 @@ namespace FileConverter
             this.PostConversionActionComboBox.ItemsSource = postConversionActions;
             
             this.InitializeCompatibleInputExtensions();
+
+            foreach (CultureInfo cultureInfo in Helpers.GetSupportedCulture())
+            {
+                if (cultureInfo.IsNeutralCulture)
+                {
+                    this.LanguageComboBox.Items.Add(cultureInfo);
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public event System.EventHandler<System.EventArgs> OnSettingsWindowHide;
+        public event EventHandler<EventArgs> OnSettingsWindowHide;
 
         public ICommand OpenUrlCommand
         {
@@ -190,7 +199,7 @@ namespace FileConverter
                 this.OnPropertyChanged();
             }
         }
-
+        
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -200,7 +209,7 @@ namespace FileConverter
         private void DownloadChangeLogAction()
         {
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            Helpers.GetChangeLogAsync(new UpgradeVersionDescription(), this.OnChangeLogRetrieved);
+            Upgrade.Helpers.GetChangeLogAsync(new UpgradeVersionDescription(), this.OnChangeLogRetrieved);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             this.AboutSectionContent = "###Downloading change log ...";
             this.DisplaySeeChangeLogLink = false;
