@@ -169,7 +169,7 @@ namespace FileConverter
             {
                 CultureInfo bestCandidate = null;
                 CultureInfo currentUICulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
-                foreach (CultureInfo culture in Helpers.GetSupportedCulture())
+                foreach (CultureInfo culture in Helpers.GetSupportedCultures())
                 {
                     if (culture.Equals(currentUICulture))
                     {

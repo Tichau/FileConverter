@@ -32,9 +32,11 @@ namespace FileConverter
         private OpenUrlCommand openUrlCommand;
         private DelegateCommand getChangeLogContentCommand;
         private bool displaySeeChangeLogLink = true;
-
+        
         public SettingsWindow()
         {
+            this.SupportedCultures = Helpers.GetSupportedCultures().Where(cultureInfo => cultureInfo.IsNeutralCulture).ToArray();
+
             this.InitializeComponent();
             
             Application application = Application.Current as Application;
@@ -70,14 +72,6 @@ namespace FileConverter
             this.PostConversionActionComboBox.ItemsSource = postConversionActions;
             
             this.InitializeCompatibleInputExtensions();
-
-            foreach (CultureInfo cultureInfo in Helpers.GetSupportedCulture())
-            {
-                if (cultureInfo.IsNeutralCulture)
-                {
-                    this.LanguageComboBox.Items.Add(cultureInfo);
-                }
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -168,6 +162,12 @@ namespace FileConverter
                     }
                 }
             }
+        }
+
+        public CultureInfo[] SupportedCultures
+        {
+            get;
+            set;
         }
 
         public string AboutSectionContent

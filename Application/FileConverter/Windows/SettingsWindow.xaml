@@ -83,6 +83,7 @@
             </Setter>
         </Style>
 
+        <generic:CultureInfoToStringConverter x:Key="CultureInfoToString"/>
         <generic:DoubleToTimeString x:Key="DoubleToTimeString"/>
         <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
@@ -757,7 +758,14 @@
                 <StackPanel Margin="5,10,5,5">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Label Content="Language :"/>
-                        <ComboBox Name="LanguageComboBox" SelectedValue="{Binding ApplicationSettings.ApplicationLanguage, ElementName=window, Mode=TwoWay}"/>
+                        <ComboBox ItemsSource="{Binding SupportedCultures, ElementName=window, Mode=OneWay}"
+                            SelectedValue="{Binding ApplicationSettings.ApplicationLanguage, ElementName=window, Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentPresenter Content="{Binding Converter={StaticResource CultureInfoToString}}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                     
                     <CheckBox x:Name="QuitAtEndCheckBox" Content="{x:Static project:Resources.AutomaticallyExitWhenAllConversionsFinished}" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}" Margin="0,0,0,5" />

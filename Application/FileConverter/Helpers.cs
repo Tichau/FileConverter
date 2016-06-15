@@ -11,7 +11,7 @@ namespace FileConverter
 
     public static class Helpers
     {
-        public static IEnumerable<CultureInfo> GetSupportedCulture()
+        public static IEnumerable<CultureInfo> GetSupportedCultures()
         {
             //Get all culture 
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);

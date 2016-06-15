@@ -124,6 +124,7 @@
     <Compile Include="ConversionPreset\ConversionPreset.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
     <Compile Include="ValueConverters\FileNameConverter.cs" />
+    <Compile Include="ValueConverters\Generic\CultureInfoToStringConverter.cs" />
     <Compile Include="ValueConverters\Generic\BoolToVisibility.cs" />
     <Compile Include="ValueConverters\ConversionSettingsToString.cs" />
     <Compile Include="ValueConverters\Generic\BoolInverterConverter.cs" />
