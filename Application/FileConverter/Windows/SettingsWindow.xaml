@@ -84,6 +84,7 @@
         </Style>
 
         <generic:CultureInfoToStringConverter x:Key="CultureInfoToString"/>
+        <generic:ObjectToLocalizedString x:Key="ObjectToLocalizedString"/>
         <generic:DoubleToTimeString x:Key="DoubleToTimeString"/>
         <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
@@ -621,7 +622,8 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
-                        <ListBox x:Name="PresetList" Grid.Row="0" HorizontalAlignment="Left" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedPreset, ElementName=window}" Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
+                        <ListBox x:Name="PresetList" Grid.Row="0" HorizontalAlignment="Left" IsSynchronizedWithCurrentItem="True" 
+                                 SelectedItem="{Binding SelectedPreset, ElementName=window}" Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
                             <ListBox.DataContext>
                                 <local:ConversionPreset/>
                             </ListBox.DataContext>
@@ -698,7 +700,14 @@
                                     </TreeView>
 
                                     <Label Grid.Row="1" Content="{x:Static project:Resources.ActionWhenConversionSucceedTitle}" ToolTip="{x:Static project:Resources.ActionWhenConversionSucceedDescription}" />
-                                    <ComboBox Grid.Row="2" x:Name="PostConversionActionComboBox" SelectedItem="{Binding SelectedPreset.InputPostConversionAction, ElementName=window, Mode=TwoWay}" />
+                                    <ComboBox Grid.Row="2" ItemsSource="{Binding InputPostConversionActions, ElementName=window, Mode=OneTime}"
+                                              SelectedItem="{Binding SelectedPreset.InputPostConversionAction, ElementName=window, Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
 
                                     <TextBlock Grid.Row="3" Margin="0,5,0,0">
                                         <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
@@ -758,7 +767,7 @@
                 <StackPanel Margin="5,10,5,5">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Label Content="Language :"/>
-                        <ComboBox ItemsSource="{Binding SupportedCultures, ElementName=window, Mode=OneWay}"
+                        <ComboBox ItemsSource="{Binding SupportedCultures, ElementName=window, Mode=OneTime}"
                             SelectedValue="{Binding ApplicationSettings.ApplicationLanguage, ElementName=window, Mode=TwoWay}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>

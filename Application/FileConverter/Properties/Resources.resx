@@ -207,6 +207,15 @@
   <data name="InputFormats" xml:space="preserve">
     <value>Input formats</value>
   </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Move in an archive folder</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>None</value>
+  </data>
   <data name="InstallButtonDescription" xml:space="preserve">
     <value>The update has been downloaded. Exit File Converter and install the update now.</value>
   </data>

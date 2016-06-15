@@ -331,6 +331,33 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string InputPostConversionActionDeleteName {
+            get {
+                return ResourceManager.GetString("InputPostConversionActionDeleteName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move in an archive folder.
+        /// </summary>
+        public static string InputPostConversionActionMoveInArchiveFolderName {
+            get {
+                return ResourceManager.GetString("InputPostConversionActionMoveInArchiveFolderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string InputPostConversionActionNoneName {
+            get {
+                return ResourceManager.GetString("InputPostConversionActionNoneName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The update has been downloaded. Exit File Converter and install the update now..
         /// </summary>
         public static string InstallButtonDescription {

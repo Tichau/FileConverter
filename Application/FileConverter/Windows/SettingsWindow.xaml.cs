@@ -61,15 +61,6 @@ namespace FileConverter
                                            };
 
             this.OutputFormats.ItemsSource = outputTypes;
-
-            InputPostConversionAction[] postConversionActions = new[]
-                                           {
-                                               InputPostConversionAction.None,
-                                               InputPostConversionAction.MoveInArchiveFolder,
-                                               InputPostConversionAction.Delete,
-                                           };
-
-            this.PostConversionActionComboBox.ItemsSource = postConversionActions;
             
             this.InitializeCompatibleInputExtensions();
         }
@@ -169,6 +160,13 @@ namespace FileConverter
             get;
             set;
         }
+
+        public InputPostConversionAction[] InputPostConversionActions => new[]
+        {
+            InputPostConversionAction.None,
+            InputPostConversionAction.MoveInArchiveFolder,
+            InputPostConversionAction.Delete,
+        };
 
         public string AboutSectionContent
         {
