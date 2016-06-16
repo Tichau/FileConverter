@@ -336,16 +336,14 @@
                             Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="1" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
 
                 <Label Content="{x:Static project:Resources.EncodingSpeed}" Grid.Row="2" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingSpeedTooltip}" HorizontalContentAlignment="Right"/>
-                <ComboBox Grid.Row="2" Grid.Column="1" SelectedValue="{Binding SelectedPreset.Settings, ConverterParameter=VideoEncodingSpeed|System.String, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=veryslow}">
-                    <System:String>Ultra Fast</System:String>
-                    <System:String>Super Fast</System:String>
-                    <System:String>Very Fast</System:String>
-                    <System:String>Faster</System:String>
-                    <System:String>Fast</System:String>
-                    <System:String>Medium</System:String>
-                    <System:String>Slow</System:String>
-                    <System:String>Slower</System:String>
-                    <System:String>Very Slow</System:String>
+                <ComboBox Grid.Row="2" Grid.Column="1" 
+                          ItemsSource="{Binding VideoEncodingSpeeds, ElementName=window, Mode=OneTime}"
+                          SelectedValue="{Binding SelectedPreset.Settings, ConverterParameter=VideoEncodingSpeed|FileConverter.ConversionJobs.VideoEncodingSpeed, Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=TwoWay, TargetNullValue=veryslow}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}, Mode=OneTime}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
                 <Label Content="{x:Static project:Resources.Scale}" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"/>
@@ -471,7 +469,7 @@
                 <!--Quality-->
                 <Label Content="{x:Static project:Resources.Quality}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"/>
                 <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=25}"
-                        Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="30" SelectionEnd="100" Minimum="0" Maximum="100" TickPlacement="BottomRight" SmallChange="5" LargeChange="15" TickFrequency="5" Foreground="#004B82" />
+                        Margin="0,5,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="30" SelectionEnd="100" Minimum="0" Maximum="100" TickPlacement="BottomRight" SmallChange="5" LargeChange="15" TickFrequency="5" Foreground="#004B82" />
                 <!--Scale-->
                 <Label Content="{x:Static project:Resources.Scale}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
                 <Grid Grid.Row="1" Grid.Column="1">

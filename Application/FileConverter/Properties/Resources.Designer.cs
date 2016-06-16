@@ -677,11 +677,92 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Faster.
+        /// </summary>
+        public static string VideoEncodingSpeedFasterName {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedFasterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast.
+        /// </summary>
+        public static string VideoEncodingSpeedFastName {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedFastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        public static string VideoEncodingSpeedMediumName {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedMediumName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slower.
+        /// </summary>
+        public static string VideoEncodingSpeedSlowerName {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedSlowerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slow.
+        /// </summary>
+        public static string VideoEncodingSpeedSlowName {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedSlowName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Super Fast.
+        /// </summary>
+        public static string VideoEncodingSpeedSuperFastName {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedSuperFastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Define the ratio &apos;file size&apos; versus &apos;compression duration&apos;. A slow compression will give you a smaller file (for the same video quality) than a faster compression..
         /// </summary>
         public static string VideoEncodingSpeedTooltip {
             get {
                 return ResourceManager.GetString("VideoEncodingSpeedTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ultra Fast.
+        /// </summary>
+        public static string VideoEncodingSpeedUltraFastName {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedUltraFastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Very Fast.
+        /// </summary>
+        public static string VideoEncodingSpeedVeryFastName {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedVeryFastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Very Slow.
+        /// </summary>
+        public static string VideoEncodingSpeedVerySlowName {
+            get {
+                return ResourceManager.GetString("VideoEncodingSpeedVerySlowName", resourceCulture);
             }
         }
         

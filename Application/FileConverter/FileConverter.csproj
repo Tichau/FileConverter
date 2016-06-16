@@ -102,6 +102,7 @@
     <Compile Include="ConversionJobs\ConversionJob_Gif.cs" />
     <Compile Include="ConversionJobs\ConversionJob_Ico.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ImageMagick.cs" />
+    <Compile Include="ConversionJobs\VideoEncodingSpeed.cs" />
     <Compile Include="ConversionPreset\ConversionSettingsOverride.cs" />
     <Compile Include="ConversionPreset\ConversionSettings.cs" />
     <Compile Include="Diagnostics\DiagnosticsData.cs" />
@@ -117,6 +118,7 @@
       <DependentUpon>Resources.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Registry.cs" />
+    <Compile Include="Settings.Migration.cs" />
     <Compile Include="Settings.Settings.cs" />
     <Compile Include="Upgrade\Helpers.cs" />
     <Compile Include="Upgrade\UpgradeVersionDescription.cs" />

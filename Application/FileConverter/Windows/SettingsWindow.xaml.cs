@@ -1,6 +1,5 @@
 ﻿// <copyright file="SettingsWindow.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-
 namespace FileConverter
 {
     using System;
@@ -15,6 +14,7 @@ namespace FileConverter
 
     using FileConverter.Annotations;
     using FileConverter.Commands;
+    using FileConverter.ConversionJobs;
     using Microsoft.Win32;
 
     /// <summary>
@@ -166,6 +166,19 @@ namespace FileConverter
             InputPostConversionAction.None,
             InputPostConversionAction.MoveInArchiveFolder,
             InputPostConversionAction.Delete,
+        };
+
+        public VideoEncodingSpeed[] VideoEncodingSpeeds => new[]
+        {
+            VideoEncodingSpeed.UltraFast,
+            VideoEncodingSpeed.SuperFast,
+            VideoEncodingSpeed.VeryFast,
+            VideoEncodingSpeed.Faster,
+            VideoEncodingSpeed.Fast,
+            VideoEncodingSpeed.Medium,
+            VideoEncodingSpeed.Slow,
+            VideoEncodingSpeed.Slower,
+            VideoEncodingSpeed.VerySlow,
         };
 
         public string AboutSectionContent

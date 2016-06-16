@@ -331,8 +331,35 @@ Special paths:
   <data name="VideoEncodingQualityTooltip" xml:space="preserve">
     <value>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</value>
   </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Faster</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Slower</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Slow</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Super Fast</value>
+  </data>
   <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
     <value>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Ultra Fast</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Very Fast</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Very Slow</value>
   </data>
   <data name="VideoTitle" xml:space="preserve">
     <value>Video</value>
