@@ -141,6 +141,9 @@
   <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
     <value>Automatically exit when all conversions finished</value>
   </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Clamp to lowest power of 2 size</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>

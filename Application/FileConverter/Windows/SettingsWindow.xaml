@@ -161,7 +161,6 @@
 
                     <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Encoding}" />
                     <DockPanel Grid.Row="0" Grid.Column="1">
-                        <Label Content="{x:Static project:Resources.Encoding}" />
                         <RadioButton x:Name="VBRradioButton" Content="VBR" ToolTip="{x:Static project:Resources.Mp3VbrDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Mp3VBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
                         <RadioButton x:Name="CBRradioButton" Content="CBR" ToolTip="{x:Static project:Resources.Mp3CbrDescrption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Mp3CBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                     </DockPanel>
@@ -485,7 +484,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="#004B82"/>
-                    <Label Grid.Column="1">
+                    <Label Grid.Row="0"  Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
                                 <MultiBinding.ConverterParameter>{0:P1}</MultiBinding.ConverterParameter>
@@ -493,7 +492,9 @@
                             </MultiBinding>
                         </Label.Content>
                     </Label>
-                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Clamp to lowest power of 2 size" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageClampSizePowerOf2|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
+                    <CheckBox Grid.Row="1" Grid.Column="0" Margin="0,5,0,5"
+                              Content="{x:Static project:Resources.ClampToLowestPowerOfTwoSize}" 
+                              IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageClampSizePowerOf2|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
                 </Grid>
                 <!--Rotate-->
                 <Label Content="{x:Static project:Resources.Rotate}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
@@ -540,8 +541,10 @@
                             </MultiBinding>
                         </Label.Content>
                     </Label>
-                    
-                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Clamp to lowest power of 2 size" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageClampSizePowerOf2|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
+
+                    <CheckBox Grid.Row="1" Grid.Column="0" Margin="0,5,0,5"
+                              Content="{x:Static project:Resources.ClampToLowestPowerOfTwoSize}" 
+                              IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageClampSizePowerOf2|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" />
                 </Grid>
                 <!--Rotate-->
                 <Label Content="{x:Static project:Resources.Rotate}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>

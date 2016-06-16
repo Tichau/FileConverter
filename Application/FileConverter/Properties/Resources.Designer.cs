@@ -133,6 +133,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clamp to lowest power of 2 size.
+        /// </summary>
+        public static string ClampToLowestPowerOfTwoSize {
+            get {
+                return ResourceManager.GetString("ClampToLowestPowerOfTwoSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
