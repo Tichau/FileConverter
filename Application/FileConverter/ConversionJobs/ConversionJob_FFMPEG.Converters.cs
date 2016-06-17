@@ -179,6 +179,18 @@ namespace FileConverter.ConversionJobs
         }
 
         /// <summary>
+        /// Convert video quality index to libtheora video quality level.
+        /// </summary>
+        /// <param name="quality">The quality index.</param>
+        /// <returns>Returns the video quality index.</returns>
+        /// The range of the video quality level is 0-10: where 10 is the highest quality/largest filesize, 0 being the lowest quality/smallest filesize.
+        /// https://trac.ffmpeg.org/wiki/TheoraVorbisEncodingGuide
+        private int OGVTheoraQualityToQualityIndex(int quality)
+        {
+            return quality;
+        }
+
+        /// <summary>
         /// Convert encoding mode setting to <c>ffmpeg</c> argument option.
         /// </summary>
         /// <param name="encoding">The encoding mode setting.</param>

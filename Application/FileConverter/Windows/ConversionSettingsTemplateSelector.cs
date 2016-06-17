@@ -43,6 +43,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate OgvSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public DataTemplate AacSettingsDataTemplate
         {
             get;
@@ -113,6 +119,9 @@ namespace FileConverter.Windows
 
                 case OutputType.Ogg:
                     return this.OggSettingsDataTemplate;
+
+                case OutputType.Ogv:
+                    return this.OgvSettingsDataTemplate;
 
                 case OutputType.Png:
                     return this.PngSettingsDataTemplate;

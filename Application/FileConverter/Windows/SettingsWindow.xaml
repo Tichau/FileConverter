@@ -388,6 +388,74 @@
             </Grid>
         </DataTemplate>
 
+        
+        <DataTemplate x:Key="OgvSettingsDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel Grid.Row="0" Grid.Column="0">
+                    <Label Content="{x:Static project:Resources.VideoTitle}" FontWeight="Bold" Margin="17,0,0,0"/>
+                    <Label Content="(theora)" FontWeight="Light" Foreground="#004B82" />
+                </DockPanel>
+
+                <Label Content="{x:Static project:Resources.Quality}" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
+                <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="5" SelectionEnd="7" Minimum="0" Maximum="10" TickPlacement="BottomRight" SmallChange="1" LargeChange="3" TickFrequency="1" Foreground="#004B82" />
+
+                <Label Content="{x:Static project:Resources.Scale}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+                <Grid Grid.Row="2" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
+                    <Label Grid.Column="1">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
+                                <MultiBinding.ConverterParameter>{0:P1}</MultiBinding.ConverterParameter>
+                                <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+
+                <!--Rotate-->
+                <Label Content="{x:Static project:Resources.Rotate}" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                    <RadioButton Content="{x:Static project:Resources.ZeroDegreesRotationTitle}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"
+                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton Content="{x:Static project:Resources.NinetyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"
+                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|90, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton Content="{x:Static project:Resources.OneEightyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"
+                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|180, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                    <RadioButton Content="{x:Static project:Resources.TwoSeventyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"
+                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                </StackPanel>
+
+                <DockPanel Grid.Row="4" Grid.Column="0">
+                    <CheckBox IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,6,0,0" />
+                    <Label Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay}"/>
+                    <Label Content="(vorbis)" FontWeight="Light" Foreground="#004B82" IsEnabled="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay}"/>
+                </DockPanel>
+
+                <Label Content="{x:Static project:Resources.Quality}" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay}"/>
+                <controls:EncodingQualitySliderControl Grid.Row="5" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="OggVBR" IsEnabled="{Binding SelectedPreset.Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=OneWay}"
+        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=128}" />
+            </Grid>
+        </DataTemplate>
+        
+        
         <DataTemplate x:Key="WebmSettingsDataTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -569,6 +637,7 @@
             Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
             Mp4SettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}"
             OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}"
+            OgvSettingsDataTemplate="{StaticResource OgvSettingsDataTemplate}"
             PngSettingsDataTemplate="{StaticResource PngSettingsDataTemplate}"
             WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
             WebmSettingsDataTemplate="{StaticResource WebmSettingsDataTemplate}" />

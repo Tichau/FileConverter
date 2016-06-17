@@ -252,6 +252,34 @@ namespace FileConverter.ConversionJobs
 
                     break;
 
+                case OutputType.Ogv:
+                    {
+                        // https://trac.ffmpeg.org/wiki/TheoraVorbisEncodingGuide
+                        int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
+                        int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
+
+                        string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
+                        string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
+
+                        string audioArgs = "-an";
+                        if (this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableAudio))
+                        {
+                            audioArgs = string.Format("-codec:a libvorbis -qscale:a {0}", this.OGGVBRBitrateToQualityIndex(audioEncodingBitrate));
+                        }
+
+                        string encoderArgs = string.Format(
+                            "-codec:v libtheora -qscale:v {0} {1} {2}",
+                            this.OGVTheoraQualityToQualityIndex(videoEncodingQuality),
+                            audioArgs,
+                            videoFilteringArgs);
+
+                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+
+                        this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
+                    }
+
+                    break;
+
                 case OutputType.Png:
                     {
                         float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);

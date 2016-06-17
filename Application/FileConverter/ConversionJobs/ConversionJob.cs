@@ -185,8 +185,8 @@ namespace FileConverter.ConversionJobs
 
             string extension = System.IO.Path.GetExtension(inputFilePath);
             extension = extension.Substring(1, extension.Length - 1);
-            string extensionCategory = PathHelpers.GetExtensionCategory(extension);
-            if (!PathHelpers.IsOutputTypeCompatibleWithCategory(this.ConversionPreset.OutputType, extensionCategory))
+            string extensionCategory = Helpers.GetExtensionCategory(extension);
+            if (!Helpers.IsOutputTypeCompatibleWithCategory(this.ConversionPreset.OutputType, extensionCategory))
             {
                 this.ConversionFailed("The input file type is not compatible with the output file type.");
                 return;

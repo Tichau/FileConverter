@@ -393,8 +393,8 @@ namespace FileConverter
             for (int index = 0; index < this.inputTypes.Count; index++)
             {
                 string inputType = this.inputTypes[index];
-                string inputCategory = PathHelpers.GetExtensionCategory(inputType);
-                if (!PathHelpers.IsOutputTypeCompatibleWithCategory(this.OutputType, inputCategory))
+                string inputCategory = Helpers.GetExtensionCategory(inputType);
+                if (!Helpers.IsOutputTypeCompatibleWithCategory(this.OutputType, inputCategory))
                 {
                     this.RemoveInputType(inputType);
                     index--;
@@ -474,6 +474,14 @@ namespace FileConverter
                     break;
 
                 case OutputType.Ogg:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
+                    break;
+
+                case OutputType.Ogv:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableAudio, "True");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "7");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
                     break;
 

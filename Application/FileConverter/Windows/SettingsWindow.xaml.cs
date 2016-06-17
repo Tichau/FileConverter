@@ -52,6 +52,7 @@ namespace FileConverter
                                                OutputType.Wav,
                                                OutputType.Mkv,
                                                OutputType.Mp4,
+                                               OutputType.Ogv,
                                                OutputType.Webm,
                                                OutputType.Avi,
                                                OutputType.Ico,
@@ -147,7 +148,7 @@ namespace FileConverter
                 for (int index = 0; index < this.inputCategories.Length; index++)
                 {
                     InputExtensionCategory category = this.inputCategories[index];
-                    if (this.SelectedPreset == null || PathHelpers.IsOutputTypeCompatibleWithCategory(this.SelectedPreset.OutputType, category.Name))
+                    if (this.SelectedPreset == null || Helpers.IsOutputTypeCompatibleWithCategory(this.SelectedPreset.OutputType, category.Name))
                     {
                         yield return category;
                     }
@@ -439,7 +440,7 @@ namespace FileConverter
             for (int index = 0; index < compatibleInputExtensions.Length; index++)
             {
                 string compatibleInputExtension = compatibleInputExtensions[index];
-                string extensionCategory = PathHelpers.GetExtensionCategory(compatibleInputExtension);
+                string extensionCategory = Helpers.GetExtensionCategory(compatibleInputExtension);
                 InputExtensionCategory category = categories.Find(match => match.Name == extensionCategory);
                 if (category == null)
                 {

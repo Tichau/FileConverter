@@ -23,7 +23,7 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_Gif(conversionPreset);
             }
 
-            if (PathHelpers.GetExtensionCategory(extension) == PathHelpers.InputCategoryNames.Image)
+            if (Helpers.GetExtensionCategory(extension) == Helpers.InputCategoryNames.Image)
             {
                 return new ConversionJob_ImageMagick(conversionPreset);
             }

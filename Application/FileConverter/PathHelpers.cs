@@ -104,94 +104,6 @@ namespace FileConverter
             return path;
         }
 
-        public static string GetExtensionCategory(string extension)
-        {
-            switch (extension)
-            {
-                case "aac":
-                case "aiff":
-                case "ape":
-                case "cda":
-                case "flac":
-                case "mp3":
-                case "m4a":
-                case "oga":
-                case "ogg":
-                case "wav":
-                case "wma":
-                    return InputCategoryNames.Audio;
-
-                case "3gp":
-                case "avi":
-                case "bik":
-                case "flv":
-                case "m4v":
-                case "mp4":
-                case "mpeg":
-                case "mov":
-                case "mkv":
-                case "ogv":
-                case "vob":
-                case "webm":
-                case "wmv":
-                    return InputCategoryNames.Video;
-
-                case "bmp":
-                case "exr":
-                case "ico":
-                case "jpg":
-                case "jpeg":
-                case "png":
-                case "psd":
-                case "tga":
-                case "tiff":
-                case "svg":
-                case "xcf":
-                    return InputCategoryNames.Image;
-
-                case "gif":
-                    return InputCategoryNames.AnimatedImage;
-            }
-
-            return InputCategoryNames.Misc;
-        }
-
-        public static bool IsOutputTypeCompatibleWithCategory(OutputType outputType, string category)
-        {
-            if (category == InputCategoryNames.Misc)
-            {
-                // Misc category contains unsorted input extensions, so we consider that they are compatible to be tolerant.
-                return true;
-            }
-
-            switch (outputType)
-            {
-                case OutputType.Aac:
-                case OutputType.Flac:
-                case OutputType.Mp3:
-                case OutputType.Ogg:
-                case OutputType.Wav:
-                    return category == InputCategoryNames.Audio || category == InputCategoryNames.Video;
-
-                case OutputType.Avi:
-                case OutputType.Mkv:
-                case OutputType.Mp4:
-                case OutputType.Webm:
-                    return category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
-
-                case OutputType.Ico:
-                case OutputType.Jpg:
-                case OutputType.Png:
-                    return category == InputCategoryNames.Image;
-
-                case OutputType.Gif:
-                    return category == InputCategoryNames.Image || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
-
-                default:
-                    return false;
-            }
-        }
-
         public static string GetUserDataFolderPath()
         {
             string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
@@ -203,16 +115,6 @@ namespace FileConverter
             }
 
             return path;
-        }
-
-        public static class InputCategoryNames
-        {
-            public const string Audio = "Audio";
-            public const string Video = "Video";
-            public const string Image = "Image";
-            public const string AnimatedImage = "Animated Image";
-
-            public const string Misc = "Misc";
         }
     }
 }
