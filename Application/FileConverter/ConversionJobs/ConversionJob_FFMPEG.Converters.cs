@@ -246,35 +246,35 @@ namespace FileConverter.ConversionJobs
         /// </summary>
         /// <param name="encodingSpeed">The encoding speed.</param>
         /// <returns>The H264 preset.</returns>
-        private string H264EncodingSpeedToPreset(string encodingSpeed)
+        private string H264EncodingSpeedToPreset(VideoEncodingSpeed encodingSpeed)
         {
             switch (encodingSpeed)
             {
-                case "Ultra Fast":
+                case VideoEncodingSpeed.UltraFast:
                     return "ultrafast";
 
-                case "Super Fast":
+                case VideoEncodingSpeed.SuperFast:
                     return "superfast";
 
-                case "Very Fast":
+                case VideoEncodingSpeed.VeryFast:
                     return "veryfast";
 
-                case "Faster":
+                case VideoEncodingSpeed.Faster:
                     return "faster";
 
-                case "Fast":
+                case VideoEncodingSpeed.Fast:
                     return "fast";
 
-                case "Medium":
+                case VideoEncodingSpeed.Medium:
                     return "medium";
 
-                case "Slow":
+                case VideoEncodingSpeed.Slow:
                     return "slow";
 
-                case "Slower":
+                case VideoEncodingSpeed.Slower:
                     return "slower";
 
-                case "Very Slow":
+                case VideoEncodingSpeed.VerySlow:
                     return "veryslow";
             }
 

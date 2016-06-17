@@ -215,7 +215,7 @@ namespace FileConverter.ConversionJobs
                         // https://trac.ffmpeg.org/wiki/Encode/H.264
                         // https://trac.ffmpeg.org/wiki/Encode/AAC
                         int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
-                        string videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<string>(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed);
+                        VideoEncodingSpeed videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<VideoEncodingSpeed>(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed);
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
 
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
