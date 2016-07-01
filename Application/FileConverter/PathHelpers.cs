@@ -150,5 +150,79 @@ namespace FileConverter
 
             return path;
         }
+
+        public static string GenerateFilePathFromTemplate(string inputFilePath, OutputType outputFileExtension, string outputFilePathTemplate, int numberIndex, int numberMax)
+        {
+            if (string.IsNullOrEmpty(inputFilePath))
+            {
+                return "Invalid input file path (argument 0).";
+            }
+
+            string inputExtension = System.IO.Path.GetExtension(inputFilePath).Substring(1);
+            string inputPathWithoutExtension = inputFilePath.Substring(0, inputFilePath.Length - inputExtension.Length - 1);
+            string outputExtension = outputFileExtension.ToString().ToLowerInvariant();
+
+            if (string.IsNullOrEmpty(outputFilePathTemplate))
+            {
+                // Default output path.
+                return inputPathWithoutExtension + "." + outputExtension;
+            }
+
+            string fileName = System.IO.Path.GetFileName(inputPathWithoutExtension);
+            string parentDirectory = System.IO.Path.GetDirectoryName(inputPathWithoutExtension);
+            if (!parentDirectory.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+            {
+                parentDirectory += System.IO.Path.DirectorySeparatorChar;
+            }
+
+            string[] directories = parentDirectory.Substring(0, parentDirectory.Length - 1).Split(System.IO.Path.DirectorySeparatorChar);
+
+            // Generate output path from template.
+            string outputPath = outputFilePathTemplate;
+
+            outputPath = outputPath.Replace("(path)", parentDirectory);
+            outputPath = outputPath.Replace("(p)", parentDirectory);
+
+            outputPath = outputPath.Replace("(filename)", fileName);
+            outputPath = outputPath.Replace("(f)", fileName);
+            outputPath = outputPath.Replace("(F)", fileName.ToUpperInvariant());
+
+            outputPath = outputPath.Replace("(outputext)", outputExtension);
+            outputPath = outputPath.Replace("(o)", outputExtension);
+            outputPath = outputPath.Replace("(O)", outputExtension.ToUpperInvariant());
+
+            outputPath = outputPath.Replace("(inputext)", inputExtension);
+            outputPath = outputPath.Replace("(i)", inputExtension);
+            outputPath = outputPath.Replace("(I)", inputExtension.ToUpperInvariant());
+
+            string myDocumentsFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "\\";
+            outputPath = outputPath.Replace("(p:d)", myDocumentsFolder);
+            outputPath = outputPath.Replace("(p:documents)", myDocumentsFolder);
+
+            string myMusicFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic) + "\\";
+            outputPath = outputPath.Replace("(p:m)", myMusicFolder);
+            outputPath = outputPath.Replace("(p:music)", myMusicFolder);
+
+            string myVideoFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyVideos) + "\\";
+            outputPath = outputPath.Replace("(p:v)", myVideoFolder);
+            outputPath = outputPath.Replace("(p:videos)", myVideoFolder);
+
+            string myPictureFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures) + "\\";
+            outputPath = outputPath.Replace("(p:p)", myPictureFolder);
+            outputPath = outputPath.Replace("(p:pictures)", myPictureFolder);
+
+            for (int index = 0; index < directories.Length; index++)
+            {
+                outputPath = outputPath.Replace(string.Format("(d{0})", directories.Length - index - 1), directories[index]);
+                outputPath = outputPath.Replace(string.Format("(D{0})", directories.Length - index - 1), directories[index].ToUpperInvariant());
+            }
+
+            outputPath = outputPath.Replace("(n:i)", numberIndex.ToString());
+            outputPath = outputPath.Replace("(n:m)", numberMax.ToString());
+
+            outputPath += "." + outputExtension;
+
+            return outputPath;
+        }
     }
 }

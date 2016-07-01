@@ -24,7 +24,6 @@ namespace FileConverter
         private InputPostConversionAction inputPostConversionAction;
         private ConversionSettings settings = new ConversionSettings();
         private string outputFileNameTemplate;
-        private FileNameConverter outputFileNameConverter = new FileNameConverter();
 
         public ConversionPreset()
         {
@@ -312,9 +311,9 @@ namespace FileConverter
             }
         }
 
-        public string GenerateOutputFilePath(string inputFilePath)
+        public string GenerateOutputFilePath(string inputFilePath, int numberIndex, int numberMax)
         {
-            return (string)this.outputFileNameConverter.Convert(new object[] { inputFilePath, this.OutputType, this.OutputFileNameTemplate }, typeof(string), null, null);
+            return PathHelpers.GenerateFilePathFromTemplate(inputFilePath, this.OutputType, this.OutputFileNameTemplate, numberIndex, numberMax);
         }
 
         public void SetSettingsValue(string settingsKey, string value)
@@ -555,7 +554,7 @@ namespace FileConverter
 
                 case "OutputFileNameTemplate":
                     {
-                        string sampleOutputFilePath = this.GenerateOutputFilePath(FileConverter.Properties.Resources.OuputFileNameTemplateSample);
+                        string sampleOutputFilePath = this.GenerateOutputFilePath(FileConverter.Properties.Resources.OuputFileNameTemplateSample, 1, 3);
                         if (string.IsNullOrEmpty(sampleOutputFilePath))
                         {
                             return "The output filename template must produce a non empty result.";
