@@ -114,7 +114,7 @@ namespace FileConverter.ConversionJobs
 
             Debug.Log("Starting CDA extraction.");
 
-            this.UserState = "Extraction";
+            this.UserState = Properties.Resources.ConversionStateExtraction;
 
             if (!this.cdDrive.IsCDReady())
             {
@@ -160,7 +160,7 @@ namespace FileConverter.ConversionJobs
             Debug.Log(string.Empty);
             Debug.Log("Start compression.");
 
-            this.UserState = "Conversion";
+            this.UserState = Properties.Resources.ConversionStateConversion;
 
             this.compressionThread.Start();
 

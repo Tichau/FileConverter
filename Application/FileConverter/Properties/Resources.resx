@@ -382,4 +382,25 @@ Special paths:
   <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
     <value>No rotation</value>
   </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Conversion</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Extraction</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>In queue</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>Read input image</value>
+  </data>
+  <data name="ConversionStateReadPdf" xml:space="preserve">
+    <value>Read document</value>
+  </data>
 </root>

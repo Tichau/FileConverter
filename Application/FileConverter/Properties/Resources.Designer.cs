@@ -169,6 +169,69 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Conversion.
+        /// </summary>
+        public static string ConversionStateConversion {
+            get {
+                return ResourceManager.GetString("ConversionStateConversion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string ConversionStateDone {
+            get {
+                return ResourceManager.GetString("ConversionStateDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extraction.
+        /// </summary>
+        public static string ConversionStateExtraction {
+            get {
+                return ResourceManager.GetString("ConversionStateExtraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        public static string ConversionStateFailed {
+            get {
+                return ResourceManager.GetString("ConversionStateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In queue.
+        /// </summary>
+        public static string ConversionStateInQueue {
+            get {
+                return ResourceManager.GetString("ConversionStateInQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read input image.
+        /// </summary>
+        public static string ConversionStateReadIntputImage {
+            get {
+                return ResourceManager.GetString("ConversionStateReadIntputImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read document.
+        /// </summary>
+        public static string ConversionStateReadPdf {
+            get {
+                return ResourceManager.GetString("ConversionStateReadPdf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Converted from.
         /// </summary>
         public static string ConvertedFrom {

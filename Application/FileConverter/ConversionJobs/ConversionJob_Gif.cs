@@ -66,7 +66,7 @@ namespace FileConverter.ConversionJobs
 
             if (this.pngConversionJob != null)
             {
-                this.UserState = "Read input image";
+                this.UserState = Properties.Resources.ConversionStateReadIntputImage;
 
                 Diagnostics.Debug.Log(string.Empty);
                 Diagnostics.Debug.Log("Convert image to PNG (intermediate format).");
