@@ -2,8 +2,12 @@
 
 namespace FileConverter
 {
+    using System;
+    using System.Text;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
+
+    using FileConverter.Diagnostics;
 
     public static class PathHelpers
     {
@@ -90,18 +94,48 @@ namespace FileConverter
             }
         }
 
-        public static string GenerateUniquePath(string path)
+        public static string GenerateUniquePath(string path, params string[] blacklist)
         {
             string baseExtension = System.IO.Path.GetExtension(path);
             string basePath = path.Substring(0, path.Length - baseExtension.Length);
             int index = 2;
-            while (System.IO.File.Exists(path))
+            while (System.IO.File.Exists(path) ||
+                (blacklist != null && System.Array.Exists(blacklist, match => match == path)))
             {
-                path = string.Format("{0} ({1}){2}", basePath, index, baseExtension);
+                path = $"{basePath} ({index}){baseExtension}";
                 index++;
             }
 
             return path;
+        }
+
+        public static bool CreateFolders(string filePath)
+        {
+            // Create output folders that doesn't already exist.
+            StringBuilder path = new StringBuilder(filePath.Length);
+            string drive = PathHelpers.GetDrive(filePath);
+            path.Append(drive);
+
+            foreach (string directory in PathHelpers.GetDirectories(filePath))
+            {
+                path.Append(directory);
+                path.Append('\\');
+
+                if (!System.IO.Directory.Exists(path.ToString()))
+                {
+                    try
+                    {
+                        System.IO.Directory.CreateDirectory(path.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        Debug.Log(string.Format("Can't create directories for path {0}", filePath));
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         public static string GetUserDataFolderPath()

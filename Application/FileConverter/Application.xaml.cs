@@ -467,15 +467,6 @@ namespace FileConverter
             {
                 Debug.LogError("Failure during conversion: {0}", exception.ToString());
             }
-
-            if (conversionJob.State == ConversionJob.ConversionState.Done && !System.IO.File.Exists(conversionJob.OutputFilePath))
-            {
-                Debug.LogError("Can't find the output file.");
-            }
-            else if (conversionJob.State == ConversionJob.ConversionState.Failed && System.IO.File.Exists(conversionJob.OutputFilePath))
-            {
-                Debug.Log("The conversion job failed but there is an output file that does exists.");
-            }
         }
 
         private void OnGetLatestVersionDescription(UpgradeVersionDescription upgradeVersionDescription)
