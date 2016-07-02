@@ -17,6 +17,7 @@ namespace FileConverter
         Mp4,
         Ogg,
         Ogv,
+        Pdf,
         Png,
         Wav,
         Webm,

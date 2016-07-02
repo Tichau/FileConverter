@@ -70,6 +70,9 @@ namespace FileConverter
 
                 case "gif":
                     return InputCategoryNames.AnimatedImage;
+
+                case "pdf":
+                    return InputCategoryNames.Document;
             }
 
             return InputCategoryNames.Misc;
@@ -102,10 +105,13 @@ namespace FileConverter
                 case OutputType.Ico:
                 case OutputType.Jpg:
                 case OutputType.Png:
-                    return category == InputCategoryNames.Image;
+                    return category == InputCategoryNames.Image || category == InputCategoryNames.Document;
 
                 case OutputType.Gif:
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
+
+                case OutputType.Pdf:
+                    return category == InputCategoryNames.Image || category == InputCategoryNames.Document;
 
                 default:
                     return false;
@@ -118,6 +124,7 @@ namespace FileConverter
             public const string Video = "Video";
             public const string Image = "Image";
             public const string AnimatedImage = "Animated Image";
+            public const string Document = "Document";
 
             public const string Misc = "Misc";
         }
