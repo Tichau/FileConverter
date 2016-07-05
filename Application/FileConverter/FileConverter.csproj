@@ -101,7 +101,6 @@
     <Compile Include="ConversionJobs\ConversionJob_FFMPEG.cs" />
     <Compile Include="ConversionJobs\ConversionJob_Gif.cs" />
     <Compile Include="ConversionJobs\ConversionJob_Ico.cs" />
-    <Compile Include="ConversionJobs\ConversionJob_Pdf.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ImageMagick.cs" />
     <Compile Include="ConversionJobs\VideoEncodingSpeed.cs" />
     <Compile Include="ConversionPreset\ConversionSettingsOverride.cs" />

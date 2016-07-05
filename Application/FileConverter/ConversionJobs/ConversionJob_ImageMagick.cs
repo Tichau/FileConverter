@@ -119,7 +119,7 @@ namespace FileConverter.ConversionJobs
         {
             image.Progress += this.Image_Progress;
 
-            if (!ignoreScale)
+            if (!ignoreScale && this.ConversionPreset.IsRelevantSetting(ConversionPreset.ConversionSettingKeys.ImageScale))
             {
                 float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
                 if (Math.Abs(scaleFactor - 1f) >= 0.005f)
@@ -130,38 +130,47 @@ namespace FileConverter.ConversionJobs
                 }
             }
 
-            float rotateAngleInDegrees = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageRotation);
-            if (Math.Abs(rotateAngleInDegrees - 0f) >= 0.05f)
+            if (this.ConversionPreset.IsRelevantSetting(ConversionPreset.ConversionSettingKeys.ImageRotation))
             {
-                Debug.Log("Apply rotation: {0}°.", rotateAngleInDegrees);
-
-                image.Rotate(rotateAngleInDegrees);
-            }
-
-            bool clampSizeToPowerOf2 = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2);
-            if (clampSizeToPowerOf2)
-            {
-                int referenceSize = System.Math.Min(image.Width, image.Height);
-                int size = 2;
-                while (size*2 <= referenceSize)
+                float rotateAngleInDegrees = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageRotation);
+                if (Math.Abs(rotateAngleInDegrees - 0f) >= 0.05f)
                 {
-                    size *= 2;
+                    Debug.Log("Apply rotation: {0}°.", rotateAngleInDegrees);
+
+                    image.Rotate(rotateAngleInDegrees);
                 }
-
-                Debug.Log("Clamp size to the nearest power of 2 size (from {0}x{1} to {2}x{2}).", image.Width, image.Height, size);
-
-                image.Scale(size, size);
             }
 
-            int maximumSize = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageMaximumSize);
-            if (maximumSize > 0)
+            if (this.ConversionPreset.IsRelevantSetting(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2))
             {
-                int width = System.Math.Min(image.Width, maximumSize);
-                int height = System.Math.Min(image.Height, maximumSize);
+                bool clampSizeToPowerOf2 = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2);
+                if (clampSizeToPowerOf2)
+                {
+                    int referenceSize = System.Math.Min(image.Width, image.Height);
+                    int size = 2;
+                    while (size*2 <= referenceSize)
+                    {
+                        size *= 2;
+                    }
 
-                Debug.Log("Clamp size to maximum size of {2}x{2} (from {0}x{1} to {2}x{3}).", image.Width, image.Height, width, height);
+                    Debug.Log("Clamp size to the nearest power of 2 size (from {0}x{1} to {2}x{2}).", image.Width, image.Height, size);
 
-                image.Scale(width, height);
+                    image.Scale(size, size);
+                }
+            }
+
+            if (this.ConversionPreset.IsRelevantSetting(ConversionPreset.ConversionSettingKeys.ImageMaximumSize))
+            {
+                int maximumSize = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageMaximumSize);
+                if (maximumSize > 0)
+                {
+                    int width = System.Math.Min(image.Width, maximumSize);
+                    int height = System.Math.Min(image.Height, maximumSize);
+
+                    Debug.Log("Clamp size to maximum size of {2}x{2} (from {0}x{1} to {2}x{3}).", image.Width, image.Height, width, height);
+
+                    image.Scale(width, height);
+                }
             }
 
             Debug.Log("Convert image (output: {0}).", this.OutputFilePath);
@@ -173,6 +182,9 @@ namespace FileConverter.ConversionJobs
 
                 case OutputType.Jpg:
                     image.Quality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    break;
+
+                case OutputType.Pdf:
                     break;
 
                 default:

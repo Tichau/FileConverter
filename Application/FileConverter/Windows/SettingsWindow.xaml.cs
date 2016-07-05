@@ -59,6 +59,7 @@ namespace FileConverter
                                                OutputType.Jpg,
                                                OutputType.Png,
                                                OutputType.Gif,
+                                               OutputType.Pdf,
                                            };
 
             this.OutputFormats.ItemsSource = outputTypes;
@@ -452,7 +453,7 @@ namespace FileConverter
             }
 
             this.inputCategories = categories.ToArray();
-            this.OnPropertyChanged("InputCategories");
+            this.OnPropertyChanged(nameof(this.InputCategories));
         }
     }
 }

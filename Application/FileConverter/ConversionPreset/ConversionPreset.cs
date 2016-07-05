@@ -376,6 +376,11 @@ namespace FileConverter
             return (T)System.Convert.ChangeType(settingsValue, type);
         }
 
+        public bool IsRelevantSetting(string settingsKey)
+        {
+            return this.Settings.ContainsKey(settingsKey);
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -399,11 +404,6 @@ namespace FileConverter
                     index--;
                 }
             }
-        }
-
-        private bool IsRelevantSetting(string settingsKey)
-        {
-            return this.Settings.ContainsKey(settingsKey);
         }
 
         private void InitializeDefaultSettings(OutputType outputType)
@@ -496,11 +496,14 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     break;
 
+                case OutputType.Pdf:
+                    break;
+
                 default:
                     throw new System.Exception("Missing default settings for type " + outputType);
             }
 
-            this.OnPropertyChanged("Settings");
+            this.OnPropertyChanged(nameof(this.Settings));
         }
 
         private void InitializeSettingsValue(string settingsKey, string value, bool force = false)

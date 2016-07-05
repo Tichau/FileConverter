@@ -111,7 +111,7 @@ namespace FileConverter
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
 
                 case OutputType.Pdf:
-                    return category == InputCategoryNames.Image || category == InputCategoryNames.Document;
+                    return category == InputCategoryNames.Image;
 
                 default:
                     return false;

@@ -29,11 +29,10 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_ImageMagick(conversionPreset);
             }
 
-            //if (conversionPreset.OutputType == OutputType.Pdf ||
-            //    Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Document)
-            //{
-            //    return new ConversionJob_Pdf(conversionPreset);
-            //}
+            if (conversionPreset.OutputType == OutputType.Pdf)
+            {
+                return new ConversionJob_ImageMagick(conversionPreset);
+            }
 
             return new ConversionJob_FFMPEG(conversionPreset);
         }
