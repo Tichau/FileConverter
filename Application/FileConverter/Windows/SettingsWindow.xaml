@@ -411,7 +411,7 @@
 
                 <Label Content="{x:Static project:Resources.Quality}" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
                 <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}"
-                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="5" SelectionEnd="7" Minimum="0" Maximum="10" TickPlacement="BottomRight" SmallChange="1" LargeChange="3" TickFrequency="1" Foreground="#004B82" />
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="5" SelectionEnd="8" Minimum="0" Maximum="10" TickPlacement="BottomRight" SmallChange="1" LargeChange="3" TickFrequency="1" Foreground="#004B82" />
 
                 <Label Content="{x:Static project:Resources.Scale}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
                 <Grid Grid.Row="2" Grid.Column="1">
