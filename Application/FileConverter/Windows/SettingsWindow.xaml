@@ -566,13 +566,13 @@
                 <Label Content="{x:Static project:Resources.Rotate}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
                 <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
                     <RadioButton Content="{x:Static project:Resources.ZeroDegreesRotationTitle}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"
-                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                     <RadioButton Content="{x:Static project:Resources.NinetyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"
-                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|90, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|90, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                     <RadioButton Content="{x:Static project:Resources.OneEightyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"
-                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|180, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|180, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                     <RadioButton Content="{x:Static project:Resources.TwoSeventyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"
-                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                                 IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=ImageRotation|270, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
