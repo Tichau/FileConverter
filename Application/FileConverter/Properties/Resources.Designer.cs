@@ -563,13 +563,16 @@ namespace FileConverter.Properties {
         ///(d0): input parent folder
         ///(d1): input sub parent folder
         ///...
-        ///use maj for uppercase version
+        ///(n:i): page number index
+        ///(n:c): total page count
         ///
         ///Special paths:
         ///(p:d): my documents path
         ///(p:m): my music path
         ///(p:v): my videos path
-        ///(p:p): my pictures path.
+        ///(p:p): my pictures path
+        ///
+        ///use maj for uppercase version.
         /// </summary>
         public static string OutputFilePathTemplateHelp {
             get {

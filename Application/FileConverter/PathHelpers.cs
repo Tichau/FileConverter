@@ -218,7 +218,7 @@ namespace FileConverter
             }
 
             outputPath = outputPath.Replace("(n:i)", numberIndex.ToString());
-            outputPath = outputPath.Replace("(n:m)", numberMax.ToString());
+            outputPath = outputPath.Replace("(n:c)", numberMax.ToString());
 
             outputPath += "." + outputExtension;
 
