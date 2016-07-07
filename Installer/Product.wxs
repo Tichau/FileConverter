@@ -24,7 +24,8 @@
         <Media Id="1" Cabinet="CabFile.cab" EmbedCab="yes" />
 
         <Feature Id="Application" Title="Installer" Level="1">
-            <ComponentGroupRef Id="ProductComponents" /> 
+            <ComponentGroupRef Id="ProductComponents" />
+            <ComponentGroupRef Id="Languages" />
         </Feature>
         
         <CustomAction Id="InstallShell" FileKey="srm.exe" ExeCommand='install "[INSTALLFOLDER]\FileConverterExtension.dll" -codebase' Execute="deferred" Return="check" Impersonate="no" />
