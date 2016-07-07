@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Directory Id="dir59665241F3CDDE1A2AC55595EAB82331" Name="Languages" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="Languages">
+            <Component Id="cmp416BC2ED150FADE2B6C889B2E30BEFF1" Directory="dir69039193B93E3CF7D8D647984CD644EA" Guid="{9E999D24-0F68-4E21-93CD-3B0AD5A10F49}">
+                <File Id="fil5460820E8FE9AB69A71E15E4E9BEB1E2" KeyPath="yes" Source="$(var.FileConverter.TargetDir)\en\FileConverter.resources.dll" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir59665241F3CDDE1A2AC55595EAB82331">
+            <Directory Id="dir69039193B93E3CF7D8D647984CD644EA" Name="en" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

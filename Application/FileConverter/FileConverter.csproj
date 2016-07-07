@@ -112,6 +112,11 @@
     <Compile Include="InputPostConversionAction.cs" />
     <Compile Include="IXmlSerializable.cs" />
     <Compile Include="PathHelpers.cs" />
+    <Compile Include="Properties\Resources.en.Designer.cs">
+      <DependentUpon>Resources.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Registry.cs" />
     <Compile Include="Settings.Migration.cs" />
     <Compile Include="Settings.Settings.cs" />
@@ -209,6 +214,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -261,7 +270,11 @@
     <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"
 copy /Y "$(SolutionDir)Middleware\gsdll64.dll" "$(TargetDir)gsdll64.dll"
 copy /Y "$(SolutionDir)Middleware\gswin64c.exe" "$(TargetDir)gswin64c.exe"
-copy /Y "$(ProjectDir)Settings.default.xml" "$(TargetDir)Settings.default.xml"</PostBuildEvent>
+copy /Y "$(ProjectDir)Settings.default.xml" "$(TargetDir)Settings.default.xml"
+robocopy $(TargetDir) $(TargetDir)\Languages "$(TargetName).resources.dll" /CREATE /S /XD Languages /IS /IT /NFL /NDL /NJH /NJS /NC /NS /NP
+if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25
+robocopy $(TargetDir) $(TargetDir)\Languages "$(TargetName).resources.dll" /MOVE /S /XD Languages /XL /IS /IT /NFL /NDL /NJH /NJS /NC /NS /NP
+if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
