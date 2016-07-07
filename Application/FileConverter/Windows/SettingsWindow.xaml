@@ -709,6 +709,9 @@
                             <Button x:Name="AddPresetButton" Content="+" ToolTip="{x:Static project:Resources.AddNewPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="AddPresetButton_Click"/>
                             <Button x:Name="RemovePresetButton" Content="-" ToolTip="{x:Static project:Resources.RemoveSelectedPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="RemovePresetButton_Click"/>
                             <Button x:Name="MoveDownPresetButton" Content="v" ToolTip="{x:Static project:Resources.MoveDownSelectedPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0,0,0" Click="MovePresetDownButton_Click"/>
+                            <TextBlock Margin="5,5,0,0">
+                                <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                            </TextBlock>
                         </DockPanel>
                     </Grid>
 
