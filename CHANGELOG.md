@@ -1,5 +1,16 @@
 # Change Log
 
+## Version 1.1
+- New: Improve the application upgrade UI. If you quit the application during the upgrade downloading, you can now see the download progress.
+- New: Localization system. File Converter can now be translated in multiple languages. The default language is the same that your OS language (if available).
+- New: Add the possibility to choose the application language in the application settings.
+- New: Possibility to encode videos using theora video codec and Ogg vorbis audio codec in a ogv container.
+- New: Possibility to convert a Pdf file into image files (one image per page).
+- New: Possibility to convert an image into a Pdf file.
+- New: Add page number and page count information in output file name generator.
+- New: Improve the application help start page (when you launch File Converter directly from the executable) with an animated picture.
+- Fixed: Issue where it was impossible to rotate an image for the output type jpg.
+
 ## Version 1.0
 - New: File Converter is now certified by Microsoft Authenticode. 
 - New: Add an about section that contains information on the software development (change log, documentation link, report issue link).
