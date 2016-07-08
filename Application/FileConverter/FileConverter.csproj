@@ -78,6 +78,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WpfAnimatedGif.1.4.14\lib\net\WpfAnimatedGif.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="yeti.mmedia">
       <HintPath>..\..\Middleware\yeti.mmedia.dll</HintPath>
     </Reference>
@@ -242,9 +246,6 @@
     <Resource Include="Resources\DownloadIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ContextMenuScreenshot.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\CancelIcon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Pledge-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FileConverterUsage.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

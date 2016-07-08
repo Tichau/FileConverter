@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fileConverter="clr-namespace:FileConverter"
         xmlns:project="clr-namespace:FileConverter.Properties"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
-        Height="480" Width="640" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize">
+        Height="530" Width="640" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize">
     <Window.Resources>
     </Window.Resources>
     <Window.Title>
@@ -16,7 +17,9 @@
         <TextBlock Margin="0,0,0,4"  Text="{x:Static project:Resources.FileConverterStartHelp1}" TextWrapping="Wrap" FontWeight="Bold" FontSize="13.333"/>
         <TextBlock Text="{x:Static project:Resources.FileConverterStartHelp2}" TextWrapping="Wrap"/>
         <TextBlock Text="{x:Static project:Resources.FileConverterStartHelp3}" TextWrapping="Wrap" />
-        <Image Margin="0,7,0,7" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Source="/FileConverter;component/Resources/ContextMenuScreenshot.png" Stretch="None"/>
+        <Image Margin="0,7,0,7" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" 
+               gif:ImageBehavior.AnimatedSource="/FileConverter;component/Resources/FileConverterUsage.gif"
+               Stretch="Fill"/>
         <Button Content="{x:Static project:Resources.Ok}" Height="28" Click="OkButton_Click"/>
     </StackPanel>
 </Window>
