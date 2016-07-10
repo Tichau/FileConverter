@@ -90,7 +90,7 @@
         <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
         <generic:FormatStringConverter x:Key="FormatStringConverter"/>
-        <valueConverters:OutputTypeEnumToViewModel x:Key="OutputTypeEnumToClass"/>
+        <valueConverters:OutputTypeEnumToViewModel x:Key="OutputTypeEnumToViewModel"/>
 
         <generic:ValueConverterGroup x:Key="ConversionSettingsToEnum">
             <valueConverters:ConversionSettingsToString/>
@@ -748,7 +748,7 @@
                                     <TreeView x:Name="InputTypesTreeView" ItemsSource="{Binding InputCategories, ElementName=window}" >
                                         <TreeView.Resources>
                                             <HierarchicalDataTemplate DataType="{x:Type local:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
-                                                <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeCategoryChecked" Unchecked="OnInputTypeCategoryUnchecked" IsThreeState="True" >
+                                                <CheckBox Content="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeCategoryChecked" Unchecked="OnInputTypeCategoryUnchecked" IsThreeState="True" >
                                                     <CheckBox.IsChecked>
                                                         <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
                                                             <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>
@@ -794,7 +794,7 @@
                             <GroupBox Header="{x:Static project:Resources.OutputFormat}" Grid.Row="1" Grid.Column="1" Margin="5">
                                 <StackPanel>
                                     <ComboBox x:Name="OutputFormats" Margin="5" Height="29" VerticalAlignment="Top" 
-                                              SelectedItem="{Binding SelectedPreset.OutputType, Converter={StaticResource OutputTypeEnumToClass}, ElementName=window, Mode=TwoWay}">
+                                              SelectedItem="{Binding SelectedPreset.OutputType, Converter={StaticResource OutputTypeEnumToViewModel}, ElementName=window, Mode=TwoWay}">
                                         <ComboBox.GroupStyle>
                                             <GroupStyle>
                                                 <GroupStyle.HeaderTemplate>

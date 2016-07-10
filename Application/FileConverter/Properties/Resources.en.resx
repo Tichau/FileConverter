@@ -406,4 +406,19 @@ use maj for uppercase version</value>
   <data name="ConversionStateReadPdf" xml:space="preserve">
     <value>Read document</value>
   </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Animated Image</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Video</value>
+  </data>
 </root>
