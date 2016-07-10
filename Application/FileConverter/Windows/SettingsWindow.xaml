@@ -730,7 +730,8 @@
                             </Grid.RowDefinitions>
 
                             <Label Content="{x:Static project:Resources.PresetName}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                            <TextBox x:Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" Text="{Binding SelectedPreset.Name, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="Auto" />
+                            <TextBox x:Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" FontSize="15"
+                                     Text="{Binding SelectedPreset.Name, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                             <GroupBox Grid.Row="1" Grid.Column="0" Header="{x:Static project:Resources.InputFormats}" Margin="5">
                                 <Grid Margin="5">

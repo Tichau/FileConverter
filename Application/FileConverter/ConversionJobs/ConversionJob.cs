@@ -86,20 +86,6 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        protected int CurrentOuputFilePathIndex
-        {
-            get
-            {
-                return this.currentOuputFilePathIndex;
-            }
-
-            set
-            {
-                this.currentOuputFilePathIndex = value;
-                this.NotifyPropertyChanged(nameof(this.OutputFilePath));
-            }
-        }
-
         public ConversionState State
         {
             get
@@ -185,6 +171,20 @@ namespace FileConverter.ConversionJobs
         {
             get;
             private set;
+        }
+
+        protected int CurrentOuputFilePathIndex
+        {
+            get
+            {
+                return this.currentOuputFilePathIndex;
+            }
+
+            set
+            {
+                this.currentOuputFilePathIndex = value;
+                this.NotifyPropertyChanged(nameof(this.OutputFilePath));
+            }
         }
 
         protected virtual InputPostConversionAction InputPostConversionAction

@@ -179,7 +179,7 @@ namespace FileConverter.ConversionJobs
         }
 
         /// <summary>
-        /// Convert video quality index to libtheora video quality level.
+        /// Convert video quality index to lib theora video quality level.
         /// </summary>
         /// <param name="quality">The quality index.</param>
         /// <returns>Returns the video quality index.</returns>

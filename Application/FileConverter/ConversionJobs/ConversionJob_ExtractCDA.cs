@@ -13,7 +13,7 @@ namespace FileConverter.ConversionJobs
 
     public class ConversionJob_ExtractCDA : ConversionJob
     {
-        private Ripper.CDDrive cdDrive;
+        private Ripper.CDDrive diskDrive;
         private int cdaTrackNumber = -1;
         private WaveWriter waveWriter;
         private string intermediateFilePath;
@@ -55,8 +55,8 @@ namespace FileConverter.ConversionJobs
 
             char driveLetter = pathDriveLetter[0];
 
-            this.cdDrive = new Ripper.CDDrive();
-            this.cdDrive.CDRemoved += new EventHandler(this.CdDriveCdRemoved);
+            this.diskDrive = new Ripper.CDDrive();
+            this.diskDrive.CDRemoved += new EventHandler(this.CdDriveCdRemoved);
 
             bool driveLetterFound = false;
             char[] driveLetters = Ripper.CDDrive.GetCDDriveLetters();
@@ -82,13 +82,13 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            if (this.cdDrive.IsOpened)
+            if (this.diskDrive.IsOpened)
             {
                 this.ConversionFailed(string.Format("CD drive already used."));
                 return;
             }
 
-            if (!this.cdDrive.Open(driveLetter))
+            if (!this.diskDrive.Open(driveLetter))
             {
                 this.ConversionFailed(string.Format("Fail to open cd drive {0}.", driveLetter));
                 return;
@@ -116,19 +116,19 @@ namespace FileConverter.ConversionJobs
 
             this.UserState = Properties.Resources.ConversionStateExtraction;
 
-            if (!this.cdDrive.IsCDReady())
+            if (!this.diskDrive.IsCDReady())
             {
                 this.ConversionFailed(string.Format("CD drive is not ready."));
                 return;
             }
 
-            if (!this.cdDrive.Refresh())
+            if (!this.diskDrive.Refresh())
             {
                 this.ConversionFailed(string.Format("Can't refresh CD drive data."));
                 return;
             }
 
-            if (!this.cdDrive.LockCD())
+            if (!this.diskDrive.LockCD())
             {
                 this.ConversionFailed(string.Format("Can't lock cd."));
                 return;
@@ -137,16 +137,16 @@ namespace FileConverter.ConversionJobs
             WaveFormat waveFormat = new WaveFormat(44100, 16, 2);
 
             using (Stream waveStream = new FileStream(this.intermediateFilePath, FileMode.Create, FileAccess.Write))
-            using (this.waveWriter = new WaveWriter(waveStream, waveFormat, this.cdDrive.TrackSize(this.cdaTrackNumber)))
+            using (this.waveWriter = new WaveWriter(waveStream, waveFormat, this.diskDrive.TrackSize(this.cdaTrackNumber)))
             {
-                this.cdDrive.ReadTrack(this.cdaTrackNumber, this.WriteWaveData, this.CdReadProgress);
+                this.diskDrive.ReadTrack(this.cdaTrackNumber, this.WriteWaveData, this.CdReadProgress);
             }
 
             this.waveWriter = null;
 
-            this.cdDrive.UnLockCD();
+            this.diskDrive.UnLockCD();
 
-            this.cdDrive.Close();
+            this.diskDrive.Close();
 
             this.StateFlags = ConversionFlags.None;
 
