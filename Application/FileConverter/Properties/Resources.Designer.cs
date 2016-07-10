@@ -689,6 +689,24 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio.
+        /// </summary>
+        public static string StringAudioName {
+            get {
+                return ResourceManager.GetString("StringAudioName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Video.
+        /// </summary>
+        public static string StringVideoName {
+            get {
+                return ResourceManager.GetString("StringVideoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 270°.
         /// </summary>
         public static string TwoSeventyDegreesRotationTitle {
