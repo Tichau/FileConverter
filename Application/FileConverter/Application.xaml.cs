@@ -178,8 +178,6 @@ namespace FileConverter
         private void Initialize()
         {
             Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString());
-            this.numberOfConversionThread = System.Math.Max(1, Environment.ProcessorCount / 2);
-            Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", this.numberOfConversionThread);
             
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
@@ -290,6 +288,15 @@ namespace FileConverter
                 Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                 return;
             }
+
+            if (this.Settings.MaximumNumberOfSimultaneousConversions <= 0)
+            {
+                this.Settings.MaximumNumberOfSimultaneousConversions = System.Math.Max(1, Environment.ProcessorCount / 2);
+                Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", this.Settings.MaximumNumberOfSimultaneousConversions);
+            }
+
+            this.numberOfConversionThread = this.Settings.MaximumNumberOfSimultaneousConversions;
+            Diagnostics.Debug.Log("Maximum number of conversion threads: {0}", this.numberOfConversionThread);
 
             // Check upgrade.
             if (this.Settings.CheckUpgradeAtStartup)

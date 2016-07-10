@@ -322,6 +322,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waiting duration.
+        /// </summary>
+        public static string ExitWaitingDuration {
+            get {
+                return ResourceManager.GetString("ExitWaitingDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File Converter is a shell extension..
         /// </summary>
         public static string FileConverterStartHelp1 {
@@ -453,6 +462,24 @@ namespace FileConverter.Properties {
         public static string IssueButtonDescription {
             get {
                 return ResourceManager.GetString("IssueButtonDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of simultaneous conversions.
+        /// </summary>
+        public static string MaximumNumberOfSimultaneousConversions {
+            get {
+                return ResourceManager.GetString("MaximumNumberOfSimultaneousConversions", resourceCulture);
             }
         }
         
@@ -689,11 +716,38 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Animated Image.
+        /// </summary>
+        public static string StringAnimatedImageName {
+            get {
+                return ResourceManager.GetString("StringAnimatedImageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Audio.
         /// </summary>
         public static string StringAudioName {
             get {
                 return ResourceManager.GetString("StringAudioName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document.
+        /// </summary>
+        public static string StringDocumentName {
+            get {
+                return ResourceManager.GetString("StringDocumentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        public static string StringImageName {
+            get {
+                return ResourceManager.GetString("StringImageName", resourceCulture);
             }
         }
         

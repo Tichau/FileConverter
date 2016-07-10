@@ -421,4 +421,13 @@ use maj for uppercase version</value>
   <data name="StringVideoName" xml:space="preserve">
     <value>Video</value>
   </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>Waiting duration</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Maximum number of simultaneous conversions</value>
+  </data>
 </root>

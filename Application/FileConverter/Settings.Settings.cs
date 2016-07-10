@@ -19,6 +19,7 @@ namespace FileConverter
         private ObservableCollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
         private bool checkUpgradeAtStartup = true;
         private CultureInfo applicationLanguage;
+        private int maximumNumberOfSimultaneousConversions;
 
         [XmlAttribute]
         public int SerializationVersion
@@ -119,6 +120,21 @@ namespace FileConverter
             set
             {
                 this.durationBetweenEndOfConversionsAndApplicationExit = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        [XmlElement]
+        public int MaximumNumberOfSimultaneousConversions
+        {
+            get
+            {
+                return this.maximumNumberOfSimultaneousConversions;
+            }
+
+            set
+            {
+                this.maximumNumberOfSimultaneousConversions = value;
                 this.OnPropertyChanged();
             }
         }

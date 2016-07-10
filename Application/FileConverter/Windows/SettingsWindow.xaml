@@ -857,7 +857,47 @@
 
             <!-- Application settings -->
             <TabItem Header="{x:Static project:Resources.Application}">
-                <StackPanel Margin="5,10,5,5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Language}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding SupportedCultures, ElementName=window, Mode=OneTime}" Margin="0,0,0,1"
+                            SelectedValue="{Binding ApplicationSettings.ApplicationLanguage, ElementName=window, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Converter={StaticResource CultureInfoToString}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.MaximumNumberOfSimultaneousConversions}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <Slider Grid.Row="1" Grid.Column="1" Minimum="1" Maximum="16" SmallChange="1" TickPlacement="BottomRight" Margin="0,5,0,5"
+                            Value="{Binding ApplicationSettings.MaximumNumberOfSimultaneousConversions, ElementName=window, Mode=TwoWay}" AutoToolTipPlacement="TopLeft" />
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="{x:Static project:Resources.AutomaticallyExitWhenAllConversionsFinished}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <CheckBox Grid.Row="2" Grid.Column="1" x:Name="QuitAtEndCheckBox" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}"  Margin="0,5,0,5" />
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="{x:Static project:Resources.ExitWaitingDuration}" HorizontalAlignment="Right" Margin="0,0,5,0" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}"/>
+                    <DockPanel Grid.Row="3" Grid.Column="1"  Margin="0,5,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
+                        <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationExit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
+                        <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
+                    </DockPanel>
+
+                    <Label Grid.Row="4" Grid.Column="0" Content="{x:Static project:Resources.AutomaticallyCheckForUpdates}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}" Margin="0,5,0,5" />
+                </Grid>
+                
+                <!--<StackPanel Margin="5,10,5,5">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Label Content="Language :"/>
                         <ComboBox ItemsSource="{Binding SupportedCultures, ElementName=window, Mode=OneTime}"
@@ -869,7 +909,9 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </StackPanel>
-                    
+
+                    <Slider Width="200"/>
+
                     <CheckBox x:Name="QuitAtEndCheckBox" Content="{x:Static project:Resources.AutomaticallyExitWhenAllConversionsFinished}" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}" Margin="0,0,0,5" />
                     <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
                         <Label Content="Waiting duration :"/>
@@ -877,7 +919,7 @@
                         <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
                     </DockPanel>
                     <CheckBox Content="{x:Static project:Resources.AutomaticallyCheckForUpdates}" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}"  />
-                </StackPanel>
+                </StackPanel>-->
             </TabItem>
             
             <!-- About -->
