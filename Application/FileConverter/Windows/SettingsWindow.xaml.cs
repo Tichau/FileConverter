@@ -10,8 +10,10 @@ namespace FileConverter
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Data;
     using System.Windows.Input;
 
+    using FileConverter.Windows;
     using FileConverter.Annotations;
     using FileConverter.Commands;
     using FileConverter.ConversionJobs;
@@ -42,28 +44,12 @@ namespace FileConverter
             Application application = Application.Current as Application;
             this.ApplicationSettings = application.Settings;
             this.PresetList.ItemsSource = this.settings.ConversionPresets;
-
-            OutputType[] outputTypes = new[]
-                                           {
-                                               OutputType.Ogg, 
-                                               OutputType.Mp3,
-                                               OutputType.Aac,
-                                               OutputType.Flac,
-                                               OutputType.Wav,
-                                               OutputType.Mkv,
-                                               OutputType.Mp4,
-                                               OutputType.Ogv,
-                                               OutputType.Webm,
-                                               OutputType.Avi,
-                                               OutputType.Ico,
-                                               OutputType.Jpg,
-                                               OutputType.Png,
-                                               OutputType.Gif,
-                                               OutputType.Pdf,
-                                           };
-
-            this.OutputFormats.ItemsSource = outputTypes;
             
+            ListCollectionView collectionView = new ListCollectionView(new List<OutputTypeViewModel>(SettingsWindow.OutputTypeViewModels));
+            collectionView.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
+
+            this.OutputFormats.ItemsSource = collectionView;
+
             this.InitializeCompatibleInputExtensions();
         }
 
@@ -119,7 +105,7 @@ namespace FileConverter
                 }
 
                 this.OnPropertyChanged();
-                this.OnPropertyChanged("InputCategories");
+                this.OnPropertyChanged(nameof(this.InputCategories));
             }
         }
 
@@ -162,6 +148,25 @@ namespace FileConverter
             get;
             set;
         }
+
+        public static OutputTypeViewModel[] OutputTypeViewModels => new[]
+        {
+            new OutputTypeViewModel(OutputType.Ogg),
+            new OutputTypeViewModel(OutputType.Mp3),
+            new OutputTypeViewModel(OutputType.Aac),
+            new OutputTypeViewModel(OutputType.Flac),
+            new OutputTypeViewModel(OutputType.Wav),
+            new OutputTypeViewModel(OutputType.Mkv),
+            new OutputTypeViewModel(OutputType.Mp4),
+            new OutputTypeViewModel(OutputType.Ogv),
+            new OutputTypeViewModel(OutputType.Webm),
+            new OutputTypeViewModel(OutputType.Avi),
+            new OutputTypeViewModel(OutputType.Png),
+            new OutputTypeViewModel(OutputType.Jpg),
+            new OutputTypeViewModel(OutputType.Ico),
+            new OutputTypeViewModel(OutputType.Gif),
+            new OutputTypeViewModel(OutputType.Pdf),
+        };
 
         public InputPostConversionAction[] InputPostConversionActions => new[]
         {

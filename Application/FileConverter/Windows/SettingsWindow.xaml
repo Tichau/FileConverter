@@ -13,6 +13,7 @@
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         Closing="SettingsWindow_OnClosing">
     <Window.Resources>
+        
         <!-- Donation button style -->
 
         <Style x:Key="DonateFocusVisual">
@@ -89,6 +90,7 @@
         <valueConverters:FileNameConverter x:Key="FileNameConverter"/>
         <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
         <generic:FormatStringConverter x:Key="FormatStringConverter"/>
+        <valueConverters:OutputTypeEnumToViewModel x:Key="OutputTypeEnumToClass"/>
 
         <generic:ValueConverterGroup x:Key="ConversionSettingsToEnum">
             <valueConverters:ConversionSettingsToString/>
@@ -790,7 +792,24 @@
 
                             <GroupBox Header="{x:Static project:Resources.OutputFormat}" Grid.Row="1" Grid.Column="1" Margin="5">
                                 <StackPanel>
-                                    <ComboBox x:Name="OutputFormats" Margin="5" Height="25" VerticalAlignment="Top" SelectedItem="{Binding SelectedPreset.OutputType, ElementName=window, Mode=TwoWay}"/>
+                                    <ComboBox x:Name="OutputFormats" Margin="5" Height="29" VerticalAlignment="Top" 
+                                              SelectedItem="{Binding SelectedPreset.OutputType, Converter={StaticResource OutputTypeEnumToClass}, ElementName=window, Mode=TwoWay}">
+                                        <ComboBox.GroupStyle>
+                                            <GroupStyle>
+                                                <GroupStyle.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#004B82" Background="#86C8F6" FontWeight="Bold" Padding="5,5,5,5"
+                                                                   Text="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"/>
+                                                    </DataTemplate>
+                                                </GroupStyle.HeaderTemplate>
+                                            </GroupStyle>
+                                        </ComboBox.GroupStyle>
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate DataType="windows:OutputTypeViewModel">
+                                                <TextBlock Text="{Binding Type}" Padding="10,2,2,2"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
 
                                     <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
 								        Content="{Binding SelectedPreset.OutputType, ElementName=window, UpdateSourceTrigger=PropertyChanged}" />

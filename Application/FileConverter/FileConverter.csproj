@@ -128,6 +128,7 @@
     <Compile Include="Upgrade\UpgradeVersionDescription.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset\ConversionPreset.cs" />
+    <Compile Include="ValueConverters\OutputTypeEnumToViewModel.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
     <Compile Include="ValueConverters\FileNameConverter.cs" />
     <Compile Include="ValueConverters\Generic\ObjectToLocalizedString.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Windows\ConversionSettingsTemplateSelector.cs" />
     <Compile Include="Windows\InputExtension.cs" />
     <Compile Include="Windows\InputExtensionCategory.cs" />
+    <Compile Include="Windows\OutputTypeViewModel.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>

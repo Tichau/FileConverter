@@ -19,6 +19,7 @@ namespace FileConverter.ValueConverters.Generic
             string typeName = value.GetType().Name;
 
             string localizationKey = $"{typeName}{stringValue}Name";
+            localizationKey = localizationKey.Replace(" ", string.Empty);
 
             string resource = Properties.Resources.ResourceManager.GetString(localizationKey);
             if (resource == null)
