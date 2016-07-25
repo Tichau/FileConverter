@@ -49,7 +49,7 @@ namespace FileConverter.ConversionJobs
             string pathDriveLetter = PathHelpers.GetPathDriveLetter(this.InputFilePath);
             if (pathDriveLetter.Length == 0)
             {
-                this.ConversionFailed("Can't retrieve input path drive letter.");
+                this.ConversionFailed(Properties.Resources.ErrorFailToRetrieveInputPathDriveLetter);
                 return;
             }
 
@@ -67,7 +67,8 @@ namespace FileConverter.ConversionJobs
 
             if (!driveLetterFound)
             {
-                this.ConversionFailed(string.Format("Invalid drive letter {0}.", driveLetter));
+                Debug.Log($"Invalid drive letter {driveLetter}.");
+                this.ConversionFailed(Properties.Resources.ErrorFailToRetrieveInputPathDriveLetter);
                 return;
             }
 
@@ -78,19 +79,20 @@ namespace FileConverter.ConversionJobs
             }
             catch (Exception)
             {
-                this.ConversionFailed(string.Format("Can't retrieve the track number from input path '{0}'.", this.InputFilePath));
+                Debug.Log($"Input path: '{this.InputFilePath}'.");
+                this.ConversionFailed(Properties.Resources.ErrorFailToRetrieveTrackNumber);
                 return;
             }
 
             if (this.diskDrive.IsOpened)
             {
-                this.ConversionFailed(string.Format("CD drive already used."));
+                this.ConversionFailed(Properties.Resources.ErrorFailToUseCDDriveOpen);
                 return;
             }
 
             if (!this.diskDrive.Open(driveLetter))
             {
-                this.ConversionFailed(string.Format("Fail to open cd drive {0}.", driveLetter));
+                this.ConversionFailed(string.Format(Properties.Resources.ErrorFailToReadCDDrive, driveLetter));
                 return;
             }
 
@@ -118,19 +120,21 @@ namespace FileConverter.ConversionJobs
 
             if (!this.diskDrive.IsCDReady())
             {
-                this.ConversionFailed(string.Format("CD drive is not ready."));
+                this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
                 return;
             }
 
             if (!this.diskDrive.Refresh())
             {
-                this.ConversionFailed(string.Format("Can't refresh CD drive data."));
+                Debug.Log("Can't refresh CD drive data.");
+                this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
                 return;
             }
 
             if (!this.diskDrive.LockCD())
             {
-                this.ConversionFailed(string.Format("Can't lock cd."));
+                Debug.Log("Can\'t lock cd.");
+                this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
                 return;
             }
 
@@ -152,7 +156,7 @@ namespace FileConverter.ConversionJobs
 
             if (!File.Exists(this.intermediateFilePath))
             {
-                this.ConversionFailed("Extraction failed.");
+                this.ConversionFailed(Properties.Resources.ErrorCDAExtractionFailed);
                 return;
             }
 

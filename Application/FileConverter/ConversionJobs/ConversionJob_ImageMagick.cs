@@ -188,7 +188,7 @@ namespace FileConverter.ConversionJobs
                     break;
 
                 default:
-                    this.ConversionFailed($"Unsupported output format {this.ConversionPreset.OutputType}.");
+                    this.ConversionFailed(string.Format(Properties.Resources.ErrorUnsupportedOutputFormat, this.ConversionPreset.OutputType));
                     image.Progress -= this.Image_Progress;
                     return;
             }

@@ -56,7 +56,7 @@ namespace FileConverter.ConversionJobs
             string ffmpegPath = this.FfmpegPath;
             if (!System.IO.File.Exists(ffmpegPath))
             {
-                this.ConversionFailed("Can't find ffmpeg executable. You should try to reinstall the application.");
+                this.ConversionFailed(Properties.Resources.ErrorCantFindFFMPEG);
                 Diagnostics.Debug.Log("Can't find ffmpeg executable ({0}). Try to reinstall the application.", ffmpegPath);
                 return;
             }
@@ -411,7 +411,7 @@ namespace FileConverter.ConversionJobs
                 }
                 catch
                 {
-                    this.ConversionFailed("Failed to launch FFMPEG process.");
+                    this.ConversionFailed(Properties.Resources.ErrorFailedToLaunchFFMPEG);
                     throw;
                 }
             }

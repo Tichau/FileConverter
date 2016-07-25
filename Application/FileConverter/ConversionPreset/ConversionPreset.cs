@@ -27,7 +27,7 @@ namespace FileConverter
 
         public ConversionPreset()
         {
-            this.Name = "New Preset";
+            this.Name = Properties.Resources.DefaultPresetName;
         }
 
         public ConversionPreset(string name, OutputType outputType, string[] inputTypes)
@@ -177,7 +177,7 @@ namespace FileConverter
                     }
                 }
 
-                this.OnPropertyChanged("Settings");
+                this.OnPropertyChanged(nameof(this.Settings));
             }
         }
 
@@ -201,7 +201,7 @@ namespace FileConverter
         {
             get
             {
-                return "Conversion Archives";
+                return Properties.Resources.ConversionArchives;
             }
         }
 
@@ -300,14 +300,14 @@ namespace FileConverter
             }
 
             this.inputTypes.Add(inputType);
-            this.OnPropertyChanged("InputTypes");
+            this.OnPropertyChanged(nameof(this.InputTypes));
         }
 
         public void RemoveInputType(string inputType)
         {
             if (this.inputTypes.Remove(inputType))
             {
-                this.OnPropertyChanged("InputTypes");
+                this.OnPropertyChanged(nameof(this.InputTypes));
             }
         }
 
@@ -340,7 +340,7 @@ namespace FileConverter
 
             this.settings[settingsKey] = value;
 
-            this.OnPropertyChanged("Settings");
+            this.OnPropertyChanged(nameof(this.Settings));
         }
 
         public string GetSettingsValue(string settingsKey)

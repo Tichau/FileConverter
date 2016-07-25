@@ -8,11 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FileConverter.Properties
-{
+namespace FileConverter.Properties {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,723 +22,728 @@ namespace FileConverter.Properties
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources
-    {
-
+    public class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
+        public static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FileConverter.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        public static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
-        public static string About
-        {
-            get
-            {
+        public static string About {
+            get {
                 return ResourceManager.GetString("About", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Allow you to chose what you want to do with your input files if the conversion succeed.
         /// </summary>
-        public static string ActionWhenConversionSucceedDescription
-        {
-            get
-            {
+        public static string ActionWhenConversionSucceedDescription {
+            get {
                 return ResourceManager.GetString("ActionWhenConversionSucceedDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Action when conversion succeed.
         /// </summary>
-        public static string ActionWhenConversionSucceedTitle
-        {
-            get
-            {
+        public static string ActionWhenConversionSucceedTitle {
+            get {
                 return ResourceManager.GetString("ActionWhenConversionSucceedTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Add new preset (duplicate selected preset).
         /// </summary>
-        public static string AddNewPreset
-        {
-            get
-            {
+        public static string AddNewPreset {
+            get {
                 return ResourceManager.GetString("AddNewPreset", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Application.
         /// </summary>
-        public static string Application
-        {
-            get
-            {
+        public static string Application {
+            get {
                 return ResourceManager.GetString("Application", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Audio.
         /// </summary>
-        public static string AudioTitle
-        {
-            get
-            {
+        public static string AudioTitle {
+            get {
                 return ResourceManager.GetString("AudioTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Automatically check for updates when File Converter starts.
         /// </summary>
-        public static string AutomaticallyCheckForUpdates
-        {
-            get
-            {
+        public static string AutomaticallyCheckForUpdates {
+            get {
                 return ResourceManager.GetString("AutomaticallyCheckForUpdates", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Automatically exit when all conversions finished.
         /// </summary>
-        public static string AutomaticallyExitWhenAllConversionsFinished
-        {
-            get
-            {
+        public static string AutomaticallyExitWhenAllConversionsFinished {
+            get {
                 return ResourceManager.GetString("AutomaticallyExitWhenAllConversionsFinished", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Clamp to lowest power of 2 size.
         /// </summary>
-        public static string ClampToLowestPowerOfTwoSize
-        {
-            get
-            {
+        public static string ClampToLowestPowerOfTwoSize {
+            get {
                 return ResourceManager.GetString("ClampToLowestPowerOfTwoSize", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
-        public static string Close
-        {
-            get
-            {
+        public static string Close {
+            get {
                 return ResourceManager.GetString("Close", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conversion Archives.
+        /// </summary>
+        public static string ConversionArchives {
+            get {
+                return ResourceManager.GetString("ConversionArchives", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Conversion Presets.
         /// </summary>
-        public static string ConversionPresets
-        {
-            get
-            {
+        public static string ConversionPresets {
+            get {
                 return ResourceManager.GetString("ConversionPresets", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Files to convert.
         /// </summary>
-        public static string ConversionQueueTitle
-        {
-            get
-            {
+        public static string ConversionQueueTitle {
+            get {
                 return ResourceManager.GetString("ConversionQueueTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Conversion.
         /// </summary>
-        public static string ConversionStateConversion
-        {
-            get
-            {
+        public static string ConversionStateConversion {
+            get {
                 return ResourceManager.GetString("ConversionStateConversion", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Done.
         /// </summary>
-        public static string ConversionStateDone
-        {
-            get
-            {
+        public static string ConversionStateDone {
+            get {
                 return ResourceManager.GetString("ConversionStateDone", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Extraction.
         /// </summary>
-        public static string ConversionStateExtraction
-        {
-            get
-            {
+        public static string ConversionStateExtraction {
+            get {
                 return ResourceManager.GetString("ConversionStateExtraction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Failed.
         /// </summary>
-        public static string ConversionStateFailed
-        {
-            get
-            {
+        public static string ConversionStateFailed {
+            get {
                 return ResourceManager.GetString("ConversionStateFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to In queue.
         /// </summary>
-        public static string ConversionStateInQueue
-        {
-            get
-            {
+        public static string ConversionStateInQueue {
+            get {
                 return ResourceManager.GetString("ConversionStateInQueue", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Read input image.
         /// </summary>
-        public static string ConversionStateReadIntputImage
-        {
-            get
-            {
+        public static string ConversionStateReadIntputImage {
+            get {
                 return ResourceManager.GetString("ConversionStateReadIntputImage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Read document.
         /// </summary>
-        public static string ConversionStateReadPdf
-        {
-            get
-            {
+        public static string ConversionStateReadPdf {
+            get {
                 return ResourceManager.GetString("ConversionStateReadPdf", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Converted from.
         /// </summary>
-        public static string ConvertedFrom
-        {
-            get
-            {
+        public static string ConvertedFrom {
+            get {
                 return ResourceManager.GetString("ConvertedFrom", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New preset.
         /// </summary>
-        public static string DefaultPresetName
-        {
-            get
-            {
+        public static string DefaultPresetName {
+            get {
                 return ResourceManager.GetString("DefaultPresetName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Logs.
         /// </summary>
-        public static string Diagnostics
-        {
-            get
-            {
+        public static string Diagnostics {
+            get {
                 return ResourceManager.GetString("Diagnostics", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Logs.
         /// </summary>
-        public static string DiagnosticsButtonTitle
-        {
-            get
-            {
+        public static string DiagnosticsButtonTitle {
+            get {
                 return ResourceManager.GetString("DiagnosticsButtonTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Open documentation.
         /// </summary>
-        public static string DocumentationButtonDescription
-        {
-            get
-            {
+        public static string DocumentationButtonDescription {
+            get {
                 return ResourceManager.GetString("DocumentationButtonDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Donate.
         /// </summary>
-        public static string DonateButtonTitle
-        {
-            get
-            {
+        public static string DonateButtonTitle {
+            get {
                 return ResourceManager.GetString("DonateButtonTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Don&apos;t forget to reward my work if you like it :).
         /// </summary>
-        public static string DonateDescription
-        {
-            get
-            {
+        public static string DonateDescription {
+            get {
                 return ResourceManager.GetString("DonateDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The update will be downloaded in background, and installed once you exit File Converter..
         /// </summary>
-        public static string DownloadAndInstallButtonDescription
-        {
-            get
-            {
+        public static string DownloadAndInstallButtonDescription {
+            get {
                 return ResourceManager.GetString("DownloadAndInstallButtonDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Install when I exit File Converter.
         /// </summary>
-        public static string DownloadAndInstallButtonTitle
-        {
-            get
-            {
+        public static string DownloadAndInstallButtonTitle {
+            get {
                 return ResourceManager.GetString("DownloadAndInstallButtonTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ###Downloading change log ....
         /// </summary>
-        public static string DownloadingChangeLog
-        {
-            get
-            {
+        public static string DownloadingChangeLog {
+            get {
                 return ResourceManager.GetString("DownloadingChangeLog", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Encoding :.
         /// </summary>
-        public static string Encoding
-        {
-            get
-            {
+        public static string Encoding {
+            get {
                 return ResourceManager.GetString("Encoding", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Encoding speed :.
         /// </summary>
-        public static string EncodingSpeed
-        {
-            get
-            {
+        public static string EncodingSpeed {
+            get {
                 return ResourceManager.GetString("EncodingSpeed", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Canceled..
+        /// </summary>
+        public static string ErrorCanceled {
+            get {
+                return ResourceManager.GetString("ErrorCanceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to find ffmpeg executable. You should try to reinstall the application..
+        /// </summary>
+        public static string ErrorCantFindFFMPEG {
+            get {
+                return ResourceManager.GetString("ErrorCantFindFFMPEG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Audio CD track extraction failed.
+        /// </summary>
+        public static string ErrorCDAExtractionFailed {
+            get {
+                return ResourceManager.GetString("ErrorCDAExtractionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CD drive is not ready..
+        /// </summary>
+        public static string ErrorCDDriveNotReady {
+            get {
+                return ResourceManager.GetString("ErrorCDDriveNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to launch ffmpeg..
+        /// </summary>
+        public static string ErrorFailedToLaunchFFMPEG {
+            get {
+                return ResourceManager.GetString("ErrorFailedToLaunchFFMPEG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to create output path folders..
+        /// </summary>
+        public static string ErrorFailToCreateOutputPathFolders {
+            get {
+                return ResourceManager.GetString("ErrorFailToCreateOutputPathFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to generate a unique output file path..
+        /// </summary>
+        public static string ErrorFailToGenerateUniqueOutputPath {
+            get {
+                return ResourceManager.GetString("ErrorFailToGenerateUniqueOutputPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to read cd drive &apos;{0}&apos;..
+        /// </summary>
+        public static string ErrorFailToReadCDDrive {
+            get {
+                return ResourceManager.GetString("ErrorFailToReadCDDrive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to retrieve input path drive letter..
+        /// </summary>
+        public static string ErrorFailToRetrieveInputPathDriveLetter {
+            get {
+                return ResourceManager.GetString("ErrorFailToRetrieveInputPathDriveLetter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to retrieve track number from the cda input path..
+        /// </summary>
+        public static string ErrorFailToRetrieveTrackNumber {
+            get {
+                return ResourceManager.GetString("ErrorFailToRetrieveTrackNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to use the CD drive because it is oppened..
+        /// </summary>
+        public static string ErrorFailToUseCDDriveOpen {
+            get {
+                return ResourceManager.GetString("ErrorFailToUseCDDriveOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The input file type is not compatible with the selected output file type..
+        /// </summary>
+        public static string ErrorInputTypeIncompatibleWithOutputType {
+            get {
+                return ResourceManager.GetString("ErrorInputTypeIncompatibleWithOutputType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid output path generated by output file path template..
+        /// </summary>
+        public static string ErrorInvalidOutputPath {
+            get {
+                return ResourceManager.GetString("ErrorInvalidOutputPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported output format &apos;{0}&apos;..
+        /// </summary>
+        public static string ErrorUnsupportedOutputFormat {
+            get {
+                return ResourceManager.GetString("ErrorUnsupportedOutputFormat", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Waiting duration before application exit.
         /// </summary>
-        public static string ExitWaitingDuration
-        {
-            get
-            {
+        public static string ExitWaitingDuration {
+            get {
                 return ResourceManager.GetString("ExitWaitingDuration", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to File Converter is a shell extension..
         /// </summary>
-        public static string FileConverterStartHelp1
-        {
-            get
-            {
+        public static string FileConverterStartHelp1 {
+            get {
                 return ResourceManager.GetString("FileConverterStartHelp1", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to That means it is integrated into the Windows explorer..
         /// </summary>
-        public static string FileConverterStartHelp2
-        {
-            get
-            {
+        public static string FileConverterStartHelp2 {
+            get {
                 return ResourceManager.GetString("FileConverterStartHelp2", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the readme file to see the list of compatible file formats)..
         /// </summary>
-        public static string FileConverterStartHelp3
-        {
-            get
-            {
+        public static string FileConverterStartHelp3 {
+            get {
                 return ResourceManager.GetString("FileConverterStartHelp3", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to File name template.
         /// </summary>
-        public static string FileNameTemplate
-        {
-            get
-            {
+        public static string FileNameTemplate {
+            get {
                 return ResourceManager.GetString("FileNameTemplate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Frames per second :.
         /// </summary>
-        public static string FramesPerSecond
-        {
-            get
-            {
+        public static string FramesPerSecond {
+            get {
                 return ResourceManager.GetString("FramesPerSecond", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Open GitHub project page.
         /// </summary>
-        public static string GitHubButtonDescription
-        {
-            get
-            {
+        public static string GitHubButtonDescription {
+            get {
                 return ResourceManager.GetString("GitHubButtonDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to help ?.
         /// </summary>
-        public static string Help
-        {
-            get
-            {
+        public static string Help {
+            get {
                 return ResourceManager.GetString("Help", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Input example.
         /// </summary>
-        public static string InputExample
-        {
-            get
-            {
+        public static string InputExample {
+            get {
                 return ResourceManager.GetString("InputExample", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Input formats.
         /// </summary>
-        public static string InputFormats
-        {
-            get
-            {
+        public static string InputFormats {
+            get {
                 return ResourceManager.GetString("InputFormats", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
-        public static string InputPostConversionActionDeleteName
-        {
-            get
-            {
+        public static string InputPostConversionActionDeleteName {
+            get {
                 return ResourceManager.GetString("InputPostConversionActionDeleteName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Move in an archive folder.
         /// </summary>
-        public static string InputPostConversionActionMoveInArchiveFolderName
-        {
-            get
-            {
+        public static string InputPostConversionActionMoveInArchiveFolderName {
+            get {
                 return ResourceManager.GetString("InputPostConversionActionMoveInArchiveFolderName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        public static string InputPostConversionActionNoneName
-        {
-            get
-            {
+        public static string InputPostConversionActionNoneName {
+            get {
                 return ResourceManager.GetString("InputPostConversionActionNoneName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The update has been downloaded. Exit File Converter and install the update now..
         /// </summary>
-        public static string InstallButtonDescription
-        {
-            get
-            {
+        public static string InstallButtonDescription {
+            get {
                 return ResourceManager.GetString("InstallButtonDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Install when I exit File Converter.
         /// </summary>
-        public static string InstallButtonTitle
-        {
-            get
-            {
+        public static string InstallButtonTitle {
+            get {
                 return ResourceManager.GetString("InstallButtonTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Report an issue.
         /// </summary>
-        public static string IssueButtonDescription
-        {
-            get
-            {
+        public static string IssueButtonDescription {
+            get {
                 return ResourceManager.GetString("IssueButtonDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
-        public static string Language
-        {
-            get
-            {
+        public static string Language {
+            get {
                 return ResourceManager.GetString("Language", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to **This program is free software**.\n You can redistribute it and/or modify it under the terms of the GNU General Public License.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.\n\n.
         /// </summary>
-        public static string LicenceHeader
-        {
-            get
-            {
+        public static string LicenceHeader {
+            get {
                 return ResourceManager.GetString("LicenceHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Maximum number of simultaneous conversions.
         /// </summary>
-        public static string MaximumNumberOfSimultaneousConversions
-        {
-            get
-            {
+        public static string MaximumNumberOfSimultaneousConversions {
+            get {
                 return ResourceManager.GetString("MaximumNumberOfSimultaneousConversions", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Move down selected preset.
         /// </summary>
-        public static string MoveDownSelectedPreset
-        {
-            get
-            {
+        public static string MoveDownSelectedPreset {
+            get {
                 return ResourceManager.GetString("MoveDownSelectedPreset", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Move up selected preset.
         /// </summary>
-        public static string MoveUpSelectedPreset
-        {
-            get
-            {
+        public static string MoveUpSelectedPreset {
+            get {
                 return ResourceManager.GetString("MoveUpSelectedPreset", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Constant bitrate encoding.
         /// </summary>
-        public static string Mp3CbrDescrption
-        {
-            get
-            {
+        public static string Mp3CbrDescrption {
+            get {
                 return ResourceManager.GetString("Mp3CbrDescrption", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Variable bitrate encoding.
         /// </summary>
-        public static string Mp3VbrDescription
-        {
-            get
-            {
+        public static string Mp3VbrDescription {
+            get {
                 return ResourceManager.GetString("Mp3VbrDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 90°.
         /// </summary>
-        public static string NinetyDegreesRotationTitle
-        {
-            get
-            {
+        public static string NinetyDegreesRotationTitle {
+            get {
                 return ResourceManager.GetString("NinetyDegreesRotationTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 90° counter clockwise rotation.
         /// </summary>
-        public static string NinetyDegreesRotationTooltip
-        {
-            get
-            {
+        public static string NinetyDegreesRotationTooltip {
+            get {
                 return ResourceManager.GetString("NinetyDegreesRotationTooltip", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
-        public static string Ok
-        {
-            get
-            {
+        public static string Ok {
+            get {
                 return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 180°.
         /// </summary>
-        public static string OneEightyDegreesRotationTitle
-        {
-            get
-            {
+        public static string OneEightyDegreesRotationTitle {
+            get {
                 return ResourceManager.GetString("OneEightyDegreesRotationTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 180° rotation.
         /// </summary>
-        public static string OneEightyDegreesRotationTooltip
-        {
-            get
-            {
+        public static string OneEightyDegreesRotationTooltip {
+            get {
                 return ResourceManager.GetString("OneEightyDegreesRotationTooltip", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to C:\Music\Artist\Album\Song.wav.
         /// </summary>
-        public static string OuputFileNameTemplateSample
-        {
-            get
-            {
+        public static string OuputFileNameTemplateSample {
+            get {
                 return ResourceManager.GetString("OuputFileNameTemplateSample", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Output.
         /// </summary>
-        public static string OutputExample
-        {
-            get
-            {
+        public static string OutputExample {
+            get {
                 return ResourceManager.GetString("OutputExample", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to (p): input file path
         ///(f): input filename
@@ -759,450 +763,368 @@ namespace FileConverter.Properties
         ///
         ///use maj for uppercase version.
         /// </summary>
-        public static string OutputFilePathTemplateHelp
-        {
-            get
-            {
+        public static string OutputFilePathTemplateHelp {
+            get {
                 return ResourceManager.GetString("OutputFilePathTemplateHelp", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Output format.
         /// </summary>
-        public static string OutputFormat
-        {
-            get
-            {
+        public static string OutputFormat {
+            get {
                 return ResourceManager.GetString("OutputFormat", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Preset.
         /// </summary>
-        public static string Preset
-        {
-            get
-            {
+        public static string Preset {
+            get {
                 return ResourceManager.GetString("Preset", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Preset Name.
         /// </summary>
-        public static string PresetName
-        {
-            get
-            {
+        public static string PresetName {
+            get {
                 return ResourceManager.GetString("PresetName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Quality :.
         /// </summary>
-        public static string Quality
-        {
-            get
-            {
+        public static string Quality {
+            get {
                 return ResourceManager.GetString("Quality", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Recommended bitrate range in blue.
         /// </summary>
-        public static string RecommendeBitrateRangeInBlue
-        {
-            get
-            {
+        public static string RecommendeBitrateRangeInBlue {
+            get {
                 return ResourceManager.GetString("RecommendeBitrateRangeInBlue", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Remove selected preset.
         /// </summary>
-        public static string RemoveSelectedPreset
-        {
-            get
-            {
+        public static string RemoveSelectedPreset {
+            get {
                 return ResourceManager.GetString("RemoveSelectedPreset", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rotate :.
         /// </summary>
-        public static string Rotate
-        {
-            get
-            {
+        public static string Rotate {
+            get {
                 return ResourceManager.GetString("Rotate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        public static string Save
-        {
-            get
-            {
+        public static string Save {
+            get {
                 return ResourceManager.GetString("Save", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Scale :.
         /// </summary>
-        public static string Scale
-        {
-            get
-            {
+        public static string Scale {
+            get {
                 return ResourceManager.GetString("Scale", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to See change log ....
         /// </summary>
-        public static string SeeChangeLog
-        {
-            get
-            {
+        public static string SeeChangeLog {
+            get {
                 return ResourceManager.GetString("SeeChangeLog", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string Settings
-        {
-            get
-            {
+        public static string Settings {
+            get {
                 return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string SettingsButtonTitle
-        {
-            get
-            {
+        public static string SettingsButtonTitle {
+            get {
                 return ResourceManager.GetString("SettingsButtonTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Animated Image.
         /// </summary>
-        public static string StringAnimatedImageName
-        {
-            get
-            {
+        public static string StringAnimatedImageName {
+            get {
                 return ResourceManager.GetString("StringAnimatedImageName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Audio.
         /// </summary>
-        public static string StringAudioName
-        {
-            get
-            {
+        public static string StringAudioName {
+            get {
                 return ResourceManager.GetString("StringAudioName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Document.
         /// </summary>
-        public static string StringDocumentName
-        {
-            get
-            {
+        public static string StringDocumentName {
+            get {
                 return ResourceManager.GetString("StringDocumentName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Image.
         /// </summary>
-        public static string StringImageName
-        {
-            get
-            {
+        public static string StringImageName {
+            get {
                 return ResourceManager.GetString("StringImageName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Video.
         /// </summary>
-        public static string StringVideoName
-        {
-            get
-            {
+        public static string StringVideoName {
+            get {
                 return ResourceManager.GetString("StringVideoName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 270°.
         /// </summary>
-        public static string TwoSeventyDegreesRotationTitle
-        {
-            get
-            {
+        public static string TwoSeventyDegreesRotationTitle {
+            get {
                 return ResourceManager.GetString("TwoSeventyDegreesRotationTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 90° clockwise rotation.
         /// </summary>
-        public static string TwoSeventyDegreesRotationTooltip
-        {
-            get
-            {
+        public static string TwoSeventyDegreesRotationTooltip {
+            get {
                 return ResourceManager.GetString("TwoSeventyDegreesRotationTooltip", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An update for File Converter is available. It is strongly recommended that you install it as soon as possible!.
         /// </summary>
-        public static string UpgradeAvailable
-        {
-            get
-            {
+        public static string UpgradeAvailable {
+            get {
                 return ResourceManager.GetString("UpgradeAvailable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Upgrade download in progress....
         /// </summary>
-        public static string UpgradeDownloadInProgress
-        {
-            get
-            {
+        public static string UpgradeDownloadInProgress {
+            get {
                 return ResourceManager.GetString("UpgradeDownloadInProgress", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to File Converter Updates.
         /// </summary>
-        public static string UpgradeWindowTitle
-        {
-            get
-            {
+        public static string UpgradeWindowTitle {
+            get {
                 return ResourceManager.GetString("UpgradeWindowTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Define the ratio &apos;file size&apos; versus &apos;video quality&apos;. A lower value will give you a smaller file, a greater value give you a better video quality..
         /// </summary>
-        public static string VideoEncodingQualityTooltip
-        {
-            get
-            {
+        public static string VideoEncodingQualityTooltip {
+            get {
                 return ResourceManager.GetString("VideoEncodingQualityTooltip", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Faster.
         /// </summary>
-        public static string VideoEncodingSpeedFasterName
-        {
-            get
-            {
+        public static string VideoEncodingSpeedFasterName {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedFasterName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Fast.
         /// </summary>
-        public static string VideoEncodingSpeedFastName
-        {
-            get
-            {
+        public static string VideoEncodingSpeedFastName {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedFastName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Medium.
         /// </summary>
-        public static string VideoEncodingSpeedMediumName
-        {
-            get
-            {
+        public static string VideoEncodingSpeedMediumName {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedMediumName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Slower.
         /// </summary>
-        public static string VideoEncodingSpeedSlowerName
-        {
-            get
-            {
+        public static string VideoEncodingSpeedSlowerName {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedSlowerName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Slow.
         /// </summary>
-        public static string VideoEncodingSpeedSlowName
-        {
-            get
-            {
+        public static string VideoEncodingSpeedSlowName {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedSlowName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Super Fast.
         /// </summary>
-        public static string VideoEncodingSpeedSuperFastName
-        {
-            get
-            {
+        public static string VideoEncodingSpeedSuperFastName {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedSuperFastName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Define the ratio &apos;file size&apos; versus &apos;compression duration&apos;. A slow compression will give you a smaller file (for the same video quality) than a faster compression..
         /// </summary>
-        public static string VideoEncodingSpeedTooltip
-        {
-            get
-            {
+        public static string VideoEncodingSpeedTooltip {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedTooltip", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ultra Fast.
         /// </summary>
-        public static string VideoEncodingSpeedUltraFastName
-        {
-            get
-            {
+        public static string VideoEncodingSpeedUltraFastName {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedUltraFastName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Very Fast.
         /// </summary>
-        public static string VideoEncodingSpeedVeryFastName
-        {
-            get
-            {
+        public static string VideoEncodingSpeedVeryFastName {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedVeryFastName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Very Slow.
         /// </summary>
-        public static string VideoEncodingSpeedVerySlowName
-        {
-            get
-            {
+        public static string VideoEncodingSpeedVerySlowName {
+            get {
                 return ResourceManager.GetString("VideoEncodingSpeedVerySlowName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Video.
         /// </summary>
-        public static string VideoTitle
-        {
-            get
-            {
+        public static string VideoTitle {
+            get {
                 return ResourceManager.GetString("VideoTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PCM signed 16-bit little-endian.
         /// </summary>
-        public static string Wav16bitsDescription
-        {
-            get
-            {
+        public static string Wav16bitsDescription {
+            get {
                 return ResourceManager.GetString("Wav16bitsDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PCM signed 24-bit little-endian.
         /// </summary>
-        public static string Wav24bitsDescription
-        {
-            get
-            {
+        public static string Wav24bitsDescription {
+            get {
                 return ResourceManager.GetString("Wav24bitsDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PCM signed 32-bit little-endian.
         /// </summary>
-        public static string Wav32bitsDescription
-        {
-            get
-            {
+        public static string Wav32bitsDescription {
+            get {
                 return ResourceManager.GetString("Wav32bitsDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PCM signed 8-bit little-endian.
         /// </summary>
-        public static string Wav8bitsDescription
-        {
-            get
-            {
+        public static string Wav8bitsDescription {
+            get {
                 return ResourceManager.GetString("Wav8bitsDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        public static string ZeroDegreesRotationTitle
-        {
-            get
-            {
+        public static string ZeroDegreesRotationTitle {
+            get {
                 return ResourceManager.GetString("ZeroDegreesRotationTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No rotation.
         /// </summary>
-        public static string ZeroDegreesRotationTooltip
-        {
-            get
-            {
+        public static string ZeroDegreesRotationTooltip {
+            get {
                 return ResourceManager.GetString("ZeroDegreesRotationTooltip", resourceCulture);
             }
         }

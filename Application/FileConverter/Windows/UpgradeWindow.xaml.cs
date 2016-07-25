@@ -77,7 +77,7 @@ namespace FileConverter.Windows
             {
                 if (string.IsNullOrEmpty(this.releaseNoteContent))
                 {
-                    return "###Downloading change log ...";
+                    return Properties.Resources.DownloadingChangeLog;
                 }
 
                 return this.releaseNoteContent;
