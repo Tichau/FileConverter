@@ -422,12 +422,21 @@ use maj for uppercase version</value>
     <value>Video</value>
   </data>
   <data name="ExitWaitingDuration" xml:space="preserve">
-    <value>Waiting duration</value>
+    <value>Waiting duration before application exit</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
   <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
     <value>Maximum number of simultaneous conversions</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>New preset</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###Downloading change log ...</value>
+  </data>
+  <data name="LicenceHeader" xml:space="preserve">
+    <value>**This program is free software**.\n You can redistribute it and/or modify it under the terms of the GNU General Public License.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.\n\n</value>
   </data>
 </root>

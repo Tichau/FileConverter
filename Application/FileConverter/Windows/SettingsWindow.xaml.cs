@@ -192,7 +192,7 @@ namespace FileConverter
         {
             get
             {
-                return "**This program is free software**.\n You can redistribute it and/or modify it under the terms of the GNU General Public License.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.\n\n" + this.releaseNoteContent;
+                return Properties.Resources.LicenceHeader + this.releaseNoteContent;
             }
 
             set
@@ -229,7 +229,7 @@ namespace FileConverter
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             Upgrade.Helpers.GetChangeLogAsync(new UpgradeVersionDescription(), this.OnChangeLogRetrieved);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            this.AboutSectionContent = "###Downloading change log ...";
+            this.AboutSectionContent = Properties.Resources.DownloadingChangeLog;
             this.DisplaySeeChangeLogLink = false;
         }
 
@@ -242,7 +242,7 @@ namespace FileConverter
         {
             if (e.PropertyName == "OutputType")
             {
-                this.OnPropertyChanged("InputCategories");
+                this.OnPropertyChanged(nameof(this.InputCategories));
             }
         }
 
@@ -343,12 +343,12 @@ namespace FileConverter
         private void AddPresetButton_Click(object sender, RoutedEventArgs e)
         {
             Application application = Application.Current as Application;
-            string presetName = "New preset";
+            string presetName = Properties.Resources.DefaultPresetName;
             int index = 1;
             while (application.Settings.ConversionPresets.Any(match => match.Name == presetName))
             {
                 index++;
-                presetName = string.Format("New preset ({0})", index);
+                presetName = $"{Properties.Resources.DefaultPresetName} ({index})";
             }
 
             ConversionPreset newPreset = null;

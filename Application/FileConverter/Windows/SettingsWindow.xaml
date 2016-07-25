@@ -896,30 +896,6 @@
                     <Label Grid.Row="4" Grid.Column="0" Content="{x:Static project:Resources.AutomaticallyCheckForUpdates}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
                     <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}" Margin="0,5,0,5" />
                 </Grid>
-                
-                <!--<StackPanel Margin="5,10,5,5">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Label Content="Language :"/>
-                        <ComboBox ItemsSource="{Binding SupportedCultures, ElementName=window, Mode=OneTime}"
-                            SelectedValue="{Binding ApplicationSettings.ApplicationLanguage, ElementName=window, Mode=TwoWay}">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <ContentPresenter Content="{Binding Converter={StaticResource CultureInfoToString}}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </StackPanel>
-
-                    <Slider Width="200"/>
-
-                    <CheckBox x:Name="QuitAtEndCheckBox" Content="{x:Static project:Resources.AutomaticallyExitWhenAllConversionsFinished}" IsChecked="{Binding ApplicationSettings.ExitApplicationWhenConversionsFinished, ElementName=window, Mode=TwoWay}" Margin="0,0,0,5" />
-                    <DockPanel Margin="40,0,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
-                        <Label Content="Waiting duration :"/>
-                        <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding ApplicationSettings.DurationBetweenEndOfConversionsAndApplicationExit, ElementName=window, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
-                        <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
-                    </DockPanel>
-                    <CheckBox Content="{x:Static project:Resources.AutomaticallyCheckForUpdates}" IsChecked="{Binding ApplicationSettings.CheckUpgradeAtStartup, ElementName=window, Mode=TwoWay}"  />
-                </StackPanel>-->
             </TabItem>
             
             <!-- About -->
