@@ -7,8 +7,11 @@
 - New: Possibility to encode videos using theora video codec and Ogg vorbis audio codec in a ogv container.
 - New: Possibility to convert a Pdf file into image files (one image per page).
 - New: Possibility to convert an image into a Pdf file.
+- New: File converter is now available for 32 bits OS systems (download the x86 installer).
 - New: Add page number and page count information in output file name generator.
 - New: Improve the application help start page (when you launch File Converter directly from the executable) with an animated picture.
+- New: Improve the output type dropdown visualization (splitting it by categories).
+- New: Add an application option to choose the maximum number of simultaneous conversions.
 - Fixed: Issue where it was impossible to rotate an image for the output type jpg.
 
 ## Version 1.0
