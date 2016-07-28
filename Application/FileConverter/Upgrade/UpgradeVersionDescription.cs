@@ -21,8 +21,28 @@ namespace FileConverter
             set;
         }
 
-        [XmlElement("URL")]
+        [XmlIgnore]
         public string InstallerURL
+        {
+            get
+            {
+#if BUILD32
+                return this.InstallerX86URL;
+#else
+                return this.InstallerX64URL;
+#endif
+            }
+        }
+
+        [XmlElement("URL")]
+        public string InstallerX64URL
+        {
+            get;
+            set;
+        }
+
+        [XmlElement("URLx86")]
+        public string InstallerX86URL
         {
             get;
             set;
