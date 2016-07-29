@@ -484,4 +484,19 @@ use maj for uppercase version</value>
   <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
     <value>Unsupported output format '{0}'.</value>
   </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>Channel count :</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>Change the number of channels of the input file.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Mono</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>Same than input file</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Stereo</value>
+  </data>
 </root>

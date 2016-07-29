@@ -19,6 +19,24 @@ namespace FileConverter.ConversionJobs
             return string.Format("{0} \"{1}\"", optionName, args);
         }
 
+        /// <summary>
+        /// Compute the argument needed to change the number of channels in an audio file.
+        /// </summary>
+        /// <param name="conversionPreset">The conversion preset</param>
+        /// <returns>The argument string.</returns>
+        /// https://trac.ffmpeg.org/wiki/AudioChannelManipulation
+        private static string ComputeAudioChannelArgs(ConversionPreset conversionPreset)
+        {
+            string channelArgs = string.Empty;
+            int channelCount = conversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioChannelCount);
+            if (channelCount > 0)
+            {
+                channelArgs = $"-ac {channelCount}";
+            }
+
+            return channelArgs;
+        }
+
         private static string ComputeTransformArgs(ConversionPreset conversionPreset)
         {
             float scaleFactor = conversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);

@@ -133,6 +133,24 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Channel count :.
+        /// </summary>
+        public static string ChannelCountTitle {
+            get {
+                return ResourceManager.GetString("ChannelCountTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change the number of channels of the input file..
+        /// </summary>
+        public static string ChannelCountTooltip {
+            get {
+                return ResourceManager.GetString("ChannelCountTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clamp to lowest power of 2 size.
         /// </summary>
         public static string ClampToLowestPowerOfTwoSize {
@@ -646,6 +664,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mono.
+        /// </summary>
+        public static string MonoOption {
+            get {
+                return ResourceManager.GetString("MonoOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Move down selected preset.
         /// </summary>
         public static string MoveDownSelectedPreset {
@@ -833,6 +860,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Same than input file.
+        /// </summary>
+        public static string SameChannelCountOption {
+            get {
+                return ResourceManager.GetString("SameChannelCountOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -874,6 +910,15 @@ namespace FileConverter.Properties {
         public static string SettingsButtonTitle {
             get {
                 return ResourceManager.GetString("SettingsButtonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stereo.
+        /// </summary>
+        public static string StereoOption {
+            get {
+                return ResourceManager.GetString("StereoOption", resourceCulture);
             }
         }
         

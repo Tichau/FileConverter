@@ -19,6 +19,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate FlacSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public DataTemplate WavSettingsDataTemplate
         {
             get;
@@ -101,6 +107,9 @@ namespace FileConverter.Windows
 
                 case OutputType.Avi:
                     return this.AviSettingsDataTemplate;
+
+                case OutputType.Flac:
+                    return this.FlacSettingsDataTemplate;
 
                 case OutputType.Gif:
                     return this.GifSettingsDataTemplate;

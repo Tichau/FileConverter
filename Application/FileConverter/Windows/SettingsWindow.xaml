@@ -138,63 +138,132 @@
         </DataTemplate>
 
         <DataTemplate x:Key="WavSettingsDataTemplate">
-            <StackPanel>
-                <DockPanel>
-                    <Label Content="{x:Static project:Resources.Encoding}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Encoding}" />
+                <DockPanel Grid.Row="0" Grid.Column="1">
                     <RadioButton x:Name="WAV8radioButton" Content="8-bits" ToolTip="{x:Static project:Resources.Wav8bitsDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav8, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
                     <RadioButton x:Name="WAV16radioButton" Content="16-bits" ToolTip="{x:Static project:Resources.Wav16bitsDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav16, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                     <RadioButton x:Name="WAV24radioButton" Content="24-bits" ToolTip="{x:Static project:Resources.Wav24bitsDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav24, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                     <RadioButton x:Name="WAV32radioButton" Content="32-bits" ToolTip="{x:Static project:Resources.Wav32bitsDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Wav32, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
                 </DockPanel>
-            </StackPanel>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.ChannelCountTitle}" ToolTip="{x:Static project:Resources.ChannelCountTooltip}" />
+                <DockPanel Grid.Row="1" Grid.Column="1">
+                    <RadioButton Content="{x:Static project:Resources.SameChannelCountOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.MonoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|1, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.StereoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|2, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                </DockPanel>
+            </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="Mp3SettingsDataTemplate">
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Encoding}" />
-                    <DockPanel Grid.Row="0" Grid.Column="1">
-                        <RadioButton x:Name="VBRradioButton" Content="VBR" ToolTip="{x:Static project:Resources.Mp3VbrDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Mp3VBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
-                        <RadioButton x:Name="CBRradioButton" Content="CBR" ToolTip="{x:Static project:Resources.Mp3CbrDescrption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Mp3CBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
-                    </DockPanel>
+                <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Encoding}" />
+                <DockPanel Grid.Row="0" Grid.Column="1">
+                    <RadioButton x:Name="VBRradioButton" Content="VBR" ToolTip="{x:Static project:Resources.Mp3VbrDescription}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Mp3VBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton x:Name="CBRradioButton" Content="CBR" ToolTip="{x:Static project:Resources.Mp3CbrDescrption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|Mp3CBR, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}"/>
+                </DockPanel>
 
-                    <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.Quality}" />
-                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" Grid.Row="1" Grid.Column="1"
-        				EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|FileConverter.Controls.EncodingMode, Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
-        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=190}" />
-                </Grid>
-            </StackPanel>
+                <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.Quality}" />
+                <controls:EncodingQualitySliderControl Grid.Row="1" Grid.Column="1"
+        			EncodingMode="{Binding SelectedPreset.Settings, ConverterParameter=AudioEncodingMode|FileConverter.Controls.EncodingMode, Converter={StaticResource ConversionSettingsToEnum}, ElementName=window, Mode=OneWay, TargetNullValue=VBR}" 
+        			Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=190}" />
+
+                <Label Grid.Row="2" Grid.Column="0" Content="{x:Static project:Resources.ChannelCountTitle}" ToolTip="{x:Static project:Resources.ChannelCountTooltip}" />
+                <DockPanel Grid.Row="2" Grid.Column="1">
+                    <RadioButton Content="{x:Static project:Resources.SameChannelCountOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.MonoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|1, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.StereoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|2, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                </DockPanel>
+            </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="OggSettingsDataTemplate">
-            <StackPanel>
-                <DockPanel>
-                    <Label Content="{x:Static project:Resources.Quality}" />
-                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="OggVBR" 
-        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=160}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Quality}" />
+                <controls:EncodingQualitySliderControl Grid.Row="0" Grid.Column="1" EncodingMode="OggVBR" 
+        			Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=160}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.ChannelCountTitle}" ToolTip="{x:Static project:Resources.ChannelCountTooltip}" />
+                <DockPanel Grid.Row="1" Grid.Column="1">
+                    <RadioButton Content="{x:Static project:Resources.SameChannelCountOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.MonoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|1, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.StereoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|2, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
                 </DockPanel>
-            </StackPanel>
+            </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="AacSettingsDataTemplate">
-            <StackPanel>
-                <DockPanel>
-                    <Label Content="{x:Static project:Resources.Quality}" />
-                    <controls:EncodingQualitySliderControl x:Name="EncodingQualitySlider" EncodingMode="AacVBR" 
-        				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=128}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Quality}" />
+                <controls:EncodingQualitySliderControl Grid.Row="0" Grid.Column="1" EncodingMode="AacVBR" 
+        			Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=128}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.ChannelCountTitle}" ToolTip="{x:Static project:Resources.ChannelCountTooltip}" />
+                <DockPanel Grid.Row="1" Grid.Column="1">
+                    <RadioButton Content="{x:Static project:Resources.SameChannelCountOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.MonoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|1, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.StereoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|2, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
                 </DockPanel>
-            </StackPanel>
+            </Grid>
         </DataTemplate>
-        
+
+        <DataTemplate x:Key="FlacSettingsDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.ChannelCountTitle}" ToolTip="{x:Static project:Resources.ChannelCountTooltip}" />
+                <DockPanel Grid.Row="0" Grid.Column="1">
+                    <RadioButton Content="{x:Static project:Resources.SameChannelCountOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|0, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.MonoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|1, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                    <RadioButton Content="{x:Static project:Resources.StereoOption}" Margin="5" IsChecked="{Binding SelectedPreset.Settings, ConverterParameter=AudioChannelCount|2, Converter={StaticResource ConversionSettingsEquals}, ElementName=window, Mode=TwoWay}" />
+                </DockPanel>
+            </Grid>
+        </DataTemplate>
+
         <DataTemplate x:Key="GifSettingsDataTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -390,7 +459,6 @@
             </Grid>
         </DataTemplate>
 
-        
         <DataTemplate x:Key="OgvSettingsDataTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -456,7 +524,6 @@
         				Bitrate="{Binding SelectedPreset.Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay, TargetNullValue=128}" />
             </Grid>
         </DataTemplate>
-        
         
         <DataTemplate x:Key="WebmSettingsDataTemplate">
             <Grid>
@@ -633,6 +700,7 @@
             DefaultDataTemplate="{StaticResource EmptyDataTemplate}"
             AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}"
             AviSettingsDataTemplate="{StaticResource AviSettingsDataTemplate}"
+            FlacSettingsDataTemplate="{StaticResource FlacSettingsDataTemplate}"
             GifSettingsDataTemplate="{StaticResource GifSettingsDataTemplate}" 
             JpgSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" 
             MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
