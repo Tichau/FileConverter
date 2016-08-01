@@ -68,7 +68,7 @@
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.7.0.2.100\lib\net40-client\Magick.NET-Q16-AnyCPU.dll</HintPath>
+      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.7.0.2.600\lib\net40-client\Magick.NET-Q16-AnyCPU.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Markdown.Xaml">
