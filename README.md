@@ -20,6 +20,9 @@ Thanks to ffmpeg devs for this awesome open source file conversion tool. [Web si
 Thanks to image magick devs for this awesome open source image edition software suite.  [Web site link](http://imagemagick.net/)
 And thanks to dlemstra for the C# wrapper of this software. [CodePlex link](https://magick.codeplex.com/)
 
+**Ghostscript** as pdf edition software.
+Thanks to ghostscript devs. [Download link](http://www.ghostscript.com/download/gsdnld.html)
+
 **SharpShell** to easily create windows context menu extensions.
 Thanks to Dave Kerr for his work on SharpShell. [CodePlex link](https://sharpshell.codeplex.com/)
 
@@ -27,7 +30,10 @@ Thanks to Dave Kerr for his work on SharpShell. [CodePlex link](https://sharpshe
 Thanks to Idael Cardoso for his work on CD Audio ripper. [Code project link](http://www.codeproject.com/Articles/5458/C-Sharp-Ripper)
 
 **Markdown.XAML** for markdown rendering in the wpf application.
-Thanks to Bevan Arps for his work on Markdown.XAML. [GitHub link](https://github.com/theunrepentantgeek/Markdown.XAML)
+Thanks to Bevan Arps for his work on Markdown.XAML. [GitHub link](http://github.com/theunrepentantgeek/Markdown.XAML)
+
+**WpfAnimatedGif** for animated gif rendering in the wpf application.
+Thanks to Thomas Levesque for his work on WpfAnimatedGif. [GitHub link](http://github.com/XamlAnimatedGif/WpfAnimatedGif)
 
 ## License
 
