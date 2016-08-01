@@ -64,7 +64,7 @@
   <!-- congigure the project to sign the installer. Comment this line to produce an unsigned installer. -->
   <Import Project=".\Installer.sign" />
   <PropertyGroup>
-    <PreBuildEvent>"C:\Program Files (x86)\WiX Toolset v3.10\bin\heat.exe" dir "$(SolutionDir)Application\FileConverter\bin\$(ConfigurationName)\Languages" -gg -template fragment -cg "Languages" -dr "INSTALLFOLDER" -var "var.FileConverter.TargetDir" -out "$(ProjectDir)Languages.wxs"</PreBuildEvent>
+    <PreBuildEvent>"C:\Program Files (x86)\WiX Toolset v3.10\bin\heat.exe" dir "$(SolutionDir)Application\FileConverter\$(OutDir)Languages" -gg -template fragment -cg "Languages" -dr "INSTALLFOLDER" -var "var.FileConverter.TargetDir" -out "$(ProjectDir)Languages.wxs"</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

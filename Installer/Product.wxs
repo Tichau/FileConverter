@@ -5,15 +5,19 @@
 <?define Win64 = "yes" ?>
 <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
 <?else ?>
-<?define ProductName = "File Converter" ?>
+<?define ProductName = "File Converter (32 bit)" ?>
 <?define Win64 = "no" ?>
 <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
 <?endif ?>
 
 <!-- Upgrade documentation: http://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="1.0.0" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
-        <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="1.0.13" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
+        <?if $(var.Platform) = x64 ?>
+            <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />        
+        <?else ?>
+            <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />        
+        <?endif ?>
         
         <Icon Id="icon.ico" SourceFile="..\Resources\ApplicationIcon.ico"/>
         <Property Id="ARPPRODUCTICON" Value="icon.ico" />
@@ -99,10 +103,10 @@
                 <File Id="Magick.NET.dll" Source="$(var.FileConverter.TargetDir)\Magick.NET-Q16-AnyCPU.dll" KeyPath="yes" Checksum="yes"/>
             </Component>
             <Component Guid="{C28EDCA8-AE86-4672-8B14-6686AC35F5E6}" Win64="$(var.Win64)">
-                <File Id="gsdll64.dll" Source="$(var.FileConverter.TargetDir)\gsdll64.dll" KeyPath="yes" Checksum="yes"/>
+                <File Id="gsdll64.dll" Source="$(var.FileConverter.TargetDir)gsdll32.dll" KeyPath="yes" Checksum="yes"/>
             </Component>
             <Component Guid="{6AC1B233-477A-42CF-8F6F-87CA22295BE0}" Win64="$(var.Win64)">
-                <File Id="gswin64c.exe" Source="$(var.FileConverter.TargetDir)\gswin64c.exe" KeyPath="yes" Checksum="yes"/>
+                <File Id="gswin64c.exe" Source="$(var.FileConverter.TargetDir)gswin32c.exe" KeyPath="yes" Checksum="yes"/>
             </Component>
             <Component Guid="{E1B1C09C-B089-40D8-859B-0E55F640CAE1}" Win64="$(var.Win64)">
                 <File Id="Markdown.Xaml.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)\Markdown.Xaml.dll" Checksum="yes"/>
