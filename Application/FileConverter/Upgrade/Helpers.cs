@@ -25,7 +25,12 @@ namespace FileConverter.Upgrade
 
         public static async Task<UpgradeVersionDescription> GetLatestVersionDescriptionAsync(OnUpgradeOperationCompletedEventHandler onGetCompleteDelegate = null)
         {
+#if BUILD32
+            Uri uri = new Uri(Helpers.BaseURI + "version (x86).xml");
+#else
             Uri uri = new Uri(Helpers.BaseURI + "version.xml");
+#endif
+
             Stream stream = await Helpers.webClient.OpenReadTaskAsync(uri);
 
             UpgradeVersionDescription upgradeVersionDescription = null;
@@ -64,7 +69,7 @@ namespace FileConverter.Upgrade
         {
             if (upgradeVersionDescription == null)
             {
-                throw new ArgumentNullException("upgradeVersionDescription");
+                throw new ArgumentNullException(nameof(upgradeVersionDescription));
             }
 
             Uri uri = new Uri(Helpers.BaseURI + "CHANGELOG.md");

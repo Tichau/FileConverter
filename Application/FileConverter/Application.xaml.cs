@@ -177,8 +177,12 @@ namespace FileConverter
 
         private void Initialize()
         {
-            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString());
-            
+#if BUILD32
+            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString() + " (32 bits)");
+#else
+            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString() + " (64 bits)");
+#endif
+
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
             string[] args = Environment.GetCommandLineArgs();
