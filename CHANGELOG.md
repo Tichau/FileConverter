@@ -1,19 +1,19 @@
 # Change Log
 
 ## Version 1.1
-- New: Improve the application upgrade UI. If you quit the application during the upgrade downloading, you can now see the download progress.
-- New: Localization system. File Converter can now be translated in multiple languages. The default language is the same that your OS language (if available).
+- New: Localization system. File Converter can now be translated in multiple languages. The default language is the same than your OS language (if available).
+- New: Improve the application upgrade UI. If you quit the application during the upgrade downloading, you will now see the download progress.
 - New: Add the possibility to choose the application language in the application settings.
 - New: Possibility to encode videos using theora video codec and Ogg vorbis audio codec in a ogv container.
 - New: Possibility to convert a Pdf file into image files (one image per page).
 - New: Possibility to convert an image into a Pdf file.
 - New: Possibility to change the number of channels of an audio file (stereo -> mono, 5.1 -> stereo, ...).
-- New: File converter is now available for 32 bits OS systems (download the x86 installer).
+- New: File converter is now available for Windows 32 bits systems (download the x86 installer).
 - New: Add page number and page count information in output file name generator.
-- New: Improve the application help start page (when you launch File Converter directly from the executable) with an animated picture.
-- New: Improve the output type dropdown visualization (splitting it by categories).
 - New: Add an application option to choose the maximum number of simultaneous conversions.
-- Fixed: Issue where it was impossible to rotate an image for the output type jpg.
+- Change: Improve the application help start page (when you launch File Converter directly from the executable) with an animated picture.
+- Change: Improve the output type dropdown visualization (splitting it by categories).
+- Fixed: Issue where it was impossible to rotate an image for the output type: jpg.
 
 ## Version 1.0
 - New: File Converter is now certified by Microsoft Authenticode. 
