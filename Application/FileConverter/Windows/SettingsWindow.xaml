@@ -925,7 +925,7 @@
 
             <!-- Application settings -->
             <TabItem Header="{x:Static project:Resources.Application}">
-                <Grid>
+                <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
