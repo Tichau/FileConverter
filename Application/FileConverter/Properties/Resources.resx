@@ -234,7 +234,7 @@
   <data name="MoveUpSelectedPreset" xml:space="preserve">
     <value>Move up selected preset</value>
   </data>
-  <data name="Mp3CbrDescrption" xml:space="preserve">
+  <data name="Mp3CbrDescription" xml:space="preserve">
     <value>Constant bitrate encoding</value>
   </data>
   <data name="Mp3VbrDescription" xml:space="preserve">
@@ -436,9 +436,6 @@ use maj for uppercase version</value>
   <data name="DownloadingChangeLog" xml:space="preserve">
     <value>###Downloading change log ...</value>
   </data>
-  <data name="LicenceHeader" xml:space="preserve">
-    <value>**This program is free software**.\n You can redistribute it and/or modify it under the terms of the GNU General Public License.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.\n\n</value>
-  </data>
   <data name="ConversionArchives" xml:space="preserve">
     <value>Conversion Archives</value>
   </data>
@@ -498,5 +495,14 @@ use maj for uppercase version</value>
   </data>
   <data name="StereoOption" xml:space="preserve">
     <value>Stereo</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**This program is free software**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>You can redistribute it and/or modify it under the terms of the GNU General Public License.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.</value>
   </data>
 </root>

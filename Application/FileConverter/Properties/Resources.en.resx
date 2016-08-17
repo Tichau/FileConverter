@@ -189,9 +189,6 @@
   <data name="FileConverterStartHelp2" xml:space="preserve">
     <value>That means it is integrated into the Windows explorer.</value>
   </data>
-  <data name="FileConverterStartHelp3" xml:space="preserve">
-    <value>To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the readme file to see the list of compatible file formats).</value>
-  </data>
   <data name="FileNameTemplate" xml:space="preserve">
     <value>File name template</value>
   </data>
@@ -234,7 +231,7 @@
   <data name="MoveUpSelectedPreset" xml:space="preserve">
     <value>Move up selected preset</value>
   </data>
-  <data name="Mp3CbrDescrption" xml:space="preserve">
+  <data name="Mp3CbrDescription" xml:space="preserve">
     <value>Constant bitrate encoding</value>
   </data>
   <data name="Mp3VbrDescription" xml:space="preserve">
@@ -436,9 +433,6 @@ use maj for uppercase version</value>
   <data name="DownloadingChangeLog" xml:space="preserve">
     <value>###Downloading change log ...</value>
   </data>
-  <data name="LicenceHeader" xml:space="preserve">
-    <value>**This program is free software**.\n You can redistribute it and/or modify it under the terms of the GNU General Public License.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.\n\n</value>
-  </data>
   <data name="ConversionArchives" xml:space="preserve">
     <value>Conversion Archives</value>
   </data>
@@ -498,5 +492,17 @@ use maj for uppercase version</value>
   </data>
   <data name="StereoOption" xml:space="preserve">
     <value>Stereo</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the online documentation to see the list of compatible file formats).</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**This program is free software**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>You can redistribute it and/or modify it under the terms of the GNU General Public License.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.</value>
   </data>
 </root>

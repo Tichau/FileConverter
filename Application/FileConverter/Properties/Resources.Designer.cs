@@ -646,11 +646,29 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to **This program is free software**.\n You can redistribute it and/or modify it under the terms of the GNU General Public License.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.\n\n.
+        ///   Looks up a localized string similar to **This program is free software**..
         /// </summary>
-        public static string LicenceHeader {
+        public static string LicenceHeader1 {
             get {
-                return ResourceManager.GetString("LicenceHeader", resourceCulture);
+                return ResourceManager.GetString("LicenceHeader1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can redistribute it and/or modify it under the terms of the GNU General Public License..
+        /// </summary>
+        public static string LicenceHeader2 {
+            get {
+                return ResourceManager.GetString("LicenceHeader2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details..
+        /// </summary>
+        public static string LicenceHeader3 {
+            get {
+                return ResourceManager.GetString("LicenceHeader3", resourceCulture);
             }
         }
         
@@ -693,9 +711,9 @@ namespace FileConverter.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Constant bitrate encoding.
         /// </summary>
-        public static string Mp3CbrDescrption {
+        public static string Mp3CbrDescription {
             get {
-                return ResourceManager.GetString("Mp3CbrDescrption", resourceCulture);
+                return ResourceManager.GetString("Mp3CbrDescription", resourceCulture);
             }
         }
         

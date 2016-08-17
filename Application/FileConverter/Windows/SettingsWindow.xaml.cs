@@ -191,8 +191,12 @@ namespace FileConverter
         public string AboutSectionContent
         {
             get
-            {
-                return Properties.Resources.LicenceHeader + this.releaseNoteContent;
+            { 
+                string content = Properties.Resources.LicenceHeader1 + "\n";
+                content += Properties.Resources.LicenceHeader2 + "\n\n";
+                content += Properties.Resources.LicenceHeader3 + "\n\n";
+                content += this.releaseNoteContent;
+                return content;
             }
 
             set
