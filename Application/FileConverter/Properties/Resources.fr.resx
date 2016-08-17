@@ -178,7 +178,7 @@
     <comment>The update will be downloaded in background, and installed once you exit File Converter.</comment>
   </data>
   <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
-    <value>Installer lorseque je quitte File Converter</value>
+    <value>Installer lorsque je quitte File Converter</value>
     <comment>Install when I exit File Converter</comment>
   </data>
   <data name="Encoding" xml:space="preserve">

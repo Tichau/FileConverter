@@ -7,14 +7,22 @@
     </Fragment>
     <Fragment>
         <ComponentGroup Id="Languages">
-            <Component Id="cmp416BC2ED150FADE2B6C889B2E30BEFF1" Directory="dir69039193B93E3CF7D8D647984CD644EA" Guid="{9E41719E-8595-45AF-B415-77668D7EB832}">
+            <Component Id="cmp416BC2ED150FADE2B6C889B2E30BEFF1" Directory="dir69039193B93E3CF7D8D647984CD644EA" Guid="{07ED1147-DE5F-4EB1-92E5-D4AEB62FCF68}">
                 <File Id="fil5460820E8FE9AB69A71E15E4E9BEB1E2" KeyPath="yes" Source="$(var.FileConverter.TargetDir)\en\FileConverter.resources.dll" />
+            </Component>
+            <Component Id="cmpF149529191A3B87AAB82B9301A2CAB8B" Directory="dir6DD71661C1CC5A2A0CCF37D75E6494F1" Guid="{B9769F62-8047-4CA6-8C95-CCC710DDA390}">
+                <File Id="fil47BB5F07444A2330EB2978EA5E7A488E" KeyPath="yes" Source="$(var.FileConverter.TargetDir)\fr\FileConverter.resources.dll" />
             </Component>
         </ComponentGroup>
     </Fragment>
     <Fragment>
         <DirectoryRef Id="dir59665241F3CDDE1A2AC55595EAB82331">
             <Directory Id="dir69039193B93E3CF7D8D647984CD644EA" Name="en" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir59665241F3CDDE1A2AC55595EAB82331">
+            <Directory Id="dir6DD71661C1CC5A2A0CCF37D75E6494F1" Name="fr" />
         </DirectoryRef>
     </Fragment>
 </Wix>
