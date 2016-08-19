@@ -3,17 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FileConverter.Windows"
-        xmlns:fileConverter="clr-namespace:FileConverter"
         xmlns:diagnostics="clr-namespace:FileConverter.Diagnostics"
+        xmlns:project="clr-namespace:FileConverter.Properties"
+        xmlns:local="clr-namespace:FileConverter"
         mc:Ignorable="d"
-        Title="Diagnostics" Height="600" Width="800" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
+        Height="600" Width="800" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
+    <Window.Title>
+        <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
+    </Window.Title>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label  Grid.Row="0" Content="Logs" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" />
+        <Label  Grid.Row="0" Content="{x:Static project:Resources.Diagnostics}" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" />
 
         <TabControl Grid.Row="1" Margin="5" ItemsSource="{Binding Path=(diagnostics:Debug.Data), Mode=OneWay}">
             <TabControl.ItemTemplate>

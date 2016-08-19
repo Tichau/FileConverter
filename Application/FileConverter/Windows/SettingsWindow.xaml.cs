@@ -5,15 +5,18 @@ namespace FileConverter
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Data;
     using System.Windows.Input;
 
+    using FileConverter.Windows;
     using FileConverter.Annotations;
     using FileConverter.Commands;
-    using FileConverter.Upgrade;
+    using FileConverter.ConversionJobs;
     using Microsoft.Win32;
 
     /// <summary>
@@ -31,49 +34,28 @@ namespace FileConverter
         private OpenUrlCommand openUrlCommand;
         private DelegateCommand getChangeLogContentCommand;
         private bool displaySeeChangeLogLink = true;
-
+        
         public SettingsWindow()
         {
+            this.SupportedCultures = Helpers.GetSupportedCultures().Where(cultureInfo => cultureInfo.IsNeutralCulture).ToArray();
+
             this.InitializeComponent();
             
             Application application = Application.Current as Application;
             this.ApplicationSettings = application.Settings;
             this.PresetList.ItemsSource = this.settings.ConversionPresets;
-
-            OutputType[] outputTypes = new[]
-                                           {
-                                               OutputType.Ogg, 
-                                               OutputType.Mp3,
-                                               OutputType.Aac,
-                                               OutputType.Flac,
-                                               OutputType.Wav,
-                                               OutputType.Mkv,
-                                               OutputType.Mp4,
-                                               OutputType.Webm,
-                                               OutputType.Avi,
-                                               OutputType.Ico,
-                                               OutputType.Jpg,
-                                               OutputType.Png,
-                                               OutputType.Gif,
-                                           };
-
-            this.OutputFormats.ItemsSource = outputTypes;
-
-            InputPostConversionAction[] postConversionActions = new[]
-                                           {
-                                               InputPostConversionAction.None,
-                                               InputPostConversionAction.MoveInArchiveFolder,
-                                               InputPostConversionAction.Delete,
-                                           };
-
-            this.PostConversionActionComboBox.ItemsSource = postConversionActions;
             
+            ListCollectionView collectionView = new ListCollectionView(new List<OutputTypeViewModel>(SettingsWindow.OutputTypeViewModels));
+            collectionView.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
+
+            this.OutputFormats.ItemsSource = collectionView;
+
             this.InitializeCompatibleInputExtensions();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public event System.EventHandler<System.EventArgs> OnSettingsWindowHide;
+        public event EventHandler<EventArgs> OnSettingsWindowHide;
 
         public ICommand OpenUrlCommand
         {
@@ -123,7 +105,7 @@ namespace FileConverter
                 }
 
                 this.OnPropertyChanged();
-                this.OnPropertyChanged("InputCategories");
+                this.OnPropertyChanged(nameof(this.InputCategories));
             }
         }
 
@@ -153,7 +135,7 @@ namespace FileConverter
                 for (int index = 0; index < this.inputCategories.Length; index++)
                 {
                     InputExtensionCategory category = this.inputCategories[index];
-                    if (this.SelectedPreset == null || PathHelpers.IsOutputTypeCompatibleWithCategory(this.SelectedPreset.OutputType, category.Name))
+                    if (this.SelectedPreset == null || Helpers.IsOutputTypeCompatibleWithCategory(this.SelectedPreset.OutputType, category.Name))
                     {
                         yield return category;
                     }
@@ -161,11 +143,60 @@ namespace FileConverter
             }
         }
 
+        public CultureInfo[] SupportedCultures
+        {
+            get;
+            set;
+        }
+
+        public static OutputTypeViewModel[] OutputTypeViewModels => new[]
+        {
+            new OutputTypeViewModel(OutputType.Ogg),
+            new OutputTypeViewModel(OutputType.Mp3),
+            new OutputTypeViewModel(OutputType.Aac),
+            new OutputTypeViewModel(OutputType.Flac),
+            new OutputTypeViewModel(OutputType.Wav),
+            new OutputTypeViewModel(OutputType.Mkv),
+            new OutputTypeViewModel(OutputType.Mp4),
+            new OutputTypeViewModel(OutputType.Ogv),
+            new OutputTypeViewModel(OutputType.Webm),
+            new OutputTypeViewModel(OutputType.Avi),
+            new OutputTypeViewModel(OutputType.Png),
+            new OutputTypeViewModel(OutputType.Jpg),
+            new OutputTypeViewModel(OutputType.Ico),
+            new OutputTypeViewModel(OutputType.Gif),
+            new OutputTypeViewModel(OutputType.Pdf),
+        };
+
+        public InputPostConversionAction[] InputPostConversionActions => new[]
+        {
+            InputPostConversionAction.None,
+            InputPostConversionAction.MoveInArchiveFolder,
+            InputPostConversionAction.Delete,
+        };
+
+        public VideoEncodingSpeed[] VideoEncodingSpeeds => new[]
+        {
+            VideoEncodingSpeed.UltraFast,
+            VideoEncodingSpeed.SuperFast,
+            VideoEncodingSpeed.VeryFast,
+            VideoEncodingSpeed.Faster,
+            VideoEncodingSpeed.Fast,
+            VideoEncodingSpeed.Medium,
+            VideoEncodingSpeed.Slow,
+            VideoEncodingSpeed.Slower,
+            VideoEncodingSpeed.VerySlow,
+        };
+
         public string AboutSectionContent
         {
             get
-            {
-                return "**This program is free software**.\n You can redistribute it and/or modify it under the terms of the GNU General Public License.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.\n\n" + this.releaseNoteContent;
+            { 
+                string content = Properties.Resources.LicenceHeader1 + "\n";
+                content += Properties.Resources.LicenceHeader2 + "\n\n";
+                content += Properties.Resources.LicenceHeader3 + "\n\n";
+                content += this.releaseNoteContent;
+                return content;
             }
 
             set
@@ -190,7 +221,7 @@ namespace FileConverter
                 this.OnPropertyChanged();
             }
         }
-
+        
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -200,9 +231,9 @@ namespace FileConverter
         private void DownloadChangeLogAction()
         {
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            Helpers.GetChangeLogAsync(new UpgradeVersionDescription(), this.OnChangeLogRetrieved);
+            Upgrade.Helpers.GetChangeLogAsync(new UpgradeVersionDescription(), this.OnChangeLogRetrieved);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            this.AboutSectionContent = "###Downloading change log ...";
+            this.AboutSectionContent = Properties.Resources.DownloadingChangeLog;
             this.DisplaySeeChangeLogLink = false;
         }
 
@@ -215,7 +246,7 @@ namespace FileConverter
         {
             if (e.PropertyName == "OutputType")
             {
-                this.OnPropertyChanged("InputCategories");
+                this.OnPropertyChanged(nameof(this.InputCategories));
             }
         }
 
@@ -316,12 +347,12 @@ namespace FileConverter
         private void AddPresetButton_Click(object sender, RoutedEventArgs e)
         {
             Application application = Application.Current as Application;
-            string presetName = "New preset";
+            string presetName = Properties.Resources.DefaultPresetName;
             int index = 1;
             while (application.Settings.ConversionPresets.Any(match => match.Name == presetName))
             {
                 index++;
-                presetName = string.Format("New preset ({0})", index);
+                presetName = $"{Properties.Resources.DefaultPresetName} ({index})";
             }
 
             ConversionPreset newPreset = null;
@@ -419,7 +450,7 @@ namespace FileConverter
             for (int index = 0; index < compatibleInputExtensions.Length; index++)
             {
                 string compatibleInputExtension = compatibleInputExtensions[index];
-                string extensionCategory = PathHelpers.GetExtensionCategory(compatibleInputExtension);
+                string extensionCategory = Helpers.GetExtensionCategory(compatibleInputExtension);
                 InputExtensionCategory category = categories.Find(match => match.Name == extensionCategory);
                 if (category == null)
                 {
@@ -431,7 +462,7 @@ namespace FileConverter
             }
 
             this.inputCategories = categories.ToArray();
-            this.OnPropertyChanged("InputCategories");
+            this.OnPropertyChanged(nameof(this.InputCategories));
         }
     }
 }

@@ -3,11 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xaml="clr-namespace:Markdown.Xaml;assembly=Markdown.Xaml"
              xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
+             xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
              StartupUri="Windows/MainWindow.xaml" ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <!-- Converters -->
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
-        
+        <generic:BoolToVisibility x:Key="BoolToVisibility"/>
+
+        <generic:ValueConverterGroup x:Key="InvBoolToVisibility">
+            <generic:BoolInverterConverter/>
+            <generic:BoolToVisibility/>
+        </generic:ValueConverterGroup>
+
         <!-- Markdown style -->
         <Style TargetType="FlowDocument" x:Key="DocumentStyle">
             <Setter Property="FontFamily" Value="Segoe UI" />

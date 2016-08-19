@@ -6,9 +6,9 @@ namespace FileConverter.ConversionJobs
     {
         public static ConversionJob Create(ConversionPreset conversionPreset, string inputFilePath)
         {
-            string extension = System.IO.Path.GetExtension(inputFilePath);
-            extension = extension.ToLowerInvariant().Substring(1, extension.Length - 1);
-            if (extension == "cda")
+            string inputFileExtension = System.IO.Path.GetExtension(inputFilePath);
+            inputFileExtension = inputFileExtension.ToLowerInvariant().Substring(1, inputFileExtension.Length - 1);
+            if (inputFileExtension == "cda")
             {
                 return new ConversionJob_ExtractCDA(conversionPreset);    
             }
@@ -23,7 +23,13 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_Gif(conversionPreset);
             }
 
-            if (PathHelpers.GetExtensionCategory(extension) == PathHelpers.InputCategoryNames.Image)
+            if (Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Image ||
+                Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Document)
+            {
+                return new ConversionJob_ImageMagick(conversionPreset);
+            }
+
+            if (conversionPreset.OutputType == OutputType.Pdf)
             {
                 return new ConversionJob_ImageMagick(conversionPreset);
             }

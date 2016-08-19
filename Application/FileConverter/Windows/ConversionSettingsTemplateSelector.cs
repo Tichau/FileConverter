@@ -19,6 +19,12 @@ namespace FileConverter.Windows
             set;
         }
 
+        public DataTemplate FlacSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         public DataTemplate WavSettingsDataTemplate
         {
             get;
@@ -38,6 +44,12 @@ namespace FileConverter.Windows
         }
 
         public DataTemplate OggSettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
+        public DataTemplate OgvSettingsDataTemplate
         {
             get;
             set;
@@ -96,6 +108,9 @@ namespace FileConverter.Windows
                 case OutputType.Avi:
                     return this.AviSettingsDataTemplate;
 
+                case OutputType.Flac:
+                    return this.FlacSettingsDataTemplate;
+
                 case OutputType.Gif:
                     return this.GifSettingsDataTemplate;
 
@@ -113,6 +128,9 @@ namespace FileConverter.Windows
 
                 case OutputType.Ogg:
                     return this.OggSettingsDataTemplate;
+
+                case OutputType.Ogv:
+                    return this.OgvSettingsDataTemplate;
 
                 case OutputType.Png:
                     return this.PngSettingsDataTemplate;

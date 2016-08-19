@@ -13,7 +13,7 @@ namespace FileConverter.ConversionJobs
 
     public class ConversionJob_ExtractCDA : ConversionJob
     {
-        private Ripper.CDDrive cdDrive;
+        private Ripper.CDDrive diskDrive;
         private int cdaTrackNumber = -1;
         private WaveWriter waveWriter;
         private string intermediateFilePath;
@@ -49,14 +49,14 @@ namespace FileConverter.ConversionJobs
             string pathDriveLetter = PathHelpers.GetPathDriveLetter(this.InputFilePath);
             if (pathDriveLetter.Length == 0)
             {
-                this.ConversionFailed("Can't retrieve input path drive letter.");
+                this.ConversionFailed(Properties.Resources.ErrorFailToRetrieveInputPathDriveLetter);
                 return;
             }
 
             char driveLetter = pathDriveLetter[0];
 
-            this.cdDrive = new Ripper.CDDrive();
-            this.cdDrive.CDRemoved += new EventHandler(this.CdDriveCdRemoved);
+            this.diskDrive = new Ripper.CDDrive();
+            this.diskDrive.CDRemoved += new EventHandler(this.CdDriveCdRemoved);
 
             bool driveLetterFound = false;
             char[] driveLetters = Ripper.CDDrive.GetCDDriveLetters();
@@ -67,7 +67,8 @@ namespace FileConverter.ConversionJobs
 
             if (!driveLetterFound)
             {
-                this.ConversionFailed(string.Format("Invalid drive letter {0}.", driveLetter));
+                Debug.Log($"Invalid drive letter {driveLetter}.");
+                this.ConversionFailed(Properties.Resources.ErrorFailToRetrieveInputPathDriveLetter);
                 return;
             }
 
@@ -78,19 +79,20 @@ namespace FileConverter.ConversionJobs
             }
             catch (Exception)
             {
-                this.ConversionFailed(string.Format("Can't retrieve the track number from input path '{0}'.", this.InputFilePath));
+                Debug.Log($"Input path: '{this.InputFilePath}'.");
+                this.ConversionFailed(Properties.Resources.ErrorFailToRetrieveTrackNumber);
                 return;
             }
 
-            if (this.cdDrive.IsOpened)
+            if (this.diskDrive.IsOpened)
             {
-                this.ConversionFailed(string.Format("CD drive already used."));
+                this.ConversionFailed(Properties.Resources.ErrorFailToUseCDDriveOpen);
                 return;
             }
 
-            if (!this.cdDrive.Open(driveLetter))
+            if (!this.diskDrive.Open(driveLetter))
             {
-                this.ConversionFailed(string.Format("Fail to open cd drive {0}.", driveLetter));
+                this.ConversionFailed(string.Format(Properties.Resources.ErrorFailToReadCDDrive, driveLetter));
                 return;
             }
 
@@ -102,7 +104,7 @@ namespace FileConverter.ConversionJobs
             // Sub conversion job (for compression).
             this.compressionConversionJob = ConversionJobFactory.Create(this.ConversionPreset, this.intermediateFilePath);
             this.compressionConversionJob.PrepareConversion(this.intermediateFilePath, this.OutputFilePath);
-            this.compressionThread = new Thread(this.CompressAsync);
+            this.compressionThread = Helpers.InstantiateThread("CDACompressionThread", this.CompressAsync);
         }
 
         protected override void Convert()
@@ -114,45 +116,47 @@ namespace FileConverter.ConversionJobs
 
             Debug.Log("Starting CDA extraction.");
 
-            this.UserState = "Extraction";
+            this.UserState = Properties.Resources.ConversionStateExtraction;
 
-            if (!this.cdDrive.IsCDReady())
+            if (!this.diskDrive.IsCDReady())
             {
-                this.ConversionFailed(string.Format("CD drive is not ready."));
+                this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
                 return;
             }
 
-            if (!this.cdDrive.Refresh())
+            if (!this.diskDrive.Refresh())
             {
-                this.ConversionFailed(string.Format("Can't refresh CD drive data."));
+                Debug.Log("Can't refresh CD drive data.");
+                this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
                 return;
             }
 
-            if (!this.cdDrive.LockCD())
+            if (!this.diskDrive.LockCD())
             {
-                this.ConversionFailed(string.Format("Can't lock cd."));
+                Debug.Log("Can\'t lock cd.");
+                this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
                 return;
             }
 
             WaveFormat waveFormat = new WaveFormat(44100, 16, 2);
 
             using (Stream waveStream = new FileStream(this.intermediateFilePath, FileMode.Create, FileAccess.Write))
-            using (this.waveWriter = new WaveWriter(waveStream, waveFormat, this.cdDrive.TrackSize(this.cdaTrackNumber)))
+            using (this.waveWriter = new WaveWriter(waveStream, waveFormat, this.diskDrive.TrackSize(this.cdaTrackNumber)))
             {
-                this.cdDrive.ReadTrack(this.cdaTrackNumber, this.WriteWaveData, this.CdReadProgress);
+                this.diskDrive.ReadTrack(this.cdaTrackNumber, this.WriteWaveData, this.CdReadProgress);
             }
 
             this.waveWriter = null;
 
-            this.cdDrive.UnLockCD();
+            this.diskDrive.UnLockCD();
 
-            this.cdDrive.Close();
+            this.diskDrive.Close();
 
             this.StateFlags = ConversionFlags.None;
 
             if (!File.Exists(this.intermediateFilePath))
             {
-                this.ConversionFailed("Extraction failed.");
+                this.ConversionFailed(Properties.Resources.ErrorCDAExtractionFailed);
                 return;
             }
 
@@ -160,7 +164,7 @@ namespace FileConverter.ConversionJobs
             Debug.Log(string.Empty);
             Debug.Log("Start compression.");
 
-            this.UserState = "Conversion";
+            this.UserState = Properties.Resources.ConversionStateConversion;
 
             this.compressionThread.Start();
 

@@ -31,7 +31,7 @@ namespace FileConverter.ConversionJobs
             string inputFilePath = string.Empty;
 
             // If the output is an image start to convert it into png before send it to ffmpeg.
-            if (PathHelpers.GetExtensionCategory(extension) == PathHelpers.InputCategoryNames.Image && extension != "png")
+            if (Helpers.GetExtensionCategory(extension) == Helpers.InputCategoryNames.Image && extension != "png")
             {
                 // Generate intermediate file path.
                 string fileName = Path.GetFileName(this.OutputFilePath);
@@ -66,7 +66,7 @@ namespace FileConverter.ConversionJobs
 
             if (this.pngConversionJob != null)
             {
-                this.UserState = "Read input image";
+                this.UserState = Properties.Resources.ConversionStateReadIntputImage;
 
                 Diagnostics.Debug.Log(string.Empty);
                 Diagnostics.Debug.Log("Convert image to PNG (intermediate format).");

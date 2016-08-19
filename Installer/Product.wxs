@@ -5,15 +5,19 @@
 <?define Win64 = "yes" ?>
 <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
 <?else ?>
-<?define ProductName = "File Converter" ?>
+<?define ProductName = "File Converter (32 bit)" ?>
 <?define Win64 = "no" ?>
 <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
 <?endif ?>
 
 <!-- Upgrade documentation: http://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="1.0.0" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
-        <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="1.1.0" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
+        <?if $(var.Platform) = x64 ?>
+            <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />        
+        <?else ?>
+            <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />        
+        <?endif ?>
         
         <Icon Id="icon.ico" SourceFile="..\Resources\ApplicationIcon.ico"/>
         <Property Id="ARPPRODUCTICON" Value="icon.ico" />
@@ -24,7 +28,8 @@
         <Media Id="1" Cabinet="CabFile.cab" EmbedCab="yes" />
 
         <Feature Id="Application" Title="Installer" Level="1">
-            <ComponentGroupRef Id="ProductComponents" /> 
+            <ComponentGroupRef Id="ProductComponents" />
+            <ComponentGroupRef Id="Languages" />
         </Feature>
         
         <CustomAction Id="InstallShell" FileKey="srm.exe" ExeCommand='install "[INSTALLFOLDER]\FileConverterExtension.dll" -codebase' Execute="deferred" Return="check" Impersonate="no" />
@@ -78,13 +83,16 @@
                 </File>
                 <RemoveFolder Id='RemoveStartMenuDir' Directory='ApplicationStartMenuShortcut' On='uninstall' />
             </Component>
+            <Component Guid="{1B14FF2D-C82D-4425-A447-DED14CCBEA5C}" Win64="$(var.Win64)">
+                <File Id="FileConverter.exe.config" Source="$(var.FileConverter.TargetDir)FileConverter.exe.config" KeyPath="yes" Checksum="yes" />
+            </Component>
             
             <!-- Extension -->
             <Component Guid="{AA5EA6F7-C443-488B-8E48-7CF000B9AD2A}" Win64="$(var.Win64)">
-                <File Id="FileConverterExtension.dll" KeyPath="yes" Source="..\Application\FileConverterExtension\bin\$(var.Configuration)\FileConverterExtension.dll" Checksum="yes" />
+                <File Id="FileConverterExtension.dll" Source="$(var.FileConverterExtension.TargetDir)FileConverterExtension.dll" KeyPath="yes" Checksum="yes" />
             </Component>
             <Component Guid="{9BF0AC45-A586-41C9-BA93-6048B46DA65F}" Win64="$(var.Win64)">
-                <File Id="SharpShell.dll" KeyPath="yes" Source="..\packages\SharpShell.2.2.0.0\lib\net40\SharpShell.dll" Checksum="yes"/>
+                <File Id="SharpShell.dll" Source="$(var.FileConverterExtension.TargetDir)SharpShell.dll" KeyPath="yes" Checksum="yes"/>
             </Component>
             <Component Guid="{EC580BEF-F962-42BD-B46D-4E4C126F2641}" Win64="$(var.Win64)">
                 <File Id="srm.exe" Source="..\packages\SharpShellTools.2.2.0.0\lib\srm.exe" KeyPath="yes" Checksum="yes"/>
@@ -92,24 +100,33 @@
             
             <!-- Third parties -->
             <Component Guid="{1790B82E-86BC-4B95-AA1D-9859FF3B6CA4}" Win64="$(var.Win64)">
-                <File Source="..\Middleware\ffmpeg.exe" KeyPath="yes" Checksum="yes" />
+                <File Source="$(var.FileConverter.TargetDir)ffmpeg.exe" KeyPath="yes" Checksum="yes" />
             </Component>
             <Component Guid="{C59B7F72-D8D6-47A3-B1D9-515CBC9FCE6F}" Win64="$(var.Win64)">
-                <File Id="Magick.NET.dll" KeyPath="yes" Source="..\Application\FileConverter\bin\$(var.Configuration)\Magick.NET-Q16-AnyCPU.dll" Checksum="yes"/>
+                <File Id="Magick.NET.dll" Source="$(var.FileConverter.TargetDir)Magick.NET-Q16-AnyCPU.dll" KeyPath="yes" Checksum="yes"/>
+            </Component>
+            <Component Guid="{C28EDCA8-AE86-4672-8B14-6686AC35F5E6}" Win64="$(var.Win64)">
+                <File Id="gsdll64.dll" Source="$(var.FileConverter.TargetDir)gsdll32.dll" KeyPath="yes" Checksum="yes"/>
+            </Component>
+            <Component Guid="{6AC1B233-477A-42CF-8F6F-87CA22295BE0}" Win64="$(var.Win64)">
+                <File Id="gswin64c.exe" Source="$(var.FileConverter.TargetDir)gswin32c.exe" KeyPath="yes" Checksum="yes"/>
             </Component>
             <Component Guid="{E1B1C09C-B089-40D8-859B-0E55F640CAE1}" Win64="$(var.Win64)">
-                <File Id="Markdown.Xaml.dll" KeyPath="yes" Source="..\Middleware\Markdown.Xaml.dll" Checksum="yes"/>
+                <File Id="Markdown.Xaml.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)Markdown.Xaml.dll" Checksum="yes"/>
             </Component>
             <Component Guid="{55CD0B47-D5B0-4F0C-A54E-3E11DF345B48}" Win64="$(var.Win64)">
-                <File Id="Ripper.dll" KeyPath="yes" Source="..\Middleware\Ripper.dll" Checksum="yes"/>
+                <File Id="Ripper.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)Ripper.dll" Checksum="yes"/>
             </Component>
             <Component Guid="{3CE6CF1B-431C-41FD-8381-3F73EDAF7B8A}" Win64="$(var.Win64)">
-                <File Id="yeti.mmedia.dll" KeyPath="yes" Source="..\Middleware\yeti.mmedia.dll" Checksum="yes"/>
+                <File Id="yeti.mmedia.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)yeti.mmedia.dll" Checksum="yes"/>
+            </Component>
+            <Component Guid="{0FC2EE41-35DB-49B1-8FD6-77E57254A6A5}" Win64="$(var.Win64)">
+                <File Id="WpfAnimatedGif.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)WpfAnimatedGif.dll" Checksum="yes"/>
             </Component>
             
             <!-- Configuration and documentation -->
             <Component Guid="{86AEF5B3-C25B-4662-BAEF-20969D1821A5}" Win64="$(var.Win64)">
-                <File Source="..\Application\FileConverter\Settings.default.xml" KeyPath="yes" />
+                <File Source="$(var.FileConverter.ProjectDir)\Settings.default.xml" KeyPath="yes" />
             </Component>
             <Component Guid="{A5158756-A107-4010-9E2F-3C0333F5A5F6}" Win64="$(var.Win64)">
                 <File Source="..\README.md" KeyPath="yes" />
@@ -125,7 +142,7 @@
             <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
                 <RegistryKey Root="HKCU" Key="Software\FileConverter" ForceDeleteOnUninstall="yes">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
-                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;exr;flac;flv;gif;ico;jpg;jpeg;m4a;m4v;mkv;mov;mp3;mp4;mpeg;oga;ogg;ogv;png;psd;svg;tga;tiff;vob;wav;webm;wma;wmv"/>
+                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;exr;flac;flv;gif;ico;jpg;jpeg;m4a;m4v;mkv;mov;mp3;mp4;mpeg;oga;ogg;ogv;pdf;png;psd;svg;tga;tiff;vob;wav;webm;wma;wmv"/>
                 </RegistryKey>
             </Component>
         </ComponentGroup>

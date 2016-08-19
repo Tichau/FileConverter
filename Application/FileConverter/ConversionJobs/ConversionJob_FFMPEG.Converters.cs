@@ -19,6 +19,24 @@ namespace FileConverter.ConversionJobs
             return string.Format("{0} \"{1}\"", optionName, args);
         }
 
+        /// <summary>
+        /// Compute the argument needed to change the number of channels in an audio file.
+        /// </summary>
+        /// <param name="conversionPreset">The conversion preset</param>
+        /// <returns>The argument string.</returns>
+        /// https://trac.ffmpeg.org/wiki/AudioChannelManipulation
+        private static string ComputeAudioChannelArgs(ConversionPreset conversionPreset)
+        {
+            string channelArgs = string.Empty;
+            int channelCount = conversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioChannelCount);
+            if (channelCount > 0)
+            {
+                channelArgs = $"-ac {channelCount}";
+            }
+
+            return channelArgs;
+        }
+
         private static string ComputeTransformArgs(ConversionPreset conversionPreset)
         {
             float scaleFactor = conversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);
@@ -179,6 +197,18 @@ namespace FileConverter.ConversionJobs
         }
 
         /// <summary>
+        /// Convert video quality index to lib theora video quality level.
+        /// </summary>
+        /// <param name="quality">The quality index.</param>
+        /// <returns>Returns the video quality index.</returns>
+        /// The range of the video quality level is 0-10: where 10 is the highest quality/largest filesize, 0 being the lowest quality/smallest filesize.
+        /// https://trac.ffmpeg.org/wiki/TheoraVorbisEncodingGuide
+        private int OGVTheoraQualityToQualityIndex(int quality)
+        {
+            return quality;
+        }
+
+        /// <summary>
         /// Convert encoding mode setting to <c>ffmpeg</c> argument option.
         /// </summary>
         /// <param name="encoding">The encoding mode setting.</param>
@@ -246,35 +276,35 @@ namespace FileConverter.ConversionJobs
         /// </summary>
         /// <param name="encodingSpeed">The encoding speed.</param>
         /// <returns>The H264 preset.</returns>
-        private string H264EncodingSpeedToPreset(string encodingSpeed)
+        private string H264EncodingSpeedToPreset(VideoEncodingSpeed encodingSpeed)
         {
             switch (encodingSpeed)
             {
-                case "Ultra Fast":
+                case VideoEncodingSpeed.UltraFast:
                     return "ultrafast";
 
-                case "Super Fast":
+                case VideoEncodingSpeed.SuperFast:
                     return "superfast";
 
-                case "Very Fast":
+                case VideoEncodingSpeed.VeryFast:
                     return "veryfast";
 
-                case "Faster":
+                case VideoEncodingSpeed.Faster:
                     return "faster";
 
-                case "Fast":
+                case VideoEncodingSpeed.Fast:
                     return "fast";
 
-                case "Medium":
+                case VideoEncodingSpeed.Medium:
                     return "medium";
 
-                case "Slow":
+                case VideoEncodingSpeed.Slow:
                     return "slow";
 
-                case "Slower":
+                case VideoEncodingSpeed.Slower:
                     return "slower";
 
-                case "Very Slow":
+                case VideoEncodingSpeed.VerySlow:
                     return "veryslow";
             }
 

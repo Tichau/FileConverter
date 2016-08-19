@@ -2,18 +2,24 @@
 
 namespace FileConverter.Windows
 {
+    using System;
+    using System.Windows.Input;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
     using System.Windows;
 
     using FileConverter.Annotations;
+    using FileConverter.Commands;
     using FileConverter.Upgrade;
     
     public partial class UpgradeWindow : Window, INotifyPropertyChanged
     {
         private UpgradeVersionDescription upgradeVersionDescription;
         private string releaseNoteContent;
+
+        private DelegateCommand downloadInstallerCommand;
+        private DelegateCommand launchInstallerCommand;
 
         public UpgradeWindow()
         {
@@ -22,6 +28,32 @@ namespace FileConverter.Windows
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ICommand DownloadInstallerCommand
+        {
+            get
+            {
+                if (this.downloadInstallerCommand == null)
+                {
+                    this.downloadInstallerCommand = new DelegateCommand(this.ExecuteDownloadInstallerCommand);
+                }
+
+                return this.downloadInstallerCommand;
+            }
+        }
+
+        public ICommand LaunchInstallerCommand
+        {
+            get
+            {
+                if (this.launchInstallerCommand == null)
+                {
+                    this.launchInstallerCommand = new DelegateCommand(this.ExecuteLaunchInstallerCommand);
+                }
+
+                return this.launchInstallerCommand;
+            }
+        }
+        
         public UpgradeVersionDescription VersionDescription
         {
             get
@@ -38,14 +70,14 @@ namespace FileConverter.Windows
                 this.OnPropertyChanged();
             }
         }
-
+        
         public string ReleaseNote
         {
             get
             {
                 if (string.IsNullOrEmpty(this.releaseNoteContent))
                 {
-                    return "###Downloading change log ...";
+                    return Properties.Resources.DownloadingChangeLog;
                 }
 
                 return this.releaseNoteContent;
@@ -58,7 +90,7 @@ namespace FileConverter.Windows
                 this.OnPropertyChanged();
             }
         }
-
+        
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -70,10 +102,15 @@ namespace FileConverter.Windows
             this.ReleaseNote = versionDescription.ChangeLog;
         }
 
-        private void OnInstallButtonClick(object sender, RoutedEventArgs e)
+        private void ExecuteDownloadInstallerCommand()
         {
             this.upgradeVersionDescription.NeedToUpgrade = true;
             Helpers.DownloadInstallerAsync(this.upgradeVersionDescription);
+            this.Hide();
+        }
+
+        private void ExecuteLaunchInstallerCommand()
+        {
             this.Close();
         }
     }

@@ -31,7 +31,7 @@ namespace FileConverter
         private static readonly Version Version = new Version()
                                             {
                                                 Major = 1, 
-                                                Minor = 0,
+                                                Minor = 1,
                                                 Patch = 0,
                                             };
 
@@ -42,8 +42,7 @@ namespace FileConverter
         private bool needToRunConversionThread;
         private bool cancelAutoExit;
         private bool isSessionEnding;
-        private UpgradeVersionDescription upgradeVersionDescription = null;
-
+        
         public Application()
         {
             this.ConvertionJobs = this.conversionJobs.AsReadOnly();
@@ -83,6 +82,12 @@ namespace FileConverter
             set;
         }
 
+        public UpgradeVersionDescription UpgradeVersionDescription
+        {
+            get;
+            private set;
+        }
+
         public bool Verbose
         {
             get;
@@ -107,7 +112,7 @@ namespace FileConverter
 
             if (this.needToRunConversionThread)
             {
-                Thread fileConvertionThread = new Thread(this.ConvertFiles);
+                Thread fileConvertionThread = Helpers.InstantiateThread("ConversionQueueThread", this.ConvertFiles);
                 fileConvertionThread.Start();
             }
         }
@@ -118,23 +123,23 @@ namespace FileConverter
 
             Debug.Log("Exit application.");
             
-            if (!this.isSessionEnding && this.upgradeVersionDescription != null && this.upgradeVersionDescription.NeedToUpgrade)
+            if (!this.isSessionEnding && this.UpgradeVersionDescription != null && this.UpgradeVersionDescription.NeedToUpgrade)
             {
-                Debug.Log("A new version of file converter has been found: {0}.", this.upgradeVersionDescription.LatestVersion);
+                Debug.Log("A new version of file converter has been found: {0}.", this.UpgradeVersionDescription.LatestVersion);
 
-                if (string.IsNullOrEmpty(this.upgradeVersionDescription.InstallerPath))
+                if (string.IsNullOrEmpty(this.UpgradeVersionDescription.InstallerPath))
                 {
                     Debug.LogError("Invalid installer path.");
                 }
                 else
                 {
                     Debug.Log("Wait for the end of the installer download.");
-                    while (this.upgradeVersionDescription.InstallerDownloadInProgress)
+                    while (this.UpgradeVersionDescription.InstallerDownloadInProgress)
                     {
                         Thread.Sleep(1000);
                     }
 
-                    string installerPath = this.upgradeVersionDescription.InstallerPath;
+                    string installerPath = this.UpgradeVersionDescription.InstallerPath;
                     if (!System.IO.File.Exists(installerPath))
                     {
                         Debug.LogError("Can't find upgrade installer ({0}). Try to restart the application.", installerPath);
@@ -142,7 +147,7 @@ namespace FileConverter
                     }
 
                     // Start process.
-                    Debug.Log("Start file converter upgrade from version {0} to {1}.", ApplicationVersion, this.upgradeVersionDescription.LatestVersion);
+                    Debug.Log("Start file converter upgrade from version {0} to {1}.", ApplicationVersion, this.UpgradeVersionDescription.LatestVersion);
 
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(installerPath)
                         {
@@ -172,10 +177,12 @@ namespace FileConverter
 
         private void Initialize()
         {
-            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString());
-            this.numberOfConversionThread = System.Math.Max(1, Environment.ProcessorCount / 2);
-            Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", this.numberOfConversionThread);
-            
+#if BUILD32
+            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString() + " (32 bits)");
+#else
+            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString() + " (64 bits)");
+#endif
+
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
             string[] args = Environment.GetCommandLineArgs();
@@ -286,9 +293,21 @@ namespace FileConverter
                 return;
             }
 
+            if (this.Settings.MaximumNumberOfSimultaneousConversions <= 0)
+            {
+                this.Settings.MaximumNumberOfSimultaneousConversions = System.Math.Max(1, Environment.ProcessorCount / 2);
+                Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", this.Settings.MaximumNumberOfSimultaneousConversions);
+            }
+
+            this.numberOfConversionThread = this.Settings.MaximumNumberOfSimultaneousConversions;
+            Diagnostics.Debug.Log("Maximum number of conversion threads: {0}", this.numberOfConversionThread);
+
             // Check upgrade.
             if (this.Settings.CheckUpgradeAtStartup)
             {
+#if DEBUG
+                Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+#else
                 long fileTime = Registry.GetValue<long>(Registry.Keys.LastUpdateCheckDate);
                 DateTime lastUpdateDateTime = DateTime.FromFileTime(fileTime);
 
@@ -297,6 +316,7 @@ namespace FileConverter
                 {
                     Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
                 }
+#endif
             }
 
             ConversionPreset conversionPreset = null;
@@ -376,7 +396,7 @@ namespace FileConverter
                             Thread thread = jobThreads[threadIndex];
                             if (thread == null || !thread.IsAlive)
                             {
-                                jobThread = new Thread(this.ExecuteConversionJob);
+                                jobThread = Helpers.InstantiateThread("ConversionThread", this.ExecuteConversionJob);
                                 jobThreads[threadIndex] = jobThread;
                                 break;
                             }
@@ -458,15 +478,6 @@ namespace FileConverter
             {
                 Debug.LogError("Failure during conversion: {0}", exception.ToString());
             }
-
-            if (conversionJob.State == ConversionJob.ConversionState.Done && !System.IO.File.Exists(conversionJob.OutputFilePath))
-            {
-                Debug.LogError("Can't find the output file.");
-            }
-            else if (conversionJob.State == ConversionJob.ConversionState.Failed && System.IO.File.Exists(conversionJob.OutputFilePath))
-            {
-                Debug.Log("The conversion job failed but there is an output file that does exists.");
-            }
         }
 
         private void OnGetLatestVersionDescription(UpgradeVersionDescription upgradeVersionDescription)
@@ -483,7 +494,7 @@ namespace FileConverter
                 return;
             }
 
-            this.upgradeVersionDescription = upgradeVersionDescription;
+            this.UpgradeVersionDescription = upgradeVersionDescription;
             (this.MainWindow as MainWindow).OnNewVersionReleased(upgradeVersionDescription);
         }
     }

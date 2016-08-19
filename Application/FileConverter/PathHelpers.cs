@@ -2,8 +2,12 @@
 
 namespace FileConverter
 {
+    using System;
+    using System.Text;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
+
+    using FileConverter.Diagnostics;
 
     public static class PathHelpers
     {
@@ -90,106 +94,48 @@ namespace FileConverter
             }
         }
 
-        public static string GenerateUniquePath(string path)
+        public static string GenerateUniquePath(string path, params string[] blacklist)
         {
             string baseExtension = System.IO.Path.GetExtension(path);
             string basePath = path.Substring(0, path.Length - baseExtension.Length);
             int index = 2;
-            while (System.IO.File.Exists(path))
+            while (System.IO.File.Exists(path) ||
+                (blacklist != null && System.Array.Exists(blacklist, match => match == path)))
             {
-                path = string.Format("{0} ({1}){2}", basePath, index, baseExtension);
+                path = $"{basePath} ({index}){baseExtension}";
                 index++;
             }
 
             return path;
         }
 
-        public static string GetExtensionCategory(string extension)
+        public static bool CreateFolders(string filePath)
         {
-            switch (extension)
+            // Create output folders that doesn't already exist.
+            StringBuilder path = new StringBuilder(filePath.Length);
+            string drive = PathHelpers.GetDrive(filePath);
+            path.Append(drive);
+
+            foreach (string directory in PathHelpers.GetDirectories(filePath))
             {
-                case "aac":
-                case "aiff":
-                case "ape":
-                case "cda":
-                case "flac":
-                case "mp3":
-                case "m4a":
-                case "oga":
-                case "ogg":
-                case "wav":
-                case "wma":
-                    return InputCategoryNames.Audio;
+                path.Append(directory);
+                path.Append('\\');
 
-                case "3gp":
-                case "avi":
-                case "bik":
-                case "flv":
-                case "m4v":
-                case "mp4":
-                case "mpeg":
-                case "mov":
-                case "mkv":
-                case "ogv":
-                case "vob":
-                case "webm":
-                case "wmv":
-                    return InputCategoryNames.Video;
-
-                case "bmp":
-                case "exr":
-                case "ico":
-                case "jpg":
-                case "jpeg":
-                case "png":
-                case "psd":
-                case "tga":
-                case "tiff":
-                case "svg":
-                case "xcf":
-                    return InputCategoryNames.Image;
-
-                case "gif":
-                    return InputCategoryNames.AnimatedImage;
+                if (!System.IO.Directory.Exists(path.ToString()))
+                {
+                    try
+                    {
+                        System.IO.Directory.CreateDirectory(path.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        Debug.Log(string.Format("Can't create directories for path {0}", filePath));
+                        return false;
+                    }
+                }
             }
 
-            return InputCategoryNames.Misc;
-        }
-
-        public static bool IsOutputTypeCompatibleWithCategory(OutputType outputType, string category)
-        {
-            if (category == InputCategoryNames.Misc)
-            {
-                // Misc category contains unsorted input extensions, so we consider that they are compatible to be tolerant.
-                return true;
-            }
-
-            switch (outputType)
-            {
-                case OutputType.Aac:
-                case OutputType.Flac:
-                case OutputType.Mp3:
-                case OutputType.Ogg:
-                case OutputType.Wav:
-                    return category == InputCategoryNames.Audio || category == InputCategoryNames.Video;
-
-                case OutputType.Avi:
-                case OutputType.Mkv:
-                case OutputType.Mp4:
-                case OutputType.Webm:
-                    return category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
-
-                case OutputType.Ico:
-                case OutputType.Jpg:
-                case OutputType.Png:
-                    return category == InputCategoryNames.Image;
-
-                case OutputType.Gif:
-                    return category == InputCategoryNames.Image || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
-
-                default:
-                    return false;
-            }
+            return true;
         }
 
         public static string GetUserDataFolderPath()
@@ -205,14 +151,78 @@ namespace FileConverter
             return path;
         }
 
-        public static class InputCategoryNames
+        public static string GenerateFilePathFromTemplate(string inputFilePath, OutputType outputFileExtension, string outputFilePathTemplate, int numberIndex, int numberMax)
         {
-            public const string Audio = "Audio";
-            public const string Video = "Video";
-            public const string Image = "Image";
-            public const string AnimatedImage = "Animated Image";
+            if (string.IsNullOrEmpty(inputFilePath))
+            {
+                return "Invalid input file path (argument 0).";
+            }
 
-            public const string Misc = "Misc";
+            string inputExtension = System.IO.Path.GetExtension(inputFilePath).Substring(1);
+            string inputPathWithoutExtension = inputFilePath.Substring(0, inputFilePath.Length - inputExtension.Length - 1);
+            string outputExtension = outputFileExtension.ToString().ToLowerInvariant();
+
+            if (string.IsNullOrEmpty(outputFilePathTemplate))
+            {
+                // Default output path.
+                return inputPathWithoutExtension + "." + outputExtension;
+            }
+
+            string fileName = System.IO.Path.GetFileName(inputPathWithoutExtension);
+            string parentDirectory = System.IO.Path.GetDirectoryName(inputPathWithoutExtension);
+            if (!parentDirectory.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+            {
+                parentDirectory += System.IO.Path.DirectorySeparatorChar;
+            }
+
+            string[] directories = parentDirectory.Substring(0, parentDirectory.Length - 1).Split(System.IO.Path.DirectorySeparatorChar);
+
+            // Generate output path from template.
+            string outputPath = outputFilePathTemplate;
+
+            outputPath = outputPath.Replace("(path)", parentDirectory);
+            outputPath = outputPath.Replace("(p)", parentDirectory);
+
+            outputPath = outputPath.Replace("(filename)", fileName);
+            outputPath = outputPath.Replace("(f)", fileName);
+            outputPath = outputPath.Replace("(F)", fileName.ToUpperInvariant());
+
+            outputPath = outputPath.Replace("(outputext)", outputExtension);
+            outputPath = outputPath.Replace("(o)", outputExtension);
+            outputPath = outputPath.Replace("(O)", outputExtension.ToUpperInvariant());
+
+            outputPath = outputPath.Replace("(inputext)", inputExtension);
+            outputPath = outputPath.Replace("(i)", inputExtension);
+            outputPath = outputPath.Replace("(I)", inputExtension.ToUpperInvariant());
+
+            string myDocumentsFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "\\";
+            outputPath = outputPath.Replace("(p:d)", myDocumentsFolder);
+            outputPath = outputPath.Replace("(p:documents)", myDocumentsFolder);
+
+            string myMusicFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic) + "\\";
+            outputPath = outputPath.Replace("(p:m)", myMusicFolder);
+            outputPath = outputPath.Replace("(p:music)", myMusicFolder);
+
+            string myVideoFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyVideos) + "\\";
+            outputPath = outputPath.Replace("(p:v)", myVideoFolder);
+            outputPath = outputPath.Replace("(p:videos)", myVideoFolder);
+
+            string myPictureFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures) + "\\";
+            outputPath = outputPath.Replace("(p:p)", myPictureFolder);
+            outputPath = outputPath.Replace("(p:pictures)", myPictureFolder);
+
+            for (int index = 0; index < directories.Length; index++)
+            {
+                outputPath = outputPath.Replace(string.Format("(d{0})", directories.Length - index - 1), directories[index]);
+                outputPath = outputPath.Replace(string.Format("(D{0})", directories.Length - index - 1), directories[index].ToUpperInvariant());
+            }
+
+            outputPath = outputPath.Replace("(n:i)", numberIndex.ToString());
+            outputPath = outputPath.Replace("(n:c)", numberMax.ToString());
+
+            outputPath += "." + outputExtension;
+
+            return outputPath;
         }
     }
 }
