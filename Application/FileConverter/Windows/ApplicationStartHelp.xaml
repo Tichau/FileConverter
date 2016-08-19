@@ -6,14 +6,14 @@
         xmlns:fileConverter="clr-namespace:FileConverter"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        mc:Ignorable="d"
-        Height="530" Width="640" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize">
+        mc:Ignorable="d" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize" 
+        Width="640" Height="545">
     <Window.Resources>
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(fileConverter:Application.ApplicationVersion)"/>
     </Window.Title>
-    <StackPanel Margin="5">
+    <StackPanel Margin="5" VerticalAlignment="Center">
         <TextBlock Margin="0,0,0,4"  Text="{x:Static project:Resources.FileConverterStartHelp1}" TextWrapping="Wrap" FontWeight="Bold" FontSize="13.333"/>
         <TextBlock Text="{x:Static project:Resources.FileConverterStartHelp2}" TextWrapping="Wrap"/>
         <TextBlock Text="{x:Static project:Resources.FileConverterStartHelp3}" TextWrapping="Wrap" />
