@@ -415,7 +415,7 @@ utilisez maj pour une version en majuscules</value>
     <value>Lecture de l'image d'origine</value>
   </data>
   <data name="ConversionStateReadPdf" xml:space="preserve">
-    <value>Lectur du document</value>
+    <value>Lecture du document</value>
   </data>
   <data name="StringAnimatedImageName" xml:space="preserve">
     <value>Image Animée</value>
@@ -522,5 +522,14 @@ utilisez maj pour une version en majuscules</value>
   <data name="LicenceHeader3" xml:space="preserve">
     <value>Ce programme est distribué dans l'espoir d'être utile, mais SANS AUCUNE GARANTIE. Voir la GNU General Public Licence (disponible dans le dossier d'installation: `LICENCE.md`) pour plus de détails.</value>
     <comment>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.</comment>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>Fermeture de l'application.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>L'application se fermera automatiquement dans {0} secondes.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>L'application se fermera automatiquement dans 1 seconde.</value>
   </data>
 </root>

@@ -106,6 +106,33 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The application is terminating..
+        /// </summary>
+        public static string ApplicationIsTerminating {
+            get {
+                return ResourceManager.GetString("ApplicationIsTerminating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application will automatically terminate in {0} seconds..
+        /// </summary>
+        public static string ApplicationWillTerminateInMultipleSeconds {
+            get {
+                return ResourceManager.GetString("ApplicationWillTerminateInMultipleSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application will automatically terminate in 1 second..
+        /// </summary>
+        public static string ApplicationWillTerminateInOneSecond {
+            get {
+                return ResourceManager.GetString("ApplicationWillTerminateInOneSecond", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Audio.
         /// </summary>
         public static string AudioTitle {

@@ -505,4 +505,13 @@ use maj for uppercase version</value>
   <data name="LicenceHeader3" xml:space="preserve">
     <value>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.</value>
   </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>The application is terminating.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>The application will automatically terminate in {0} seconds.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>The application will automatically terminate in 1 second.</value>
+  </data>
 </root>

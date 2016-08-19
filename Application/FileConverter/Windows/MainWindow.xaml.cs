@@ -182,16 +182,16 @@ namespace FileConverter
 
             if (remaingingSeconds >= 2)
             {
-                this.InformationMessage = string.Format("The application will automatically terminate in {0} seconds.", remaingingSeconds);
+                this.InformationMessage = string.Format(Properties.Resources.ApplicationWillTerminateInMultipleSeconds, remaingingSeconds);
             }
             else if (remaingingSeconds == 1)
             {
-                this.InformationMessage = string.Format("The application will automatically terminate in {0} second.", remaingingSeconds);
+                this.InformationMessage = Properties.Resources.ApplicationWillTerminateInOneSecond;
             }
 
             if (remaingingSeconds <= 0)
             {
-                this.InformationMessage = string.Format("The application is terminating.");
+                this.InformationMessage = Properties.Resources.ApplicationIsTerminating;
             }
         }
     }
