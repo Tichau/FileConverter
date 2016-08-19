@@ -84,15 +84,15 @@
                 <RemoveFolder Id='RemoveStartMenuDir' Directory='ApplicationStartMenuShortcut' On='uninstall' />
             </Component>
             <Component Guid="{1B14FF2D-C82D-4425-A447-DED14CCBEA5C}" Win64="$(var.Win64)">
-                <File Id="FileConverter.exe.config" Source="$(var.FileConverterExtension.TargetDir)\FileConverter.exe.config" KeyPath="yes" Checksum="yes" />
+                <File Id="FileConverter.exe.config" Source="$(var.FileConverter.TargetDir)FileConverter.exe.config" KeyPath="yes" Checksum="yes" />
             </Component>
             
             <!-- Extension -->
             <Component Guid="{AA5EA6F7-C443-488B-8E48-7CF000B9AD2A}" Win64="$(var.Win64)">
-                <File Id="FileConverterExtension.dll" Source="$(var.FileConverterExtension.TargetDir)\FileConverterExtension.dll" KeyPath="yes" Checksum="yes" />
+                <File Id="FileConverterExtension.dll" Source="$(var.FileConverterExtension.TargetDir)FileConverterExtension.dll" KeyPath="yes" Checksum="yes" />
             </Component>
             <Component Guid="{9BF0AC45-A586-41C9-BA93-6048B46DA65F}" Win64="$(var.Win64)">
-                <File Id="SharpShell.dll" Source="$(var.FileConverterExtension.TargetDir)\SharpShell.dll" KeyPath="yes" Checksum="yes"/>
+                <File Id="SharpShell.dll" Source="$(var.FileConverterExtension.TargetDir)SharpShell.dll" KeyPath="yes" Checksum="yes"/>
             </Component>
             <Component Guid="{EC580BEF-F962-42BD-B46D-4E4C126F2641}" Win64="$(var.Win64)">
                 <File Id="srm.exe" Source="..\packages\SharpShellTools.2.2.0.0\lib\srm.exe" KeyPath="yes" Checksum="yes"/>
