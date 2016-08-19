@@ -4,6 +4,7 @@
 - New: Localization system. File Converter can now be translated in multiple languages. The default language is the same than your OS language (if available).
 - New: Improve the application upgrade UI. If you quit the application during the upgrade downloading, you will now see the download progress.
 - New: Add the possibility to choose the application language in the application settings.
+- New: Add french localization.
 - New: Possibility to encode videos using theora video codec and Ogg vorbis audio codec in a ogv container.
 - New: Possibility to convert a Pdf file into image files (one image per page).
 - New: Possibility to convert an image into a Pdf file.
