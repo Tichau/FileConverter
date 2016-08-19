@@ -112,7 +112,7 @@ namespace FileConverter
 
             if (this.needToRunConversionThread)
             {
-                Thread fileConvertionThread = new Thread(this.ConvertFiles);
+                Thread fileConvertionThread = Helpers.InstantiateThread("ConversionQueueThread", this.ConvertFiles);
                 fileConvertionThread.Start();
             }
         }
@@ -396,7 +396,7 @@ namespace FileConverter
                             Thread thread = jobThreads[threadIndex];
                             if (thread == null || !thread.IsAlive)
                             {
-                                jobThread = new Thread(this.ExecuteConversionJob);
+                                jobThread = Helpers.InstantiateThread("ConversionThread", this.ExecuteConversionJob);
                                 jobThreads[threadIndex] = jobThread;
                                 break;
                             }

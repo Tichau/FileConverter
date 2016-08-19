@@ -104,7 +104,7 @@ namespace FileConverter.ConversionJobs
             // Sub conversion job (for compression).
             this.compressionConversionJob = ConversionJobFactory.Create(this.ConversionPreset, this.intermediateFilePath);
             this.compressionConversionJob.PrepareConversion(this.intermediateFilePath, this.OutputFilePath);
-            this.compressionThread = new Thread(this.CompressAsync);
+            this.compressionThread = Helpers.InstantiateThread("CDACompressionThread", this.CompressAsync);
         }
 
         protected override void Convert()

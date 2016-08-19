@@ -8,6 +8,7 @@ namespace FileConverter
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Threading;
 
     public static class Helpers
     {
@@ -118,6 +119,40 @@ namespace FileConverter
             }
         }
 
+        public static Thread InstantiateThread(string name, ThreadStart threadStart)
+        {
+            Application application = Application.Current as Application;
+            CultureInfo currentCulture = application?.Settings?.ApplicationLanguage;
+
+            Thread thread = new Thread(threadStart);
+            thread.Name = name;
+
+            if (currentCulture != null)
+            {
+                thread.CurrentCulture = currentCulture;
+                thread.CurrentUICulture = currentCulture;
+            }
+
+            return thread;
+        }
+
+        public static Thread InstantiateThread(string name, ParameterizedThreadStart parameterizedThreadStart)
+        {
+            Application application = Application.Current as Application;
+            CultureInfo currentCulture = application?.Settings?.ApplicationLanguage;
+
+            Thread thread = new Thread(parameterizedThreadStart);
+            thread.Name = name;
+
+            if (currentCulture != null)
+            {
+                thread.CurrentCulture = currentCulture;
+                thread.CurrentUICulture = currentCulture;
+            }
+
+            return thread;
+        }
+        
         public static class InputCategoryNames
         {
             public const string Audio = "Audio";
