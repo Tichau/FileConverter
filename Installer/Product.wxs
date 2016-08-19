@@ -83,6 +83,9 @@
                 </File>
                 <RemoveFolder Id='RemoveStartMenuDir' Directory='ApplicationStartMenuShortcut' On='uninstall' />
             </Component>
+            <Component Guid="{1B14FF2D-C82D-4425-A447-DED14CCBEA5C}" Win64="$(var.Win64)">
+                <File Id="FileConverter.exe.config" Source="$(var.FileConverterExtension.TargetDir)\FileConverter.exe.config" KeyPath="yes" Checksum="yes" />
+            </Component>
             
             <!-- Extension -->
             <Component Guid="{AA5EA6F7-C443-488B-8E48-7CF000B9AD2A}" Win64="$(var.Win64)">
