@@ -22,10 +22,12 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_ExtractCDA() : base()
         {
+            this.IsCancelable = true;
         }
 
         public ConversionJob_ExtractCDA(ConversionPreset conversionPreset) : base(conversionPreset)
         {
+            this.IsCancelable = true;
         }
 
         protected override InputPostConversionAction InputPostConversionAction
@@ -186,6 +188,13 @@ namespace FileConverter.ConversionJobs
             File.Delete(this.intermediateFilePath);
         }
 
+        public override void Cancel()
+        {
+            base.Cancel();
+
+            this.compressionConversionJob.Cancel();
+        }
+
         private void WriteWaveData(object sender, DataReadEventArgs eventArgs)
         {
             this.waveWriter?.Write(eventArgs.Data, 0, (int)eventArgs.DataSize);
@@ -193,6 +202,12 @@ namespace FileConverter.ConversionJobs
 
         private void CdReadProgress(object sender, ReadProgressEventArgs eventArgs)
         {
+            if (this.CancelIsRequested)
+            {
+                eventArgs.CancelRead = true;
+                return;
+            }
+
             this.Progress = (float)eventArgs.BytesRead / (float)eventArgs.Bytes2Read;
 
             eventArgs.CancelRead |= this.State != ConversionState.InProgress;

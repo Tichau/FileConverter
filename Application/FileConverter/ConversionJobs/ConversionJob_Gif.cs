@@ -14,6 +14,15 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_Gif(ConversionPreset conversionPreset) : base(conversionPreset)
         {
+            this.IsCancelable = true;
+        }
+
+        public override void Cancel()
+        {
+            base.Cancel();
+
+            this.pngConversionJob.Cancel();
+            this.gifConversionJob.Cancel();
         }
 
         protected override void Initialize()

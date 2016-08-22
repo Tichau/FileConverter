@@ -13,6 +13,15 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_Ico(ConversionPreset conversionPreset) : base(conversionPreset)
         {
+            this.IsCancelable = true;
+        }
+
+        public override void Cancel()
+        {
+            base.Cancel();
+
+            this.pngConversionJob.Cancel();
+            this.icoConversionJob.Cancel();
         }
 
         protected override void Initialize()
