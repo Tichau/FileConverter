@@ -14,10 +14,12 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_ImageMagick() : base()
         {
+            this.IsCancelable = true;
         }
 
         public ConversionJob_ImageMagick(ConversionPreset conversionPreset) : base(conversionPreset)
         {
+            this.IsCancelable = true;
         }
 
         protected override void Initialize()
@@ -199,6 +201,12 @@ namespace FileConverter.ConversionJobs
 
         private void Image_Progress(object sender, ProgressEventArgs eventArgs)
         {
+            if (this.CancelIsRequested)
+            {
+                eventArgs.Cancel = true;
+                return;
+            }
+
             float alreadyCompletedPages = this.CurrentOuputFilePathIndex / (float)this.pageCount;
             this.Progress = alreadyCompletedPages + (float)eventArgs.Progress.ToDouble() / (100f * this.pageCount);
         }
