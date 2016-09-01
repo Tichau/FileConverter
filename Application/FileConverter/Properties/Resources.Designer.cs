@@ -268,20 +268,20 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read document.
+        /// </summary>
+        public static string ConversionStateReadDocument {
+            get {
+                return ResourceManager.GetString("ConversionStateReadDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Read input image.
         /// </summary>
         public static string ConversionStateReadIntputImage {
             get {
                 return ResourceManager.GetString("ConversionStateReadIntputImage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Read document.
-        /// </summary>
-        public static string ConversionStateReadPdf {
-            get {
-                return ResourceManager.GetString("ConversionStateReadPdf", resourceCulture);
             }
         }
         

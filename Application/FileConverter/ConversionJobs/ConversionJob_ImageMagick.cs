@@ -95,7 +95,7 @@ namespace FileConverter.ConversionJobs
             Debug.Log("Density: {0}dpi.", dpi);
             settings.Density = new Density(dpi, dpi);
 
-            this.UserState = Properties.Resources.ConversionStateReadPdf;
+            this.UserState = Properties.Resources.ConversionStateReadDocument;
 
             using (MagickImageCollection images = new MagickImageCollection())
             {

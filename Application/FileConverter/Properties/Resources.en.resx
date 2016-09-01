@@ -400,7 +400,7 @@ use maj for uppercase version</value>
   <data name="ConversionStateReadIntputImage" xml:space="preserve">
     <value>Read input image</value>
   </data>
-  <data name="ConversionStateReadPdf" xml:space="preserve">
+  <data name="ConversionStateReadDocument" xml:space="preserve">
     <value>Read document</value>
   </data>
   <data name="StringAnimatedImageName" xml:space="preserve">

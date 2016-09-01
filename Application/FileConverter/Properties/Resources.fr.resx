@@ -414,7 +414,7 @@ utilisez maj pour une version en majuscules</value>
   <data name="ConversionStateReadIntputImage" xml:space="preserve">
     <value>Lecture de l'image d'origine</value>
   </data>
-  <data name="ConversionStateReadPdf" xml:space="preserve">
+  <data name="ConversionStateReadDocument" xml:space="preserve">
     <value>Lecture du document</value>
   </data>
   <data name="StringAnimatedImageName" xml:space="preserve">
