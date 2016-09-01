@@ -13,6 +13,11 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_ExtractCDA(conversionPreset);    
             }
 
+            if (inputFileExtension == "doc" || inputFileExtension == "docx")
+            {
+                return new ConversionJob_Word(conversionPreset);
+            }
+
             if (conversionPreset.OutputType == OutputType.Ico)
             {
                 return new ConversionJob_Ico(conversionPreset);
@@ -23,17 +28,17 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_Gif(conversionPreset);
             }
 
-            if (Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Image ||
-                Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Document)
-            {
-                return new ConversionJob_ImageMagick(conversionPreset);
-            }
-
             if (conversionPreset.OutputType == OutputType.Pdf)
             {
                 return new ConversionJob_ImageMagick(conversionPreset);
             }
 
+            if (Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Image ||
+                Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Document)
+            {
+                return new ConversionJob_ImageMagick(conversionPreset);
+            }
+            
             return new ConversionJob_FFMPEG(conversionPreset);
         }
     }

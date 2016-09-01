@@ -73,6 +73,8 @@ namespace FileConverter
                     return InputCategoryNames.AnimatedImage;
 
                 case "pdf":
+                case "doc":
+                case "docx":
                     return InputCategoryNames.Document;
             }
 
@@ -112,7 +114,7 @@ namespace FileConverter
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
 
                 case OutputType.Pdf:
-                    return category == InputCategoryNames.Image;
+                    return category == InputCategoryNames.Image || category == InputCategoryNames.Document;
 
                 default:
                     return false;
