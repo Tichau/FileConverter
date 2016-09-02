@@ -1004,6 +1004,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Misc.
+        /// </summary>
+        public static string StringMiscName {
+            get {
+                return ResourceManager.GetString("StringMiscName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Video.
         /// </summary>
         public static string StringVideoName {

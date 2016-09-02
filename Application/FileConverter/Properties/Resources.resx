@@ -514,4 +514,7 @@ use maj for uppercase version</value>
   <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
     <value>The application will automatically terminate in 1 second.</value>
   </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Misc</value>
+  </data>
 </root>

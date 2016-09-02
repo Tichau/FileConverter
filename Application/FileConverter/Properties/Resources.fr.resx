@@ -532,4 +532,7 @@ utilisez maj pour une version en majuscules</value>
   <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
     <value>L'application se fermera automatiquement dans 1 seconde.</value>
   </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Autre</value>
+  </data>
 </root>
