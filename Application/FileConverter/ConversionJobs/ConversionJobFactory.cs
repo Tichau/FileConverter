@@ -13,7 +13,7 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_ExtractCDA(conversionPreset);    
             }
 
-            if (inputFileExtension == "doc" || inputFileExtension == "docx")
+            if (inputFileExtension == "doc" || inputFileExtension == "docx" || inputFileExtension == "odt")
             {
                 return new ConversionJob_Word(conversionPreset);
             }
