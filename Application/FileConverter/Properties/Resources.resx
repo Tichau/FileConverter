@@ -446,7 +446,7 @@ use maj for uppercase version</value>
     <value>Fail to find ffmpeg executable. You should try to reinstall the application.</value>
   </data>
   <data name="ErrorCDAExtractionFailed" xml:space="preserve">
-    <value>Audio CD track extraction failed</value>
+    <value>Audio CD track extraction failed.</value>
   </data>
   <data name="ErrorCDDriveNotReady" xml:space="preserve">
     <value>CD drive is not ready.</value>
@@ -516,5 +516,11 @@ use maj for uppercase version</value>
   </data>
   <data name="StringMiscName" xml:space="preserve">
     <value>Misc</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Can't find the output file(s).</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>The conversion job failed but there is an output file that does exists.</value>
   </data>
 </root>

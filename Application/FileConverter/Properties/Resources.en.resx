@@ -517,4 +517,10 @@ use maj for uppercase version</value>
   <data name="StringMiscName" xml:space="preserve">
     <value>Misc</value>
   </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Can't find the output file(s).</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>The conversion job failed but there is an output file that does exists.</value>
+  </data>
 </root>

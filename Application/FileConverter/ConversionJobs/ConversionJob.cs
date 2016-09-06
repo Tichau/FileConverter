@@ -336,11 +336,11 @@ namespace FileConverter.ConversionJobs
 
             if (this.State == ConversionJob.ConversionState.Done && !this.AllOuputFilesExists())
             {
-                Debug.LogError("Can't find the output file(s).");
+                Debug.LogError(Properties.Resources.ErrorCantFindOutputFiles);
             }
             else if (this.State == ConversionJob.ConversionState.Failed && this.AtLeastOneOuputFilesExists())
             {
-                Debug.Log("The conversion job failed but there is an output file that does exists.");
+                Debug.Log(Properties.Resources.ErrorConversionFailedWithOutput);
             }
         }
 

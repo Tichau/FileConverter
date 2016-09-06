@@ -412,7 +412,16 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Audio CD track extraction failed.
+        ///   Looks up a localized string similar to Can&apos;t find the output file(s)..
+        /// </summary>
+        public static string ErrorCantFindOutputFiles {
+            get {
+                return ResourceManager.GetString("ErrorCantFindOutputFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Audio CD track extraction failed..
         /// </summary>
         public static string ErrorCDAExtractionFailed {
             get {
@@ -426,6 +435,15 @@ namespace FileConverter.Properties {
         public static string ErrorCDDriveNotReady {
             get {
                 return ResourceManager.GetString("ErrorCDDriveNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The conversion job failed but there is an output file that does exists..
+        /// </summary>
+        public static string ErrorConversionFailedWithOutput {
+            get {
+                return ResourceManager.GetString("ErrorConversionFailedWithOutput", resourceCulture);
             }
         }
         
