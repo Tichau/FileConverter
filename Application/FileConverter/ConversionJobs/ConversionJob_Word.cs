@@ -2,19 +2,43 @@
 
 namespace FileConverter.ConversionJobs
 {
-    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+
+    using Word = Microsoft.Office.Interop.Word;
 
     public class ConversionJob_Word : ConversionJob
     {
-        private static Microsoft.Office.Interop.Word.Application wordApplication;
+        private static Word.Application wordApplication;
         private static int wordApplicationRefCount = 0;
+
+        private string intermediateFilePath = string.Empty;
+        private ConversionJob pdf2ImageConversionJob = null;
+        private Word.Document document;
 
         public ConversionJob_Word() : base()
         {
+            ConversionJob_Word.InitializeWordApplicationInstance();
         }
 
         public ConversionJob_Word(ConversionPreset conversionPreset) : base(conversionPreset)
         {
+            ConversionJob_Word.InitializeWordApplicationInstance();
+        }
+
+        protected override int GetOuputFilesCount()
+        {
+            if (this.ConversionPreset.OutputType == OutputType.Pdf)
+            {
+                return 1;
+            }
+
+            Diagnostics.Debug.Log("Load word document '{0}'.", this.InputFilePath);
+            this.document = ConversionJob_Word.wordApplication.Documents.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
+
+            int pagesCount = this.document.ComputeStatistics(Word.WdStatistic.wdStatisticPages);
+
+            return pagesCount;
         }
 
         protected override void Initialize()
@@ -23,15 +47,95 @@ namespace FileConverter.ConversionJobs
 
             if (this.ConversionPreset == null)
             {
-                throw new Exception("The conversion preset must be valid.");
+                throw new System.Exception("The conversion preset must be valid.");
             }
 
-            if (this.ConversionPreset.OutputType != OutputType.Pdf)
+            // Initialize converters.
+            if (this.ConversionPreset.OutputType == OutputType.Pdf)
             {
-                this.ConversionFailed("This conversion is not allowed");
-                return;
+                this.intermediateFilePath = this.OutputFilePath;
+            }
+            else
+            {
+                // Generate intermediate file path.
+                string fileName = Path.GetFileNameWithoutExtension(this.InputFilePath);
+                string tempPath = Path.GetTempPath();
+                this.intermediateFilePath = PathHelpers.GenerateUniquePath(tempPath + fileName + ".pdf");
+
+                ConversionPreset intermediatePreset = new ConversionPreset("Pdf to image", this.ConversionPreset, "pdf");
+                this.pdf2ImageConversionJob = ConversionJobFactory.Create(intermediatePreset, this.intermediateFilePath);
+                this.pdf2ImageConversionJob.PrepareConversion(this.intermediateFilePath, this.OutputFilePaths);
+            }
+        }
+
+        protected override void Convert()
+        {
+            if (this.ConversionPreset == null)
+            {
+                throw new System.Exception("The conversion preset must be valid.");
             }
 
+            this.UserState = Properties.Resources.ConversionStateReadDocument;
+
+            if (this.document == null)
+            {
+                Diagnostics.Debug.Log("Load word document '{0}'.", this.InputFilePath);
+                this.document = ConversionJob_Word.wordApplication.Documents.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
+            }
+
+            // Make this document the active document.
+            this.document.Activate();
+
+            this.UserState = Properties.Resources.ConversionStateConversion;
+
+            Diagnostics.Debug.Log("Load word document to pdf.");
+            this.document.SaveAs(this.intermediateFilePath, Word.WdSaveFormat.wdFormatPDF);
+
+            Diagnostics.Debug.Log("Close word document '{0}'.", this.InputFilePath);
+            this.document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
+            this.document = null;
+
+            System.Threading.Interlocked.Decrement(ref ConversionJob_Word.wordApplicationRefCount);
+            if (ConversionJob_Word.wordApplicationRefCount == 0)
+            {
+                Diagnostics.Debug.Log("Quit word application via interop.");
+                ConversionJob_Word.wordApplication.Quit();
+            }
+            
+            if (this.pdf2ImageConversionJob != null)
+            {
+                if (!System.IO.File.Exists(this.intermediateFilePath))
+                {
+                    this.ConversionFailed(Properties.Resources.ErrorCantFindOutputFiles);
+                    return;
+                }
+
+                Task updateProgress = this.UpdateProgress();
+
+                Diagnostics.Debug.Log("Convert pdf to images.");
+
+                this.pdf2ImageConversionJob.StartConvertion();
+
+                if (this.pdf2ImageConversionJob.State != ConversionState.Done)
+                {
+                    this.ConversionFailed(this.pdf2ImageConversionJob.ErrorMessage);
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(this.intermediateFilePath))
+                {
+                    Diagnostics.Debug.Log("Delete intermediate file {0}.", this.intermediateFilePath);
+
+                    File.Delete(this.intermediateFilePath);
+                }
+
+                updateProgress.Wait();
+            }
+        }
+
+        private static void InitializeWordApplicationInstance()
+        {
+            // Initialize word application.
             System.Threading.Interlocked.Increment(ref ConversionJob_Word.wordApplicationRefCount);
             if (ConversionJob_Word.wordApplication == null)
             {
@@ -43,32 +147,23 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        protected override void Convert()
+        private async Task UpdateProgress()
         {
-            if (this.ConversionPreset == null)
+            while (this.pdf2ImageConversionJob.State != ConversionState.Done &&
+                   this.pdf2ImageConversionJob.State != ConversionState.Failed)
             {
-                throw new Exception("The conversion preset must be valid.");
-            }
+                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
+                {
+                    this.Progress = this.pdf2ImageConversionJob.Progress;
+                }
 
-            this.UserState = Properties.Resources.ConversionStateReadDocument;
+                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
+                {
+                    this.Progress = this.pdf2ImageConversionJob.Progress;
+                    this.UserState = this.pdf2ImageConversionJob.UserState;
+                }
 
-            object inputFilePath = this.InputFilePath;
-            Microsoft.Office.Interop.Word.Document document = ConversionJob_Word.wordApplication.Documents.Open(ref inputFilePath);
-
-            // Make this document the active document.
-            document.Activate();
-
-            this.UserState = Properties.Resources.ConversionStateConversion;
-
-            object outputFilePath = this.OutputFilePath;
-            object outputFileFormat = Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF;
-            document.SaveAs(ref outputFilePath, ref outputFileFormat);
-
-            System.Threading.Interlocked.Decrement(ref ConversionJob_Word.wordApplicationRefCount);
-            if (ConversionJob_Word.wordApplicationRefCount == 0)
-            {
-                Diagnostics.Debug.Log("Quit word application via interop.");
-                ConversionJob_Word.wordApplication.Quit();
+                await Task.Delay(40);
             }
         }
     }

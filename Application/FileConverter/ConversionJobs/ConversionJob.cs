@@ -19,7 +19,6 @@ namespace FileConverter.ConversionJobs
         private CancelConversionJobCommand cancelCommand;
 
         private string initialInputPath = string.Empty;
-        private string[] outputFilePaths;
         private int currentOuputFilePathIndex;
 
         public ConversionJob()
@@ -67,22 +66,22 @@ namespace FileConverter.ConversionJobs
         {
             get
             {
-                if (this.outputFilePaths == null)
+                if (this.OutputFilePaths == null)
                 {
                     return string.Empty;
                 }
 
                 if (this.CurrentOuputFilePathIndex < 0)
                 {
-                    return this.outputFilePaths[0];
+                    return this.OutputFilePaths[0];
                 }
 
-                if (this.CurrentOuputFilePathIndex >= this.outputFilePaths.Length)
+                if (this.CurrentOuputFilePathIndex >= this.OutputFilePaths.Length)
                 {
-                    return this.outputFilePaths[this.outputFilePaths.Length - 1];
+                    return this.OutputFilePaths[this.OutputFilePaths.Length - 1];
                 }
 
-                return this.outputFilePaths[this.CurrentOuputFilePathIndex];
+                return this.OutputFilePaths[this.CurrentOuputFilePathIndex];
             }
         }
 
@@ -200,12 +199,18 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        protected string[] OutputFilePaths
+        {
+            get;
+            private set;
+        }
+
         public virtual bool CanStartConversion(ConversionFlags conversionFlags)
         {
             return (conversionFlags & ConversionFlags.CdDriveExtraction) == 0;
         }
 
-        public void PrepareConversion(string inputFilePath, string outputFilePath = null)
+        public void PrepareConversion(string inputFilePath, params string[] outputFilePaths)
         {
             if (string.IsNullOrEmpty(inputFilePath))
             {
@@ -229,12 +234,22 @@ namespace FileConverter.ConversionJobs
             this.initialInputPath = inputFilePath;
             this.InputFilePath = inputFilePath;
 
-            int outputFilesCount = this.GetOuputFilesCount();
-            this.outputFilePaths = new string[outputFilesCount];
-
-            for (int index = 0; index < outputFilesCount; index++)
+            this.OutputFilePaths = outputFilePaths;
+            if (this.OutputFilePaths.Length == 0)
             {
-                string path = outputFilePath ?? this.ConversionPreset.GenerateOutputFilePath(inputFilePath, index + 1, outputFilesCount);
+                int outputFilesCount = this.GetOuputFilesCount();
+                this.OutputFilePaths = new string[outputFilesCount];
+            }
+
+            for (int index = 0; index < this.OutputFilePaths.Length; index++)
+            {
+                if (!string.IsNullOrEmpty(this.OutputFilePaths[index]))
+                {
+                    // Don't generate a path if it has already been set.
+                    continue;
+                }
+
+                string path = this.ConversionPreset.GenerateOutputFilePath(inputFilePath, index + 1, this.OutputFilePaths.Length);
 
                 if (!PathHelpers.IsPathValid(path))
                 {
@@ -266,7 +281,7 @@ namespace FileConverter.ConversionJobs
                 // Make the output path valid.
                 try
                 {
-                    path = PathHelpers.GenerateUniquePath(path, this.outputFilePaths);
+                    path = PathHelpers.GenerateUniquePath(path, this.OutputFilePaths);
                 }
                 catch (Exception exception)
                 {
@@ -275,7 +290,7 @@ namespace FileConverter.ConversionJobs
                     return;
                 }
 
-                this.outputFilePaths[index] = path;
+                this.OutputFilePaths[index] = path;
             }
 
             this.CurrentOuputFilePathIndex = 0;
@@ -372,9 +387,9 @@ namespace FileConverter.ConversionJobs
         {
             Debug.Log("Conversion Failed.");
 
-            for (int index = 0; index < this.outputFilePaths.Length; index++)
+            for (int index = 0; index < this.OutputFilePaths.Length; index++)
             {
-                string outputFilePath = this.outputFilePaths[index];
+                string outputFilePath = this.OutputFilePaths[index];
                 try
                 {
                     if (System.IO.File.Exists(outputFilePath))
@@ -453,9 +468,9 @@ namespace FileConverter.ConversionJobs
 
         private bool AllOuputFilesExists()
         {
-            for (int index = 0; index < this.outputFilePaths.Length; index++)
+            for (int index = 0; index < this.OutputFilePaths.Length; index++)
             {
-                string outputFilePath = this.outputFilePaths[index];
+                string outputFilePath = this.OutputFilePaths[index];
                 if (!System.IO.File.Exists(outputFilePath))
                 {
                     return false;
@@ -467,9 +482,9 @@ namespace FileConverter.ConversionJobs
 
         private bool AtLeastOneOuputFilesExists()
         {
-            for (int index = 0; index < this.outputFilePaths.Length; index++)
+            for (int index = 0; index < this.OutputFilePaths.Length; index++)
             {
-                string outputFilePath = this.outputFilePaths[index];
+                string outputFilePath = this.OutputFilePaths[index];
                 if (System.IO.File.Exists(outputFilePath))
                 {
                     return true;
