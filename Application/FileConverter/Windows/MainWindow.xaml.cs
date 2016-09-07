@@ -147,7 +147,7 @@ namespace FileConverter
             else if (this.upgradeWindow == null)
             {
                 this.upgradeWindow = new UpgradeWindow();
-                this.upgradeWindow.Closed += UpgradeWindow_Closed;
+                this.upgradeWindow.Closed += this.UpgradeWindow_Closed;
             }
             
             Application application = Application.Current as Application;

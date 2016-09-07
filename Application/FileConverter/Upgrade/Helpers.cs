@@ -128,7 +128,7 @@ namespace FileConverter.Upgrade
             Helpers.currentlyDownloadedVersionDescription = upgradeVersionDescription;
 
             Helpers.webClient.DownloadProgressChanged += Helpers.WebClient_DownloadProgressChanged;
-            Helpers.webClient.DownloadFileCompleted += Helpers.WebClient_DownloadFileCompleted; ;
+            Helpers.webClient.DownloadFileCompleted += Helpers.WebClient_DownloadFileCompleted;
             Task downloadTask = Helpers.webClient.DownloadFileTaskAsync(uri, installerPath);
         }
 

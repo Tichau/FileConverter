@@ -14,13 +14,13 @@ namespace FileConverter
     {
         public static IEnumerable<CultureInfo> GetSupportedCultures()
         {
-            //Get all culture 
+            // Get all cultures.
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
 
-            //Find the location where application installed.
+            // Find the location where application installed.
             string exeLocation = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
 
-            //Return all culture for which satellite folder found with culture code.
+            // Return all culture for which satellite folder found with culture code.
             return cultures.Where(cultureInfo => Directory.Exists(Path.Combine(exeLocation, "Languages", cultureInfo.Name)));
         }
 

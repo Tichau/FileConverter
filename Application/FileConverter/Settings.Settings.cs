@@ -1,12 +1,9 @@
 ﻿// <copyright file="Settings.Settings.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.Globalization;
-using System.Windows;
-using System.Windows.Markup;
-
 namespace FileConverter
 {
     using System.Collections.ObjectModel;
+    using System.Globalization;
     using System.Linq;
     using System.Xml.Serialization;
 

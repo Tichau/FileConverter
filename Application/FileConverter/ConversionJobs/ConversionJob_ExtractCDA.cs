@@ -37,7 +37,14 @@ namespace FileConverter.ConversionJobs
                 return InputPostConversionAction.None;
             }
         }
-        
+
+        public override void Cancel()
+        {
+            base.Cancel();
+
+            this.compressionConversionJob.Cancel();
+        }
+
         protected override void Initialize()
         {
             base.Initialize();
@@ -186,13 +193,6 @@ namespace FileConverter.ConversionJobs
             Debug.Log("Delete intermediate file {0}.", this.intermediateFilePath);
 
             File.Delete(this.intermediateFilePath);
-        }
-
-        public override void Cancel()
-        {
-            base.Cancel();
-
-            this.compressionConversionJob.Cancel();
         }
 
         private void WriteWaveData(object sender, DataReadEventArgs eventArgs)

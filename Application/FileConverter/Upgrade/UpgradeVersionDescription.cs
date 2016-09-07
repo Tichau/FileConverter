@@ -1,17 +1,18 @@
 // <copyright file="UpgradeVersionDescription.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using FileConverter.Annotations;
-
 namespace FileConverter
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using System.Xml.Serialization;
+
+    using FileConverter.Annotations;
 
     public class UpgradeVersionDescription : INotifyPropertyChanged
     {
         private int installerDownloadProgress;
         private bool installerDownloadInProgress;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [XmlElement("Latest")]

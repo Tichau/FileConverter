@@ -2,12 +2,11 @@
 
 namespace FileConverter.Windows
 {
-    using System;
-    using System.Windows.Input;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
     using System.Windows;
+    using System.Windows.Input;
 
     using FileConverter.Annotations;
     using FileConverter.Commands;

@@ -13,10 +13,10 @@ namespace FileConverter
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using FileConverter.Windows;
     using FileConverter.Annotations;
     using FileConverter.Commands;
     using FileConverter.ConversionJobs;
+    using FileConverter.Windows;
     using Microsoft.Win32;
 
     /// <summary>
@@ -56,6 +56,25 @@ namespace FileConverter
         public event PropertyChangedEventHandler PropertyChanged;
 
         public event EventHandler<EventArgs> OnSettingsWindowHide;
+
+        public static OutputTypeViewModel[] OutputTypeViewModels => new[]
+        {
+            new OutputTypeViewModel(OutputType.Ogg),
+            new OutputTypeViewModel(OutputType.Mp3),
+            new OutputTypeViewModel(OutputType.Aac),
+            new OutputTypeViewModel(OutputType.Flac),
+            new OutputTypeViewModel(OutputType.Wav),
+            new OutputTypeViewModel(OutputType.Mkv),
+            new OutputTypeViewModel(OutputType.Mp4),
+            new OutputTypeViewModel(OutputType.Ogv),
+            new OutputTypeViewModel(OutputType.Webm),
+            new OutputTypeViewModel(OutputType.Avi),
+            new OutputTypeViewModel(OutputType.Png),
+            new OutputTypeViewModel(OutputType.Jpg),
+            new OutputTypeViewModel(OutputType.Ico),
+            new OutputTypeViewModel(OutputType.Gif),
+            new OutputTypeViewModel(OutputType.Pdf),
+        };
 
         public ICommand OpenUrlCommand
         {
@@ -148,26 +167,7 @@ namespace FileConverter
             get;
             set;
         }
-
-        public static OutputTypeViewModel[] OutputTypeViewModels => new[]
-        {
-            new OutputTypeViewModel(OutputType.Ogg),
-            new OutputTypeViewModel(OutputType.Mp3),
-            new OutputTypeViewModel(OutputType.Aac),
-            new OutputTypeViewModel(OutputType.Flac),
-            new OutputTypeViewModel(OutputType.Wav),
-            new OutputTypeViewModel(OutputType.Mkv),
-            new OutputTypeViewModel(OutputType.Mp4),
-            new OutputTypeViewModel(OutputType.Ogv),
-            new OutputTypeViewModel(OutputType.Webm),
-            new OutputTypeViewModel(OutputType.Avi),
-            new OutputTypeViewModel(OutputType.Png),
-            new OutputTypeViewModel(OutputType.Jpg),
-            new OutputTypeViewModel(OutputType.Ico),
-            new OutputTypeViewModel(OutputType.Gif),
-            new OutputTypeViewModel(OutputType.Pdf),
-        };
-
+        
         public InputPostConversionAction[] InputPostConversionActions => new[]
         {
             InputPostConversionAction.None,

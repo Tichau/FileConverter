@@ -87,7 +87,7 @@ namespace FileConverter.ConversionJobs
             float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
             if (Math.Abs(scaleFactor - 1f) >= 0.005f)
             {
-                Debug.Log("Apply scale factor: {0}%.", scaleFactor*100);
+                Debug.Log("Apply scale factor: {0}%.", scaleFactor * 100);
 
                 dpi *= scaleFactor;
             }
@@ -126,9 +126,9 @@ namespace FileConverter.ConversionJobs
                 float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
                 if (Math.Abs(scaleFactor - 1f) >= 0.005f)
                 {
-                    Debug.Log("Apply scale factor: {0}%.", scaleFactor*100);
+                    Debug.Log("Apply scale factor: {0}%.", scaleFactor * 100);
 
-                    image.Scale(new Percentage(scaleFactor*100f));
+                    image.Scale(new Percentage(scaleFactor * 100f));
                 }
             }
 
@@ -150,7 +150,7 @@ namespace FileConverter.ConversionJobs
                 {
                     int referenceSize = System.Math.Min(image.Width, image.Height);
                     int size = 2;
-                    while (size*2 <= referenceSize)
+                    while (size * 2 <= referenceSize)
                     {
                         size *= 2;
                     }
@@ -208,7 +208,7 @@ namespace FileConverter.ConversionJobs
             }
 
             float alreadyCompletedPages = this.CurrentOuputFilePathIndex / (float)this.pageCount;
-            this.Progress = alreadyCompletedPages + (float)eventArgs.Progress.ToDouble() / (100f * this.pageCount);
+            this.Progress = alreadyCompletedPages + ((float)eventArgs.Progress.ToDouble() / (100f * this.pageCount));
         }
     }
 }
