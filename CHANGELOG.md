@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 1.2
+- New: Possibility to convert word documents (docx, odt and doc) to pdf and images (this feature is only available if you have Microsoft Office installed).
+- New: Add the possibility to cancel image, CDA extraction and gif conversions.
+- Fixed: Issue where multiple conversion jobs was created for the same file resulting in an error message.
+- Tech: Improve application performances on startup.
+- Tech: Improve diagnostics.
+
 ## Version 1.1
 - New: Localization system. File Converter can now be translated in multiple languages. The default language is the same than your OS language (if available).
 - New: Add the possibility to choose the application language in the application settings.
