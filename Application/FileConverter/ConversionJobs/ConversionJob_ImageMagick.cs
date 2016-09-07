@@ -17,7 +17,7 @@ namespace FileConverter.ConversionJobs
             this.IsCancelable = true;
         }
 
-        public ConversionJob_ImageMagick(ConversionPreset conversionPreset) : base(conversionPreset)
+        public ConversionJob_ImageMagick(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
             this.IsCancelable = true;
         }

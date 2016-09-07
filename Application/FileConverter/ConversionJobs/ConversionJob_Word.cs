@@ -21,7 +21,7 @@ namespace FileConverter.ConversionJobs
             ConversionJob_Word.InitializeWordApplicationInstance();
         }
 
-        public ConversionJob_Word(ConversionPreset conversionPreset) : base(conversionPreset)
+        public ConversionJob_Word(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
             ConversionJob_Word.InitializeWordApplicationInstance();
         }

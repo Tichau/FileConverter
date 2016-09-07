@@ -541,4 +541,7 @@ utilisez maj pour une version en majuscules</value>
   <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
     <value>Des fichiers sont présents malgré l'echec de la conversion.</value>
   </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Préparation</value>
+  </data>
 </root>

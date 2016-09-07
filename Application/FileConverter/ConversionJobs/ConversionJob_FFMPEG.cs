@@ -28,7 +28,7 @@ namespace FileConverter.ConversionJobs
             this.IsCancelable = true;
         }
 
-        public ConversionJob_FFMPEG(ConversionPreset conversionPreset) : base(conversionPreset)
+        public ConversionJob_FFMPEG(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
             this.IsCancelable = true;
         }

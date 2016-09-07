@@ -268,6 +268,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prepare conversion.
+        /// </summary>
+        public static string ConversionStatePrepareConversion {
+            get {
+                return ResourceManager.GetString("ConversionStatePrepareConversion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Read document.
         /// </summary>
         public static string ConversionStateReadDocument {

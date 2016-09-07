@@ -10,36 +10,36 @@ namespace FileConverter.ConversionJobs
             inputFileExtension = inputFileExtension.ToLowerInvariant().Substring(1, inputFileExtension.Length - 1);
             if (inputFileExtension == "cda")
             {
-                return new ConversionJob_ExtractCDA(conversionPreset);    
+                return new ConversionJob_ExtractCDA(conversionPreset, inputFilePath);    
             }
 
             if (inputFileExtension == "doc" || inputFileExtension == "docx" || inputFileExtension == "odt")
             {
-                return new ConversionJob_Word(conversionPreset);
+                return new ConversionJob_Word(conversionPreset, inputFilePath);
             }
 
             if (conversionPreset.OutputType == OutputType.Ico)
             {
-                return new ConversionJob_Ico(conversionPreset);
+                return new ConversionJob_Ico(conversionPreset, inputFilePath);
             }
 
             if (conversionPreset.OutputType == OutputType.Gif)
             {
-                return new ConversionJob_Gif(conversionPreset);
+                return new ConversionJob_Gif(conversionPreset, inputFilePath);
             }
 
             if (conversionPreset.OutputType == OutputType.Pdf)
             {
-                return new ConversionJob_ImageMagick(conversionPreset);
+                return new ConversionJob_ImageMagick(conversionPreset, inputFilePath);
             }
 
             if (Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Image ||
                 Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Document)
             {
-                return new ConversionJob_ImageMagick(conversionPreset);
+                return new ConversionJob_ImageMagick(conversionPreset, inputFilePath);
             }
             
-            return new ConversionJob_FFMPEG(conversionPreset);
+            return new ConversionJob_FFMPEG(conversionPreset, inputFilePath);
         }
     }
 }

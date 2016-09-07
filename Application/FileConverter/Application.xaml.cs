@@ -341,8 +341,7 @@ namespace FileConverter
                     {
                         string inputFilePath = filePaths[index];
                         ConversionJob conversionJob = ConversionJobFactory.Create(conversionPreset, inputFilePath);
-                        conversionJob.PrepareConversion(inputFilePath);
-
+                        
                         this.conversionJobs.Add(conversionJob);
                     }
                 }
@@ -358,8 +357,14 @@ namespace FileConverter
 
         private void ConvertFiles()
         {
-            Thread[] jobThreads = new Thread[this.numberOfConversionThread];
+            // Prepare conversions.
+            for (int index = 0; index < this.ConvertionJobs.Count; index++)
+            {
+                this.ConvertionJobs[index].PrepareConversion();
+            }
             
+            // Convert!
+            Thread[] jobThreads = new Thread[this.numberOfConversionThread];
             while (true)
             {
                 // Compute conversion flags.

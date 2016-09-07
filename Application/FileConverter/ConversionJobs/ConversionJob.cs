@@ -25,17 +25,26 @@ namespace FileConverter.ConversionJobs
         {
             this.State = ConversionState.Unknown;
             this.ConversionPreset = null;
+            this.initialInputPath = string.Empty;
             this.InputFilePath = string.Empty;
         }
 
-        public ConversionJob(ConversionPreset conversionPreset) : this()
+        public ConversionJob(ConversionPreset conversionPreset, string inputFilePath) : this()
         {
             if (conversionPreset == null)
             {
-                throw new ArgumentNullException("conversionPreset");
+                throw new ArgumentNullException(nameof(conversionPreset));
             }
 
+            if (string.IsNullOrEmpty(inputFilePath))
+            {
+                throw new ArgumentNullException(nameof(inputFilePath));
+            }
+
+            this.initialInputPath = inputFilePath;
+            this.InputFilePath = inputFilePath;
             this.ConversionPreset = conversionPreset;
+            this.UserState = Properties.Resources.ConversionStatePrepareConversion;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -66,7 +75,7 @@ namespace FileConverter.ConversionJobs
         {
             get
             {
-                if (this.OutputFilePaths == null)
+                if (this.OutputFilePaths == null || this.OutputFilePaths.Length == 0)
                 {
                     return string.Empty;
                 }
@@ -210,19 +219,16 @@ namespace FileConverter.ConversionJobs
             return (conversionFlags & ConversionFlags.CdDriveExtraction) == 0;
         }
 
-        public void PrepareConversion(string inputFilePath, params string[] outputFilePaths)
+        public void PrepareConversion(params string[] outputFilePaths)
         {
-            if (string.IsNullOrEmpty(inputFilePath))
-            {
-                throw new ArgumentNullException(nameof(inputFilePath));
-            }
-
             if (this.ConversionPreset == null)
             {
                 throw new Exception("The conversion preset must be valid.");
             }
 
-            string extension = System.IO.Path.GetExtension(inputFilePath);
+            this.InputFilePath = this.initialInputPath;
+
+            string extension = System.IO.Path.GetExtension(this.initialInputPath);
             extension = extension.Substring(1, extension.Length - 1);
             string extensionCategory = Helpers.GetExtensionCategory(extension);
             if (!Helpers.IsOutputTypeCompatibleWithCategory(this.ConversionPreset.OutputType, extensionCategory))
@@ -230,9 +236,6 @@ namespace FileConverter.ConversionJobs
                 this.ConversionFailed(Properties.Resources.ErrorInputTypeIncompatibleWithOutputType);
                 return;
             }
-
-            this.initialInputPath = inputFilePath;
-            this.InputFilePath = inputFilePath;
 
             this.OutputFilePaths = outputFilePaths;
             if (this.OutputFilePaths.Length == 0)
@@ -249,7 +252,7 @@ namespace FileConverter.ConversionJobs
                     continue;
                 }
 
-                string path = this.ConversionPreset.GenerateOutputFilePath(inputFilePath, index + 1, this.OutputFilePaths.Length);
+                string path = this.ConversionPreset.GenerateOutputFilePath(this.initialInputPath, index + 1, this.OutputFilePaths.Length);
 
                 if (!PathHelpers.IsPathValid(path))
                 {
@@ -267,7 +270,7 @@ namespace FileConverter.ConversionJobs
                         string inputExtension = System.IO.Path.GetExtension(this.InputFilePath);
                         string pathWithoutExtension = this.InputFilePath.Substring(0, this.InputFilePath.Length - inputExtension.Length);
                         this.InputFilePath = PathHelpers.GenerateUniquePath(pathWithoutExtension + "_TEMP" + inputExtension);
-                        System.IO.File.Move(inputFilePath, this.InputFilePath);
+                        System.IO.File.Move(this.initialInputPath, this.InputFilePath);
                     }
                 }
 

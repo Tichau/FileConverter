@@ -523,4 +523,7 @@ use maj for uppercase version</value>
   <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
     <value>The conversion job failed but there is an output file that does exists.</value>
   </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Prepare conversion</value>
+  </data>
 </root>

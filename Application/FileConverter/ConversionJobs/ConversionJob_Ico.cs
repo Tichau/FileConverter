@@ -11,7 +11,7 @@ namespace FileConverter.ConversionJobs
         private ConversionJob pngConversionJob;
         private ConversionJob icoConversionJob;
 
-        public ConversionJob_Ico(ConversionPreset conversionPreset) : base(conversionPreset)
+        public ConversionJob_Ico(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
             this.IsCancelable = true;
         }
@@ -43,11 +43,11 @@ namespace FileConverter.ConversionJobs
             intermediatePreset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "True");
             intermediatePreset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "256");
             this.pngConversionJob = ConversionJobFactory.Create(intermediatePreset, this.InputFilePath);
-            this.pngConversionJob.PrepareConversion(this.InputFilePath, this.intermediateFilePath);
+            this.pngConversionJob.PrepareConversion(this.intermediateFilePath);
 
             // Convert png file into ico.
-            this.icoConversionJob = new ConversionJob_FFMPEG(this.ConversionPreset);
-            this.icoConversionJob.PrepareConversion(this.intermediateFilePath, this.OutputFilePath);
+            this.icoConversionJob = new ConversionJob_FFMPEG(this.ConversionPreset, this.intermediateFilePath);
+            this.icoConversionJob.PrepareConversion(this.OutputFilePath);
         }
 
         protected override void Convert()
