@@ -410,6 +410,12 @@ namespace FileConverter
                         if (jobThread != null)
                         {
                             jobThread.Start(conversionJob);
+
+                            while (conversionJob.State == ConversionJob.ConversionState.Ready)
+                            {
+                                Debug.Log("Wait the launch of the conversion thread before launching any other thread.");
+                                Thread.Sleep(20);
+                            }
                         }
 
                         break;
