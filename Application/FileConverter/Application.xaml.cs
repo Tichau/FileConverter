@@ -401,7 +401,7 @@ namespace FileConverter
                             Thread thread = jobThreads[threadIndex];
                             if (thread == null || !thread.IsAlive)
                             {
-                                jobThread = Helpers.InstantiateThread("ConversionThread", this.ExecuteConversionJob);
+                                jobThread = Helpers.InstantiateThread(conversionJob.GetType().Name, this.ExecuteConversionJob);
                                 jobThreads[threadIndex] = jobThread;
                                 break;
                             }
