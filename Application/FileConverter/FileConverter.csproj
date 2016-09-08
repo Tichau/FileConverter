@@ -76,7 +76,13 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="office, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -118,6 +124,7 @@
     </Compile>
     <Compile Include="Commands\CancelConversionJobCommand.cs" />
     <Compile Include="ConversionJobs\ConversionFlags.cs" />
+    <Compile Include="ConversionJobs\ConversionJob_PowerPoint.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ExtractCDA.cs" />
     <Compile Include="ConversionJobs\ConversionJobFactory.cs" />
     <Compile Include="ConversionJobs\ConversionJob_FFMPEG.Converters.cs" />

@@ -75,6 +75,9 @@ namespace FileConverter
                 case "pdf":
                 case "doc":
                 case "docx":
+                case "ppt":
+                case "pptx":
+                case "odp":
                 case "ods":
                 case "odt":
                 case "xls":

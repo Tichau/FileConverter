@@ -13,14 +13,19 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_ExtractCDA(conversionPreset, inputFilePath);    
             }
 
-            if (inputFileExtension == "doc" || inputFileExtension == "docx" || inputFileExtension == "odt")
+            if (inputFileExtension == "docx" || inputFileExtension == "odt" || inputFileExtension == "doc")
             {
                 return new ConversionJob_Word(conversionPreset, inputFilePath);
             }
 
-            if (inputFileExtension == "xls" || inputFileExtension == "xlsx" || inputFileExtension == "ods")
+            if (inputFileExtension == "xlsx" || inputFileExtension == "ods" || inputFileExtension == "xls")
             {
                 return new ConversionJob_Excel(conversionPreset, inputFilePath);
+            }
+
+            if (inputFileExtension == "pptx" || inputFileExtension == "odp" || inputFileExtension == "ppt")
+            {
+                return new ConversionJob_PowerPoint(conversionPreset, inputFilePath);
             }
 
             if (conversionPreset.OutputType == OutputType.Ico)
