@@ -75,7 +75,10 @@ namespace FileConverter
                 case "pdf":
                 case "doc":
                 case "docx":
+                case "ods":
                 case "odt":
+                case "xls":
+                case "xlsx":
                     return InputCategoryNames.Document;
             }
 

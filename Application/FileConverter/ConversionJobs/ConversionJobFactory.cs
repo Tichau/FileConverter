@@ -18,6 +18,11 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_Word(conversionPreset, inputFilePath);
             }
 
+            if (inputFileExtension == "xls" || inputFileExtension == "xlsx" || inputFileExtension == "ods")
+            {
+                return new ConversionJob_Excel(conversionPreset, inputFilePath);
+            }
+
             if (conversionPreset.OutputType == OutputType.Ico)
             {
                 return new ConversionJob_Ico(conversionPreset, inputFilePath);
