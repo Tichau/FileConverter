@@ -710,7 +710,8 @@
             OgvSettingsDataTemplate="{StaticResource OgvSettingsDataTemplate}"
             PngSettingsDataTemplate="{StaticResource PngSettingsDataTemplate}"
             WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
-            WebmSettingsDataTemplate="{StaticResource WebmSettingsDataTemplate}" />
+            WebmSettingsDataTemplate="{StaticResource WebmSettingsDataTemplate}"
+            WebpSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" />
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>

@@ -67,6 +67,7 @@ namespace FileConverter
                 case "tiff":
                 case "svg":
                 case "xcf":
+                case "webp":
                     return InputCategoryNames.Image;
 
                 case "gif":
@@ -115,6 +116,7 @@ namespace FileConverter
                 case OutputType.Ico:
                 case OutputType.Jpg:
                 case OutputType.Png:
+                case OutputType.Webp:
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Document;
 
                 case OutputType.Gif:

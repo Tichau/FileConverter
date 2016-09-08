@@ -189,6 +189,10 @@ namespace FileConverter.ConversionJobs
                 case OutputType.Pdf:
                     break;
 
+                case OutputType.Webp:
+                    image.Quality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    break;
+
                 default:
                     this.ConversionFailed(string.Format(Properties.Resources.ErrorUnsupportedOutputFormat, this.ConversionPreset.OutputType));
                     image.Progress -= this.Image_Progress;

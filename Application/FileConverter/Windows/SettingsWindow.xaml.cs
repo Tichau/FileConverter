@@ -71,6 +71,7 @@ namespace FileConverter
             new OutputTypeViewModel(OutputType.Avi),
             new OutputTypeViewModel(OutputType.Png),
             new OutputTypeViewModel(OutputType.Jpg),
+            new OutputTypeViewModel(OutputType.Webp),
             new OutputTypeViewModel(OutputType.Ico),
             new OutputTypeViewModel(OutputType.Gif),
             new OutputTypeViewModel(OutputType.Pdf),

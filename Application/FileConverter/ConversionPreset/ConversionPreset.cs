@@ -508,6 +508,14 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
                     break;
 
+                case OutputType.Webp:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "40");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
+                    break;
+
                 case OutputType.Ico:
                     break;
 
