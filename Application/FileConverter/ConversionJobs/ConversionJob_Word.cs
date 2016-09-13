@@ -81,7 +81,7 @@ namespace FileConverter.ConversionJobs
             this.UserState = Properties.Resources.ConversionStateConversion;
 
             Diagnostics.Debug.Log("Convert word document to pdf.");
-            this.document.SaveAs(this.intermediateFilePath, Word.WdSaveFormat.wdFormatPDF);
+            this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
 
             Diagnostics.Debug.Log("Close word document '{0}'.", this.InputFilePath);
             this.document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
