@@ -1,7 +1,11 @@
 # Change Log
 
 ## Version 1.2
-- New: Possibility to convert word documents (docx, odt and doc) to pdf and images (this feature is only available if you have Microsoft Office installed).
+- New: Possibility to convert Word documents (docx, odt and doc) to pdf and images (this feature is only available if you have Microsoft Office installed).
+- New: Possibility to convert Excel documents (xlsx, ods and xls) to pdf and images (this feature is only available if you have Microsoft Office installed).
+- New: Possibility to convert PowerPoint documents (pptx, odp and ppt) to pdf and images (this feature is only available if you have Microsoft Office installed).
+- New: Possibility to convert images and documents to webp format.
+- New: Support new image input format: webp.
 - New: Add the possibility to cancel image, CDA extraction and gif conversions.
 - Fixed: Issue where multiple conversion jobs was created for the same file resulting in an error message.
 - Tech: Improve application performances on startup.
