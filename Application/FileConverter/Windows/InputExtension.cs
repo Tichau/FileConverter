@@ -11,7 +11,7 @@ namespace FileConverter
     public class InputExtension : INotifyPropertyChanged
     {
         private readonly Brush DefaultBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-        private readonly Brush ErrorBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+        private readonly Brush ErrorBrush = new SolidColorBrush(Color.FromRgb(255, 65, 0));
 
         private string name;
         private Brush foregroundBrush;
