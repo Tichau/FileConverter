@@ -7,7 +7,7 @@ namespace FileConverter.ConversionJobs
 
     using Excel = Microsoft.Office.Interop.Excel;
 
-    public class ConversionJob_Excel : ConversionJob
+    public class ConversionJob_Excel : ConversionJob_Office
     {
         private Excel.Workbook document;
         private Excel.Application application;
@@ -48,6 +48,11 @@ namespace FileConverter.ConversionJobs
         protected override void Initialize()
         {
             base.Initialize();
+
+            if (this.State == ConversionState.Failed)
+            {
+                return;
+            }
 
             if (this.ConversionPreset == null)
             {

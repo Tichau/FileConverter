@@ -10,8 +10,23 @@ namespace FileConverter
     using System.Reflection;
     using System.Threading;
 
+    using Microsoft.Win32;
+
     public static class Helpers
     {
+        private static readonly string[] CompatibleOfficeVersions = new string[]
+        {
+            "16.0", // Office 2016
+            "15.0", // Office 2013
+            ////"14.0", // Office 2010
+            ////"12.0", // Office 2007
+            ////"11.0", // Office 2003
+            ////"10.0", // Office XP
+            ////"9.0", // Office 2000
+            ////"8.0", // Office 98
+            ////"7.0", // Office 97
+        };
+
         public static IEnumerable<CultureInfo> GetSupportedCultures()
         {
             // Get all cultures.
@@ -163,7 +178,50 @@ namespace FileConverter
 
             return thread;
         }
-        
+
+        /// <summary>
+        /// Check whether Microsoft office is available or not.
+        /// </summary>
+        /// <returns>Returns true if Office is installed on the computer.</returns>
+        /// source: http://stackoverflow.com/questions/3266675/how-to-detect-installed-version-of-ms-office/3267832#3267832
+        public static bool IsMicrosoftOfficeAvailable()
+        {
+            string registryKeyPattern = @"Software\Microsoft\Office\{0}\Common";
+
+            for (int index = 0; index < Helpers.CompatibleOfficeVersions.Length; index++)
+            {
+                string registryKeyPath = string.Format(registryKeyPattern, Helpers.CompatibleOfficeVersions[index]);
+                RegistryKey officeRegistryKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(registryKeyPath);
+                if (officeRegistryKey != null)
+                {
+                    Diagnostics.Debug.Log($"Registry key '{registryKeyPath}' found");
+                    return true;
+                }
+            }
+
+            Diagnostics.Debug.Log("No compatible office version found.");
+            return false;
+        }
+
+        public static bool IsExtensionCompatibleWithOffice(string extension)
+        {
+            switch (extension)
+            {
+                case "doc":
+                case "docx":
+                case "ppt":
+                case "pptx":
+                case "odp":
+                case "ods":
+                case "odt":
+                case "xls":
+                case "xlsx":
+                    return true;
+            }
+
+            return false;
+        }
+
         public static class InputCategoryNames
         {
             public const string Audio = "Audio";

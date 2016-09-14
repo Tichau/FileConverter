@@ -538,6 +538,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Microsoft Office must be installed in order to convert Office documents..
+        /// </summary>
+        public static string ErrorMicrosoftOfficeIsNotAvailable {
+            get {
+                return ResourceManager.GetString("ErrorMicrosoftOfficeIsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unsupported output format &apos;{0}&apos;..
         /// </summary>
         public static string ErrorUnsupportedOutputFormat {

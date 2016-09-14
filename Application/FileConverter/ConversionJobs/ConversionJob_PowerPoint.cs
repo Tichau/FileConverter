@@ -8,7 +8,7 @@ namespace FileConverter.ConversionJobs
     using Microsoft.Office.Core;
     using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
-    public class ConversionJob_PowerPoint : ConversionJob
+    public class ConversionJob_PowerPoint : ConversionJob_Office
     {
         private PowerPoint.Presentation document;
         private PowerPoint.Application application;
@@ -40,6 +40,11 @@ namespace FileConverter.ConversionJobs
         protected override void Initialize()
         {
             base.Initialize();
+
+            if (this.State == ConversionState.Failed)
+            {
+                return;
+            }
 
             if (this.ConversionPreset == null)
             {

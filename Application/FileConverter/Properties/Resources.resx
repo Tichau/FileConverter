@@ -526,4 +526,7 @@ use maj for uppercase version</value>
   <data name="ConversionStatePrepareConversion" xml:space="preserve">
     <value>Prepare conversion</value>
   </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Office must be installed in order to convert Office documents.</value>
+  </data>
 </root>

@@ -7,7 +7,7 @@ namespace FileConverter.ConversionJobs
 
     using Word = Microsoft.Office.Interop.Word;
 
-    public class ConversionJob_Word : ConversionJob
+    public class ConversionJob_Word : ConversionJob_Office
     {
         private Word.Document document;
         private Word.Application wordApplication;
@@ -40,6 +40,11 @@ namespace FileConverter.ConversionJobs
         protected override void Initialize()
         {
             base.Initialize();
+
+            if (this.State == ConversionState.Failed)
+            {
+                return;
+            }
 
             if (this.ConversionPreset == null)
             {

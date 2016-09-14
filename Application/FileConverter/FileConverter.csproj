@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Commands\CancelConversionJobCommand.cs" />
     <Compile Include="ConversionJobs\ConversionFlags.cs" />
+    <Compile Include="ConversionJobs\ConversionJob_Office.cs" />
     <Compile Include="ConversionJobs\ConversionJob_PowerPoint.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ExtractCDA.cs" />
     <Compile Include="ConversionJobs\ConversionJobFactory.cs" />

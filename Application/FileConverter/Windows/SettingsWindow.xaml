@@ -827,7 +827,7 @@
                                                 </CheckBox>
                                             </HierarchicalDataTemplate>
                                             <DataTemplate DataType="{x:Type local:InputExtension}">
-                                                <CheckBox Content="{Binding Name}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeChecked" Unchecked="OnInputTypeUnchecked">
+                                                <CheckBox Content="{Binding Name}" Foreground="{Binding ForegroundBrush}" ToolTip="{Binding ToolTip}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeChecked" Unchecked="OnInputTypeUnchecked">
                                                     <CheckBox.IsChecked>
                                                         <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
                                                             <Binding ElementName="window" Path="SelectedPreset.InputTypes" Mode="OneWay"/>
