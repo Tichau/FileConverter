@@ -19,12 +19,12 @@ namespace FileConverter
             "16.0", // Office 2016
             "15.0", // Office 2013
             "14.0", // Office 2010
-            ////"12.0", // Office 2007
-            ////"11.0", // Office 2003
-            ////"10.0", // Office XP
-            ////"9.0", // Office 2000
-            ////"8.0", // Office 98
-            ////"7.0", // Office 97
+            "12.0", // Office 2007
+            "11.0", // Office 2003
+            "10.0", // Office XP
+            "9.0", // Office 2000
+            "8.0", // Office 98
+            "7.0", // Office 97
         };
 
         public static IEnumerable<CultureInfo> GetSupportedCultures()
