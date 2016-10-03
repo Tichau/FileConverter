@@ -92,7 +92,7 @@ namespace FileConverter.ConversionJobs
             this.document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
             this.document = null;
 
-            this.ReleaseWordApplicationInstanceIfNeeded();
+            this.ReleaseOfficeApplicationInstanceIfNeeded();
             
             if (this.pdf2ImageConversionJob != null)
             {
@@ -125,6 +125,27 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        protected override void InitializeOfficeApplicationInstanceIfNecessary()
+        {
+            if (this.wordApplication != null)
+            {
+                return;
+            }
+
+            // Initialize word application.
+            Diagnostics.Debug.Log("Instantiate word application via interop.");
+            this.wordApplication = new Microsoft.Office.Interop.Word.Application
+            {
+                Visible = false
+            };
+        }
+
+        protected override void ReleaseOfficeApplicationInstanceIfNeeded()
+        {
+            Diagnostics.Debug.Log("Quit word application via interop.");
+            this.wordApplication.Quit();
+        }
+
         private async Task UpdateProgress()
         {
             while (this.pdf2ImageConversionJob.State != ConversionState.Done &&
@@ -147,7 +168,7 @@ namespace FileConverter.ConversionJobs
 
         private void LoadDocumentIfNecessary()
         {
-            this.InitializeWordApplicationInstanceIfNecessary();
+            this.InitializeOfficeApplicationInstanceIfNecessary();
 
             if (this.document == null)
             {
@@ -155,27 +176,6 @@ namespace FileConverter.ConversionJobs
 
                 this.document = this.wordApplication.Documents.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
             }
-        }
-
-        private void InitializeWordApplicationInstanceIfNecessary()
-        {
-            if (this.wordApplication != null)
-            {
-                return;
-            }
-
-            // Initialize word application.
-            Diagnostics.Debug.Log("Instantiate word application via interop.");
-            this.wordApplication = new Microsoft.Office.Interop.Word.Application
-            {
-                Visible = false
-            };
-        }
-
-        private void ReleaseWordApplicationInstanceIfNeeded()
-        {
-            Diagnostics.Debug.Log("Quit word application via interop.");
-            this.wordApplication.Quit();
         }
     }
 }

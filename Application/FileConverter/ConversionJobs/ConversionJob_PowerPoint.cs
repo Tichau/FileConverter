@@ -80,9 +80,6 @@ namespace FileConverter.ConversionJobs
 
             this.LoadDocumentIfNecessary();
 
-            // Make this document the active document.
-            //this.document.Activate();
-
             this.UserState = Properties.Resources.ConversionStateConversion;
 
             Diagnostics.Debug.Log("Convert PowerPoint document to pdf.");
@@ -92,7 +89,7 @@ namespace FileConverter.ConversionJobs
             this.document.Close();
             this.document = null;
 
-            this.ReleaseApplicationInstanceIfNeeded();
+            this.ReleaseOfficeApplicationInstanceIfNeeded();
             
             if (this.pdf2ImageConversionJob != null)
             {
@@ -125,6 +122,24 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        protected override void InitializeOfficeApplicationInstanceIfNecessary()
+        {
+            if (this.application != null)
+            {
+                return;
+            }
+
+            // Initialize PowerPoint application.
+            Diagnostics.Debug.Log("Instantiate PowerPoint application via interop.");
+            this.application = new PowerPoint.Application();
+        }
+
+        protected override void ReleaseOfficeApplicationInstanceIfNeeded()
+        {
+            Diagnostics.Debug.Log("Quit PowerPoint application via interop.");
+            this.application.Quit();
+        }
+
         private async Task UpdateProgress()
         {
             while (this.pdf2ImageConversionJob.State != ConversionState.Done &&
@@ -147,32 +162,14 @@ namespace FileConverter.ConversionJobs
 
         private void LoadDocumentIfNecessary()
         {
-            this.InitializeApplicationInstanceIfNecessary();
+            this.InitializeOfficeApplicationInstanceIfNecessary();
 
             if (this.document == null)
             {
                 Diagnostics.Debug.Log("Load PowerPoint document '{0}'.", this.InputFilePath);
 
-                this.document = this.application.Presentations.Open(this.InputFilePath, ReadOnly:MsoTriState.msoTrue, WithWindow:MsoTriState.msoFalse);
+                this.document = this.application.Presentations.Open(this.InputFilePath, ReadOnly: MsoTriState.msoTrue, WithWindow: MsoTriState.msoFalse);
             }
-        }
-
-        private void InitializeApplicationInstanceIfNecessary()
-        {
-            if (this.application != null)
-            {
-                return;
-            }
-
-            // Initialize PowerPoint application.
-            Diagnostics.Debug.Log("Instantiate PowerPoint application via interop.");
-            this.application = new PowerPoint.Application();
-        }
-
-        private void ReleaseApplicationInstanceIfNeeded()
-        {
-            Diagnostics.Debug.Log("Quit PowerPoint application via interop.");
-            this.application.Quit();
         }
     }
 }

@@ -22,5 +22,16 @@ namespace FileConverter.ConversionJobs
                 return;
             }
         }
+
+        protected override void OnConversionFailed()
+        {
+            base.OnConversionFailed();
+
+            this.ReleaseOfficeApplicationInstanceIfNeeded();
+        }
+
+        protected abstract void InitializeOfficeApplicationInstanceIfNecessary();
+
+        protected abstract void ReleaseOfficeApplicationInstanceIfNeeded();
     }
 }

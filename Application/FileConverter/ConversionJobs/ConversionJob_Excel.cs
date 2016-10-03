@@ -100,7 +100,7 @@ namespace FileConverter.ConversionJobs
             this.document.Close(false);
             this.document = null;
 
-            this.ReleaseApplicationInstanceIfNeeded();
+            this.ReleaseOfficeApplicationInstanceIfNeeded();
             
             if (this.pdf2ImageConversionJob != null)
             {
@@ -133,6 +133,27 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        protected override void InitializeOfficeApplicationInstanceIfNecessary()
+        {
+            if (this.application != null)
+            {
+                return;
+            }
+
+            // Initialize excel application.
+            Diagnostics.Debug.Log("Instantiate excel application via interop.");
+            this.application = new Excel.Application
+            {
+                Visible = false
+            };
+        }
+
+        protected override void ReleaseOfficeApplicationInstanceIfNeeded()
+        {
+            Diagnostics.Debug.Log("Quit excel application via interop.");
+            this.application.Quit();
+        }
+
         private async Task UpdateProgress()
         {
             while (this.pdf2ImageConversionJob.State != ConversionState.Done &&
@@ -155,7 +176,7 @@ namespace FileConverter.ConversionJobs
 
         private void LoadDocumentIfNecessary()
         {
-            this.InitializeApplicationInstanceIfNecessary();
+            this.InitializeOfficeApplicationInstanceIfNecessary();
 
             if (this.document == null)
             {
@@ -163,27 +184,6 @@ namespace FileConverter.ConversionJobs
 
                 this.document = this.application.Workbooks.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
             }
-        }
-
-        private void InitializeApplicationInstanceIfNecessary()
-        {
-            if (this.application != null)
-            {
-                return;
-            }
-
-            // Initialize excel application.
-            Diagnostics.Debug.Log("Instantiate excel application via interop.");
-            this.application = new Excel.Application
-            {
-                Visible = false
-            };
-        }
-
-        private void ReleaseApplicationInstanceIfNeeded()
-        {
-            Diagnostics.Debug.Log("Quit excel application via interop.");
-            this.application.Quit();
         }
     }
 }
