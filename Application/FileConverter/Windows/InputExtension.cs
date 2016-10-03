@@ -10,8 +10,8 @@ namespace FileConverter
 
     public class InputExtension : INotifyPropertyChanged
     {
-        private readonly Brush DefaultBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-        private readonly Brush ErrorBrush = new SolidColorBrush(Color.FromRgb(255, 65, 0));
+        private readonly Brush defaultBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+        private readonly Brush errorBrush = new SolidColorBrush(Color.FromRgb(255, 65, 0));
 
         private string name;
         private Brush foregroundBrush;
@@ -23,11 +23,11 @@ namespace FileConverter
 
             if (!Helpers.IsExtensionCompatibleWithOffice(name) || Helpers.IsMicrosoftOfficeAvailable())
             {
-                this.ForegroundBrush = this.DefaultBrush;
+                this.ForegroundBrush = this.defaultBrush;
             }
             else
             {
-                this.ForegroundBrush = this.ErrorBrush;
+                this.ForegroundBrush = this.errorBrush;
                 this.ToolTip = Properties.Resources.ErrorMicrosoftOfficeIsNotAvailable;
             }
         }
