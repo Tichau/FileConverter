@@ -529,4 +529,7 @@ use maj for uppercase version</value>
   <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
     <value>Microsoft Office must be installed in order to convert Office documents.</value>
   </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Fail to open document with Microsoft Office (check if your licence/installation are valid).</value>
+  </data>
 </root>

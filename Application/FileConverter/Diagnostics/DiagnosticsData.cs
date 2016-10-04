@@ -77,7 +77,7 @@ namespace FileConverter.Diagnostics
 
         public void Log(string message, params object[] arguments)
         {
-            string log = string.Format(message, arguments);
+            string log = arguments.Length > 0 ? string.Format(message, arguments) : message;
 
             this.logMessages.Add(log);
             this.logFileWriter.WriteLine(log);

@@ -2,11 +2,13 @@
 
 namespace FileConverter.ConversionJobs
 {
+    using System;
     using System.IO;
     using System.Threading.Tasks;
 
     using Microsoft.Office.Core;
     using PowerPoint = Microsoft.Office.Interop.PowerPoint;
+    using FileConverter.Diagnostics;
 
     public class ConversionJob_PowerPoint : ConversionJob_Office
     {
@@ -31,7 +33,10 @@ namespace FileConverter.ConversionJobs
                 return 1;
             }
 
-            this.LoadDocumentIfNecessary();
+            if (!this.TryLoadDocumentIfNecessary())
+            {
+                return 1;
+            }
 
             int pagesCount = this.document.Slides.Count;
             return pagesCount;
@@ -78,7 +83,11 @@ namespace FileConverter.ConversionJobs
 
             this.UserState = Properties.Resources.ConversionStateReadDocument;
 
-            this.LoadDocumentIfNecessary();
+            if (!this.TryLoadDocumentIfNecessary())
+            {
+                this.ConversionFailed(Properties.Resources.ErrorUnableToUseMicrosoftOffice);
+                return;
+            }
 
             this.UserState = Properties.Resources.ConversionStateConversion;
 
@@ -136,8 +145,14 @@ namespace FileConverter.ConversionJobs
 
         protected override void ReleaseOfficeApplicationInstanceIfNeeded()
         {
+            if (this.application == null)
+            {
+                return;
+            }
+
             Diagnostics.Debug.Log("Quit PowerPoint application via interop.");
             this.application.Quit();
+            this.application = null;
         }
 
         private async Task UpdateProgress()
@@ -159,10 +174,23 @@ namespace FileConverter.ConversionJobs
                 await Task.Delay(40);
             }
         }
-
-        private void LoadDocumentIfNecessary()
+        
+        private bool TryLoadDocumentIfNecessary()
         {
-            this.InitializeOfficeApplicationInstanceIfNecessary();
+            try
+            {
+                this.InitializeOfficeApplicationInstanceIfNecessary();
+            }
+            catch (Exception exception)
+            {
+                Debug.Log(exception.ToString());
+                Debug.Log("Failed to initialize office application.");
+            }
+
+            if (this.application == null)
+            {
+                return false;
+            }
 
             if (this.document == null)
             {
@@ -170,6 +198,8 @@ namespace FileConverter.ConversionJobs
 
                 this.document = this.application.Presentations.Open(this.InputFilePath, ReadOnly: MsoTriState.msoTrue, WithWindow: MsoTriState.msoFalse);
             }
+
+            return this.document != null;
         }
     }
 }

@@ -547,6 +547,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fail to open document with Microsoft Office (check if your licence/installation is valid)..
+        /// </summary>
+        public static string ErrorUnableToUseMicrosoftOffice {
+            get {
+                return ResourceManager.GetString("ErrorUnableToUseMicrosoftOffice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unsupported output format &apos;{0}&apos;..
         /// </summary>
         public static string ErrorUnsupportedOutputFormat {

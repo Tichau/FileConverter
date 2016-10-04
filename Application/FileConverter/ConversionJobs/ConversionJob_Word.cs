@@ -2,15 +2,17 @@
 
 namespace FileConverter.ConversionJobs
 {
+    using System;
     using System.IO;
     using System.Threading.Tasks;
 
     using Word = Microsoft.Office.Interop.Word;
+    using FileConverter.Diagnostics;
 
     public class ConversionJob_Word : ConversionJob_Office
     {
         private Word.Document document;
-        private Word.Application wordApplication;
+        private Word.Application application;
 
         private string intermediateFilePath = string.Empty;
         private ConversionJob pdf2ImageConversionJob = null;
@@ -30,7 +32,10 @@ namespace FileConverter.ConversionJobs
                 return 1;
             }
 
-            this.LoadDocumentIfNecessary();
+            if (!this.TryLoadDocumentIfNecessary())
+            {
+                return 1;
+            }
 
             int pagesCount = this.document.ComputeStatistics(Word.WdStatistic.wdStatisticPages);
 
@@ -78,7 +83,11 @@ namespace FileConverter.ConversionJobs
 
             this.UserState = Properties.Resources.ConversionStateReadDocument;
 
-            this.LoadDocumentIfNecessary();
+            if (!this.TryLoadDocumentIfNecessary())
+            {
+                this.ConversionFailed(Properties.Resources.ErrorUnableToUseMicrosoftOffice);
+                return;
+            }
 
             // Make this document the active document.
             this.document.Activate();
@@ -127,14 +136,14 @@ namespace FileConverter.ConversionJobs
 
         protected override void InitializeOfficeApplicationInstanceIfNecessary()
         {
-            if (this.wordApplication != null)
+            if (this.application != null)
             {
                 return;
             }
 
             // Initialize word application.
             Diagnostics.Debug.Log("Instantiate word application via interop.");
-            this.wordApplication = new Microsoft.Office.Interop.Word.Application
+            this.application = new Microsoft.Office.Interop.Word.Application
             {
                 Visible = false
             };
@@ -142,8 +151,14 @@ namespace FileConverter.ConversionJobs
 
         protected override void ReleaseOfficeApplicationInstanceIfNeeded()
         {
+            if (this.application == null)
+            {
+                return;
+            }
+
             Diagnostics.Debug.Log("Quit word application via interop.");
-            this.wordApplication.Quit();
+            this.application.Quit();
+            this.application = null;
         }
 
         private async Task UpdateProgress()
@@ -166,16 +181,31 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        private void LoadDocumentIfNecessary()
+        private bool TryLoadDocumentIfNecessary()
         {
-            this.InitializeOfficeApplicationInstanceIfNecessary();
+            try
+            {
+                this.InitializeOfficeApplicationInstanceIfNecessary();
+            }
+            catch (Exception exception)
+            {
+                Debug.Log(exception.ToString());
+                Debug.Log("Failed to initialize office application.");
+            }
+
+            if (this.application == null)
+            {
+                return false;
+            }
 
             if (this.document == null)
             {
                 Diagnostics.Debug.Log("Load word document '{0}'.", this.InputFilePath);
 
-                this.document = this.wordApplication.Documents.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
+                this.document = this.application.Documents.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
             }
+
+            return this.document != null;
         }
     }
 }

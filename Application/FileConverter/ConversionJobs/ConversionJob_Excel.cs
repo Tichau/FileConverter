@@ -2,10 +2,12 @@
 
 namespace FileConverter.ConversionJobs
 {
+    using System;
     using System.IO;
     using System.Threading.Tasks;
 
     using Excel = Microsoft.Office.Interop.Excel;
+    using FileConverter.Diagnostics;
 
     public class ConversionJob_Excel : ConversionJob_Office
     {
@@ -30,7 +32,10 @@ namespace FileConverter.ConversionJobs
                 return 1;
             }
 
-            this.LoadDocumentIfNecessary();
+            if (!this.TryLoadDocumentIfNecessary())
+            {
+                return 1;
+            }
 
             int pagesCount = 0;
             foreach (object sheet in this.document.Sheets)
@@ -86,7 +91,11 @@ namespace FileConverter.ConversionJobs
 
             this.UserState = Properties.Resources.ConversionStateReadDocument;
 
-            this.LoadDocumentIfNecessary();
+            if (!this.TryLoadDocumentIfNecessary())
+            {
+                this.ConversionFailed(Properties.Resources.ErrorUnableToUseMicrosoftOffice);
+                return;
+            }
 
             // Make this document the active document.
             this.document.Activate();
@@ -150,8 +159,14 @@ namespace FileConverter.ConversionJobs
 
         protected override void ReleaseOfficeApplicationInstanceIfNeeded()
         {
+            if (this.application == null)
+            {
+                return;
+            }
+
             Diagnostics.Debug.Log("Quit excel application via interop.");
             this.application.Quit();
+            this.application = null;
         }
 
         private async Task UpdateProgress()
@@ -173,10 +188,23 @@ namespace FileConverter.ConversionJobs
                 await Task.Delay(40);
             }
         }
-
-        private void LoadDocumentIfNecessary()
+        
+        private bool TryLoadDocumentIfNecessary()
         {
-            this.InitializeOfficeApplicationInstanceIfNecessary();
+            try
+            {
+                this.InitializeOfficeApplicationInstanceIfNecessary();
+            }
+            catch (Exception exception)
+            {
+                Debug.Log(exception.ToString());
+                Debug.Log("Failed to initialize office application.");
+            }
+
+            if (this.application == null)
+            {
+                return false;
+            }
 
             if (this.document == null)
             {
@@ -184,6 +212,8 @@ namespace FileConverter.ConversionJobs
 
                 this.document = this.application.Workbooks.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
             }
+
+            return this.document != null;
         }
     }
 }
