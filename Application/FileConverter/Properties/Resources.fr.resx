@@ -550,4 +550,13 @@ utilisez maj pour une version en majuscules</value>
   <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
     <value>Impossible d'ouvrir le document avec Microsoft Office (vérifiez que la licence/l'installation sont valides).</value>
   </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Excel doit être installé pour pouvoir convertir les documents Excel.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>Microsoft PowerPoint doit être installé pour pouvoir convertir les documents PowerPoint.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Word doit être installé pour pouvoir convertir les documents Word.</value>
+  </data>
 </root>

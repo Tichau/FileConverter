@@ -12,14 +12,44 @@ namespace FileConverter.ConversionJobs
         {
         }
 
+        public enum ApplicationName
+        {
+            None,
+
+            Word,
+            Excel,
+            PowerPoint
+        }
+
+        protected abstract ApplicationName Application
+        {
+            get;
+        }
+        
         protected override void Initialize()
         {
             base.Initialize();
 
-            if (!Helpers.IsMicrosoftOfficeAvailable())
+            if (!Helpers.IsMicrosoftOfficeApplicationAvailable(this.Application))
             {
-                this.ConversionFailed(Properties.Resources.ErrorMicrosoftOfficeIsNotAvailable);
-                return;
+                switch (this.Application)
+                {
+                    case ApplicationName.Word:
+                        this.ConversionFailed(Properties.Resources.ErrorMicrosoftWordIsNotAvailable);
+                        return;
+
+                    case ApplicationName.PowerPoint:
+                        this.ConversionFailed(Properties.Resources.ErrorMicrosoftPowerPointIsNotAvailable);
+                        return;
+
+                    case ApplicationName.Excel:
+                        this.ConversionFailed(Properties.Resources.ErrorMicrosoftExcelIsNotAvailable);
+                        return;
+
+                    default:
+                        this.ConversionFailed(Properties.Resources.ErrorMicrosoftOfficeIsNotAvailable);
+                        return;
+                }
             }
         }
 

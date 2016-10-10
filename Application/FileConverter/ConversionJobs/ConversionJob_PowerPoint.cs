@@ -6,9 +6,10 @@ namespace FileConverter.ConversionJobs
     using System.IO;
     using System.Threading.Tasks;
 
-    using Microsoft.Office.Core;
-    using PowerPoint = Microsoft.Office.Interop.PowerPoint;
     using FileConverter.Diagnostics;
+    using Microsoft.Office.Core;
+
+    using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
     public class ConversionJob_PowerPoint : ConversionJob_Office
     {
@@ -24,6 +25,14 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_PowerPoint(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
+        }
+
+        protected override ApplicationName Application
+        {
+            get
+            {
+                return ApplicationName.PowerPoint;
+            }
         }
 
         protected override int GetOuputFilesCount()

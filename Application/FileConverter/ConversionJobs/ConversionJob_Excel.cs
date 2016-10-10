@@ -6,8 +6,9 @@ namespace FileConverter.ConversionJobs
     using System.IO;
     using System.Threading.Tasks;
 
-    using Excel = Microsoft.Office.Interop.Excel;
     using FileConverter.Diagnostics;
+
+    using Excel = Microsoft.Office.Interop.Excel;
 
     public class ConversionJob_Excel : ConversionJob_Office
     {
@@ -23,6 +24,14 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_Excel(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
+        }
+
+        protected override ApplicationName Application
+        {
+            get
+            {
+                return ApplicationName.Excel;
+            }
         }
 
         protected override int GetOuputFilesCount()

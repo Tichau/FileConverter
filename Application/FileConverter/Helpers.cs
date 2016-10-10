@@ -10,23 +10,11 @@ namespace FileConverter
     using System.Reflection;
     using System.Threading;
 
+    using FileConverter.ConversionJobs;
     using Microsoft.Win32;
 
     public static class Helpers
     {
-        private static readonly string[] CompatibleOfficeVersions = new string[]
-        {
-            "16.0", // Office 2016
-            "15.0", // Office 2013
-            "14.0", // Office 2010
-            "12.0", // Office 2007
-            "11.0", // Office 2003
-            "10.0", // Office XP
-            "9.0", // Office 2000
-            "8.0", // Office 98
-            "7.0", // Office 97
-        };
-
         public static IEnumerable<CultureInfo> GetSupportedCultures()
         {
             // Get all cultures.
@@ -184,42 +172,74 @@ namespace FileConverter
         /// </summary>
         /// <returns>Returns true if Office is installed on the computer.</returns>
         /// source: http://stackoverflow.com/questions/3266675/how-to-detect-installed-version-of-ms-office/3267832#3267832
-        public static bool IsMicrosoftOfficeAvailable()
+        /// source: http://www.codeproject.com/Articles/26520/Getting-Office-s-Version
+        public static bool IsMicrosoftOfficeApplicationAvailable(ConversionJobs.ConversionJob_Office.ApplicationName application)
         {
-            string registryKeyPattern = @"Software\Microsoft\Office\{0}\Common";
-
-            for (int index = 0; index < Helpers.CompatibleOfficeVersions.Length; index++)
+            string registryKeyPattern = @"Software\Microsoft\Windows\CurrentVersion\App Paths\";
+            switch (application)
             {
-                string registryKeyPath = string.Format(registryKeyPattern, Helpers.CompatibleOfficeVersions[index]);
-                RegistryKey officeRegistryKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(registryKeyPath);
-                if (officeRegistryKey != null)
+                case ConversionJob_Office.ApplicationName.Word:
+                    registryKeyPattern += "winword.exe";
+                    break;
+
+                case ConversionJob_Office.ApplicationName.PowerPoint:
+                    registryKeyPattern += "powerpnt.exe";
+                    break;
+
+                case ConversionJob_Office.ApplicationName.Excel:
+                    registryKeyPattern += "excel.exe";
+                    break;
+
+                case ConversionJob_Office.ApplicationName.None:
+                    return false;
+            }
+
+            // Looks inside CURRENT_USER.
+            RegistryKey winwordKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(registryKeyPattern, false);
+            if (winwordKey != null)
+            {
+                string winwordPath = winwordKey.GetValue(string.Empty).ToString();
+                if (!string.IsNullOrEmpty(winwordPath))
                 {
-                    Diagnostics.Debug.Log($"Registry key '{registryKeyPath}' found");
                     return true;
                 }
             }
 
-            Diagnostics.Debug.Log("No compatible office version found.");
+            // If not found, looks inside LOCAL_MACHINE.
+            winwordKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(registryKeyPattern, false);
+            if (winwordKey != null)
+            {
+                string winwordPath = winwordKey.GetValue(string.Empty).ToString();
+                if (!string.IsNullOrEmpty(winwordPath))
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
-        public static bool IsExtensionCompatibleWithOffice(string extension)
+        public static ConversionJob_Office.ApplicationName GetOfficeApplicationCompatibleWithExtension(string extension)
         {
             switch (extension)
             {
                 case "doc":
                 case "docx":
+                case "odt":
+                    return ConversionJob_Office.ApplicationName.Word;
+
                 case "ppt":
                 case "pptx":
                 case "odp":
+                    return ConversionJob_Office.ApplicationName.PowerPoint;
+
                 case "ods":
-                case "odt":
                 case "xls":
                 case "xlsx":
-                    return true;
+                    return ConversionJob_Office.ApplicationName.Excel;
             }
 
-            return false;
+            return ConversionJob_Office.ApplicationName.None;
         }
 
         public static class InputCategoryNames

@@ -6,8 +6,9 @@ namespace FileConverter.ConversionJobs
     using System.IO;
     using System.Threading.Tasks;
 
-    using Word = Microsoft.Office.Interop.Word;
     using FileConverter.Diagnostics;
+
+    using Word = Microsoft.Office.Interop.Word;
 
     public class ConversionJob_Word : ConversionJob_Office
     {
@@ -23,6 +24,14 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_Word(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
+        }
+
+        protected override ApplicationName Application
+        {
+            get
+            {
+                return ApplicationName.Word;
+            }
         }
 
         protected override int GetOuputFilesCount()

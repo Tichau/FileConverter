@@ -7,6 +7,7 @@ namespace FileConverter
     using System.Windows.Media;
 
     using FileConverter.Annotations;
+    using FileConverter.ConversionJobs;
 
     public class InputExtension : INotifyPropertyChanged
     {
@@ -21,14 +22,29 @@ namespace FileConverter
         {
             this.Name = name;
 
-            if (!Helpers.IsExtensionCompatibleWithOffice(name) || Helpers.IsMicrosoftOfficeAvailable())
+            ConversionJob_Office.ApplicationName officeApplication = Helpers.GetOfficeApplicationCompatibleWithExtension(name);
+
+            if (officeApplication == ConversionJob_Office.ApplicationName.None || Helpers.IsMicrosoftOfficeApplicationAvailable(officeApplication))
             {
                 this.ForegroundBrush = this.defaultBrush;
             }
             else
             {
                 this.ForegroundBrush = this.errorBrush;
-                this.ToolTip = Properties.Resources.ErrorMicrosoftOfficeIsNotAvailable;
+                switch (officeApplication)
+                {
+                    case ConversionJob_Office.ApplicationName.Word:
+                        this.ToolTip = Properties.Resources.ErrorMicrosoftWordIsNotAvailable;
+                        break;
+
+                    case ConversionJob_Office.ApplicationName.PowerPoint:
+                        this.ToolTip = Properties.Resources.ErrorMicrosoftPowerPointIsNotAvailable;
+                        break;
+
+                    case ConversionJob_Office.ApplicationName.Excel:
+                        this.ToolTip = Properties.Resources.ErrorMicrosoftExcelIsNotAvailable;
+                        break;
+                }
             }
         }
 

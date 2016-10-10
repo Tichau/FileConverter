@@ -538,11 +538,38 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Microsoft Excel must be installed in order to convert Excel documents..
+        /// </summary>
+        public static string ErrorMicrosoftExcelIsNotAvailable {
+            get {
+                return ResourceManager.GetString("ErrorMicrosoftExcelIsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Microsoft Office must be installed in order to convert Office documents..
         /// </summary>
         public static string ErrorMicrosoftOfficeIsNotAvailable {
             get {
                 return ResourceManager.GetString("ErrorMicrosoftOfficeIsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft PowerPoint must be installed in order to convert PowerPoint documents..
+        /// </summary>
+        public static string ErrorMicrosoftPowerPointIsNotAvailable {
+            get {
+                return ResourceManager.GetString("ErrorMicrosoftPowerPointIsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft Word must be installed in order to convert Word documents..
+        /// </summary>
+        public static string ErrorMicrosoftWordIsNotAvailable {
+            get {
+                return ResourceManager.GetString("ErrorMicrosoftWordIsNotAvailable", resourceCulture);
             }
         }
         
