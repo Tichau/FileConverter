@@ -268,20 +268,29 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read input image.
+        ///   Looks up a localized string similar to Prepare conversion.
         /// </summary>
-        public static string ConversionStateReadIntputImage {
+        public static string ConversionStatePrepareConversion {
             get {
-                return ResourceManager.GetString("ConversionStateReadIntputImage", resourceCulture);
+                return ResourceManager.GetString("ConversionStatePrepareConversion", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Read document.
         /// </summary>
-        public static string ConversionStateReadPdf {
+        public static string ConversionStateReadDocument {
             get {
-                return ResourceManager.GetString("ConversionStateReadPdf", resourceCulture);
+                return ResourceManager.GetString("ConversionStateReadDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read input image.
+        /// </summary>
+        public static string ConversionStateReadIntputImage {
+            get {
+                return ResourceManager.GetString("ConversionStateReadIntputImage", resourceCulture);
             }
         }
         
@@ -412,7 +421,16 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Audio CD track extraction failed.
+        ///   Looks up a localized string similar to Can&apos;t find the output file(s)..
+        /// </summary>
+        public static string ErrorCantFindOutputFiles {
+            get {
+                return ResourceManager.GetString("ErrorCantFindOutputFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Audio CD track extraction failed..
         /// </summary>
         public static string ErrorCDAExtractionFailed {
             get {
@@ -426,6 +444,15 @@ namespace FileConverter.Properties {
         public static string ErrorCDDriveNotReady {
             get {
                 return ResourceManager.GetString("ErrorCDDriveNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The conversion job failed but there is an output file that does exists..
+        /// </summary>
+        public static string ErrorConversionFailedWithOutput {
+            get {
+                return ResourceManager.GetString("ErrorConversionFailedWithOutput", resourceCulture);
             }
         }
         
@@ -507,6 +534,51 @@ namespace FileConverter.Properties {
         public static string ErrorInvalidOutputPath {
             get {
                 return ResourceManager.GetString("ErrorInvalidOutputPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft Excel must be installed in order to convert Excel documents..
+        /// </summary>
+        public static string ErrorMicrosoftExcelIsNotAvailable {
+            get {
+                return ResourceManager.GetString("ErrorMicrosoftExcelIsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft Office must be installed in order to convert Office documents..
+        /// </summary>
+        public static string ErrorMicrosoftOfficeIsNotAvailable {
+            get {
+                return ResourceManager.GetString("ErrorMicrosoftOfficeIsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft PowerPoint must be installed in order to convert PowerPoint documents..
+        /// </summary>
+        public static string ErrorMicrosoftPowerPointIsNotAvailable {
+            get {
+                return ResourceManager.GetString("ErrorMicrosoftPowerPointIsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft Word must be installed in order to convert Word documents..
+        /// </summary>
+        public static string ErrorMicrosoftWordIsNotAvailable {
+            get {
+                return ResourceManager.GetString("ErrorMicrosoftWordIsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to open document with Microsoft Office (check if your licence/installation is valid)..
+        /// </summary>
+        public static string ErrorUnableToUseMicrosoftOffice {
+            get {
+                return ResourceManager.GetString("ErrorUnableToUseMicrosoftOffice", resourceCulture);
             }
         }
         
@@ -1000,6 +1072,15 @@ namespace FileConverter.Properties {
         public static string StringImageName {
             get {
                 return ResourceManager.GetString("StringImageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Misc.
+        /// </summary>
+        public static string StringMiscName {
+            get {
+                return ResourceManager.GetString("StringMiscName", resourceCulture);
             }
         }
         

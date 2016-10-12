@@ -21,5 +21,6 @@ namespace FileConverter
         Png,
         Wav,
         Webm,
+        Webp,
     }
 }

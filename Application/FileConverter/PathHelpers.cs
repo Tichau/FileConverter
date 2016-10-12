@@ -3,8 +3,8 @@
 namespace FileConverter
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
+    using System.Text;
     using System.Text.RegularExpressions;
 
     using FileConverter.Diagnostics;

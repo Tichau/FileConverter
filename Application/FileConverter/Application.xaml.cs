@@ -31,7 +31,7 @@ namespace FileConverter
         private static readonly Version Version = new Version()
                                             {
                                                 Major = 1, 
-                                                Minor = 1,
+                                                Minor = 2,
                                                 Patch = 0,
                                             };
 
@@ -341,8 +341,7 @@ namespace FileConverter
                     {
                         string inputFilePath = filePaths[index];
                         ConversionJob conversionJob = ConversionJobFactory.Create(conversionPreset, inputFilePath);
-                        conversionJob.PrepareConversion(inputFilePath);
-
+                        
                         this.conversionJobs.Add(conversionJob);
                     }
                 }
@@ -358,8 +357,14 @@ namespace FileConverter
 
         private void ConvertFiles()
         {
-            Thread[] jobThreads = new Thread[this.numberOfConversionThread];
+            // Prepare conversions.
+            for (int index = 0; index < this.ConvertionJobs.Count; index++)
+            {
+                this.ConvertionJobs[index].PrepareConversion();
+            }
             
+            // Convert!
+            Thread[] jobThreads = new Thread[this.numberOfConversionThread];
             while (true)
             {
                 // Compute conversion flags.
@@ -396,7 +401,7 @@ namespace FileConverter
                             Thread thread = jobThreads[threadIndex];
                             if (thread == null || !thread.IsAlive)
                             {
-                                jobThread = Helpers.InstantiateThread("ConversionThread", this.ExecuteConversionJob);
+                                jobThread = Helpers.InstantiateThread(conversionJob.GetType().Name, this.ExecuteConversionJob);
                                 jobThreads[threadIndex] = jobThread;
                                 break;
                             }
@@ -405,6 +410,12 @@ namespace FileConverter
                         if (jobThread != null)
                         {
                             jobThread.Start(conversionJob);
+
+                            while (conversionJob.State == ConversionJob.ConversionState.Ready)
+                            {
+                                Debug.Log("Wait the launch of the conversion thread before launching any other thread.");
+                                Thread.Sleep(20);
+                            }
                         }
 
                         break;

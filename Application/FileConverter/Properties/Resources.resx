@@ -403,7 +403,7 @@ use maj for uppercase version</value>
   <data name="ConversionStateReadIntputImage" xml:space="preserve">
     <value>Read input image</value>
   </data>
-  <data name="ConversionStateReadPdf" xml:space="preserve">
+  <data name="ConversionStateReadDocument" xml:space="preserve">
     <value>Read document</value>
   </data>
   <data name="StringAnimatedImageName" xml:space="preserve">
@@ -446,7 +446,7 @@ use maj for uppercase version</value>
     <value>Fail to find ffmpeg executable. You should try to reinstall the application.</value>
   </data>
   <data name="ErrorCDAExtractionFailed" xml:space="preserve">
-    <value>Audio CD track extraction failed</value>
+    <value>Audio CD track extraction failed.</value>
   </data>
   <data name="ErrorCDDriveNotReady" xml:space="preserve">
     <value>CD drive is not ready.</value>
@@ -513,5 +513,32 @@ use maj for uppercase version</value>
   </data>
   <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
     <value>The application will automatically terminate in 1 second.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Can't find the output file(s).</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>The conversion job failed but there is an output file that does exists.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Prepare conversion</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Office must be installed in order to convert Office documents.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Fail to open document with Microsoft Office (check if your licence/installation is valid).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Excel must be installed in order to convert Excel documents.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>Microsoft PowerPoint must be installed in order to convert PowerPoint documents.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Word must be installed in order to convert Word documents.</value>
   </data>
 </root>

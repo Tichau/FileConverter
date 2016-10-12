@@ -12,7 +12,7 @@
 
 <!-- Upgrade documentation: http://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="1.1.0" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
+    <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="1.2.0" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
         <?if $(var.Platform) = x64 ?>
             <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />        
         <?else ?>
@@ -142,7 +142,7 @@
             <Component Id="RegistryEntries" Guid="{C3EF3D67-0206-4DBD-B2EA-78FF2E290093}">
                 <RegistryKey Root="HKCU" Key="Software\FileConverter" ForceDeleteOnUninstall="yes">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe"/>
-                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;exr;flac;flv;gif;ico;jpg;jpeg;m4a;m4v;mkv;mov;mp3;mp4;mpeg;oga;ogg;ogv;pdf;png;psd;svg;tga;tiff;vob;wav;webm;wma;wmv"/>
+                    <RegistryValue Name="CompatibleInputExtensions" Type="string" Value="3gp;aac;aiff;ape;avi;bik;bmp;cda;doc;docx;exr;flac;flv;gif;ico;jpg;jpeg;m4a;m4v;mkv;mov;mp3;mp4;mpeg;odp;ods;odt;oga;ogg;ogv;pdf;png;ppt;pptx;psd;svg;tga;tiff;vob;wav;webm;webp;wma;wmv;xls;xlsx"/>
                 </RegistryKey>
             </Component>
         </ComponentGroup>

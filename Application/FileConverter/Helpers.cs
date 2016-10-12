@@ -10,17 +10,20 @@ namespace FileConverter
     using System.Reflection;
     using System.Threading;
 
+    using FileConverter.ConversionJobs;
+    using Microsoft.Win32;
+
     public static class Helpers
     {
         public static IEnumerable<CultureInfo> GetSupportedCultures()
         {
-            //Get all culture 
+            // Get all cultures.
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
 
-            //Find the location where application installed.
+            // Find the location where application installed.
             string exeLocation = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
 
-            //Return all culture for which satellite folder found with culture code.
+            // Return all culture for which satellite folder found with culture code.
             return cultures.Where(cultureInfo => Directory.Exists(Path.Combine(exeLocation, "Languages", cultureInfo.Name)));
         }
 
@@ -67,12 +70,22 @@ namespace FileConverter
                 case "tiff":
                 case "svg":
                 case "xcf":
+                case "webp":
                     return InputCategoryNames.Image;
 
                 case "gif":
                     return InputCategoryNames.AnimatedImage;
 
                 case "pdf":
+                case "doc":
+                case "docx":
+                case "ppt":
+                case "pptx":
+                case "odp":
+                case "ods":
+                case "odt":
+                case "xls":
+                case "xlsx":
                     return InputCategoryNames.Document;
             }
 
@@ -106,13 +119,14 @@ namespace FileConverter
                 case OutputType.Ico:
                 case OutputType.Jpg:
                 case OutputType.Png:
+                case OutputType.Webp:
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Document;
 
                 case OutputType.Gif:
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
 
                 case OutputType.Pdf:
-                    return category == InputCategoryNames.Image;
+                    return category == InputCategoryNames.Image || category == InputCategoryNames.Document;
 
                 default:
                     return false;
@@ -152,7 +166,82 @@ namespace FileConverter
 
             return thread;
         }
-        
+
+        /// <summary>
+        /// Check whether Microsoft office is available or not.
+        /// </summary>
+        /// <returns>Returns true if Office is installed on the computer.</returns>
+        /// source: http://stackoverflow.com/questions/3266675/how-to-detect-installed-version-of-ms-office/3267832#3267832
+        /// source: http://www.codeproject.com/Articles/26520/Getting-Office-s-Version
+        public static bool IsMicrosoftOfficeApplicationAvailable(ConversionJobs.ConversionJob_Office.ApplicationName application)
+        {
+            string registryKeyPattern = @"Software\Microsoft\Windows\CurrentVersion\App Paths\";
+            switch (application)
+            {
+                case ConversionJob_Office.ApplicationName.Word:
+                    registryKeyPattern += "winword.exe";
+                    break;
+
+                case ConversionJob_Office.ApplicationName.PowerPoint:
+                    registryKeyPattern += "powerpnt.exe";
+                    break;
+
+                case ConversionJob_Office.ApplicationName.Excel:
+                    registryKeyPattern += "excel.exe";
+                    break;
+
+                case ConversionJob_Office.ApplicationName.None:
+                    return false;
+            }
+
+            // Looks inside CURRENT_USER.
+            RegistryKey winwordKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(registryKeyPattern, false);
+            if (winwordKey != null)
+            {
+                string winwordPath = winwordKey.GetValue(string.Empty).ToString();
+                if (!string.IsNullOrEmpty(winwordPath))
+                {
+                    return true;
+                }
+            }
+
+            // If not found, looks inside LOCAL_MACHINE.
+            winwordKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(registryKeyPattern, false);
+            if (winwordKey != null)
+            {
+                string winwordPath = winwordKey.GetValue(string.Empty).ToString();
+                if (!string.IsNullOrEmpty(winwordPath))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static ConversionJob_Office.ApplicationName GetOfficeApplicationCompatibleWithExtension(string extension)
+        {
+            switch (extension)
+            {
+                case "doc":
+                case "docx":
+                case "odt":
+                    return ConversionJob_Office.ApplicationName.Word;
+
+                case "ppt":
+                case "pptx":
+                case "odp":
+                    return ConversionJob_Office.ApplicationName.PowerPoint;
+
+                case "ods":
+                case "xls":
+                case "xlsx":
+                    return ConversionJob_Office.ApplicationName.Excel;
+            }
+
+            return ConversionJob_Office.ApplicationName.None;
+        }
+
         public static class InputCategoryNames
         {
             public const string Audio = "Audio";

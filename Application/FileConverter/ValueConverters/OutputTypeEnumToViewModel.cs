@@ -1,11 +1,12 @@
-﻿// <copyright file="BitrateToString.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="OutputTypeEnumToViewModel.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters
 {
     using System;
     using System.Globalization;
-    using System.Windows.Data;
     using System.Linq;
+    using System.Windows.Data;
+
     using FileConverter.Windows;
 
     public class OutputTypeEnumToViewModel : IValueConverter

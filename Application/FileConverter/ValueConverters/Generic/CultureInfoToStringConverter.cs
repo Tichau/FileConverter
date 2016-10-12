@@ -1,4 +1,4 @@
-﻿// <copyright file="BoolInverterConverter.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="CultureInfoToStringConverter.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters.Generic
 {
@@ -27,7 +27,7 @@ namespace FileConverter.ValueConverters.Generic
                 return nativeName.ToUpper(cultureInfo);
             }
 
-            return nativeName.Substring(0, 1).ToUpper(cultureInfo) + nativeName.Substring(1, nativeName.Length - 1); ;
+            return nativeName.Substring(0, 1).ToUpper(cultureInfo) + nativeName.Substring(1, nativeName.Length - 1);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

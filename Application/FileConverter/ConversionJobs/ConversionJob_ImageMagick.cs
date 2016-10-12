@@ -14,10 +14,12 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_ImageMagick() : base()
         {
+            this.IsCancelable = true;
         }
 
-        public ConversionJob_ImageMagick(ConversionPreset conversionPreset) : base(conversionPreset)
+        public ConversionJob_ImageMagick(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
+            this.IsCancelable = true;
         }
 
         protected override void Initialize()
@@ -85,7 +87,7 @@ namespace FileConverter.ConversionJobs
             float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
             if (Math.Abs(scaleFactor - 1f) >= 0.005f)
             {
-                Debug.Log("Apply scale factor: {0}%.", scaleFactor*100);
+                Debug.Log("Apply scale factor: {0}%.", scaleFactor * 100);
 
                 dpi *= scaleFactor;
             }
@@ -93,7 +95,7 @@ namespace FileConverter.ConversionJobs
             Debug.Log("Density: {0}dpi.", dpi);
             settings.Density = new Density(dpi, dpi);
 
-            this.UserState = Properties.Resources.ConversionStateReadPdf;
+            this.UserState = Properties.Resources.ConversionStateReadDocument;
 
             using (MagickImageCollection images = new MagickImageCollection())
             {
@@ -124,9 +126,9 @@ namespace FileConverter.ConversionJobs
                 float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
                 if (Math.Abs(scaleFactor - 1f) >= 0.005f)
                 {
-                    Debug.Log("Apply scale factor: {0}%.", scaleFactor*100);
+                    Debug.Log("Apply scale factor: {0}%.", scaleFactor * 100);
 
-                    image.Scale(new Percentage(scaleFactor*100f));
+                    image.Scale(new Percentage(scaleFactor * 100f));
                 }
             }
 
@@ -148,7 +150,7 @@ namespace FileConverter.ConversionJobs
                 {
                     int referenceSize = System.Math.Min(image.Width, image.Height);
                     int size = 2;
-                    while (size*2 <= referenceSize)
+                    while (size * 2 <= referenceSize)
                     {
                         size *= 2;
                     }
@@ -187,6 +189,10 @@ namespace FileConverter.ConversionJobs
                 case OutputType.Pdf:
                     break;
 
+                case OutputType.Webp:
+                    image.Quality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    break;
+
                 default:
                     this.ConversionFailed(string.Format(Properties.Resources.ErrorUnsupportedOutputFormat, this.ConversionPreset.OutputType));
                     image.Progress -= this.Image_Progress;
@@ -199,8 +205,14 @@ namespace FileConverter.ConversionJobs
 
         private void Image_Progress(object sender, ProgressEventArgs eventArgs)
         {
+            if (this.CancelIsRequested)
+            {
+                eventArgs.Cancel = true;
+                return;
+            }
+
             float alreadyCompletedPages = this.CurrentOuputFilePathIndex / (float)this.pageCount;
-            this.Progress = alreadyCompletedPages + (float)eventArgs.Progress.ToDouble() / (100f * this.pageCount);
+            this.Progress = alreadyCompletedPages + ((float)eventArgs.Progress.ToDouble() / (100f * this.pageCount));
         }
     }
 }

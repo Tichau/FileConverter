@@ -22,10 +22,12 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_ExtractCDA() : base()
         {
+            this.IsCancelable = true;
         }
 
-        public ConversionJob_ExtractCDA(ConversionPreset conversionPreset) : base(conversionPreset)
+        public ConversionJob_ExtractCDA(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
+            this.IsCancelable = true;
         }
 
         protected override InputPostConversionAction InputPostConversionAction
@@ -35,7 +37,14 @@ namespace FileConverter.ConversionJobs
                 return InputPostConversionAction.None;
             }
         }
-        
+
+        public override void Cancel()
+        {
+            base.Cancel();
+
+            this.compressionConversionJob.Cancel();
+        }
+
         protected override void Initialize()
         {
             base.Initialize();
@@ -103,7 +112,7 @@ namespace FileConverter.ConversionJobs
 
             // Sub conversion job (for compression).
             this.compressionConversionJob = ConversionJobFactory.Create(this.ConversionPreset, this.intermediateFilePath);
-            this.compressionConversionJob.PrepareConversion(this.intermediateFilePath, this.OutputFilePath);
+            this.compressionConversionJob.PrepareConversion(this.OutputFilePath);
             this.compressionThread = Helpers.InstantiateThread("CDACompressionThread", this.CompressAsync);
         }
 
@@ -193,6 +202,12 @@ namespace FileConverter.ConversionJobs
 
         private void CdReadProgress(object sender, ReadProgressEventArgs eventArgs)
         {
+            if (this.CancelIsRequested)
+            {
+                eventArgs.CancelRead = true;
+                return;
+            }
+
             this.Progress = (float)eventArgs.BytesRead / (float)eventArgs.Bytes2Read;
 
             eventArgs.CancelRead |= this.State != ConversionState.InProgress;

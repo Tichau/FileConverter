@@ -5,9 +5,9 @@ namespace FileConverter.Diagnostics
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Threading;
     using System.Windows;
 
     public static class Debug
@@ -54,12 +54,14 @@ namespace FileConverter.Diagnostics
         {
             DiagnosticsData diagnosticsData;
 
-            int threadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
+            Thread currentThread = System.Threading.Thread.CurrentThread;
+            int threadId = currentThread.ManagedThreadId;
             lock (Debug.diagnosticsDataById)
             {
                 if (!Debug.diagnosticsDataById.TryGetValue(threadId, out diagnosticsData))
                 {
-                    diagnosticsData = new DiagnosticsData(Debug.threadCount > 0 ? string.Format("Thread {0}", Debug.threadCount) : "Application");
+                    string threadName = Debug.threadCount > 0 ? $"{currentThread.Name} ({Debug.threadCount})" : "Application";
+                    diagnosticsData = new DiagnosticsData(threadName);
                     diagnosticsData.Initialize(Debug.diagnosticsFolderPath, threadId);
                     Debug.diagnosticsDataById.Add(threadId, diagnosticsData);
                     Debug.threadCount++;

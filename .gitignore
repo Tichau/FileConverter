@@ -195,3 +195,6 @@ FakesAssemblies/
 
 # Ignore the installer signing commands file
 Installer/Installer.sign
+
+# Ignore the installer languages file because it is automatically generated
+Installer/Languages.wxs
