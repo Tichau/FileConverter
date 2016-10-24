@@ -308,7 +308,7 @@ use maj for uppercase version</value>
     <value>See change log ...</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>File Converter Settings</value>
   </data>
   <data name="SettingsButtonTitle" xml:space="preserve">
     <value>Settings</value>
@@ -540,5 +540,8 @@ use maj for uppercase version</value>
   </data>
   <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
     <value>Microsoft Word must be installed in order to convert Word documents.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Open File Converter website</value>
   </data>
 </root>

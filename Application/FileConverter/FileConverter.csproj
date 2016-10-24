@@ -312,6 +312,12 @@
   <ItemGroup>
     <Resource Include="Resources\FileConverterUsage.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Settings-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WebSite-Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg\$(PlatformName)\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"

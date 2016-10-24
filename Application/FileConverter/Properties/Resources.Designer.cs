@@ -1283,6 +1283,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open File Converter website.
+        /// </summary>
+        public static string WebsiteButtonDescription {
+            get {
+                return ResourceManager.GetString("WebsiteButtonDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
         public static string ZeroDegreesRotationTitle {

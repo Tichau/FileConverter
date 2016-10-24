@@ -541,4 +541,7 @@ use maj for uppercase version</value>
   <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
     <value>Microsoft Word must be installed in order to convert Word documents.</value>
   </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Open File Converter website</value>
+  </data>
 </root>

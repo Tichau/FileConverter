@@ -736,9 +736,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="..\Resources\ApplicationIcon.png" />
+            <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="..\Resources\Settings-Icon.png" />
             <Label Grid.Column="1" Content="{x:Static project:Resources.Settings}" FontSize="20" Margin="4" VerticalAlignment="Center" />
-            <Label Grid.Column="2" HorizontalAlignment="Right" FontStyle="Italic" FontSize="14" VerticalAlignment="Center">
+            <Label Grid.Column="2" HorizontalAlignment="Right" FontStyle="Italic" FontSize="14" VerticalAlignment="Center" Foreground="#FF999999">
                 <Label.Content>
                     <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
                 </Label.Content>
@@ -987,9 +987,6 @@
                                 <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
                             </Label.Content>
                         </Label>
-                        <TextBlock Margin="5" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-                            <Hyperlink Foreground="#1E6BB8"  Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://www.file-converter.org?from=about">www.file-converter.org</Hyperlink>
-                        </TextBlock>
                     </DockPanel>
                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
                         <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/?from=about">
@@ -1007,6 +1004,11 @@
                                 <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
                             </Button.Content>
                         </Button>
+                        <Button ToolTip="{x:Static project:Resources.WebsiteButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="www.file-converter.org?from=about">
+                            <Button.Content>
+                                <Image Source="/FileConverter;component/Resources/WebSite-Icon.png"></Image>
+                            </Button.Content>
+                        </Button>
                     </StackPanel>
 
                     <DockPanel Grid.Row="1" Grid.Column="0" Margin="0,0,5,0">
@@ -1018,7 +1020,7 @@
                         </TextBlock>
                     </DockPanel>
 
-                    <Image Grid.Row="1" Grid.Column="1" Margin="0,5,0,5"  Source="/FileConverter;component/Resources/ApplicationIcon.ico"></Image>
+                    <Image Grid.Row="1" Grid.Column="1" Margin="20,20,20,20"  Source="/FileConverter;component/Resources/ApplicationIcon.ico"></Image>
                         
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center"/>
