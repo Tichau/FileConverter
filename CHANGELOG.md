@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.2.1
+- Fixed: Issue where the default language was set to french (github issue #6).
+- Change: Small improvements of File Converter application and installer interface thanks to TheAresjej (github issues #7 and #8).
+
 ## Version 1.2
 - New: Possibility to convert Word documents (docx, odt and doc) to pdf and images (this feature is only available if you have Microsoft Word installed).
 - New: Possibility to convert Excel documents (xlsx, ods and xls) to pdf and images (this feature is only available if you have Microsoft Excel installed).
