@@ -9,6 +9,8 @@ namespace FileConverter.ConversionJobs
 
     public class ConversionJob_ImageMagick : ConversionJob
     {
+        private const float BaseDpiForPdfConversion = 200f;
+
         private bool isInputFilePdf;
         private int pageCount;
 
@@ -83,7 +85,7 @@ namespace FileConverter.ConversionJobs
         {
             MagickReadSettings settings = new MagickReadSettings();
 
-            float dpi = 200f;
+            float dpi = BaseDpiForPdfConversion;
             float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
             if (Math.Abs(scaleFactor - 1f) >= 0.005f)
             {
@@ -93,7 +95,7 @@ namespace FileConverter.ConversionJobs
             }
 
             Debug.Log("Density: {0}dpi.", dpi);
-            settings.Density = new Density(dpi, dpi);
+            settings.Density = new Density(dpi);
 
             this.UserState = Properties.Resources.ConversionStateReadDocument;
 
@@ -187,6 +189,8 @@ namespace FileConverter.ConversionJobs
                     break;
 
                 case OutputType.Pdf:
+                    Debug.Log("Density: {0}dpi.", BaseDpiForPdfConversion);
+                    image.Density = new Density(BaseDpiForPdfConversion);
                     break;
 
                 case OutputType.Webp:
