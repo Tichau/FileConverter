@@ -1,8 +1,9 @@
 # Change Log
 
 ## Version 1.2.1
+- Fixed: Issue where audio file tags were not copied in a format readable by Windows.
 - Fixed: Issue where the default language was set to french (github issue #6).
-- Fixed: Issue where the size of a pdf generated from images were not consistent.
+- Fixed: Issue where the size of a pdf generated from images was not consistent.
 - Change: Small improvements of File Converter application and installer interface thanks to TheAresjej (github issues #7 and #8).
 
 ## Version 1.2
