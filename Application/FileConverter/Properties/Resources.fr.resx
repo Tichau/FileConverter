@@ -319,7 +319,7 @@ utilisez maj pour une version en majuscules</value>
     <value>Voir les changements ...</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Configuration</value>
+    <value>Configuration de File Converter</value>
   </data>
   <data name="SettingsButtonTitle" xml:space="preserve">
     <value>Configuration</value>
@@ -558,5 +558,8 @@ utilisez maj pour une version en majuscules</value>
   </data>
   <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
     <value>Microsoft Word doit être installé pour pouvoir convertir les documents Word.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Ouvrir le site web de File Converter</value>
   </data>
 </root>

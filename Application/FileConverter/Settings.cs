@@ -135,7 +135,7 @@ namespace FileConverter
                     {
                         Settings.MigrateSettingsToCurrentVersion(userSettings);
 
-                        Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
+                        Diagnostics.Debug.Log("File converter settings have been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
                         userSettings.SerializationVersion = Version;
                     }
 
@@ -483,7 +483,7 @@ namespace FileConverter
 
         private Settings Merge(Settings settings)
         {
-            if (settings == null)
+            if (settings == null || settings.conversionPresets == null)
             {
                 return this;
             }
