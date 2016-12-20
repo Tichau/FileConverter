@@ -54,6 +54,22 @@ namespace FileConverter
                     }
                 }
             }
+
+            if (settingsVersion <= 3)
+            {
+                // Try to fix corrupted settings (GitHub issue #5).
+                string scale = preset.GetSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale);
+                if (scale != null)
+                {
+                    preset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, scale.Replace(',', '.'));
+                }
+
+                scale = preset.GetSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale);
+                if (scale != null)
+                {
+                    preset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, scale.Replace(',', '.'));
+                }
+            }
         }
     }
 }

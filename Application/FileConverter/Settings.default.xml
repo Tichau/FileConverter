@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SerializationVersion="3">
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SerializationVersion="4">
     <ExitApplicationWhenConversionsFinished>true</ExitApplicationWhenConversionsFinished>
     <DurationBetweenEndOfConversionsAndApplicationExit>3</DurationBetweenEndOfConversionsAndApplicationExit>
     <MaximumNumberOfSimultaneousConversions>2</MaximumNumberOfSimultaneousConversions>
@@ -243,7 +243,7 @@
         <InputTypes>gif</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
-        <Settings Key="VideoScale" Value="0,75" />
+        <Settings Key="VideoScale" Value="0.75" />
         <Settings Key="VideoRotation" Value="0" />
         <Settings Key="VideoFramesPerSecond" Value="10" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
@@ -504,7 +504,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
-        <Settings Key="ImageScale" Value="0,25" />
+        <Settings Key="ImageScale" Value="0.25" />
         <Settings Key="ImageRotation" Value="0" />
         <Settings Key="ImageClampSizePowerOf2" Value="False" />
         <Settings Key="ImageMaximumSize" Value="0" />
