@@ -9,7 +9,7 @@ namespace FileConverter
 
     public partial class Settings : IXmlSerializable
     {
-        public const int Version = 3;
+        public const int Version = 4;
         
         private bool exitApplicationWhenConversionsFinished = true;
         private float durationBetweenEndOfConversionsAndApplicationExit = 3f;
