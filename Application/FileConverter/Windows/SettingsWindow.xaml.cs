@@ -37,7 +37,7 @@ namespace FileConverter
         
         public SettingsWindow()
         {
-            this.SupportedCultures = Helpers.GetSupportedCultures().Where(cultureInfo => cultureInfo.IsNeutralCulture).ToArray();
+            this.SupportedCultures = Helpers.GetSupportedCultures().ToArray();
 
             this.InitializeComponent();
             
