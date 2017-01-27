@@ -11,6 +11,12 @@ You can help this project by contributing on [Github](https://github.com/Tichau/
 
 ## Thanks
 
+### Localization
+
+Thanks to **Khidreal** for the Portuguese localization.
+
+## Middlewares
+
 File converter uses the following middlewares:
 
 **ffmpeg** as file conversion software.

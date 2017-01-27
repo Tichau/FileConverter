@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 1.2.2
+- Added: Portuguese translation (thanks to Khidreal).
+- Fixed: Issue where scale was corrupted when switching application language (github issue #5).
+- Fixed: Issue where file metadata were not copied when converting to aac format (github issue #15).
+- Tech: Update to ffmpeg 3.2.2 version.
+- Tech: Improve security using https instead of http for upgrade system and links (thanks to TheAresjej).
+
 ## Version 1.2.1
 - Fixed: Issue where audio file tags were not copied in a format readable by Windows.
 - Fixed: Issue where the default language was set to french (github issue #6).
