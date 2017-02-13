@@ -1035,7 +1035,7 @@
                         </Button>
                     </StackPanel>
 
-                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2016, Adrien Allard. All right reserved." Foreground="#FF4D4D4D" Margin="0,2,0,2"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2017, Adrien Allard. All right reserved." Foreground="#FF4D4D4D" Margin="0,2,0,2"/>
                 </Grid>
             </TabItem>
         </TabControl>
