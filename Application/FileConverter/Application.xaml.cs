@@ -32,7 +32,7 @@ namespace FileConverter
                                             {
                                                 Major = 1, 
                                                 Minor = 2,
-                                                Patch = 1,
+                                                Patch = 2,
                                             };
 
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
