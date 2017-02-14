@@ -781,7 +781,7 @@
                             <Button x:Name="RemovePresetButton" Content="-" ToolTip="{x:Static project:Resources.RemoveSelectedPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="RemovePresetButton_Click"/>
                             <Button x:Name="MoveDownPresetButton" Content="v" ToolTip="{x:Static project:Resources.MoveDownSelectedPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0,0,0" Click="MovePresetDownButton_Click"/>
                             <TextBlock Margin="5,5,0,0">
-                                <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
                             </TextBlock>
                         </DockPanel>
                     </Grid>
@@ -855,7 +855,7 @@
                                     </ComboBox>
 
                                     <TextBlock Grid.Row="3" Margin="0,5,0,0">
-                                        <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                     </TextBlock>
                                 </Grid>
                             </GroupBox>
@@ -913,7 +913,7 @@
                                             </TextBlock.Text>
                                         </TextBlock>
                                         <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
-                                            <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                         </TextBlock>
                                     </Grid>
 
@@ -1002,7 +1002,7 @@
                         
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center" FontStyle="Italic"/>
-                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://pledgie.com/campaigns/31615?from=about">
+                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://pledgie.com/campaigns/31615?from=about">
                             <Button.Content>
                                 <DockPanel>
                                     <Image Source="/FileConverter;component/Resources/Pledge-icon.png"></Image>
@@ -1013,17 +1013,17 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
-                        <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/?from=about">
+                        <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Icon.png"></Image>
                             </Button.Content>
                         </Button>
-                        <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/issues?from=about">
+                        <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/issues?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Issue-Icon.png"></Image>
                             </Button.Content>
                         </Button>
-                        <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/wiki?from=about">
+                        <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/wiki?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
                             </Button.Content>

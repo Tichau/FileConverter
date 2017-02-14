@@ -13,9 +13,9 @@ namespace FileConverter.Upgrade
     public static class Helpers
     {
 #if DEBUG
-        private const string BaseURI = "http://raw.githubusercontent.com/Tichau/FileConverter/development/";
+        private const string BaseURI = "https://raw.githubusercontent.com/Tichau/FileConverter/development/";
 #else
-        private const string BaseURI = "http://raw.githubusercontent.com/Tichau/FileConverter/master/";
+        private const string BaseURI = "https://raw.githubusercontent.com/Tichau/FileConverter/master/";
 #endif
 
         private static WebClient webClient = new WebClient();
