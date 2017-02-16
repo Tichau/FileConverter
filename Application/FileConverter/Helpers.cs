@@ -24,7 +24,13 @@ namespace FileConverter
             string exeLocation = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
 
             // Return all culture for which satellite folder found with culture code.
-            return cultures.Where(cultureInfo => Directory.Exists(Path.Combine(exeLocation, "Languages", cultureInfo.Name)));
+            foreach (CultureInfo cultureInfo in cultures)
+            {
+                if (!string.IsNullOrEmpty(cultureInfo.Name) && Directory.Exists(Path.Combine(exeLocation, "Languages", cultureInfo.Name)))
+                {
+                    yield return cultureInfo;
+                }
+            }
         }
 
         public static string GetExtensionCategory(string extension)

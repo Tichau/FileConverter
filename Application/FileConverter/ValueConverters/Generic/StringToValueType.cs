@@ -27,7 +27,7 @@ namespace FileConverter.ValueConverters.Generic
                 throw new Exception("Invalid enum type " + typeName + ".");
             }
 
-            return System.Convert.ChangeType(value, type);
+            return System.Convert.ChangeType(value, type, culture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -36,8 +36,8 @@ namespace FileConverter.ValueConverters.Generic
             {
                 return null;
             }
-
-            return value.ToString();
+            
+            return System.Convert.ChangeType(value, typeof(string), culture);
         }
     }
 }

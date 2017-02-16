@@ -1,7 +1,7 @@
 ﻿// <copyright file="Application.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 /*  File Converter - This program allow you to convert file format to another.
-    Copyright (C) 2016 Adrien Allard
+    Copyright (C) 2017 Adrien Allard
     email: adrien.allard.pro@gmail.com
 
     This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ namespace FileConverter
                                             {
                                                 Major = 1, 
                                                 Minor = 2,
-                                                Patch = 1,
+                                                Patch = 2,
                                             };
 
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();

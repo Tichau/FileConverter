@@ -6,7 +6,7 @@
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         xmlns:windows="clr-namespace:FileConverter.Windows"
         xmlns:project="clr-namespace:FileConverter.Properties"
-        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
         x:Name="window" x:Class="FileConverter.SettingsWindow"
         MinWidth="640" MinHeight="480" 
         Width="900" Height="675"
@@ -288,7 +288,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -345,7 +345,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -423,7 +423,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -489,7 +489,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -556,7 +556,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -618,7 +618,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="#004B82"/>
                     <Label Grid.Row="0"  Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -667,7 +667,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="#004B82"/>
+                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding SelectedPreset.Settings, ConverterParameter=ImageScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, ElementName=window, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="#004B82"/>
                     <Label Grid.Column="1">
                         <Label.Content>
                             <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -781,7 +781,7 @@
                             <Button x:Name="RemovePresetButton" Content="-" ToolTip="{x:Static project:Resources.RemoveSelectedPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0" Click="RemovePresetButton_Click"/>
                             <Button x:Name="MoveDownPresetButton" Content="v" ToolTip="{x:Static project:Resources.MoveDownSelectedPreset}" HorizontalAlignment="Left" Width="25" Margin="2,0,0,0" Click="MovePresetDownButton_Click"/>
                             <TextBlock Margin="5,5,0,0">
-                                <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
                             </TextBlock>
                         </DockPanel>
                     </Grid>
@@ -855,7 +855,7 @@
                                     </ComboBox>
 
                                     <TextBlock Grid.Row="3" Margin="0,5,0,0">
-                                        <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                     </TextBlock>
                                 </Grid>
                             </GroupBox>
@@ -913,7 +913,7 @@
                                             </TextBlock.Text>
                                         </TextBlock>
                                         <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
-                                            <Hyperlink CommandParameter="http://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                         </TextBlock>
                                     </Grid>
 
@@ -1002,7 +1002,7 @@
                         
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center" FontStyle="Italic"/>
-                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://pledgie.com/campaigns/31615?from=about">
+                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://pledgie.com/campaigns/31615?from=about">
                             <Button.Content>
                                 <DockPanel>
                                     <Image Source="/FileConverter;component/Resources/Pledge-icon.png"></Image>
@@ -1013,17 +1013,17 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
-                        <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/?from=about">
+                        <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Icon.png"></Image>
                             </Button.Content>
                         </Button>
-                        <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/issues?from=about">
+                        <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/issues?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Issue-Icon.png"></Image>
                             </Button.Content>
                         </Button>
-                        <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="http://github.com/Tichau/FileConverter/wiki?from=about">
+                        <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/wiki?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
                             </Button.Content>
@@ -1035,7 +1035,7 @@
                         </Button>
                     </StackPanel>
 
-                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2016, Adrien Allard. All right reserved." Foreground="#FF4D4D4D" Margin="0,2,0,2"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2017, Adrien Allard. All right reserved." Foreground="#FF4D4D4D" Margin="0,2,0,2"/>
                 </Grid>
             </TabItem>
         </TabControl>
