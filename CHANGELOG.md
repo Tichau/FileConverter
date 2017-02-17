@@ -1,7 +1,7 @@
 # Change Log
 
 ## Version 1.2.2
-- Added: Portuguese translation (thanks to Khidreal).
+- New: Portuguese translation (thanks to Khidreal).
 - Fixed: Issue where scale was corrupted when switching application language (github issue #5).
 - Fixed: Issue where file metadata were not copied when converting to aac format (github issue #15).
 - Tech: Update to ffmpeg 3.2.2 version.
