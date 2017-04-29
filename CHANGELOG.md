@@ -1,9 +1,9 @@
 # Change Log
 
 ## Version 1.2.3
-- Fixed: Issue where the scale were not working for image conversions depending on the application current language.
-- Tech: Include office librairy dependencies in package config (now you don't need to install office to build the project).
-- Tech: Upgrade ghostscript to version 9.21.
+- Fixed: Issue where the scale was not working for image conversions depending on the application current language.
+- Tech: Include office library dependencies in package config (now you don't need to install office to build the project).
+- Tech: Upgrade Ghostscript to version 9.21.
 - Tech: Update ImageMagick to version 7.0.5.
 
 ## Version 1.2.2
