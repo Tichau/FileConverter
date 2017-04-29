@@ -5,6 +5,7 @@ namespace FileConverter
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Xml.Serialization;
@@ -378,7 +379,7 @@ namespace FileConverter
                 return (T)System.Enum.Parse(type, settingsValue);
             }
 
-            return (T)System.Convert.ChangeType(settingsValue, type);
+            return (T)System.Convert.ChangeType(settingsValue, type, NumberFormatInfo.InvariantInfo);
         }
 
         public bool IsRelevantSetting(string settingsKey)

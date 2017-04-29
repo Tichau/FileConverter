@@ -10,6 +10,7 @@ namespace FileConverter.ConversionJobs
     public class ConversionJob_ImageMagick : ConversionJob
     {
         private const float BaseDpiForPdfConversion = 200f;
+        private const int PdfSuperSamplingRatio = 1;
 
         private bool isInputFilePdf;
         private int pageCount;
@@ -95,7 +96,7 @@ namespace FileConverter.ConversionJobs
             }
 
             Debug.Log("Density: {0}dpi.", dpi);
-            settings.Density = new Density(dpi);
+            settings.Density = new Density(dpi * PdfSuperSamplingRatio);
 
             this.UserState = Properties.Resources.ConversionStateReadDocument;
 
@@ -112,8 +113,14 @@ namespace FileConverter.ConversionJobs
                 foreach (MagickImage image in images)
                 {
                     Debug.Log("Write page {0}/{1}.", this.CurrentOuputFilePathIndex + 1, this.pageCount);
-                    this.ConvertImage(image, true);
 
+                    if (PdfSuperSamplingRatio > 1)
+                    {
+                        image.Scale(new Percentage(100 / PdfSuperSamplingRatio));
+                    }
+
+                    this.ConvertImage(image, true);
+                    
                     this.CurrentOuputFilePathIndex++;
                 }
             }
@@ -181,7 +188,8 @@ namespace FileConverter.ConversionJobs
             switch (this.ConversionPreset.OutputType)
             {
                 case OutputType.Png:
-                    image.Quality = 100;
+                    // http://stackoverflow.com/questions/27267073/imagemagick-lossless-max-compression-for-png
+                    image.Quality = 95;
                     break;
 
                 case OutputType.Jpg:
