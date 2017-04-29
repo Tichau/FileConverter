@@ -1,5 +1,11 @@
 # Change Log
 
+## Version 1.2.3
+- Fixed: Issue where the scale were not working for image conversions depending on the application current language.
+- Tech: Include office librairy dependencies in package config (now you don't need to install office to build the project).
+- Tech: Upgrade ghostscript to version 9.21.
+- Tech: Update ImageMagick to version 7.0.5.
+
 ## Version 1.2.2
 - Added: Portuguese translation (thanks to Khidreal).
 - Fixed: Issue where scale was corrupted when switching application language (github issue #5).
