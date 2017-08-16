@@ -137,14 +137,14 @@
     <value>Audio</value>
   </data>
   <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
-    <value>Vérifier automatiquement les mises à jour au démarage de File Converter</value>
+    <value>Vérifier automatiquement les mises à jour au démarrage de File Converter</value>
     <comment>Automatically check for updates when File Converter starts</comment>
   </data>
   <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
-    <value>Terminer File Converter lorsque toutes les conversions ont réussies</value>
+    <value>Terminer File Converter lorsque toutes les conversions ont réussi</value>
   </data>
   <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
-    <value>Ajuster à la taille en puissance de 2 la plus proche</value>
+    <value>Ajuster la taille à la puissance de 2 la plus proche</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Fermer</value>
@@ -174,7 +174,7 @@
     <value>N'oubliez pas de récompenser mon travail si vous l'apréciez :)</value>
   </data>
   <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
-    <value>La mise à jour sera téléchargé en tache de fond et sera installé à la fermeture de File Converter.</value>
+    <value>La mise à jour sera téléchargée en tâche de fond et sera installée à la fermeture de File Converter.</value>
     <comment>The update will be downloaded in background, and installed once you exit File Converter.</comment>
   </data>
   <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
@@ -195,7 +195,7 @@
     <comment>That means it is integrated into the Windows explorer.</comment>
   </data>
   <data name="FileConverterStartHelp3" xml:space="preserve">
-    <value>Pour utiliser File Converter, ouvrez l'explorateur et faites un clic droit sur le ou les fichier(s) que vous souhaitez convertir pour faire apparaitre le menu contextuel ou vous trouverez File Converter (visitez la documentation en ligne pour connaître la liste des extensions de fichiers compatibles).</value>
+    <value>Pour utiliser File Converter, ouvrez l'explorateur et faites un clic droit sur le ou les fichier(s) que vous souhaitez convertir pour faire apparaître le menu contextuel où vous trouverez File Converter (visitez la documentation en ligne pour connaître la liste des extensions de fichier compatibles).</value>
     <comment>To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the online documentation to see the list of compatible file formats).</comment>
   </data>
   <data name="FileNameTemplate" xml:space="preserve">
@@ -211,7 +211,7 @@
     <value>aide ?</value>
   </data>
   <data name="InputExample" xml:space="preserve">
-    <value>Example de chemin d'origine</value>
+    <value>Exemple de chemin d'origine</value>
   </data>
   <data name="InputFormats" xml:space="preserve">
     <value>Formats compatibles</value>
@@ -226,7 +226,7 @@
     <value>Aucune</value>
   </data>
   <data name="InstallButtonDescription" xml:space="preserve">
-    <value>La mise à jour a été téléchargé. Quitte File Conveter et installe la mise à jour maintenant.</value>
+    <value>La mise à jour a été téléchargée. Quitte File Converter et installe la mise à jour maintenant.</value>
     <comment>The update has been downloaded. Exit File Converter and install the update now.</comment>
   </data>
   <data name="InstallButtonTitle" xml:space="preserve">
@@ -280,7 +280,7 @@
 (n:i): index du numéro de page
 (n:c): nombre total de pages
 
-Chemin spéciaux:
+Chemins spéciaux:
 (p:d): chemin vers mes documents
 (p:m): chemin vers ma musique
 (p:v): chemin vers mes vidéos
@@ -341,7 +341,7 @@ utilisez maj pour une version en majuscules</value>
     <value>Mise à jour de File Converter</value>
   </data>
   <data name="VideoEncodingQualityTooltip" xml:space="preserve">
-    <value>Défini le rapport 'poid du fichier' contre 'qualité vidéo'. Une valeur basse donnera un fichier plus léger, une valeur haute une meilleur qualité vidéo.</value>
+    <value>Définit le rapport 'poids du fichier' contre 'qualité vidéo'. Une valeur basse donnera un fichier plus léger, une valeur haute une meilleure qualité vidéo.</value>
     <comment>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</comment>
   </data>
   <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
@@ -363,7 +363,7 @@ utilisez maj pour une version en majuscules</value>
     <value>Super Rapide</value>
   </data>
   <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
-    <value>Défini le ratio 'poid du fichier' contre 'temps de compression'. Une compression lente donnera un fichier plus léger (pour la même qualité vidéo) qu'une compression rapide.</value>
+    <value>Définit le ratio 'poids du fichier' contre 'temps de compression'. Une compression lente donnera un fichier plus léger (pour la même qualité vidéo) par rapport à une compression rapide.</value>
     <comment>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</comment>
   </data>
   <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
@@ -433,7 +433,7 @@ utilisez maj pour une version en majuscules</value>
     <value>Vidéo</value>
   </data>
   <data name="ExitWaitingDuration" xml:space="preserve">
-    <value>Temps d'attente avant l'arret de l'application</value>
+    <value>Temps d'attente avant l'arrêt de l'application</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Langue</value>
@@ -536,7 +536,7 @@ utilisez maj pour une version en majuscules</value>
     <value>Autre</value>
   </data>
   <data name="ErrorCantFindOutputFiles" xml:space="preserve">
-    <value>Les fichiers n'ont pas pu être converti.</value>
+    <value>Les fichiers n'ont pas pu être convertis.</value>
   </data>
   <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
     <value>Des fichiers sont présents malgré l'echec de la conversion.</value>
