@@ -415,6 +415,8 @@ namespace FileConverter.ConversionJobs
         {
             Debug.Log("Conversion Succeed!");
 
+            ChangeOutputFileTimestampToMatchOriginal();
+
             // Apply the input post conversion action.
             switch (this.InputPostConversionAction)
             {
@@ -447,6 +449,35 @@ namespace FileConverter.ConversionJobs
             this.State = ConversionState.Done;
             this.UserState = Properties.Resources.ConversionStateDone;
             Debug.Log("Conversion Done!");
+        }
+
+        private void ChangeOutputFileTimestampToMatchOriginal()
+        {
+            Debug.Log("Changing output files timestamp to match original timestamp ...");
+
+            var originalFileCreationTime = System.IO.File.GetCreationTimeUtc(this.InputFilePath);
+            var originalFileLastAccesTime = System.IO.File.GetLastAccessTimeUtc(this.InputFilePath);
+            var originalFileLastWriteTime = System.IO.File.GetLastWriteTimeUtc(this.InputFilePath);
+            Debug.Log("  original timestamp: {0}, {1}, {2}", originalFileCreationTime, originalFileLastAccesTime, originalFileLastWriteTime);
+
+            for (int index = 0; index < this.OutputFilePaths.Length; index++)
+            {
+                string outputFilePath = this.OutputFilePaths[index];
+                try
+                {
+                    System.IO.File.SetCreationTimeUtc(this.OutputFilePaths[index], originalFileCreationTime);
+                    System.IO.File.SetLastAccessTimeUtc(this.OutputFilePaths[index], originalFileLastAccesTime);
+                    System.IO.File.SetLastWriteTimeUtc(this.OutputFilePaths[index], originalFileLastWriteTime);
+                    Debug.Log("  output file '{0}' timestamp changed", this.OutputFilePaths[index]);
+                }
+                catch (Exception exception)
+                {
+                    Debug.Log("Can't change timestamp from file '{0}'", outputFilePath);
+                    Debug.Log("An exception as been thrown: {0}.", exception.ToString());
+                }
+            }
+
+            Debug.Log("... timestamp matching finished.");
         }
 
         protected void ConversionFailed(string exitingMessage)
