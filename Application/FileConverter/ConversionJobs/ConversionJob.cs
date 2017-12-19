@@ -465,10 +465,10 @@ namespace FileConverter.ConversionJobs
                 string outputFilePath = this.OutputFilePaths[index];
                 try
                 {
-                    System.IO.File.SetCreationTimeUtc(this.OutputFilePaths[index], originalFileCreationTime);
-                    System.IO.File.SetLastAccessTimeUtc(this.OutputFilePaths[index], originalFileLastAccesTime);
-                    System.IO.File.SetLastWriteTimeUtc(this.OutputFilePaths[index], originalFileLastWriteTime);
-                    Debug.Log("  output file '{0}' timestamp changed", this.OutputFilePaths[index]);
+                    System.IO.File.SetCreationTimeUtc(outputFilePath, originalFileCreationTime);
+                    System.IO.File.SetLastAccessTimeUtc(outputFilePath, originalFileLastAccesTime);
+                    System.IO.File.SetLastWriteTimeUtc(outputFilePath, originalFileLastWriteTime);
+                    Debug.Log("  output file '{0}' timestamp changed", outputFilePath);
                 }
                 catch (Exception exception)
                 {
