@@ -66,9 +66,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.7.0.5.502\lib\net40-client\Magick.NET-Q16-AnyCPU.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.4.6.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.7.4.6\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
     </Reference>
     <Reference Include="Markdown.Xaml">
       <HintPath>..\..\Middleware\Markdown.Xaml.dll</HintPath>
