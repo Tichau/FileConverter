@@ -9,6 +9,17 @@ You can find more information about what's in File converter and how to use it o
 
 You can help this project by contributing on [Github](https://github.com/Tichau/FileConverter) or by making a donation on [Pledgie](https://pledgie.com/campaigns/31615) :).
 
+## Setup development environement
+
+### Requirements
+
+For File Converter and its explorer extension:
+- Visual Studio 2017
+
+For the installer:
+- [Wix toolset build tool v3.11 and visual studio extension](http://wixtoolset.org/)
+- [Windows SDK Signing Tools for Desktop Apps](https://developer.microsoft.com/fr-fr/windows/downloads/windows-10-sdk)
+
 ## Thanks
 
 ### Localization
