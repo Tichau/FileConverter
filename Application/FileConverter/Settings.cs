@@ -246,22 +246,26 @@ namespace FileConverter
             if (registryNeedModifications)
             {
                 // Write the settings in registry.
-                if (Settings.IsInAdmininstratorPrivileges)
+                bool succeed = Settings.ApplyRegistryModifications(registryEntries);
+                if (succeed)
                 {
-                    // We are in admin mode, write registry ...
-                    bool succeed = Settings.ApplyRegistryModifications(registryEntries);
-                    if (succeed)
-                    {
-                        // ... and copy temporary settings file to the real settings file.
-                        string userFilePath = Settings.GetUserSettingsFilePath();
-                        File.Copy(temporaryFilePath, userFilePath, true);
-                        File.Delete(temporaryFilePath);
-                    }
+                    // ... and copy temporary settings file to the real settings file.
+                    string userFilePath = Settings.GetUserSettingsFilePath();
+                    File.Copy(temporaryFilePath, userFilePath, true);
+                    File.Delete(temporaryFilePath);
                 }
                 else
                 {
-                    // Run the application in admin mode in order to perform modifications.
-                    Settings.RunSaveInAdminMode();
+                    if (!Settings.IsInAdmininstratorPrivileges)
+                    {
+                        // Run the application in admin mode in order to perform modifications.
+                        Diagnostics.Debug.Log("Can't apply registry modifications, fallback to admin privileges.");
+                        Settings.RunSaveInAdminMode();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Can't apply settings in registry. (code 0x09)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else
@@ -283,12 +287,6 @@ namespace FileConverter
 
         private static bool ApplyRegistryModifications(Dictionary<string, List<string>> registryEntries)
         {
-            if (!Settings.IsInAdmininstratorPrivileges)
-            {
-                MessageBox.Show("Can't apply settings in registry because the application is not in administrator privileges. (code 0x04)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
             RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\FileConverter", RegistryKeyPermissionCheck.ReadWriteSubTree);
             if (registryKey == null)
             {
