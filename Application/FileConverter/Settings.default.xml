@@ -194,6 +194,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
         <InputTypes>3gp</InputTypes>
@@ -226,6 +227,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
         <InputTypes>3gp</InputTypes>
@@ -440,6 +442,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
@@ -479,6 +482,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
@@ -500,6 +504,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
@@ -520,6 +525,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
@@ -539,6 +545,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
@@ -558,6 +565,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
@@ -579,6 +587,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
@@ -594,6 +603,7 @@
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>

@@ -73,6 +73,7 @@ namespace FileConverter
                 case "png":
                 case "psd":
                 case "tga":
+                case "tif":
                 case "tiff":
                 case "svg":
                 case "xcf":
