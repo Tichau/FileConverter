@@ -84,6 +84,71 @@
             </Setter>
         </Style>
 
+        <!-- SayThanks button style -->
+
+        <Style x:Key="SayThanksFocusVisual">
+            <Setter Property="Control.Background" Value="#E5E5E5"></Setter>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Control}">
+                        <Grid Margin="3 2">
+                            <Rectangle Name="r1" StrokeThickness="1" Stroke="Black" StrokeDashArray="2 2"/>
+                            <Border Name="border" Width="{TemplateBinding ActualWidth}" Height="{TemplateBinding ActualHeight}"  CornerRadius="2" BorderThickness="1" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SayThanksButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource SayThanksFocusVisual}" />
+            <Setter Property="Background" Value="#E5E5E5"/>
+            <Setter Property="Foreground" Value="#3AC025"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="1" Padding="4,2" BorderBrush="#404040" CornerRadius="3" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="contentShadow" Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#303030" />
+                                <Setter Property="Foreground" Value="#3AC025" />
+                                <Setter Property="Background" Value="#CCCCCC"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#202020" />
+                                <Setter Property="Background" Value="#BBBBBB"/>
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF282828" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.7" />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <generic:CultureInfoToStringConverter x:Key="CultureInfoToString"/>
         <generic:ObjectToLocalizedString x:Key="ObjectToLocalizedString"/>
         <generic:DoubleToTimeString x:Key="DoubleToTimeString"/>
@@ -1007,6 +1072,14 @@
                                 <DockPanel>
                                     <Image Source="/FileConverter;component/Resources/ItchIO-icon.png"></Image>
                                     <Label Content="{x:Static project:Resources.DonateButtonTitle}" Margin="5,0,5,0" Foreground="WhiteSmoke" FontWeight="Bold" FontSize="14"/>
+                                </DockPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button Style="{StaticResource SayThanksButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://saythanks.io/to/Tichau">
+                            <Button.Content>
+                                <DockPanel>
+                                    <Image Source="/FileConverter;component/Resources/SayThanks-icon.png"></Image>
+                                    <Label Content="{x:Static project:Resources.SayThanksButtonTitle}" Margin="5,0,5,0" Foreground="DimGray" FontWeight="Bold" FontSize="14"/>
                                 </DockPanel>
                             </Button.Content>
                         </Button>
