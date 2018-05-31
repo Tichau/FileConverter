@@ -562,4 +562,7 @@ utilisez maj pour une version en majuscules</value>
   <data name="WebsiteButtonDescription" xml:space="preserve">
     <value>Ouvrir le site web de File Converter</value>
   </data>
+  <data name="SayThanksButtonTitle" xml:space="preserve">
+    <value>Dire Merci !</value>
+  </data>
 </root>
