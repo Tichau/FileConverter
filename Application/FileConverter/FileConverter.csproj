@@ -313,9 +313,6 @@
     <Resource Include="Resources\GitHub-Documentation-Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Pledge-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\FileConverterUsage.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -323,6 +320,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WebSite-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ItchIO-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

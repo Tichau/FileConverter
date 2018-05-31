@@ -17,7 +17,7 @@
         <!-- Donation button style -->
 
         <Style x:Key="DonateFocusVisual">
-            <Setter Property="Control.Background" Value="#037F4D"></Setter>
+            <Setter Property="Control.Background" Value="#F95B5C"></Setter>
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Control}">
@@ -37,12 +37,12 @@
         <Style x:Key="DonateButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="FocusVisualStyle" Value="{StaticResource DonateFocusVisual}" />
-            <Setter Property="Background" Value="#009E61"/>
+            <Setter Property="Background" Value="#F95B5C"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Name="border" BorderThickness="1" Padding="4,2" BorderBrush="#026B38" CornerRadius="3" Background="{TemplateBinding Background}">
+                        <Border Name="border" BorderThickness="1" Padding="4,2" BorderBrush="#F96D6C" CornerRadius="3" Background="{TemplateBinding Background}">
                             <Grid>
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="contentShadow" Style="{StaticResource ShadowStyle}">
                                     <ContentPresenter.RenderTransform>
@@ -54,13 +54,13 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#015129" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="#F96D6C" />
                                 <Setter Property="Foreground" Value="WhiteSmoke" />
-                                <Setter Property="Background" Value="#037F4D"/>
+                                <Setter Property="Background" Value="#F78A8C"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="#016332" />
-                                <Setter Property="Background" Value="#049156"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#F75B5B" />
+                                <Setter Property="Background" Value="#F4ADB0"/>
                                 <Setter TargetName="content" Property="RenderTransform" >
                                     <Setter.Value>
                                         <TranslateTransform Y="1.0" />
@@ -1002,10 +1002,10 @@
                         
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center" FontStyle="Italic"/>
-                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://pledgie.com/campaigns/31615?from=about">
+                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://tichau.itch.io/file-converter">
                             <Button.Content>
                                 <DockPanel>
-                                    <Image Source="/FileConverter;component/Resources/Pledge-icon.png"></Image>
+                                    <Image Source="/FileConverter;component/Resources/ItchIO-icon.png"></Image>
                                     <Label Content="{x:Static project:Resources.DonateButtonTitle}" Margin="5,0,5,0" Foreground="WhiteSmoke" FontWeight="Bold" FontSize="14"/>
                                 </DockPanel>
                             </Button.Content>
