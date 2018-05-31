@@ -1,119 +1,145 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>File Converter - Convert & compress everything in 2 clicks!</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="file, convert, compress, windows, open source" />
-    <meta name="description" content="File Converter is a very simple tool which allows you to convert and compress one or several file(s) using the context menu in windows explorer." />
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="icon" href="favicon.ico" />
 
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<head>
+  <meta charset="UTF-8">
+  <title>File Converter - Convert & compress everything in 2 clicks!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="file, convert, compress, windows, open source" />
+  <meta name="description" content="File Converter is a very simple tool which allows you to convert and compress one or several file(s) using the context menu in windows explorer."
+  />
+  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  <link rel="icon" href="favicon.ico" />
 
-      ga('create', 'UA-71411543-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-  </head>
-  <body>
-    <section class="page-header">
-      <a href="index.html"><img src="images/application-icon.png" height="128" width="128" /></a>
-      <h1 class="project-name">File Converter</h1>
-      <h2 class="project-tagline">Convert & compress everything in 2 clicks!</h2>
-      <a href="https://github.com/Tichau/FileConverter" class="btn">View on GitHub</a>
-      <a href="download.html" class="btn btn-highlight">Download</a>
-      <a href="https://github.com/Tichau/FileConverter/wiki" class="btn">Documentation</a>
-    </section>
+  <script>
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-    <section class="main-content">
+    ga('create', 'UA-71411543-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+<body>
+  <section class="page-header">
+    <a href="index.html">
+      <img src="images/application-icon.png" height="128" width="128" />
+    </a>
+    <h1 class="project-name">File Converter</h1>
+    <h2 class="project-tagline">Convert & compress everything in 2 clicks!</h2>
+    <a href="https://github.com/Tichau/FileConverter" class="btn">View on GitHub</a>
+    <a href="download.html" class="btn btn-highlight">Download</a>
+    <a href="https://github.com/Tichau/FileConverter/wiki" class="btn">Documentation</a>
+  </section>
+
+  <section class="main-content">
+    <h2>
+      <a id="description" class="anchor" href="#description" aria-hidden="true">
+        <span class="octicon octicon-link"></span>
+      </a>
+      Description
+    </h2>
+
+    <p>
+      <strong>File Converter</strong> is a very simple tool which allows you to convert and compress one or several file(s) using
+      the context menu in windows explorer.</p>
+
+    <img src="images/file-converter-usage.gif" />
+
+    <p>The interface is designed to be as light as possible to keep the application pleasant to use.</p>
+
+    <p>It supports a lot of different file formats:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Supported output formats</th>
+          <th>Compatible input formats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Audio</td>
+          <td>flac, aac, ogg, mp3, wav</td>
+          <td>3gp, aiff, ape, avi, bik, cda, flac, flv, m4a, mkv, mov, mp3, mp4, oga, ogg, wav, webm, wma, wmv</td>
+        </tr>
+        <tr>
+          <td>Video</td>
+          <td>webm, mkv, mp4, ogv, avi, gif</td>
+          <td>3gp, avi, bik, flv, gif, m4v, mkv, mp4, mpeg, mov, ogv, webm, wmv</td>
+        </tr>
+        <tr>
+          <td>Image</td>
+          <td>png, jpg, ico, webp</td>
+          <td>bmp, exr, ico, jpg, jpeg, png, psd, svg, tiff, tga, webp, pdf, doc*, docx*, odt*, odp*, ods*, ppt*, pptx*, xls*,
+            xlsx*</td>
+        </tr>
+        <td>Document</td>
+        <td>pdf</td>
+        <td>doc*, docx*, odt*, odp*, ods*, ppt*, pptx*, xls*, xlsx*, bmp, exr, ico, jpg, jpeg, png, psd, svg, tiff, tga</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="highlight">* You need to have installed Microsoft Office in order to convert Office documents.</p>
+
+    <p>You can heavily customize the application in order to add / remove conversion presets in the files context menus or edit
+      the existing one to change the conversion options.</p>
+
+    <img src="images/screenshot3.png" />
+
+    <p>If you want more informations about the features offered in File Converter, visit the
+      <a href="https://github.com/Tichau/FileConverter/wiki">documentation page</a>.</p>
+
+    <p>I hope this application will help you :)</p>
+    <p>
+      <strong>It is open source (GLP v3), free and without any adds</strong> so you just have to enjoy it!
+      <p>
+
         <h2>
-            <a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-            Description
-        </h2>
-
-        <p><strong>File Converter</strong> is a very simple tool which allows you to convert and compress one or several file(s) using the context menu in windows explorer.</p>
-
-        <img src="images/file-converter-usage.gif" />
-
-        <p>The interface is designed to be as light as possible to keep the application pleasant to use.</p>
-        
-        <p>It supports a lot of different file formats:</p>
-
-        <table>
-        <thead>
-            <tr>
-            <th></th>
-            <th>Supported output formats</th>
-            <th>Compatible input formats</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <td>Audio</td>
-            <td>flac, aac, ogg, mp3, wav</td>
-            <td>3gp, aiff, ape, avi, bik, cda, flac, flv, m4a, mkv, mov, mp3, mp4, oga, ogg, wav, webm, wma, wmv</td>
-            </tr>
-            <tr>
-            <td>Video</td>
-            <td>webm, mkv, mp4, ogv, avi, gif</td>
-            <td>3gp, avi, bik, flv, gif, m4v, mkv, mp4, mpeg, mov, ogv, webm, wmv</td>
-            </tr>
-            <tr>
-            <td>Image</td>
-            <td>png, jpg, ico, webp</td>
-            <td>bmp, exr, ico, jpg, jpeg, png, psd, svg, tiff, tga, webp, pdf, doc*, docx*, odt*, odp*, ods*, ppt*, pptx*, xls*, xlsx*</td>
-            </tr>
-            <td>Document</td>
-            <td>pdf</td>
-            <td>doc*, docx*, odt*, odp*, ods*, ppt*, pptx*, xls*, xlsx*, bmp, exr, ico, jpg, jpeg, png, psd, svg, tiff, tga</td>
-            </tr>
-        </tbody>
-        </table>
-
-        <p class="highlight">* You need to have installed Microsoft Office in order to convert Office documents.</p>
-
-        <p>You can heavily customize the application in order to add / remove conversion presets in the files context menus or edit the existing one to change the conversion options.</p>
-
-        <img src="images/screenshot3.png" />
-
-        <p>If you want more informations about the features offered in File Converter, visit the <a href="https://github.com/Tichau/FileConverter/wiki">documentation page</a>.</p>
-
-        <p>I hope this application will help you :)</p>
-        <p><strong>It is open source (GLP v3), free and without any adds</strong> so you just have to enjoy it!<p>
-
-        <h2>
-          <a id="donate" class="anchor" href="#donate" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+          <a id="donate" class="anchor" href="#donate" aria-hidden="true">
+            <span class="octicon octicon-link"></span>
+          </a>
           Donate
         </h2>
-        
+
         <p>
-          File Converter is a personal open source project started in 2014. 
-          I have put hundreds of hours adding, refining and tuning File Converter with the goal of making the conversion and compression of files an easy task for everyone.
+          File Converter is a personal open source project started in 2014. I have put hundreds of hours adding, refining and tuning
+          File Converter with the goal of making the conversion and compression of files an easy task for everyone.
         </p>
         <p>
-          You can help me by <a href="https://github.com/Tichau/FileConverter/wiki#contribute">contributing to the project</a> or by making a donation :).
+          You can help me by
+          <a href="https://github.com/Tichau/FileConverter/wiki#contribute">contributing to the project</a> or by making a donation :).
         </p>
-          
-        <a target="_blank" href='https://pledgie.com/campaigns/31615'><img alt='Click here to lend your support to: File Converter and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/31615.png?skin_name=chrome' border='0' ></a>
-          
+
+        <a target="_blank" href='https://pledgie.com/campaigns/31615'>
+          <img alt='Click here to lend your support to: File Converter and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/31615.png?skin_name=chrome'
+            border='0'>
+        </a>
+
         <h2>
-          <a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+          <a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true">
+            <span class="octicon octicon-link"></span>
+          </a>
           Troubleshooting
         </h2>
-        
+
         <p>If you encounter any problem with File Converter, you can:</p>
         <ul>
-          <li>See the already known problems in the <a href="https://github.com/Tichau/FileConverter/wiki/Troubleshooting">troubleshooting section of the documentation</a>.</li>
-          <li>Or report an issue on the <a href="https://github.com/Tichau/FileConverter/issues">bug tracker</a>.</li>
+          <li>See the already known problems in the
+            <a href="https://github.com/Tichau/FileConverter/wiki/Troubleshooting">troubleshooting section of the documentation</a>.</li>
+          <li>Or report an issue on the
+            <a href="https://github.com/Tichau/FileConverter/issues">bug tracker</a>.</li>
         </ul>
-        
+
         <p>
           When you report an issue, please join the following informations:
         </p>
@@ -123,28 +149,37 @@
           <li>The Diagnostics folder of the session that encountered the issue.</li>
           <li>A screenshot (if possible) and a description that shows/explain the issue.</li>
         </ul>
-        
+
         <p>You will find the xml files and diagnostics folder in c:\Users\[UserName]\AppData\Local\FileConverter\.</p>
-          
+
         <h2>
-          <a id="download" class="anchor" href="#download" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+          <a id="download" class="anchor" href="#download" aria-hidden="true">
+            <span class="octicon octicon-link"></span>
+          </a>
           Downloads
         </h2>
 
         <p>File Converter is compatible with Windows Vista / 7 / 8 and 10.</p>
 
-        <p>Windows 64 bits installer: <a href="download.html">FileConverter-1.2.3-x64-setup.msi</a> (~39 Mo)</p>
-        <p>Windows 32 bits installer: <a href="download-x86.html">FileConverter-1.2.3-x86-setup.msi</a> (~38 Mo)</p>
-        <p>Sources (C#/WPF project): <a href="https://github.com/Tichau/FileConverter/tarball/master">FileConverter-v1.2.3.tar.gz</a> (~40 Mo)</p>
+        <p>Windows 64 bits installer:
+          <a href="download.html">FileConverter-1.2.3-x64-setup.msi</a> (~39 Mo)</p>
+        <p>Windows 32 bits installer:
+          <a href="download-x86.html">FileConverter-1.2.3-x86-setup.msi</a> (~38 Mo)</p>
+        <p>Sources (C#/WPF project):
+          <a href="https://github.com/Tichau/FileConverter/tarball/master">FileConverter-v1.2.3.tar.gz</a> (~40 Mo)</p>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/Tichau/FileConverter">File Converter</a> is maintained by <a href="https://github.com/Tichau">Adrien Allard</a>.</span>
+        <footer class="site-footer">
+          <span class="site-footer-owner">
+            <a href="https://github.com/Tichau/FileConverter">File Converter</a> is maintained by
+            <a href="https://github.com/Tichau">Adrien Allard</a>.</span>
 
-        <span class="site-footer-credits">This page was created using a customized version of the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+          <span class="site-footer-credits">This page was created using a customized version of the
+            <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by
+            <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+        </footer>
 
-    </section>
-  
-  </body>
-  
+  </section>
+
+</body>
+
 </html>

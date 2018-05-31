@@ -1,5 +1,7 @@
-<h2>        
-<a id="change-log" class="anchor" href="#change-log" aria-hidden="true"><span class="octicon octicon-link"></span></a>Change Log</h2>
+<h2>
+  <a id="change-log" class="anchor" href="#change-log" aria-hidden="true">
+    <span class="octicon octicon-link"></span>
+  </a>Change Log</h2>
 
 <h3>Version 1.2.3</h3>
 <ul>
@@ -23,14 +25,18 @@
   <li>Fixed: Issue where audio file tags were not copied in a format readable by Windows.</li>
   <li>Fixed: Issue where the default language was set to french (github issue #6).</li>
   <li>Fixed: Issue where the size of a pdf generated from images was not consistent.</li>
-  <li>Change: Small improvements of File Converter application and installer interface thanks to TheAresjej (github issues #7 and #8).</li>
+  <li>Change: Small improvements of File Converter application and installer interface thanks to TheAresjej (github issues #7
+    and #8).</li>
 </ul>
 
 <h3>Version 1.2</h3>
 <ul>
-  <li>New: Possibility to convert Word documents (docx, odt and doc) to pdf and images (this feature is only available if you have Microsoft Word installed).</li>
-  <li>New: Possibility to convert Excel documents (xlsx, ods and xls) to pdf and images (this feature is only available if you have Microsoft Excel installed).</li>
-  <li>New: Possibility to convert PowerPoint documents (pptx, odp and ppt) to pdf and images (this feature is only available if you have Microsoft PowerPoint installed).</li>
+  <li>New: Possibility to convert Word documents (docx, odt and doc) to pdf and images (this feature is only available if you
+    have Microsoft Word installed).</li>
+  <li>New: Possibility to convert Excel documents (xlsx, ods and xls) to pdf and images (this feature is only available if you
+    have Microsoft Excel installed).</li>
+  <li>New: Possibility to convert PowerPoint documents (pptx, odp and ppt) to pdf and images (this feature is only available
+    if you have Microsoft PowerPoint installed).</li>
   <li>New: Possibility to convert images and documents to webp format.</li>
   <li>New: Support new image input format: webp.</li>
   <li>New: Add the possibility to cancel image, CDA extraction and gif conversions.</li>
@@ -41,17 +47,20 @@
 
 <h3>Version 1.1</h3>
 <ul>
-  <li>New: Localization system. File Converter can now be translated in multiple languages. The default language is the same than your OS language (if available).</li>
+  <li>New: Localization system. File Converter can now be translated in multiple languages. The default language is the same
+    than your OS language (if available).</li>
   <li>New: Add the possibility to choose the application language in the application settings.</li>
   <li>New: Add french localization.</li>
   <li>New: Possibility to convert a Pdf file into image files (one image per page).</li>
   <li>New: Possibility to convert an image into a Pdf file.</li>
   <li>New: Possibility to encode videos using theora video codec and Ogg vorbis audio codec in a ogv container.</li>
   <li>New: Possibility to change the number of channels of an audio file (stereo -> mono, 5.1 -> stereo, ...).</li>
-  <li>New: Improve the application upgrade UI. If you quit the application during the upgrade downloading, you will now see the download progress.</li>
+  <li>New: Improve the application upgrade UI. If you quit the application during the upgrade downloading, you will now see the
+    download progress.</li>
   <li>New: File converter is now available for Windows 32 bits systems (download the x86 installer).</li>
   <li>New: Add an application option to choose the maximum number of simultaneous conversions.</li>
-  <li>Change: Improve the application help start page (when you launch File Converter directly from the executable) with an animated picture.</li>
+  <li>Change: Improve the application help start page (when you launch File Converter directly from the executable) with an animated
+    picture.</li>
   <li>Change: Improve the output type dropdown visualization (splitting it by categories).</li>
   <li>Fixed: Issue where it was impossible to rotate an image for the output types: jpg and png.</li>
 </ul>
@@ -59,12 +68,15 @@
 <h3>Version 1.0</h3>
 <ul>
   <li>New: File Converter is now certified by Microsoft Authenticode.</li>
-  <li>New: Add an about section that contains information on the software development (change log, documentation link, report issue link).</li>
+  <li>New: Add an about section that contains information on the software development (change log, documentation link, report
+    issue link).</li>
   <li>New: Split conversion preset settings and application settings to improve ergonomy.</li>
-  <li>New: Add help shortcut in the conversion preset edition interface that links directly to the corresponding documentation page.</li>
+  <li>New: Add help shortcut in the conversion preset edition interface that links directly to the corresponding documentation
+    page.</li>
   <li>New: Add shortcuts in start menu.</li>
   <li>New: Create a donation campaign on Pledgie and linked it in the about section.</li>
-  <li>Fixed: Issue with Avast antivirus where File Converter and Windows explorer was frozen when the user tried to use File Converter.</li>
+  <li>Fixed: Issue with Avast antivirus where File Converter and Windows explorer was frozen when the user tried to use File
+    Converter.</li>
   <li>Fixed: Issue where it was impossible to convert files from a network path.</li>
 </ul>
 
@@ -78,13 +90,16 @@
   <li>New: Support new video input formats: ogv and mpeg.</li>
   <li>New: Support new audio input format: oga.</li>
   <li>New: Possibility to cancel some conversion jobs (gif/cda and image conversion jobs are not cancelable for now).</li>
-  <li>Fixed: Issue where video can't be compressed using H.264 codec (mp4 or mkv presets) when its size (width or height) is not divisible by 2 (append a lot when the user tries to scale a video) (github issue #2).</li>
+  <li>Fixed: Issue where video can't be compressed using H.264 codec (mp4 or mkv presets) when its size (width or height) is
+    not divisible by 2 (append a lot when the user tries to scale a video) (github issue #2).</li>
   <li>Fixed: Issue where "Clamp to power of 2 size" option didn't work well with images that already have a power of 2 size.</li>
   <li>Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg).</li>
   <li>Fixed: Issue where converting a video into the ogg format did not extract audio in an ogg file correctly.</li>
-  <li>Fixed: Issue where simultaneous read on the same CD drive was performed when files from differents conversions come from the same drive (other than cda extraction preset).</li>
+  <li>Fixed: Issue where simultaneous read on the same CD drive was performed when files from differents conversions come from
+    the same drive (other than cda extraction preset).</li>
   <li>Fixed: Issue where the path generator was unable to create a valid path if the input file was at the root of a drive.</li>
-  <li>Tech: Annotate the conversion presets to know if there are default preset or user preset in order to improve the upgrade process.</li>
+  <li>Tech: Annotate the conversion presets to know if there are default preset or user preset in order to improve the upgrade
+    process.</li>
 </ul>
 
 <h3>Version 0.6</h3>
@@ -96,7 +111,8 @@
   <li>New: Remove restriction on image size to convert to ico file format (it is now possible to convert all images to ico).</li>
   <li>New: Add "Clamp to power of 2 size" option in image conversion.</li>
   <li>New: Support input images encoded in 16 bits or 32 bits per color channel.</li>
-  <li>Fixed: Issue where the installer detects the utilisation of the extension dll in explorer, ask the user to restart it and fail to do it.</li>
+  <li>Fixed: Issue where the installer detects the utilisation of the extension dll in explorer, ask the user to restart it and
+    fail to do it.</li>
   <li>Fixed: Issue where it is impossible to delete a conversion preset defined in default settings.</li>
   <li>Fixed: Issue where the Windows context menu does not contain user preset after an application upgrade.</li>
   <li>Fixed: Issue where some registry keys remain after file converter uninstallation.</li>
@@ -108,7 +124,7 @@
 <h3>Version 0.5</h3>
 <ul>
   <li>New: Software update system. The application now checks if a new version of File Converter is available.</li>
-  <li>New: Possibility to scale images and videos.</li> 
+  <li>New: Possibility to scale images and videos.</li>
   <li>New: Possibility to encode videos (avi output file format) using Xvid video codec and Mp3 audio codec.</li>
   <li>New: Support new video input file formats: 3gp, webm and wmv.</li>
   <li>New: Add a help window to explain how file converter works when you launch it without using the context menu.</li>
@@ -125,14 +141,16 @@
   <li>New: Support new audio input file format: aac</li>
   <li>New: Support new video input file formats: bik, flv, mov, mkv</li>
   <li>New: Support new image input file formats: bmp, tiff, png, jpg and ico.</li>
-  <li>New: Multi-thread conversion (file converter will now start multiple conversions at the time depending on your number of cores).</li>
+  <li>New: Multi-thread conversion (file converter will now start multiple conversions at the time depending on your number of
+    cores).</li>
   <li>New: Copy the currently selected preset when clicking on the add preset button.</li>
   <li>New: Add “My Documents”, “My Music”, “My Videos” and “My Pictures” folder to output file name generator.</li>
   <li>New: Possibility to choose if the application quit after succeeded conversions.</li>
   <li>Fixed: Reordering presets does not update the registry.</li>
   <li>Fixed: Merge default settings with user settings to prevent errors when upgrading the application.</li>
   <li>Tech: Handle incorrect user settings case.</li>
-  <li>Tech: Improve diagnostics system (compatibility with logs from multiple threads, dump files in AppData folder and error messages).</li>
+  <li>Tech: Improve diagnostics system (compatibility with logs from multiple threads, dump files in AppData folder and error
+    messages).</li>
   <li>Tech: Update ffmpeg version.</li>
 </ul>
 
