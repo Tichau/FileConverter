@@ -254,3 +254,14 @@ a {
 .highlight {
   color: #DF3900;
 }
+
+.main-content .btn {
+  color: #01578E;
+  border-color: #7094AA;
+  background: #B9D1E0;
+}
+.main-content .btn:hover {
+  color: #1F7EBA;
+  border-color: #93AEBF;
+  background: #D6E4ED;
+}
