@@ -1012,7 +1012,7 @@
                         
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center" FontStyle="Italic"/>
-                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://tichau.itch.io/file-converter">
+                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, ElementName=window, Mode=OneWay}" CommandParameter="https://tichau.itch.io/file-converter/purchase">
                             <Button.Content>
                                 <DockPanel>
                                     <Image Source="/FileConverter;component/Resources/ItchIO-icon.png"></Image>
