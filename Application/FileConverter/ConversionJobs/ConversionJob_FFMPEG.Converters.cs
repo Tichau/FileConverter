@@ -100,8 +100,8 @@ namespace FileConverter.ConversionJobs
             {
                 // http://trac.ffmpeg.org/wiki/Encode/H.264#Encodingfordumbplayers
                 // YUV planar color space with 4:2:0 chroma subsampling
-                transformArgs += (transformArgs.Length > 0 ? "," : "") + "format=yuv420p";
-                // maybe there should be an option for this on the settings?
+                transformArgs += (transformArgs.Length > 0 ? "," : string.Empty) + "format=yuv420p";
+                //// TODO: maybe there should be an option for this on the settings?
             }
 
             return transformArgs;

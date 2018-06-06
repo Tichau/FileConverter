@@ -74,9 +74,10 @@ namespace FileConverter.ConversionJobs
         protected virtual void FillFFMpegArgumentsList()
         {
             // This option are necessary to be able to read metadata on Windows. src: http://jonhall.info/how_to/create_id3_tags_using_ffmpeg
-            const string mp3MetadataArgs = "-id3v2_version 3 -write_id3v1 1";
+            const string MP3MetadataArgs = "-id3v2_version 3 -write_id3v1 1";
+
             // AAC have no standard tag system, use ApeV2 (that are compatible). src: http://eolindel.free.fr/foobar/tags.shtml
-            const string aacMetadataArgs = "-write_apetag 1";
+            const string AACMetadataArgs = "-write_apetag 1";
 
             switch (this.ConversionPreset.OutputType)
             {
@@ -86,7 +87,7 @@ namespace FileConverter.ConversionJobs
 
                         // https://trac.ffmpeg.org/wiki/Encode/AAC
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
-                        string encoderArgs = $"-c:a aac -q:a {this.AACBitrateToQualityIndex(audioEncodingBitrate)} {channelArgs} {aacMetadataArgs}";
+                        string encoderArgs = $"-c:a aac -q:a {this.AACBitrateToQualityIndex(audioEncodingBitrate)} {channelArgs} {AACMetadataArgs}";
 
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
@@ -111,7 +112,7 @@ namespace FileConverter.ConversionJobs
 
                         // Compute final arguments.
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
-                        string encoderArgs = $"-c:v mpeg4 -vtag xvid -qscale:v {this.MPEG4QualityToQualityIndex(videoEncodingQuality)} {audioArgs} {videoFilteringArgs} {mp3MetadataArgs}";
+                        string encoderArgs = $"-c:v mpeg4 -vtag xvid -qscale:v {this.MPEG4QualityToQualityIndex(videoEncodingQuality)} {audioArgs} {videoFilteringArgs} {MP3MetadataArgs}";
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
@@ -203,11 +204,11 @@ namespace FileConverter.ConversionJobs
                         switch (encodingMode)
                         {
                             case EncodingMode.Mp3VBR:
-                                encoderArgs = $"-codec:a libmp3lame -q:a {this.MP3VBRBitrateToQualityIndex(encodingQuality)} {channelArgs} {mp3MetadataArgs}";
+                                encoderArgs = $"-codec:a libmp3lame -q:a {this.MP3VBRBitrateToQualityIndex(encodingQuality)} {channelArgs} {MP3MetadataArgs}";
                                 break;
 
                             case EncodingMode.Mp3CBR:
-                                encoderArgs = $"-codec:a libmp3lame -b:a {encodingQuality}k {channelArgs} {mp3MetadataArgs}";
+                                encoderArgs = $"-codec:a libmp3lame -b:a {encodingQuality}k {channelArgs} {MP3MetadataArgs}";
                                 break;
 
                             default:

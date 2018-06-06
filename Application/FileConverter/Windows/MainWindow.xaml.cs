@@ -2,13 +2,13 @@
 
 namespace FileConverter
 {
-    using System.ComponentModel;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows;
 
-    using FileConverter.ConversionJobs;
     using FileConverter.Annotations;
+    using FileConverter.ConversionJobs;
     using FileConverter.Windows;
 
     public partial class MainWindow : Window, INotifyPropertyChanged
