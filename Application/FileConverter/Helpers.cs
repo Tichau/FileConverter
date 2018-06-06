@@ -177,6 +177,7 @@ namespace FileConverter
         /// <summary>
         /// Check whether Microsoft office is available or not.
         /// </summary>
+        /// <param name="application">The office application name.</param>
         /// <returns>Returns true if Office is installed on the computer.</returns>
         /// source: http://stackoverflow.com/questions/3266675/how-to-detect-installed-version-of-ms-office/3267832#3267832
         /// source: http://www.codeproject.com/Articles/26520/Getting-Office-s-Version

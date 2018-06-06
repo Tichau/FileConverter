@@ -415,7 +415,7 @@ namespace FileConverter.ConversionJobs
         {
             Debug.Log("Conversion Succeed!");
 
-            ChangeOutputFileTimestampToMatchOriginal();
+            this.ChangeOutputFileTimestampToMatchOriginal();
 
             // Apply the input post conversion action.
             switch (this.InputPostConversionAction)
@@ -451,6 +451,29 @@ namespace FileConverter.ConversionJobs
             Debug.Log("Conversion Done!");
         }
 
+        protected void ConversionFailed(string exitingMessage)
+        {
+            Debug.Log("Fail: {0}", exitingMessage);
+
+            if (this.State == ConversionState.Failed)
+            {
+                // Already failed, don't override informations.
+                return;
+            }
+
+            this.State = ConversionState.Failed;
+            this.UserState = Properties.Resources.ConversionStateFailed;
+            this.ErrorMessage = exitingMessage;
+        }
+
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         private void ChangeOutputFileTimestampToMatchOriginal()
         {
             Debug.Log("Changing output files timestamp to match original timestamp ...");
@@ -478,29 +501,6 @@ namespace FileConverter.ConversionJobs
             }
 
             Debug.Log("... timestamp matching finished.");
-        }
-
-        protected void ConversionFailed(string exitingMessage)
-        {
-            Debug.Log("Fail: {0}", exitingMessage);
-
-            if (this.State == ConversionState.Failed)
-            {
-                // Already failed, don't override informations.
-                return;    
-            }
-
-            this.State = ConversionState.Failed;
-            this.UserState = Properties.Resources.ConversionStateFailed;
-            this.ErrorMessage = exitingMessage;
-        }
-
-        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         private bool AllOuputFilesExists()

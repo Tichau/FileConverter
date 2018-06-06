@@ -106,7 +106,7 @@ namespace FileConverter
         {
             get;
             set;
-        } = false;
+        }
 
         [XmlElement]
         public List<string> InputTypes
