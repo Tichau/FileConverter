@@ -165,8 +165,10 @@
     <Compile Include="Settings.Settings.cs" />
     <Compile Include="Upgrade\Helpers.cs" />
     <Compile Include="Upgrade\UpgradeVersionDescription.cs" />
+    <Compile Include="ValueConverters\ConversionJobsToProgressState.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset\ConversionPreset.cs" />
+    <Compile Include="ValueConverters\ConversionJobsToProgressValue.cs" />
     <Compile Include="ValueConverters\OutputTypeEnumToViewModel.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
     <Compile Include="ValueConverters\FileNameConverter.cs" />
