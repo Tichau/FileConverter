@@ -3,9 +3,11 @@
 namespace FileConverter
 {
     using System.ComponentModel;
+    using System.Collections.ObjectModel;
     using System.Runtime.CompilerServices;
     using System.Windows;
 
+    using FileConverter.ConversionJobs;
     using FileConverter.Annotations;
     using FileConverter.Windows;
 
@@ -16,16 +18,16 @@ namespace FileConverter
         private UpgradeWindow upgradeWindow;
 
         private string informationMessage;
+        private ObservableCollection<ConversionJob> conversionJobs;
 
         public MainWindow()
         {
             this.InitializeComponent();
 
             Application application = Application.Current as Application;
+            this.ConvertionJobs = new ObservableCollection<ConversionJob>(application.ConvertionJobs);
 
             application.OnApplicationTerminate += this.Application_OnApplicationTerminate;
-
-            this.ConverterJobsList.ItemsSource = application.ConvertionJobs;
 
             if (application.HideMainWindow)
             {
@@ -60,6 +62,24 @@ namespace FileConverter
             }
         }
 
+        public ObservableCollection<ConversionJob> ConvertionJobs
+        {
+            get
+            {
+                return this.conversionJobs;
+            }
+
+            private set
+            {
+                this.conversionJobs = value;
+
+                foreach (var job in this.conversionJobs)
+                {
+                    job.PropertyChanged += this.ConversionJob_PropertyChanged;
+                }
+            }
+        }
+
         public void OnNewVersionReleased(UpgradeVersionDescription upgradeVersionDescription)
         {
             this.ShowUpgradeWindow();
@@ -80,6 +100,11 @@ namespace FileConverter
         {
             base.OnClosing(eventArgs);
 
+            foreach (var job in this.conversionJobs)
+            {
+                job.PropertyChanged -= this.ConversionJob_PropertyChanged;
+            }
+
             Application application = Application.Current as Application;
 
             if (application.UpgradeVersionDescription != null && application.UpgradeVersionDescription.NeedToUpgrade && !application.UpgradeVersionDescription.InstallerDownloadDone)
@@ -88,6 +113,16 @@ namespace FileConverter
                 this.ShowUpgradeWindow();
                 this.upgradeWindow.VersionDescription = application.UpgradeVersionDescription;
             }
+        }
+
+        private void ConversionJob_PropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
+        {
+            if (eventArgs.PropertyName != "State" && eventArgs.PropertyName != "Progress")
+            {
+                return;
+            }
+
+            this.OnPropertyChanged(nameof(this.ConvertionJobs));
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)

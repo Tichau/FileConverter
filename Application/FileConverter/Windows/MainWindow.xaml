@@ -11,6 +11,8 @@
         x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
     <Window.Resources>
         <valueConverters:ConversionStateToBrush x:Key="ConversionStateToColor" />
+        <valueConverters:ConversionJobsToProgressState x:Key="ConversionJobsToProgressState" />
+        <valueConverters:ConversionJobsToProgressValue x:Key="ConversionJobsToProgressValue" />
 
         <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">
             <generic:ValueToString/>
@@ -21,6 +23,11 @@
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
     </Window.Title>
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo 
+            ProgressState="{Binding ConvertionJobs, Converter={StaticResource ConversionJobsToProgressState}, ElementName=FileConverterMainWindow}"
+            ProgressValue="{Binding ConvertionJobs, Converter={StaticResource ConversionJobsToProgressValue}, ElementName=FileConverterMainWindow}" />
+    </Window.TaskbarItemInfo>
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -44,7 +51,7 @@
         </Grid>
 
         <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-            <ItemsControl x:Name="ConverterJobsList">
+            <ItemsControl ItemsSource="{Binding ConvertionJobs, ElementName=FileConverterMainWindow}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Background="{Binding State, ConverterParameter=Background, Converter={StaticResource ConversionStateToColor}}" Margin="0,4">
