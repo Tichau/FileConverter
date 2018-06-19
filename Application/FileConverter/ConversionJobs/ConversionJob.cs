@@ -13,6 +13,7 @@ namespace FileConverter.ConversionJobs
     public class ConversionJob : INotifyPropertyChanged
     {
         private float progress = 0f;
+        private DateTime startTime;
         private ConversionState state = ConversionState.Unknown;
         private string errorMessage = string.Empty;
         private string userState = string.Empty;
@@ -132,6 +133,20 @@ namespace FileConverter.ConversionJobs
             protected set
             {
                 this.progress = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        public System.DateTime StartTime
+        {
+            get
+            {
+                return this.startTime;
+            }
+
+            protected set
+            {
+                this.startTime = value;
                 this.NotifyPropertyChanged();
             }
         }
@@ -333,6 +348,7 @@ namespace FileConverter.ConversionJobs
 
             Debug.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
 
+            this.StartTime = DateTime.Now;
             this.State = ConversionState.InProgress;
             
             try
