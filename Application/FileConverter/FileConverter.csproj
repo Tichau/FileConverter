@@ -168,6 +168,7 @@
     <Compile Include="ValueConverters\ConversionJobsToProgressState.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset\ConversionPreset.cs" />
+    <Compile Include="ValueConverters\ConversionJobToEstimatedRemainingDuration.cs" />
     <Compile Include="ValueConverters\ConversionJobsToProgressValue.cs" />
     <Compile Include="ValueConverters\OutputTypeEnumToViewModel.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
