@@ -7,6 +7,7 @@
         xmlns:conversionJobs="clr-namespace:FileConverter.ConversionJobs"
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         xmlns:project="clr-namespace:FileConverter.Properties"
+        xmlns:controls="clr-namespace:FileConverter.Controls"
         mc:Ignorable="d" x:Class="FileConverter.MainWindow"
         x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
     <Window.Resources>
@@ -54,45 +55,7 @@
             <ItemsControl ItemsSource="{Binding ConvertionJobs, ElementName=FileConverterMainWindow}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Background="{Binding State, ConverterParameter=Background, Converter={StaticResource ConversionStateToColor}}" Margin="0,4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="70"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Margin="10" Grid.Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2.5*" MinWidth="300" />
-                                    <ColumnDefinition Width="*" MinWidth="100" />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding OutputFilePath}" FontWeight="Bold" />
-
-                                <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,0,0,0">
-                                    <WrapPanel>
-                                        <TextBlock Text="{x:Static project:Resources.ConvertedFrom}" FontSize="11" FontStyle="Italic" Margin="0,0,5,0" />
-                                        <TextBlock Text="{Binding InputFilePath}" FontSize="11" FontStyle="Italic" />
-                                    </WrapPanel>
-                                    <TextBlock  Text="{Binding ErrorMessage}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" />
-                                </StackPanel>
-
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding UserState}" FontWeight="Bold" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" />
-
-                                <ProgressBar Grid.Row="1" Grid.Column="1" Height="18" Width="Auto" Minimum="0" Maximum="1" SmallChange="0.001" Value="{Binding Progress, Mode=OneWay}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToColor}}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" MinWidth="100" LargeChange="0.1" />
-                            </Grid>
-
-                            <Button Margin="5" Grid.Column="1" Background="WhiteSmoke" Foreground="#FF3E3E3E" Visibility="{Binding State, Converter={StaticResource EnumEqualsToVisibility}, ConverterParameter=|InProgress|Collapsed}" Command="{Binding CancelCommand}" ToolTip="Cancel">
-                                <Button.Content>
-                                    <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" />
-                                </Button.Content>
-                            </Button>
-                            <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/SuccessIcon.png" Width="48" Height="48" Visibility="{Binding State, Converter={StaticResource EnumEqualsToVisibility}, ConverterParameter=|Done|Collapsed}"/>
-                            <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/FailIcon.png" Width="48" Height="48" Visibility="{Binding State, Converter={StaticResource EnumEqualsToVisibility}, ConverterParameter=|Failed|Collapsed}"/>
-                        </Grid>
+                        <controls:ConversionJob></controls:ConversionJob>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.DataContext>
