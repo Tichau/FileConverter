@@ -122,6 +122,9 @@
     <Compile Include="ApplicationTerminateArgs.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\OpenUrlCommand.cs" />
+    <Compile Include="Controls\ConversionJob.xaml.cs">
+      <DependentUpon>ConversionJob.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
     </Compile>
@@ -207,6 +210,10 @@
       <DependentUpon>UpgradeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="XmlHelpers.cs" />
+    <Page Include="Controls\ConversionJob.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\EncodingQualitySliderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
