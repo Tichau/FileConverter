@@ -66,8 +66,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.4.6.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.7.4.6\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
+    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.8.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.7.8.0\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
     </Reference>
     <Reference Include="Markdown.Xaml">
       <HintPath>..\..\Middleware\Markdown.Xaml.dll</HintPath>
@@ -122,8 +122,8 @@
     <Compile Include="ApplicationTerminateArgs.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\OpenUrlCommand.cs" />
-    <Compile Include="Controls\ConversionJob.xaml.cs">
-      <DependentUpon>ConversionJob.xaml</DependentUpon>
+    <Compile Include="Controls\ConversionJobControl.xaml.cs">
+      <DependentUpon>ConversionJobControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
@@ -141,6 +141,7 @@
     <Compile Include="ConversionJobs\ConversionJob_Excel.cs" />
     <Compile Include="ConversionJobs\ConversionJob_Word.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ImageMagick.cs" />
+    <Compile Include="ConversionJobs\ConversionState.cs" />
     <Compile Include="ConversionJobs\VideoEncodingSpeed.cs" />
     <Compile Include="ConversionPreset\ConversionSettingsOverride.cs" />
     <Compile Include="ConversionPreset\ConversionSettings.cs" />
@@ -210,7 +211,7 @@
       <DependentUpon>UpgradeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="XmlHelpers.cs" />
-    <Page Include="Controls\ConversionJob.xaml">
+    <Page Include="Controls\ConversionJobControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -342,9 +343,7 @@
   <ItemGroup>
     <Resource Include="Resources\SayThanks-Icon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SampleData\ConversionPreset\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg\$(PlatformName)\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"

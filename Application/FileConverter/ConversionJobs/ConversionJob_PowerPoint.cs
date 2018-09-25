@@ -35,7 +35,7 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        protected override int GetOuputFilesCount()
+        protected override int GetOutputFilesCount()
         {
             if (this.ConversionPreset.OutputType == OutputType.Pdf)
             {
@@ -121,7 +121,7 @@ namespace FileConverter.ConversionJobs
 
                 Diagnostics.Debug.Log("Convert pdf to images.");
 
-                this.pdf2ImageConversionJob.StartConvertion();
+                this.pdf2ImageConversionJob.StartConversion();
 
                 if (this.pdf2ImageConversionJob.State != ConversionState.Done)
                 {

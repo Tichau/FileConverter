@@ -5,29 +5,21 @@
         xmlns:local="clr-namespace:FileConverter"
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
         xmlns:conversionJobs="clr-namespace:FileConverter.ConversionJobs"
-        xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:controls="clr-namespace:FileConverter.Controls"
         mc:Ignorable="d" x:Class="FileConverter.MainWindow"
         x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
     <Window.Resources>
-        <valueConverters:ConversionStateToBrush x:Key="ConversionStateToColor" />
         <valueConverters:ConversionJobsToProgressState x:Key="ConversionJobsToProgressState" />
         <valueConverters:ConversionJobsToProgressValue x:Key="ConversionJobsToProgressValue" />
-
-        <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">
-            <generic:ValueToString/>
-            <generic:EqualsConverter/>
-            <generic:BoolToVisibility/>
-        </generic:ValueConverterGroup>
     </Window.Resources>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
     </Window.Title>
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo 
-            ProgressState="{Binding ConvertionJobs, Converter={StaticResource ConversionJobsToProgressState}, ElementName=FileConverterMainWindow}"
-            ProgressValue="{Binding ConvertionJobs, Converter={StaticResource ConversionJobsToProgressValue}, ElementName=FileConverterMainWindow}" />
+            ProgressState="{Binding ConversionJobs, Converter={StaticResource ConversionJobsToProgressState}, ElementName=FileConverterMainWindow}"
+            ProgressValue="{Binding ConversionJobs, Converter={StaticResource ConversionJobsToProgressValue}, ElementName=FileConverterMainWindow}" />
     </Window.TaskbarItemInfo>
 
     <Grid Margin="10">
@@ -52,10 +44,10 @@
         </Grid>
 
         <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-            <ItemsControl ItemsSource="{Binding ConvertionJobs, ElementName=FileConverterMainWindow}">
+            <ItemsControl ItemsSource="{Binding ConversionJobs, ElementName=FileConverterMainWindow}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:ConversionJob></controls:ConversionJob>
+                        <controls:ConversionJobControl></controls:ConversionJobControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.DataContext>

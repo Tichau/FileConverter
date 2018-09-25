@@ -24,7 +24,7 @@ namespace FileConverter.Commands
                 return false;
             }
 
-            return this.conversionJob.IsCancelable && this.conversionJob.State == ConversionJob.ConversionState.InProgress;
+            return this.conversionJob.IsCancelable && this.conversionJob.State == ConversionState.InProgress;
         }
 
         public void Execute(object parameter)

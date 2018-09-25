@@ -96,7 +96,7 @@ namespace FileConverter.Upgrade
         {
             if (upgradeVersionDescription == null)
             {
-                throw new ArgumentNullException("upgradeVersionDescription");
+                throw new ArgumentNullException(nameof(upgradeVersionDescription));
             }
 
             if (Helpers.currentlyDownloadedVersionDescription != null)

@@ -25,7 +25,7 @@ namespace FileConverter
             this.InitializeComponent();
 
             Application application = Application.Current as Application;
-            this.ConvertionJobs = new ObservableCollection<ConversionJob>(application.ConvertionJobs);
+            this.ConversionJobs = new ObservableCollection<ConversionJob>(application.ConvertionJobs);
 
             application.OnApplicationTerminate += this.Application_OnApplicationTerminate;
 
@@ -62,7 +62,7 @@ namespace FileConverter
             }
         }
 
-        public ObservableCollection<ConversionJob> ConvertionJobs
+        public ObservableCollection<ConversionJob> ConversionJobs
         {
             get
             {
@@ -122,7 +122,7 @@ namespace FileConverter
                 return;
             }
 
-            this.OnPropertyChanged(nameof(this.ConvertionJobs));
+            this.OnPropertyChanged(nameof(this.ConversionJobs));
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)

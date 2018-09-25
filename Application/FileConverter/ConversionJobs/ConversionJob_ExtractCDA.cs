@@ -220,7 +220,7 @@ namespace FileConverter.ConversionJobs
 
         private void CompressAsync()
         {
-            this.compressionConversionJob.StartConvertion();
+            this.compressionConversionJob.StartConversion();
         }
     }
 }

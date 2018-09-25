@@ -373,10 +373,10 @@ namespace FileConverter
                 for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
                 {
                     ConversionJob conversionJob = this.conversionJobs[jobIndex];
-                    allJobAreFinished &= !(conversionJob.State == ConversionJob.ConversionState.Ready ||
-                                         conversionJob.State == ConversionJob.ConversionState.InProgress);
+                    allJobAreFinished &= !(conversionJob.State == ConversionState.Ready ||
+                                         conversionJob.State == ConversionState.InProgress);
 
-                    if (conversionJob.State == ConversionJob.ConversionState.InProgress)
+                    if (conversionJob.State == ConversionState.InProgress)
                     {
                         conversionFlags |= conversionJob.StateFlags;
                     }
@@ -391,7 +391,7 @@ namespace FileConverter
                 for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
                 {
                     ConversionJob conversionJob = this.conversionJobs[jobIndex];
-                    if (conversionJob.State == ConversionJob.ConversionState.Ready &&
+                    if (conversionJob.State == ConversionState.Ready &&
                         conversionJob.CanStartConversion(conversionFlags))
                     {
                         // Find a thread to execute the job.
@@ -411,7 +411,7 @@ namespace FileConverter
                         {
                             jobThread.Start(conversionJob);
 
-                            while (conversionJob.State == ConversionJob.ConversionState.Ready)
+                            while (conversionJob.State == ConversionState.Ready)
                             {
                                 Debug.Log("Wait the launch of the conversion thread before launching any other thread.");
                                 Thread.Sleep(20);
@@ -430,7 +430,7 @@ namespace FileConverter
                 bool allConversionsSucceed = true;
                 for (int index = 0; index < this.conversionJobs.Count; index++)
                 {
-                    allConversionsSucceed &= this.conversionJobs[index].State == ConversionJob.ConversionState.Done;
+                    allConversionsSucceed &= this.conversionJobs[index].State == ConversionState.Done;
                 }
 
                 if (this.cancelAutoExit)
@@ -472,10 +472,10 @@ namespace FileConverter
             ConversionJob conversionJob = parameter as ConversionJob;
             if (conversionJob == null)
             {
-                throw new System.ArgumentException("The parameter must be a conversion job.", "parameter");
+                throw new System.ArgumentException("The parameter must be a conversion job.", nameof(parameter));
             }
 
-            if (conversionJob.State != ConversionJob.ConversionState.Ready)
+            if (conversionJob.State != ConversionState.Ready)
             {
                 Debug.LogError("Fail to execute conversion job.");
                 return;
@@ -483,7 +483,7 @@ namespace FileConverter
 
             try
             {
-                conversionJob.StartConvertion();
+                conversionJob.StartConversion();
             }
             catch (Exception exception)
             {
