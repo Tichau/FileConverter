@@ -218,6 +218,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <DesignData Include="SampleData\ConversionJobSampleData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
     <Page Include="Windows\ApplicationStartHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -337,6 +341,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SayThanks-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SampleData\ConversionPreset\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
