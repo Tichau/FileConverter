@@ -314,7 +314,7 @@ namespace FileConverter.ConversionJobs
             }
             catch (Exception exception)
             {
-                this.ConversionFailed("Error during job initialization.");
+                this.ConversionFailed(Properties.Resources.ErrorDuringJobInitialization);
                 Debug.Log(exception.ToString());
                 return;
             }
