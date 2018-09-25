@@ -544,4 +544,7 @@ Use maj para a versão em maiúsculas</value>
   <data name="WebsiteButtonDescription" xml:space="preserve">
     <value>Abrir o site do File Converter</value>
   </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>Error during conversion job initialization.</value>
+  </data>
 </root>

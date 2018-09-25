@@ -457,6 +457,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during conversion job initialization..
+        /// </summary>
+        public static string ErrorDuringJobInitialization {
+            get {
+                return ResourceManager.GetString("ErrorDuringJobInitialization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fail to launch ffmpeg..
         /// </summary>
         public static string ErrorFailedToLaunchFFMPEG {
