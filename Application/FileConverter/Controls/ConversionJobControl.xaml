@@ -31,7 +31,7 @@
                     <TextBlock Text="{x:Static project:Resources.ConvertedFrom}" FontSize="11" FontStyle="Italic" Margin="0,0,5,0" />
                     <TextBlock Text="{Binding InputFilePath}" FontSize="11" FontStyle="Italic" />
                 </WrapPanel>
-                <TextBlock Text="{Binding ErrorMessage}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}}" />
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}}" FontSize="14" />
             </StackPanel>
 
             <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding UserState}" FontWeight="Bold" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}}" />
