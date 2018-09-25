@@ -21,16 +21,8 @@ namespace FileConverter.ConversionJobs
 
         private string initialInputPath = string.Empty;
         private int currentOuputFilePathIndex;
-
-        public ConversionJob()
-        {
-            this.State = ConversionState.Unknown;
-            this.ConversionPreset = null;
-            this.initialInputPath = string.Empty;
-            this.InputFilePath = string.Empty;
-        }
-
-        public ConversionJob(ConversionPreset conversionPreset, string inputFilePath) : this()
+        
+        public ConversionJob(ConversionPreset conversionPreset, string inputFilePath)
         {
             if (conversionPreset == null)
             {
@@ -42,10 +34,20 @@ namespace FileConverter.ConversionJobs
                 throw new ArgumentNullException(nameof(inputFilePath));
             }
 
+            this.State = ConversionState.Unknown;
             this.initialInputPath = inputFilePath;
             this.InputFilePath = inputFilePath;
             this.ConversionPreset = conversionPreset;
             this.UserState = Properties.Resources.ConversionStatePrepareConversion;
+        }
+
+        public ConversionJob()
+        {
+            this.State = ConversionState.InProgress;
+            this.ConversionPreset = null;
+            this.initialInputPath = string.Empty;
+            this.InputFilePath = "C:\\My file.png";
+            this.UserState = "DesignMode";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -15,6 +15,15 @@
             <generic:BoolToVisibility/>
         </generic:ValueConverterGroup>
 
+        <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">
+            <generic:ValueToString/>
+            <generic:EqualsConverter/>
+            <generic:BoolToVisibility/>
+        </generic:ValueConverterGroup>
+
+        <valueConverters:ConversionStateToBrush x:Key="ConversionStateToBrush" />
+        <valueConverters:ConversionJobToEstimatedRemainingDuration x:Key="ConversionJobToEstimatedRemainingDuration" />
+
         <!-- Markdown style -->
         <Style TargetType="FlowDocument" x:Key="DocumentStyle">
             <Setter Property="FontFamily" Value="Segoe UI" />
