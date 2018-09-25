@@ -38,7 +38,7 @@
 
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <ProgressBar Grid.Row="1" Grid.Column="1" Height="18" Width="Auto" Minimum="0" Maximum="1" SmallChange="0.001" Value="{Binding Progress, Mode=OneWay}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}, Mode=OneWay}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" MinWidth="100" LargeChange="0.1" />
-                <TextBlock>
+                <TextBlock Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}}">
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource ConversionJobToEstimatedRemainingDuration}" Mode="OneWay">
                             <Binding Path="State" Mode="OneWay"/>
