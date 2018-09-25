@@ -17,12 +17,12 @@ namespace FileConverter.ValueConverters
                 return string.Empty;
             }
 
-            ConversionJob.ConversionState state = (ConversionJob.ConversionState)values[0];
+            ConversionState state = (ConversionState)values[0];
             DateTime startTime = (DateTime)values[1];
             float progress = (float)values[2];
 
-            if (state == ConversionJob.ConversionState.Unknown ||
-                state == ConversionJob.ConversionState.Ready ||
+            if (state == ConversionState.Unknown ||
+                state == ConversionState.Ready ||
                 progress < 0.05f)
             {
                 return "-";

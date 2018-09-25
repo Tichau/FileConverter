@@ -40,7 +40,7 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        protected override int GetOuputFilesCount()
+        protected override int GetOutputFilesCount()
         {
             if (System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant() == ".pdf")
             {
@@ -64,7 +64,7 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("The conversion preset must be valid.");
             }
 
-            this.CurrentOuputFilePathIndex = 0;
+            this.CurrentOutputFilePathIndex = 0;
 
             if (this.isInputFilePdf)
             {
@@ -112,7 +112,7 @@ namespace FileConverter.ConversionJobs
 
                 foreach (MagickImage image in images)
                 {
-                    Debug.Log("Write page {0}/{1}.", this.CurrentOuputFilePathIndex + 1, this.pageCount);
+                    Debug.Log("Write page {0}/{1}.", this.CurrentOutputFilePathIndex + 1, this.pageCount);
 
                     if (PdfSuperSamplingRatio > 1)
                     {
@@ -121,7 +121,7 @@ namespace FileConverter.ConversionJobs
 
                     this.ConvertImage(image, true);
                     
-                    this.CurrentOuputFilePathIndex++;
+                    this.CurrentOutputFilePathIndex++;
                 }
             }
         }
@@ -223,7 +223,7 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            float alreadyCompletedPages = this.CurrentOuputFilePathIndex / (float)this.pageCount;
+            float alreadyCompletedPages = this.CurrentOutputFilePathIndex / (float)this.pageCount;
             this.Progress = alreadyCompletedPages + ((float)eventArgs.Progress.ToDouble() / (100f * this.pageCount));
         }
     }

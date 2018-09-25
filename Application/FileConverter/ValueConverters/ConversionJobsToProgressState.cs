@@ -24,13 +24,13 @@ namespace FileConverter.ValueConverters
             TaskbarItemProgressState progressState = TaskbarItemProgressState.None;
             foreach (ConversionJob job in jobs)
             {
-                if (job.State == ConversionJob.ConversionState.Failed)
+                if (job.State == ConversionState.Failed)
                 {
                     progressState = TaskbarItemProgressState.Error;
                     break;
                 }
 
-                if (job.State == ConversionJob.ConversionState.InProgress)
+                if (job.State == ConversionState.InProgress)
                 {
                     progressState = TaskbarItemProgressState.Normal;
                     break;
