@@ -3,7 +3,7 @@
 ## Description
 **File Converter** is a very simple tool which allows you to convert and compress one or several file(s) using the context menu of windows explorer.
 
-You can download it here: [www.file-converter.org](http://file-converter.org/?from=readme.md).
+You can download it here: [www.file-converter.org](https://file-converter.org/?from=readme.md).
 
 You can find more information about what's in File converter and how to use it on the [wiki](https://github.com/Tichau/FileConverter/wiki).
 
@@ -12,6 +12,22 @@ You can find more information about what's in File converter and how to use it o
 File Converter is a personal open source project started in 2014. I have put hundreds of hours adding, refining and tuning File Converter with the goal of making the conversion and compression of files an easy task for everyone.
 
 You can help me by [contributing to the project](https://github.com/Tichau/FileConverter/wiki#contribute), by [making a donation](https://tichau.itch.io/file-converter) or just by [saying thanks​](https://saythanks.io/to/Tichau) :).
+
+##  Troubleshooting
+
+If you encounter any problem with File Converter, you can:
+
+* See the already known problems in the [troubleshooting section of the documentation](https://github.com/Tichau/FileConverter/wiki/Troubleshooting).
+* Or report an issue on the [bug tracker](https://github.com/Tichau/FileConverter/issues).
+
+When you report an issue, please join the following informations:
+
+* Registry.xml
+* Settings.user.xml
+* The Diagnostics folder of the session that encountered the issue.
+* A screenshot (if possible) and a description that shows/explain the issue.
+
+You will find the xml files and diagnostics folder in `c:\Users\[UserName]\AppData\Local\FileConverter\`.
 
 ## Setup development environement
 
