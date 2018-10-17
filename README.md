@@ -7,8 +7,6 @@ You can download it here: [www.file-converter.org](http://file-converter.org/?fr
 
 You can find more information about what's in File converter and how to use it on the [wiki](https://github.com/Tichau/FileConverter/wiki).
 
-You can help this project by contributing on [Github](https://github.com/Tichau/FileConverter) or by making a donation on [Pledgie](https://pledgie.com/campaigns/31615) :).
-
 ## Donate
 
 File Converter is a personal open source project started in 2014. I have put hundreds of hours adding, refining and tuning File Converter with the goal of making the conversion and compression of files an easy task for everyone.
