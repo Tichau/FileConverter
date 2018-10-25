@@ -597,6 +597,7 @@ namespace FileConverter
             public const string VideoScale = "VideoScale";
             public const string VideoRotation = "VideoRotation";
             public const string VideoFramesPerSecond = "VideoFramesPerSecond";
+            public const string FFMPEGCustomCommand = "FFMPEGCustomCommand";
 
             public const string EnableAudio = "EnableAudio";
             public const string EnableVideo = "EnableVideo";

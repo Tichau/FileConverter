@@ -84,6 +84,16 @@ namespace FileConverter.ConversionJobs
 
         protected virtual void FillFFMpegArgumentsList()
         {
+            string customCommand = this.ConversionPreset.GetSettingsValue<string>(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand);
+            if (!string.IsNullOrEmpty(customCommand))
+            {
+                // Custom command override other settings.
+                string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, customCommand);
+
+                this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
+                return;
+            }
+
             // This option are necessary to be able to read metadata on Windows. src: http://jonhall.info/how_to/create_id3_tags_using_ffmpeg
             const string MP3MetadataArgs = "-id3v2_version 3 -write_id3v1 1";
 
