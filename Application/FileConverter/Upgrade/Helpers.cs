@@ -13,7 +13,7 @@ namespace FileConverter.Upgrade
     public static class Helpers
     {
 #if DEBUG
-        private const string BaseURI = "https://raw.githubusercontent.com/Tichau/FileConverter/development/";
+        private const string BaseURI = "https://raw.githubusercontent.com/Tichau/FileConverter/integration/";
 #else
         private const string BaseURI = "https://raw.githubusercontent.com/Tichau/FileConverter/master/";
 #endif
