@@ -1,11 +1,21 @@
 ﻿<Application x:Class="FileConverter.Application"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:xaml="clr-namespace:Markdown.Xaml;assembly=Markdown.Xaml"
              xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
              xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
-             StartupUri="Windows/MainWindow.xaml" ShutdownMode="OnMainWindowClose">
+             xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
+             xmlns:services="clr-namespace:FileConverter.Services"
+             ShutdownMode="OnLastWindowClose">
     <Application.Resources>
+        <!--Global View Model Locator-->
+        <viewModels:ViewModelLocator x:Key="Locator" />
+        <services:NavigationService x:Key="Navigation" />
+        <services:ConversionService x:Key="Conversions" />
+        <services:SettingsService x:Key="Settings" />
+        <services:UpgradeService x:Key="Upgrade" />
+
         <!-- Converters -->
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <generic:BoolToVisibility x:Key="BoolToVisibility"/>

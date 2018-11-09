@@ -11,6 +11,10 @@ namespace FileConverter
     using System.Threading;
 
     using FileConverter.ConversionJobs;
+    using FileConverter.Services;
+
+    using GalaSoft.MvvmLight.Ioc;
+
     using Microsoft.Win32;
 
     public static class Helpers
@@ -142,8 +146,8 @@ namespace FileConverter
 
         public static Thread InstantiateThread(string name, ThreadStart threadStart)
         {
-            Application application = Application.Current as Application;
-            CultureInfo currentCulture = application?.Settings?.ApplicationLanguage;
+            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(threadStart);
             thread.Name = name;
@@ -159,8 +163,8 @@ namespace FileConverter
 
         public static Thread InstantiateThread(string name, ParameterizedThreadStart parameterizedThreadStart)
         {
-            Application application = Application.Current as Application;
-            CultureInfo currentCulture = application?.Settings?.ApplicationLanguage;
+            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(parameterizedThreadStart);
             thread.Name = name;

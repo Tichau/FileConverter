@@ -167,6 +167,13 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="InputPostConversionAction.cs" />
     <Compile Include="IXmlSerializable.cs" />
+    <Compile Include="Services\ConversionJobsTerminatedEventArgs.cs" />
+    <Compile Include="Services\ConversionService.cs" />
+    <Compile Include="Services\IConversionService.cs" />
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\ISettingsService.cs" />
+    <Compile Include="Services\IUpgradeService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="PathHelpers.cs" />
     <Compile Include="Properties\Resources.fr.Designer.cs">
       <DependentUpon>Resources.fr.resx</DependentUpon>
@@ -181,6 +188,9 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Registry.cs" />
+    <Compile Include="Pages.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\UpgradeService.cs" />
     <Compile Include="Settings.Migration.cs" />
     <Compile Include="Settings.Settings.cs" />
     <Compile Include="Upgrade\Helpers.cs" />
