@@ -127,15 +127,32 @@ namespace FileConverter.Upgrade
 
             Helpers.currentlyDownloadedVersionDescription = upgradeVersionDescription;
 
+            // Source: https://stackoverflow.com/questions/2859790/the-request-was-aborted-could-not-create-ssl-tls-secure-channel#2904963
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             Helpers.webClient.DownloadProgressChanged += Helpers.WebClient_DownloadProgressChanged;
             Helpers.webClient.DownloadFileCompleted += Helpers.WebClient_DownloadFileCompleted;
             Task downloadTask = Helpers.webClient.DownloadFileTaskAsync(uri, installerPath);
+            if (downloadTask != null)
+            {
+                await downloadTask;
+            }
         }
 
-        private static void WebClient_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        private static void WebClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             Helpers.webClient.DownloadProgressChanged -= WebClient_DownloadProgressChanged;
             Helpers.webClient.DownloadFileCompleted -= WebClient_DownloadFileCompleted;
+
+            if (e.Error != null)
+            {
+                Debug.LogError("Failed to download the new File Converter upgrade. You should try again or download it manually.");
+                Debug.Log(e.Error.ToString());
+                if (Helpers.currentlyDownloadedVersionDescription != null)
+                {
+                    Helpers.currentlyDownloadedVersionDescription.NeedToUpgrade = false;
+                }
+            }
 
             if (Helpers.currentlyDownloadedVersionDescription != null)
             {
