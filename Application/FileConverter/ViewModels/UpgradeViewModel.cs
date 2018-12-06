@@ -11,6 +11,7 @@ namespace FileConverter.ViewModels
     using FileConverter.Services;
 
     using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Ioc;
 
     /// <summary>
@@ -30,8 +31,8 @@ namespace FileConverter.ViewModels
         private UpgradeVersionDescription upgradeVersionDescription;
         private string releaseNoteContent;
 
-        private DelegateCommand downloadInstallerCommand;
-        private DelegateCommand launchInstallerCommand;
+        private RelayCommand downloadInstallerCommand;
+        private RelayCommand launchInstallerCommand;
 
         /// <summary>
         /// Initializes a new instance of the UpgradeViewModel class.
@@ -59,7 +60,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.downloadInstallerCommand == null)
                 {
-                    this.downloadInstallerCommand = new DelegateCommand(this.ExecuteDownloadInstallerCommand);
+                    this.downloadInstallerCommand = new RelayCommand(this.ExecuteDownloadInstallerCommand);
                 }
 
                 return this.downloadInstallerCommand;
@@ -72,7 +73,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.launchInstallerCommand == null)
                 {
-                    this.launchInstallerCommand = new DelegateCommand(this.ExecuteLaunchInstallerCommand);
+                    this.launchInstallerCommand = new RelayCommand(this.ExecuteLaunchInstallerCommand);
                 }
 
                 return this.launchInstallerCommand;

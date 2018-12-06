@@ -11,6 +11,7 @@ namespace FileConverter.ViewModels
     using FileConverter.Services;
 
     using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Ioc;
 
     /// <summary>
@@ -27,7 +28,7 @@ namespace FileConverter.ViewModels
     /// </summary>
     public class HelpViewModel : ViewModelBase
     {
-        private DelegateCommand quitCommand;
+        private RelayCommand quitCommand;
 
         /// <summary>
         /// Initializes a new instance of the HelpViewModel class.
@@ -49,7 +50,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.quitCommand == null)
                 {
-                    this.quitCommand = new DelegateCommand(() => System.Windows.Application.Current.Shutdown());
+                    this.quitCommand = new RelayCommand(() => System.Windows.Application.Current.Shutdown());
                 }
 
                 return this.quitCommand;

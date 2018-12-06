@@ -10,6 +10,7 @@ namespace FileConverter.ViewModels
     using FileConverter.Services;
 
     using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Ioc;
 
     /// <summary>
@@ -29,7 +30,8 @@ namespace FileConverter.ViewModels
         private string informationMessage;
         private ObservableCollection<ConversionJob> conversionJobs;
 
-        private DelegateCommand showSettingsCommand;
+        private RelayCommand showSettingsCommand;
+        private RelayCommand showDiagnosticsCommand;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -90,7 +92,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.showSettingsCommand == null)
                 {
-                    this.showSettingsCommand = new DelegateCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().NavigateTo(Pages.Settings));
+                    this.showSettingsCommand = new RelayCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().NavigateTo(Pages.Settings));
                 }
 
                 return this.showSettingsCommand;
@@ -101,12 +103,12 @@ namespace FileConverter.ViewModels
         {
             get
             {
-                if (this.showSettingsCommand == null)
+                if (this.showDiagnosticsCommand == null)
                 {
-                    this.showSettingsCommand = new DelegateCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().NavigateTo(Pages.Diagnostics));
+                    this.showDiagnosticsCommand = new RelayCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().NavigateTo(Pages.Diagnostics));
                 }
 
-                return this.showSettingsCommand;
+                return this.showDiagnosticsCommand;
             }
         }
 

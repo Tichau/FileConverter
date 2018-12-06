@@ -45,7 +45,7 @@ namespace FileConverter.ViewModels
         private bool displaySeeChangeLogLink = true;
 
         private OpenUrlCommand openUrlCommand;
-        private DelegateCommand getChangeLogContentCommand;
+        private RelayCommand getChangeLogContentCommand;
         private RelayCommand movePresetUpCommand;
         private RelayCommand movePresetDownCommand;
         private RelayCommand addNewPresetCommand;
@@ -223,7 +223,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.getChangeLogContentCommand == null)
                 {
-                    this.getChangeLogContentCommand = new DelegateCommand(this.DownloadChangeLogAction);
+                    this.getChangeLogContentCommand = new RelayCommand(this.DownloadChangeLogAction);
                 }
 
                 return this.getChangeLogContentCommand;
