@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileConverter"
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
-        xmlns:conversionJobs="clr-namespace:FileConverter.ConversionJobs"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:controls="clr-namespace:FileConverter.Controls"
-        mc:Ignorable="d" x:Class="FileConverter.MainWindow"
-        x:Name="FileConverterMainWindow" Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico">
+        mc:Ignorable="d" x:Class="FileConverter.Views.MainWindow"
+        Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Window.Resources>
         <valueConverters:ConversionJobsToProgressState x:Key="ConversionJobsToProgressState" />
         <valueConverters:ConversionJobsToProgressValue x:Key="ConversionJobsToProgressValue" />
@@ -18,8 +18,8 @@
     </Window.Title>
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo 
-            ProgressState="{Binding ConversionJobs, Converter={StaticResource ConversionJobsToProgressState}, ElementName=FileConverterMainWindow}"
-            ProgressValue="{Binding ConversionJobs, Converter={StaticResource ConversionJobsToProgressValue}, ElementName=FileConverterMainWindow}" />
+            ProgressState="{Binding ConversionJobs, Converter={StaticResource ConversionJobsToProgressState}}"
+            ProgressValue="{Binding ConversionJobs, Converter={StaticResource ConversionJobsToProgressValue}}" />
     </Window.TaskbarItemInfo>
 
     <Grid Margin="10">
@@ -37,22 +37,19 @@
 
             <DockPanel Grid.Column="0">
                 <Label Content="{x:Static project:Resources.ConversionQueueTitle}" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold"/>
-                <Label Content="{Binding InformationMessage, ElementName=FileConverterMainWindow}" VerticalAlignment="Top" Height="30" FontSize="13.333" HorizontalAlignment="Right"/>
+                <Label Content="{Binding InformationMessage}" VerticalAlignment="Top" Height="30" FontSize="13.333" HorizontalAlignment="Right"/>
             </DockPanel>
-            <Button x:Name="DiagnosticsButton" Grid.Column="1" Content="{x:Static project:Resources.DiagnosticsButtonTitle}" Margin="3,3" Click="DiagnosticsButton_OnClick"/>
-            <Button x:Name="SettingsButton"  Grid.Column="2" Content="{x:Static project:Resources.SettingsButtonTitle}" Margin="3,3" Click="SettingsButton_OnClick"/>
+            <Button x:Name="DiagnosticsButton" Grid.Column="1" Content="{x:Static project:Resources.DiagnosticsButtonTitle}" Margin="3,3" Command="{Binding ShowDiagnosticsCommand}"/>
+            <Button x:Name="SettingsButton"  Grid.Column="2" Content="{x:Static project:Resources.SettingsButtonTitle}" Margin="3,3" Command="{Binding ShowSettingsCommand}"/>
         </Grid>
 
         <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-            <ItemsControl ItemsSource="{Binding ConversionJobs, ElementName=FileConverterMainWindow}">
+            <ItemsControl ItemsSource="{Binding ConversionJobs}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <controls:ConversionJobControl></controls:ConversionJobControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-                <ItemsControl.DataContext>
-                    <conversionJobs:ConversionJob/>
-                </ItemsControl.DataContext>
             </ItemsControl>
         </ScrollViewer>
     </Grid>

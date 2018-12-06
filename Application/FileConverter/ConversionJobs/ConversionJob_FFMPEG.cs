@@ -32,7 +32,20 @@ namespace FileConverter.ConversionJobs
         {
             this.IsCancelable = true;
         }
-        
+
+        public static VideoEncodingSpeed[] VideoEncodingSpeeds => new[]
+           {
+               VideoEncodingSpeed.UltraFast,
+               VideoEncodingSpeed.SuperFast,
+               VideoEncodingSpeed.VeryFast,
+               VideoEncodingSpeed.Faster,
+               VideoEncodingSpeed.Fast,
+               VideoEncodingSpeed.Medium,
+               VideoEncodingSpeed.Slow,
+               VideoEncodingSpeed.Slower,
+               VideoEncodingSpeed.VerySlow,
+           };
+
         protected virtual string FfmpegPath
         {
             get

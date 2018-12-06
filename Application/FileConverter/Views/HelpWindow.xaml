@@ -1,4 +1,4 @@
-﻿<Window x:Class="FileConverter.Windows.ApplicationStartHelp"
+﻿<Window x:Class="FileConverter.Views.HelpWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,8 @@
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize" 
-        Width="640" Height="545">
+        Width="640" Height="545"
+        DataContext="{Binding Help, Source={StaticResource Locator}}">
     <Window.Resources>
     </Window.Resources>
     <Window.Title>
@@ -20,6 +21,6 @@
         <Image Margin="0,7,0,7" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" 
                gif:ImageBehavior.AnimatedSource="/FileConverter;component/Resources/FileConverterUsage.gif"
                Stretch="Fill"/>
-        <Button Content="{x:Static project:Resources.Ok}" Height="28" Click="OkButton_Click"/>
+        <Button Content="{x:Static project:Resources.Ok}" Height="28" Command="{Binding QuitCommand}"/>
     </StackPanel>
 </Window>

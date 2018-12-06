@@ -1,6 +1,6 @@
 ﻿// <copyright file="ConversionSettingsTemplateSelector.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-namespace FileConverter.Windows
+namespace FileConverter.Views
 {
     using System.Windows;
     using System.Windows.Controls;
@@ -104,9 +104,9 @@ namespace FileConverter.Windows
                 return this.DefaultDataTemplate;
             }
 
-            OutputType outputType = (OutputType)item;
+            ConversionPreset conversionPreset = (ConversionPreset)item;
            
-            switch (outputType)
+            switch (conversionPreset.OutputType)
             {
                 case OutputType.Aac:
                     return this.AacSettingsDataTemplate;

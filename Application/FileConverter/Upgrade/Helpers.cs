@@ -3,12 +3,15 @@
 namespace FileConverter.Upgrade
 {
     using System;
+    using System.ComponentModel;
     using System.IO;
     using System.Net;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Serialization;
+
+    using FileConverter.Diagnostics;
 
     public static class Helpers
     {

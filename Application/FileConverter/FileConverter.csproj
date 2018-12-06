@@ -219,21 +219,26 @@
     <Compile Include="ValueConverters\OutputTypeToVisibility.cs" />
     <Compile Include="ValueConverters\Generic\StringToEnum.cs" />
     <Compile Include="ValueConverters\Generic\ValueConverterGroup.cs" />
-    <Compile Include="Windows\ApplicationStartHelp.xaml.cs">
-      <DependentUpon>ApplicationStartHelp.xaml</DependentUpon>
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\HelpViewModel.cs" />
+    <Compile Include="ViewModels\UpgradeViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\DiagnosticsWindow.xaml.cs">
+    <Compile Include="Views\DiagnosticsWindow.xaml.cs">
       <DependentUpon>DiagnosticsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ConversionSettingsTemplateSelector.cs" />
-    <Compile Include="Windows\InputExtension.cs" />
-    <Compile Include="Windows\InputExtensionCategory.cs" />
-    <Compile Include="Windows\OutputTypeViewModel.cs" />
-    <Compile Include="Windows\SettingsWindow.xaml.cs">
+    <Compile Include="Views\ConversionSettingsTemplateSelector.cs" />
+    <Compile Include="ViewModels\InputExtension.cs" />
+    <Compile Include="ViewModels\InputExtensionCategory.cs" />
+    <Compile Include="ViewModels\OutputTypeViewModel.cs" />
+    <Compile Include="Views\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Version.cs" />
-    <Compile Include="Windows\UpgradeWindow.xaml.cs">
+    <Compile Include="Views\UpgradeWindow.xaml.cs">
       <DependentUpon>UpgradeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="XmlHelpers.cs" />
@@ -249,15 +254,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
-    <Page Include="Windows\ApplicationStartHelp.xaml">
+    <Page Include="Views\HelpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\DiagnosticsWindow.xaml">
+    <Page Include="Views\DiagnosticsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -268,23 +273,23 @@
     <Compile Include="ValueConverters\ConversionStateToBrush.cs" />
     <Compile Include="ConversionJobs\ConversionJob.cs" />
     <Compile Include="Diagnostics\Debug.cs" />
-    <Compile Include="Windows\MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\Resources\ConversionPresets.xaml">
+    <Page Include="Views\Resources\ConversionPresets.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Resources\CustomStyles.xaml">
+    <Page Include="Views\Resources\CustomStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\SettingsWindow.xaml">
+    <Page Include="Views\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\UpgradeWindow.xaml">
+    <Page Include="Views\UpgradeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,7 +7,9 @@ namespace FileConverter.ValueConverters
     using System.Linq;
     using System.Windows.Data;
 
-    using FileConverter.Windows;
+    using CommonServiceLocator;
+
+    using FileConverter.ViewModels;
 
     public class OutputTypeEnumToViewModel : IValueConverter
     {
@@ -20,7 +22,10 @@ namespace FileConverter.ValueConverters
 
             OutputType outputType = (OutputType)value;
 
-            return SettingsWindow.OutputTypeViewModels.FirstOrDefault(match => match.Type == outputType);
+            SettingsViewModel settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+
+            return settingsViewModel.OutputTypes.Cast<OutputTypeViewModel>()
+                .FirstOrDefault(match => match.Type == outputType);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
