@@ -25,12 +25,10 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_FFMPEG() : base()
         {
-            this.IsCancelable = true;
         }
 
         public ConversionJob_FFMPEG(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
-            this.IsCancelable = true;
         }
 
         public static VideoEncodingSpeed[] VideoEncodingSpeeds => new[]

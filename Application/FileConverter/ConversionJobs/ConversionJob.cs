@@ -6,9 +6,12 @@ namespace FileConverter.ConversionJobs
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Text;
+    using System.Windows.Input;
 
     using FileConverter.Commands;
     using FileConverter.Diagnostics;
+
+    using GalaSoft.MvvmLight.Command;
 
     public class ConversionJob : INotifyPropertyChanged
     {
@@ -17,7 +20,7 @@ namespace FileConverter.ConversionJobs
         private ConversionState state = ConversionState.Unknown;
         private string errorMessage = string.Empty;
         private string userState = string.Empty;
-        private CancelConversionJobCommand cancelCommand;
+        private RelayCommand cancelCommand;
 
         private string initialInputPath;
         private int currentOutputFilePathIndex;
@@ -160,23 +163,17 @@ namespace FileConverter.ConversionJobs
             protected set;
         }
 
-        public CancelConversionJobCommand CancelCommand
+        public ICommand CancelCommand
         {
             get
             {
                 if (this.cancelCommand == null)
                 {
-                    this.cancelCommand = new CancelConversionJobCommand(this);
+                    this.cancelCommand = new RelayCommand(this.Cancel, this.IsCancelable);
                 }
 
                 return this.cancelCommand;
             }
-        }
-
-        public bool IsCancelable
-        {
-            get;
-            protected set;
         }
 
         protected bool CancelIsRequested
@@ -381,13 +378,18 @@ namespace FileConverter.ConversionJobs
 
         public virtual void Cancel()
         {
-            if (!this.IsCancelable || this.State != ConversionState.InProgress)
+            if (!this.IsCancelable())
             {
                 return;
             }
 
             this.CancelIsRequested = true;
             this.ConversionFailed(Properties.Resources.ErrorCanceled);
+        }
+
+        protected virtual bool IsCancelable()
+        {
+            return this.State == ConversionState.InProgress;
         }
 
         protected virtual int GetOutputFilesCount()

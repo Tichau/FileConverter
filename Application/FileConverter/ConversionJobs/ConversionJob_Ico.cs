@@ -13,7 +13,6 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_Ico(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
-            this.IsCancelable = true;
         }
 
         public override void Cancel()

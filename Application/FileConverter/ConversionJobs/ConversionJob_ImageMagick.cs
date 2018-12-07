@@ -17,12 +17,10 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_ImageMagick() : base()
         {
-            this.IsCancelable = true;
         }
 
         public ConversionJob_ImageMagick(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
-            this.IsCancelable = true;
         }
 
         protected override void Initialize()

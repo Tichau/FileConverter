@@ -143,7 +143,6 @@
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\CancelConversionJobCommand.cs" />
     <Compile Include="ConversionJobs\ConversionFlags.cs" />
     <Compile Include="ConversionJobs\ConversionJob_Office.cs" />
     <Compile Include="ConversionJobs\ConversionJob_PowerPoint.cs" />
