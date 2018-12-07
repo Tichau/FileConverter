@@ -8,12 +8,12 @@ namespace FileConverter.Services
 
     public interface IConversionService
     {
+        event System.EventHandler<ConversionJobsTerminatedEventArgs> ConversionJobsTerminated;
+
         ReadOnlyCollection<ConversionJob> ConversionJobs
         {
             get;
         }
-
-        event System.EventHandler<ConversionJobsTerminatedEventArgs> ConversionJobsTerminated;
 
         void ConvertFilesAsync();
 

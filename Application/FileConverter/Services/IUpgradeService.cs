@@ -1,4 +1,5 @@
-﻿
+﻿// <copyright file="IUpgradeService.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+
 namespace FileConverter.Services
 {
     public interface IUpgradeService

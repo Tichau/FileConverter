@@ -1,3 +1,5 @@
+// <copyright file="ViewModelLocator.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+
 /*
   In App.xaml:
   <Application.Resources>

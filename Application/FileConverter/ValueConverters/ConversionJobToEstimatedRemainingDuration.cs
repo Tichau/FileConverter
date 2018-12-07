@@ -1,4 +1,4 @@
-﻿// <copyright file="ConversionJobsToProgressValue.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="ConversionJobToEstimatedRemainingDuration.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters
 {

@@ -1,3 +1,4 @@
+// <copyright file="DiagnosticsViewModel.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ViewModels
 {
@@ -15,7 +16,7 @@ namespace FileConverter.ViewModels
     using GalaSoft.MvvmLight.Ioc;
 
     /// <summary>
-    /// This class contains properties that the main View can data bind to.
+    /// This class contains properties that the diagnostics View can data bind to.
     /// <para>
     /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
     /// </para>
@@ -31,7 +32,7 @@ namespace FileConverter.ViewModels
         private RelayCommand<CancelEventArgs> closeCommand;
 
         /// <summary>
-        /// Initializes a new instance of the HelpViewModel class.
+        /// Initializes a new instance of the DiagnosticsViewModel class.
         /// </summary>
         public DiagnosticsViewModel()
         {
