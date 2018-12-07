@@ -127,8 +127,8 @@ namespace FileConverter.ViewModels
 
         private void ExecuteDownloadInstallerCommand()
         {
-            this.upgradeVersionDescription.NeedToUpgrade = true;
-            Upgrade.Helpers.DownloadInstallerAsync(this.upgradeVersionDescription);
+            IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+            upgradeService.StartUpgrade();
 
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             navigationService.GoBack();

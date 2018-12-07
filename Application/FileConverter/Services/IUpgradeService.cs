@@ -11,5 +11,9 @@ namespace FileConverter.Services
         }
 
         void CheckForUpgrade();
+
+        void StartUpgrade();
+
+        void CancelUpgrade();
     }
 }

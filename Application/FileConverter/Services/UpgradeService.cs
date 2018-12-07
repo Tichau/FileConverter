@@ -30,18 +30,56 @@ namespace FileConverter.Services
 
         public void CheckForUpgrade()
         {
-#if DEBUG
-            Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
-#else
-            long fileTime = Registry.GetValue<long>(Registry.Keys.LastUpdateCheckDate);
-            DateTime lastUpdateDateTime = DateTime.FromFileTime(fileTime);
-
-            TimeSpan durationSinceLastUpdate = DateTime.Now.Subtract(lastUpdateDateTime);
-            if (durationSinceLastUpdate > new TimeSpan(1, 0, 0, 0))
+            try
             {
+#if DEBUG
                 Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
-            }
+#else
+                long fileTime = Registry.GetValue<long>(Registry.Keys.LastUpdateCheckDate);
+                DateTime lastUpdateDateTime = DateTime.FromFileTime(fileTime);
+
+                TimeSpan durationSinceLastUpdate = DateTime.Now.Subtract(lastUpdateDateTime);
+                if (durationSinceLastUpdate > new TimeSpan(1, 0, 0, 0))
+                {
+                    Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+                }
 #endif
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.Log($"Failed to check upgrade: {exception.Message}.");
+            }
+        }
+
+        public void StartUpgrade()
+        {
+            if (this.UpgradeVersionDescription == null)
+            {
+                Diagnostics.Debug.Log("Can't start upgrade because no check upgrade have been done.");
+                return;
+            }
+
+            try
+            {
+                this.UpgradeVersionDescription.NeedToUpgrade = true;
+                Task task = Upgrade.Helpers.DownloadInstallerAsync(this.upgradeVersionDescription);
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.Log($"Failed to download upgrade: {exception.Message}.");
+            }
+        }
+
+        public void CancelUpgrade()
+        {
+            if (this.UpgradeVersionDescription == null)
+            {
+                Diagnostics.Debug.Log("Can't cancel upgrade because there is no upgrade in progress.");
+                return;
+            }
+
+            Diagnostics.Debug.Log("Cancel application upgrade.");
+            this.UpgradeVersionDescription.NeedToUpgrade = false;
         }
 
         private void OnGetLatestVersionDescription(UpgradeVersionDescription description)
