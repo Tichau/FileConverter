@@ -73,6 +73,14 @@ namespace FileConverter.Diagnostics
             diagnosticsData.Log(message, arguments);
         }
 
+        public static void Assert(bool condition, string message)
+        {
+            if (!condition)
+            {
+                LogError(message);
+            }
+        }
+
         public static void LogError(string message, params object[] arguments)
         {
             string log = string.Format(message, arguments);
