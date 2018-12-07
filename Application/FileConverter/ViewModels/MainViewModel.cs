@@ -32,6 +32,7 @@ namespace FileConverter.ViewModels
 
         private RelayCommand showSettingsCommand;
         private RelayCommand showDiagnosticsCommand;
+        private RelayCommand<CancelEventArgs> closeCommand;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -92,7 +93,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.showSettingsCommand == null)
                 {
-                    this.showSettingsCommand = new RelayCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().NavigateTo(Pages.Settings));
+                    this.showSettingsCommand = new RelayCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().Show(Pages.Settings));
                 }
 
                 return this.showSettingsCommand;
@@ -105,11 +106,30 @@ namespace FileConverter.ViewModels
             {
                 if (this.showDiagnosticsCommand == null)
                 {
-                    this.showDiagnosticsCommand = new RelayCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().NavigateTo(Pages.Diagnostics));
+                    this.showDiagnosticsCommand = new RelayCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().Show(Pages.Diagnostics));
                 }
 
                 return this.showDiagnosticsCommand;
             }
+        }
+
+        public ICommand CloseCommand
+        {
+            get
+            {
+                if (this.closeCommand == null)
+                {
+                    this.closeCommand = new RelayCommand<CancelEventArgs>(this.Close);
+                }
+
+                return this.closeCommand;
+            }
+        }
+
+        private void Close(CancelEventArgs args)
+        {
+            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            navigationService.Close(Pages.Main, args != null);
         }
 
         private void ConversionJob_PropertyChanged(object sender, PropertyChangedEventArgs eventArgs)

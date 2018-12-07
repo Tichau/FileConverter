@@ -6,9 +6,16 @@
         xmlns:valueConverters="clr-namespace:FileConverter.ValueConverters"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:controls="clr-namespace:FileConverter.Controls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d" x:Class="FileConverter.Views.MainWindow"
         Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <command:EventToCommand Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <valueConverters:ConversionJobsToProgressState x:Key="ConversionJobsToProgressState" />
         <valueConverters:ConversionJobsToProgressValue x:Key="ConversionJobsToProgressValue" />

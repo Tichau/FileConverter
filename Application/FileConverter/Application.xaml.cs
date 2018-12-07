@@ -72,13 +72,13 @@ namespace FileConverter
 
             if (this.showHelp)
             {
-                navigationService.NavigateTo(Pages.Help);
+                navigationService.Show(Pages.Help);
                 return;
             }
 
             if (this.needToRunConversionThread)
             {
-                navigationService.NavigateTo(Pages.Main);
+                navigationService.Show(Pages.Main);
 
                 IConversionService conversionService = SimpleIoc.Default.GetInstance<IConversionService>();
                 conversionService.ConversionJobsTerminated += this.ConversionService_ConversionJobsTerminated;
@@ -87,12 +87,12 @@ namespace FileConverter
 
             if (this.showSettings)
             {
-                navigationService.NavigateTo(Pages.Settings);
+                navigationService.Show(Pages.Settings);
             }
 
             if (this.verbose)
             {
-                navigationService.NavigateTo(Pages.Diagnostics);
+                navigationService.Show(Pages.Diagnostics);
             }
         }
 
@@ -184,11 +184,11 @@ namespace FileConverter
 
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
 
-            navigationService.RegisterPage<HelpWindow>(Pages.Help, false);
-            navigationService.RegisterPage<MainWindow>(Pages.Main, false);
-            navigationService.RegisterPage<SettingsWindow>(Pages.Settings, true);
-            navigationService.RegisterPage<DiagnosticsWindow>(Pages.Diagnostics, true);
-            navigationService.RegisterPage<UpgradeWindow>(Pages.Upgrade, true);
+            navigationService.RegisterPage<HelpWindow>(Pages.Help, false, true);
+            navigationService.RegisterPage<MainWindow>(Pages.Main, false, true);
+            navigationService.RegisterPage<SettingsWindow>(Pages.Settings, true, true);
+            navigationService.RegisterPage<DiagnosticsWindow>(Pages.Diagnostics, true, false);
+            navigationService.RegisterPage<UpgradeWindow>(Pages.Upgrade, true, false);
         }
 
         private void Initialize()
@@ -351,7 +351,7 @@ namespace FileConverter
 
         private void UpgradeService_NewVersionAvailable(object sender, UpgradeVersionDescription e)
         {
-            SimpleIoc.Default.GetInstance<INavigationService>().NavigateTo(Pages.Upgrade);
+            SimpleIoc.Default.GetInstance<INavigationService>().Show(Pages.Upgrade);
 
             IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
             upgradeService.NewVersionAvailable -= this.UpgradeService_NewVersionAvailable;

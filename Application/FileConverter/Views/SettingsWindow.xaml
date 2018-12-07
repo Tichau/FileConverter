@@ -1,15 +1,21 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:FileConverter"
-    xmlns:project="clr-namespace:FileConverter.Properties"
+        xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:views="clr-namespace:FileConverter.Views"
         xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
         x:Class="FileConverter.Views.SettingsWindow"
         MinWidth="640" MinHeight="480" 
         Width="920" Height="675"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
-        DataContext="{Binding Settings, Source={StaticResource Locator}}"
-        Closing="SettingsWindow_OnClosing">
+        DataContext="{Binding Settings, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <command:EventToCommand Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

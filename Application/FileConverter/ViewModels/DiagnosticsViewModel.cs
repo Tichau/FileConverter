@@ -26,14 +26,14 @@ namespace FileConverter.ViewModels
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class HelpViewModel : ViewModelBase
+    public class DiagnosticsViewModel : ViewModelBase
     {
         private RelayCommand<CancelEventArgs> closeCommand;
 
         /// <summary>
         /// Initializes a new instance of the HelpViewModel class.
         /// </summary>
-        public HelpViewModel()
+        public DiagnosticsViewModel()
         {
             if (this.IsInDesignMode)
             {
@@ -60,7 +60,7 @@ namespace FileConverter.ViewModels
         private void Close(CancelEventArgs args)
         {
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-            navigationService.Close(Pages.Help, args != null);
+            navigationService.Close(Pages.Diagnostics, args != null);
         }
     }
 }

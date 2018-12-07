@@ -33,6 +33,7 @@ namespace FileConverter.ViewModels
 
         private RelayCommand downloadInstallerCommand;
         private RelayCommand launchInstallerCommand;
+        private RelayCommand<CancelEventArgs> closeCommand;
 
         /// <summary>
         /// Initializes a new instance of the UpgradeViewModel class.
@@ -77,6 +78,19 @@ namespace FileConverter.ViewModels
                 }
 
                 return this.launchInstallerCommand;
+            }
+        }
+        
+        public ICommand CloseCommand
+        {
+            get
+            {
+                if (this.closeCommand == null)
+                {
+                    this.closeCommand = new RelayCommand<CancelEventArgs>(this.Close);
+                }
+
+                return this.closeCommand;
             }
         }
 
@@ -131,13 +145,19 @@ namespace FileConverter.ViewModels
             upgradeService.StartUpgrade();
 
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-            navigationService.GoBack();
+            navigationService.Close(Pages.Upgrade, false);
         }
 
         private void ExecuteLaunchInstallerCommand()
         {
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-            navigationService.GoBack();
+            navigationService.Close(Pages.Upgrade, false);
+        }
+
+        private void Close(CancelEventArgs args)
+        {
+            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            navigationService.Close(Pages.Upgrade, args != null);
         }
     }
 }

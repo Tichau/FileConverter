@@ -9,6 +9,8 @@ namespace FileConverter.Services
     using System.Runtime.CompilerServices;
     using System.Windows;
 
+    using FileConverter.Annotations;
+
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Ioc;
 
@@ -17,76 +19,16 @@ namespace FileConverter.Services
     public class NavigationService : ObservableObject, INavigationService
     {
         private readonly Dictionary<string, PageInfo> pageInfoByType;
-        private readonly List<string> historic;
-        private string currentPageKey;
+        private int numberOfPageShowed = 0;
 
         public NavigationService()
         {
             this.pageInfoByType = new Dictionary<string, PageInfo>();
-            this.historic = new List<string>();
 
             SimpleIoc.Default.Register<INavigationService>(() => this);
         }
-
-        public string CurrentPageKey
-        {
-            get => this.currentPageKey;
-
-            private set
-            {
-                if (this.currentPageKey == value)
-                {
-                    return;
-                }
-
-                this.currentPageKey = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        public object Parameter { get; private set; }
         
-        public void GoBack()
-        {
-            lock (this.pageInfoByType)
-            {
-                if (this.historic.Count <= 0)
-                {
-                    return;
-                }
-
-                string pageKey = this.historic.Last();
-                PageInfo pageInfo;
-                if (!this.pageInfoByType.TryGetValue(pageKey, out pageInfo))
-                {
-                    throw new ArgumentException($"No such page: {pageKey} ", nameof(pageKey));
-                }
-
-                this.historic.RemoveAt(this.historic.Count - 1);
-                this.CurrentPageKey = this.historic.LastOrDefault();
-
-                Diagnostics.Debug.Log($"Go back from {pageKey ?? "null"} to {this.CurrentPageKey ?? "null"}.");
-
-                this.pageInfoByType[pageKey] = pageInfo;
-
-                if (pageInfo.Instance.IsVisible)
-                {
-                    pageInfo.Instance.Close();
-                }
-
-                if (string.IsNullOrEmpty(this.CurrentPageKey))
-                {
-                    Application.Current.Shutdown();
-                }
-            }
-        }
-
-        public void NavigateTo(string pageKey)
-        {
-            this.NavigateTo(pageKey, null);
-        }
-
-        public virtual void NavigateTo(string pageKey, object parameter)
+        public void Show([NotNull] string pageKey)
         {
             lock (this.pageInfoByType)
             {
@@ -96,23 +38,23 @@ namespace FileConverter.Services
                     throw new ArgumentException($"No such page: {pageKey}.", nameof(pageKey));
                 }
 
+                if (pageInfo.Showed)
+                {
+                    return;
+                }
+
+                pageInfo.Showed = true;
+
                 if (pageInfo.Instance == null || !pageInfo.Instance.IsLoaded)
                 {
                     pageInfo.Instance = Activator.CreateInstance(pageInfo.Type) as Window;
                 }
 
-                this.Parameter = parameter;
-                this.historic.Add(pageKey);
-                this.CurrentPageKey = pageKey;
-
-                Diagnostics.Debug.Log($"Navigate to {this.CurrentPageKey ?? "null"}.");
+                Diagnostics.Debug.Log($"Show page {pageKey}.");
 
                 this.pageInfoByType[pageKey] = pageInfo;
-                
-                if (pageInfo.Instance.IsVisible)
-                {
-                    return;
-                }
+
+                this.numberOfPageShowed++;
 
                 if (pageInfo.CancelAutoExit)
                 {
@@ -124,7 +66,75 @@ namespace FileConverter.Services
             }
         }
 
-        public void RegisterPage<T>(string pageKey, bool cancelAutoExit) where T : Window
+        public void Close([NotNull] string pageKey, bool alreadyClosing)
+        {
+            if (pageKey == null)
+            {
+                throw new ArgumentNullException(nameof(pageKey));
+            }
+
+            lock (this.pageInfoByType)
+            {
+                PageInfo pageInfo;
+                if (!this.pageInfoByType.TryGetValue(pageKey, out pageInfo))
+                {
+                    throw new ArgumentException($"No such page: {pageKey}.", nameof(pageKey));
+                }
+
+                if (!pageInfo.Showed)
+                {
+                    return;
+                }
+
+                pageInfo.Showed = false;
+                
+                Diagnostics.Debug.Log($"Close page {pageKey}.");
+
+                this.pageInfoByType[pageKey] = pageInfo;
+
+                if (pageInfo.MainWindow)
+                {
+                    this.CloseSecondaryWindowsIfThereIsNoOtherMainWindowShowed();
+                }
+
+                if (!alreadyClosing)
+                {
+                    pageInfo.Instance.Close();
+                }
+
+                this.numberOfPageShowed--;
+
+                // If this is the last window.
+                if (this.numberOfPageShowed == 0)
+                {
+                    IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+                    bool upgradeInProgress = upgradeService.UpgradeVersionDescription != null &&
+                             upgradeService.UpgradeVersionDescription.NeedToUpgrade &&
+                             !upgradeService.UpgradeVersionDescription.InstallerDownloadDone;
+
+                    if (upgradeInProgress)
+                    {
+                        if (pageKey == Pages.Upgrade)
+                        {
+                            upgradeService.CancelUpgrade();
+                            Application.Current.Shutdown();
+                        }
+                        else
+                        {
+                            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+                            navigationService.Show(Pages.Upgrade);
+                            Diagnostics.Debug.Log("There is an upgrade in progress, display the upgrade window.");
+                        }
+                    }
+                    else
+                    {
+                        Application.Current.Shutdown();
+                    }
+                }
+            }
+        }
+
+        public void RegisterPage<T>(string pageKey, bool cancelAutoExit, bool mainWindow) where T : Window
         {
             if (string.IsNullOrEmpty(pageKey))
             {
@@ -135,7 +145,7 @@ namespace FileConverter.Services
             {
                 if (!this.pageInfoByType.ContainsKey(pageKey))
                 {
-                    this.pageInfoByType.Add(pageKey, new PageInfo(typeof(T), cancelAutoExit));
+                    this.pageInfoByType.Add(pageKey, new PageInfo(typeof(T), cancelAutoExit, mainWindow));
                 }
                 else
                 {
@@ -144,17 +154,46 @@ namespace FileConverter.Services
             }
         }
 
+        private void CloseSecondaryWindowsIfThereIsNoOtherMainWindowShowed()
+        {
+            List<string> windowsToClose = new List<string>();
+            foreach (KeyValuePair<string, PageInfo> keyValuePair in this.pageInfoByType)
+            {
+                if (keyValuePair.Value.MainWindow && keyValuePair.Value.Showed)
+                {
+                    // There is another main window showed.
+                    return;
+                }
+
+                if (keyValuePair.Value.Showed)
+                {
+                    windowsToClose.Add(keyValuePair.Key);
+                }
+            }
+
+            // Close all windows.
+            for (int index = 0; index < windowsToClose.Count; index++)
+            {
+                this.Close(windowsToClose[index], false);
+            }
+        }
+
         private struct PageInfo
         {
             public Window Instance;
             public Type Type;
             public bool CancelAutoExit;
+            public bool MainWindow;
 
-            public PageInfo(Type type, bool cancelAutoExit)
+            public bool Showed;
+
+            public PageInfo(Type type, bool cancelAutoExit, bool mainWindow)
             {
                 this.Instance = null;
                 this.Type = type;
                 this.CancelAutoExit = cancelAutoExit;
+                this.MainWindow = mainWindow;
+                this.Showed = false;
             }
         }
     }

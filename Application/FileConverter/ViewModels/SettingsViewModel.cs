@@ -51,7 +51,7 @@ namespace FileConverter.ViewModels
         private RelayCommand addNewPresetCommand;
         private RelayCommand removePresetCommand;
         private RelayCommand saveCommand;
-        private RelayCommand closeCommand;
+        private RelayCommand<CancelEventArgs> closeCommand;
 
         private ListCollectionView outputTypes;
         private CultureInfo[] supportedCultures;
@@ -314,7 +314,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.closeCommand == null)
                 {
-                    this.closeCommand = new RelayCommand(this.CloseSettings);
+                    this.closeCommand = new RelayCommand<CancelEventArgs>(this.CloseSettings);
                 }
 
                 return this.closeCommand;
@@ -377,13 +377,13 @@ namespace FileConverter.ViewModels
             this.RaisePropertyChanged(nameof(this.InputCategories));
         }
         
-        private void CloseSettings()
+        private void CloseSettings(CancelEventArgs args)
         {
             ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
             settingsService.RevertSettings();
 
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-            navigationService.GoBack();
+            navigationService.Close(Pages.Settings, args != null);
         }
 
         private bool CanSaveSettings()
@@ -398,7 +398,7 @@ namespace FileConverter.ViewModels
             settingsService.Settings.Save();
 
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-            navigationService.GoBack();
+            navigationService.Close(Pages.Settings, false);
         }
         
         private bool CanMoveSelectedPresetUp()

@@ -6,9 +6,16 @@
         xmlns:fileConverter="clr-namespace:FileConverter"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize" 
         Width="640" Height="545"
         DataContext="{Binding Help, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <command:EventToCommand Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
     </Window.Resources>
     <Window.Title>
@@ -21,6 +28,6 @@
         <Image Margin="0,7,0,7" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" 
                gif:ImageBehavior.AnimatedSource="/FileConverter;component/Resources/FileConverterUsage.gif"
                Stretch="Fill"/>
-        <Button Content="{x:Static project:Resources.Ok}" Height="28" Command="{Binding QuitCommand}"/>
+        <Button Content="{x:Static project:Resources.Ok}" Height="28" Command="{Binding CloseCommand}"/>
     </StackPanel>
 </Window>

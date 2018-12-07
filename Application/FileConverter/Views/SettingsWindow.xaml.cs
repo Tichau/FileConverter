@@ -2,7 +2,6 @@
 
 namespace FileConverter.Views
 {
-    using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
@@ -114,14 +113,6 @@ namespace FileConverter.Views
             {
                 dataContext.SelectedPreset.RemoveInputType(inputExtension);
             }
-        }
-        
-        private void SettingsWindow_OnClosing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-
-            SettingsViewModel settingsViewModel = (SettingsViewModel)this.DataContext;
-            settingsViewModel.CloseCommand.Execute(null);
         }
     }
 }

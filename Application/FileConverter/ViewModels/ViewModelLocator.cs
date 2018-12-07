@@ -51,6 +51,7 @@ namespace FileConverter.ViewModels
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<UpgradeViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
+            SimpleIoc.Default.Register<DiagnosticsViewModel>();
         }
 
         public HelpViewModel Help => ServiceLocator.Current.GetInstance<HelpViewModel>();
@@ -61,9 +62,6 @@ namespace FileConverter.ViewModels
 
         public SettingsViewModel Settings => ServiceLocator.Current.GetInstance<SettingsViewModel>();
 
-        public static void Cleanup()
-        {
-            // TODO Clear the ViewModels
-        }
+        public DiagnosticsViewModel Diagnostics => ServiceLocator.Current.GetInstance<DiagnosticsViewModel>();
     }
 }
