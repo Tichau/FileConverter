@@ -6,7 +6,6 @@ namespace FileConverter.ViewModels
     using System.ComponentModel;
     using System.Windows.Input;
 
-    using FileConverter.Commands;
     using FileConverter.ConversionJobs;
     using FileConverter.Services;
 

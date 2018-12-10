@@ -5,10 +5,8 @@ namespace FileConverter.ConversionJobs
     using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using System.Text;
     using System.Windows.Input;
 
-    using FileConverter.Commands;
     using FileConverter.Diagnostics;
 
     using GalaSoft.MvvmLight.Command;

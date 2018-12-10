@@ -6,6 +6,7 @@ namespace FileConverter.ViewModels
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
     using System.Windows;
@@ -13,7 +14,6 @@ namespace FileConverter.ViewModels
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using FileConverter.Commands;
     using FileConverter.ConversionJobs;
     using FileConverter.Services;
 
@@ -44,7 +44,7 @@ namespace FileConverter.ViewModels
         private string releaseNoteContent;
         private bool displaySeeChangeLogLink = true;
 
-        private OpenUrlCommand openUrlCommand;
+        private RelayCommand<string> openUrlCommand;
         private RelayCommand getChangeLogContentCommand;
         private RelayCommand movePresetUpCommand;
         private RelayCommand movePresetDownCommand;
@@ -236,7 +236,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.openUrlCommand == null)
                 {
-                    this.openUrlCommand = new OpenUrlCommand();
+                    this.openUrlCommand = new RelayCommand<string>((url) => Process.Start(url));
                 }
 
                 return this.openUrlCommand;

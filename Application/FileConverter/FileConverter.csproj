@@ -136,7 +136,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationTerminateArgs.cs" />
-    <Compile Include="Commands\OpenUrlCommand.cs" />
     <Compile Include="Controls\ConversionJobControl.xaml.cs">
       <DependentUpon>ConversionJobControl.xaml</DependentUpon>
     </Compile>

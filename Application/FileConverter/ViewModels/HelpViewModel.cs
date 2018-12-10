@@ -2,13 +2,9 @@
 
 namespace FileConverter.ViewModels
 {
-    using System;
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Input;
 
-    using FileConverter.Commands;
-    using FileConverter.ConversionJobs;
     using FileConverter.Services;
 
     using GalaSoft.MvvmLight;
