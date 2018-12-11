@@ -37,7 +37,6 @@ namespace FileConverter.ViewModels
         private InputExtensionCategory[] inputCategories;
         private ConversionPreset selectedPreset;
         private Settings settings;
-        private string releaseNoteContent;
         private bool displaySeeChangeLogLink = true;
 
         private RelayCommand<string> openUrlCommand;
