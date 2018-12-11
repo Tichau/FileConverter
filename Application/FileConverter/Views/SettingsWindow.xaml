@@ -308,8 +308,8 @@
                     </DockPanel>
 
                     <DockPanel Grid.Row="1" Grid.Column="0" Margin="0,0,5,0">
-                        <FlowDocumentScrollViewer Grid.Row="0" Grid.Column="0" Margin="5,10,5,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
-                                          Document="{Binding AboutSectionContent, Converter={StaticResource TextToFlowDocumentConverter}}" DockPanel.Dock="Top"/>
+                        <FlowDocumentScrollViewer Grid.Row="0" Grid.Column="0" Margin="5,10,5,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" DockPanel.Dock="Top"
+                                                  Document="{Binding UpgradeVersionDescription.ChangeLog, Source={StaticResource Upgrade}, Converter={StaticResource ChangelogToMarkdown}, ConverterParameter=True|}" />
 
                         <TextBlock Grid.Row="1" Margin="5" DockPanel.Dock="Top" FontSize="14" HorizontalAlignment="Center" 
                                    Visibility="{Binding DisplaySeeChangeLogLink, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">

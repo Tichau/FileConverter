@@ -16,24 +16,6 @@
         <services:SettingsService x:Key="Settings" />
         <services:UpgradeService x:Key="Upgrade" />
 
-        <!-- Converters -->
-        <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
-        <generic:BoolToVisibility x:Key="BoolToVisibility"/>
-
-        <generic:ValueConverterGroup x:Key="InvBoolToVisibility">
-            <generic:BoolInverterConverter/>
-            <generic:BoolToVisibility/>
-        </generic:ValueConverterGroup>
-
-        <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">
-            <generic:ValueToString/>
-            <generic:EqualsConverter/>
-            <generic:BoolToVisibility/>
-        </generic:ValueConverterGroup>
-
-        <valueConverters:ConversionStateToBrush x:Key="ConversionStateToBrush" />
-        <valueConverters:ConversionJobToEstimatedRemainingDuration x:Key="ConversionJobToEstimatedRemainingDuration" />
-
         <!-- Markdown style -->
         <Style TargetType="FlowDocument" x:Key="DocumentStyle">
             <Setter Property="FontFamily" Value="Segoe UI" />
@@ -66,11 +48,33 @@
         </Style>
 
         <xaml:Markdown x:Key="Markdown"
-                        DocumentStyle="{StaticResource DocumentStyle}"
-                        Heading1Style="{StaticResource PageHeader}"
-                        Heading2Style="{StaticResource SubHeader}"
-                        Heading3Style="{StaticResource SubHeaderSecondary}"/>
+                       DocumentStyle="{StaticResource DocumentStyle}"
+                       Heading1Style="{StaticResource PageHeader}"
+                       Heading2Style="{StaticResource SubHeader}"
+                       Heading3Style="{StaticResource SubHeaderSecondary}"/>
 
-        <xaml:TextToFlowDocumentConverter x:Key="TextToFlowDocumentConverter" Markdown="{StaticResource Markdown}"/>
+        <!-- Converters -->
+        <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
+        <generic:BoolToVisibility x:Key="BoolToVisibility"/>
+
+        <generic:ValueConverterGroup x:Key="InvBoolToVisibility">
+            <generic:BoolInverterConverter/>
+            <generic:BoolToVisibility/>
+        </generic:ValueConverterGroup>
+
+        <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">
+            <generic:ValueToString/>
+            <generic:EqualsConverter/>
+            <generic:BoolToVisibility/>
+        </generic:ValueConverterGroup>
+
+        <valueConverters:ConversionStateToBrush x:Key="ConversionStateToBrush" />
+        <valueConverters:ConversionJobToEstimatedRemainingDuration x:Key="ConversionJobToEstimatedRemainingDuration" />
+
+        <generic:ValueConverterGroup x:Key="ChangelogToMarkdown">
+            <valueConverters:ChangelogConverter/>
+            <xaml:TextToFlowDocumentConverter Markdown="{StaticResource Markdown}"/>
+        </generic:ValueConverterGroup>
+        
     </Application.Resources>
 </Application>

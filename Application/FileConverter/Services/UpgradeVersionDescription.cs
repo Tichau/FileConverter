@@ -1,6 +1,6 @@
 // <copyright file="UpgradeVersionDescription.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-namespace FileConverter
+namespace FileConverter.Services
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
@@ -8,12 +8,14 @@ namespace FileConverter
 
     using FileConverter.Annotations;
 
-    public class UpgradeVersionDescription : INotifyPropertyChanged
+    using GalaSoft.MvvmLight;
+
+    public class UpgradeVersionDescription : ObservableObject
     {
         private int installerDownloadProgress;
         private bool installerDownloadInProgress;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private string changeLog;
 
         [XmlElement("Latest")]
         public Version LatestVersion
@@ -28,12 +30,16 @@ namespace FileConverter
             get;
             set;
         }
-        
+
         [XmlIgnore]
         public string ChangeLog
         {
-            get;
-            set;
+            get => this.changeLog;
+            set
+            {
+                this.changeLog = value;
+                this.RaisePropertyChanged();
+            }
         }
 
         [XmlIgnore]
@@ -54,9 +60,9 @@ namespace FileConverter
             set
             {
                 this.installerDownloadInProgress = value;
-                this.OnPropertyChanged();
-                this.OnPropertyChanged(nameof(this.InstallerDownloadDone));
-                this.OnPropertyChanged(nameof(this.InstallerDownloadNotStarted));
+                this.RaisePropertyChanged();
+                this.RaisePropertyChanged(nameof(this.InstallerDownloadDone));
+                this.RaisePropertyChanged(nameof(this.InstallerDownloadNotStarted));
             }
         }
 
@@ -71,9 +77,9 @@ namespace FileConverter
             set
             {
                 this.installerDownloadProgress = value;
-                this.OnPropertyChanged();
-                this.OnPropertyChanged(nameof(this.InstallerDownloadDone));
-                this.OnPropertyChanged(nameof(this.InstallerDownloadNotStarted));
+                this.RaisePropertyChanged();
+                this.RaisePropertyChanged(nameof(this.InstallerDownloadDone));
+                this.RaisePropertyChanged(nameof(this.InstallerDownloadNotStarted));
             }
         }
 
@@ -100,12 +106,6 @@ namespace FileConverter
         {
             get;
             set;
-        }
-        
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

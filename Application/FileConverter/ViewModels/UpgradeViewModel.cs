@@ -26,8 +26,7 @@ namespace FileConverter.ViewModels
     /// </summary>
     public class UpgradeViewModel : ViewModelBase
     {
-        private UpgradeVersionDescription upgradeVersionDescription;
-        private string releaseNoteContent;
+        private readonly IUpgradeService upgradeService;
 
         private RelayCommand downloadInstallerCommand;
         private RelayCommand launchInstallerCommand;
@@ -38,19 +37,8 @@ namespace FileConverter.ViewModels
         /// </summary>
         public UpgradeViewModel()
         {
-            if (this.IsInDesignMode)
-            {
-                // Code runs in Blend --> create design time data.
-                UpgradeVersionDescription versionDescription = new UpgradeVersionDescription();
-                versionDescription.LatestVersion = new Version() { Major = 0, Minor = 1, Patch = 0, };
-                this.VersionDescription = versionDescription;
-            }
-            else
-            {
-                IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
-                this.VersionDescription = upgradeService.UpgradeVersionDescription;
-                upgradeService.NewVersionAvailable += this.UpgradeService_NewVersionAvailable;
-            }
+            this.upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+            this.upgradeService.GetChangeLogAsync();
         }
 
         public ICommand DownloadInstallerCommand
@@ -92,55 +80,9 @@ namespace FileConverter.ViewModels
             }
         }
 
-        public UpgradeVersionDescription VersionDescription
-        {
-            get
-            {
-                return this.upgradeVersionDescription;
-            }
-
-            set
-            {
-                this.upgradeVersionDescription = value;
-
-                Task<string> task = Upgrade.Helpers.GetChangeLogAsync(this.upgradeVersionDescription, this.OnChangeLogRetrieved);
-                this.RaisePropertyChanged();
-            }
-        }
-
-        public string ReleaseNote
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(this.releaseNoteContent))
-                {
-                    return Properties.Resources.DownloadingChangeLog;
-                }
-
-                return this.releaseNoteContent;
-            }
-
-            set
-            {
-                this.releaseNoteContent = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        private void UpgradeService_NewVersionAvailable(object sender, UpgradeVersionDescription newVersion)
-        {
-            this.VersionDescription = newVersion;
-        }
-
-        private void OnChangeLogRetrieved(UpgradeVersionDescription versionDescription)
-        {
-            this.ReleaseNote = versionDescription.ChangeLog;
-        }
-
         private void ExecuteDownloadInstallerCommand()
         {
-            IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
-            upgradeService.StartUpgrade();
+            this.upgradeService.StartUpgrade();
 
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             navigationService.Close(Pages.Upgrade, false);

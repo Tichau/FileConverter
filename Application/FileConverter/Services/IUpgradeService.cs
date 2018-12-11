@@ -2,6 +2,8 @@
 
 namespace FileConverter.Services
 {
+    using System.Threading.Tasks;
+
     public interface IUpgradeService
     {
         event System.EventHandler<UpgradeVersionDescription> NewVersionAvailable;
@@ -16,5 +18,7 @@ namespace FileConverter.Services
         void StartUpgrade();
 
         void CancelUpgrade();
+
+        Task<string> GetChangeLogAsync(UpgradeService.OnUpgradeOperationCompletedEventHandler onGetCompleteDelegate = null);
     }
 }

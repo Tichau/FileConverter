@@ -190,11 +190,11 @@
     <Compile Include="Services\UpgradeService.cs" />
     <Compile Include="Settings.Migration.cs" />
     <Compile Include="Settings.Settings.cs" />
-    <Compile Include="Upgrade\Helpers.cs" />
-    <Compile Include="Upgrade\UpgradeVersionDescription.cs" />
+    <Compile Include="Services\UpgradeVersionDescription.cs" />
     <Compile Include="ValueConverters\ConversionJobsToProgressState.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset\ConversionPreset.cs" />
+    <Compile Include="ValueConverters\ChangelogConverter.cs" />
     <Compile Include="ValueConverters\ConversionJobToEstimatedRemainingDuration.cs" />
     <Compile Include="ValueConverters\ConversionJobsToProgressValue.cs" />
     <Compile Include="ValueConverters\OutputTypeEnumToViewModel.cs" />

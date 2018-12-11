@@ -2,19 +2,15 @@
 
 namespace FileConverter.ViewModels
 {
-    using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using FileConverter.ConversionJobs;
     using FileConverter.Services;
 
     using GalaSoft.MvvmLight;
@@ -55,7 +51,6 @@ namespace FileConverter.ViewModels
 
         private ListCollectionView outputTypes;
         private CultureInfo[] supportedCultures;
-
 
         /// <summary>
         /// Initializes a new instance of the SettingsViewModel class.
@@ -183,25 +178,6 @@ namespace FileConverter.ViewModels
             }
         }
         
-        public string AboutSectionContent
-        {
-            get
-            {
-                string content = Properties.Resources.LicenceHeader1 + "\n";
-                content += Properties.Resources.LicenceHeader2 + "\n\n";
-                content += Properties.Resources.LicenceHeader3 + "\n\n";
-                content += this.releaseNoteContent;
-                return content;
-            }
-
-            set
-            {
-                this.releaseNoteContent = value;
-
-                this.RaisePropertyChanged();
-            }
-        }
-
         public bool DisplaySeeChangeLogLink
         {
             get
@@ -333,10 +309,8 @@ namespace FileConverter.ViewModels
 
         private void DownloadChangeLogAction()
         {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            Upgrade.Helpers.GetChangeLogAsync(new UpgradeVersionDescription(), description => this.AboutSectionContent = description.ChangeLog);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            this.AboutSectionContent = Properties.Resources.DownloadingChangeLog;
+            IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+            upgradeService.GetChangeLogAsync();
             this.DisplaySeeChangeLogLink = false;
         }
 
