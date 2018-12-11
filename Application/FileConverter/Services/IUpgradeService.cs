@@ -13,12 +13,12 @@ namespace FileConverter.Services
             get;
         }
 
-        void CheckForUpgrade();
+        Task<UpgradeVersionDescription> CheckForUpgrade();
 
-        void StartUpgrade();
+        Task<string> DownloadChangeLog();
+
+        Task StartUpgrade();
 
         void CancelUpgrade();
-
-        Task<string> GetChangeLogAsync(UpgradeService.OnUpgradeOperationCompletedEventHandler onGetCompleteDelegate = null);
     }
 }

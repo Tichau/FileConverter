@@ -38,7 +38,7 @@ namespace FileConverter.ViewModels
         public UpgradeViewModel()
         {
             this.upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
-            this.upgradeService.GetChangeLogAsync();
+            this.upgradeService.DownloadChangeLog();
         }
 
         public ICommand DownloadInstallerCommand

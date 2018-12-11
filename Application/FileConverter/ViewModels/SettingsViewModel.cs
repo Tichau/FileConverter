@@ -310,7 +310,7 @@ namespace FileConverter.ViewModels
         private void DownloadChangeLogAction()
         {
             IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
-            upgradeService.GetChangeLogAsync();
+            upgradeService.DownloadChangeLog();
             this.DisplaySeeChangeLogLink = false;
         }
 

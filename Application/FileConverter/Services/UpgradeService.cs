@@ -36,9 +36,7 @@ namespace FileConverter.Services
             SimpleIoc.Default.Register<IUpgradeService>(() => this);
         }
 
-        public delegate void OnUpgradeOperationCompletedEventHandler(UpgradeVersionDescription upgradeVersionDescription);
-
-        public event System.EventHandler<UpgradeVersionDescription> NewVersionAvailable;
+        public event EventHandler<UpgradeVersionDescription> NewVersionAvailable;
 
         public UpgradeVersionDescription UpgradeVersionDescription
         {
@@ -50,12 +48,13 @@ namespace FileConverter.Services
             }
         }
         
-        public void CheckForUpgrade()
+        public async Task<UpgradeVersionDescription> CheckForUpgrade()
         {
+            Task<UpgradeVersionDescription> task = null;
             try
             {
 #if DEBUG
-                Task<UpgradeVersionDescription> task = this.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+                task = this.DownloadLatestVersionDescription();
 #else
                 long fileTime = Registry.GetValue<long>(Registry.Keys.LastUpdateCheckDate);
                 DateTime lastUpdateDateTime = DateTime.FromFileTime(fileTime);
@@ -63,7 +62,7 @@ namespace FileConverter.Services
                 TimeSpan durationSinceLastUpdate = DateTime.Now.Subtract(lastUpdateDateTime);
                 if (durationSinceLastUpdate > new TimeSpan(1, 0, 0, 0))
                 {
-                    Task<UpgradeVersionDescription> task = this.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+                    task = this.DownloadLatestVersionDescription();
                 }
 #endif
             }
@@ -71,24 +70,76 @@ namespace FileConverter.Services
             {
                 Diagnostics.Debug.Log($"Failed to check upgrade: {exception.Message}.");
             }
+
+            if (task == null)
+            {
+                return null;
+            }
+
+            UpgradeVersionDescription versionDescription = await task;
+
+            Registry.SetValue(Registry.Keys.LastUpdateCheckDate, DateTime.Now.ToFileTime());
+
+            if (versionDescription.LatestVersion <= Application.ApplicationVersion)
+            {
+                return null;
+            }
+
+            this.UpgradeVersionDescription = versionDescription;
+
+            this.NewVersionAvailable?.Invoke(this, versionDescription);
+            return versionDescription;
         }
 
-        public void StartUpgrade()
+        public async Task<string> DownloadChangeLog()
         {
             if (this.UpgradeVersionDescription == null)
             {
-                Diagnostics.Debug.Log("Can't start upgrade because no check upgrade have been done.");
+                throw new ArgumentNullException(nameof(this.UpgradeVersionDescription));
+            }
+
+            this.UpgradeVersionDescription.ChangeLog = Properties.Resources.DownloadingChangeLog;
+
+            Uri uri = new Uri(UpgradeService.BaseURI + "CHANGELOG.md");
+            try
+            {
+                Task<Stream> openReadTaskAsync = this.webClient.OpenReadTaskAsync(uri);
+                if (openReadTaskAsync == null)
+                {
+                    return null;
+                }
+
+                Stream stream = await openReadTaskAsync;
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    this.UpgradeVersionDescription.ChangeLog = reader.ReadToEnd();
+                }
+            }
+            catch (Exception)
+            {
+                Debug.LogError("Error while retrieving change log.");
+                return null;
+            }
+
+            return this.UpgradeVersionDescription.ChangeLog;
+        }
+
+        public async Task StartUpgrade()
+        {
+            if (this.UpgradeVersionDescription == null)
+            {
+                Debug.Log("Can't start upgrade because no check upgrade have been done.");
                 return;
             }
 
             try
             {
                 this.UpgradeVersionDescription.NeedToUpgrade = true;
-                Task task = this.DownloadInstallerAsync();
+                await this.DownloadInstaller();
             }
             catch (Exception exception)
             {
-                Diagnostics.Debug.Log($"Failed to download upgrade: {exception.Message}.");
+                Debug.Log($"Failed to download upgrade: {exception.Message}.");
             }
         }
 
@@ -104,55 +155,7 @@ namespace FileConverter.Services
             this.UpgradeVersionDescription.NeedToUpgrade = false;
         }
 
-        public async Task<string> GetChangeLogAsync(OnUpgradeOperationCompletedEventHandler onGetCompleteDelegate = null)
-        {
-            if (this.UpgradeVersionDescription == null)
-            {
-                throw new ArgumentNullException(nameof(this.UpgradeVersionDescription));
-            }
-
-            this.UpgradeVersionDescription.ChangeLog = Properties.Resources.DownloadingChangeLog;
-
-            Uri uri = new Uri(UpgradeService.BaseURI + "CHANGELOG.md");
-            try
-            {
-                Stream stream = await this.webClient.OpenReadTaskAsync(uri);
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    this.UpgradeVersionDescription.ChangeLog = reader.ReadToEnd();
-                }
-            }
-            catch (Exception)
-            {
-                Debug.LogError("Error while retrieving change log.");
-                return null;
-            }
-
-            onGetCompleteDelegate?.Invoke(this.UpgradeVersionDescription);
-
-            return this.UpgradeVersionDescription.ChangeLog;
-        }
-
-        private void OnGetLatestVersionDescription(UpgradeVersionDescription description)
-        {
-            if (description == null)
-            {
-                return;
-            }
-
-            Registry.SetValue(Registry.Keys.LastUpdateCheckDate, DateTime.Now.ToFileTime());
-
-            if (description.LatestVersion <= Application.ApplicationVersion)
-            {
-                return;
-            }
-
-            this.UpgradeVersionDescription = description;
-            
-            this.NewVersionAvailable?.Invoke(this, description);
-        }
-
-        private async Task<UpgradeVersionDescription> GetLatestVersionDescriptionAsync(OnUpgradeOperationCompletedEventHandler onGetCompleteDelegate = null)
+        private async Task<UpgradeVersionDescription> DownloadLatestVersionDescription()
         {
 #if BUILD32
             Uri uri = new Uri(Helpers.BaseURI + "version (x86).xml");
@@ -189,12 +192,10 @@ namespace FileConverter.Services
                 return null;
             }
 
-            onGetCompleteDelegate?.Invoke(description);
-
             return description;
         }
 
-        private async Task DownloadInstallerAsync()
+        private async Task DownloadInstaller()
         {
             if (this.UpgradeVersionDescription == null)
             {
@@ -231,43 +232,28 @@ namespace FileConverter.Services
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             this.webClient.DownloadProgressChanged += this.WebClient_DownloadProgressChanged;
-            this.webClient.DownloadFileCompleted += this.WebClient_DownloadFileCompleted;
-            Task downloadTask = this.webClient.DownloadFileTaskAsync(uri, installerPath);
-            if (downloadTask != null)
-            {
-                await downloadTask;
-            }
-        }
 
-        private void WebClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            this.webClient.DownloadProgressChanged -= this.WebClient_DownloadProgressChanged;
-            this.webClient.DownloadFileCompleted -= this.WebClient_DownloadFileCompleted;
-
-            if (e.Error != null)
+            try
             {
-                Debug.LogError("Failed to download the new File Converter upgrade. You should try again or download it manually.");
-                Debug.Log(e.Error.ToString());
-                if (this.UpgradeVersionDescription != null)
-                {
-                    this.UpgradeVersionDescription.NeedToUpgrade = false;
-                }
-            }
+                await this.webClient.DownloadFileTaskAsync(uri, installerPath);
 
-            if (this.UpgradeVersionDescription != null)
-            {
                 this.UpgradeVersionDescription.InstallerDownloadProgress = 100;
                 this.UpgradeVersionDescription.InstallerDownloadInProgress = false;
                 this.UpgradeVersionDescription = null;
             }
-        }
+            catch (Exception exception)
+            {
+                Debug.LogError("Failed to download the new File Converter upgrade. You should try again or download it manually.");
+                Debug.Log(exception.ToString());
+                this.UpgradeVersionDescription.NeedToUpgrade = false;
+            }
 
+            this.webClient.DownloadProgressChanged -= this.WebClient_DownloadProgressChanged;
+        }
+        
         private void WebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs eventArgs)
         {
-            if (this.UpgradeVersionDescription != null)
-            {
-                this.UpgradeVersionDescription.InstallerDownloadProgress = eventArgs.ProgressPercentage;
-            }
+            this.UpgradeVersionDescription.InstallerDownloadProgress = eventArgs.ProgressPercentage;
         }
     }
 }
