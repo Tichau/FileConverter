@@ -71,12 +71,12 @@ namespace FileConverter.Services
                 Diagnostics.Debug.Log($"Failed to check upgrade: {exception.Message}.");
             }
 
-            if (task == null)
+            UpgradeVersionDescription versionDescription = await task;
+
+            if (versionDescription == null)
             {
                 return null;
             }
-
-            UpgradeVersionDescription versionDescription = await task;
 
             Registry.SetValue(Registry.Keys.LastUpdateCheckDate, DateTime.Now.ToFileTime());
 
