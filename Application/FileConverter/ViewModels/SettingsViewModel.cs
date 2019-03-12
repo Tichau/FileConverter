@@ -368,7 +368,7 @@ namespace FileConverter.ViewModels
         {
             // Save changes.
             ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
-            settingsService.Settings.Save();
+            settingsService.SaveSettings();
 
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             navigationService.Close(Pages.Settings, false);

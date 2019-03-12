@@ -18,6 +18,7 @@ namespace FileConverter
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Security.Principal;
     using System.Threading;
     using System.Windows;
 
@@ -48,6 +49,14 @@ namespace FileConverter
         public event EventHandler<ApplicationTerminateArgs> OnApplicationTerminate;
 
         public static Version ApplicationVersion => Application.Version;
+
+        public static bool IsInAdmininstratorPrivileges
+        {
+            get
+            {
+                return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+            }
+        }
 
         public void CancelAutoExit()
         {
@@ -228,6 +237,8 @@ namespace FileConverter
                 return;
             }
 
+            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+
             // Parse arguments.
             List<string> filePaths = new List<string>();
             string conversionPresetName = null;
@@ -247,7 +258,7 @@ namespace FileConverter
                     switch (parameterTitle)
                     {
                         case "post-install-init":
-                            Settings.PostInstallationInitialization();
+                            settingsService.PostInstallationInitialization();
                             Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                             return;
 
@@ -261,7 +272,7 @@ namespace FileConverter
                             break;
 
                         case "apply-settings":
-                            Settings.ApplyTemporarySettings();
+                            settingsService.ApplyTemporarySettings();
                             Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                             return;
 
@@ -295,7 +306,6 @@ namespace FileConverter
                 }
             }
 
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
             if (settingsService.Settings == null)
             {
                 Diagnostics.Debug.LogError("The application will now shutdown. If you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");

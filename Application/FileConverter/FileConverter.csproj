@@ -189,7 +189,6 @@
     <Compile Include="Services\SettingsService.Migration.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\UpgradeService.cs" />
-    <Compile Include="Settings.Settings.cs" />
     <Compile Include="Services\UpgradeVersionDescription.cs" />
     <Compile Include="ValueConverters\ConversionJobsToProgressState.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />

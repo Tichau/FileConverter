@@ -9,6 +9,12 @@ namespace FileConverter.Services
             get;
         }
 
+        void PostInstallationInitialization();
+
+        void ApplyTemporarySettings();
+
+        void SaveSettings();
+
         void RevertSettings();
     }
 }

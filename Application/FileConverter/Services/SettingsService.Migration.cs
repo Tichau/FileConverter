@@ -1,14 +1,13 @@
-﻿// // <copyright file="Settings.Migration.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="SettingsService.Migration.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-namespace FileConverter
+namespace FileConverter.Services
 {
     using System;
-
     using FileConverter.ConversionJobs;
 
-    public partial class Settings
+    public partial class SettingsService
     {
-        private static void MigrateSettingsToCurrentVersion(Settings settings)
+        private void MigrateSettingsToCurrentVersion(Settings settings)
         {
             int settingsVersion = settings.SerializationVersion;
 
@@ -17,12 +16,12 @@ namespace FileConverter
             {
                 foreach (ConversionPreset conversionPreset in settings.ConversionPresets)
                 {
-                    Settings.MigrateConversionPresetToCurrentVersion(conversionPreset, settingsVersion);
+                    this.MigrateConversionPresetToCurrentVersion(conversionPreset, settingsVersion);
                 }
             }
         }
 
-        private static void MigrateConversionPresetToCurrentVersion(ConversionPreset preset, int settingsVersion)
+        private void MigrateConversionPresetToCurrentVersion(ConversionPreset preset, int settingsVersion)
         {
             if (settingsVersion <= 2)
             {
