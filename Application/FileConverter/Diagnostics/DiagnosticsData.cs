@@ -66,7 +66,7 @@ namespace FileConverter.Diagnostics
             path = PathHelpers.GenerateUniquePath(path);
             this.logFileWriter = new StreamWriter(File.Open(path, FileMode.Create));
 
-            this.Log("{0} {1}\n", System.DateTime.Now.ToLongDateString(), System.DateTime.Now.ToLongTimeString());
+            this.Log($"{System.DateTime.Now.ToLongDateString()} {System.DateTime.Now.ToLongTimeString()}\n");
         }
 
         public void Release()
@@ -75,10 +75,8 @@ namespace FileConverter.Diagnostics
             this.logFileWriter = null;
         }
 
-        public void Log(string message, params object[] arguments)
+        public void Log(string log)
         {
-            string log = arguments.Length > 0 ? string.Format(message, arguments) : message;
-
             this.logMessages.Add(log);
             this.logFileWriter.WriteLine(log);
             this.logFileWriter.Flush();

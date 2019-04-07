@@ -15,9 +15,12 @@ namespace FileConverter.Diagnostics
         private static string diagnosticsFolderPath;
         private static Dictionary<int, DiagnosticsData> diagnosticsDataById = new Dictionary<int, DiagnosticsData>();
         private static int threadCount = 0;
+        private static int mainThreadId = 0;
 
         static Debug()
         {
+            Debug.mainThreadId = Thread.CurrentThread.ManagedThreadId;
+
             string path = PathHelpers.GetUserDataFolderPath();
 
             // Delete old diagnostics folder (1 day).
@@ -52,10 +55,30 @@ namespace FileConverter.Diagnostics
 
         public static void Log(string message, params object[] arguments)
         {
-            DiagnosticsData diagnosticsData;
+            string log = arguments.Length > 0 ? string.Format(message, arguments) : message;
+            Debug.Log(log, ConsoleColor.White);
+        }
 
-            Thread currentThread = System.Threading.Thread.CurrentThread;
+        public static void Log(string message)
+        {
+            Debug.Log(message, ConsoleColor.White);
+        }
+
+        public static void Log(string log, ConsoleColor color)
+        {
+            DiagnosticsData diagnosticsData;
+            
+            Thread currentThread = Thread.CurrentThread;
             int threadId = currentThread.ManagedThreadId;
+
+            // Display main thread logs in standard output.
+            if (threadId == Debug.mainThreadId)
+            {
+                Console.ForegroundColor = color;
+                Console.WriteLine(log);
+                Console.ResetColor();
+            }
+
             lock (Debug.diagnosticsDataById)
             {
                 if (!Debug.diagnosticsDataById.TryGetValue(threadId, out diagnosticsData))
@@ -70,7 +93,7 @@ namespace FileConverter.Diagnostics
                 }
             }
 
-            diagnosticsData.Log(message, arguments);
+            diagnosticsData.Log(log);
         }
 
         public static void Assert(bool condition, string message)
@@ -87,7 +110,12 @@ namespace FileConverter.Diagnostics
 
             MessageBox.Show(log, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            Debug.Log("Error: " + message, arguments);
+            Debug.Log($"Error: {log}", ConsoleColor.Red);
+        }
+
+        public static void LogError(int errorCode, string message)
+        {
+            Debug.LogError($"{message} (code 0x{errorCode:X})");
         }
 
         public static void Release()
