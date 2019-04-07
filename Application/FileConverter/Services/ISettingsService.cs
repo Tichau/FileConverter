@@ -9,7 +9,7 @@ namespace FileConverter.Services
             get;
         }
 
-        void PostInstallationInitialization();
+        bool PostInstallationInitialization();
 
         void ApplyTemporarySettings();
 

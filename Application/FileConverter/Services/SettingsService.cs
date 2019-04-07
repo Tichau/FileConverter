@@ -72,8 +72,10 @@ namespace FileConverter.Services
             }
         }
 
-        public void PostInstallationInitialization()
+        public bool PostInstallationInitialization()
         {
+            Debug.Log("Execute post installation initialization.");
+
             Settings defaultSettings = null;
 
             // Load the default settings.
@@ -85,12 +87,14 @@ namespace FileConverter.Services
                 }
                 catch (Exception exception)
                 {
-                    Debug.LogError("Fail to load file converter default settings. {0}", exception.Message);
+                    Debug.LogError($"Fail to load file converter default settings. {exception.Message}");
+                    return false;
                 }
             }
             else
             {
                 Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", this.DefaultSettingsFilePath);
+                return false;
             }
 
             // Load user settings if exists.
@@ -131,7 +135,7 @@ namespace FileConverter.Services
             }
 
             Settings settings = userSettings != null ? userSettings.Merge(defaultSettings) : defaultSettings;
-            this.Save(settings);
+            return this.Save(settings);
         }
 
         public void ApplyTemporarySettings()
@@ -148,7 +152,7 @@ namespace FileConverter.Services
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
             if (registryKey == null)
             {
-                Debug.LogError("Can't apply settings in registry. (code 0x03)");
+                Debug.LogError(0x03, "Can't apply settings in registry.");
                 return;
             }
 
@@ -241,7 +245,7 @@ namespace FileConverter.Services
             return settings;
         }
 
-        private void Save(Settings settings)
+        private bool Save(Settings settings)
         {
             if (settings == null)
             {
@@ -279,7 +283,8 @@ namespace FileConverter.Services
                     }
                     else
                     {
-                        MessageBox.Show("Can't apply settings in registry. (code 0x09)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        Debug.LogError(0x09, "Can't apply settings in registry.");
+                        return false;
                     }
                 }
             }
@@ -289,6 +294,8 @@ namespace FileConverter.Services
                 File.Copy(this.UserSettingsTemporaryFilePath, this.UserSettingsFilePath, true);
                 File.Delete(this.UserSettingsTemporaryFilePath);
             }
+
+            return true;
         }
 
         private void RunSaveInAdminMode()
@@ -374,7 +381,7 @@ namespace FileConverter.Services
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter", RegistryKeyPermissionCheck.ReadWriteSubTree);
             if (registryKey == null)
             {
-                MessageBox.Show("Can't apply settings in registry. (code 0x05)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.LogError(0x05, "Can't find File Converter registry entry.");
                 return false;
             }
 
@@ -388,7 +395,7 @@ namespace FileConverter.Services
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Can't apply settings in registry. (code 0x06)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Debug.LogError(0x06, "Can't apply settings in registry.");
                     return false;
                 }
             }
@@ -419,7 +426,7 @@ namespace FileConverter.Services
 
                 if (subKey == null)
                 {
-                    MessageBox.Show("Can't apply settings in registry. (code 0x07)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Debug.LogError(0x07, "Can't apply settings in registry.");
                     return false;
                 }
 

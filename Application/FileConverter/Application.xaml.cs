@@ -211,16 +211,7 @@ namespace FileConverter
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
             string[] args = Environment.GetCommandLineArgs();
-
-#if (DEBUG)
-            {
-                System.Array.Resize(ref args, 3);
-                args[1] = "--settings";
-                args[2] = "--verbose";
-            }
-
-#endif
-
+            
             // Log arguments.
             for (int index = 0; index < args.Length; index++)
             {
@@ -240,6 +231,8 @@ namespace FileConverter
             ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
 
             // Parse arguments.
+            bool quitAfterStartup = false;
+            int quitExitCode = 0;
             List<string> filePaths = new List<string>();
             string conversionPresetName = null;
             for (int index = 1; index < args.Length; index++)
@@ -258,14 +251,65 @@ namespace FileConverter
                     switch (parameterTitle)
                     {
                         case "post-install-init":
-                            settingsService.PostInstallationInitialization();
-                            Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-                            return;
+                            if (!settingsService.PostInstallationInitialization())
+                            {
+                                quitExitCode = 0x0F;
+                                Debug.LogError(quitExitCode, $"Failed to execute post install initialization.");
+                            }
+
+                            quitAfterStartup = true;
+                            break;
+
+                        case "register-shell-extension":
+                        {
+                            quitAfterStartup = true;
+
+                            if (index >= args.Length - 1)
+                            {
+                                quitExitCode = 0x0B;
+                                Debug.LogError(quitExitCode, $"Invalid format.");
+                                break;
+                            }
+
+                            string shellExtensionPath = args[index + 1];
+                            index++;
+
+                            if (!Helpers.RegisterShellExtension(shellExtensionPath))
+                            {
+                                quitExitCode = 0x0C;
+                                Debug.LogError(quitExitCode, $"Failed to register shell extension {shellExtensionPath}.");
+                            }
+
+                            break;
+                        }
+
+                        case "unregister-shell-extension":
+                        {
+                            quitAfterStartup = true;
+
+                            if (index >= args.Length - 1)
+                            {
+                                quitExitCode = 0x0D;
+                                Debug.LogError(quitExitCode, $"Invalid format.");
+                                break;
+                            }
+
+                            string shellExtensionPath = args[index + 1];
+                            index++;
+                                
+                            if (!Helpers.UnregisterExtension(shellExtensionPath))
+                            {
+                                quitExitCode = 0x0E;
+                                Debug.LogError(quitExitCode, $"Failed to unregister shell extension {shellExtensionPath}.");
+                            }
+
+                            break;
+                        }
 
                         case "version":
-                            Console.Write(ApplicationVersion.ToString());
-                            Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-                            return;
+                            Console.WriteLine(ApplicationVersion.ToString());
+                            quitAfterStartup = true;
+                            break;
 
                         case "settings":
                             this.showSettings = true;
@@ -273,20 +317,21 @@ namespace FileConverter
 
                         case "apply-settings":
                             settingsService.ApplyTemporarySettings();
-                            Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-                            return;
+                            quitAfterStartup = true;
+                            break;
 
                         case "conversion-preset":
                             if (index >= args.Length - 1)
                             {
-                                Debug.LogError("Invalid format. (code 0x01)");
-                                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-                                return;
+                                quitAfterStartup = true;
+                                quitExitCode = 0x01;
+                                Debug.LogError(quitExitCode, $"Invalid format.");
+                                break;
                             }
 
                             conversionPresetName = args[index + 1];
                             index++;
-                            continue;
+                            break;
 
                         case "verbose":
                             {
@@ -308,10 +353,18 @@ namespace FileConverter
 
             if (settingsService.Settings == null)
             {
-                Diagnostics.Debug.LogError("The application will now shutdown. If you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
-                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                Debug.LogError("Can't load File Converter settings. The application will now shutdown, if you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
+                quitAfterStartup = true;
+                quitExitCode = 13;
+            }
+
+            if (quitAfterStartup)
+            {
+                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown(quitExitCode)));
                 return;
             }
+
+            Debug.Assert(quitExitCode == 0, "An error happened during the initialization.");
             
             // Check for upgrade.
             if (settingsService.Settings.CheckUpgradeAtStartup)
