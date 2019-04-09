@@ -6,6 +6,7 @@
         xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         x:Class="FileConverter.Views.SettingsWindow"
         MinWidth="640" MinHeight="480" 
         Width="920" Height="675"
@@ -22,6 +23,8 @@
                 <ResourceDictionary Source="Resources/CustomStyles.xaml"/>
                 <ResourceDictionary Source="Resources/ConversionPresets.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <generic:IcoFileSizeSelectorConverter x:Key="IcoFileSizeSelector" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -317,7 +320,9 @@
                         </TextBlock>
                     </DockPanel>
 
-                    <Image Grid.Row="1" Grid.Column="1" Margin="20,20,20,20" VerticalAlignment="Top" Source="/FileConverter;component/Resources/ApplicationIcon.ico"></Image>
+                    <Image Grid.Row="1" Grid.Column="1" Margin="20,20,20,20" VerticalAlignment="Top" 
+                           Source="{Binding Source=/FileConverter;component/Resources/ApplicationIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=256}">
+                    </Image>
 
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center" FontStyle="Italic"/>

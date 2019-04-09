@@ -201,6 +201,7 @@
     <Compile Include="ValueConverters\ChangelogConverter.cs" />
     <Compile Include="ValueConverters\ConversionJobToEstimatedRemainingDuration.cs" />
     <Compile Include="ValueConverters\ConversionJobsToProgressValue.cs" />
+    <Compile Include="ValueConverters\Generic\IcoFileSizeSelectorConverter.cs" />
     <Compile Include="ValueConverters\OutputTypeEnumToViewModel.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
     <Compile Include="ValueConverters\FileNameConverter.cs" />
@@ -343,9 +344,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ApplicationIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ApplicationIcon.ico" />
