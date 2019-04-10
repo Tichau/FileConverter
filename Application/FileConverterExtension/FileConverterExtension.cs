@@ -5,6 +5,7 @@ namespace FileConverterExtension
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Runtime.InteropServices;
@@ -107,8 +108,8 @@ namespace FileConverterExtension
 
             ToolStripMenuItem fileConverterItem = new ToolStripMenuItem
             {
-                Text = "File Converter",
-                Image = Properties.Resources.ApplicationIcon_16x16.ToBitmap(),
+                Text = "File Converter!",
+                Image = new Icon(Properties.Resources.ApplicationIcon, SystemInformation.SmallIconSize).ToBitmap(),
             };
 
             for (int index = 0; index < this.presetList.Count; index++)
