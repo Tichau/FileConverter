@@ -12,8 +12,9 @@ namespace FileConverter
 
     using FileConverter.Annotations;
     using FileConverter.Controls;
-    using FileConverter.Diagnostics;
-    using FileConverter.ValueConverters;
+    using FileConverter.Services;
+
+    using GalaSoft.MvvmLight.Ioc;
 
     [XmlRoot]
     [XmlType]
@@ -570,8 +571,8 @@ namespace FileConverter
                             return "The preset name can't contains the character ';'.";
                         }
 
-                        Application application = Application.Current as Application;
-                        int? count = application?.Settings?.ConversionPresets?.Count(match => match?.name == this.Name);
+                        ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+                        int? count = settingsService.Settings?.ConversionPresets?.Count(match => match?.name == this.Name);
                         if (count > 1)
                         {
                             return "The preset name is already used.";

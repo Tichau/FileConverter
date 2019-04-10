@@ -25,7 +25,12 @@ namespace FileConverter.ConversionJobs
         {
             get;
         }
-        
+
+        protected override bool IsCancelable()
+        {
+            return false;
+        }
+
         protected override void Initialize()
         {
             base.Initialize();

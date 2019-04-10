@@ -2,28 +2,26 @@
 
 namespace FileConverter
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics;
-    using System.IO;
     using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Security.Principal;
-    using System.Windows;
     using System.Xml.Serialization;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
 
-    using FileConverter.Annotations;
-    using Microsoft.Win32;
+    using GalaSoft.MvvmLight;
 
     [XmlRoot]
     [XmlType]
-    public partial class Settings : INotifyPropertyChanged, IDataErrorInfo
+    public class Settings : ObservableObject, IDataErrorInfo, IXmlSerializable
     {
-        private const char PresetSeparator = ';';
+        public const int Version = 4;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private bool exitApplicationWhenConversionsFinished = true;
+        private float durationBetweenEndOfConversionsAndApplicationExit = 3f;
+        private ObservableCollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
+        private bool checkUpgradeAtStartup = true;
+        private CultureInfo applicationLanguage;
+        private int maximumNumberOfSimultaneousConversions;
 
         [XmlIgnore]
         public string Error
@@ -43,14 +41,6 @@ namespace FileConverter
             }
         }
 
-        private static bool IsInAdmininstratorPrivileges
-        {
-            get
-            {
-                return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
-            }
-        }
-
         [XmlIgnore]
         public string this[string columnName]
         {
@@ -59,222 +49,10 @@ namespace FileConverter
                 return this.Error;
             }
         }
-
-        public static void ApplyTemporarySettings()
-        {
-            // Load temporary settings.
-            string temporaryFilePath = Settings.GetUserSettingsTemporaryFilePath();
-            if (!File.Exists(temporaryFilePath))
-            {
-                return;
-            }
-
-            Settings settings = null;
-            XmlHelpers.LoadFromFile("Settings", temporaryFilePath, out settings);
-
-            RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
-            if (registryKey == null)
-            {
-                Diagnostics.Debug.LogError("Can't apply settings in registry. (code 0x03)");
-                return;
-            }
-
-            // Compute the registry entries data from settings.
-            Dictionary<string, List<string>> registryEntries = ComputeRegistryEntriesFromConvertionPresets(settings.ConversionPresets);
-
-            bool succeed = Settings.ApplyRegistryModifications(registryEntries);
-
-            if (succeed)
-            {
-                // Copy temporary settings file to the real settings file.
-                string userFilePath = Settings.GetUserSettingsFilePath();
-                File.Copy(temporaryFilePath, userFilePath, true);
-                File.Delete(temporaryFilePath);
-            }
-        }
-
-        public static void PostInstallationInitialization()
-        {
-            Settings defaultSettings = null;
-
-            // Load the default settings.
-            string defaultFilePath = Settings.GetDefaultSettingsFilePath();
-            if (File.Exists(defaultFilePath))
-            {
-                try
-                {
-                    XmlHelpers.LoadFromFile<Settings>("Settings", defaultFilePath, out defaultSettings);
-                }
-                catch (Exception exception)
-                {
-                    Diagnostics.Debug.LogError("Fail to load file converter default settings. {0}", exception.Message);
-                }
-            }
-            else
-            {
-                Diagnostics.Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", defaultFilePath);
-            }
-
-            // Load user settings if exists.
-            Settings userSettings = null;
-            string userFilePath = Settings.GetUserSettingsFilePath();
-            if (File.Exists(userFilePath))
-            {
-                try
-                {
-                    XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, out userSettings);
-                }
-                catch (Exception)
-                {
-                    System.IO.File.Delete(userFilePath);
-                }
-
-                if (userSettings != null)
-                {
-                    if (userSettings.SerializationVersion != Version)
-                    {
-                        Settings.MigrateSettingsToCurrentVersion(userSettings);
-
-                        Diagnostics.Debug.Log("File converter settings have been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
-                        userSettings.SerializationVersion = Version;
-                    }
-
-                    // Remove default settings.
-                    if (userSettings.ConversionPresets != null)
-                    {
-                        for (int index = userSettings.ConversionPresets.Count - 1; index >= 0; index--)
-                        {
-                            if (userSettings.ConversionPresets[index].IsDefaultSettings)
-                            {
-                                userSettings.ConversionPresets.RemoveAt(index);
-                            }
-                        }
-                    }
-                }
-            }
-
-            Settings settings = userSettings != null ? userSettings.Merge(defaultSettings) : defaultSettings;
-            settings.Save();
-        }
-
-        public static Settings Load()
-        {
-            Settings settings = null;
-            string userFilePath = Settings.GetUserSettingsFilePath();
-            if (File.Exists(userFilePath))
-            {
-                Settings userSettings = null;
-                try
-                {
-                    XmlHelpers.LoadFromFile<Settings>("Settings", userFilePath, out userSettings);
-                    settings = userSettings;
-                }
-                catch (Exception)
-                {
-                    MessageBoxResult messageBoxResult =
-                        MessageBox.Show(
-                            "Can't load file converter user settings. Do you want to fall back to default settings ?",
-                            "Error", 
-                            MessageBoxButton.YesNo, 
-                            MessageBoxImage.Exclamation);
-
-                    if (messageBoxResult == MessageBoxResult.Yes)
-                    {
-                        System.IO.File.Delete(userFilePath);
-                        return Settings.Load();
-                    }
-                    else if (messageBoxResult == MessageBoxResult.No)
-                    {
-                        return null;
-                    }
-                }
-
-                if (userSettings != null && userSettings.SerializationVersion != Version)
-                {
-                    Settings.MigrateSettingsToCurrentVersion(userSettings);
-
-                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", userSettings.SerializationVersion, Version);
-                    userSettings.SerializationVersion = Version;
-                    userSettings.Save();
-                }
-            }
-            else
-            {
-                // Load the default settings.
-                string defaultFilePath = Settings.GetDefaultSettingsFilePath();
-                if (File.Exists(defaultFilePath))
-                {
-                    Settings defaultSettings = null;
-                    try
-                    {
-                        XmlHelpers.LoadFromFile<Settings>("Settings", defaultFilePath, out defaultSettings);
-                        settings = defaultSettings;
-                    }
-                    catch (Exception exception)
-                    {
-                        Diagnostics.Debug.LogError("Fail to load file converter default settings. {0}", exception.Message);
-                    }
-                }
-                else
-                {
-                    Diagnostics.Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", defaultFilePath);
-                }
-            }
-
-            return settings;
-        }
-
+        
         public ConversionPreset GetPresetFromName(string presetName)
         {
             return this.conversionPresets.FirstOrDefault(match => match.Name == presetName);
-        }
-        
-        public void Save()
-        {
-            this.Clean();
-
-            // Save the settings in a temporary files (we'll write the settings file when we'll succeed to write the registry keys).
-            string temporaryFilePath = Settings.GetUserSettingsTemporaryFilePath();
-            XmlHelpers.SaveToFile("Settings", temporaryFilePath, this);
-
-            // Compute the registry entries data from settings.
-            Dictionary<string, List<string>> registryEntries = Settings.ComputeRegistryEntriesFromConvertionPresets(this.ConversionPresets);
-
-            // Detect if existing registry configuration need to be modified.
-            bool registryNeedModifications = Settings.IsRegistryNeedModifications(registryEntries);
-
-            if (registryNeedModifications)
-            {
-                // Write the settings in registry.
-                bool succeed = Settings.ApplyRegistryModifications(registryEntries);
-                if (succeed)
-                {
-                    // ... and copy temporary settings file to the real settings file.
-                    string userFilePath = Settings.GetUserSettingsFilePath();
-                    File.Copy(temporaryFilePath, userFilePath, true);
-                    File.Delete(temporaryFilePath);
-                }
-                else
-                {
-                    if (!Settings.IsInAdmininstratorPrivileges)
-                    {
-                        // Run the application in admin mode in order to perform modifications.
-                        Diagnostics.Debug.Log("Can't apply registry modifications, fallback to admin privileges.");
-                        Settings.RunSaveInAdminMode();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Can't apply settings in registry. (code 0x09)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-            }
-            else
-            {
-                // Copy temporary settings file to the real settings file.
-                string userFilePath = Settings.GetUserSettingsFilePath();
-                File.Copy(temporaryFilePath, userFilePath, true);
-                File.Delete(temporaryFilePath);
-            }
         }
 
         public void Clean()
@@ -284,202 +62,8 @@ namespace FileConverter
                 this.ConversionPresets[index].Clean();
             }
         }
-
-        private static bool ApplyRegistryModifications(Dictionary<string, List<string>> registryEntries)
-        {
-            RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\FileConverter", RegistryKeyPermissionCheck.ReadWriteSubTree);
-            if (registryKey == null)
-            {
-                MessageBox.Show("Can't apply settings in registry. (code 0x05)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
-            // Delete previous settings.
-            string[] subKeyNames = registryKey.GetSubKeyNames();
-            for (int index = 0; index < subKeyNames.Length; index++)
-            {
-                try
-                {
-                    registryKey.DeleteSubKey(subKeyNames[index]);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Can't apply settings in registry. (code 0x06)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-            }
-
-            // Apply settings in registry.
-            foreach (KeyValuePair<string, List<string>> registryEntry in registryEntries)
-            {
-                string presets = string.Empty;
-                for (int index = 0; index < registryEntry.Value.Count; index++)
-                {
-                    if (index > 0)
-                    {
-                        presets += ";";
-                    }
-
-                    presets += registryEntry.Value[index];
-                }
-
-                RegistryKey subKey = null;
-                try
-                {
-                    subKey = registryKey.CreateSubKey(registryEntry.Key);
-                }
-                catch (Exception exception)
-                {
-                    Diagnostics.Debug.Log(exception.Message);
-                }
-
-                if (subKey == null)
-                {
-                    MessageBox.Show("Can't apply settings in registry. (code 0x07)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-
-                subKey.SetValue("Presets", presets);
-            }
-
-            return true;
-        }
-
-        private static Dictionary<string, List<string>> ComputeRegistryEntriesFromConvertionPresets(ICollection<ConversionPreset> conversionPresets)
-        {
-            Dictionary<string, List<string>> registryEntries = new Dictionary<string, List<string>>();
-            
-            foreach (ConversionPreset conversionPreset in conversionPresets)
-            {
-                List<string> inputTypes = conversionPreset.InputTypes;
-                for (int inputIndex = 0; inputIndex < inputTypes.Count; inputIndex++)
-                {
-                    string inputType = inputTypes[inputIndex].ToLowerInvariant();
-                    if (!registryEntries.ContainsKey(inputType))
-                    {
-                        registryEntries.Add(inputType, new List<string>());
-                    }
-
-                    registryEntries[inputType].Add(conversionPreset.Name);
-                }
-            }
-
-            return registryEntries;
-        }
-
-        private static string GetDefaultSettingsFilePath()
-        {
-            string path = Assembly.GetEntryAssembly().Location;
-            path = Path.GetDirectoryName(path);
-
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            path = Path.Combine(path, "Settings.default.xml");
-            return path;
-        }
-
-        private static string GetUserSettingsFilePath()
-        {
-            string path = PathHelpers.GetUserDataFolderPath();
-            path = Path.Combine(path, "Settings.user.xml");
-            return path;
-        }
-
-        private static string GetUserSettingsTemporaryFilePath()
-        {
-            string path = PathHelpers.GetUserDataFolderPath();
-            path = Path.Combine(path, "Settings.temp.xml");
-            return path;
-        }
-
-        private static bool IsRegistryNeedModifications(Dictionary<string, List<string>> registryEntries)
-        {
-            // Compare to registry entries.
-            RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
-            if (registryKey == null)
-            {
-                return true;
-            }
-
-            string[] subKeyNames = registryKey.GetSubKeyNames();
-            if (subKeyNames.Length == registryEntries.Count)
-            {
-                for (int index = 0; index < subKeyNames.Length; index++)
-                {
-                    string subKeyName = subKeyNames[index];
-                    if (!registryEntries.ContainsKey(subKeyName))
-                    {
-                        return true;
-                    }
-
-                    List<string> presetsList = registryEntries[subKeyName];
-
-                    RegistryKey subKey = registryKey.OpenSubKey(subKeyName);
-                    if (subKey == null)
-                    {
-                        return true;
-                    }
-
-                    string presetsString = subKey.GetValue("Presets", string.Empty) as string;
-                    string[] presets = presetsString != null ? presetsString.Split(Settings.PresetSeparator) : new string[0];
-                    if (presets.Length != presetsList.Count)
-                    {
-                        return true;
-                    }
-
-                    for (int presetIndex = 0; presetIndex < presets.Length; presetIndex++)
-                    {
-                        if (presetsList[presetIndex] != presets[presetIndex])
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private static void RunSaveInAdminMode()
-        {
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(Assembly.GetEntryAssembly().Location, "--apply-settings")
-            {
-                UseShellExecute = true,
-                Verb = "runas", // indicates to elevate privileges
-            };
-
-            Process process = new Process
-            {
-                EnableRaisingEvents = true, // enable WaitForExit()
-                StartInfo = processStartInfo
-            };
-
-            try
-            {
-                process.Start();
-                process.WaitForExit();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Can't apply settings in registry because the application has no administrator privileges. (code 0x08)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-        }
-
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private Settings Merge(Settings settings)
+        
+        public Settings Merge(Settings settings)
         {
             if (settings == null || settings.conversionPresets == null)
             {
@@ -498,6 +82,195 @@ namespace FileConverter
             }
 
             return this;
+        }
+
+        [XmlAttribute]
+        public int SerializationVersion
+        {
+            get;
+            set;
+        } = Version;
+
+        [XmlIgnore]
+        public CultureInfo ApplicationLanguage
+        {
+            get
+            {
+                return this.applicationLanguage;
+            }
+
+            set
+            {
+                if (this.applicationLanguage != null && this.applicationLanguage.Equals(value))
+                {
+                    return;
+                }
+
+                this.applicationLanguage = value;
+                if (this.applicationLanguage != null)
+                {
+                    System.Threading.Thread.CurrentThread.CurrentCulture = this.applicationLanguage;
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = this.applicationLanguage;
+                }
+
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [XmlElement]
+        public string ApplicationLanguageName
+        {
+            get
+            {
+                if (this.ApplicationLanguage == null)
+                {
+                    return string.Empty;
+                }
+
+                return this.ApplicationLanguage.Name;
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    this.ApplicationLanguage = null;
+                    return;
+                }
+
+                this.ApplicationLanguage = CultureInfo.GetCultureInfo(value);
+            }
+        }
+
+        [XmlIgnore]
+        public ObservableCollection<ConversionPreset> ConversionPresets
+        {
+            get
+            {
+                return this.conversionPresets;
+            }
+
+            set
+            {
+                this.conversionPresets = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [XmlElement]
+        public bool ExitApplicationWhenConversionsFinished
+        {
+            get
+            {
+                return this.exitApplicationWhenConversionsFinished;
+            }
+
+            set
+            {
+                this.exitApplicationWhenConversionsFinished = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [XmlElement]
+        public float DurationBetweenEndOfConversionsAndApplicationExit
+        {
+            get
+            {
+                return this.durationBetweenEndOfConversionsAndApplicationExit;
+            }
+
+            set
+            {
+                this.durationBetweenEndOfConversionsAndApplicationExit = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [XmlElement]
+        public int MaximumNumberOfSimultaneousConversions
+        {
+            get
+            {
+                return this.maximumNumberOfSimultaneousConversions;
+            }
+
+            set
+            {
+                this.maximumNumberOfSimultaneousConversions = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        [XmlElement("ConversionPreset")]
+        public ConversionPreset[] SerializableConversionPresets
+        {
+            get
+            {
+                return this.ConversionPresets.ToArray();
+            }
+
+            set
+            {
+                for (int index = 0; index < value.Length; index++)
+                {
+                    this.ConversionPresets.Add(value[index]);
+                }
+            }
+        }
+
+        [XmlElement]
+        public bool CheckUpgradeAtStartup
+        {
+            get
+            {
+                return this.checkUpgradeAtStartup;
+            }
+
+            set
+            {
+                this.checkUpgradeAtStartup = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public void OnDeserializationComplete()
+        {
+            this.DurationBetweenEndOfConversionsAndApplicationExit = System.Math.Max(0, System.Math.Min(10, this.DurationBetweenEndOfConversionsAndApplicationExit));
+
+            for (int index = 0; index < this.ConversionPresets.Count; index++)
+            {
+                this.ConversionPresets[index].OnDeserializationComplete();
+            }
+
+            // Initialize application if it was not deserialized from the settings.
+            if (this.ApplicationLanguage == null)
+            {
+                CultureInfo bestCandidate = null;
+                CultureInfo currentUICulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+                foreach (CultureInfo culture in Helpers.GetSupportedCultures())
+                {
+                    if (culture.Equals(currentUICulture))
+                    {
+                        bestCandidate = culture;
+                        break;
+                    }
+                    else if (culture.Equals(currentUICulture.Parent))
+                    {
+                        bestCandidate = culture;
+                    }
+                }
+
+                if (bestCandidate != null)
+                {
+                    this.ApplicationLanguage = bestCandidate;
+                }
+                else
+                {
+                    Diagnostics.Debug.Log("Can't find supported culture info for culture {0}. Fallback to default culture.", currentUICulture);
+                    this.ApplicationLanguage = CultureInfo.GetCultureInfo("en");
+                }
+            }
         }
     }
 }

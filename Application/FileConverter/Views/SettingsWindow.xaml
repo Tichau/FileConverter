@@ -1,0 +1,386 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:FileConverter"
+        xmlns:project="clr-namespace:FileConverter.Properties"
+        xmlns:views="clr-namespace:FileConverter.Views"
+        xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
+        x:Class="FileConverter.Views.SettingsWindow"
+        MinWidth="640" MinHeight="480" 
+        Width="920" Height="675"
+        WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
+        DataContext="{Binding Settings, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <command:EventToCommand Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/CustomStyles.xaml"/>
+                <ResourceDictionary Source="Resources/ConversionPresets.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <generic:IcoFileSizeSelectorConverter x:Key="IcoFileSizeSelector" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.Title>
+        <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
+    </Window.Title>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="53"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="28"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="..\Resources\Settings-Icon.png" />
+            <Label Grid.Column="1" Content="{x:Static project:Resources.Settings}" FontSize="20" Margin="4" VerticalAlignment="Center" />
+            <Label Grid.Column="2" HorizontalAlignment="Right" FontStyle="Italic" FontSize="14" VerticalAlignment="Center" Foreground="#FF999999">
+                <Label.Content>
+                    <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
+                </Label.Content>
+            </Label>
+        </Grid>
+
+        <TabControl Grid.Row="1">
+
+            <!-- Conversion presets settings -->
+            <TabItem Header="{x:Static project:Resources.ConversionPresets}">
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Preset list -->
+                    <Grid x:Name="PresetListGrid" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="PresetList" Grid.Row="0" HorizontalAlignment="Left" IsSynchronizedWithCurrentItem="True" 
+                                 ItemsSource="{Binding Settings.ConversionPresets}"
+                                 SelectedItem="{Binding SelectedPreset}" 
+                                 Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Name}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <DockPanel Grid.Row="1" Margin="0,5,0,0" HorizontalAlignment="Center">
+                            <Button Content="^" HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" 
+                                    ToolTip="{x:Static project:Resources.MoveUpSelectedPreset}"
+                                    Command="{Binding MovePresetUpCommand}"/>
+                            <Button Content="+" HorizontalAlignment="Left" Width="25" Margin="2,0"
+                                    ToolTip="{x:Static project:Resources.AddNewPreset}"
+                                    Command="{Binding AddNewPresetCommand}"/>
+                            <Button Content="-" HorizontalAlignment="Left" Width="25" Margin="2,0"
+                                    ToolTip="{x:Static project:Resources.RemoveSelectedPreset}" 
+                                    Command="{Binding RemoveSelectedPresetCommand}"/>
+                            <Button Content="v" HorizontalAlignment="Left" Width="25" Margin="2,0,0,0"
+                                    ToolTip="{x:Static project:Resources.MoveDownSelectedPreset}"
+                                    Command="{Binding MovePresetDownCommand}"/>
+                            <TextBlock Margin="5,5,0,0">
+                                <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                            </TextBlock>
+                        </DockPanel>
+                    </Grid>
+
+                    <!-- Preset settings -->
+                    <GroupBox Header="{x:Static project:Resources.Preset}" Margin="5,5,0,0" Grid.Column="1" 
+                              Visibility="{Binding SelectedPreset, Converter={StaticResource ReferenceToVisibility}}">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" MaxWidth="240"/>
+                                <ColumnDefinition Width="2.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="{x:Static project:Resources.PresetName}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                            <TextBox x:Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" FontSize="15"
+                                     Text="{Binding SelectedPreset.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                            <GroupBox Grid.Row="1" Grid.Column="0" Header="{x:Static project:Resources.InputFormats}" Margin="5">
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="22"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TreeView x:Name="InputTypesTreeView" ItemsSource="{Binding InputCategories}" >
+                                        <TreeView.Resources>
+                                            <HierarchicalDataTemplate DataType="{x:Type viewModels:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
+                                                <CheckBox Content="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeCategoryChecked" Unchecked="OnInputTypeCategoryUnchecked" IsThreeState="True" >
+                                                    <CheckBox.IsChecked>
+                                                        <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
+                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type views:SettingsWindow}}" Path="DataContext.SelectedPreset.InputTypes" Mode="OneWay"/>
+                                                            <Binding Path="InputExtensionNames" Mode="OneWay"/>
+                                                        </MultiBinding>
+                                                    </CheckBox.IsChecked>
+                                                </CheckBox>
+                                            </HierarchicalDataTemplate>
+                                            <DataTemplate DataType="{x:Type viewModels:InputExtension}">
+                                                <CheckBox Content="{Binding Name}" Foreground="{Binding ForegroundBrush}" ToolTip="{Binding ToolTip}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeChecked" Unchecked="OnInputTypeUnchecked">
+                                                    <CheckBox.IsChecked>
+                                                        <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
+                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type views:SettingsWindow}}" Path="DataContext.SelectedPreset.InputTypes" Mode="OneWay"/>
+                                                            <Binding Path="Name" Mode="OneWay"/>
+                                                        </MultiBinding>
+                                                    </CheckBox.IsChecked>
+                                                </CheckBox>
+                                            </DataTemplate>
+                                        </TreeView.Resources>
+                                        <TreeView.ItemContainerStyle>
+                                            <Style TargetType="TreeViewItem">
+                                                <Setter Property="IsExpanded" Value="True"/>
+                                            </Style>
+                                        </TreeView.ItemContainerStyle>
+                                    </TreeView>
+
+                                    <Label Grid.Row="1" Content="{x:Static project:Resources.ActionWhenConversionSucceedTitle}" ToolTip="{x:Static project:Resources.ActionWhenConversionSucceedDescription}" />
+                                    <ComboBox Grid.Row="2" ItemsSource="{Binding InputPostConversionActions, Mode=OneTime}"
+                                              SelectedItem="{Binding SelectedPreset.InputPostConversionAction, Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+
+                                    <TextBlock Grid.Row="3" Margin="0,5,0,0">
+                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                    </TextBlock>
+                                </Grid>
+                            </GroupBox>
+
+                            <GroupBox Header="{x:Static project:Resources.OutputFormat}" Grid.Row="1" Grid.Column="1" Margin="5">
+                                <StackPanel>
+                                    <ComboBox Margin="5" Height="29" VerticalAlignment="Top" 
+                                              ItemsSource="{Binding OutputTypes}"
+                                              SelectedItem="{Binding SelectedPreset.OutputType, Converter={StaticResource OutputTypeEnumToViewModel}, Mode=TwoWay}">
+                                        <ComboBox.GroupStyle>
+                                            <GroupStyle>
+                                                <GroupStyle.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Foreground="#004B82" Background="#86C8F6" FontWeight="Bold" Padding="5,5,5,5"
+                                                                   Text="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"/>
+                                                    </DataTemplate>
+                                                </GroupStyle.HeaderTemplate>
+                                            </GroupStyle>
+                                        </ComboBox.GroupStyle>
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate DataType="viewModels:OutputTypeViewModel">
+                                                <TextBlock Text="{Binding Type}" Padding="10,2,2,2"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+
+                                    <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
+								        Content="{Binding SelectedPreset, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Separator/>
+
+                                    <!-- Output file name template -->
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="23"/>
+                                            <RowDefinition Height="23"/>
+                                            <RowDefinition Height="23"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Content="{x:Static project:Resources.FileNameTemplate}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}"
+                                                 Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                                        <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                        <TextBlock Text="{x:Static project:Resources.OuputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center">
+                                            <TextBlock.Text>
+                                                <MultiBinding Converter="{StaticResource FileNameConverter}">
+                                                    <Binding Source="{x:Static project:Resources.OuputFileNameTemplateSample}"/>
+                                                    <Binding Path="SelectedPreset.OutputType" Mode="OneWay"/>
+                                                    <Binding Path="SelectedPreset.OutputFileNameTemplate" Mode="OneWay"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
+                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
+
+                                </StackPanel>
+                            </GroupBox>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <!-- Application settings -->
+            <TabItem Header="{x:Static project:Resources.Application}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Language}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding SupportedCultures, Mode=OneTime}" Margin="0,0,0,1"
+                            SelectedValue="{Binding Settings.ApplicationLanguage, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{Binding Converter={StaticResource CultureInfoToString}}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.MaximumNumberOfSimultaneousConversions}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <Slider Grid.Row="1" Grid.Column="1" Minimum="1" Maximum="16" SmallChange="1" TickPlacement="BottomRight" Margin="0,5,0,5"
+                            Value="{Binding Settings.MaximumNumberOfSimultaneousConversions, Mode=TwoWay}" AutoToolTipPlacement="TopLeft" />
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="{x:Static project:Resources.AutomaticallyExitWhenAllConversionsFinished}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <CheckBox Grid.Row="2" Grid.Column="1" x:Name="QuitAtEndCheckBox" IsChecked="{Binding Settings.ExitApplicationWhenConversionsFinished, Mode=TwoWay}"  Margin="0,5,0,5" />
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="{x:Static project:Resources.ExitWaitingDuration}" HorizontalAlignment="Right" Margin="0,0,5,0" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}"/>
+                    <DockPanel Grid.Row="3" Grid.Column="1"  Margin="0,5,0,5" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed, ElementName=QuitAtEndCheckBox}">
+                        <Slider x:Name="DurationBeforeQuitSlider" Value="{Binding Settings.DurationBetweenEndOfConversionsAndApplicationExit, Mode=TwoWay}" Minimum="0" Maximum="10" SmallChange="0.1" IsSnapToTickEnabled="True" Width="250" TickFrequency="0.1"/>
+                        <Label Content="{Binding Value, Converter={StaticResource DoubleToTimeString}, ElementName=DurationBeforeQuitSlider}"/>
+                    </DockPanel>
+
+                    <Label Grid.Row="4" Grid.Column="0" Content="{x:Static project:Resources.AutomaticallyCheckForUpdates}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding Settings.CheckUpgradeAtStartup, Mode=TwoWay}" Margin="0,5,0,5" />
+                </Grid>
+            </TabItem>
+
+            <!-- About -->
+            <TabItem Header="{x:Static project:Resources.About}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="256"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Grid.Row="0" Grid.Column="0">
+                        <Label FontSize="28">
+                            <Label.Content>
+                                <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
+                            </Label.Content>
+                        </Label>
+                    </DockPanel>
+
+                    <DockPanel Grid.Row="1" Grid.Column="0" Margin="0,0,5,0">
+                        <FlowDocumentScrollViewer Grid.Row="0" Grid.Column="0" Margin="5,10,5,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" DockPanel.Dock="Top"
+                                                  Document="{Binding UpgradeVersionDescription.ChangeLog, Source={StaticResource Upgrade}, Converter={StaticResource ChangelogToMarkdown}, ConverterParameter=True|}" />
+
+                        <TextBlock Grid.Row="1" Margin="5" DockPanel.Dock="Top" FontSize="14" HorizontalAlignment="Center" 
+                                   Visibility="{Binding DisplaySeeChangeLogLink, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">
+                            <Hyperlink Foreground="#1E6BB8" Command="{Binding GetChangeLogContentCommand, Mode=OneWay}"><x:Static Member="project:Resources.SeeChangeLog" /></Hyperlink>
+                        </TextBlock>
+                    </DockPanel>
+
+                    <Image Grid.Row="1" Grid.Column="1" Margin="20,20,20,20" VerticalAlignment="Top" 
+                           Source="{Binding Source=/FileConverter;component/Resources/ApplicationIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=256}">
+                    </Image>
+
+                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center" FontStyle="Italic"/>
+                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://tichau.itch.io/file-converter/purchase">
+                            <Button.Content>
+                                <DockPanel>
+                                    <Image Source="/FileConverter;component/Resources/ItchIO-icon.png"></Image>
+                                    <Label Content="{x:Static project:Resources.DonateButtonTitle}" Margin="5,0,5,0" Foreground="WhiteSmoke" FontWeight="Bold" FontSize="14"/>
+                                </DockPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button Style="{StaticResource SayThanksButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://saythanks.io/to/Tichau">
+                            <Button.Content>
+                                <DockPanel>
+                                    <Image Source="/FileConverter;component/Resources/SayThanks-icon.png"></Image>
+                                    <Label Content="{x:Static project:Resources.SayThanksButtonTitle}" Margin="5,0,5,0" Foreground="DimGray" FontWeight="Bold" FontSize="14"/>
+                                </DockPanel>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+                        <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" 
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/?from=about">
+                            <Button.Content>
+                                <Image Source="/FileConverter;component/Resources/GitHub-Icon.png"></Image>
+                            </Button.Content>
+                        </Button>
+                        <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" 
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/issues?from=about">
+                            <Button.Content>
+                                <Image Source="/FileConverter;component/Resources/GitHub-Issue-Icon.png"></Image>
+                            </Button.Content>
+                        </Button>
+                        <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" 
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/wiki?from=about">
+                            <Button.Content>
+                                <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
+                            </Button.Content>
+                        </Button>
+                        <Button ToolTip="{x:Static project:Resources.WebsiteButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" 
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="www.file-converter.org?from=about">
+                            <Button.Content>
+                                <Image Source="/FileConverter;component/Resources/WebSite-Icon.png"></Image>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2017, Adrien Allard. All right reserved." Foreground="#FF4D4D4D" Margin="0,2,0,2"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <Button Grid.Row="2" Content="{x:Static project:Resources.Close}" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0"
+                Command="{Binding CloseCommand}"/>
+        <Button Grid.Row="2" Content="{x:Static project:Resources.Save}" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" 
+                Command="{Binding SaveCommand}"/>
+
+    </Grid>
+
+</Window>

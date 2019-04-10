@@ -45,8 +45,7 @@ namespace FileConverter
                 throw;
             }
 
-            IXmlSerializable xmlSerializableObject = deserializedObject as IXmlSerializable;
-            if (xmlSerializableObject != null)
+            if (deserializedObject is IXmlSerializable xmlSerializableObject)
             {
                 xmlSerializableObject.OnDeserializationComplete();
             }

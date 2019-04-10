@@ -1,4 +1,4 @@
-﻿// // <copyright file="Helpers.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="Helpers.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter
 {
@@ -6,15 +6,104 @@ namespace FileConverter
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
     using System.Threading;
+    using System.ComponentModel.Composition.Hosting;
 
     using FileConverter.ConversionJobs;
+    using FileConverter.Services;
+
+    using SharpShell;
+    using SharpShell.ServerRegistration;
+    using GalaSoft.MvvmLight.Ioc;
+
     using Microsoft.Win32;
 
     public static class Helpers
     {
+        public static bool RegisterShellExtension(string shellExtensionPath)
+        {
+            if (!Application.IsInAdmininstratorPrivileges)
+            {
+                Diagnostics.Debug.LogError("File Converter needs administrator privileges to register the shell extension.");
+                return false;
+            }
+
+            if (!File.Exists(shellExtensionPath))
+            {
+                Diagnostics.Debug.LogError($"Shell extension {shellExtensionPath} does not exists.");
+                return false;
+            }
+
+            Diagnostics.Debug.Log($"Install and register shell extension: {shellExtensionPath}.");
+
+            try
+            {
+                var catalog = new AssemblyCatalog(shellExtensionPath);
+                var container = new CompositionContainer(catalog);
+                var server = container.GetExport<ISharpShellServer>().Value;
+
+                RegistrationType registrationType = RegistrationType.OS64Bit;
+#if BUILD32
+                registrationType = RegistrationType.OS32Bit;
+#endif
+
+                ServerRegistrationManager.InstallServer(server, registrationType, true);
+                Diagnostics.Debug.Log($"Shell extension has been installed correctly.");
+
+                ServerRegistrationManager.RegisterServer(server, registrationType);
+                Diagnostics.Debug.Log($"Shell extension has been registered correctly.");
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.LogError($"An exception has been thrown during shell extension {shellExtensionPath} registration.\n{exception}");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool UnregisterExtension(string shellExtensionPath)
+        {
+            if (!Application.IsInAdmininstratorPrivileges)
+            {
+                Diagnostics.Debug.LogError("File Converter needs administrator privileges to unregister the shell extension.");
+                return false;
+            }
+
+            if (!File.Exists(shellExtensionPath))
+            {
+                Diagnostics.Debug.LogError($"Shell extension {shellExtensionPath} does not exists.");
+                return false;
+            }
+
+            Diagnostics.Debug.Log($"Unregister and uninstall shell extension: {shellExtensionPath}.");
+
+            try
+            {
+                var catalog = new AssemblyCatalog(shellExtensionPath);
+                var container = new CompositionContainer(catalog);
+                var server = container.GetExport<ISharpShellServer>().Value;
+
+                RegistrationType registrationType = RegistrationType.OS64Bit;
+#if BUILD32
+                registrationType = RegistrationType.OS32Bit;
+#endif
+
+                ServerRegistrationManager.UnregisterServer(server, registrationType);
+                Diagnostics.Debug.Log($"Shell extension has been successfully unregistered.");
+                ServerRegistrationManager.UninstallServer(server, registrationType);
+                Diagnostics.Debug.Log($"Shell extension has been successfully uninstalled.");
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.LogError($"An exception has been thrown during shell extension {shellExtensionPath} unregistration.\n{exception}");
+                return false;
+            }
+
+            return true;
+        }
+
         public static IEnumerable<CultureInfo> GetSupportedCultures()
         {
             // Get all cultures.
@@ -142,8 +231,8 @@ namespace FileConverter
 
         public static Thread InstantiateThread(string name, ThreadStart threadStart)
         {
-            Application application = Application.Current as Application;
-            CultureInfo currentCulture = application?.Settings?.ApplicationLanguage;
+            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(threadStart);
             thread.Name = name;
@@ -159,8 +248,8 @@ namespace FileConverter
 
         public static Thread InstantiateThread(string name, ParameterizedThreadStart parameterizedThreadStart)
         {
-            Application application = Application.Current as Application;
-            CultureInfo currentCulture = application?.Settings?.ApplicationLanguage;
+            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(parameterizedThreadStart);
             thread.Name = name;

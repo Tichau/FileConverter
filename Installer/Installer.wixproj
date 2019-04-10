@@ -57,9 +57,6 @@
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!-- congigure the project to sign the installer. Comment this line to produce an unsigned installer. -->
   <Import Project=".\Installer.sign" />

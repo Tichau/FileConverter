@@ -1,4 +1,4 @@
-﻿// <copyright file="ConversionJobsToProgressValue.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="ConversionJobToEstimatedRemainingDuration.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters
 {
@@ -20,6 +20,10 @@ namespace FileConverter.ValueConverters
             ConversionState state = (ConversionState)values[0];
             DateTime startTime = (DateTime)values[1];
             float progress = (float)values[2];
+            if (progress <= 0f)
+            {
+                return string.Empty;
+            }
 
             if (state == ConversionState.Unknown ||
                 state == ConversionState.Ready ||

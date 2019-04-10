@@ -34,6 +34,11 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        protected override bool IsCancelable()
+        {
+            return false;
+        }
+
         protected override int GetOutputFilesCount()
         {
             if (this.ConversionPreset.OutputType == OutputType.Pdf)
