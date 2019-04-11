@@ -2,6 +2,8 @@
 
 ## Next version
 - Added: Brazilian Portuguese translation (thanks to Marhc).
+- Added: Spanish translation (thanks to Chachak).
+- Added: Italian translation (thanks to Davide).
 - Added: Remove the need to ask administrator privileges to edit File Converter settings.
 - Added: Support tif input extension (only tiff was handled).
 - Added: Display conversion progress on the Windows taskbar item.
