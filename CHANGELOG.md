@@ -4,8 +4,8 @@
 - Added: Brazilian Portuguese translation (thanks to Marhc).
 - Added: Spanish translation (thanks to Chachak).
 - Added: Italian translation (thanks to Davide).
-- Added: Remove the need to ask administrator privileges to edit File Converter settings.
-- Added: Support tif input extension (only tiff was handled).
+- Added: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).
+- Added: Support tif input extension (only tiff was handled) (github issue #29).
 - Added: Display conversion progress on the Windows taskbar item.
 - Added: Display estimated remaining time for each jobs.
 - Added: "Say thanks" button if you can't donate and want to keep my motivation up :).
@@ -21,7 +21,7 @@
 - Tech: Update SharpShell to v2.7.1. 
 - Tech: Update project to Visual Studio 2017 and installer Wix 3.11.
 - Tech: Update project to .NET framework 4.6.1 (the last .NET version compatible with Windows Vista).
-- Tech: Remove sharpshell tools from installer dependencies. The shell extension is now registered by File Converter application.
+- Tech: Remove sharpshell tools from installer dependencies. The shell extension is now registered by File Converter application (github issue #39 #46).
 
 ## Version 1.2.3
 - Fixed: Issue where the scale was not working for image conversions depending on the application current language.
