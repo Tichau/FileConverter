@@ -112,9 +112,42 @@ namespace FileConverterExtension
                 Image = new Icon(Properties.Resources.ApplicationIcon, SystemInformation.SmallIconSize).ToBitmap(),
             };
 
-            for (int index = 0; index < this.presetList.Count; index++)
+            foreach (PresetDefinition preset in this.presetList)
             {
-                PresetDefinition preset = this.presetList[index];
+                ToolStripMenuItem root = fileConverterItem;
+                if (preset.Folders != null)
+                {
+                    foreach (string folder in preset.Folders)
+                    {
+                        ToolStripItem[] folderItems = root.DropDownItems.Find(folder, false);
+                        if (folderItems.Length == 0)
+                        {
+                            ToolStripMenuItem folderItem = new ToolStripMenuItem
+                            {
+                                Name = folder,
+                                Text = folder,
+                            };
+
+                            root.DropDownItems.Add(folderItem);
+                            root = folderItem;
+                        }
+                        else
+                        {
+                            root = folderItems[0] as ToolStripMenuItem;
+                        }
+
+                        if (root == null)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (root == null)
+                {
+                    // Fallback when something went wrong during folder creation.
+                    root = fileConverterItem;
+                }
 
                 ToolStripMenuItem subItem = new ToolStripMenuItem
                 {
@@ -122,8 +155,9 @@ namespace FileConverterExtension
                     Enabled = preset.Enabled
                 };
 
-                fileConverterItem.DropDownItems.Add(subItem);
-                subItem.Click += (sender, args) => this.ConvertFiles(preset.Name);
+
+                root.DropDownItems.Add(subItem);
+                subItem.Click += (sender, args) => this.ConvertFiles(preset.FullName);
             }
 
             if (this.presetList.Count > 0)
@@ -190,10 +224,19 @@ namespace FileConverterExtension
                 for (int presetIndex = 0; presetIndex < presets.Length; presetIndex++)
                 {
                     string presetName = presets[presetIndex];
-                    PresetDefinition presetDefinition = this.presetList.FirstOrDefault(match => match.Name == presetName);
+                    PresetDefinition presetDefinition = this.presetList.FirstOrDefault(match => match.FullName == presetName);
                     if (presetDefinition == null)
                     {
-                        presetDefinition = new PresetDefinition(presetName);
+                        string[] folders = presetName.Split('/');
+                        if (folders.Length == 0)
+                        {
+                            continue;
+                        }
+
+                        string name = folders[folders.Length - 1];
+                        Array.Resize(ref folders, folders.Length - 1);
+
+                        presetDefinition = new PresetDefinition(presetName, name, folders);
                         this.presetList.Add(presetDefinition);
                     }
 

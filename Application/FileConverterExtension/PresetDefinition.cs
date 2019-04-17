@@ -4,12 +4,26 @@ namespace FileConverterExtension
 {
     public class PresetDefinition
     {
-        public PresetDefinition(string name)
+        public PresetDefinition(string fullName, string name, string[] folders)
         {
+            this.FullName = fullName;
             this.Name = name;
+            this.Folders = folders;
+        }
+
+        public string FullName
+        {
+            get;
+            private set;
         }
 
         public string Name
+        {
+            get;
+            private set;
+        }
+
+        public string[] Folders
         {
             get;
             private set;
