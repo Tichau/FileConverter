@@ -27,7 +27,7 @@ namespace FileConverterExtension
         private string fileConverterPath;
         private RegistryKey fileConverterRegistryKey;
         private List<PresetDefinition> presetList = new List<PresetDefinition>();
-        private List<string> compatibleInputExtensions = new List<string>(); 
+        private List<string> compatibleInputExtensions = new List<string>();
 
         private RegistryKey FileConverterRegistryKey
         {
@@ -97,7 +97,7 @@ namespace FileConverterExtension
 
                 return this.compatibleInputExtensions;
             }
-        } 
+        }
 
         protected override bool CanShowMenu()
         {
@@ -129,7 +129,7 @@ namespace FileConverterExtension
 
             ToolStripMenuItem fileConverterItem = new ToolStripMenuItem
             {
-                Text = "File Converter!",
+                Text = "File Converter",
                 Image = new Icon(Properties.Resources.ApplicationIcon, SystemInformation.SmallIconSize).ToBitmap(),
             };
 
