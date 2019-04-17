@@ -47,7 +47,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="..\Resources\Settings-Icon.png" />
+            <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top"
+                   Source="{Binding Source=/FileConverter;component/Resources/SettingsIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=96}">
+            </Image>
+
             <Label Grid.Column="1" Content="{x:Static project:Resources.Settings}" FontSize="20" Margin="4" VerticalAlignment="Center" />
             <Label Grid.Column="2" HorizontalAlignment="Right" FontStyle="Italic" FontSize="14" VerticalAlignment="Center" Foreground="#FF999999">
                 <Label.Content>
