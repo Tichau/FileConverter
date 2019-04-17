@@ -121,4 +121,13 @@
   <data name="ApplicationIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\applicationicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FolderIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\foldericon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PresetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\preseticon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\settingsicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

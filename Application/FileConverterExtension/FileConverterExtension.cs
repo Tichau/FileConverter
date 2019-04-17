@@ -59,6 +59,25 @@ namespace FileConverterExtension
             }
         }
 
+        private bool DisplayPresetIcons
+        {
+            get
+            {
+                string displayPresetIcons = this.FileConverterRegistryKey.GetValue("DisplayPresetIcons") as string;
+                if (displayPresetIcons == null)
+                {
+                    return false;
+                }
+
+                if (!bool.TryParse(displayPresetIcons, out bool value))
+                {
+                    return false;
+                }
+
+                return value;
+            }
+        }
+
         private IEnumerable<string> CompatibleInputExtensions
         {
             get
@@ -104,6 +123,8 @@ namespace FileConverterExtension
         {
             this.RefreshPresetList();
 
+            bool displayPresetIcons = this.DisplayPresetIcons;
+
             ContextMenuStrip menu = new ContextMenuStrip();
 
             ToolStripMenuItem fileConverterItem = new ToolStripMenuItem
@@ -126,6 +147,7 @@ namespace FileConverterExtension
                             {
                                 Name = folder,
                                 Text = folder,
+                                Image = new Icon(Properties.Resources.FolderIcon, SystemInformation.SmallIconSize).ToBitmap(),
                             };
 
                             root.DropDownItems.Add(folderItem);
@@ -155,6 +177,10 @@ namespace FileConverterExtension
                     Enabled = preset.Enabled
                 };
 
+                if (displayPresetIcons)
+                {
+                    subItem.Image = new Icon(Properties.Resources.PresetIcon, SystemInformation.SmallIconSize).ToBitmap();
+                }
 
                 root.DropDownItems.Add(subItem);
                 subItem.Click += (sender, args) => this.ConvertFiles(preset.FullName);
@@ -169,6 +195,7 @@ namespace FileConverterExtension
                 ToolStripMenuItem subItem = new ToolStripMenuItem
                 {
                     Text = "Configure presets...",
+                    Image = new Icon(Properties.Resources.SettingsIcon, SystemInformation.SmallIconSize).ToBitmap(),
                 };
 
                 fileConverterItem.DropDownItems.Add(subItem);
