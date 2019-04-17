@@ -154,6 +154,7 @@ namespace FileConverter
                 case "wmv":
                     return InputCategoryNames.Video;
 
+                case "arw":
                 case "bmp":
                 case "exr":
                 case "ico":
@@ -161,6 +162,7 @@ namespace FileConverter
                 case "jpeg":
                 case "png":
                 case "psd":
+                case "raf":
                 case "tga":
                 case "tif":
                 case "tiff":

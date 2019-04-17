@@ -4,6 +4,7 @@
 - Added: Brazilian Portuguese translation (thanks to Marhc).
 - Added: Spanish translation (thanks to Chachak).
 - Added: Italian translation (thanks to Davide).
+- Added: Support new raw image input formats: arw and raf.
 - Added: Possibility to create preset folders in File Converter context menu.
 - Added: Display conversion progress on the Windows taskbar item.
 - Added: Display estimated remaining time for each jobs.
