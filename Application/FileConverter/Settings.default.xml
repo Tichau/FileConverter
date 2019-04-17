@@ -185,6 +185,7 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Gif" OutputType="Gif" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
@@ -192,6 +193,7 @@
         <InputTypes>jpeg</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
@@ -218,11 +220,13 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Gif (low quality)" OutputType="Gif" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
@@ -433,11 +437,13 @@
         <OutputFileNameTemplate>(p:m)CDA Extraction\(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Png" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
@@ -473,11 +479,13 @@
         <OutputFileNameTemplate>(p)(f) (n:i) of (n:c)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Webp" OutputType="Webp" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
@@ -495,11 +503,13 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To small Png (25%)" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
@@ -516,11 +526,13 @@
         <OutputFileNameTemplate>(p)(f)-small</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Png (rotate left)" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
@@ -536,11 +548,13 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Png (rotate right)" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
@@ -556,11 +570,13 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Jpg" OutputType="Jpg" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
@@ -595,10 +611,12 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Pdf" OutputType="Pdf" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
         <InputTypes>svg</InputTypes>
