@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48"
-   height="48"
-   viewBox="0 0 48.000001 48.000001"
+   width="256"
+   height="256"
+   viewBox="0 0 256.00001 256.00001"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="SuccessIcon.svg"
    inkscape:export-filename="C:\Users\Adrien\Documents\GitHub\FileConverter\Resources\SuccessIcon.png"
    inkscape:export-xdpi="90"
@@ -28,17 +28,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8"
-     inkscape:cx="29.858285"
-     inkscape:cy="28.115955"
+     inkscape:zoom="3.6203867"
+     inkscape:cx="106.14858"
+     inkscape:cy="186.87105"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:window-width="1289"
-     inkscape:window-height="745"
-     inkscape:window-x="69"
-     inkscape:window-y="-8"
+     inkscape:window-width="2854"
+     inkscape:window-height="1955"
+     inkscape:window-x="133"
+     inkscape:window-y="-13"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,10 +56,10 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-1004.3622)">
+     transform="translate(0,-796.3622)">
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#4caf50;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 2.125,1031.1122 13.625,19 29.875,-43.5"
+       style="fill:none;fill-rule:evenodd;stroke:#4caf50;stroke-width:19.13197517;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 23.971008,937.572 89.139299,1028.4489 232.03124,820.38864"
        id="path3342"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />

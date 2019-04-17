@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48"
-   height="48"
-   viewBox="0 0 48.000001 48.000001"
+   width="256"
+   height="256"
+   viewBox="0 0 256.00001 256.00001"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="CancelIcon.svg"
    inkscape:export-filename="C:\Users\aallard\Documents\GitHub\FileConverter\Resources\CancelIcon.png"
    inkscape:export-xdpi="90"
@@ -28,17 +28,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8"
-     inkscape:cx="29.858285"
-     inkscape:cy="23.115955"
+     inkscape:zoom="2"
+     inkscape:cx="102.11763"
+     inkscape:cy="151.52912"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:window-width="1853"
-     inkscape:window-height="1058"
-     inkscape:window-x="59"
-     inkscape:window-y="-8"
+     inkscape:window-width="2854"
+     inkscape:window-height="1955"
+     inkscape:window-x="133"
+     inkscape:window-y="-13"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,11 +56,11 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-1004.3622)">
+     transform="translate(0,-796.3622)">
     <path
-       style="opacity:1;fill:#d32f2f;fill-opacity:0.94117647;stroke:none"
-       d="M 24 0 A 24 24 0 0 0 0 24 A 24 24 0 0 0 24 48 A 24 24 0 0 0 48 24 A 24 24 0 0 0 24 0 z M 24 4 A 20 20 0 0 1 44 24 A 20 20 0 0 1 40.560547 35.203125 L 10.087891 9.6328125 A 20 20 0 0 1 24 4 z M 7.4394531 12.796875 L 37.912109 38.367188 A 20 20 0 0 1 24 44 A 20 20 0 0 1 4 24 A 20 20 0 0 1 7.4394531 12.796875 z "
-       transform="translate(0,1004.3622)"
-       id="path3338" />
+       style="opacity:1;fill:#d32f2f;fill-opacity:0.94117647;stroke:none;stroke-width:5.05208349"
+       d="M 128,803.1122 A 121.25,121.25 0 0 0 6.75,924.3622 121.25,121.25 0 0 0 128,1045.6122 121.25,121.25 0 0 0 249.25,924.3622 121.25,121.25 0 0 0 128,803.1122 Z m 0,20.20833 A 101.04167,101.04167 0 0 1 229.04167,924.3622 101.04167,101.04167 0 0 1 211.66526,980.96132 L 57.714866,851.77797 A 101.04167,101.04167 0 0 1 128,823.32053 Z M 44.334737,867.76308 198.28513,996.9464 A 101.04167,101.04167 0 0 1 128,1025.4039 101.04167,101.04167 0 0 1 26.958333,924.3622 101.04167,101.04167 0 0 1 44.334737,867.76308 Z"
+       id="path3338"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>
