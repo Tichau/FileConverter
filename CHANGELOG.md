@@ -17,7 +17,7 @@
 - Change: Change output files timestamp to match original file (github issue #33) (thanks to Diego López Bugna).
 - Fixed: Issue where File Converter version upgrade download was not working due to an issue with https encryption.
 - Fixed: Issue where output video was not working correclty on some video players like Quick time (github issue #34) (thanks to Diego López Bugna).
-- Fixed: Issue where File Converter icon was blurry in explorer context menu on high dpi device.
+- Fixed: Issue where icons and images were blurry on high dpi device.
 - Tech: Complete rework of the project architecture to be able to improve it in a long term perspective. The project is now using the MVVM Light framework and is following more closely this design pattern.
 - Tech: Update ffmpeg to v4.0.0 and ImageMagick to v7.8.0.
 - Tech: Update SharpShell to v2.7.1. 
