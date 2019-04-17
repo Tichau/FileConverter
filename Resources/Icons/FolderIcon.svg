@@ -11,16 +11,16 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="256"
    height="256"
-   viewBox="0 0 256.00001 256.00001"
-   id="svg2"
+   viewBox="0 0 67.733332 67.733335"
    version="1.1"
+   id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="CancelIcon.svg"
-   inkscape:export-filename="C:\Users\aallard\Documents\GitHub\FileConverter\Resources\CancelIcon.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   sodipodi:docname="FolderIcon.svg"
+   inkscape:export-filename="C:\Users\Adrien\folder.png"
+   inkscape:export-xdpi="24"
+   inkscape:export-ydpi="24">
   <defs
-     id="defs4" />
+     id="defs2" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -28,10 +28,10 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="102.11763"
-     inkscape:cy="151.52912"
-     inkscape:document-units="px"
+     inkscape:zoom="4"
+     inkscape:cx="115.19402"
+     inkscape:cy="158.861"
+     inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
@@ -41,26 +41,38 @@
      inkscape:window-y="-13"
      inkscape:window-maximized="1" />
   <metadata
-     id="metadata7">
+     id="metadata5">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Calque 1"
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-796.3622)">
-    <path
-       style="opacity:1;fill:#d32f2f;fill-opacity:0.94117647;stroke:none;stroke-width:5.05208349"
-       d="M 128,803.1122 A 121.25,121.25 0 0 0 6.75,924.3622 121.25,121.25 0 0 0 128,1045.6122 121.25,121.25 0 0 0 249.25,924.3622 121.25,121.25 0 0 0 128,803.1122 Z m 0,20.20833 A 101.04167,101.04167 0 0 1 229.04167,924.3622 101.04167,101.04167 0 0 1 211.66526,980.96132 L 57.714866,851.77797 A 101.04167,101.04167 0 0 1 128,823.32053 Z M 44.334737,867.76308 198.28513,996.9464 A 101.04167,101.04167 0 0 1 128,1025.4039 101.04167,101.04167 0 0 1 26.958333,924.3622 101.04167,101.04167 0 0 1 44.334737,867.76308 Z"
-       id="path3338"
-       inkscape:connector-curvature="0" />
+     transform="translate(0,-229.26665)">
+    <g
+       id="g4542"
+       transform="matrix(1.1587496,0,0,1.1587496,-4.9762681,-40.885059)">
+      <path
+         inkscape:connector-curvature="0"
+         id="rect815-2"
+         d="m 12.035441,239.86755 c -1.946667,0 -3.5139975,1.56733 -3.5139975,3.514 v 32.97215 c 0,1.94667 1.5673305,3.514 3.5139975,3.514 h 42.972052 c 1.946667,0 3.513998,-1.56733 3.513998,-3.514 v -27.90579 c -2.441006,1.08323 -20.634915,-0.73794 -20.634915,-0.73794 l -9.499161,-7.84242 z"
+         style="fill:#004b82;fill-opacity:1;stroke-width:0.99046963;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         ry="3.5138385"
+         y="244.86769"
+         x="8.5213537"
+         height="40"
+         width="50"
+         id="rect815"
+         style="fill:#0171bb;fill-opacity:1;stroke-width:0.99046963;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
   </g>
 </svg>

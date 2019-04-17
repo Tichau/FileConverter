@@ -4,10 +4,12 @@
 - Added: Brazilian Portuguese translation (thanks to Marhc).
 - Added: Spanish translation (thanks to Chachak).
 - Added: Italian translation (thanks to Davide).
-- Added: Remove the need to ask administrator privileges to edit File Converter settings.
-- Added: Support tif input extension (only tiff was handled).
+- Added: Possibility to create preset folders in File Converter context menu.
 - Added: Display conversion progress on the Windows taskbar item.
 - Added: Display estimated remaining time for each jobs.
+- Added: Support tif input extension (only tiff was handled) (github issue #29).
+- Added: Icons on context menu elements.
+- Added: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).
 - Added: "Say thanks" button if you can't donate and want to keep my motivation up :).
 - Added: Messages logged from main thread are now displayed in the console standard output.
 - Change: Replace Pledgie donation button by Itch.io donation button since Pledgie does not exist anymore.
@@ -15,13 +17,13 @@
 - Change: Change output files timestamp to match original file (github issue #33) (thanks to Diego López Bugna).
 - Fixed: Issue where File Converter version upgrade download was not working due to an issue with https encryption.
 - Fixed: Issue where output video was not working correclty on some video players like Quick time (github issue #34) (thanks to Diego López Bugna).
-- Fixed: Issue where File Converter icon was blurry in explorer context menu on high dpi device.
+- Fixed: Issue where icons and images were blurry on high dpi device.
 - Tech: Complete rework of the project architecture to be able to improve it in a long term perspective. The project is now using the MVVM Light framework and is following more closely this design pattern.
 - Tech: Update ffmpeg to v4.0.0 and ImageMagick to v7.8.0.
 - Tech: Update SharpShell to v2.7.1. 
 - Tech: Update project to Visual Studio 2017 and installer Wix 3.11.
 - Tech: Update project to .NET framework 4.6.1 (the last .NET version compatible with Windows Vista).
-- Tech: Remove sharpshell tools from installer dependencies. The shell extension is now registered by File Converter application.
+- Tech: Remove sharpshell tools from installer dependencies. The shell extension is now registered by File Converter application (github issue #39 #46).
 
 ## Version 1.2.3
 - Fixed: Issue where the scale was not working for image conversions depending on the application current language.

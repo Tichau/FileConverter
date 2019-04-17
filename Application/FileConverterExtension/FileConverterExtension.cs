@@ -27,7 +27,7 @@ namespace FileConverterExtension
         private string fileConverterPath;
         private RegistryKey fileConverterRegistryKey;
         private List<PresetDefinition> presetList = new List<PresetDefinition>();
-        private List<string> compatibleInputExtensions = new List<string>(); 
+        private List<string> compatibleInputExtensions = new List<string>();
 
         private RegistryKey FileConverterRegistryKey
         {
@@ -59,6 +59,25 @@ namespace FileConverterExtension
             }
         }
 
+        private bool DisplayPresetIcons
+        {
+            get
+            {
+                string displayPresetIcons = this.FileConverterRegistryKey.GetValue("DisplayPresetIcons") as string;
+                if (displayPresetIcons == null)
+                {
+                    return false;
+                }
+
+                if (!bool.TryParse(displayPresetIcons, out bool value))
+                {
+                    return false;
+                }
+
+                return value;
+            }
+        }
+
         private IEnumerable<string> CompatibleInputExtensions
         {
             get
@@ -78,7 +97,7 @@ namespace FileConverterExtension
 
                 return this.compatibleInputExtensions;
             }
-        } 
+        }
 
         protected override bool CanShowMenu()
         {
@@ -104,17 +123,53 @@ namespace FileConverterExtension
         {
             this.RefreshPresetList();
 
+            bool displayPresetIcons = this.DisplayPresetIcons;
+
             ContextMenuStrip menu = new ContextMenuStrip();
 
             ToolStripMenuItem fileConverterItem = new ToolStripMenuItem
             {
-                Text = "File Converter!",
+                Text = "File Converter",
                 Image = new Icon(Properties.Resources.ApplicationIcon, SystemInformation.SmallIconSize).ToBitmap(),
             };
 
-            for (int index = 0; index < this.presetList.Count; index++)
+            foreach (PresetDefinition preset in this.presetList)
             {
-                PresetDefinition preset = this.presetList[index];
+                ToolStripMenuItem root = fileConverterItem;
+                if (preset.Folders != null)
+                {
+                    foreach (string folder in preset.Folders)
+                    {
+                        ToolStripItem[] folderItems = root.DropDownItems.Find(folder, false);
+                        if (folderItems.Length == 0)
+                        {
+                            ToolStripMenuItem folderItem = new ToolStripMenuItem
+                            {
+                                Name = folder,
+                                Text = folder,
+                                Image = new Icon(Properties.Resources.FolderIcon, SystemInformation.SmallIconSize).ToBitmap(),
+                            };
+
+                            root.DropDownItems.Add(folderItem);
+                            root = folderItem;
+                        }
+                        else
+                        {
+                            root = folderItems[0] as ToolStripMenuItem;
+                        }
+
+                        if (root == null)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (root == null)
+                {
+                    // Fallback when something went wrong during folder creation.
+                    root = fileConverterItem;
+                }
 
                 ToolStripMenuItem subItem = new ToolStripMenuItem
                 {
@@ -122,8 +177,13 @@ namespace FileConverterExtension
                     Enabled = preset.Enabled
                 };
 
-                fileConverterItem.DropDownItems.Add(subItem);
-                subItem.Click += (sender, args) => this.ConvertFiles(preset.Name);
+                if (displayPresetIcons)
+                {
+                    subItem.Image = new Icon(Properties.Resources.PresetIcon, SystemInformation.SmallIconSize).ToBitmap();
+                }
+
+                root.DropDownItems.Add(subItem);
+                subItem.Click += (sender, args) => this.ConvertFiles(preset.FullName);
             }
 
             if (this.presetList.Count > 0)
@@ -135,6 +195,7 @@ namespace FileConverterExtension
                 ToolStripMenuItem subItem = new ToolStripMenuItem
                 {
                     Text = "Configure presets...",
+                    Image = new Icon(Properties.Resources.SettingsIcon, SystemInformation.SmallIconSize).ToBitmap(),
                 };
 
                 fileConverterItem.DropDownItems.Add(subItem);
@@ -190,10 +251,19 @@ namespace FileConverterExtension
                 for (int presetIndex = 0; presetIndex < presets.Length; presetIndex++)
                 {
                     string presetName = presets[presetIndex];
-                    PresetDefinition presetDefinition = this.presetList.FirstOrDefault(match => match.Name == presetName);
+                    PresetDefinition presetDefinition = this.presetList.FirstOrDefault(match => match.FullName == presetName);
                     if (presetDefinition == null)
                     {
-                        presetDefinition = new PresetDefinition(presetName);
+                        string[] folders = presetName.Split('/');
+                        if (folders.Length == 0)
+                        {
+                            continue;
+                        }
+
+                        string name = folders[folders.Length - 1];
+                        Array.Resize(ref folders, folders.Length - 1);
+
+                        presetDefinition = new PresetDefinition(presetName, name, folders);
                         this.presetList.Add(presetDefinition);
                     }
 

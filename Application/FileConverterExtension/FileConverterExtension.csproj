@@ -84,6 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\ApplicationIcon.ico" />
+    <Content Include="Resources\FolderIcon.ico" />
+    <Content Include="Resources\PresetIcon.ico" />
+    <Content Include="Resources\SettingsIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

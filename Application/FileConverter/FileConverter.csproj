@@ -375,9 +375,6 @@
     <Resource Include="Resources\FileConverterUsage.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Settings-Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\WebSite-Icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +388,9 @@
       <Project>{0c44ca69-42d6-4357-bdfd-83069d1aba2f}</Project>
       <Name>FileConverterExtension</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SettingsIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
