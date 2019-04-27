@@ -7,18 +7,17 @@ namespace FileConverter
     using System.ComponentModel;
     using System.Globalization;
     using System.Linq;
-    using System.Runtime.CompilerServices;
     using System.Xml.Serialization;
 
-    using FileConverter.Annotations;
     using FileConverter.Controls;
     using FileConverter.Services;
 
+    using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Ioc;
 
     [XmlRoot]
     [XmlType]
-    public class ConversionPreset : INotifyPropertyChanged, IDataErrorInfo, IXmlSerializable
+    public class ConversionPreset : ObservableObject, IDataErrorInfo, IXmlSerializable
     {
         private string name;
         private OutputType outputType;
@@ -68,7 +67,6 @@ namespace FileConverter
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [XmlAttribute]
         public string Name
@@ -81,7 +79,7 @@ namespace FileConverter
             set
             {
                 this.name = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
@@ -97,7 +95,7 @@ namespace FileConverter
             {
                 this.outputType = value;
                 this.InitializeDefaultSettings(this.outputType);
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
                 this.CoerceInputTypes();
             }
         }
@@ -125,7 +123,7 @@ namespace FileConverter
                     this.inputTypes[index] = this.inputTypes[index].ToLowerInvariant();
                 }
                 
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
@@ -140,7 +138,7 @@ namespace FileConverter
             set
             {
                 this.inputPostConversionAction = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
@@ -184,7 +182,7 @@ namespace FileConverter
                     }
                 }
 
-                this.OnPropertyChanged(nameof(this.Settings));
+                this.RaisePropertyChanged(nameof(this.Settings));
             }
         }
 
@@ -199,7 +197,7 @@ namespace FileConverter
             set
             {
                 this.outputFileNameTemplate = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
@@ -239,7 +237,7 @@ namespace FileConverter
                     }
                 }
 
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
@@ -247,7 +245,7 @@ namespace FileConverter
         {
             get
             {
-                string errorString = this.Validate("Name");
+                string errorString = this.Validate("ShortName");
                 if (!string.IsNullOrEmpty(errorString))
                 {
                     return errorString;
@@ -307,14 +305,14 @@ namespace FileConverter
             }
 
             this.inputTypes.Add(inputType);
-            this.OnPropertyChanged(nameof(this.InputTypes));
+            this.RaisePropertyChanged(nameof(this.InputTypes));
         }
 
         public void RemoveInputType(string inputType)
         {
             if (this.inputTypes.Remove(inputType))
             {
-                this.OnPropertyChanged(nameof(this.InputTypes));
+                this.RaisePropertyChanged(nameof(this.InputTypes));
             }
         }
 
@@ -347,7 +345,7 @@ namespace FileConverter
 
             this.settings[settingsKey] = value;
 
-            this.OnPropertyChanged(nameof(this.Settings));
+            this.RaisePropertyChanged(nameof(this.Settings));
         }
 
         public string GetSettingsValue(string settingsKey)
@@ -386,12 +384,6 @@ namespace FileConverter
         public bool IsRelevantSetting(string settingsKey)
         {
             return this.Settings.ContainsKey(settingsKey);
-        }
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void CoerceInputTypes()
@@ -529,7 +521,7 @@ namespace FileConverter
                     throw new System.Exception("Missing default settings for type " + outputType);
             }
 
-            this.OnPropertyChanged(nameof(this.Settings));
+            this.RaisePropertyChanged(nameof(this.Settings));
         }
 
         private void InitializeSettingsValue(string settingsKey, string value, bool force = false)
