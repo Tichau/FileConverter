@@ -71,10 +71,14 @@ namespace FileConverter.ConversionJobs
             else
             {
                 this.pageCount = 1;
-                using (MagickImage image = new MagickImage(this.InputFilePath))
+                MagickReadSettings readSettings = new MagickReadSettings
+                {
+                    Format = MagickFormat.Cr2
+                };
+
+                using (MagickImage image = new MagickImage(this.InputFilePath, readSettings))
                 {
                     Debug.Log("Load image {0} succeed.", this.InputFilePath);
-
                     this.ConvertImage(image);
                 }
             }

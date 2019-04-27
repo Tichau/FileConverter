@@ -156,6 +156,7 @@ namespace FileConverter
 
                 case "arw":
                 case "bmp":
+                case "cr2":
                 case "exr":
                 case "ico":
                 case "jpg":
