@@ -4,7 +4,7 @@
 - Added: Brazilian Portuguese translation (thanks to Marhc).
 - Added: Spanish translation (thanks to Chachak).
 - Added: Italian translation (thanks to Davide).
-- Added: Support new raw image input formats: arw and raf.
+- Added: Support new raw image input formats: arw, raf and cr2.
 - Added: Possibility to create preset folders in File Converter context menu.
 - Added: Display conversion progress on the Windows taskbar item.
 - Added: Display estimated remaining time for each jobs.
@@ -20,7 +20,7 @@
 - Fixed: Issue where output video was not working correclty on some video players like Quick time (github issue #34) (thanks to Diego López Bugna).
 - Fixed: Issue where icons and images were blurry on high dpi device.
 - Tech: Complete rework of the project architecture to be able to improve it in a long term perspective. The project is now using the MVVM Light framework and is following more closely this design pattern.
-- Tech: Update ffmpeg to v4.0.0 and ImageMagick to v7.8.0.
+- Tech: Update ffmpeg to v4.0.0 and ImageMagick to v7.12.0.
 - Tech: Update SharpShell to v2.7.1. 
 - Tech: Update project to Visual Studio 2017 and installer Wix 3.11.
 - Tech: Update project to .NET framework 4.6.1 (the last .NET version compatible with Windows Vista).
