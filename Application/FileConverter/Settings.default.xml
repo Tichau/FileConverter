@@ -187,6 +187,7 @@
     <ConversionPreset Name="To Gif" OutputType="Gif" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
@@ -222,6 +223,7 @@
     <ConversionPreset Name="To Gif (low quality)" OutputType="Gif" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
@@ -439,6 +441,7 @@
     <ConversionPreset Name="To Png" OutputType="Png" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
@@ -481,6 +484,7 @@
     <ConversionPreset Name="To Webp" OutputType="Webp" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
@@ -505,6 +509,7 @@
     <ConversionPreset Name="To small Png (25%)" OutputType="Png" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
@@ -528,6 +533,7 @@
     <ConversionPreset Name="To Png (rotate left)" OutputType="Png" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
@@ -550,6 +556,7 @@
     <ConversionPreset Name="To Png (rotate right)" OutputType="Png" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
@@ -572,6 +579,7 @@
     <ConversionPreset Name="To Jpg" OutputType="Jpg" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
@@ -595,6 +603,7 @@
     </ConversionPreset>
     <ConversionPreset Name="To Ico" OutputType="Ico" IsDefaultSettings="true">
         <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
@@ -612,6 +621,7 @@
     </ConversionPreset>
     <ConversionPreset Name="To Pdf" OutputType="Pdf" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
+        <InputTypes>cr2</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>exr</InputTypes>
         <InputTypes>jpg</InputTypes>
