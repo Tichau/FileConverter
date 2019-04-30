@@ -19,7 +19,8 @@ namespace FileConverter
     [XmlType]
     public class ConversionPreset : ObservableObject, IDataErrorInfo, IXmlSerializable
     {
-        private string name;
+        private string shortName;
+
         private OutputType outputType;
         private List<string> inputTypes;
         private InputPostConversionAction inputPostConversionAction;
@@ -28,12 +29,12 @@ namespace FileConverter
 
         public ConversionPreset()
         {
-            this.Name = Properties.Resources.DefaultPresetName;
+            this.FullName = Properties.Resources.DefaultPresetName;
         }
 
-        public ConversionPreset(string name, OutputType outputType, params string[] inputTypes)
+        public ConversionPreset(string fullName, OutputType outputType, params string[] inputTypes)
         {
-            this.Name = name;
+            this.FullName = fullName;
             this.OutputType = outputType;
             List<string> inputTypeList = new List<string>();
             inputTypeList.AddRange(inputTypes);
@@ -42,9 +43,9 @@ namespace FileConverter
             this.outputFileNameTemplate = "(p)(f)";
         }
 
-        public ConversionPreset(string name, ConversionPreset source, params string[] additionalInputTypes)
+        public ConversionPreset(string fullName, ConversionPreset source, params string[] additionalInputTypes)
         {
-            this.Name = name;
+            this.FullName = fullName;
             this.OutputType = source.outputType;
             List<string> inputTypeList = new List<string>();
             if (source.inputTypes != null)
@@ -67,20 +68,59 @@ namespace FileConverter
             }
         }
 
-
-        [XmlAttribute]
-        public string Name
+        [XmlAttribute("Name")]
+        public string FullName
         {
             get
             {
-                return this.name;
+                string fullName = string.Empty;
+                if (this.ParentFoldersNames != null)
+                {
+                    foreach (string folder in this.ParentFoldersNames)
+                    {
+                        fullName += $"{folder}/";
+                    }
+                }
+
+                fullName += this.shortName;
+
+                return fullName;
             }
 
             set
             {
-                this.name = value;
+                string[] folders = value.Split('/');
+                if (folders.Length == 0)
+                {
+                    Diagnostics.Debug.Log("Invalid full name.");
+                    this.ShortName = value;
+                    return;
+                }
+
+                this.ShortName = folders[folders.Length - 1];
+                Array.Resize(ref folders, folders.Length - 1);
+
+                this.ParentFoldersNames = folders;
+            }
+        }
+
+        [XmlIgnore]
+        public string ShortName
+        {
+            get => this.shortName;
+
+            set
+            {
+                this.shortName = value;
                 this.RaisePropertyChanged();
             }
+        }
+
+        [XmlIgnore]
+        public string[] ParentFoldersNames
+        {
+            get;
+            private set;
         }
 
         [XmlAttribute]
@@ -551,20 +591,25 @@ namespace FileConverter
             // Return error message if there is an error, else return empty or null string.
             switch (propertyName)
             {
-                case "Name":
+                case "ShortName":
                     {
-                        if (string.IsNullOrEmpty(this.Name))
+                        if (string.IsNullOrEmpty(this.ShortName))
                         {
                             return "The preset name can't be empty.";
                         }
 
-                        if (this.Name.Contains(";"))
+                        if (this.ShortName.Contains(";"))
                         {
                             return "The preset name can't contains the character ';'.";
                         }
 
+                        if (this.ShortName.Contains("/"))
+                        {
+                            return "The preset name can't contains the character '/'.";
+                        }
+
                         ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
-                        int? count = settingsService.Settings?.ConversionPresets?.Count(match => match?.name == this.Name);
+                        int? count = settingsService.Settings?.ConversionPresets?.Count(match => match?.shortName == this.ShortName);
                         if (count > 1)
                         {
                             return "The preset name is already used.";

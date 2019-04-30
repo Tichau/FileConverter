@@ -52,7 +52,7 @@ namespace FileConverter
         
         public ConversionPreset GetPresetFromName(string presetName)
         {
-            return this.conversionPresets.FirstOrDefault(match => match.Name == presetName);
+            return this.conversionPresets.FirstOrDefault(match => match.FullName == presetName);
         }
 
         public void Clean()
@@ -73,7 +73,7 @@ namespace FileConverter
             for (int index = 0; index < settings.conversionPresets.Count; index++)
             {
                 ConversionPreset conversionPreset = settings.conversionPresets[index];
-                if (this.conversionPresets.Any(match => match.Name == conversionPreset.Name))
+                if (this.conversionPresets.Any(match => match.FullName == conversionPreset.FullName))
                 {
                     continue;
                 }

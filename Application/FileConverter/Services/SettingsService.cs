@@ -451,7 +451,7 @@ namespace FileConverter.Services
                         registryEntries.Add(inputType, new List<string>());
                     }
 
-                    registryEntries[inputType].Add(conversionPreset.Name);
+                    registryEntries[inputType].Add(conversionPreset.FullName);
                 }
             }
 
