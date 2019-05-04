@@ -1,6 +1,8 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:FileConverter"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:views="clr-namespace:FileConverter.Views"
         xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
@@ -11,7 +13,9 @@
         MinWidth="640" MinHeight="480" 
         Width="920" Height="675"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
-        DataContext="{Binding Settings, Source={StaticResource Locator}}">
+        mc:Ignorable="d"
+        DataContext="{Binding Settings, Source={StaticResource Locator}}"
+        d:DataContext="{d:DesignData /SampleData/SettingsSampleData.xaml}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <command:EventToCommand Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />

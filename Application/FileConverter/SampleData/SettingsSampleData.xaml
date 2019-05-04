@@ -1,0 +1,41 @@
+﻿<viewModels:SettingsViewModel 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
+    xmlns:fileConverter="clr-namespace:FileConverter">
+
+    <viewModels:SettingsViewModel.Settings>
+        <fileConverter:Settings>
+            <fileConverter:Settings.ConversionPresets>
+                <fileConverter:ConversionPreset ShortName="To Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
+                <fileConverter:ConversionPreset ShortName="To Mp4" OutputType="Mp4"></fileConverter:ConversionPreset>
+                <fileConverter:ConversionPreset ShortName="To Mp3" OutputType="Mp3"></fileConverter:ConversionPreset>
+                <fileConverter:ConversionPreset ShortName="To Png" OutputType="Png"></fileConverter:ConversionPreset>
+            </fileConverter:Settings.ConversionPresets>
+        </fileConverter:Settings>
+    </viewModels:SettingsViewModel.Settings>
+
+    <viewModels:SettingsViewModel.PresetsRootFolder>
+        <viewModels:PresetFolder Name="Root">
+            <viewModels:PresetFolder.Children>
+                <viewModels:PresetFolder Name="Advanced">
+                    <viewModels:PresetFolder.Children>
+                        <fileConverter:ConversionPreset ShortName="To Small Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
+                        <fileConverter:ConversionPreset ShortName="To Small Png" OutputType="Png"></fileConverter:ConversionPreset>
+                    </viewModels:PresetFolder.Children>
+                </viewModels:PresetFolder>
+                <fileConverter:ConversionPreset ShortName="To Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
+                <fileConverter:ConversionPreset ShortName="To Mp4" OutputType="Mp4"></fileConverter:ConversionPreset>
+                <fileConverter:ConversionPreset ShortName="To Mp3" OutputType="Mp3"></fileConverter:ConversionPreset>
+                <fileConverter:ConversionPreset ShortName="To Png" OutputType="Png"></fileConverter:ConversionPreset>
+            </viewModels:PresetFolder.Children>
+        </viewModels:PresetFolder>
+    </viewModels:SettingsViewModel.PresetsRootFolder>
+
+    <viewModels:SettingsViewModel.SelectedPreset>
+        <fileConverter:ConversionPreset ShortName="To Avi" 
+                                        OutputType="Avi" 
+                                        OutputFileNameTemplate="(p)(f)" 
+                                        InputPostConversionAction="None" />
+    </viewModels:SettingsViewModel.SelectedPreset>
+</viewModels:SettingsViewModel>
+

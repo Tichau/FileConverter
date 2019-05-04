@@ -3,7 +3,6 @@
     ErrorMessage="There is no error for now" 
     InputFilePath="C:\Path\To\AVery\Long\Location\WithAVeryNiceFile.png" 
     OutputFilePath="C:\Path\To\AVery\Long\Location\WithAVeryNiceFile.jpg" 
-    IsCancelable="False" 
     StartTime="08/07/2018 22:10:55" 
     State="InProgress"
     StateFlags="None" 
