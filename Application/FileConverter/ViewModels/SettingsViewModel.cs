@@ -35,6 +35,7 @@ namespace FileConverter.ViewModels
     public class SettingsViewModel : ViewModelBase
     {
         private InputExtensionCategory[] inputCategories;
+        private PresetFolder presetsRootFolder;
         private ConversionPreset selectedPreset;
         private Settings settings;
         private bool displaySeeChangeLogLink = true;
@@ -91,6 +92,7 @@ namespace FileConverter.ViewModels
                 this.SupportedCultures = Helpers.GetSupportedCultures().ToArray();
 
                 this.InitializeCompatibleInputExtensions();
+                this.InitializePresetFolders();
             }
         }
 
@@ -349,7 +351,31 @@ namespace FileConverter.ViewModels
             this.inputCategories = categories.ToArray();
             this.RaisePropertyChanged(nameof(this.InputCategories));
         }
-        
+
+        private void InitializePresetFolders()
+        {
+            this.presetsRootFolder = new PresetFolder(null, null);
+            foreach (ConversionPreset preset in this.Settings.ConversionPresets)
+            {
+                PresetFolder folder = this.presetsRootFolder;
+                foreach (string folderName in preset.ParentFoldersNames)
+                {
+                    PresetFolder subFolder = folder.Children.FirstOrDefault(match => match is PresetFolder && ((PresetFolder)match).Name == folderName) as PresetFolder;
+                    if (subFolder == null)
+                    {
+                        subFolder = new PresetFolder(folderName, folder.FoldersNames);
+                        folder.Children.Add(subFolder);
+                    }
+
+                    folder = subFolder;
+                }
+
+                folder.Children.Add(preset);
+            }
+
+            this.RaisePropertyChanged(nameof(this.PresetsRootFolder));
+        }
+
         private void CloseSettings(CancelEventArgs args)
         {
             ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
