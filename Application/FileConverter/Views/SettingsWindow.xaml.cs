@@ -30,6 +30,11 @@ namespace FileConverter.Views
                     this.PresetNameTextBox.Focus();
                     this.PresetNameTextBox.SelectAll();
                     break;
+
+                case "FolderName":
+                    this.FolderNameTextBox.Focus();
+                    this.FolderNameTextBox.SelectAll();
+                    break;
             }
         }
 

@@ -12,6 +12,7 @@ namespace FileConverter.ViewModels
     using System.Windows.Input;
 
     using FileConverter.Services;
+    using FileConverter.Views;
 
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
@@ -19,6 +20,7 @@ namespace FileConverter.ViewModels
     using GalaSoft.MvvmLight.Messaging;
 
     using Microsoft.Win32;
+    using ImageMagick;
 
     /// <summary>
     /// This class contains properties that the main View can data bind to.
@@ -36,12 +38,14 @@ namespace FileConverter.ViewModels
     {
         private InputExtensionCategory[] inputCategories;
         private PresetFolder presetsRootFolder;
+        private PresetFolder selectedFolder;
         private ConversionPreset selectedPreset;
         private Settings settings;
         private bool displaySeeChangeLogLink = true;
 
         private RelayCommand<string> openUrlCommand;
         private RelayCommand getChangeLogContentCommand;
+        private RelayCommand createFolderCommand;
         private RelayCommand movePresetUpCommand;
         private RelayCommand movePresetDownCommand;
         private RelayCommand addNewPresetCommand;
@@ -123,6 +127,67 @@ namespace FileConverter.ViewModels
                                                                                  InputPostConversionAction.Delete,
                                                                              };
 
+        public PresetFolder PresetsRootFolder
+        {
+            get => this.presetsRootFolder;
+
+            set
+            {
+                this.presetsRootFolder = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public ObservableObject SelectedItem
+        {
+            get
+            {
+                if (this.SelectedFolder != null)
+                {
+                    return this.SelectedFolder;
+                }
+
+                return this.SelectedPreset;
+            }
+
+            set
+            {
+                if (value is ConversionPreset preset)
+                {
+                    this.SelectedPreset = preset;
+                    this.SelectedFolder = null;
+                }
+                else if (value is PresetFolder folder)
+                {
+                    this.SelectedFolder = folder;
+                    this.SelectedPreset = null;
+                }
+                else
+                {
+                    this.SelectedPreset = null;
+                    this.SelectedFolder = null;
+                }
+
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public PresetFolder SelectedFolder
+        {
+            get => this.selectedFolder;
+
+            set
+            {
+                this.selectedFolder = value;
+
+                this.RaisePropertyChanged();
+                this.RaisePropertyChanged(nameof(this.SelectedItem));
+                this.movePresetUpCommand?.RaiseCanExecuteChanged();
+                this.movePresetDownCommand?.RaiseCanExecuteChanged();
+                this.removePresetCommand?.RaiseCanExecuteChanged();
+            }
+        }
+
         public ConversionPreset SelectedPreset
         {
             get => this.selectedPreset;
@@ -142,9 +207,11 @@ namespace FileConverter.ViewModels
                 }
 
                 this.RaisePropertyChanged();
+                this.RaisePropertyChanged(nameof(this.SelectedItem));
                 this.RaisePropertyChanged(nameof(this.InputCategories));
                 this.movePresetUpCommand?.RaiseCanExecuteChanged();
                 this.movePresetDownCommand?.RaiseCanExecuteChanged();
+                this.removePresetCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -217,6 +284,19 @@ namespace FileConverter.ViewModels
                 }
 
                 return this.openUrlCommand;
+            }
+        }
+
+        public ICommand CreateFolderCommand
+        {
+            get
+            {
+                if (this.createFolderCommand == null)
+                {
+                    this.createFolderCommand = new RelayCommand(this.CreateFolder);
+                }
+
+                return this.createFolderCommand;
             }
         }
 
@@ -297,6 +377,19 @@ namespace FileConverter.ViewModels
                 return this.closeCommand;
             }
         }
+
+        public TreeViewSelectionBehavior.IsChildOfPredicate PresetsHierarchyPredicate => (object nodeA, object nodeB) =>
+            {
+                if (nodeA is ConversionPreset)
+                {
+                    return false;
+                }
+
+                PresetFolder parentFolder = nodeA as PresetFolder;
+                Diagnostics.Debug.Assert(parentFolder != null, "Node should be a preset folder.");
+
+                return parentFolder.IsNodeInHierarchy(nodeB as ObservableObject, true);
+            };
 
         private void SelectedPresetPropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
         {
@@ -399,91 +492,122 @@ namespace FileConverter.ViewModels
             INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             navigationService.Close(Pages.Settings, false);
         }
-        
-        private bool CanMoveSelectedPresetUp()
+
+        private void CreateFolder()
         {
-            ConversionPreset presetToMove = this.SelectedPreset;
-            if (presetToMove == null)
+            PresetFolder parent;
+            if (this.SelectedFolder != null)
             {
-                return false;
+                parent = this.SelectedFolder;
+            }
+            else
+            {
+                parent = this.GetSelectedItemParentFolder();
             }
 
-            int indexOfSelectedPreset = this.settings.ConversionPresets.IndexOf(presetToMove);
+            int insertIndex = parent.Children.IndexOf(this.SelectedItem) + 1;
+            if (insertIndex < 0)
+            {
+                insertIndex = parent.Children.Count;
+            }
+
+            // Generate a unique folder name.
+            string folderName = Properties.Resources.DefaultFolderName;
+            int index = 1;
+            while (parent.Children.Any(match => match is PresetFolder folder && folder.Name == folderName))
+            {
+                index++;
+                folderName = $"{Properties.Resources.DefaultFolderName} ({index})";
+            }
+
+            PresetFolder newFolder = new PresetFolder(folderName, parent.FoldersNames);
+
+            parent.Children.Insert(insertIndex, newFolder);
+
+            this.SelectedItem = newFolder;
+
+            Messenger.Default.Send<string>("FolderName", "DoFocus");
+        }
+
+        private bool CanMoveSelectedPresetUp()
+        {
+            PresetFolder parent = this.GetSelectedItemParentFolder();
+
+            int indexOfSelectedPreset = parent.Children.IndexOf(this.SelectedItem);
             return indexOfSelectedPreset > 0;
         }
 
         private void MoveSelectedPresetUp()
         {
-            ConversionPreset presetToMove = this.SelectedPreset;
-            if (presetToMove == null)
-            {
-                return;
-            }
+            PresetFolder parent = this.GetSelectedItemParentFolder();
 
-            int indexOfSelectedPreset = this.settings.ConversionPresets.IndexOf(presetToMove);
+            int indexOfSelectedPreset = parent.Children.IndexOf(this.SelectedItem);
             int newIndexOfSelectedPreset = System.Math.Max(0, indexOfSelectedPreset - 1);
 
-            this.settings.ConversionPresets.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
+            parent.Children.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
             this.movePresetUpCommand?.RaiseCanExecuteChanged();
             this.movePresetDownCommand?.RaiseCanExecuteChanged();
         }
 
         private bool CanMoveSelectedPresetDown()
         {
-            ConversionPreset presetToMove = this.SelectedPreset;
-            if (presetToMove == null)
-            {
-                return false;
-            }
-
-            int indexOfSelectedPreset = this.settings.ConversionPresets.IndexOf(presetToMove);
-            return indexOfSelectedPreset < this.settings.ConversionPresets.Count - 1;
+            PresetFolder parent = this.GetSelectedItemParentFolder();
+            int indexOfSelectedPreset = parent.Children.IndexOf(this.SelectedItem);
+            return indexOfSelectedPreset < parent.Children.Count - 1;
         }
 
         private void MoveSelectedPresetDown()
         {
-            ConversionPreset presetToMove = this.SelectedPreset;
-            if (presetToMove == null)
-            {
-                return;
-            }
+            PresetFolder parent = this.GetSelectedItemParentFolder();
+            int indexOfSelectedPreset = parent.Children.IndexOf(this.SelectedItem);
+            int newIndexOfSelectedPreset = System.Math.Min(parent.Children.Count - 1, indexOfSelectedPreset + 1);
 
-            int indexOfSelectedPreset = this.settings.ConversionPresets.IndexOf(presetToMove);
-            int newIndexOfSelectedPreset = System.Math.Min(this.settings.ConversionPresets.Count - 1, indexOfSelectedPreset + 1);
-
-            this.settings.ConversionPresets.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
+            parent.Children.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
             this.movePresetUpCommand?.RaiseCanExecuteChanged();
             this.movePresetDownCommand?.RaiseCanExecuteChanged();
         }
 
         private void AddNewPreset()
         {
+            PresetFolder parent;
+            if (this.SelectedFolder != null)
+            {
+                parent = this.SelectedFolder;
+            }
+            else
+            {
+                parent = this.GetSelectedItemParentFolder();
+            }
+
+            int insertIndex = parent.Children.IndexOf(this.SelectedItem) + 1;
+            if (insertIndex < 0)
+            {
+                insertIndex = parent.Children.Count;
+            }
+
             // Generate a unique preset name.
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
             string presetName = Properties.Resources.DefaultPresetName;
             int index = 1;
-            while (settingsService.Settings.ConversionPresets.Any(match => match.Name == presetName))
+            while (parent.Children.Any(match => match is ConversionPreset folder && folder.ShortName == presetName))
             {
                 index++;
                 presetName = $"{Properties.Resources.DefaultPresetName} ({index})";
             }
 
-            // Create preset by coping the selected one.
-            int insertIndex = 0;
+            // Create preset by copying the selected one.
             ConversionPreset newPreset = null;
             if (this.SelectedPreset != null)
             {
                 newPreset = new ConversionPreset(presetName, this.SelectedPreset);
-                insertIndex = this.settings.ConversionPresets.IndexOf(this.SelectedPreset) + 1;
             }
             else
             {
                 newPreset = new ConversionPreset(presetName, OutputType.Mkv, new string[0]);
-                insertIndex = this.settings.ConversionPresets.Count;
             }
 
-            settingsService.Settings.ConversionPresets.Insert(insertIndex, newPreset);
-            this.SelectedPreset = newPreset;
+            parent.Children.Insert(insertIndex, newPreset);
+
+            this.SelectedItem = newPreset;
 
             Messenger.Default.Send<string>("PresetName", "DoFocus");
 
@@ -492,15 +616,42 @@ namespace FileConverter.ViewModels
 
         private void RemoveSelectedPreset()
         {
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
-            settingsService.Settings.ConversionPresets.Remove(this.selectedPreset);
+            PresetFolder parent = this.GetSelectedItemParentFolder();
+            parent.Children.Remove(this.SelectedItem);
+
+            this.SelectedItem = null;
 
             this.removePresetCommand.RaiseCanExecuteChanged();
         }
 
         private bool CanRemoveSelectedPreset()
         {
-            return this.SelectedPreset != null;
+            return this.SelectedItem != null;
+        }
+
+        private PresetFolder GetSelectedItemParentFolder()
+        {
+            PresetFolder parent = this.PresetsRootFolder;
+            if (this.SelectedPreset != null)
+            {
+                foreach (string folderName in this.SelectedPreset.ParentFoldersNames)
+                {
+                    parent = parent.Children.First(match => match is PresetFolder folder && folder.Name == folderName) as PresetFolder;
+                }
+            }
+            else if (this.SelectedFolder != null)
+            {
+                string[] parentFolderNames = this.SelectedFolder.ParentFoldersNames;
+                if (parentFolderNames != null)
+                {
+                    foreach (string folderName in parentFolderNames)
+                    {
+                        parent = parent.Children.First(match => match is PresetFolder folder && folder.Name == folderName) as PresetFolder;
+                    }
+                }
+            }
+
+            return parent;
         }
     }
 }

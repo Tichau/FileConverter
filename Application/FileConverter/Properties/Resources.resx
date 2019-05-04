@@ -550,4 +550,16 @@ use maj for uppercase version</value>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>Error during conversion job initialization.</value>
   </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>Create a new folder.</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>New folder</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>Folder Name</value>
+  </data>
 </root>

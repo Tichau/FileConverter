@@ -82,19 +82,42 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
-                        <ListBox x:Name="PresetList" Grid.Row="0" HorizontalAlignment="Left" IsSynchronizedWithCurrentItem="True" 
-                                 ItemsSource="{Binding Settings.ConversionPresets}"
-                                 SelectedItem="{Binding SelectedPreset}" 
-                                 Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding Name}"/>
+
+                        <TreeView ItemsSource="{Binding PresetsRootFolder.Children}" Grid.Row="0"
+                                  Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
+                            <TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type viewModels:PresetFolder}" ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Image HorizontalAlignment="Left" Height="24" Width="24" VerticalAlignment="Top" Margin="5"
+                                               Source="{Binding Source=/FileConverter;component/Resources/FolderIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}">
+                                        </Image>
+                                        <TextBlock Text="{Binding Name}" FontWeight="DemiBold" FontSize="14" VerticalAlignment="Center" Margin="5,0"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                                <DataTemplate DataType="{x:Type local:ConversionPreset}">
+                                    <TextBlock Text="{Binding ShortName}" FontSize="12" Margin="5" />
                                 </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                            </TreeView.Resources>
+                            <TreeView.ItemContainerStyle>
+                                <Style TargetType="TreeViewItem">
+                                    <Setter Property="IsExpanded" Value="True"/>
+                                </Style>
+                            </TreeView.ItemContainerStyle>
+                            <i:Interaction.Behaviors>
+                                <views:TreeViewSelectionBehavior
+                                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                    HierarchyPredicate="{Binding PresetsHierarchyPredicate}"
+                                    ExpandSelected="True"/>
+                            </i:Interaction.Behaviors>
+                        </TreeView>
 
                         <DockPanel Grid.Row="1" Margin="0,5,0,0" HorizontalAlignment="Center">
-                            <Button Content="^" HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" 
+                            <Button HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" 
+                                    ToolTip="{x:Static project:Resources.CreateANewFolder}"
+                                    Command="{Binding CreateFolderCommand}">
+                                <Image Source="{Binding Source=/FileConverter;component/Resources/FolderIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" />
+                            </Button>
+                            <Button Content="^" HorizontalAlignment="Left" Width="25" Margin="2,0" 
                                     ToolTip="{x:Static project:Resources.MoveUpSelectedPreset}"
                                     Command="{Binding MovePresetUpCommand}"/>
                             <Button Content="+" HorizontalAlignment="Left" Width="25" Margin="2,0"
@@ -112,6 +135,26 @@
                         </DockPanel>
                     </Grid>
 
+                    <!-- Folder settings -->
+                    <GroupBox Header="{x:Static project:Resources.PresetFolder}" Margin="5,5,0,0" Grid.Column="1" 
+                              DataContext="{Binding SelectedFolder}"
+                              Visibility="{Binding ., Converter={StaticResource ReferenceToVisibility}}">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" MaxWidth="240"/>
+                                <ColumnDefinition Width="2.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="{x:Static project:Resources.PresetFolderName}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                            <TextBox x:Name="FolderNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" FontSize="15"
+                                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        </Grid>
+                    </GroupBox>
+
                     <!-- Preset settings -->
                     <GroupBox Header="{x:Static project:Resources.Preset}" Margin="5,5,0,0" Grid.Column="1" 
                               Visibility="{Binding SelectedPreset, Converter={StaticResource ReferenceToVisibility}}">
@@ -127,7 +170,7 @@
 
                             <Label Content="{x:Static project:Resources.PresetName}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
                             <TextBox x:Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" FontSize="15"
-                                     Text="{Binding SelectedPreset.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                                     Text="{Binding SelectedPreset.ShortName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                             <GroupBox Grid.Row="1" Grid.Column="0" Header="{x:Static project:Resources.InputFormats}" Margin="5">
                                 <Grid Margin="5">
