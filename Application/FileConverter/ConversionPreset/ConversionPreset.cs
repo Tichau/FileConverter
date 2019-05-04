@@ -32,9 +32,10 @@ namespace FileConverter
             this.FullName = Properties.Resources.DefaultPresetName;
         }
 
-        public ConversionPreset(string fullName, OutputType outputType, params string[] inputTypes)
+        public ConversionPreset(string shortName, string[] parentFoldersNames, OutputType outputType, params string[] inputTypes)
         {
-            this.FullName = fullName;
+            this.ShortName = shortName;
+            this.ParentFoldersNames = parentFoldersNames;
             this.OutputType = outputType;
             List<string> inputTypeList = new List<string>();
             inputTypeList.AddRange(inputTypes);
@@ -43,9 +44,10 @@ namespace FileConverter
             this.outputFileNameTemplate = "(p)(f)";
         }
 
-        public ConversionPreset(string fullName, ConversionPreset source, params string[] additionalInputTypes)
+        public ConversionPreset(string shortName, ConversionPreset source, params string[] additionalInputTypes)
         {
-            this.FullName = fullName;
+            this.ShortName = shortName;
+            this.ParentFoldersNames = source.ParentFoldersNames;
             this.OutputType = source.outputType;
             List<string> inputTypeList = new List<string>();
             if (source.inputTypes != null)

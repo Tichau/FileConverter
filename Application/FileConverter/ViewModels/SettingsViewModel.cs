@@ -65,8 +65,8 @@ namespace FileConverter.ViewModels
             {
                 // Code runs in Blend --> create design time data.
                 this.Settings = new Settings();
-                this.Settings.ConversionPresets.Add(new ConversionPreset("Test", OutputType.Mp3));
-                this.SelectedPreset = new ConversionPreset("Test", OutputType.Mp3);
+                this.Settings.ConversionPresets.Add(new ConversionPreset("Test", null, OutputType.Mp3));
+                this.SelectedPreset = new ConversionPreset("Test", null, OutputType.Mp3);
             }
             else
             {
@@ -602,7 +602,7 @@ namespace FileConverter.ViewModels
             }
             else
             {
-                newPreset = new ConversionPreset(presetName, OutputType.Mkv, new string[0]);
+                newPreset = new ConversionPreset(presetName, parent.FoldersNames, OutputType.Mkv, new string[0]);
             }
 
             parent.Children.Insert(insertIndex, newPreset);

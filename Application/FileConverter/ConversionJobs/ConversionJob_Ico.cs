@@ -38,7 +38,7 @@ namespace FileConverter.ConversionJobs
             this.intermediateFilePath = PathHelpers.GenerateUniquePath(tempPath + fileName + ".png");
 
             // Convert input in png file to send it to ffmpeg for the ico conversion.
-            ConversionPreset intermediatePreset = new ConversionPreset("To compatible image", OutputType.Png, this.ConversionPreset.InputTypes.ToArray());
+            ConversionPreset intermediatePreset = new ConversionPreset("To compatible image", null, OutputType.Png, this.ConversionPreset.InputTypes.ToArray());
             intermediatePreset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "True");
             intermediatePreset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "256");
             this.pngConversionJob = ConversionJobFactory.Create(intermediatePreset, this.InputFilePath);
