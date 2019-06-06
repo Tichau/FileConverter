@@ -898,20 +898,20 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Music\Artist\Album\Song.wav.
-        /// </summary>
-        public static string OuputFileNameTemplateSample {
-            get {
-                return ResourceManager.GetString("OuputFileNameTemplateSample", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Output.
         /// </summary>
         public static string OutputExample {
             get {
                 return ResourceManager.GetString("OutputExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C:\Music\Artist\Album\Song.wav.
+        /// </summary>
+        public static string OutputFileNameTemplateSample {
+            get {
+                return ResourceManager.GetString("OutputFileNameTemplateSample", resourceCulture);
             }
         }
         

@@ -255,7 +255,7 @@
   <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
     <value>Rotacionar 180°</value>
   </data>
-  <data name="OuputFileNameTemplateSample" xml:space="preserve">
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
     <value>C:\Música\Artista\Álbum\música.wav</value>
   </data>
   <data name="OutputExample" xml:space="preserve">

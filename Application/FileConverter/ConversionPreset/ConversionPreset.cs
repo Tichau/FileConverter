@@ -622,7 +622,7 @@ namespace FileConverter
 
                 case "OutputFileNameTemplate":
                     {
-                        string sampleOutputFilePath = this.GenerateOutputFilePath(FileConverter.Properties.Resources.OuputFileNameTemplateSample, 1, 3);
+                        string sampleOutputFilePath = this.GenerateOutputFilePath(FileConverter.Properties.Resources.OutputFileNameTemplateSample, 1, 3);
                         if (string.IsNullOrEmpty(sampleOutputFilePath))
                         {
                             return "The output filename template must produce a non empty result.";
