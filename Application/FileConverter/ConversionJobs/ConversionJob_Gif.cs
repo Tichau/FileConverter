@@ -47,7 +47,7 @@ namespace FileConverter.ConversionJobs
                 this.intermediateFilePath = PathHelpers.GenerateUniquePath(tempPath + fileName + ".png");
 
                 // Convert input in png file to send it to ffmpeg for the gif conversion.
-                ConversionPreset intermediatePreset = new ConversionPreset("To compatible image", null, OutputType.Png, this.ConversionPreset.InputTypes.ToArray());
+                ConversionPreset intermediatePreset = new ConversionPreset("To compatible image", OutputType.Png, this.ConversionPreset.InputTypes.ToArray());
                 this.pngConversionJob = ConversionJobFactory.Create(intermediatePreset, this.InputFilePath);
                 this.pngConversionJob.PrepareConversion(this.intermediateFilePath);
 

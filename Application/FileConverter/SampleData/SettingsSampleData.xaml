@@ -15,27 +15,55 @@
     </viewModels:SettingsViewModel.Settings>
 
     <viewModels:SettingsViewModel.PresetsRootFolder>
-        <viewModels:PresetFolder Name="Root">
-            <viewModels:PresetFolder.Children>
-                <viewModels:PresetFolder Name="Advanced">
-                    <viewModels:PresetFolder.Children>
-                        <fileConverter:ConversionPreset ShortName="To Small Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
-                        <fileConverter:ConversionPreset ShortName="To Small Png" OutputType="Png"></fileConverter:ConversionPreset>
-                    </viewModels:PresetFolder.Children>
-                </viewModels:PresetFolder>
-                <fileConverter:ConversionPreset ShortName="To Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
-                <fileConverter:ConversionPreset ShortName="To Mp4" OutputType="Mp4"></fileConverter:ConversionPreset>
-                <fileConverter:ConversionPreset ShortName="To Mp3" OutputType="Mp3"></fileConverter:ConversionPreset>
-                <fileConverter:ConversionPreset ShortName="To Png" OutputType="Png"></fileConverter:ConversionPreset>
-            </viewModels:PresetFolder.Children>
-        </viewModels:PresetFolder>
+        <viewModels:PresetFolderNode Name="Root">
+            <viewModels:PresetFolderNode.Children>
+                <viewModels:PresetFolderNode Name="Advanced">
+                    <viewModels:PresetFolderNode.Children>
+                        <viewModels:PresetNode>
+                            <viewModels:PresetNode.Preset>
+                                <fileConverter:ConversionPreset ShortName="To Small Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
+                            </viewModels:PresetNode.Preset>
+                        </viewModels:PresetNode>
+                        <viewModels:PresetNode>
+                            <viewModels:PresetNode.Preset>
+                                <fileConverter:ConversionPreset ShortName="To Small Png" OutputType="Png"></fileConverter:ConversionPreset>
+                            </viewModels:PresetNode.Preset>
+                        </viewModels:PresetNode>
+                    </viewModels:PresetFolderNode.Children>
+                </viewModels:PresetFolderNode>
+                <viewModels:PresetNode>
+                    <viewModels:PresetNode.Preset>
+                        <fileConverter:ConversionPreset ShortName="To Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
+                    </viewModels:PresetNode.Preset>
+                </viewModels:PresetNode>
+                <viewModels:PresetNode>
+                    <viewModels:PresetNode.Preset>
+                        <fileConverter:ConversionPreset ShortName="To Mp4" OutputType="Mp4"></fileConverter:ConversionPreset>
+                    </viewModels:PresetNode.Preset>
+                </viewModels:PresetNode>
+                <viewModels:PresetNode>
+                    <viewModels:PresetNode.Preset>
+                        <fileConverter:ConversionPreset ShortName="To Mp3" OutputType="Mp3"></fileConverter:ConversionPreset>
+                    </viewModels:PresetNode.Preset>
+                </viewModels:PresetNode>
+                <viewModels:PresetNode>
+                    <viewModels:PresetNode.Preset>
+                        <fileConverter:ConversionPreset ShortName="To Png" OutputType="Png"></fileConverter:ConversionPreset>
+                    </viewModels:PresetNode.Preset>
+                </viewModels:PresetNode>
+            </viewModels:PresetFolderNode.Children>
+        </viewModels:PresetFolderNode>
     </viewModels:SettingsViewModel.PresetsRootFolder>
 
     <viewModels:SettingsViewModel.SelectedPreset>
-        <fileConverter:ConversionPreset ShortName="To Avi" 
-                                        OutputType="Avi" 
-                                        OutputFileNameTemplate="(p)(f)" 
-                                        InputPostConversionAction="None" />
+        <viewModels:PresetNode>
+            <viewModels:PresetNode.Preset>
+                <fileConverter:ConversionPreset ShortName="To Avi" 
+                                                OutputType="Avi" 
+                                                OutputFileNameTemplate="(p)(f)" 
+                                                InputPostConversionAction="None" />
+            </viewModels:PresetNode.Preset>
+        </viewModels:PresetNode>
     </viewModels:SettingsViewModel.SelectedPreset>
 </viewModels:SettingsViewModel>
 

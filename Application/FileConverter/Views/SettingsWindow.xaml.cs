@@ -54,7 +54,7 @@ namespace FileConverter.Views
 
             string inputFormat = (checkBox.Content as string).ToLowerInvariant();
 
-            dataContext.SelectedPreset.AddInputType(inputFormat);
+            dataContext.SelectedPreset.Preset.AddInputType(inputFormat);
         }
 
         private void OnInputTypeUnchecked(object sender, RoutedEventArgs e)
@@ -73,7 +73,7 @@ namespace FileConverter.Views
 
             string inputFormat = (checkBox.Content as string).ToLowerInvariant();
 
-            dataContext.SelectedPreset.RemoveInputType(inputFormat);
+            dataContext.SelectedPreset.Preset.RemoveInputType(inputFormat);
         }
 
         private void OnInputTypeCategoryChecked(object sender, RoutedEventArgs e)
@@ -94,7 +94,7 @@ namespace FileConverter.Views
 
             foreach (string inputExtension in category.InputExtensionNames)
             {
-                dataContext.SelectedPreset.AddInputType(inputExtension);
+                dataContext.SelectedPreset.Preset.AddInputType(inputExtension);
             }
         }
 
@@ -116,7 +116,7 @@ namespace FileConverter.Views
 
             foreach (string inputExtension in category.InputExtensionNames)
             {
-                dataContext.SelectedPreset.RemoveInputType(inputExtension);
+                dataContext.SelectedPreset.Preset.RemoveInputType(inputExtension);
             }
         }
     }

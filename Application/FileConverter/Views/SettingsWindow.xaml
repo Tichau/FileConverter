@@ -86,7 +86,7 @@
                         <TreeView ItemsSource="{Binding PresetsRootFolder.Children}" Grid.Row="0"
                                   Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
                             <TreeView.Resources>
-                                <HierarchicalDataTemplate DataType="{x:Type viewModels:PresetFolder}" ItemsSource="{Binding Children}">
+                                <HierarchicalDataTemplate DataType="{x:Type viewModels:PresetFolderNode}" ItemsSource="{Binding Children}">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <Image HorizontalAlignment="Left" Height="24" Width="24" VerticalAlignment="Top" Margin="5"
                                                Source="{Binding Source=/FileConverter;component/Resources/FolderIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}">
@@ -94,8 +94,8 @@
                                         <TextBlock Text="{Binding Name}" FontWeight="DemiBold" FontSize="14" VerticalAlignment="Center" Margin="5,0"/>
                                     </StackPanel>
                                 </HierarchicalDataTemplate>
-                                <DataTemplate DataType="{x:Type local:ConversionPreset}">
-                                    <TextBlock Text="{Binding ShortName}" FontSize="12" Margin="5" />
+                                <DataTemplate DataType="{x:Type viewModels:PresetNode}">
+                                    <TextBlock Text="{Binding Preset.ShortName}" FontSize="12" Margin="5" />
                                 </DataTemplate>
                             </TreeView.Resources>
                             <TreeView.ItemContainerStyle>
@@ -137,9 +137,8 @@
 
                     <!-- Folder settings -->
                     <GroupBox Header="{x:Static project:Resources.PresetFolder}" Margin="5,5,0,0" Grid.Column="1" 
-                              DataContext="{Binding SelectedFolder}"
-                              Visibility="{Binding ., Converter={StaticResource ReferenceToVisibility}}">
-                        <Grid Margin="5">
+                              Visibility="{Binding SelectedFolder, Converter={StaticResource ReferenceToVisibility}}">
+                        <Grid DataContext="{Binding SelectedFolder}" Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" MaxWidth="240"/>
                                 <ColumnDefinition Width="2.5*"/>
@@ -170,7 +169,7 @@
 
                             <Label Content="{x:Static project:Resources.PresetName}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
                             <TextBox x:Name="PresetNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" FontSize="15"
-                                     Text="{Binding SelectedPreset.ShortName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                                     Text="{Binding SelectedPreset.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                             <GroupBox Grid.Row="1" Grid.Column="0" Header="{x:Static project:Resources.InputFormats}" Margin="5">
                                 <Grid Margin="5">
@@ -190,7 +189,7 @@
                                                 <CheckBox Content="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeCategoryChecked" Unchecked="OnInputTypeCategoryUnchecked" IsThreeState="True" >
                                                     <CheckBox.IsChecked>
                                                         <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
-                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type views:SettingsWindow}}" Path="DataContext.SelectedPreset.InputTypes" Mode="OneWay"/>
+                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPreset.Preset.InputTypes" Mode="OneWay"/>
                                                             <Binding Path="InputExtensionNames" Mode="OneWay"/>
                                                         </MultiBinding>
                                                     </CheckBox.IsChecked>
@@ -200,7 +199,7 @@
                                                 <CheckBox Content="{Binding Name}" Foreground="{Binding ForegroundBrush}" ToolTip="{Binding ToolTip}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeChecked" Unchecked="OnInputTypeUnchecked">
                                                     <CheckBox.IsChecked>
                                                         <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
-                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type views:SettingsWindow}}" Path="DataContext.SelectedPreset.InputTypes" Mode="OneWay"/>
+                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPreset.Preset.InputTypes" Mode="OneWay"/>
                                                             <Binding Path="Name" Mode="OneWay"/>
                                                         </MultiBinding>
                                                     </CheckBox.IsChecked>
@@ -216,7 +215,7 @@
 
                                     <Label Grid.Row="1" Content="{x:Static project:Resources.ActionWhenConversionSucceedTitle}" ToolTip="{x:Static project:Resources.ActionWhenConversionSucceedDescription}" />
                                     <ComboBox Grid.Row="2" ItemsSource="{Binding InputPostConversionActions, Mode=OneTime}"
-                                              SelectedItem="{Binding SelectedPreset.InputPostConversionAction, Mode=TwoWay}">
+                                              SelectedItem="{Binding SelectedPreset.Preset.InputPostConversionAction, Mode=TwoWay}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}}" />
@@ -234,7 +233,7 @@
                                 <StackPanel>
                                     <ComboBox Margin="5" Height="29" VerticalAlignment="Top" 
                                               ItemsSource="{Binding OutputTypes}"
-                                              SelectedItem="{Binding SelectedPreset.OutputType, Converter={StaticResource OutputTypeEnumToViewModel}, Mode=TwoWay}">
+                                              SelectedItem="{Binding SelectedPreset.Preset.OutputType, Converter={StaticResource OutputTypeEnumToViewModel}, Mode=TwoWay}">
                                         <ComboBox.GroupStyle>
                                             <GroupStyle>
                                                 <GroupStyle.HeaderTemplate>
@@ -253,7 +252,7 @@
                                     </ComboBox>
 
                                     <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
-								        Content="{Binding SelectedPreset, UpdateSourceTrigger=PropertyChanged}" />
+								        Content="{Binding SelectedPreset.Preset, UpdateSourceTrigger=PropertyChanged}" />
                                     <Separator/>
 
                                     <!-- Output file name template -->
@@ -270,16 +269,16 @@
                                         </Grid.RowDefinitions>
                                         <Label Content="{x:Static project:Resources.FileNameTemplate}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
                                         <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}"
-                                                 Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                                                 Text="{Binding SelectedPreset.Preset.OutputFileNameTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                                         <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
                                         <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center"/>
                                         <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
                                         <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center">
                                             <TextBlock.Text>
                                                 <MultiBinding Converter="{StaticResource FileNameConverter}">
-                                                    <Binding Source="{x:Static project:Resources.OuputFileNameTemplateSample}"/>
-                                                    <Binding Path="SelectedPreset.OutputType" Mode="OneWay"/>
-                                                    <Binding Path="SelectedPreset.OutputFileNameTemplate" Mode="OneWay"/>
+                                                    <Binding Source="{x:Static project:Resources.OutputFileNameTemplateSample}"/>
+                                                    <Binding Path="SelectedPreset.Preset.OutputType" Mode="OneWay"/>
+                                                    <Binding Path="SelectedPreset.Preset.OutputFileNameTemplate" Mode="OneWay"/>
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>

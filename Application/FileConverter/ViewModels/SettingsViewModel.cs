@@ -37,9 +37,9 @@ namespace FileConverter.ViewModels
     public class SettingsViewModel : ViewModelBase
     {
         private InputExtensionCategory[] inputCategories;
-        private PresetFolder presetsRootFolder;
-        private PresetFolder selectedFolder;
-        private ConversionPreset selectedPreset;
+        private PresetFolderNode presetsRootFolder;
+        private PresetFolderNode selectedFolder;
+        private PresetNode selectedPreset;
         private Settings settings;
         private bool displaySeeChangeLogLink = true;
 
@@ -65,8 +65,7 @@ namespace FileConverter.ViewModels
             {
                 // Code runs in Blend --> create design time data.
                 this.Settings = new Settings();
-                this.Settings.ConversionPresets.Add(new ConversionPreset("Test", null, OutputType.Mp3));
-                this.SelectedPreset = new ConversionPreset("Test", null, OutputType.Mp3);
+                this.Settings.ConversionPresets.Add(new ConversionPreset("Test", OutputType.Mp3));
             }
             else
             {
@@ -112,7 +111,7 @@ namespace FileConverter.ViewModels
                 for (int index = 0; index < this.inputCategories.Length; index++)
                 {
                     InputExtensionCategory category = this.inputCategories[index];
-                    if (this.SelectedPreset == null || Helpers.IsOutputTypeCompatibleWithCategory(this.SelectedPreset.OutputType, category.Name))
+                    if (this.SelectedPreset == null || Helpers.IsOutputTypeCompatibleWithCategory(this.SelectedPreset.Preset.OutputType, category.Name))
                     {
                         yield return category;
                     }
@@ -127,7 +126,7 @@ namespace FileConverter.ViewModels
                                                                                  InputPostConversionAction.Delete,
                                                                              };
 
-        public PresetFolder PresetsRootFolder
+        public PresetFolderNode PresetsRootFolder
         {
             get => this.presetsRootFolder;
 
@@ -138,7 +137,7 @@ namespace FileConverter.ViewModels
             }
         }
 
-        public ObservableObject SelectedItem
+        public AbstractTreeNode SelectedItem
         {
             get
             {
@@ -152,12 +151,12 @@ namespace FileConverter.ViewModels
 
             set
             {
-                if (value is ConversionPreset preset)
+                if (value is PresetNode preset)
                 {
                     this.SelectedPreset = preset;
                     this.SelectedFolder = null;
                 }
-                else if (value is PresetFolder folder)
+                else if (value is PresetFolderNode folder)
                 {
                     this.SelectedFolder = folder;
                     this.SelectedPreset = null;
@@ -172,7 +171,7 @@ namespace FileConverter.ViewModels
             }
         }
 
-        public PresetFolder SelectedFolder
+        public PresetFolderNode SelectedFolder
         {
             get => this.selectedFolder;
 
@@ -188,7 +187,7 @@ namespace FileConverter.ViewModels
             }
         }
 
-        public ConversionPreset SelectedPreset
+        public PresetNode SelectedPreset
         {
             get => this.selectedPreset;
 
@@ -196,14 +195,14 @@ namespace FileConverter.ViewModels
             {
                 if (this.selectedPreset != null)
                 {
-                    this.selectedPreset.PropertyChanged -= this.SelectedPresetPropertyChanged;
+                    this.selectedPreset.Preset.PropertyChanged -= this.SelectedPresetPropertyChanged;
                 }
 
                 this.selectedPreset = value;
 
                 if (this.selectedPreset != null)
                 {
-                    this.selectedPreset.PropertyChanged += this.SelectedPresetPropertyChanged;
+                    this.selectedPreset.Preset.PropertyChanged += this.SelectedPresetPropertyChanged;
                 }
 
                 this.RaisePropertyChanged();
@@ -380,15 +379,15 @@ namespace FileConverter.ViewModels
 
         public TreeViewSelectionBehavior.IsChildOfPredicate PresetsHierarchyPredicate => (object nodeA, object nodeB) =>
             {
-                if (nodeA is ConversionPreset)
+                if (nodeA is PresetNode)
                 {
                     return false;
                 }
 
-                PresetFolder parentFolder = nodeA as PresetFolder;
+                PresetFolderNode parentFolder = nodeA as PresetFolderNode;
                 Diagnostics.Debug.Assert(parentFolder != null, "Node should be a preset folder.");
 
-                return parentFolder.IsNodeInHierarchy(nodeB as ObservableObject, true);
+                return parentFolder.IsNodeInHierarchy(nodeB as AbstractTreeNode, true);
             };
 
         private void SelectedPresetPropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
@@ -447,26 +446,52 @@ namespace FileConverter.ViewModels
 
         private void InitializePresetFolders()
         {
-            this.presetsRootFolder = new PresetFolder(null, null);
+            this.presetsRootFolder = new PresetFolderNode(null, null);
             foreach (ConversionPreset preset in this.Settings.ConversionPresets)
             {
-                PresetFolder folder = this.presetsRootFolder;
+                PresetFolderNode parent = this.presetsRootFolder;
                 foreach (string folderName in preset.ParentFoldersNames)
                 {
-                    PresetFolder subFolder = folder.Children.FirstOrDefault(match => match is PresetFolder && ((PresetFolder)match).Name == folderName) as PresetFolder;
+                    PresetFolderNode subFolder = parent.Children.FirstOrDefault(match => match is PresetFolderNode && ((PresetFolderNode)match).Name == folderName) as PresetFolderNode;
                     if (subFolder == null)
                     {
-                        subFolder = new PresetFolder(folderName, folder.FoldersNames);
-                        folder.Children.Add(subFolder);
+                        subFolder = new PresetFolderNode(folderName, parent);
+                        parent.Children.Add(subFolder);
                     }
 
-                    folder = subFolder;
+                    parent = subFolder;
                 }
 
-                folder.Children.Add(preset);
+                PresetNode presetNode = new PresetNode(preset, parent);
+                parent.Children.Add(presetNode);
             }
 
             this.RaisePropertyChanged(nameof(this.PresetsRootFolder));
+        }
+
+        private void ComputePresetsParentFoldersNames(AbstractTreeNode node, List<string> folderNamesCache)
+        {
+            if (node is PresetFolderNode folder)
+            {
+                if (!string.IsNullOrEmpty(folder.Name))
+                {
+                    folderNamesCache.Add(folder.Name);
+                }
+
+                foreach (var child in folder.Children)
+                {
+                    this.ComputePresetsParentFoldersNames(child, folderNamesCache);
+                }
+
+                if (!string.IsNullOrEmpty(folder.Name))
+                {
+                    folderNamesCache.RemoveAt(folderNamesCache.Count - 1);
+                }
+            }
+            else if (node is PresetNode preset)
+            {
+                preset.Preset.ParentFoldersNames = folderNamesCache.ToArray();
+            }
         }
 
         private void CloseSettings(CancelEventArgs args)
@@ -485,6 +510,9 @@ namespace FileConverter.ViewModels
 
         private void SaveSettings()
         {
+            // Compute parent folder names.
+            this.ComputePresetsParentFoldersNames(this.presetsRootFolder, new List<string>());
+
             // Save changes.
             ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
             settingsService.SaveSettings();
@@ -495,14 +523,18 @@ namespace FileConverter.ViewModels
 
         private void CreateFolder()
         {
-            PresetFolder parent;
+            PresetFolderNode parent;
             if (this.SelectedFolder != null)
             {
                 parent = this.SelectedFolder;
             }
+            else if (this.SelectedItem != null)
+            {
+                parent = this.SelectedItem.Parent;
+            }
             else
             {
-                parent = this.GetSelectedItemParentFolder();
+                parent = this.presetsRootFolder;
             }
 
             int insertIndex = parent.Children.IndexOf(this.SelectedItem) + 1;
@@ -514,13 +546,13 @@ namespace FileConverter.ViewModels
             // Generate a unique folder name.
             string folderName = Properties.Resources.DefaultFolderName;
             int index = 1;
-            while (parent.Children.Any(match => match is PresetFolder folder && folder.Name == folderName))
+            while (parent.Children.Any(match => match is PresetFolderNode folder && folder.Name == folderName))
             {
                 index++;
                 folderName = $"{Properties.Resources.DefaultFolderName} ({index})";
             }
 
-            PresetFolder newFolder = new PresetFolder(folderName, parent.FoldersNames);
+            PresetFolderNode newFolder = new PresetFolderNode(folderName, parent);
 
             parent.Children.Insert(insertIndex, newFolder);
 
@@ -531,52 +563,129 @@ namespace FileConverter.ViewModels
 
         private bool CanMoveSelectedPresetUp()
         {
-            PresetFolder parent = this.GetSelectedItemParentFolder();
+            if (this.SelectedItem == null)
+            {
+                // no preset selected.
+                return false;
+            }
 
-            int indexOfSelectedPreset = parent.Children.IndexOf(this.SelectedItem);
+            if (this.SelectedItem.Parent != this.presetsRootFolder)
+            {
+                // The parent is not the root, we can move the preset up.
+                return true;
+            }
+
+            int indexOfSelectedPreset = this.SelectedItem.Parent.Children.IndexOf(this.SelectedItem);
             return indexOfSelectedPreset > 0;
         }
 
         private void MoveSelectedPresetUp()
         {
-            PresetFolder parent = this.GetSelectedItemParentFolder();
+            Diagnostics.Debug.Assert(this.SelectedItem != null, "this.SelectedItem != null");
 
-            int indexOfSelectedPreset = parent.Children.IndexOf(this.SelectedItem);
-            int newIndexOfSelectedPreset = System.Math.Max(0, indexOfSelectedPreset - 1);
+            AbstractTreeNode itemToMoveUp = this.SelectedItem;
+            PresetFolderNode currentParent = itemToMoveUp.Parent;
+            int indexOfSelectedPreset = currentParent.Children.IndexOf(itemToMoveUp);
+            if (indexOfSelectedPreset == 0)
+            {
+                // Move to the parent folder.
+                int indexOfFolder = currentParent.Parent.Children.IndexOf(currentParent);
+                currentParent.Children.RemoveAt(indexOfSelectedPreset);
+                currentParent.Parent.Children.Insert(indexOfFolder, itemToMoveUp);
+                itemToMoveUp.Parent = currentParent.Parent;
+            }
+            else
+            {
+                int newIndexOfSelectedPreset = System.Math.Max(0, indexOfSelectedPreset - 1);
+                if (currentParent.Children[newIndexOfSelectedPreset] is PresetFolderNode newParent)
+                {
+                    // Move to child folder.
+                    currentParent.Children.RemoveAt(indexOfSelectedPreset);
+                    newParent.Children.Add(itemToMoveUp);
+                    itemToMoveUp.Parent = newParent;
+                }
+                else
+                {
+                    // Swap nodes.
+                    currentParent.Children.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
+                }
+            }
 
-            parent.Children.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
+            this.SelectedItem = itemToMoveUp;
             this.movePresetUpCommand?.RaiseCanExecuteChanged();
             this.movePresetDownCommand?.RaiseCanExecuteChanged();
         }
 
         private bool CanMoveSelectedPresetDown()
         {
-            PresetFolder parent = this.GetSelectedItemParentFolder();
-            int indexOfSelectedPreset = parent.Children.IndexOf(this.SelectedItem);
-            return indexOfSelectedPreset < parent.Children.Count - 1;
+            if (this.SelectedItem == null)
+            {
+                // no preset selected.
+                return false;
+            }
+
+            if (this.SelectedItem.Parent != this.presetsRootFolder)
+            {
+                // The parent is not the root, we can move the preset down.
+                return true;
+            }
+
+            int indexOfSelectedPreset = this.SelectedItem.Parent.Children.IndexOf(this.SelectedItem);
+            return indexOfSelectedPreset < this.SelectedItem.Parent.Children.Count - 1;
         }
 
         private void MoveSelectedPresetDown()
         {
-            PresetFolder parent = this.GetSelectedItemParentFolder();
-            int indexOfSelectedPreset = parent.Children.IndexOf(this.SelectedItem);
-            int newIndexOfSelectedPreset = System.Math.Min(parent.Children.Count - 1, indexOfSelectedPreset + 1);
+            Diagnostics.Debug.Assert(this.SelectedItem != null, "this.SelectedItem != null");
 
-            parent.Children.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
+            AbstractTreeNode itemToMoveDown = this.SelectedItem;
+            PresetFolderNode currentParent = itemToMoveDown.Parent;
+            int indexOfSelectedPreset = currentParent.Children.IndexOf(itemToMoveDown);
+            if (indexOfSelectedPreset == currentParent.Children.Count - 1)
+            {
+                // Move to the parent folder.
+                int indexOfFolder = currentParent.Parent.Children.IndexOf(currentParent);
+                currentParent.Children.RemoveAt(indexOfSelectedPreset);
+                currentParent.Parent.Children.Insert(indexOfFolder  + 1, itemToMoveDown);
+                itemToMoveDown.Parent = currentParent.Parent;
+            }
+            else
+            {
+                int newIndexOfSelectedPreset = System.Math.Min(this.SelectedItem.Parent.Children.Count - 1, indexOfSelectedPreset + 1);
+                if (currentParent.Children[newIndexOfSelectedPreset] is PresetFolderNode newParent)
+                {
+                    // Move to child folder.
+                    currentParent.Children.RemoveAt(indexOfSelectedPreset);
+                    newParent.Children.Insert(0, itemToMoveDown);
+                    itemToMoveDown.Parent = newParent;
+                }
+                else
+                {
+                    // Swap nodes.
+                    currentParent.Children.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
+                }
+            }
+
+            this.SelectedItem = itemToMoveDown;
+
             this.movePresetUpCommand?.RaiseCanExecuteChanged();
             this.movePresetDownCommand?.RaiseCanExecuteChanged();
         }
 
         private void AddNewPreset()
         {
-            PresetFolder parent;
+            PresetFolderNode parent;
             if (this.SelectedFolder != null)
             {
                 parent = this.SelectedFolder;
             }
+            else if (this.SelectedItem != null)
+            {
+                parent = this.SelectedItem.Parent;
+            }
             else
             {
-                parent = this.GetSelectedItemParentFolder();
+                parent = this.presetsRootFolder;
             }
 
             int insertIndex = parent.Children.IndexOf(this.SelectedItem) + 1;
@@ -588,7 +697,7 @@ namespace FileConverter.ViewModels
             // Generate a unique preset name.
             string presetName = Properties.Resources.DefaultPresetName;
             int index = 1;
-            while (parent.Children.Any(match => match is ConversionPreset folder && folder.ShortName == presetName))
+            while (parent.Children.Any(match => match is PresetNode folder && folder.Preset.ShortName == presetName))
             {
                 index++;
                 presetName = $"{Properties.Resources.DefaultPresetName} ({index})";
@@ -598,16 +707,18 @@ namespace FileConverter.ViewModels
             ConversionPreset newPreset = null;
             if (this.SelectedPreset != null)
             {
-                newPreset = new ConversionPreset(presetName, this.SelectedPreset);
+                newPreset = new ConversionPreset(presetName, this.SelectedPreset.Preset);
             }
             else
             {
-                newPreset = new ConversionPreset(presetName, parent.FoldersNames, OutputType.Mkv, new string[0]);
+                newPreset = new ConversionPreset(presetName, OutputType.Mkv, new string[0]);
             }
 
-            parent.Children.Insert(insertIndex, newPreset);
+            PresetNode node = new PresetNode(newPreset, parent);
 
-            this.SelectedItem = newPreset;
+            parent.Children.Insert(insertIndex, node);
+
+            this.SelectedItem = node;
 
             Messenger.Default.Send<string>("PresetName", "DoFocus");
 
@@ -616,8 +727,7 @@ namespace FileConverter.ViewModels
 
         private void RemoveSelectedPreset()
         {
-            PresetFolder parent = this.GetSelectedItemParentFolder();
-            parent.Children.Remove(this.SelectedItem);
+            this.SelectedItem.Parent.Children.Remove(this.SelectedItem);
 
             this.SelectedItem = null;
 
@@ -627,31 +737,6 @@ namespace FileConverter.ViewModels
         private bool CanRemoveSelectedPreset()
         {
             return this.SelectedItem != null;
-        }
-
-        private PresetFolder GetSelectedItemParentFolder()
-        {
-            PresetFolder parent = this.PresetsRootFolder;
-            if (this.SelectedPreset != null)
-            {
-                foreach (string folderName in this.SelectedPreset.ParentFoldersNames)
-                {
-                    parent = parent.Children.First(match => match is PresetFolder folder && folder.Name == folderName) as PresetFolder;
-                }
-            }
-            else if (this.SelectedFolder != null)
-            {
-                string[] parentFolderNames = this.SelectedFolder.ParentFoldersNames;
-                if (parentFolderNames != null)
-                {
-                    foreach (string folderName in parentFolderNames)
-                    {
-                        parent = parent.Children.First(match => match is PresetFolder folder && folder.Name == folderName) as PresetFolder;
-                    }
-                }
-            }
-
-            return parent;
         }
     }
 }

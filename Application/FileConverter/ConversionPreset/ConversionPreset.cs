@@ -32,10 +32,9 @@ namespace FileConverter
             this.FullName = Properties.Resources.DefaultPresetName;
         }
 
-        public ConversionPreset(string shortName, string[] parentFoldersNames, OutputType outputType, params string[] inputTypes)
+        public ConversionPreset(string shortName, OutputType outputType, params string[] inputTypes)
         {
             this.ShortName = shortName;
-            this.ParentFoldersNames = parentFoldersNames;
             this.OutputType = outputType;
             List<string> inputTypeList = new List<string>();
             inputTypeList.AddRange(inputTypes);
@@ -122,7 +121,7 @@ namespace FileConverter
         public string[] ParentFoldersNames
         {
             get;
-            private set;
+            set;
         }
 
         [XmlAttribute]
