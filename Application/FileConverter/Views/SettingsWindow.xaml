@@ -83,8 +83,9 @@
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
 
-                        <TreeView ItemsSource="{Binding PresetsRootFolder.Children}" Grid.Row="0"
-                                  Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
+                        <TreeView Name="PresetTreeView" Grid.Row="0"
+                                  ItemsSource="{Binding PresetsRootFolder.Children}"
+                                  Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}" AllowDrop="True">
                             <TreeView.Resources>
                                 <HierarchicalDataTemplate DataType="{x:Type viewModels:PresetFolderNode}" ItemsSource="{Binding Children}">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -101,6 +102,11 @@
                             <TreeView.ItemContainerStyle>
                                 <Style TargetType="TreeViewItem">
                                     <Setter Property="IsExpanded" Value="True"/>
+                                    <Setter Property="BorderBrush" Value="#1E6BB8"/>
+                                    <EventSetter Event="TreeViewItem.DragOver"  Handler="TreeView_DragOver"/>
+                                    <EventSetter Event="TreeViewItem.Drop" Handler="TreeView_Drop"/>
+                                    <EventSetter Event="TreeViewItem.MouseMove" Handler="TreeView_MouseMove"/>
+                                    <EventSetter Event="TreeViewItem.MouseDown" Handler="TreeView_MouseDown"/>
                                 </Style>
                             </TreeView.ItemContainerStyle>
                             <i:Interaction.Behaviors>
