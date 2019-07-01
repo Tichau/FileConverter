@@ -428,7 +428,7 @@ namespace FileConverter.ViewModels
             this.RaisePropertyChanged(nameof(this.PresetsRootFolder));
         }
 
-        private void ComputePresetsParentFoldersNames(AbstractTreeNode node, List<string> folderNamesCache)
+        private void ComputePresetsParentFoldersNamesAndFillSettings(AbstractTreeNode node, List<string> folderNamesCache)
         {
             if (node is PresetFolderNode folder)
             {
@@ -439,7 +439,7 @@ namespace FileConverter.ViewModels
 
                 foreach (var child in folder.Children)
                 {
-                    this.ComputePresetsParentFoldersNames(child, folderNamesCache);
+                    this.ComputePresetsParentFoldersNamesAndFillSettings(child, folderNamesCache);
                 }
 
                 if (!string.IsNullOrEmpty(folder.Name))
@@ -450,6 +450,7 @@ namespace FileConverter.ViewModels
             else if (node is PresetNode preset)
             {
                 preset.Preset.ParentFoldersNames = folderNamesCache.ToArray();
+                this.settings.ConversionPresets.Add(preset.Preset);
             }
         }
 
@@ -470,8 +471,9 @@ namespace FileConverter.ViewModels
         private void SaveSettings()
         {
             // Compute parent folder names.
-            this.ComputePresetsParentFoldersNames(this.presetsRootFolder, new List<string>());
-
+            this.settings.ConversionPresets.Clear();
+            this.ComputePresetsParentFoldersNamesAndFillSettings(this.presetsRootFolder, new List<string>());
+            
             // Save changes.
             ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
             settingsService.SaveSettings();
