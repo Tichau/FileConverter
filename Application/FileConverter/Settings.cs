@@ -12,7 +12,7 @@ namespace FileConverter
 
     [XmlRoot]
     [XmlType]
-    public class Settings : ObservableObject, IDataErrorInfo, IXmlSerializable
+    public class Settings : ObservableObject, IXmlSerializable
     {
         public const int Version = 4;
 
@@ -22,33 +22,6 @@ namespace FileConverter
         private bool checkUpgradeAtStartup = true;
         private CultureInfo applicationLanguage;
         private int maximumNumberOfSimultaneousConversions;
-
-        [XmlIgnore]
-        public string Error
-        {
-            get
-            {
-                for (int index = 0; index < this.ConversionPresets.Count; index++)
-                {
-                    string error = this.ConversionPresets[index].Error;
-                    if (!string.IsNullOrEmpty(error))
-                    {
-                        return error;
-                    }
-                }
-
-                return string.Empty;
-            }
-        }
-
-        [XmlIgnore]
-        public string this[string columnName]
-        {
-            get
-            {
-                return this.Error;
-            }
-        }
         
         public ConversionPreset GetPresetFromName(string presetName)
         {

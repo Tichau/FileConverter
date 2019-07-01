@@ -34,7 +34,7 @@ namespace FileConverter.ViewModels
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class SettingsViewModel : ViewModelBase
+    public class SettingsViewModel : ViewModelBase, IDataErrorInfo
     {
         private InputExtensionCategory[] inputCategories;
         private PresetFolderNode presetsRootFolder;
@@ -61,6 +61,16 @@ namespace FileConverter.ViewModels
         /// </summary>
         public SettingsViewModel()
         {
+            this.getChangeLogContentCommand = new RelayCommand(this.DownloadChangeLogAction);
+            this.openUrlCommand = new RelayCommand<string>((url) => Process.Start(url));
+            this.createFolderCommand = new RelayCommand(this.CreateFolder);
+            this.movePresetUpCommand = new RelayCommand(this.MoveSelectedPresetUp, this.CanMoveSelectedPresetUp);
+            this.movePresetDownCommand = new RelayCommand(this.MoveSelectedPresetDown, this.CanMoveSelectedPresetDown);
+            this.addNewPresetCommand = new RelayCommand(this.AddNewPreset);
+            this.removePresetCommand = new RelayCommand(this.RemoveSelectedPreset, this.CanRemoveSelectedPreset);
+            this.saveCommand = new RelayCommand(this.SaveSettings, this.CanSaveSettings);
+            this.closeCommand = new RelayCommand<CancelEventArgs>(this.CloseSettings);
+
             if (this.IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
@@ -260,122 +270,23 @@ namespace FileConverter.ViewModels
             }
         }
         
-        public ICommand GetChangeLogContentCommand
-        {
-            get
-            {
-                if (this.getChangeLogContentCommand == null)
-                {
-                    this.getChangeLogContentCommand = new RelayCommand(this.DownloadChangeLogAction);
-                }
+        public ICommand GetChangeLogContentCommand => this.getChangeLogContentCommand;
 
-                return this.getChangeLogContentCommand;
-            }
-        }
+        public ICommand OpenUrlCommand => this.openUrlCommand;
 
-        public ICommand OpenUrlCommand
-        {
-            get
-            {
-                if (this.openUrlCommand == null)
-                {
-                    this.openUrlCommand = new RelayCommand<string>((url) => Process.Start(url));
-                }
+        public ICommand CreateFolderCommand => this.createFolderCommand;
 
-                return this.openUrlCommand;
-            }
-        }
+        public ICommand MovePresetUpCommand => this.movePresetUpCommand;
 
-        public ICommand CreateFolderCommand
-        {
-            get
-            {
-                if (this.createFolderCommand == null)
-                {
-                    this.createFolderCommand = new RelayCommand(this.CreateFolder);
-                }
+        public ICommand MovePresetDownCommand => this.movePresetDownCommand;
 
-                return this.createFolderCommand;
-            }
-        }
+        public ICommand AddNewPresetCommand => this.addNewPresetCommand;
 
-        public ICommand MovePresetUpCommand
-        {
-            get
-            {
-                if (this.movePresetUpCommand == null)
-                {
-                    this.movePresetUpCommand = new RelayCommand(this.MoveSelectedPresetUp, this.CanMoveSelectedPresetUp);
-                }
+        public ICommand RemoveSelectedPresetCommand => this.removePresetCommand;
 
-                return this.movePresetUpCommand;
-            }
-        }
+        public ICommand SaveCommand => this.saveCommand;
 
-        public ICommand MovePresetDownCommand
-        {
-            get
-            {
-                if (this.movePresetDownCommand == null)
-                {
-                    this.movePresetDownCommand = new RelayCommand(this.MoveSelectedPresetDown, this.CanMoveSelectedPresetDown);
-                }
-
-                return this.movePresetDownCommand;
-            }
-        }
-
-        public ICommand AddNewPresetCommand
-        {
-            get
-            {
-                if (this.addNewPresetCommand == null)
-                {
-                    this.addNewPresetCommand = new RelayCommand(this.AddNewPreset);
-                }
-
-                return this.addNewPresetCommand;
-            }
-        }
-
-        public ICommand RemoveSelectedPresetCommand
-        {
-            get
-            {
-                if (this.removePresetCommand == null)
-                {
-                    this.removePresetCommand = new RelayCommand(this.RemoveSelectedPreset, this.CanRemoveSelectedPreset);
-                }
-                
-                return this.removePresetCommand;
-            }
-        }
-
-        public ICommand SaveCommand
-        {
-            get
-            {
-                if (this.saveCommand == null)
-                {
-                    this.saveCommand = new RelayCommand(this.SaveSettings, this.CanSaveSettings);
-                }
-
-                return this.saveCommand;
-            }
-        }
-
-        public ICommand CloseCommand
-        {
-            get
-            {
-                if (this.closeCommand == null)
-                {
-                    this.closeCommand = new RelayCommand<CancelEventArgs>(this.CloseSettings);
-                }
-
-                return this.closeCommand;
-            }
-        }
+        public ICommand CloseCommand => this.closeCommand;
 
         public TreeViewSelectionBehavior.IsChildOfPredicate PresetsHierarchyPredicate => (object nodeA, object nodeB) =>
             {
@@ -390,6 +301,45 @@ namespace FileConverter.ViewModels
                 return parentFolder.IsNodeInHierarchy(nodeB as AbstractTreeNode, true);
             };
 
+        public string Error
+        {
+            get
+            {
+                string nodeError = this.CheckErrorRecursively(this.presetsRootFolder);
+                if (!string.IsNullOrEmpty(nodeError))
+                {
+                    return nodeError;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string this[string columnName] => this.Error;
+
+        private string CheckErrorRecursively(AbstractTreeNode node)
+        {
+            string nodeError = node.Error;
+            if (!string.IsNullOrEmpty(nodeError))
+            {
+                return nodeError;
+            }
+
+            if (node is PresetFolderNode folder)
+            {
+                foreach (AbstractTreeNode child in folder.Children)
+                {
+                    nodeError = this.CheckErrorRecursively(child);
+                    if (!string.IsNullOrEmpty(nodeError))
+                    {
+                        return nodeError;
+                    }
+                }
+            }
+
+            return string.Empty;
+        }
+
         private void SelectedPresetPropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
         {
             if (eventArgs.PropertyName == "OutputType")
@@ -397,6 +347,11 @@ namespace FileConverter.ViewModels
                 this.RaisePropertyChanged(nameof(this.InputCategories));
             }
 
+            this.saveCommand.RaiseCanExecuteChanged();
+        }
+
+        private void NodePropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
+        {
             this.saveCommand.RaiseCanExecuteChanged();
         }
 
@@ -457,6 +412,8 @@ namespace FileConverter.ViewModels
                     {
                         subFolder = new PresetFolderNode(folderName, parent);
                         parent.Children.Add(subFolder);
+
+                        subFolder.PropertyChanged += this.NodePropertyChanged;
                     }
 
                     parent = subFolder;
@@ -464,6 +421,8 @@ namespace FileConverter.ViewModels
 
                 PresetNode presetNode = new PresetNode(preset, parent);
                 parent.Children.Add(presetNode);
+
+                presetNode.PropertyChanged += this.NodePropertyChanged;
             }
 
             this.RaisePropertyChanged(nameof(this.PresetsRootFolder));
@@ -505,7 +464,7 @@ namespace FileConverter.ViewModels
 
         private bool CanSaveSettings()
         {
-            return this.settings != null && string.IsNullOrEmpty(this.settings.Error);
+            return string.IsNullOrEmpty(this.Error);
         }
 
         private void SaveSettings()
@@ -556,7 +515,11 @@ namespace FileConverter.ViewModels
 
             parent.Children.Insert(insertIndex, newFolder);
 
+            newFolder.PropertyChanged += this.NodePropertyChanged;
+
             this.SelectedItem = newFolder;
+
+            this.saveCommand.RaiseCanExecuteChanged();
 
             Messenger.Default.Send<string>("FolderName", "DoFocus");
         }
@@ -612,8 +575,9 @@ namespace FileConverter.ViewModels
             }
 
             this.SelectedItem = itemToMoveUp;
-            this.movePresetUpCommand?.RaiseCanExecuteChanged();
-            this.movePresetDownCommand?.RaiseCanExecuteChanged();
+            this.movePresetUpCommand.RaiseCanExecuteChanged();
+            this.movePresetDownCommand.RaiseCanExecuteChanged();
+            this.saveCommand.RaiseCanExecuteChanged();
         }
 
         private bool CanMoveSelectedPresetDown()
@@ -668,8 +632,9 @@ namespace FileConverter.ViewModels
 
             this.SelectedItem = itemToMoveDown;
 
-            this.movePresetUpCommand?.RaiseCanExecuteChanged();
-            this.movePresetDownCommand?.RaiseCanExecuteChanged();
+            this.movePresetUpCommand.RaiseCanExecuteChanged();
+            this.movePresetDownCommand.RaiseCanExecuteChanged();
+            this.saveCommand.RaiseCanExecuteChanged();
         }
 
         private void AddNewPreset()
@@ -718,25 +683,51 @@ namespace FileConverter.ViewModels
 
             parent.Children.Insert(insertIndex, node);
 
+            node.PropertyChanged += this.NodePropertyChanged;
+
             this.SelectedItem = node;
 
             Messenger.Default.Send<string>("PresetName", "DoFocus");
 
             this.removePresetCommand.RaiseCanExecuteChanged();
+            this.saveCommand.RaiseCanExecuteChanged();
         }
 
         private void RemoveSelectedPreset()
         {
+            this.SelectedItem.PropertyChanged -= this.NodePropertyChanged;
+
             this.SelectedItem.Parent.Children.Remove(this.SelectedItem);
 
             this.SelectedItem = null;
 
             this.removePresetCommand.RaiseCanExecuteChanged();
+            this.saveCommand.RaiseCanExecuteChanged();
         }
 
         private bool CanRemoveSelectedPreset()
         {
             return this.SelectedItem != null;
+        }
+
+        public override void Cleanup()
+        {
+            base.Cleanup();
+
+            this.UnbindNode(this.presetsRootFolder);
+        }
+
+        private void UnbindNode(AbstractTreeNode node)
+        {
+            node.PropertyChanged -= this.NodePropertyChanged;
+
+            if (node is PresetFolderNode folder)
+            {
+                foreach (AbstractTreeNode child in folder.Children)
+                {
+                    this.UnbindNode(child);
+                }
+            }
         }
     }
 }

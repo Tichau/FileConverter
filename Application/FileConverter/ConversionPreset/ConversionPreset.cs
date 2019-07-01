@@ -17,7 +17,7 @@ namespace FileConverter
 
     [XmlRoot]
     [XmlType]
-    public class ConversionPreset : ObservableObject, IDataErrorInfo, IXmlSerializable
+    public class ConversionPreset : ObservableObject, IXmlSerializable
     {
         private string shortName;
 
@@ -279,34 +279,6 @@ namespace FileConverter
                 }
 
                 this.RaisePropertyChanged();
-            }
-        }
-
-        public string Error
-        {
-            get
-            {
-                string errorString = this.Validate("ShortName");
-                if (!string.IsNullOrEmpty(errorString))
-                {
-                    return errorString;
-                }
-
-                errorString = this.Validate("OutputFileNameTemplate");
-                if (!string.IsNullOrEmpty(errorString))
-                {
-                    return errorString;
-                }
-
-                return string.Empty;
-            }
-        }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                return this.Validate(columnName);
             }
         }
 
@@ -587,107 +559,6 @@ namespace FileConverter
             }
         }
 
-        private string Validate(string propertyName)
-        {
-            // Return error message if there is an error, else return empty or null string.
-            switch (propertyName)
-            {
-                case "ShortName":
-                    {
-                        if (string.IsNullOrEmpty(this.ShortName))
-                        {
-                            return "The preset name can't be empty.";
-                        }
-
-                        if (this.ShortName.Contains(";"))
-                        {
-                            return "The preset name can't contains the character ';'.";
-                        }
-
-                        if (this.ShortName.Contains("/"))
-                        {
-                            return "The preset name can't contains the character '/'.";
-                        }
-
-                        ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
-                        int? count = settingsService.Settings?.ConversionPresets?.Count(match => match?.shortName == this.ShortName);
-                        if (count > 1)
-                        {
-                            return "The preset name is already used.";
-                        }
-                    }
-
-                    break;
-
-                case "OutputFileNameTemplate":
-                    {
-                        string sampleOutputFilePath = this.GenerateOutputFilePath(FileConverter.Properties.Resources.OutputFileNameTemplateSample, 1, 3);
-                        if (string.IsNullOrEmpty(sampleOutputFilePath))
-                        {
-                            return "The output filename template must produce a non empty result.";
-                        }
-
-                        if (!PathHelpers.IsPathValid(sampleOutputFilePath))
-                        {
-                            // Diagnostic to feedback purpose.
-                            // Drive letter.
-                            if (!PathHelpers.IsPathDriveLetterValid(sampleOutputFilePath))
-                            {
-                                return "The output filename template must define a root (for example c:\\, use (p) to use the input file path).";
-                            }
-
-                            // File name.
-                            string filename = PathHelpers.GetFileName(sampleOutputFilePath);
-                            if (filename == null)
-                            {
-                                return "The output file name must not be empty (use (f) to use the name of the input file).";
-                            }
-
-                            char[] invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
-                            for (int index = 0; index < invalidFileNameChars.Length; index++)
-                            {
-                                if (filename.Contains(invalidFileNameChars[index]))
-                                {
-                                    return "The output file name must not contains the character '" + invalidFileNameChars[index] + "'.";
-                                }
-                            }
-
-                            // Directory names.
-                            string path = sampleOutputFilePath.Substring(3, sampleOutputFilePath.Length - 3 - filename.Length);
-                            char[] invalidPathChars = System.IO.Path.GetInvalidPathChars();
-                            for (int index = 0; index < invalidPathChars.Length; index++)
-                            {
-                                if (string.IsNullOrEmpty(path))
-                                {
-                                    return "The output directory name must not be empty (use (d0), (d1), ... to use the name of the parent directories of the input file).";
-                                }
-
-                                if (path.Contains(invalidPathChars[index]))
-                                {
-                                    return "The output directory name must not contains the character '" + invalidPathChars[index] + "'.";
-                                }
-                            }
-
-                            string[] directories = path.Split('\\');
-                            for (int index = 0; index < directories.Length; ++index)
-                            {
-                                string directoryName = directories[index];
-                                if (string.IsNullOrEmpty(directoryName))
-                                {
-                                    return "The output directory name must not be empty (use (d0), (d1), ... to use the name of the parent directories of the input file).";
-                                }
-                            }
-
-                            return "The output filename template is invalid";
-                        }
-                    }
-
-                    break;
-            }
-
-            return string.Empty;
-        }
-        
         public struct ConversionSetting
         {
             public ConversionSetting(KeyValuePair<string, string> keyValuePair)
