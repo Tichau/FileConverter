@@ -100,7 +100,12 @@
                                 </DataTemplate>
                             </TreeView.Resources>
                             <TreeView.ItemContainerStyle>
-                                <Style TargetType="TreeViewItem">
+                                <Style TargetType="{x:Type TreeViewItem}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasError, FallbackValue=False}" Value="True">
+                                            <Setter Property="Background" Value="#F44336"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
                                     <Style.Resources>
                                         <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#86C8F6" />
                                         <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="#074078" />
@@ -110,6 +115,7 @@
 
                                     <Setter Property="IsExpanded" Value="True"/>
                                     <Setter Property="BorderBrush" Value="#1E6BB8"/>
+
                                     <EventSetter Event="TreeViewItem.DragOver"  Handler="TreeView_DragOver"/>
                                     <EventSetter Event="TreeViewItem.Drop" Handler="TreeView_Drop"/>
                                     <EventSetter Event="TreeViewItem.MouseMove" Handler="TreeView_MouseMove"/>

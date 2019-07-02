@@ -41,6 +41,8 @@ namespace FileConverter.ViewModels
 
         public string this[string columnName] => this.Validate(columnName);
 
+        public bool HasError => !string.IsNullOrEmpty(this.Error);
+
         public string Error
         {
             get
@@ -135,6 +137,7 @@ namespace FileConverter.ViewModels
             {
                 this.Preset.ShortName = value;
                 this.RaisePropertyChanged();
+                this.RaisePropertyChanged(nameof(this.HasError));
             }
         }
 
@@ -257,6 +260,7 @@ namespace FileConverter.ViewModels
             {
                 this.name = value;
                 this.RaisePropertyChanged();
+                this.RaisePropertyChanged(nameof(this.HasError));
             }
         }
 
