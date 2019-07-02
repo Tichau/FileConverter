@@ -96,11 +96,18 @@
                                     </StackPanel>
                                 </HierarchicalDataTemplate>
                                 <DataTemplate DataType="{x:Type viewModels:PresetNode}">
-                                    <TextBlock Text="{Binding Preset.ShortName}" FontSize="12" Margin="5" />
+                                    <TextBlock Text="{Binding Name}" FontSize="12" Margin="5" />
                                 </DataTemplate>
                             </TreeView.Resources>
                             <TreeView.ItemContainerStyle>
                                 <Style TargetType="TreeViewItem">
+                                    <Style.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#86C8F6" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="#074078" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#DFE0E0" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#4B5762" />
+                                    </Style.Resources>
+
                                     <Setter Property="IsExpanded" Value="True"/>
                                     <Setter Property="BorderBrush" Value="#1E6BB8"/>
                                     <EventSetter Event="TreeViewItem.DragOver"  Handler="TreeView_DragOver"/>
@@ -113,7 +120,7 @@
                                 <views:TreeViewSelectionBehavior
                                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                                     HierarchyPredicate="{Binding PresetsHierarchyPredicate}"
-                                    ExpandSelected="True"/>
+                                    ExpandSelected="False"/>
                             </i:Interaction.Behaviors>
                         </TreeView>
 
