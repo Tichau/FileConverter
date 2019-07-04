@@ -9,6 +9,7 @@ namespace FileConverter.Views
     using System.Windows.Input;
     using System.Windows.Media;
 
+    using FileConverter.Diagnostics;
     using FileConverter.ViewModels;
 
     using GalaSoft.MvvmLight.Messaging;
@@ -20,8 +21,15 @@ namespace FileConverter.Views
     {
         private Point lastMouseDown;
         private AbstractTreeNode draggedItem;
-        private AbstractTreeNode target;
         private TreeViewItem highlightedItem;
+        private AbstractTreeNode target;
+        private DragDropTargetPosition targetPosition;
+
+        private enum DragDropTargetPosition
+        {
+            Before,
+            After,
+        }
 
         public SettingsWindow()
         {
@@ -130,7 +138,8 @@ namespace FileConverter.Views
 
         private void TreeView_DragOver(object sender, DragEventArgs args)
         {
-            if (this.DragInProgress(args.GetPosition(this.PresetTreeView)))
+            Point position = args.GetPosition(this.PresetTreeView);
+            if (this.DragInProgress(position))
             {
                 if (this.highlightedItem != null)
                 {
@@ -138,19 +147,38 @@ namespace FileConverter.Views
                 }
 
                 // Verify that this is a valid drop and then store the drop target
-                TreeViewItem item = this.GetNearestContainer(args.OriginalSource as UIElement);
-                if (this.CheckDropTarget(this.draggedItem, item.DataContext as AbstractTreeNode))
-                {
-                    args.Effects = DragDropEffects.Move;
+                FrameworkElement element = args.OriginalSource as FrameworkElement;
+                TreeViewItem item = this.GetNearestContainer(element);
 
-                    this.highlightedItem = item;
-                    if (item.DataContext is PresetFolderNode)
+                if (this.CheckDropTarget(this.draggedItem, item?.DataContext as AbstractTreeNode))
+                {
+                    Debug.Assert(element != null, "element should not be null");
+                    Point relativePosition = args.GetPosition(element);
+
+                    DragDropTargetPosition dragDropTargetPosition;
+                    if (relativePosition.Y - (element.ActualHeight / 2) < 0)
                     {
-                        item.BorderThickness = new Thickness(0, 0, 0, 2);
+                        dragDropTargetPosition = DragDropTargetPosition.Before;
                     }
                     else
                     {
-                        item.BorderThickness = new Thickness(0, 2, 0, 0);
+                        dragDropTargetPosition = DragDropTargetPosition.After;
+                    }
+
+                    args.Effects = DragDropEffects.Move;
+
+                    this.highlightedItem = item;
+                    this.targetPosition = dragDropTargetPosition;
+
+                    switch (this.targetPosition)
+                    {
+                        case DragDropTargetPosition.Before:
+                            item.BorderThickness = new Thickness(0, 2, 0, 0);
+                            break;
+
+                        case DragDropTargetPosition.After:
+                            item.BorderThickness = new Thickness(0, 0, 0, 2);
+                            break;
                     }
                 }
                 else
@@ -168,8 +196,9 @@ namespace FileConverter.Views
             args.Handled = true;
 
             // Verify that this is a valid drop and then store the drop target
-            TreeViewItem item = this.GetNearestContainer(args.OriginalSource as UIElement);
-            if (this.draggedItem != null && item.DataContext is AbstractTreeNode nodeItem)
+            FrameworkElement element = args.OriginalSource as FrameworkElement;
+            TreeViewItem item = this.GetNearestContainer(element);
+            if (this.draggedItem != null && item != null && item.DataContext is AbstractTreeNode nodeItem)
             {
                 this.target = nodeItem;
                 args.Effects = DragDropEffects.Move;
@@ -223,23 +252,41 @@ namespace FileConverter.Views
         private bool CheckDropTarget(AbstractTreeNode sourceItem, AbstractTreeNode targetItem)
         {
             // Check whether the target item is meeting your condition
-            return sourceItem != targetItem;
+            return sourceItem != targetItem && targetItem != null;
         }
 
         private void MoveItem(AbstractTreeNode sourceItem, AbstractTreeNode targetItem)
         {
-            if (targetItem is PresetFolderNode newParent)
+            switch (this.targetPosition)
             {
-                sourceItem.Parent.Children.Remove(sourceItem);
-                newParent.Children.Insert(0, sourceItem);
-                sourceItem.Parent = newParent;
-            }
-            else if (targetItem is PresetNode nodeUnderMe)
-            {
-                sourceItem.Parent.Children.Remove(sourceItem);
-                int indexOfNode = nodeUnderMe.Parent.Children.IndexOf(nodeUnderMe);
-                nodeUnderMe.Parent.Children.Insert(indexOfNode, sourceItem);
-                sourceItem.Parent = nodeUnderMe.Parent;
+                case DragDropTargetPosition.Before:
+                    {
+                        sourceItem.Parent.Children.Remove(sourceItem);
+                        int indexOfNode = targetItem.Parent.Children.IndexOf(targetItem);
+                        targetItem.Parent.Children.Insert(indexOfNode, sourceItem);
+                        sourceItem.Parent = targetItem.Parent;
+                    }
+
+                    break;
+
+                case DragDropTargetPosition.After:
+                    {
+                        if (targetItem is PresetFolderNode newParent)
+                        {
+                            sourceItem.Parent.Children.Remove(sourceItem);
+                            newParent.Children.Insert(0, sourceItem);
+                            sourceItem.Parent = newParent;
+                        }
+                        else if (targetItem is PresetNode nodeBeforeMe)
+                        {
+                            sourceItem.Parent.Children.Remove(sourceItem);
+                            int indexOfNode = nodeBeforeMe.Parent.Children.IndexOf(nodeBeforeMe);
+                            nodeBeforeMe.Parent.Children.Insert(indexOfNode + 1, sourceItem);
+                            sourceItem.Parent = nodeBeforeMe.Parent;
+                        }
+                    }
+
+                    break;
             }
         }
 
@@ -255,6 +302,5 @@ namespace FileConverter.Views
 
             return container;
         }
-
     }
 }
