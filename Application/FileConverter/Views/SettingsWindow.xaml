@@ -119,7 +119,6 @@
                                     <EventSetter Event="TreeViewItem.DragOver"  Handler="TreeView_DragOver"/>
                                     <EventSetter Event="TreeViewItem.Drop" Handler="TreeView_Drop"/>
                                     <EventSetter Event="TreeViewItem.MouseMove" Handler="TreeView_MouseMove"/>
-                                    <EventSetter Event="TreeViewItem.MouseDown" Handler="TreeView_MouseDown"/>
                                 </Style>
                             </TreeView.ItemContainerStyle>
                             <i:Interaction.Behaviors>

@@ -19,12 +19,6 @@ namespace FileConverter.Views
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        private Point lastMouseDown;
-        private AbstractTreeNode draggedItem;
-        private TreeViewItem highlightedItem;
-        private AbstractTreeNode target;
-        private DragDropTargetPosition targetPosition;
-
         private enum DragDropTargetPosition
         {
             Before,
@@ -135,59 +129,50 @@ namespace FileConverter.Views
                 dataContext.SelectedPreset.Preset.RemoveInputType(inputExtension);
             }
         }
+        
+        private void TreeView_MouseMove(object sender, MouseEventArgs args)
+        {
+            if (args.LeftButton == MouseButtonState.Pressed && 
+                this.PresetTreeView.SelectedItem is AbstractTreeNode nodeToDrag)
+            {
+                var dataObj = new DataObject();
+                dataObj.SetData("DragSource", nodeToDrag);
+
+                DragDrop.DoDragDrop(this.PresetTreeView, dataObj, DragDropEffects.Move);
+            }
+        }
 
         private void TreeView_DragOver(object sender, DragEventArgs args)
         {
-            Point position = args.GetPosition(this.PresetTreeView);
-            if (this.DragInProgress(position))
-            {
-                if (this.highlightedItem != null)
-                {
-                    this.highlightedItem.BorderThickness = new Thickness(0);
-                }
+            args.Effects = DragDropEffects.None;
+            args.Handled = true;
 
-                // Verify that this is a valid drop and then store the drop target
+            if (args.Data.GetData("HighlightedItem") is TreeViewItem highlightedItem)
+            {
+                highlightedItem.BorderThickness = new Thickness(0);
+            }
+
+            if (this.TryComputeDropTarget(args, out AbstractTreeNode target, out DragDropTargetPosition position))
+            {
+                args.Effects = DragDropEffects.Move;
+                args.Handled = true;
+
                 FrameworkElement element = args.OriginalSource as FrameworkElement;
                 TreeViewItem item = this.GetNearestContainer(element);
 
-                if (this.CheckDropTarget(this.draggedItem, item?.DataContext as AbstractTreeNode))
+                args.Data.SetData("HighlightedItem", item);
+
+                switch (position)
                 {
-                    Debug.Assert(element != null, "element should not be null");
-                    Point relativePosition = args.GetPosition(element);
+                    case DragDropTargetPosition.Before:
+                        item.BorderThickness = new Thickness(0, 2, 0, 0);
+                        break;
 
-                    DragDropTargetPosition dragDropTargetPosition;
-                    if (relativePosition.Y - (element.ActualHeight / 2) < 0)
-                    {
-                        dragDropTargetPosition = DragDropTargetPosition.Before;
-                    }
-                    else
-                    {
-                        dragDropTargetPosition = DragDropTargetPosition.After;
-                    }
-
-                    args.Effects = DragDropEffects.Move;
-
-                    this.highlightedItem = item;
-                    this.targetPosition = dragDropTargetPosition;
-
-                    switch (this.targetPosition)
-                    {
-                        case DragDropTargetPosition.Before:
-                            item.BorderThickness = new Thickness(0, 2, 0, 0);
-                            break;
-
-                        case DragDropTargetPosition.After:
-                            item.BorderThickness = new Thickness(0, 0, 0, 2);
-                            break;
-                    }
-                }
-                else
-                {
-                    args.Effects = DragDropEffects.None;
+                    case DragDropTargetPosition.After:
+                        item.BorderThickness = new Thickness(0, 0, 0, 2);
+                        break;
                 }
             }
-
-            args.Handled = true;
         }
 
         private void TreeView_Drop(object sender, DragEventArgs args)
@@ -195,58 +180,45 @@ namespace FileConverter.Views
             args.Effects = DragDropEffects.None;
             args.Handled = true;
 
-            // Verify that this is a valid drop and then store the drop target
-            FrameworkElement element = args.OriginalSource as FrameworkElement;
-            TreeViewItem item = this.GetNearestContainer(element);
-            if (this.draggedItem != null && item != null && item.DataContext is AbstractTreeNode nodeItem)
+            if (this.TryComputeDropTarget(args, out AbstractTreeNode target, out DragDropTargetPosition position))
             {
-                this.target = nodeItem;
+                AbstractTreeNode nodeToDrag = (AbstractTreeNode)args.Data.GetData("DragSource");
+                Debug.Assert(nodeToDrag != null, "nodeToDrag != null");
+
+                this.MoveItem(nodeToDrag, target, position);
+
+                if (args.Data.GetData("HighlightedItem") is TreeViewItem highlightedItem)
+                {
+                    highlightedItem.BorderThickness = new Thickness(0);
+                }
+
                 args.Effects = DragDropEffects.Move;
             }
         }
 
-        private void TreeView_MouseMove(object sender, MouseEventArgs args)
+        private bool TryComputeDropTarget(DragEventArgs args, out AbstractTreeNode target, out DragDropTargetPosition position)
         {
-            if (args.LeftButton == MouseButtonState.Pressed && this.DragInProgress(args.GetPosition(this.PresetTreeView)))
+            FrameworkElement source = args.OriginalSource as FrameworkElement;
+            TreeViewItem item = this.GetNearestContainer(source);
+
+            target = item?.DataContext as AbstractTreeNode;
+
+            Debug.Assert(source != null, "source should not be null");
+            Point relativePosition = args.GetPosition(source);
+
+            if (relativePosition.Y - (source.ActualHeight / 2) < 0)
             {
-                this.draggedItem = (AbstractTreeNode)this.PresetTreeView.SelectedItem;
-                if (this.draggedItem != null)
-                {
-                    DragDropEffects finalDropEffect = DragDrop.DoDragDrop(this.PresetTreeView, this.PresetTreeView.SelectedValue, DragDropEffects.Move);
-
-                    if (finalDropEffect == DragDropEffects.Move && this.target != null)
-                    {
-                        // A Move drop was accepted
-                        if (this.CheckDropTarget(this.draggedItem, this.target))
-                        {
-                            this.MoveItem(this.draggedItem, this.target);
-
-                            if (this.highlightedItem != null)
-                            {
-                                this.highlightedItem.BorderThickness = new Thickness(0);
-                            }
-
-                            this.highlightedItem = null;
-                            this.target = null;
-                            this.draggedItem = null;
-                        }
-                    }
-                }
+                position = DragDropTargetPosition.Before;
             }
-        }
-
-        private void TreeView_MouseDown(object sender, MouseButtonEventArgs args)
-        {
-            if (args.ChangedButton == MouseButton.Left)
+            else
             {
-                this.lastMouseDown = args.GetPosition(this.PresetTreeView);
+                position = DragDropTargetPosition.After;
             }
-        }
 
-        private bool DragInProgress(Point currentPosition)
-        {
-            return Math.Abs(currentPosition.X - this.lastMouseDown.X) > 10.0 ||
-                   Math.Abs(currentPosition.Y - this.lastMouseDown.Y) > 10.0;
+            AbstractTreeNode nodeToDrag = (AbstractTreeNode)args.Data.GetData("DragSource");
+            Debug.Assert(nodeToDrag != null, "nodeToDrag != null");
+
+            return target != null && this.CheckDropTarget(nodeToDrag, target);
         }
 
         private bool CheckDropTarget(AbstractTreeNode sourceItem, AbstractTreeNode targetItem)
@@ -255,9 +227,9 @@ namespace FileConverter.Views
             return sourceItem != targetItem && targetItem != null;
         }
 
-        private void MoveItem(AbstractTreeNode sourceItem, AbstractTreeNode targetItem)
+        private void MoveItem(AbstractTreeNode sourceItem, AbstractTreeNode targetItem, DragDropTargetPosition targetPosition)
         {
-            switch (this.targetPosition)
+            switch (targetPosition)
             {
                 case DragDropTargetPosition.Before:
                     {
