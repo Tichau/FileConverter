@@ -138,7 +138,13 @@ namespace FileConverter.Views
                 var dataObj = new DataObject();
                 dataObj.SetData("DragSource", nodeToDrag);
 
-                DragDrop.DoDragDrop(this.PresetTreeView, dataObj, DragDropEffects.Move);
+                DragDropEffects dropEffect = DragDrop.DoDragDrop(this.PresetTreeView, dataObj, DragDropEffects.Move);
+                if (dropEffect == DragDropEffects.Move)
+                {
+                    TreeViewItem draggedItem = this.GetTreeViewItem(this.PresetTreeView, nodeToDrag);
+                    Debug.Assert(draggedItem != null, "draggedItem != null");
+                    draggedItem.IsSelected = true;
+                }
             }
         }
 
@@ -224,7 +230,23 @@ namespace FileConverter.Views
         private bool CheckDropTarget(AbstractTreeNode sourceItem, AbstractTreeNode targetItem)
         {
             // Check whether the target item is meeting your condition
-            return sourceItem != targetItem && targetItem != null;
+            if (targetItem == null)
+            {
+                return false;
+            }
+
+            AbstractTreeNode folder = targetItem;
+            while (folder != null)
+            {
+                if (folder == sourceItem)
+                {
+                    return false;
+                }
+
+                folder = folder.Parent;
+            }
+
+            return true;
         }
 
         private void MoveItem(AbstractTreeNode sourceItem, AbstractTreeNode targetItem, DragDropTargetPosition targetPosition)
@@ -273,6 +295,40 @@ namespace FileConverter.Views
             }
 
             return container;
+        }
+
+        /// <summary>
+        /// Recursively search for an item in this subtree.
+        /// </summary>
+        /// <param name="container">The parent ItemsControl. This can be a TreeView or a TreeViewItem.</param>
+        /// <param name="item">The item to search for.</param>
+        /// <returns>The TreeViewItem that contains the specified item.</returns>
+        /// Source: https://docs.microsoft.com/fr-fr/dotnet/framework/wpf/controls/how-to-find-a-treeviewitem-in-a-treeview
+        private TreeViewItem GetTreeViewItem(ItemsControl container, object item)
+        {
+            if (container != null)
+            {
+                if (container.DataContext == item)
+                {
+                    return container as TreeViewItem;
+                }
+
+                for (int i = 0, count = container.Items.Count; i < count; i++)
+                {
+                    TreeViewItem subContainer = (TreeViewItem)container.ItemContainerGenerator.ContainerFromIndex(i);
+                    if (subContainer != null)
+                    {
+                        // Search the next level for the object.
+                        TreeViewItem resultContainer = this.GetTreeViewItem(subContainer, item);
+                        if (resultContainer != null)
+                        {
+                            return resultContainer;
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }
