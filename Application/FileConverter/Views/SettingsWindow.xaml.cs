@@ -145,6 +145,11 @@ namespace FileConverter.Views
                     Debug.Assert(draggedItem != null, "draggedItem != null");
                     draggedItem.IsSelected = true;
                 }
+
+                if (dataObj.GetData("HighlightedItem") is TreeViewItem highlightedItem)
+                {
+                    highlightedItem.BorderThickness = new Thickness(0);
+                }
             }
         }
 
@@ -192,11 +197,6 @@ namespace FileConverter.Views
                 Debug.Assert(nodeToDrag != null, "nodeToDrag != null");
 
                 this.MoveItem(nodeToDrag, target, position);
-
-                if (args.Data.GetData("HighlightedItem") is TreeViewItem highlightedItem)
-                {
-                    highlightedItem.BorderThickness = new Thickness(0);
-                }
 
                 args.Effects = DragDropEffects.Move;
             }
