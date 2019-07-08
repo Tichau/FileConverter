@@ -22,6 +22,7 @@ namespace FileConverter.Views
         private enum DragDropTargetPosition
         {
             Before,
+            In,
             After,
         }
 
@@ -141,6 +142,12 @@ namespace FileConverter.Views
                 DragDropEffects dropEffect = DragDrop.DoDragDrop(this.PresetTreeView, dataObj, DragDropEffects.Move);
                 if (dropEffect == DragDropEffects.Move)
                 {
+                    TreeViewItem draggedItemParent = this.GetTreeViewItem(this.PresetTreeView, nodeToDrag.Parent);
+                    if (draggedItemParent != null)
+                    {
+                        draggedItemParent.IsExpanded = true;
+                    }
+
                     TreeViewItem draggedItem = this.GetTreeViewItem(this.PresetTreeView, nodeToDrag);
                     Debug.Assert(draggedItem != null, "draggedItem != null");
                     draggedItem.IsSelected = true;
@@ -179,6 +186,10 @@ namespace FileConverter.Views
                         item.BorderThickness = new Thickness(0, 2, 0, 0);
                         break;
 
+                    case DragDropTargetPosition.In:
+                        item.BorderThickness = new Thickness(2, 2, 2, 2);
+                        break;
+
                     case DragDropTargetPosition.After:
                         item.BorderThickness = new Thickness(0, 0, 0, 2);
                         break;
@@ -206,19 +217,51 @@ namespace FileConverter.Views
         {
             FrameworkElement source = args.OriginalSource as FrameworkElement;
             TreeViewItem item = this.GetNearestContainer(source);
-
+            
             target = item?.DataContext as AbstractTreeNode;
 
             Debug.Assert(source != null, "source should not be null");
             Point relativePosition = args.GetPosition(source);
 
-            if (relativePosition.Y - (source.ActualHeight / 2) < 0)
+            if (target is PresetFolderNode)
             {
-                position = DragDropTargetPosition.Before;
+                if (item.IsExpanded)
+                {
+                    if (relativePosition.Y - (source.ActualHeight / 2) < 0)
+                    {
+                        position = DragDropTargetPosition.Before;
+                    }
+                    else
+                    {
+                        position = DragDropTargetPosition.In;
+                    }
+                }
+                else
+                {
+                    if (relativePosition.Y < source.ActualHeight / 3)
+                    {
+                        position = DragDropTargetPosition.Before;
+                    }
+                    else if (relativePosition.Y < 2 * (source.ActualHeight / 3))
+                    {
+                        position = DragDropTargetPosition.In;
+                    }
+                    else
+                    {
+                        position = DragDropTargetPosition.After;
+                    }
+                }
             }
             else
             {
-                position = DragDropTargetPosition.After;
+                if (relativePosition.Y - (source.ActualHeight / 2) < 0)
+                {
+                    position = DragDropTargetPosition.Before;
+                }
+                else
+                {
+                    position = DragDropTargetPosition.After;
+                }
             }
 
             AbstractTreeNode nodeToDrag = (AbstractTreeNode)args.Data.GetData("DragSource");
@@ -263,7 +306,7 @@ namespace FileConverter.Views
 
                     break;
 
-                case DragDropTargetPosition.After:
+                case DragDropTargetPosition.In:
                     {
                         if (targetItem is PresetFolderNode newParent)
                         {
@@ -271,13 +314,20 @@ namespace FileConverter.Views
                             newParent.Children.Insert(0, sourceItem);
                             sourceItem.Parent = newParent;
                         }
-                        else if (targetItem is PresetNode nodeBeforeMe)
+                        else
                         {
-                            sourceItem.Parent.Children.Remove(sourceItem);
-                            int indexOfNode = nodeBeforeMe.Parent.Children.IndexOf(nodeBeforeMe);
-                            nodeBeforeMe.Parent.Children.Insert(indexOfNode + 1, sourceItem);
-                            sourceItem.Parent = nodeBeforeMe.Parent;
+                            Debug.LogError("Can move element in target.");
                         }
+                    }
+
+                    break;
+
+                case DragDropTargetPosition.After:
+                    {
+                        sourceItem.Parent.Children.Remove(sourceItem);
+                        int indexOfNode = targetItem.Parent.Children.IndexOf(targetItem);
+                        targetItem.Parent.Children.Insert(indexOfNode + 1, sourceItem);
+                        sourceItem.Parent = targetItem.Parent;
                     }
 
                     break;
