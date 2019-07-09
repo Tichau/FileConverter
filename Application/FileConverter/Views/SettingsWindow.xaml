@@ -85,7 +85,8 @@
 
                         <TreeView Name="PresetTreeView" Grid.Row="0"
                                   ItemsSource="{Binding PresetsRootFolder.Children}"
-                                  Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}" AllowDrop="True">
+                                  Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}" AllowDrop="True"
+                                  views:DragDropExtension.ScrollOnDragDrop="True">
                             <TreeView.Resources>
                                 <HierarchicalDataTemplate DataType="{x:Type viewModels:PresetFolderNode}" ItemsSource="{Binding Children}">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
