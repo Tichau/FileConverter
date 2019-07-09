@@ -12,7 +12,7 @@ namespace FileConverter
 
     [XmlRoot]
     [XmlType]
-    public class Settings : ObservableObject, IDataErrorInfo, IXmlSerializable
+    public class Settings : ObservableObject, IXmlSerializable
     {
         public const int Version = 4;
 
@@ -22,37 +22,10 @@ namespace FileConverter
         private bool checkUpgradeAtStartup = true;
         private CultureInfo applicationLanguage;
         private int maximumNumberOfSimultaneousConversions;
-
-        [XmlIgnore]
-        public string Error
-        {
-            get
-            {
-                for (int index = 0; index < this.ConversionPresets.Count; index++)
-                {
-                    string error = this.ConversionPresets[index].Error;
-                    if (!string.IsNullOrEmpty(error))
-                    {
-                        return error;
-                    }
-                }
-
-                return string.Empty;
-            }
-        }
-
-        [XmlIgnore]
-        public string this[string columnName]
-        {
-            get
-            {
-                return this.Error;
-            }
-        }
         
         public ConversionPreset GetPresetFromName(string presetName)
         {
-            return this.conversionPresets.FirstOrDefault(match => match.Name == presetName);
+            return this.conversionPresets.FirstOrDefault(match => match.FullName == presetName);
         }
 
         public void Clean()
@@ -73,7 +46,7 @@ namespace FileConverter
             for (int index = 0; index < settings.conversionPresets.Count; index++)
             {
                 ConversionPreset conversionPreset = settings.conversionPresets[index];
-                if (this.conversionPresets.Any(match => match.Name == conversionPreset.Name))
+                if (this.conversionPresets.Any(match => match.FullName == conversionPreset.FullName))
                 {
                     continue;
                 }

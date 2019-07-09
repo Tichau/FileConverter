@@ -81,6 +81,8 @@
         </Setter>
     </Style>
 
+    <!-- Data validation styles -->
+
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>

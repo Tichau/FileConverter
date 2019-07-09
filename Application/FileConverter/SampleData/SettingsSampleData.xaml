@@ -1,0 +1,69 @@
+﻿<viewModels:SettingsViewModel 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
+    xmlns:fileConverter="clr-namespace:FileConverter">
+
+    <viewModels:SettingsViewModel.Settings>
+        <fileConverter:Settings>
+            <fileConverter:Settings.ConversionPresets>
+                <fileConverter:ConversionPreset ShortName="To Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
+                <fileConverter:ConversionPreset ShortName="To Mp4" OutputType="Mp4"></fileConverter:ConversionPreset>
+                <fileConverter:ConversionPreset ShortName="To Mp3" OutputType="Mp3"></fileConverter:ConversionPreset>
+                <fileConverter:ConversionPreset ShortName="To Png" OutputType="Png"></fileConverter:ConversionPreset>
+            </fileConverter:Settings.ConversionPresets>
+        </fileConverter:Settings>
+    </viewModels:SettingsViewModel.Settings>
+
+    <viewModels:SettingsViewModel.PresetsRootFolder>
+        <viewModels:PresetFolderNode Name="Root">
+            <viewModels:PresetFolderNode.Children>
+                <viewModels:PresetFolderNode Name="Advanced">
+                    <viewModels:PresetFolderNode.Children>
+                        <viewModels:PresetNode>
+                            <viewModels:PresetNode.Preset>
+                                <fileConverter:ConversionPreset ShortName="To Small Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
+                            </viewModels:PresetNode.Preset>
+                        </viewModels:PresetNode>
+                        <viewModels:PresetNode>
+                            <viewModels:PresetNode.Preset>
+                                <fileConverter:ConversionPreset ShortName="To Small Png" OutputType="Png"></fileConverter:ConversionPreset>
+                            </viewModels:PresetNode.Preset>
+                        </viewModels:PresetNode>
+                    </viewModels:PresetFolderNode.Children>
+                </viewModels:PresetFolderNode>
+                <viewModels:PresetNode>
+                    <viewModels:PresetNode.Preset>
+                        <fileConverter:ConversionPreset ShortName="To Avi" OutputType="Avi" OutputFileNameTemplate="(p)(f)"/>
+                    </viewModels:PresetNode.Preset>
+                </viewModels:PresetNode>
+                <viewModels:PresetNode>
+                    <viewModels:PresetNode.Preset>
+                        <fileConverter:ConversionPreset ShortName="To Mp4" OutputType="Mp4"></fileConverter:ConversionPreset>
+                    </viewModels:PresetNode.Preset>
+                </viewModels:PresetNode>
+                <viewModels:PresetNode>
+                    <viewModels:PresetNode.Preset>
+                        <fileConverter:ConversionPreset ShortName="To Mp3" OutputType="Mp3"></fileConverter:ConversionPreset>
+                    </viewModels:PresetNode.Preset>
+                </viewModels:PresetNode>
+                <viewModels:PresetNode>
+                    <viewModels:PresetNode.Preset>
+                        <fileConverter:ConversionPreset ShortName="To Png" OutputType="Png"></fileConverter:ConversionPreset>
+                    </viewModels:PresetNode.Preset>
+                </viewModels:PresetNode>
+            </viewModels:PresetFolderNode.Children>
+        </viewModels:PresetFolderNode>
+    </viewModels:SettingsViewModel.PresetsRootFolder>
+
+    <viewModels:SettingsViewModel.SelectedPreset>
+        <viewModels:PresetNode>
+            <viewModels:PresetNode.Preset>
+                <fileConverter:ConversionPreset ShortName="To Avi" 
+                                                OutputType="Avi" 
+                                                OutputFileNameTemplate="(p)(f)" 
+                                                InputPostConversionAction="None" />
+            </viewModels:PresetNode.Preset>
+        </viewModels:PresetNode>
+    </viewModels:SettingsViewModel.SelectedPreset>
+</viewModels:SettingsViewModel>
+

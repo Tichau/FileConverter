@@ -319,7 +319,7 @@ namespace FileConverter.ConversionJobs
                 this.State = ConversionState.Ready;
             }
 
-            Debug.Log("Job initialized: Preset: '{0}' Input: {1} Output: {2}", this.ConversionPreset.Name, this.InputFilePath, this.OutputFilePath);
+            Debug.Log("Job initialized: Preset: '{0}' Input: {1} Output: {2}", this.ConversionPreset.FullName, this.InputFilePath, this.OutputFilePath);
 
             if (this.State != ConversionState.Failed)
             {

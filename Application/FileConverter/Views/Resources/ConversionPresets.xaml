@@ -89,13 +89,13 @@
 
             <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Encoding}" />
             <DockPanel Grid.Row="0" Grid.Column="1">
-                <RadioButton x:Name="VBRradioButton" Content="VBR" ToolTip="{x:Static project:Resources.Mp3VbrDescription}" Margin="5" IsChecked="{Binding Settings, ConverterParameter=AudioEncodingMode|Mp3VBR, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}" />
-                <RadioButton x:Name="CBRradioButton" Content="CBR" ToolTip="{x:Static project:Resources.Mp3CbrDescription}" Margin="5" IsChecked="{Binding Settings, ConverterParameter=AudioEncodingMode|Mp3CBR, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
+                <RadioButton Content="VBR" ToolTip="{x:Static project:Resources.Mp3VbrDescription}" Margin="5" IsChecked="{Binding Settings, ConverterParameter=AudioEncodingMode|Mp3VBR, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}" />
+                <RadioButton Content="CBR" ToolTip="{x:Static project:Resources.Mp3CbrDescription}" Margin="5" IsChecked="{Binding Settings, ConverterParameter=AudioEncodingMode|Mp3CBR, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
             </DockPanel>
 
             <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.Quality}" />
             <controls:EncodingQualitySliderControl Grid.Row="1" Grid.Column="1"
-        			EncodingMode="{Binding Settings, ConverterParameter=AudioEncodingMode|FileConverter.Controls.EncodingMode, Converter={StaticResource ConversionSettingsToEnum}, Mode=OneWay, TargetNullValue=VBR}" 
+        			EncodingMode="{Binding Settings, ConverterParameter=AudioEncodingMode|FileConverter.Controls.EncodingMode, Converter={StaticResource ConversionSettingsToEnum}, Mode=OneWay}" 
         			Bitrate="{Binding Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay, TargetNullValue=190}" />
 
             <Label Grid.Row="2" Grid.Column="0" Content="{x:Static project:Resources.ChannelCountTitle}" ToolTip="{x:Static project:Resources.ChannelCountTooltip}" />

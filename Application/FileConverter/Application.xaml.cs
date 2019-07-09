@@ -391,7 +391,7 @@ namespace FileConverter
                 IConversionService conversionService = SimpleIoc.Default.GetInstance<IConversionService>();
 
                 // Create conversion jobs.
-                Debug.Log("Create jobs for conversion preset: '{0}'", conversionPreset.Name);
+                Debug.Log("Create jobs for conversion preset: '{0}'", conversionPreset.FullName);
                 try
                 {
                     for (int index = 0; index < filePaths.Count; index++)

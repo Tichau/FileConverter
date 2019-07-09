@@ -72,52 +72,6 @@
         <Settings Key="AudioBitrate" Value="96" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To Mp4 (rotate left)" OutputType="Mp4" IsDefaultSettings="true">
-        <InputTypes>gif</InputTypes>
-        <InputTypes>3gp</InputTypes>
-        <InputTypes>avi</InputTypes>
-        <InputTypes>bik</InputTypes>
-        <InputTypes>flv</InputTypes>
-        <InputTypes>m4v</InputTypes>
-        <InputTypes>mkv</InputTypes>
-        <InputTypes>mov</InputTypes>
-        <InputTypes>mp4</InputTypes>
-        <InputTypes>mpeg</InputTypes>
-        <InputTypes>ogv</InputTypes>
-        <InputTypes>webm</InputTypes>
-        <InputTypes>wmv</InputTypes>
-        <InputPostConversionAction>None</InputPostConversionAction>
-        <Settings Key="EnableAudio" Value="True" />
-        <Settings Key="VideoQuality" Value="30" />
-        <Settings Key="VideoEncodingSpeed" Value="Medium" />
-        <Settings Key="VideoScale" Value="1" />
-        <Settings Key="VideoRotation" Value="90" />
-        <Settings Key="AudioBitrate" Value="155" />
-        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
-    </ConversionPreset>
-    <ConversionPreset Name="To Mp4 (rotate right)" OutputType="Mp4" IsDefaultSettings="true">
-        <InputTypes>avi</InputTypes>
-        <InputTypes>bik</InputTypes>
-        <InputTypes>flv</InputTypes>
-        <InputTypes>mkv</InputTypes>
-        <InputTypes>mov</InputTypes>
-        <InputTypes>mp4</InputTypes>
-        <InputTypes>3gp</InputTypes>
-        <InputTypes>webm</InputTypes>
-        <InputTypes>wmv</InputTypes>
-        <InputTypes>m4v</InputTypes>
-        <InputTypes>mpeg</InputTypes>
-        <InputTypes>ogv</InputTypes>
-        <InputTypes>gif</InputTypes>
-        <InputPostConversionAction>None</InputPostConversionAction>
-        <Settings Key="EnableAudio" Value="True" />
-        <Settings Key="VideoQuality" Value="30" />
-        <Settings Key="VideoEncodingSpeed" Value="Medium" />
-        <Settings Key="VideoScale" Value="1" />
-        <Settings Key="VideoRotation" Value="270" />
-        <Settings Key="AudioBitrate" Value="155" />
-        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
-    </ConversionPreset>
     <ConversionPreset Name="To Webm" OutputType="Webm" IsDefaultSettings="true">
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
@@ -506,76 +460,6 @@
         <Settings Key="ImageMaximumSize" Value="0" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="To small Png (25%)" OutputType="Png" IsDefaultSettings="true">
-        <InputTypes>arw</InputTypes>
-        <InputTypes>bmp</InputTypes>
-        <InputTypes>cr2</InputTypes>
-        <InputTypes>exr</InputTypes>
-        <InputTypes>ico</InputTypes>
-        <InputTypes>jpg</InputTypes>
-        <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
-        <InputTypes>png</InputTypes>
-        <InputTypes>psd</InputTypes>
-        <InputTypes>svg</InputTypes>
-        <InputTypes>tga</InputTypes>
-        <InputTypes>tif</InputTypes>
-        <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
-        <InputTypes>webp</InputTypes>
-        <InputPostConversionAction>None</InputPostConversionAction>
-        <Settings Key="ImageScale" Value="0.25" />
-        <Settings Key="ImageRotation" Value="0" />
-        <Settings Key="ImageClampSizePowerOf2" Value="False" />
-        <Settings Key="ImageMaximumSize" Value="0" />
-        <OutputFileNameTemplate>(p)(f)-small</OutputFileNameTemplate>
-    </ConversionPreset>
-    <ConversionPreset Name="To Png (rotate left)" OutputType="Png" IsDefaultSettings="true">
-        <InputTypes>arw</InputTypes>
-        <InputTypes>bmp</InputTypes>
-        <InputTypes>cr2</InputTypes>
-        <InputTypes>exr</InputTypes>
-        <InputTypes>ico</InputTypes>
-        <InputTypes>jpg</InputTypes>
-        <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
-        <InputTypes>png</InputTypes>
-        <InputTypes>psd</InputTypes>
-        <InputTypes>svg</InputTypes>
-        <InputTypes>tga</InputTypes>
-        <InputTypes>tif</InputTypes>
-        <InputTypes>tiff</InputTypes>
-        <InputTypes>webp</InputTypes>
-        <InputPostConversionAction>None</InputPostConversionAction>
-        <Settings Key="ImageScale" Value="1" />
-        <Settings Key="ImageRotation" Value="90" />
-        <Settings Key="ImageClampSizePowerOf2" Value="False" />
-        <Settings Key="ImageMaximumSize" Value="0" />
-        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
-    </ConversionPreset>
-    <ConversionPreset Name="To Png (rotate right)" OutputType="Png" IsDefaultSettings="true">
-        <InputTypes>arw</InputTypes>
-        <InputTypes>bmp</InputTypes>
-        <InputTypes>cr2</InputTypes>
-        <InputTypes>exr</InputTypes>
-        <InputTypes>ico</InputTypes>
-        <InputTypes>jpg</InputTypes>
-        <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
-        <InputTypes>png</InputTypes>
-        <InputTypes>psd</InputTypes>
-        <InputTypes>svg</InputTypes>
-        <InputTypes>tga</InputTypes>
-        <InputTypes>tif</InputTypes>
-        <InputTypes>tiff</InputTypes>
-        <InputTypes>webp</InputTypes>
-        <InputPostConversionAction>None</InputPostConversionAction>
-        <Settings Key="ImageScale" Value="1" />
-        <Settings Key="ImageRotation" Value="270" />
-        <Settings Key="ImageClampSizePowerOf2" Value="False" />
-        <Settings Key="ImageMaximumSize" Value="0" />
-        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
-    </ConversionPreset>
     <ConversionPreset Name="To Jpg" OutputType="Jpg" IsDefaultSettings="true">
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
@@ -645,6 +529,744 @@
         <InputTypes>xls</InputTypes>
         <InputTypes>xlsx</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 75%/To Mkv" OutputType="Mkv" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="30" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="0.75" />
+        <Settings Key="VideoRotation" Value="0" />
+        <Settings Key="AudioBitrate" Value="155" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 75%/To Mp4" OutputType="Mp4" IsDefaultSettings="false">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="30" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="0.75" />
+        <Settings Key="VideoRotation" Value="90" />
+        <Settings Key="AudioBitrate" Value="155" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 75%/To Webm" OutputType="Webm" IsDefaultSettings="false">
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="AudioBitrate" Value="160" />
+        <Settings Key="VideoQuality" Value="40" />
+        <Settings Key="VideoScale" Value="0.75" />
+        <Settings Key="VideoRotation" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 75%/To Ogv" OutputType="Ogv" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="8" />
+        <Settings Key="VideoScale" Value="0.75" />
+        <Settings Key="VideoRotation" Value="0" />
+        <Settings Key="AudioBitrate" Value="160" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 75%/To Avi" OutputType="Avi" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="27" />
+        <Settings Key="VideoScale" Value="0.75" />
+        <Settings Key="VideoRotation" Value="0" />
+        <Settings Key="AudioBitrate" Value="190" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 75%/To Png" OutputType="Png" IsDefaultSettings="false">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageScale" Value="0.75" />
+        <Settings Key="ImageRotation" Value="0" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)-small</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 75%/To Webp" OutputType="Webp" IsDefaultSettings="false">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageQuality" Value="40" />
+        <Settings Key="ImageScale" Value="0.75" />
+        <Settings Key="ImageRotation" Value="0" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 75%/To Jpg" OutputType="Jpg" IsDefaultSettings="false">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageQuality" Value="40" />
+        <Settings Key="ImageScale" Value="0.75" />
+        <Settings Key="ImageRotation" Value="0" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 25%/To Mkv" OutputType="Mkv" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="30" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="0.25" />
+        <Settings Key="VideoRotation" Value="0" />
+        <Settings Key="AudioBitrate" Value="155" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 25%/To Mp4" OutputType="Mp4" IsDefaultSettings="false">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="30" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="0.25" />
+        <Settings Key="VideoRotation" Value="90" />
+        <Settings Key="AudioBitrate" Value="155" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 25%/To Webm" OutputType="Webm" IsDefaultSettings="false">
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="AudioBitrate" Value="160" />
+        <Settings Key="VideoQuality" Value="40" />
+        <Settings Key="VideoScale" Value="0.25" />
+        <Settings Key="VideoRotation" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 25%/To Ogv" OutputType="Ogv" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="8" />
+        <Settings Key="VideoScale" Value="0.25" />
+        <Settings Key="VideoRotation" Value="0" />
+        <Settings Key="AudioBitrate" Value="160" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 25%/To Avi" OutputType="Avi" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="27" />
+        <Settings Key="VideoScale" Value="0.25" />
+        <Settings Key="VideoRotation" Value="0" />
+        <Settings Key="AudioBitrate" Value="190" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 25%/To Png" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageScale" Value="0.25" />
+        <Settings Key="ImageRotation" Value="0" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)-small</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 25%/To Webp" OutputType="Webp" IsDefaultSettings="false">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageQuality" Value="40" />
+        <Settings Key="ImageScale" Value="0.25" />
+        <Settings Key="ImageRotation" Value="0" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Scale 25%/To Jpg" OutputType="Jpg" IsDefaultSettings="false">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageQuality" Value="40" />
+        <Settings Key="ImageScale" Value="0.25" />
+        <Settings Key="ImageRotation" Value="0" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate left/To Mkv" OutputType="Mkv" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="30" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="90" />
+        <Settings Key="AudioBitrate" Value="155" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate left/To Mp4" OutputType="Mp4" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="30" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="90" />
+        <Settings Key="AudioBitrate" Value="155" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate left/To Mp4 (low quality)" OutputType="Mp4" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="20" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="90" />
+        <Settings Key="AudioBitrate" Value="96" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate left/To Webm" OutputType="Webm" IsDefaultSettings="false">
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="AudioBitrate" Value="160" />
+        <Settings Key="VideoQuality" Value="40" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="90" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate left/To Ogv" OutputType="Ogv" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="8" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="90" />
+        <Settings Key="AudioBitrate" Value="160" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate left/To Avi" OutputType="Avi" IsDefaultSettings="false">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="27" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="90" />
+        <Settings Key="AudioBitrate" Value="190" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate left/To Png" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageScale" Value="1" />
+        <Settings Key="ImageRotation" Value="90" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate left/To Jpg" OutputType="Jpg" IsDefaultSettings="false">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageQuality" Value="40" />
+        <Settings Key="ImageScale" Value="1" />
+        <Settings Key="ImageRotation" Value="90" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate right/To Mkv" OutputType="Mkv" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="30" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="270" />
+        <Settings Key="AudioBitrate" Value="155" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate right/To Mp4" OutputType="Mp4" IsDefaultSettings="true">
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="30" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="270" />
+        <Settings Key="AudioBitrate" Value="155" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate right/To Mp4 (low quality)" OutputType="Mp4" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="20" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="270" />
+        <Settings Key="AudioBitrate" Value="96" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate right/To Webm" OutputType="Webm" IsDefaultSettings="false">
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="AudioBitrate" Value="160" />
+        <Settings Key="VideoQuality" Value="40" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="270" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate right/To Ogv" OutputType="Ogv" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="8" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="270" />
+        <Settings Key="AudioBitrate" Value="160" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate right/To Avi" OutputType="Avi" IsDefaultSettings="false">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="27" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="270" />
+        <Settings Key="AudioBitrate" Value="190" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate right/To Png" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageScale" Value="1" />
+        <Settings Key="ImageRotation" Value="270" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Rotate right/To Jpg" OutputType="Jpg" IsDefaultSettings="false">
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageQuality" Value="40" />
+        <Settings Key="ImageScale" Value="1" />
+        <Settings Key="ImageRotation" Value="270" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <CheckUpgradeAtStartup>true</CheckUpgradeAtStartup>

@@ -1,6 +1,8 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:FileConverter"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:views="clr-namespace:FileConverter.Views"
         xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
@@ -11,7 +13,9 @@
         MinWidth="640" MinHeight="480" 
         Width="920" Height="675"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
-        DataContext="{Binding Settings, Source={StaticResource Locator}}">
+        mc:Ignorable="d"
+        DataContext="{Binding Settings, Source={StaticResource Locator}}"
+        d:DataContext="{d:DesignData /SampleData/SettingsSampleData.xaml}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <command:EventToCommand Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
@@ -78,19 +82,61 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
-                        <ListBox x:Name="PresetList" Grid.Row="0" HorizontalAlignment="Left" IsSynchronizedWithCurrentItem="True" 
-                                 ItemsSource="{Binding Settings.ConversionPresets}"
-                                 SelectedItem="{Binding SelectedPreset}" 
-                                 Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding Name}"/>
+
+                        <TreeView Name="PresetTreeView" Grid.Row="0"
+                                  ItemsSource="{Binding PresetsRootFolder.Children}"
+                                  Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}" AllowDrop="True"
+                                  views:DragDropExtension.ScrollOnDragDrop="True">
+                            <TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type viewModels:PresetFolderNode}" ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Image HorizontalAlignment="Left" Height="24" Width="24" VerticalAlignment="Top" Margin="5"
+                                               Source="{Binding Source=/FileConverter;component/Resources/FolderIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}">
+                                        </Image>
+                                        <TextBlock Text="{Binding Name}" FontWeight="DemiBold" FontSize="14" VerticalAlignment="Center" Margin="5,0"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                                <DataTemplate DataType="{x:Type viewModels:PresetNode}">
+                                    <TextBlock Text="{Binding Name}" FontSize="12" Margin="5" />
                                 </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                            </TreeView.Resources>
+                            <TreeView.ItemContainerStyle>
+                                <Style TargetType="{x:Type TreeViewItem}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasError, FallbackValue=False}" Value="True">
+                                            <Setter Property="Background" Value="#F44336"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Style.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#86C8F6" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="#074078" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#DFE0E0" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#4B5762" />
+                                    </Style.Resources>
+
+                                    <Setter Property="IsExpanded" Value="True"/>
+                                    <Setter Property="BorderBrush" Value="#1E6BB8"/>
+
+                                    <EventSetter Event="TreeViewItem.DragOver"  Handler="TreeView_DragOver"/>
+                                    <EventSetter Event="TreeViewItem.Drop" Handler="TreeView_Drop"/>
+                                    <EventSetter Event="TreeViewItem.MouseMove" Handler="TreeView_MouseMove"/>
+                                </Style>
+                            </TreeView.ItemContainerStyle>
+                            <i:Interaction.Behaviors>
+                                <views:TreeViewSelectionBehavior
+                                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                    HierarchyPredicate="{Binding PresetsHierarchyPredicate}"
+                                    ExpandSelected="False"/>
+                            </i:Interaction.Behaviors>
+                        </TreeView>
 
                         <DockPanel Grid.Row="1" Margin="0,5,0,0" HorizontalAlignment="Center">
-                            <Button Content="^" HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" 
+                            <Button HorizontalAlignment="Left" Width="25" Margin="0,0,2,0" 
+                                    ToolTip="{x:Static project:Resources.CreateANewFolder}"
+                                    Command="{Binding CreateFolderCommand}">
+                                <Image Source="{Binding Source=/FileConverter;component/Resources/FolderIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" />
+                            </Button>
+                            <Button Content="^" HorizontalAlignment="Left" Width="25" Margin="2,0" 
                                     ToolTip="{x:Static project:Resources.MoveUpSelectedPreset}"
                                     Command="{Binding MovePresetUpCommand}"/>
                             <Button Content="+" HorizontalAlignment="Left" Width="25" Margin="2,0"
@@ -107,6 +153,25 @@
                             </TextBlock>
                         </DockPanel>
                     </Grid>
+
+                    <!-- Folder settings -->
+                    <GroupBox Header="{x:Static project:Resources.PresetFolder}" Margin="5,5,0,0" Grid.Column="1" 
+                              Visibility="{Binding SelectedFolder, Converter={StaticResource ReferenceToVisibility}}">
+                        <Grid DataContext="{Binding SelectedFolder}" Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" MaxWidth="240"/>
+                                <ColumnDefinition Width="2.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="{x:Static project:Resources.PresetFolderName}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                            <TextBox x:Name="FolderNameTextBox" Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" FontSize="15"
+                                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        </Grid>
+                    </GroupBox>
 
                     <!-- Preset settings -->
                     <GroupBox Header="{x:Static project:Resources.Preset}" Margin="5,5,0,0" Grid.Column="1" 
@@ -143,7 +208,7 @@
                                                 <CheckBox Content="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeCategoryChecked" Unchecked="OnInputTypeCategoryUnchecked" IsThreeState="True" >
                                                     <CheckBox.IsChecked>
                                                         <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
-                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type views:SettingsWindow}}" Path="DataContext.SelectedPreset.InputTypes" Mode="OneWay"/>
+                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPreset.Preset.InputTypes" Mode="OneWay"/>
                                                             <Binding Path="InputExtensionNames" Mode="OneWay"/>
                                                         </MultiBinding>
                                                     </CheckBox.IsChecked>
@@ -153,7 +218,7 @@
                                                 <CheckBox Content="{Binding Name}" Foreground="{Binding ForegroundBrush}" ToolTip="{Binding ToolTip}" Height="20" VerticalAlignment="Top" Margin="2" Checked="OnInputTypeChecked" Unchecked="OnInputTypeUnchecked">
                                                     <CheckBox.IsChecked>
                                                         <MultiBinding Converter="{StaticResource CollectionContainsElementToBool}" Mode="OneWay">
-                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type views:SettingsWindow}}" Path="DataContext.SelectedPreset.InputTypes" Mode="OneWay"/>
+                                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type Window}}" Path="DataContext.SelectedPreset.Preset.InputTypes" Mode="OneWay"/>
                                                             <Binding Path="Name" Mode="OneWay"/>
                                                         </MultiBinding>
                                                     </CheckBox.IsChecked>
@@ -169,7 +234,7 @@
 
                                     <Label Grid.Row="1" Content="{x:Static project:Resources.ActionWhenConversionSucceedTitle}" ToolTip="{x:Static project:Resources.ActionWhenConversionSucceedDescription}" />
                                     <ComboBox Grid.Row="2" ItemsSource="{Binding InputPostConversionActions, Mode=OneTime}"
-                                              SelectedItem="{Binding SelectedPreset.InputPostConversionAction, Mode=TwoWay}">
+                                              SelectedItem="{Binding SelectedPreset.Preset.InputPostConversionAction, Mode=TwoWay}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}}" />
@@ -187,7 +252,7 @@
                                 <StackPanel>
                                     <ComboBox Margin="5" Height="29" VerticalAlignment="Top" 
                                               ItemsSource="{Binding OutputTypes}"
-                                              SelectedItem="{Binding SelectedPreset.OutputType, Converter={StaticResource OutputTypeEnumToViewModel}, Mode=TwoWay}">
+                                              SelectedItem="{Binding SelectedPreset.Preset.OutputType, Converter={StaticResource OutputTypeEnumToViewModel}, Mode=TwoWay}">
                                         <ComboBox.GroupStyle>
                                             <GroupStyle>
                                                 <GroupStyle.HeaderTemplate>
@@ -206,7 +271,7 @@
                                     </ComboBox>
 
                                     <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
-								        Content="{Binding SelectedPreset, UpdateSourceTrigger=PropertyChanged}" />
+								        Content="{Binding SelectedPreset.Preset, UpdateSourceTrigger=PropertyChanged}" />
                                     <Separator/>
 
                                     <!-- Output file name template -->
@@ -222,17 +287,18 @@
                                             <RowDefinition Height="23"/>
                                         </Grid.RowDefinitions>
                                         <Label Content="{x:Static project:Resources.FileNameTemplate}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}"
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" 
+                                                 ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}"
                                                  Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                                         <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
-                                        <TextBlock Text="{x:Static project:Resources.OuputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center"/>
                                         <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
                                         <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center">
                                             <TextBlock.Text>
                                                 <MultiBinding Converter="{StaticResource FileNameConverter}">
-                                                    <Binding Source="{x:Static project:Resources.OuputFileNameTemplateSample}"/>
-                                                    <Binding Path="SelectedPreset.OutputType" Mode="OneWay"/>
-                                                    <Binding Path="SelectedPreset.OutputFileNameTemplate" Mode="OneWay"/>
+                                                    <Binding Source="{x:Static project:Resources.OutputFileNameTemplateSample}"/>
+                                                    <Binding Path="SelectedPreset.Preset.OutputType" Mode="OneWay"/>
+                                                    <Binding Path="SelectedPreset.Preset.OutputFileNameTemplate" Mode="OneWay"/>
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>

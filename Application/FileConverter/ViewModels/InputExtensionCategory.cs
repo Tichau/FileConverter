@@ -3,12 +3,9 @@
 namespace FileConverter.ViewModels
 {
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
+    using GalaSoft.MvvmLight;
 
-    using FileConverter.Annotations;
-
-    public class InputExtensionCategory : INotifyPropertyChanged
+    public class InputExtensionCategory : ObservableObject
     {
         private string name;
         private List<InputExtension> inputExtensions = new List<InputExtension>();
@@ -17,8 +14,6 @@ namespace FileConverter.ViewModels
         {
             this.Name = name;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name
         {
@@ -30,7 +25,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.name = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
@@ -60,15 +55,9 @@ namespace FileConverter.ViewModels
             {
                 inputExtension = new InputExtension(extension);
                 this.inputExtensions.Add(inputExtension);
-                this.OnPropertyChanged("InputExtensions");
-                this.OnPropertyChanged("InputExtensionNames");
+                this.RaisePropertyChanged("InputExtensions");
+                this.RaisePropertyChanged("InputExtensionNames");
             }
-        }
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

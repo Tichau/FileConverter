@@ -301,7 +301,7 @@
     <value>Rotazione di 180°</value>
     <comment>180° rotation</comment>
   </data>
-  <data name="OuputFileNameTemplateSample" xml:space="preserve">
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
     <value>C:\Musica\Artista\Album\Canzone.wav</value>
     <comment>C:\Music\Artist\Album\Song.wav</comment>
   </data>

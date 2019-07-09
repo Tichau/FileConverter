@@ -255,7 +255,7 @@
   <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
     <value>180° rotation</value>
   </data>
-  <data name="OuputFileNameTemplateSample" xml:space="preserve">
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
     <value>C:\Music\Artist\Album\Song.wav</value>
   </data>
   <data name="OutputExample" xml:space="preserve">
@@ -549,5 +549,17 @@ use maj for uppercase version</value>
   </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>Error during conversion job initialization.</value>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>Create a new folder.</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>New folder</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>Folder Name</value>
   </data>
 </root>

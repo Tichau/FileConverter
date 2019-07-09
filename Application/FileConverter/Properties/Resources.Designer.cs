@@ -304,6 +304,24 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a new folder..
+        /// </summary>
+        public static string CreateANewFolder {
+            get {
+                return ResourceManager.GetString("CreateANewFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New folder.
+        /// </summary>
+        public static string DefaultFolderName {
+            get {
+                return ResourceManager.GetString("DefaultFolderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New preset.
         /// </summary>
         public static string DefaultPresetName {
@@ -880,20 +898,20 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Music\Artist\Album\Song.wav.
-        /// </summary>
-        public static string OuputFileNameTemplateSample {
-            get {
-                return ResourceManager.GetString("OuputFileNameTemplateSample", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Output.
         /// </summary>
         public static string OutputExample {
             get {
                 return ResourceManager.GetString("OutputExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C:\Music\Artist\Album\Song.wav.
+        /// </summary>
+        public static string OutputFileNameTemplateSample {
+            get {
+                return ResourceManager.GetString("OutputFileNameTemplateSample", resourceCulture);
             }
         }
         
@@ -937,6 +955,24 @@ namespace FileConverter.Properties {
         public static string Preset {
             get {
                 return ResourceManager.GetString("Preset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder.
+        /// </summary>
+        public static string PresetFolder {
+            get {
+                return ResourceManager.GetString("PresetFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder Name.
+        /// </summary>
+        public static string PresetFolderName {
+            get {
+                return ResourceManager.GetString("PresetFolderName", resourceCulture);
             }
         }
         

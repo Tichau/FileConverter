@@ -222,11 +222,14 @@
     <Compile Include="ValueConverters\Generic\StringToEnum.cs" />
     <Compile Include="ValueConverters\Generic\ValueConverterGroup.cs" />
     <Compile Include="ViewModels\DiagnosticsViewModel.cs" />
+    <Compile Include="ViewModels\PresetNode.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\HelpViewModel.cs" />
     <Compile Include="ViewModels\UpgradeViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\BindableSelectedItemBehavior.cs" />
+    <Compile Include="Views\DragDropExtension.cs" />
     <Compile Include="Views\HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
@@ -257,6 +260,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="SampleData\SettingsSampleData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\HelpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -391,6 +398,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SettingsIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FolderIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
