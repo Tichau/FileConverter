@@ -1,16 +1,15 @@
 ﻿// <copyright file="DragDropExtension.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-
 namespace FileConverter.Views
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+
     /// <summary>
     /// Provides extended support for drag drop operation
     /// </summary>
-
     public static class DragDropExtension
     {
         public static readonly DependencyProperty ScrollOnDragDropProperty = DependencyProperty.RegisterAttached("ScrollOnDragDrop", typeof(bool), typeof(DragDropExtension), new PropertyMetadata(false, HandleScrollOnDragDropChanged));
@@ -37,13 +36,13 @@ namespace FileConverter.Views
 
         private static void HandleScrollOnDragDropChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
-            FrameworkElement container = dependencyObject as FrameworkElement;
-
             if (dependencyObject == null)
             {
                 Diagnostics.Debug.LogError("Invalid types!");
                 return;
             }
+
+            FrameworkElement container = dependencyObject as FrameworkElement;
 
             Unsubscribe(container);
 

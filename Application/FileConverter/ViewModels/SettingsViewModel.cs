@@ -20,7 +20,6 @@ namespace FileConverter.ViewModels
     using GalaSoft.MvvmLight.Messaging;
 
     using Microsoft.Win32;
-    using ImageMagick;
 
     /// <summary>
     /// This class contains properties that the main View can data bind to.
