@@ -134,27 +134,32 @@
                             <Button Width="25" Margin="2,0" 
                                     ToolTip="{x:Static project:Resources.MoveUpSelectedPreset}"
                                     Command="{Binding MovePresetUpCommand}">
-                                <Image Source="{Binding Source=/FileConverter;component/Resources/UpIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" />
+                                <Image Source="{Binding Source=/FileConverter;component/Resources/UpIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}"
+                                       Style="{StaticResource EnableDisableImageStyle}"/>
                             </Button>
                             <Button Width="25" Margin="0,0,2,0" 
                                     ToolTip="{x:Static project:Resources.CreateANewFolder}"
                                     Command="{Binding CreateFolderCommand}">
-                                <Image Source="{Binding Source=/FileConverter;component/Resources/FolderIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" />
+                                <Image Source="{Binding Source=/FileConverter;component/Resources/FolderIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                       Style="{StaticResource EnableDisableImageStyle}"/>
                             </Button>
                             <Button Width="25" Margin="2,0"
                                     ToolTip="{x:Static project:Resources.AddNewPreset}"
                                     Command="{Binding AddNewPresetCommand}">
-                                <Image Source="{Binding Source=/FileConverter;component/Resources/PresetIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" />
+                                <Image Source="{Binding Source=/FileConverter;component/Resources/PresetIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                       Style="{StaticResource EnableDisableImageStyle}"/>
                             </Button>
                             <Button Width="25" Margin="2,0"
                                     ToolTip="{x:Static project:Resources.RemoveSelectedPreset}" 
                                     Command="{Binding RemoveSelectedPresetCommand}">
-                                <Image Source="{Binding Source=/FileConverter;component/Resources/DeleteIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" />
+                                <Image Source="{Binding Source=/FileConverter;component/Resources/DeleteIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                       Style="{StaticResource EnableDisableImageStyle}"/>
                             </Button>
                             <Button Width="25" Margin="2,0,0,0"
                                     ToolTip="{x:Static project:Resources.MoveDownSelectedPreset}"
                                     Command="{Binding MovePresetDownCommand}">
-                                <Image Source="{Binding Source=/FileConverter;component/Resources/DownIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" />
+                                <Image Source="{Binding Source=/FileConverter;component/Resources/DownIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                       Style="{StaticResource EnableDisableImageStyle}"/>
                             </Button>
                             <TextBlock Margin="5,5,0,0">
                                 <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
