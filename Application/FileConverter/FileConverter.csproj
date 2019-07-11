@@ -402,6 +402,18 @@
   <ItemGroup>
     <Resource Include="Resources\FolderIcon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\UpIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DownIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PresetIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DeleteIcon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg\$(PlatformName)\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"
