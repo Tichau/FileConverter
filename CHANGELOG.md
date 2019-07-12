@@ -7,7 +7,7 @@
 - Added: Spanish translation (thanks to Chachak).
 - Added: Italian translation (thanks to Davide).
 - Added: More presets for scale and rotation in File Converter default configuration.
-- Added: Support new raw image input formats: arw, dng, raf and cr2.
+- Added: Support new raw image input formats: arw, dng, nef, raf and cr2.
 - Added: Display conversion progress on the Windows taskbar item.
 - Added: Display estimated remaining time for each jobs.
 - Added: Support tif input extension (only tiff was handled) (github issue #29).
