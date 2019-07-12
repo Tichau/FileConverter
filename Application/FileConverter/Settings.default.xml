@@ -410,6 +410,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="1" />
         <Settings Key="ImageRotation" Value="0" />
@@ -454,6 +455,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -480,6 +482,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -532,6 +535,7 @@
         <InputTypes>xls</InputTypes>
         <InputTypes>xlsx</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
@@ -665,6 +669,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="0.75" />
         <Settings Key="ImageRotation" Value="0" />
@@ -690,6 +695,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="0.75" />
@@ -716,6 +722,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="0.75" />
@@ -854,6 +861,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="0.25" />
         <Settings Key="ImageRotation" Value="0" />
@@ -879,6 +887,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="0.25" />
@@ -905,6 +914,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="0.25" />
@@ -1065,6 +1075,7 @@
         <InputTypes>tiff</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="1" />
         <Settings Key="ImageRotation" Value="90" />
@@ -1090,6 +1101,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -1116,6 +1128,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -1276,6 +1289,7 @@
         <InputTypes>tiff</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="1" />
         <Settings Key="ImageRotation" Value="270" />
@@ -1301,6 +1315,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -1327,6 +1342,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
