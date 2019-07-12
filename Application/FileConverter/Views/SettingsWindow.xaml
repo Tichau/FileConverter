@@ -25,7 +25,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/CustomStyles.xaml"/>
-                <ResourceDictionary Source="Resources/ConversionPresets.xaml"/>
+                <ResourceDictionary Source="Resources/ConversionPresetTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <generic:IcoFileSizeSelectorConverter x:Key="IcoFileSizeSelector" />
