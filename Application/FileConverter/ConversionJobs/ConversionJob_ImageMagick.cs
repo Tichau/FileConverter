@@ -71,10 +71,24 @@ namespace FileConverter.ConversionJobs
             else
             {
                 this.pageCount = 1;
-                MagickReadSettings readSettings = new MagickReadSettings
+                MagickReadSettings readSettings = new MagickReadSettings();
+
+                string inputExtension = System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant();
+                switch (inputExtension)
                 {
-                    Format = MagickFormat.Cr2
-                };
+                    case ".cr2":
+                        // Requires an explicit image format otherwise the image is interpreted as a TIFF image.
+                        readSettings.Format = MagickFormat.Cr2;
+                        break;
+
+                    case ".dng":
+                        // Requires an explicit image format otherwise the image is interpreted as a TIFF image.
+                        readSettings.Format = MagickFormat.Dng;
+                        break;
+
+                    default:
+                        break;
+                }
 
                 using (MagickImage image = new MagickImage(this.InputFilePath, readSettings))
                 {
