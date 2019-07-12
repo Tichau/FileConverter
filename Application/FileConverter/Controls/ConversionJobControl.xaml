@@ -8,6 +8,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="800" 
              d:DataContext="{d:DesignData /SampleData/ConversionJobSampleData.xaml}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Views/Resources/CustomStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Background="{Binding State, Converter={StaticResource ConversionStateToBrush}, ConverterParameter=Background}" Margin="0,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -51,7 +58,7 @@
         </Grid>
 
         <Button Margin="5" Grid.Column="1" Background="WhiteSmoke" Foreground="#FF3E3E3E" Visibility="{Binding State, ConverterParameter=|InProgress|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}" Command="{Binding CancelCommand}" ToolTip="Cancel">
-            <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" />
+            <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" Style="{StaticResource EnableDisableImageStyle}" />
         </Button>
         <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/SuccessIcon.png" Width="48" Height="48" Visibility="{Binding State, ConverterParameter=|Done|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
         <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/FailIcon.png" Width="48" Height="48" Visibility="{Binding State, ConverterParameter=|Failed|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
