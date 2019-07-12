@@ -157,10 +157,12 @@ namespace FileConverter
                 case "arw":
                 case "bmp":
                 case "cr2":
+                case "dng":
                 case "exr":
                 case "ico":
                 case "jpg":
                 case "jpeg":
+                case "nef":
                 case "png":
                 case "psd":
                 case "raf":
