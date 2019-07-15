@@ -97,6 +97,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advance mode.
+        /// </summary>
+        public static string AdvanceMode {
+            get {
+                return ResourceManager.GetString("AdvanceMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Application.
         /// </summary>
         public static string Application {
@@ -624,6 +633,24 @@ namespace FileConverter.Properties {
         public static string ExitWaitingDuration {
             get {
                 return ResourceManager.GetString("ExitWaitingDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Arguments.
+        /// </summary>
+        public static string FFMPEGCustomArguments {
+            get {
+                return ResourceManager.GetString("FFMPEGCustomArguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom FFMPEG command line arguments.
+        /// </summary>
+        public static string FFMPEGCustomArgumentsTooltip {
+            get {
+                return ResourceManager.GetString("FFMPEGCustomArgumentsTooltip", resourceCulture);
             }
         }
         
