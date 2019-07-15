@@ -84,13 +84,15 @@ namespace FileConverter.ConversionJobs
 
         protected virtual void FillFFMpegArgumentsList()
         {
-            string customCommand = this.ConversionPreset.GetSettingsValue<string>(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand);
-            if (!string.IsNullOrEmpty(customCommand))
+            bool customCommandEnabled = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand);
+            if (customCommandEnabled)
             {
                 // Custom command override other settings.
-                string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, customCommand);
+                string customCommand = this.ConversionPreset.GetSettingsValue<string>(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand) ?? string.Empty;
 
+                string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, customCommand);
                 this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
+
                 return;
             }
 

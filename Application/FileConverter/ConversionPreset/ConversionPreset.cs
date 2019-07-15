@@ -428,17 +428,20 @@ namespace FileConverter
                 case OutputType.Aac:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Flac:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Ogg:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
@@ -446,12 +449,14 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Mp3VBR.ToString(), true);
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Wav:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Wav16.ToString(), true);
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
@@ -462,6 +467,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
@@ -472,6 +478,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
@@ -482,6 +489,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
@@ -491,6 +499,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
@@ -500,6 +509,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "40");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
@@ -611,6 +621,7 @@ namespace FileConverter
 
             public const string EnableAudio = "EnableAudio";
             public const string EnableVideo = "EnableVideo";
+            public const string EnableFFMPEGCustomCommand = "EnableFFMPEGCustomCommand";
         }
     }
 }
