@@ -19,6 +19,7 @@
     <generic:CollectionContainsElementToBool x:Key="CollectionContainsElementToBool"/>
     <generic:FormatStringConverter x:Key="FormatStringConverter"/>
     <valueConverters:OutputTypeEnumToViewModel x:Key="OutputTypeEnumToViewModel"/>
+    <valueConverters:ConversionSettingsRelevant x:Key="ConversionSettingsRelevant"/>
 
     <generic:ValueConverterGroup x:Key="ConversionSettingsToEnum">
         <valueConverters:ConversionSettingsToString/>
@@ -298,109 +299,82 @@
     </DataTemplate>
 
     <DataTemplate x:Key="MkvSettingsDataTemplate" DataType="{x:Type fileConverter:ConversionPreset}">
-        <StackPanel>
-            <DockPanel>
-                <CheckBox Margin="0,6,0,0" 
-                          IsChecked="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" />
-                <Label FontWeight="Bold" 
-                       Content="{x:Static project:Resources.AdvanceMode}" IsEnabled="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel Grid.Row="0" Grid.Column="0">
+                <Label Content="{x:Static project:Resources.VideoTitle}" FontWeight="Bold" Margin="17,0,0,0"/>
+                <Label Content="(H.264)" FontWeight="Light" Foreground="#004B82" />
             </DockPanel>
 
-            <Grid Visibility="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean|Collapsed, Converter={StaticResource ConversionSettingsToVisibility}}">
+            <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.Quality}" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
+            <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" 
+                    Value="{Binding Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}"
+                    Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="1" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
+
+            <Label Grid.Row="2" Grid.Column="0" Content="{x:Static project:Resources.EncodingSpeed}" ToolTip="{x:Static project:Resources.VideoEncodingSpeedTooltip}" HorizontalContentAlignment="Right"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" 
+                          ItemsSource="{Binding Path=(conversionJobs:ConversionJob_FFMPEG.VideoEncodingSpeeds)}"
+                          SelectedValue="{Binding Settings, ConverterParameter=VideoEncodingSpeed|FileConverter.ConversionJobs.VideoEncodingSpeed, Converter={StaticResource ConversionSettingsToEnum}, Mode=TwoWay, TargetNullValue=veryslow}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}, Mode=OneTime}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Label Content="{x:Static project:Resources.Scale}" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"/>
+            <Grid Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                
-                <Label Content="{x:Static project:Resources.FFMPEGCustomArguments}" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" />
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" 
-                         ToolTip="{x:Static project:Resources.FFMPEGCustomArgumentsTooltip}"
-                         Text="{Binding Settings, ConverterParameter=FFMPEGCustomCommand|System.String, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,5,5,0">
-                    <Hyperlink CommandParameter="https://ffmpeg.org/ffmpeg.html" Command="{Binding DataContext.OpenUrlCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
-                </TextBlock>
+                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
+                <Label Grid.Column="1">
+                    <Label.Content>
+                        <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
+                            <MultiBinding.ConverterParameter>{0:P1}</MultiBinding.ConverterParameter>
+                            <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
+                        </MultiBinding>
+                    </Label.Content>
+                </Label>
             </Grid>
 
-            <Grid Visibility="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean|Visible;Collapsed, Converter={StaticResource ConversionSettingsToVisibility}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <!--Rotate-->
+            <Label Content="{x:Static project:Resources.Rotate}" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"/>
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+                <RadioButton Content="{x:Static project:Resources.ZeroDegreesRotationTitle}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"
+                                 IsChecked="{Binding Settings, ConverterParameter=VideoRotation|0, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
+                <RadioButton Content="{x:Static project:Resources.NinetyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"
+                                 IsChecked="{Binding Settings, ConverterParameter=VideoRotation|90, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
+                <RadioButton Content="{x:Static project:Resources.OneEightyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"
+                                 IsChecked="{Binding Settings, ConverterParameter=VideoRotation|180, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
+                <RadioButton Content="{x:Static project:Resources.TwoSeventyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"
+                                 IsChecked="{Binding Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
+            </StackPanel>
 
-                <DockPanel Grid.Row="0" Grid.Column="0">
-                    <Label Content="{x:Static project:Resources.VideoTitle}" FontWeight="Bold" Margin="17,0,0,0"/>
-                    <Label Content="(H.264)" FontWeight="Light" Foreground="#004B82" />
-                </DockPanel>
+            <DockPanel Grid.Row="5" Grid.Column="0">
+                <CheckBox IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
+                <Label Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+                <Label Content="(AAC)" FontWeight="Light" Foreground="#004B82" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+            </DockPanel>
 
-                <Label Content="{x:Static project:Resources.Quality}" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
-                <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}"
-                                Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="1" LargeChange="6" TickFrequency="1" Foreground="#004B82" />
-
-                <Label Content="{x:Static project:Resources.EncodingSpeed}" Grid.Row="2" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingSpeedTooltip}" HorizontalContentAlignment="Right"/>
-                <ComboBox Grid.Row="2" Grid.Column="1" 
-                              ItemsSource="{Binding Path=(conversionJobs:ConversionJob_FFMPEG.VideoEncodingSpeeds)}"
-                              SelectedValue="{Binding Settings, ConverterParameter=VideoEncodingSpeed|FileConverter.ConversionJobs.VideoEncodingSpeed, Converter={StaticResource ConversionSettingsToEnum}, Mode=TwoWay, TargetNullValue=veryslow}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}, Mode=OneTime}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-
-                <Label Content="{x:Static project:Resources.Scale}" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"/>
-                <Grid Grid.Row="3" Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="60"/>
-                    </Grid.ColumnDefinitions>
-                    <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="#004B82"/>
-                    <Label Grid.Column="1">
-                        <Label.Content>
-                            <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
-                                <MultiBinding.ConverterParameter>{0:P1}</MultiBinding.ConverterParameter>
-                                <Binding ElementName="ScaleSlider" Path="Value" Mode="OneWay"/>
-                            </MultiBinding>
-                        </Label.Content>
-                    </Label>
-                </Grid>
-
-                <!--Rotate-->
-                <Label Content="{x:Static project:Resources.Rotate}" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"/>
-                <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
-                    <RadioButton Content="{x:Static project:Resources.ZeroDegreesRotationTitle}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"
-                                     IsChecked="{Binding Settings, ConverterParameter=VideoRotation|0, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
-                    <RadioButton Content="{x:Static project:Resources.NinetyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"
-                                     IsChecked="{Binding Settings, ConverterParameter=VideoRotation|90, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
-                    <RadioButton Content="{x:Static project:Resources.OneEightyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"
-                                     IsChecked="{Binding Settings, ConverterParameter=VideoRotation|180, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
-                    <RadioButton Content="{x:Static project:Resources.TwoSeventyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"
-                                     IsChecked="{Binding Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
-                </StackPanel>
-
-                <DockPanel Grid.Row="5" Grid.Column="0">
-                    <CheckBox IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
-                    <Label Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
-                    <Label Content="(AAC)" FontWeight="Light" Foreground="#004B82" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
-                </DockPanel>
-
-                <Label Content="{x:Static project:Resources.Quality}" Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
-                <controls:EncodingQualitySliderControl Grid.Row="6" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="AacVBR" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"
-        				    Bitrate="{Binding Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay, TargetNullValue=128}" />
-            </Grid>
-        </StackPanel>
+            <Label Content="{x:Static project:Resources.Quality}" Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+            <controls:EncodingQualitySliderControl Grid.Row="6" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="AacVBR" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"
+        				Bitrate="{Binding Settings, ConverterParameter=AudioBitrate|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay, TargetNullValue=128}" />
+        </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="OgvSettingsDataTemplate" DataType="{x:Type fileConverter:ConversionPreset}">
@@ -640,22 +614,99 @@
         </Grid>
     </DataTemplate>
 
-    <views:ConversionSettingsTemplateSelector x:Key="ConversionSettingsSelector"
-            DefaultDataTemplate="{StaticResource EmptyDataTemplate}"
-            AacSettingsDataTemplate="{StaticResource AacSettingsDataTemplate}"
-            AviSettingsDataTemplate="{StaticResource AviSettingsDataTemplate}"
-            FlacSettingsDataTemplate="{StaticResource FlacSettingsDataTemplate}"
-            GifSettingsDataTemplate="{StaticResource GifSettingsDataTemplate}" 
-            JpgSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" 
-            MkvSettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}" 
-            Mp3SettingsDataTemplate="{StaticResource Mp3SettingsDataTemplate}"
-            Mp4SettingsDataTemplate="{StaticResource MkvSettingsDataTemplate}"
-            OggSettingsDataTemplate="{StaticResource OggSettingsDataTemplate}"
-            OgvSettingsDataTemplate="{StaticResource OgvSettingsDataTemplate}"
-            PngSettingsDataTemplate="{StaticResource PngSettingsDataTemplate}"
-            WavSettingsDataTemplate="{StaticResource WavSettingsDataTemplate}"
-            WebmSettingsDataTemplate="{StaticResource WebmSettingsDataTemplate}"
-            WebpSettingsDataTemplate="{StaticResource JpgSettingsDataTemplate}" />
+    <Style x:Key="OutputTypeSelectorStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="ContentTemplate" Value="{StaticResource EmptyDataTemplate}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding OutputType}" Value="Aac">
+                <Setter Property="ContentTemplate" Value="{StaticResource AacSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Avi">
+                <Setter Property="ContentTemplate" Value="{StaticResource AviSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Flac">
+                <Setter Property="ContentTemplate" Value="{StaticResource FlacSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Gif">
+                <Setter Property="ContentTemplate" Value="{StaticResource GifSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Jpg">
+                <Setter Property="ContentTemplate" Value="{StaticResource JpgSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Mkv">
+                <Setter Property="ContentTemplate" Value="{StaticResource MkvSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Mp3">
+                <Setter Property="ContentTemplate" Value="{StaticResource Mp3SettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Mp4">
+                <Setter Property="ContentTemplate" Value="{StaticResource MkvSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Ogg">
+                <Setter Property="ContentTemplate" Value="{StaticResource OggSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Ogv">
+                <Setter Property="ContentTemplate" Value="{StaticResource OgvSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Png">
+                <Setter Property="ContentTemplate" Value="{StaticResource PngSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Wav">
+                <Setter Property="ContentTemplate" Value="{StaticResource WavSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Webm">
+                <Setter Property="ContentTemplate" Value="{StaticResource WebmSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Webp">
+                <Setter Property="ContentTemplate" Value="{StaticResource JpgSettingsDataTemplate}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <DataTemplate x:Key="CustomSettingsDataTemplate" DataType="{x:Type fileConverter:ConversionPreset}">
+        <StackPanel>
+            <DockPanel>
+                <CheckBox Margin="0,6,0,0" 
+                          IsChecked="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" />
+                <Label FontWeight="Bold" 
+                       Content="{x:Static project:Resources.AdvanceMode}" IsEnabled="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+            </DockPanel>
+            <Grid Visibility="{Binding Settings, Converter={StaticResource ConversionSettingsToVisibility}, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean|Collapsed}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="{x:Static project:Resources.FFMPEGCustomArguments}" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" />
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" 
+                         ToolTip="{x:Static project:Resources.FFMPEGCustomArgumentsTooltip}"
+                         Text="{Binding Settings, ConverterParameter=FFMPEGCustomCommand|System.String, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,5,5,0">
+                    <Hyperlink CommandParameter="https://ffmpeg.org/ffmpeg.html" Command="{Binding DataContext.OpenUrlCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                </TextBlock>
+
+            </Grid>
+            <DockPanel Visibility="{Binding Settings, Converter={StaticResource ConversionSettingsToVisibility}, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean|Visible;Collapsed}">
+                <ContentControl Content="{Binding .}" Style="{StaticResource OutputTypeSelectorStyle}"/>
+            </DockPanel>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="EmptyCustomSettingsDataTemplate" DataType="{x:Type fileConverter:ConversionPreset}">
+        <ContentControl Content="{Binding .}" Style="{StaticResource OutputTypeSelectorStyle}"/>
+    </DataTemplate>
+
+    <Style x:Key="ConversionSettingsSelectorStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="ContentTemplate" Value="{StaticResource EmptyCustomSettingsDataTemplate}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding SelectedPreset.Preset.Settings, Converter={StaticResource ConversionSettingsRelevant}, ConverterParameter=EnableFFMPEGCustomCommand}" Value="True">
+                <Setter Property="ContentTemplate" Value="{StaticResource CustomSettingsDataTemplate}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>
     

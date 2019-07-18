@@ -201,6 +201,7 @@
     <Compile Include="ValueConverters\ChangelogConverter.cs" />
     <Compile Include="ValueConverters\ConversionJobToEstimatedRemainingDuration.cs" />
     <Compile Include="ValueConverters\ConversionJobsToProgressValue.cs" />
+    <Compile Include="ValueConverters\ConversionSettingsRelevant.cs" />
     <Compile Include="ValueConverters\Generic\IcoFileSizeSelectorConverter.cs" />
     <Compile Include="ValueConverters\OutputTypeEnumToViewModel.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
@@ -236,7 +237,6 @@
     <Compile Include="Views\DiagnosticsWindow.xaml.cs">
       <DependentUpon>DiagnosticsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ConversionSettingsTemplateSelector.cs" />
     <Compile Include="ViewModels\InputExtension.cs" />
     <Compile Include="ViewModels\InputExtensionCategory.cs" />
     <Compile Include="ViewModels\OutputTypeViewModel.cs" />

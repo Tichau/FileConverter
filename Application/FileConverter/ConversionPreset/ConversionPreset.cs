@@ -127,10 +127,7 @@ namespace FileConverter
         [XmlAttribute]
         public OutputType OutputType
         {
-            get
-            {
-                return this.outputType;
-            }
+            get => this.outputType;
 
             set
             {
@@ -254,10 +251,7 @@ namespace FileConverter
         [XmlIgnore]
         public IConversionSettings Settings
         {
-            get
-            {
-                return this.settings;
-            }
+            get => this.settings;
 
             set
             {
