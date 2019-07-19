@@ -668,7 +668,7 @@
                 <CheckBox Margin="0,6,0,0" 
                           IsChecked="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" />
                 <Label FontWeight="Bold" 
-                       Content="{x:Static project:Resources.AdvanceMode}" IsEnabled="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+                       Content="{x:Static project:Resources.AdvancedMode}" IsEnabled="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
             </DockPanel>
             <Grid Visibility="{Binding Settings, Converter={StaticResource ConversionSettingsToVisibility}, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean|Collapsed}">
                 <Grid.ColumnDefinitions>

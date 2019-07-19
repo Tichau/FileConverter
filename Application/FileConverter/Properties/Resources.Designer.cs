@@ -97,11 +97,11 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Advance mode.
+        ///   Looks up a localized string similar to Advanced mode.
         /// </summary>
-        public static string AdvanceMode {
+        public static string AdvancedMode {
             get {
-                return ResourceManager.GetString("AdvanceMode", resourceCulture);
+                return ResourceManager.GetString("AdvancedMode", resourceCulture);
             }
         }
         

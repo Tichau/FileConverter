@@ -562,8 +562,8 @@ use maj for uppercase version</value>
   <data name="PresetFolderName" xml:space="preserve">
     <value>Folder Name</value>
   </data>
-  <data name="AdvanceMode" xml:space="preserve">
-    <value>Advance mode</value>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Advanced mode</value>
   </data>
   <data name="FFMPEGCustomArguments" xml:space="preserve">
     <value>Custom Arguments</value>
