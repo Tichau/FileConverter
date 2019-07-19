@@ -57,11 +57,6 @@
         <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
         <generic:BoolToVisibility x:Key="BoolToVisibility"/>
 
-        <generic:ValueConverterGroup x:Key="InvBoolToVisibility">
-            <generic:BoolInverterConverter/>
-            <generic:BoolToVisibility/>
-        </generic:ValueConverterGroup>
-
         <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">
             <generic:ValueToString/>
             <generic:EqualsConverter/>

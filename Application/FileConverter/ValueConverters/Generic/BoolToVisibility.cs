@@ -17,11 +17,27 @@ namespace FileConverter.ValueConverters.Generic
 
             string stringParameter = parameter as string;
 
-            string falseResult = stringParameter ?? "Hidden";
+            string trueResult = "Visible";
+            string falseResult = "Hidden";
+            if (!string.IsNullOrEmpty(stringParameter))
+            {
+                string[] results = stringParameter.Split(';');
+                Diagnostics.Debug.Assert(results.Length <= 2, "results.Length <= 2");
+
+                if (results.Length >= 1)
+                {
+                    falseResult = results[0];
+                }
+
+                if (results.Length >= 2)
+                {
+                    trueResult = results[1];
+                }
+            }
 
             bool booleanValue = (bool)value;
 
-            return booleanValue ? "Visible" : falseResult;
+            return booleanValue ? trueResult : falseResult;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

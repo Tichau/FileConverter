@@ -25,7 +25,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/CustomStyles.xaml"/>
-                <ResourceDictionary Source="Resources/ConversionPresets.xaml"/>
+                <ResourceDictionary Source="Resources/ConversionPresetTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <generic:IcoFileSizeSelectorConverter x:Key="IcoFileSizeSelector" />
@@ -277,14 +277,16 @@
                                             </GroupStyle>
                                         </ComboBox.GroupStyle>
                                         <ComboBox.ItemTemplate>
-                                            <DataTemplate DataType="viewModels:OutputTypeViewModel">
+                                            <DataTemplate DataType="{x:Type viewModels:OutputTypeViewModel}">
                                                 <TextBlock Text="{Binding Type}" Padding="10,2,2,2"/>
                                             </DataTemplate>
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
 
-                                    <ContentControl ContentTemplateSelector="{StaticResource ResourceKey=ConversionSettingsSelector}" 
-								        Content="{Binding SelectedPreset.Preset, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ContentControl Content="{Binding SelectedPreset.Preset}"
+                                                    Style="{StaticResource ConversionSettingsSelectorStyle}">
+                                    </ContentControl>
+
                                     <Separator/>
 
                                     <!-- Output file name template -->
