@@ -1,6 +1,7 @@
 # Change Log
 
 ## Next version
+- Added: Possibility to create custom command line preset for types converted with FFMPEG (video and audio).
 - Added: Possibility to create preset folders in File Converter context menu.
 - Added: Ability to drag and drop to move conversion presets.
 - Added: Brazilian Portuguese translation (thanks to Marhc).
