@@ -10,10 +10,12 @@ namespace FileConverter.ValueConverters.Generic
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is bool))
+            if (value != null && !(value is bool))
             {
                 throw new ArgumentException("The value must be a boolean.");
             }
+
+            bool booleanValue = (bool?) value ?? false;
 
             string stringParameter = parameter as string;
 
@@ -35,7 +37,6 @@ namespace FileConverter.ValueConverters.Generic
                 }
             }
 
-            bool booleanValue = (bool)value;
 
             return booleanValue ? trueResult : falseResult;
         }
