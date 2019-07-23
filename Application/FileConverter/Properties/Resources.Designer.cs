@@ -898,6 +898,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No preset selected.
+        /// </summary>
+        public static string NoPresetSelected {
+            get {
+                return ResourceManager.GetString("NoPresetSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string Ok {

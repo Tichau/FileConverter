@@ -571,4 +571,7 @@ use maj for uppercase version</value>
   <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
     <value>Custom FFMPEG command line arguments</value>
   </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>No preset selected</value>
+  </data>
 </root>
