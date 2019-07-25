@@ -60,70 +60,22 @@
                 <GroupBox Header="{x:Static project:Resources.Preset}">
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" MaxWidth="240"/>
                             <ColumnDefinition Width="2.5*"/>
+                            <ColumnDefinition Width="*" MaxWidth="240"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="{x:Static project:Resources.PresetName}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" FontSize="15"
-                                 Loaded="SelectedPresetName_OnLoaded"
-                                 Text="{Binding SelectedPreset.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        <DockPanel Grid.Row="0" Grid.Column="0">
+                            <Label Content="{x:Static project:Resources.PresetName}" Margin="0,0,5,0"/>
+                            <TextBox Margin="5,2,5,2" TextWrapping="Wrap" FontSize="15"
+                                     Loaded="SelectedPresetName_OnLoaded"
+                                     Text="{Binding SelectedPreset.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        </DockPanel>
 
-                        <GroupBox Grid.Row="1" Grid.Column="0" Header="{x:Static project:Resources.InputFormats}" Margin="5">
-                            <Grid Margin="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="25"/>
-                                    <RowDefinition Height="25"/>
-                                    <RowDefinition Height="22"/>
-                                </Grid.RowDefinitions>
-
-                                <TreeView x:Name="InputTypesTreeView" ItemsSource="{Binding InputCategories}" >
-                                    <TreeView.Resources>
-                                        <HierarchicalDataTemplate DataType="{x:Type viewModels:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
-                                            <CheckBox Height="20" VerticalAlignment="Top" Margin="2" IsThreeState="True"
-                                              Content="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"
-                                              IsChecked="{Binding IsChecked, Mode=TwoWay}">
-                                            </CheckBox>
-                                        </HierarchicalDataTemplate>
-                                        <DataTemplate DataType="{x:Type viewModels:InputExtension}">
-                                            <CheckBox Height="20" VerticalAlignment="Top" Margin="2"
-                                              Content="{Binding Name}" Foreground="{Binding ForegroundBrush}" ToolTip="{Binding ToolTip}"
-                                              IsChecked="{Binding IsChecked, Mode=TwoWay}">
-                                            </CheckBox>
-                                        </DataTemplate>
-                                    </TreeView.Resources>
-                                    <TreeView.ItemContainerStyle>
-                                        <Style TargetType="TreeViewItem">
-                                            <Setter Property="IsExpanded" Value="True"/>
-                                        </Style>
-                                    </TreeView.ItemContainerStyle>
-                                </TreeView>
-
-                                <Label Grid.Row="1" Content="{x:Static project:Resources.ActionWhenConversionSucceedTitle}" ToolTip="{x:Static project:Resources.ActionWhenConversionSucceedDescription}" />
-                                <ComboBox Grid.Row="2" ItemsSource="{Binding InputPostConversionActions, Mode=OneTime}"
-                                              SelectedItem="{Binding SelectedPreset.Preset.InputPostConversionAction, Mode=TwoWay}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}}" />
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-
-                                <TextBlock Grid.Row="3" Margin="0,5,0,0">
-                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
-                                </TextBlock>
-                            </Grid>
-                        </GroupBox>
-
-                        <GroupBox Header="{x:Static project:Resources.OutputFormat}" Grid.Row="1" Grid.Column="1" Margin="5">
+                        <GroupBox Header="{x:Static project:Resources.OutputFormat}" Grid.Row="1" Grid.Column="0" Margin="5">
                             <StackPanel>
                                 <ComboBox Margin="5" Height="29" VerticalAlignment="Top" 
                                               ItemsSource="{Binding OutputTypes}"
@@ -185,6 +137,56 @@
                                 </Grid>
 
                             </StackPanel>
+                        </GroupBox>
+
+                        <GroupBox Grid.Row="1" Grid.Column="1" Header="{x:Static project:Resources.InputFormats}" Margin="5">
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="22"/>
+                                </Grid.RowDefinitions>
+
+                                <TreeView x:Name="InputTypesTreeView" ItemsSource="{Binding InputCategories}" >
+                                    <TreeView.Resources>
+                                        <HierarchicalDataTemplate DataType="{x:Type viewModels:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
+                                            <CheckBox Height="20" VerticalAlignment="Top" Margin="2" IsThreeState="True"
+                                              Content="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"
+                                              IsChecked="{Binding IsChecked, Mode=TwoWay}">
+                                            </CheckBox>
+                                        </HierarchicalDataTemplate>
+                                        <DataTemplate DataType="{x:Type viewModels:InputExtension}">
+                                            <CheckBox Height="20" VerticalAlignment="Top" Margin="2"
+                                              Content="{Binding Name}" Foreground="{Binding ForegroundBrush}" ToolTip="{Binding ToolTip}"
+                                              IsChecked="{Binding IsChecked, Mode=TwoWay}">
+                                            </CheckBox>
+                                        </DataTemplate>
+                                    </TreeView.Resources>
+                                    <TreeView.ItemContainerStyle>
+                                        <Style TargetType="TreeViewItem">
+                                            <Setter Property="IsExpanded" Value="True"/>
+                                        </Style>
+                                    </TreeView.ItemContainerStyle>
+                                </TreeView>
+
+                                <Label Grid.Row="1" Content="{x:Static project:Resources.ActionWhenConversionSucceedTitle}" ToolTip="{x:Static project:Resources.ActionWhenConversionSucceedDescription}" />
+                                <ComboBox Grid.Row="2" ItemsSource="{Binding InputPostConversionActions, Mode=OneTime}"
+                                              SelectedItem="{Binding SelectedPreset.Preset.InputPostConversionAction, Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+
+                                <TextBlock Grid.Row="3" Margin="0,5,0,0">
+                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                </TextBlock>
+                            </Grid>
                         </GroupBox>
                     </Grid>
                 </GroupBox>
