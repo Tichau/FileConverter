@@ -33,9 +33,11 @@
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="{x:Type diagnostics:DiagnosticsData}">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                        <TextBlock Name="Diagnostics" TextWrapping="NoWrap" Text="{Binding Content}" FontFamily="Consolas" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False"/>
+                        <TextBox TextWrapping="NoWrap" FontFamily="Consolas" IsReadOnly="True"
+                                   ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False"
+                                   Text="{Binding Content, Mode=OneWay}" />
                     </ScrollViewer>
                 </DataTemplate>
             </TabControl.ContentTemplate>
