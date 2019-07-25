@@ -57,10 +57,15 @@
             </StackPanel>
         </Grid>
 
-        <Button Margin="5" Grid.Column="1" Background="WhiteSmoke" Foreground="#FF3E3E3E" Visibility="{Binding State, ConverterParameter=|InProgress|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}" Command="{Binding CancelCommand}" ToolTip="Cancel">
-            <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" Style="{StaticResource EnableDisableImageStyle}" />
+        <Button Margin="5" Grid.Column="1" Background="WhiteSmoke" Foreground="#FF3E3E3E"
+                Visibility="{Binding State, ConverterParameter=|InProgress|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}" 
+                Command="{Binding CancelCommand}" ToolTip="Cancel">
+            <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" 
+                   Style="{StaticResource EnableDisableImageStyle}" />
         </Button>
-        <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/SuccessIcon.png" Width="48" Height="48" Visibility="{Binding State, ConverterParameter=|Done|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
-        <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/FailIcon.png" Width="48" Height="48" Visibility="{Binding State, ConverterParameter=|Failed|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
+        <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/SuccessIcon.png" Width="48" Height="48" 
+               Visibility="{Binding State, ConverterParameter=|Done|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
+        <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/FailIcon.png" Width="48" Height="48" 
+               Visibility="{Binding State, ConverterParameter=|Failed|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
     </Grid>
 </UserControl>
