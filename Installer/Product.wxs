@@ -11,7 +11,8 @@
 <?endif ?>
 
 <!-- Upgrade documentation: http://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html -->
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="1.2.3" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b">
         <?if $(var.Platform) = x64 ?>
             <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />        
@@ -42,6 +43,11 @@
             <ProgressText Action="UninstallShell">Unregister shell extension from Windows Explorer</ProgressText>
             <ProgressText Action="PostInstallInit">Initialize conversion presets</ProgressText>
         </UI>
+
+        <PropertyRef Id="WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED"/>
+        <Condition Message="This application requires .NET Framework 4.6.1. Please install the .NET Framework then run this installer again.">
+            <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED]]>
+        </Condition>
 
         <InstallExecuteSequence>
             <Custom Action="UninstallShell" Before="RemoveFiles">(NOT UPGRADINGPRODUCTCODE) AND (REMOVE="ALL")</Custom>
