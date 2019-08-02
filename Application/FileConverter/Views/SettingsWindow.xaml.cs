@@ -35,6 +35,17 @@ namespace FileConverter.Views
             this.InitializeComponent();
 
             Messenger.Default.Register<string>(this, "DoFocus", this.DoFocus);
+
+            (this.DataContext as SettingsViewModel).PropertyChanged += this.SettingsWindow_PropertyChanged;
+        }
+
+        private void SettingsWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "SelectedItem")
+            {
+                TreeViewItem selectedItem = this.GetTreeViewItem(this.PresetTreeView, this.PresetTreeView.SelectedItem);
+                selectedItem?.BringIntoView();
+            }
         }
 
         public void DoFocus(string message)
