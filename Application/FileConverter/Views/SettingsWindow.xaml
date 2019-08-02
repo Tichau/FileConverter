@@ -329,6 +329,18 @@
                                 <Image Source="{Binding Source=/FileConverter;component/Resources/PresetIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
                                        Style="{StaticResource EnableDisableImageStyle}"/>
                             </Button>
+                            <Button Width="25" Margin="2,0"
+                                    ToolTip="{x:Static project:Resources.ImportPresets}"
+                                    Command="{Binding ImportPresetCommand}">
+                                <Image Source="{Binding Source=/FileConverter;component/Resources/PresetIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                       Style="{StaticResource EnableDisableImageStyle}"/>
+                            </Button>
+                            <Button Width="25" Margin="2,0"
+                                    ToolTip="{x:Static project:Resources.ExportSelectedPresets}"
+                                    Command="{Binding ExportPresetCommand}">
+                                <Image Source="{Binding Source=/FileConverter;component/Resources/PresetIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                       Style="{StaticResource EnableDisableImageStyle}"/>
+                            </Button>
                             <Button Width="25" Margin="2,0,0,0"
                                     ToolTip="{x:Static project:Resources.RemoveSelectedPreset}" 
                                     Command="{Binding RemoveSelectedPresetCommand}">

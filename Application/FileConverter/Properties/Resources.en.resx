@@ -550,4 +550,10 @@ use maj for uppercase version</value>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>Error during conversion job initialization.</value>
   </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>Export selected presets</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>Import new presets</value>
+  </data>
 </root>

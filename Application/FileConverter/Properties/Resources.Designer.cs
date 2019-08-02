@@ -637,6 +637,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export selected presets.
+        /// </summary>
+        public static string ExportSelectedPresets {
+            get {
+                return ResourceManager.GetString("ExportSelectedPresets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Arguments.
         /// </summary>
         public static string FFMPEGCustomArguments {
@@ -714,6 +723,15 @@ namespace FileConverter.Properties {
         public static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import new presets.
+        /// </summary>
+        public static string ImportPresets {
+            get {
+                return ResourceManager.GetString("ImportPresets", resourceCulture);
             }
         }
         
