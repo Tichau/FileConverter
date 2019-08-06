@@ -22,6 +22,7 @@ namespace FileConverter.Views
         private TextBox selectedPresetNameTextBox;
         private TextBox selectedFolderNameTextBox;
         private string focusMessage;
+        private bool dragInProgress = false;
 
         private enum DragDropTargetPosition
         {
@@ -37,6 +38,9 @@ namespace FileConverter.Views
             Messenger.Default.Register<string>(this, "DoFocus", this.DoFocus);
 
             (this.DataContext as SettingsViewModel).PropertyChanged += this.SettingsWindow_PropertyChanged;
+
+            this.PresetTreeView.MouseDown += this.TreeView_MouseDown;
+            this.PresetTreeView.MouseUp += this.TreeView_MouseUp;
         }
 
         private void SettingsWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs args)
@@ -65,9 +69,30 @@ namespace FileConverter.Views
             }
         }
 
+        private void TreeView_MouseDown(object sender, MouseButtonEventArgs args)
+        {
+            FrameworkElement element = args.OriginalSource as FrameworkElement;
+            TreeViewItem treeViewItem = this.GetNearestContainer(element);
+            if (treeViewItem != null)
+            {
+                treeViewItem.IsSelected = true;
+                this.dragInProgress = args.ChangedButton == MouseButton.Left;
+            }
+            else
+            {
+                this.dragInProgress = false;
+            }
+        }
+
+        private void TreeView_MouseUp(object sender, MouseButtonEventArgs args)
+        {
+            this.dragInProgress = false;
+        }
+
         private void TreeView_MouseMove(object sender, MouseEventArgs args)
         {
-            if (args.LeftButton == MouseButtonState.Pressed && 
+            if (this.dragInProgress &&
+                args.LeftButton == MouseButtonState.Pressed && 
                 this.PresetTreeView.SelectedItem is AbstractTreeNode nodeToDrag)
             {
                 var dataObj = new DataObject();
