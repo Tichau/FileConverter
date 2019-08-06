@@ -127,7 +127,7 @@
     <value>Action when conversion succeed</value>
   </data>
   <data name="AddNewPreset" xml:space="preserve">
-    <value>Add new preset (duplicate selected preset)</value>
+    <value>New preset</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Application</value>
@@ -296,7 +296,7 @@ use maj for uppercase version</value>
     <value>Recommended bitrate range in blue</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">
-    <value>Remove selected preset</value>
+    <value>Delete</value>
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>Rotate :</value>
@@ -551,7 +551,7 @@ use maj for uppercase version</value>
     <value>Error during conversion job initialization.</value>
   </data>
   <data name="CreateANewFolder" xml:space="preserve">
-    <value>Create a new folder.</value>
+    <value>New folder</value>
   </data>
   <data name="DefaultFolderName" xml:space="preserve">
     <value>New folder</value>
@@ -575,9 +575,12 @@ use maj for uppercase version</value>
     <value>No preset selected</value>
   </data>
   <data name="ExportSelectedPresets" xml:space="preserve">
-    <value>Export selected presets</value>
+    <value>Export</value>
   </data>
   <data name="ImportPresets" xml:space="preserve">
-    <value>Import new presets</value>
+    <value>Import</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>Duplicate preset</value>
   </data>
 </root>

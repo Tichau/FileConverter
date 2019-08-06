@@ -88,7 +88,7 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new preset (duplicate selected preset).
+        ///   Looks up a localized string similar to New preset.
         /// </summary>
         public static string AddNewPreset {
             get {
@@ -313,7 +313,7 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a new folder..
+        ///   Looks up a localized string similar to New folder.
         /// </summary>
         public static string CreateANewFolder {
             get {
@@ -408,6 +408,15 @@ namespace FileConverter.Properties {
         public static string DownloadingChangeLog {
             get {
                 return ResourceManager.GetString("DownloadingChangeLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate preset.
+        /// </summary>
+        public static string DuplicatePreset {
+            get {
+                return ResourceManager.GetString("DuplicatePreset", resourceCulture);
             }
         }
         
@@ -637,7 +646,7 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export selected presets.
+        ///   Looks up a localized string similar to Export.
         /// </summary>
         public static string ExportSelectedPresets {
             get {
@@ -727,7 +736,7 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import new presets.
+        ///   Looks up a localized string similar to Import.
         /// </summary>
         public static string ImportPresets {
             get {
@@ -1058,7 +1067,7 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove selected preset.
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string RemoveSelectedPreset {
             get {
