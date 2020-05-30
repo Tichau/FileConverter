@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>පිළිබඳ</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>පරිවර්තනය සාර්ථක වූ විට ආදාන ගොනුවලට කුමක් කළ යුතු ද යන්න තෝරන්න</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>පරිවර්තනය සාර්ථක වූ විට කළ යුතු කාර්යය</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>නව ප්‍රතිසැකසුමක් තනන්න (තෝරාගත් ප්‍රතිසැකසුම අනු පිටපත් කරන්න)</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>මෘදුකාංගය</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>ශ්‍රව්‍ය</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>File Converter ආරම්භයේදී ස්වයංක්‍රියව යාවත්කාලීන සඳහා සොයන්න</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>සියළු පරිවර්තන අවසානයේ ස්වයංක්‍රියව පිටවන්න</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>2 විශාලත්වයේ කුඩාම ගුණය වෙත කලම්ප කරන්න</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>වසන්න</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>පරිවර්තන ප්‍රතිසැකසුම්</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>පරිවර්තනයට ගොනු</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>වෙතින් පිටපත් කළ</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>ලඝු</value>
+  </data>
+  <data name="DiagnosticsButtonTitle" xml:space="preserve">
+    <value>ලඝු</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>ප්‍රලේඛනය විවෘත කරන්න</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>පරිත්‍යාග</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>මගේ වැඩවලට කැමතිනම් පරිත්‍යාගයක් කිරීමට අමතක නොකරන්න :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>යාවත්කාලීනය පසුබිමින් බාගත වේ, පසුව File Converter වෙතින් පිට වීමේදී ස්ථාපනය වේ.</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>File Converter වෙතින් පිට වීමේදී ස්ථාපනය කරන්න</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>කේතනය :</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>කේතන වේගය :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter යනු shell දිගුවකි.</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>මෙයින් අදහස් වන්නේ එය  Windows Explorer වෙත ඒ්කාබද්ධ කර ඇති බවයි.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>File Converter භාවිතා කිරීමට explorer විවෘත කර කැමති ගොනුවක් මත right-click කරන්න, පසුව එන සන්දර්භ මෙනුවෙන් අවශ්‍ය File Converter විධානය සොයාගන්න (සහාය දක්වන ආකෘති ලැයිස්තුව බැලීමට readme ගොනුව කියවන්න).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>ගොනු නාම සැකිල්ල</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>තත්පරයට රාමු :</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>GitHub ව්‍යාපෘති පිටුව විවෘත කරන්න</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>උපකාර ?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>ආදාන උදාහරණ</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>ආදාන ආකෘති</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>විනාශ කරන්න</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>සංරක්ෂිත ෆෝල්ඩරයක් වෙත යවන්න</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>නැත</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>යාවත්කාලීනය බාගෙන අවසන්. File Converter වෙතින් ඉවත් වී දැන්ම යාවත්කාලීනය ස්ථාපනය කරන්න.</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>File Converter වෙතින් ඉවත් වීමේදී ස්ථාපනය කරන්න</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>දෝෂයක් වාර්තා කරන්න</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>තෝරාගත් ප්‍රතිසැකසුම පහතට යවන්න</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>තෝරාගත් ප්‍රතිසැකසුම ඉහළට යවන්න</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>නියත බිටු සීඝ්‍රතා කේතනය</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>අනියත බිටු සීඝ්‍රතා කේතනය</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° වමාවර්ත භ්‍රමණය</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>හරි</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>180° භ්‍රමණය</value>
+  </data>
+  <data name="OuputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Music\Artist\Album\Song.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>ප්‍රතිදානය</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): ආදාන ගොනු පථය
+(f): ආදාන ගොනු නාමය
+(o): ප්‍රතිදාන දිගු වර්ගය
+(i): ආදාන දිගු වර්ගය
+(d0): ආදාන මව් ෆෝල්ඩරය
+(d1): ආදාන අනු මව් ෆෝල්ඩරය
+...
+(n:i): පිටු අංක දර්ශකය
+(n:c): මුළු පිටු ගණන
+
+විශේෂ පථ:
+(p:d): my documents පථය
+(p:m): my music පථය
+(p:v): my videos පථය
+(p:p): my pictures පථය
+
+ලොකු අකුරු අනුවාදයට maj භාවිතා කරන්න</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>ප්‍රතිදාන ආකෘතිය</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>ප්‍රතිසැකසුම්</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>ප්‍රතිසැකසුම් නාමය</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>ගුණාත්මකභාවය :</value>
+  </data>
+  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+    <value>නිල් පාටින් නිර්දේශිත බිටු සිඝ්‍රතා පරාසය</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>තෝරාගත් ප්‍රතිසැකසුම ඉවත් කරන්න</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>භ්‍රමණය :</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>සුරකින්න</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>පරිමාණය :</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>වෙනස්කම් ලඝුව බලන්න ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>සැකසුම්</value>
+  </data>
+  <data name="SettingsButtonTitle" xml:space="preserve">
+    <value>සැකසුම්</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° දක්ෂිණාවර්ත භ්‍රමණය</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>File Converter හට යාවත්කාලීනයක් පවතී. එය හැකි ඉක්මණින් ස්ථාපනය කිරීමට නිර්දේශ කරමු!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>උසස් කිරීම බාගැනීම සාර්ථකව කෙරෙමින්...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>File Converter උසස් කිරීම්</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>'ගොනු විශාලත්වය' හා 'දෘශ්‍ය ගුණය' අතර අනුපාතය ලබාදෙන්න. අඩු අගයක් කුඩා ගොනුවක් ලබාදෙන අතර විශාල අගයක් සාර්ථක දෘශ්‍ය ගුණයක් ලබා දේ.</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>අධිවේගී</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>වේගවත්</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>මධ්‍යම</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>මන්දගාමී</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>අධිමන්ධ</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>සුපිරි වේගවත්</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>'ගොනු විශාලත්වය' හා 'සම්පීඩන කාලය' අතර අනුපාතය ලබාදෙන්න. වැඩි සම්පීඩනයකට වඩා අඩු සම්පීඩනයක් කුඩා ගොනුවක්(සමාන දෘශ්‍ය ගුණයකට) ලබා දේ.</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>අධික වේගවත්</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>ඉතා වේගවත්</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>ඉතා මන්දගාමී</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>දෘශ්‍ය</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM ලියාපදිංචි බිටු-16 කුඩා-එන්ඩියානු</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM ලියාපදිංචි බිටු-24 කුඩා-එන්ඩියානු</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM ලියාපදිංචි බිටු-32 කුඩා-එන්ඩියානු</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM ලියාපදිංචි බිටු-8 කුඩා-එන්ඩියානු</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>නැත</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>භ්‍රමණයක් නැත</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>පරිවර්තනය</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>අවසන්</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>නිස්සාරණය</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>අසාර්ථකයි</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>පෝලිමේ</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>ආදාන ඡායාරූපය කියවන්න</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>ලේඛනය කියවන්න</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>සජීවී ඡායාරූපය</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>ශ්‍රව්‍ය</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>ලේඛනය</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>ඡායාරූපය</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>දෘශ්‍ය පථය</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>මෘදුකාංගයෙන් ඉවත් වීමට පෙර බලා සිටීමේ කාලය</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>භාෂාව</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>උපරිම එකවර පරිවර්තන ප්‍රමාණය</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>නව ප්‍රතිසැකසුම</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###වෙනස්කම් ලඝුව බාමින් ...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>පරිවර්තන සංරක්ෂිතය</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>අවලංගුයි.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>ffmpeg එක්සික්‍යුටබලය සොයාගත නොහැක. මෘදුකාංගය ප්‍රතිස්ථාපනය කර බලන්න.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>ශ්‍රව්‍ය සීඩී පථය නිස්සාරණය අසාර්ථකයි.</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>සීඩී ධාවකය සූදානම් නැත.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>ffmpeg දියත් කිරීම අසාර්ථකයි.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>ප්‍රතිදාන පථ ෆෝල්ඩර සැකසීම අසාර්ථකයි.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>සුවිශේෂ ප්‍රතිදාන ගොනු පථයක් සැකසීම අසාර්ථකයි.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>'{0}' සීඩී ධාවකය කියැවීම අසාර්ථකයි.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>ආදාන පථ ධාවක අක්ෂරය ලබාගැනීම අසාර්ථකයි.</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>cda ආදාන පථයෙන්  පථ අංකය ලබාගැනීම අසාර්ථකයි.</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>විවෘත කර ඇති නිසා සීඩී ධාවකය භාවිත කළ නොහැක.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>තෝරාගත් ප්‍රතිදාන ගොනු වර්ගය ආදාන ගොනු වර්ගය සඳහා සහාය නොදක්වයි.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>ප්‍රතිදාන ගොනු පථ ආකෘතිය මඟින් අසාර්ථක ප්‍රතිදාන පථයක් ලබා දුනි.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>'{0}' සහාය නොදක්වන ප්‍රතිදාන ආකෘතිය.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>නාලිකා ගණන :</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>ආදාන ගොනුවේ නාලිකා ගණන වෙනස් කරන්න.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>තනි</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>ආදාන ගොනුව හා සමානව</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>ද්විත්ව</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**මෙම මෘදුකාංගය නොමිලේ ලබාදෙන මෘදුකාංගයකි**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>ඔබට GNU සාමාන්‍ය පොදු බලපත්‍රයට යටත්ව මෙය බෙදාහැරීමට හා/හෝ විකෘති කිරීමට බලය ඇත.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>මෙම මෘදුකාංගය උපකාරීවෙයි යන චේතනාවෙන් බෙදාහරිනු ලැබේ, වගකීමක් නොමැත. වැඩි විස්තර සඳහා GNU සාමාන්‍ය පොදු බලපත්‍රය බලන්න (ස්ථාපිත ෆෝල්ඩරයේ ඇත: `LICENSE.md`) for more details.</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>මෘදුකාංගය අක්‍රිය වෙමින්.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>මෘදුකාංගය ස්වයංක්‍රියව තත්පර  {0} කින් අක්‍රිය වේ.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>මෘදුකාංගය ස්වයංක්‍රියව තත්පර එකකින් අක්‍රිය වේ.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>විවිධ</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>ප්‍රතිදාන ගොනුව/ගොනු සොයාගත නොහැක.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>පරිවර්තන කාර්යය අසාර්ථක වූවද ප්‍රතිදාන ගොනුවක් දැනටමත් පවතී.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>පරිවර්තනය සූදානම් කරන්න</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Office ලේඛන පරිවර්තනය කිරීමට Microsoft Office ස්ථාපනය කර තිබිය යුතුය.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Fail to open document with Microsoft Office මඟින් ලේඛනය විවෘත කිරීම අසාර්ථකයි (බලපත්‍රය/ස්ථාපනය වලංගුදැයි බලන්න).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Excel ලේඛන පරිවර්තනයට Microsoft Excel ස්ථාපනය කර තිබිය යුතුය.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>PowerPoint ලේඛන පරිවර්තනයට Microsoft PowerPoint ස්ථාපනය කර තිබිය යුතුය.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Word ලේඛන පරිවර්තනයට Microsoft Word ස්ථාපනය කර තිබිය යුතුය.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>File Converter වෙබ් පිටුව විවෘත කරන්න</value>
+  </data>
+</root>
