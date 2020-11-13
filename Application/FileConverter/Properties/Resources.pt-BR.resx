@@ -292,7 +292,7 @@ Use maj para a versão em maiúsculas</value>
   <data name="Quality" xml:space="preserve">
     <value>Qualidade :</value>
   </data>
-  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
     <value>O bitrate recomendado está representado em azul</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">

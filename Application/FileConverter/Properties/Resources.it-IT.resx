@@ -361,7 +361,7 @@ use maj for uppercase version</comment>
     <value>Qualità :</value>
     <comment>Quality :</comment>
   </data>
-  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
     <value>In blu l'intervallo di bitrate consigliato</value>
     <comment>Recommended bitrate range in blue</comment>
   </data>

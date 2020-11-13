@@ -292,7 +292,7 @@ Use May para versión en mayúsculas</value>
   <data name="Quality" xml:space="preserve">
     <value>Calidad:</value>
   </data>
-  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
     <value>Rango de tasa de bits recomendado en azul</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">

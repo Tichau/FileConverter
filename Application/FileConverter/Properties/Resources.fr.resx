@@ -300,7 +300,7 @@ utilisez maj pour une version en majuscules</value>
   <data name="Quality" xml:space="preserve">
     <value>Qualité :</value>
   </data>
-  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
     <value>Taux recommandés en bleu</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">

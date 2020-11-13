@@ -289,7 +289,7 @@ use maj for uppercase version</value>
   <data name="Quality" xml:space="preserve">
     <value>Quality :</value>
   </data>
-  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
     <value>Recommended bitrate range in blue</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">
