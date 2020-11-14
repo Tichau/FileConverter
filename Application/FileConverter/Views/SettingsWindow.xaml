@@ -418,10 +418,10 @@
                     </DockPanel>
 
                     <DockPanel Grid.Row="1" Grid.Column="0" Margin="0,0,5,0">
-                        <FlowDocumentScrollViewer Grid.Row="0" Grid.Column="0" Margin="5,10,5,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" DockPanel.Dock="Top"
+                        <FlowDocumentScrollViewer Margin="5,10,5,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" DockPanel.Dock="Top"
                                                   Document="{Binding UpgradeVersionDescription.ChangeLog, Source={StaticResource Upgrade}, Converter={StaticResource ChangelogToMarkdown}, ConverterParameter=True|}" />
 
-                        <TextBlock Grid.Row="1" Margin="5" DockPanel.Dock="Top" FontSize="14" HorizontalAlignment="Center" 
+                        <TextBlock Margin="5" DockPanel.Dock="Top" FontSize="14" HorizontalAlignment="Center" 
                                    Visibility="{Binding DisplaySeeChangeLogLink, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">
                             <Hyperlink Foreground="{StaticResource HyperlinkBrush}" Command="{Binding GetChangeLogContentCommand, Mode=OneWay}"><x:Static Member="project:Resources.SeeChangeLog" /></Hyperlink>
                         </TextBlock>
@@ -441,7 +441,7 @@
                                 </DockPanel>
                             </Button.Content>
                         </Button>
-                        <Button Style="{StaticResource SayThanksButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://saythanks.io/to/Tichau">
+                        <Button Style="{StaticResource SayThanksButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://saythanks.io/to/adrien.allard.pro%40gmail.com">
                             <Button.Content>
                                 <DockPanel>
                                     <Image Source="/FileConverter;component/Resources/SayThanks-icon.png"></Image>
