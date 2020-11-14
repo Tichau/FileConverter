@@ -59,7 +59,7 @@
 
         <Button Margin="5" Grid.Column="1"
                 Visibility="{Binding State, ConverterParameter=|InProgress|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}" 
-                Command="{Binding CancelCommand}" ToolTip="Cancel">
+                Command="{Binding CancelCommand}" ToolTip="{x:Static project:Resources.CancelJobTooltip}">
             <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" 
                    Style="{StaticResource EnableDisableImageStyle}" />
         </Button>

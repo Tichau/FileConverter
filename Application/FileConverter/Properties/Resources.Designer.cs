@@ -169,6 +169,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelJobTooltip {
+            get {
+                return ResourceManager.GetString("CancelJobTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Channel count :.
         /// </summary>
         public static string ChannelCountTitle {

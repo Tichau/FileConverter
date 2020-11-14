@@ -583,4 +583,7 @@ use maj for uppercase version</value>
   <data name="DuplicatePreset" xml:space="preserve">
     <value>Duplicate preset</value>
   </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

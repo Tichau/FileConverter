@@ -559,4 +559,16 @@ use maj for uppercase version</value>
   <data name="DuplicatePreset" xml:space="preserve">
     <value>Duplicate preset</value>
   </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Custom Arguments</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Custom FFMPEG command line arguments</value>
+  </data>
 </root>

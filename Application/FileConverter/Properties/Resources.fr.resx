@@ -568,4 +568,16 @@ utilisez maj pour une version en majuscules</value>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>L'initialisation du processus de conversion a échoué.</value>
   </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Mode avancé</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Arguments personalisés</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Arguments de ligne de commande FFMPEG personalisés</value>
+  </data>
 </root>
