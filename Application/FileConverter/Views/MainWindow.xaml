@@ -31,23 +31,27 @@
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
             </Grid.ColumnDefinitions>
 
             <DockPanel Grid.Column="0">
-                <Label Content="{x:Static project:Resources.ConversionQueueTitle}" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold"/>
-                <Label Content="{Binding InformationMessage}" VerticalAlignment="Top" Height="30" FontSize="13.333" HorizontalAlignment="Right"/>
+                <Label Content="{x:Static project:Resources.ConversionQueueTitle}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <Label Content="{Binding InformationMessage}" VerticalAlignment="Center" FontSize="13.333" HorizontalAlignment="Right"/>
             </DockPanel>
-            <Button Grid.Column="1" Content="{x:Static project:Resources.DiagnosticsButtonTitle}" Margin="3,3" Command="{Binding ShowDiagnosticsCommand}"/>
-            <Button Grid.Column="2" Content="{x:Static project:Resources.SettingsButtonTitle}" Margin="3,3" Command="{Binding ShowSettingsCommand}"/>
+            <Button Grid.Column="1" Margin="3,3" Command="{Binding ShowDiagnosticsCommand}" ToolTip="{x:Static project:Resources.DiagnosticsButtonTooltip}">
+                <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="/Resources/LogIcon.png" />
+            </Button>
+            <Button Grid.Column="2" Margin="3,3" Command="{Binding ShowSettingsCommand}" ToolTip="{x:Static project:Resources.SettingsButtonTooltip}">
+                <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="/Resources/SettingsIcon.ico" />
+            </Button>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True">

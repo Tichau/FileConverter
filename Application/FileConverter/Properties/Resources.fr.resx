@@ -161,7 +161,7 @@
   <data name="Diagnostics" xml:space="preserve">
     <value>Historique d'activité</value>
   </data>
-  <data name="DiagnosticsButtonTitle" xml:space="preserve">
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
     <value>Historique d'activité</value>
   </data>
   <data name="DocumentationButtonDescription" xml:space="preserve">
@@ -321,7 +321,7 @@ utilisez maj pour une version en majuscules</value>
   <data name="Settings" xml:space="preserve">
     <value>Configuration de File Converter</value>
   </data>
-  <data name="SettingsButtonTitle" xml:space="preserve">
+  <data name="SettingsButtonTooltip" xml:space="preserve">
     <value>Configuration</value>
   </data>
   <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">

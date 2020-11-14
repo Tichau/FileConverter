@@ -360,9 +360,9 @@ namespace FileConverter.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Logs.
         /// </summary>
-        public static string DiagnosticsButtonTitle {
+        public static string DiagnosticsButtonTooltip {
             get {
-                return ResourceManager.GetString("DiagnosticsButtonTitle", resourceCulture);
+                return ResourceManager.GetString("DiagnosticsButtonTooltip", resourceCulture);
             }
         }
         
@@ -1150,9 +1150,9 @@ namespace FileConverter.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string SettingsButtonTitle {
+        public static string SettingsButtonTooltip {
             get {
-                return ResourceManager.GetString("SettingsButtonTitle", resourceCulture);
+                return ResourceManager.GetString("SettingsButtonTooltip", resourceCulture);
             }
         }
         
