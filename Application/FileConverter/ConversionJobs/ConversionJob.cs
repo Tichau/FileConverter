@@ -207,6 +207,8 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        protected virtual bool IsCancelable => this.State == ConversionState.InProgress;
+
         protected string[] OutputFilePaths
         {
             get;
@@ -376,18 +378,13 @@ namespace FileConverter.ConversionJobs
 
         public virtual void Cancel()
         {
-            if (!this.IsCancelable())
+            if (!this.IsCancelable)
             {
                 return;
             }
 
             this.CancelIsRequested = true;
             this.ConversionFailed(Properties.Resources.ErrorCanceled);
-        }
-
-        protected virtual bool IsCancelable()
-        {
-            return this.State == ConversionState.InProgress;
         }
 
         protected virtual int GetOutputFilesCount()

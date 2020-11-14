@@ -34,10 +34,7 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        protected override bool IsCancelable()
-        {
-            return false;
-        }
+        protected override bool IsCancelable => false;
 
         protected override int GetOutputFilesCount()
         {
