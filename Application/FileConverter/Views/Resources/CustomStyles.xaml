@@ -18,6 +18,7 @@
     <Style x:Key="DonateButton" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Background" Value="#F95B5C"/>
+        <Setter Property="Foreground" Value="WhiteSmoke"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -56,6 +57,7 @@
     <Style x:Key="SayThanksButton" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Background" Value="#E5E5E5"/>
+        <Setter Property="Foreground" Value="DimGray"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -107,6 +109,13 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- Button -->
+    
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource DarkBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LighterForegroundBrush}"/>
     </Style>
 
 </ResourceDictionary>

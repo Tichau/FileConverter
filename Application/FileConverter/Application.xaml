@@ -9,67 +9,68 @@
              xmlns:services="clr-namespace:FileConverter.Services"
              ShutdownMode="OnLastWindowClose">
     <Application.Resources>
-        <!--Global View Model Locator-->
-        <viewModels:ViewModelLocator x:Key="Locator" />
-        <services:NavigationService x:Key="Navigation" />
-        <services:ConversionService x:Key="Conversions" />
-        <services:SettingsService x:Key="Settings" />
-        <services:UpgradeService x:Key="Upgrade" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Views/Resources/Colors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-        <!-- Markdown style -->
-        <Style TargetType="FlowDocument" x:Key="DocumentStyle">
-            <Setter Property="FontFamily" Value="Segoe UI" />
-            <Setter Property="TextAlignment" Value="Left" />
-            <Setter Property="Foreground" Value="#786C71" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="LineHeight" Value="9"/>
-            <Setter Property="FontSize" Value="13" />
-        </Style>
+            <!--Global View Model Locator-->
+            <viewModels:ViewModelLocator x:Key="Locator" />
+            <services:NavigationService x:Key="Navigation" />
+            <services:ConversionService x:Key="Conversions" />
+            <services:SettingsService x:Key="Settings" />
+            <services:UpgradeService x:Key="Upgrade" />
 
-        <Style x:Key="PageHeader" TargetType="Paragraph">
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="Foreground" Value="#1E6BB8" />
-        </Style>
+            <!-- Markdown style -->
+            <Style TargetType="FlowDocument" x:Key="DocumentStyle">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="TextAlignment" Value="Left" />
+                <Setter Property="Foreground" Value="{StaticResource LighterForegroundBrush}" />
+                <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+                <Setter Property="LineHeight" Value="9"/>
+                <Setter Property="FontSize" Value="13" />
+            </Style>
 
-        <Style x:Key="SubHeader"
+            <Style x:Key="PageHeader" TargetType="Paragraph">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="Foreground" Value="{StaticResource MainBrush}" />
+            </Style>
+
+            <Style x:Key="SubHeader"
                TargetType="Paragraph">
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="Foreground"
-                    Value="#DF3900" />
-        </Style>
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Foreground" Value="{StaticResource AccentForegroundBrush}" />
+            </Style>
 
-        <Style x:Key="SubHeaderSecondary"
+            <Style x:Key="SubHeaderSecondary"
                TargetType="Paragraph">
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="Foreground"
-                    Value="#DF3900" />
-        </Style>
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Foreground" Value="{StaticResource AccentForegroundBrush}" />
+            </Style>
 
-        <xaml:Markdown x:Key="Markdown"
+            <xaml:Markdown x:Key="Markdown"
                        DocumentStyle="{StaticResource DocumentStyle}"
                        Heading1Style="{StaticResource PageHeader}"
                        Heading2Style="{StaticResource SubHeader}"
                        Heading3Style="{StaticResource SubHeaderSecondary}"/>
 
-        <!-- Converters -->
-        <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
-        <generic:BoolToVisibility x:Key="BoolToVisibility"/>
+            <!-- Converters -->
+            <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
+            <generic:BoolToVisibility x:Key="BoolToVisibility"/>
 
-        <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">
-            <generic:ValueToString/>
-            <generic:EqualsConverter/>
-            <generic:BoolToVisibility/>
-        </generic:ValueConverterGroup>
+            <generic:ValueConverterGroup x:Key="EnumEqualsToVisibility">
+                <generic:ValueToString/>
+                <generic:EqualsConverter/>
+                <generic:BoolToVisibility/>
+            </generic:ValueConverterGroup>
 
-        <valueConverters:ConversionStateToBrush x:Key="ConversionStateToBrush" />
-        <valueConverters:ConversionJobToEstimatedRemainingDuration x:Key="ConversionJobToEstimatedRemainingDuration" />
+            <valueConverters:ConversionStateToBrush x:Key="ConversionStateToBrush" />
+            <valueConverters:ConversionJobToEstimatedRemainingDuration x:Key="ConversionJobToEstimatedRemainingDuration" />
 
-        <generic:ValueConverterGroup x:Key="ChangelogToMarkdown">
-            <valueConverters:ChangelogConverter/>
-            <xaml:TextToFlowDocumentConverter Markdown="{StaticResource Markdown}"/>
-        </generic:ValueConverterGroup>
-        
+            <generic:ValueConverterGroup x:Key="ChangelogToMarkdown">
+                <valueConverters:ChangelogConverter/>
+                <xaml:TextToFlowDocumentConverter Markdown="{StaticResource Markdown}"/>
+            </generic:ValueConverterGroup>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

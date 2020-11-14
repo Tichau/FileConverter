@@ -32,8 +32,7 @@
             <generic:EqualsConverter x:Key="EqualsConverter"/>
 
             <DataTemplate x:Key="NoPresetSelectedTemplate" DataType="{x:Type viewModels:SettingsViewModel}">
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" FontSize="20"
-               Content="{x:Static project:Resources.NoPresetSelected}"/>
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" FontSize="20" Content="{x:Static project:Resources.NoPresetSelected}"/>
             </DataTemplate>
 
             <DataTemplate x:Key="FolderSelectedTemplate" DataType="{x:Type viewModels:SettingsViewModel}">
@@ -86,7 +85,7 @@
                                         <GroupStyle>
                                             <GroupStyle.HeaderTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Foreground="#004B82" Background="#86C8F6" FontWeight="Bold" Padding="5,5,5,5"
+                                                    <TextBlock Foreground="{StaticResource MainDarkBrush}" Background="{StaticResource MainLightBrush}" FontWeight="Bold" Padding="5,5,5,5"
                                                                    Text="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"/>
                                                 </DataTemplate>
                                             </GroupStyle.HeaderTemplate>
@@ -121,10 +120,10 @@
                                     <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" 
                                                  ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}"
                                                  Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                                    <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
-                                    <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center"/>
-                                    <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="Gray" FontSize="10"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="Gray" FontSize="10" VerticalAlignment="Center">
+                                    <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10"/>
+                                    <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center"/>
+                                    <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center">
                                         <TextBlock.Text>
                                             <MultiBinding Converter="{StaticResource FileNameConverter}">
                                                 <Binding Source="{x:Static project:Resources.OutputFileNameTemplateSample}"/>
@@ -134,7 +133,7 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                     <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
-                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                     </TextBlock>
                                 </Grid>
 
@@ -186,7 +185,7 @@
                                 </ComboBox>
 
                                 <TextBlock Grid.Row="3" Margin="0,5,0,0">
-                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                 </TextBlock>
                             </Grid>
                         </GroupBox>
@@ -224,7 +223,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="48"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top"
@@ -232,11 +230,6 @@
             </Image>
 
             <Label Grid.Column="1" Content="{x:Static project:Resources.Settings}" FontSize="20" Margin="4" VerticalAlignment="Center" />
-            <Label Grid.Column="2" HorizontalAlignment="Right" FontStyle="Italic" FontSize="14" VerticalAlignment="Center" Foreground="#FF999999">
-                <Label.Content>
-                    <Binding Path="(local:Application.ApplicationVersion)" Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" />
-                </Label.Content>
-            </Label>
         </Grid>
 
         <TabControl Grid.Row="1">
@@ -259,10 +252,9 @@
                             <RowDefinition Height="25"/>
                         </Grid.RowDefinitions>
 
-                        <TreeView Name="PresetTreeView" Grid.Row="0"
+                        <TreeView Name="PresetTreeView" Grid.Row="0" AllowDrop="True" views:DragDropExtension.ScrollOnDragDrop="True"
                                   ItemsSource="{Binding PresetsRootFolder.Children}"
-                                  Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}" AllowDrop="True"
-                                  views:DragDropExtension.ScrollOnDragDrop="True">
+                                  Width="{Binding ActualWidth, ElementName=PresetListGrid, Mode=OneWay}">
                             <TreeView.Resources>
                                 <HierarchicalDataTemplate DataType="{x:Type viewModels:PresetFolderNode}" ItemsSource="{Binding Children}">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -280,18 +272,18 @@
                                 <Style TargetType="{x:Type TreeViewItem}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding HasError, FallbackValue=False}" Value="True">
-                                            <Setter Property="Background" Value="#F44336"/>
+                                            <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                     <Style.Resources>
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#86C8F6" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="#074078" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#DFE0E0" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="#4B5762" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource AccentBackgroundColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{StaticResource AccentForegroundColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource DarkerBackgroundColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{StaticResource LightForegroundColor}" />
                                     </Style.Resources>
 
                                     <Setter Property="IsExpanded" Value="True"/>
-                                    <Setter Property="BorderBrush" Value="#1E6BB8"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource HyperlinkBrush}"/>
 
                                     <EventSetter Event="PreviewMouseLeftButtonDown"  Handler="TreeView_MouseDown"/>
                                     <EventSetter Event="MouseUp"  Handler="TreeView_MouseUp"/>
@@ -348,7 +340,7 @@
                         </TreeView>
 
                         <TextBlock Margin="4" Grid.Row="1">
-                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="#1E6BB8"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                         </TextBlock>
                     </Grid>
 
@@ -431,7 +423,7 @@
 
                         <TextBlock Grid.Row="1" Margin="5" DockPanel.Dock="Top" FontSize="14" HorizontalAlignment="Center" 
                                    Visibility="{Binding DisplaySeeChangeLogLink, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">
-                            <Hyperlink Foreground="#1E6BB8" Command="{Binding GetChangeLogContentCommand, Mode=OneWay}"><x:Static Member="project:Resources.SeeChangeLog" /></Hyperlink>
+                            <Hyperlink Foreground="{StaticResource HyperlinkBrush}" Command="{Binding GetChangeLogContentCommand, Mode=OneWay}"><x:Static Member="project:Resources.SeeChangeLog" /></Hyperlink>
                         </TextBlock>
                     </DockPanel>
 
@@ -445,7 +437,7 @@
                             <Button.Content>
                                 <DockPanel>
                                     <Image Source="/FileConverter;component/Resources/ItchIO-icon.png"></Image>
-                                    <Label Content="{x:Static project:Resources.DonateButtonTitle}" Margin="5,0,5,0" Foreground="WhiteSmoke" FontWeight="Bold" FontSize="14"/>
+                                    <Label Content="{x:Static project:Resources.DonateButtonTitle}" Margin="5,0,5,0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" FontWeight="Bold" FontSize="14"/>
                                 </DockPanel>
                             </Button.Content>
                         </Button>
@@ -453,32 +445,32 @@
                             <Button.Content>
                                 <DockPanel>
                                     <Image Source="/FileConverter;component/Resources/SayThanks-icon.png"></Image>
-                                    <Label Content="{x:Static project:Resources.SayThanksButtonTitle}" Margin="5,0,5,0" Foreground="DimGray" FontWeight="Bold" FontSize="14"/>
+                                    <Label Content="{x:Static project:Resources.SayThanksButtonTitle}" Margin="5,0,5,0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" FontWeight="Bold" FontSize="14"/>
                                 </DockPanel>
                             </Button.Content>
                         </Button>
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
-                        <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" 
+                        <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Padding="1" Margin="5,0,5,0" 
                                 Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Icon.png"></Image>
                             </Button.Content>
                         </Button>
-                        <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" 
+                        <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Padding="1" Margin="5,0,5,0" 
                                 Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/issues?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Issue-Icon.png"></Image>
                             </Button.Content>
                         </Button>
-                        <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" 
+                        <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Padding="1" Margin="5,0,5,0" 
                                 Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/wiki?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
                             </Button.Content>
                         </Button>
-                        <Button ToolTip="{x:Static project:Resources.WebsiteButtonDescription}" Background="WhiteSmoke" BorderBrush="DarkGray" Padding="1" Margin="5,0,5,0" 
+                        <Button ToolTip="{x:Static project:Resources.WebsiteButtonDescription}" Padding="1" Margin="5,0,5,0" 
                                 Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="www.file-converter.org?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/WebSite-Icon.png"></Image>
@@ -486,7 +478,7 @@
                         </Button>
                     </StackPanel>
 
-                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2017, Adrien Allard. All right reserved." Foreground="#FF4D4D4D" Margin="0,2,0,2"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2020, Adrien Allard. All right reserved." Foreground="{StaticResource LightForegroundBrush}" Margin="0,2,0,2"/>
                 </Grid>
             </TabItem>
         </TabControl>

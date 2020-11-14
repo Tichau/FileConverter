@@ -57,7 +57,7 @@
             </StackPanel>
         </Grid>
 
-        <Button Margin="5" Grid.Column="1" Background="WhiteSmoke" Foreground="#FF3E3E3E"
+        <Button Margin="5" Grid.Column="1"
                 Visibility="{Binding State, ConverterParameter=|InProgress|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}" 
                 Command="{Binding CancelCommand}" ToolTip="Cancel">
             <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" 
