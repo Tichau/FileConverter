@@ -18,7 +18,7 @@
     <Grid Background="{Binding State, Converter={StaticResource ConversionStateToBrush}, ConverterParameter=Background}" Margin="0,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
 
         <Grid Margin="10" Grid.Column="0">
@@ -44,7 +44,7 @@
             <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding UserState}" FontWeight="Bold" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}}" />
 
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <ProgressBar Grid.Row="1" Grid.Column="1" Height="18" Width="Auto" Minimum="0" Maximum="1" SmallChange="0.001" Value="{Binding Progress, Mode=OneWay}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}, Mode=OneWay}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" MinWidth="100" LargeChange="0.1" />
+                <ProgressBar Height="18" Width="Auto" Minimum="0" Maximum="1" SmallChange="0.001" Value="{Binding Progress, Mode=OneWay}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}, Mode=OneWay}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" MinWidth="100" LargeChange="0.1" />
                 <TextBlock Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}}">
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource ConversionJobToEstimatedRemainingDuration}" Mode="OneWay">
@@ -57,15 +57,15 @@
             </StackPanel>
         </Grid>
 
-        <Button Margin="5" Grid.Column="1"
+        <Button Margin="3" Grid.Column="1" Height="57"
                 Visibility="{Binding State, ConverterParameter=|InProgress|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}" 
                 Command="{Binding CancelCommand}" ToolTip="{x:Static project:Resources.CancelJobTooltip}">
             <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" 
                    Style="{StaticResource EnableDisableImageStyle}" />
         </Button>
-        <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/SuccessIcon.png" Width="48" Height="48" 
+        <Image Margin="3" Grid.Column="1" Source="/FileConverter;component/Resources/SuccessIcon.png" Width="48" Height="48" 
                Visibility="{Binding State, ConverterParameter=|Done|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
-        <Image Margin="5" Grid.Column="1" Source="/FileConverter;component/Resources/FailIcon.png" Width="48" Height="48" 
+        <Image Margin="3" Grid.Column="1" Source="/FileConverter;component/Resources/FailIcon.png" Width="48" Height="48" 
                Visibility="{Binding State, ConverterParameter=|Failed|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
     </Grid>
 </UserControl>
