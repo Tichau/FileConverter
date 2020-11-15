@@ -27,13 +27,7 @@ namespace FileConverter.ConversionJobs
         {
         }
 
-        protected override ApplicationName Application
-        {
-            get
-            {
-                return ApplicationName.PowerPoint;
-            }
-        }
+        protected override ApplicationName Application => ApplicationName.PowerPoint;
 
         protected override bool IsCancelable => false;
 

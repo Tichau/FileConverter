@@ -1,6 +1,5 @@
 // <copyright file="PresetNode.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -143,10 +142,7 @@ namespace FileConverter.ViewModels
 
         public string OutputFileNameTemplate
         {
-            get
-            {
-                return this.Preset.OutputFileNameTemplate;
-            }
+            get => this.Preset.OutputFileNameTemplate;
 
             set
             {

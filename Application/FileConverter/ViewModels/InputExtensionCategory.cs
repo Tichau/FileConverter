@@ -1,14 +1,11 @@
 // <copyright file="InputExtensionCategory.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.ComponentModel;
-using CommonServiceLocator;
-using FileConverter.Services;
-using GalaSoft.MvvmLight.Ioc;
-
 namespace FileConverter.ViewModels
 {
-    using System.Collections.Generic;
+    using CommonServiceLocator;
     using GalaSoft.MvvmLight;
+    using System.ComponentModel;
+    using System.Collections.Generic;
 
     public class InputExtensionCategory : ObservableObject
     {

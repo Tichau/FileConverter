@@ -129,7 +129,7 @@ namespace FileConverter
                     }
                     catch (Exception)
                     {
-                        Debug.Log(string.Format("Can't create directories for path {0}", filePath));
+                        Debug.Log($"Can't create directories for path {filePath}");
                         return false;
                     }
                 }
@@ -213,8 +213,8 @@ namespace FileConverter
 
             for (int index = 0; index < directories.Length; index++)
             {
-                outputPath = outputPath.Replace(string.Format("(d{0})", directories.Length - index - 1), directories[index]);
-                outputPath = outputPath.Replace(string.Format("(D{0})", directories.Length - index - 1), directories[index].ToUpperInvariant());
+                outputPath = outputPath.Replace($"(d{directories.Length - index - 1})", directories[index]);
+                outputPath = outputPath.Replace($"(D{directories.Length - index - 1})", directories[index].ToUpperInvariant());
             }
 
             outputPath = outputPath.Replace("(n:i)", numberIndex.ToString());

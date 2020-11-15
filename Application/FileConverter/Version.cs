@@ -49,10 +49,10 @@ namespace FileConverter
         {
             if (this.Patch == 0)
             {
-                return string.Format("{0}.{1}", this.Major, this.Minor);
+                return $"{this.Major}.{this.Minor}";
             }
 
-            return string.Format("{0}.{1}.{2}", this.Major, this.Minor, this.Patch);
+            return $"{this.Major}.{this.Minor}.{this.Patch}";
         }
 
         public override bool Equals(object obj)

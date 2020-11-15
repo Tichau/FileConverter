@@ -23,8 +23,7 @@ namespace FileConverter.ValueConverters
                 return "Hidden";
             }
 
-            OutputType referenceType;
-            if (!Enum.TryParse<OutputType>(referenceTypeName, out referenceType))
+            if (!Enum.TryParse(referenceTypeName, out OutputType referenceType))
             {
                 return "Hidden";
             }

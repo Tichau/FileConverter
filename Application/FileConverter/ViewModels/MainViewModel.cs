@@ -58,10 +58,7 @@ namespace FileConverter.ViewModels
 
         public string InformationMessage
         {
-            get
-            {
-                return this.informationMessage;
-            }
+            get => this.informationMessage;
 
             private set
             {
@@ -71,10 +68,7 @@ namespace FileConverter.ViewModels
 
         public ObservableCollection<ConversionJob> ConversionJobs
         {
-            get
-            {
-                return this.conversionJobs;
-            }
+            get => this.conversionJobs;
 
             private set
             {

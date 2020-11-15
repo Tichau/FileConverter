@@ -9,7 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d" x:Class="FileConverter.Views.MainWindow"
-        Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
+        Height="500" Width="950" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -46,10 +46,10 @@
                 <Label Content="{x:Static project:Resources.ConversionQueueTitle}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
                 <Label Content="{Binding InformationMessage}" VerticalAlignment="Center" FontSize="13.333" HorizontalAlignment="Right"/>
             </DockPanel>
-            <Button Grid.Column="1" Margin="3,3" Command="{Binding ShowDiagnosticsCommand}" ToolTip="{x:Static project:Resources.DiagnosticsButtonTooltip}">
+            <Button Grid.Column="1" Margin="3" Command="{Binding ShowDiagnosticsCommand}" ToolTip="{x:Static project:Resources.DiagnosticsButtonTooltip}">
                 <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="/Resources/LogIcon.png" />
             </Button>
-            <Button Grid.Column="2" Margin="3,3" Command="{Binding ShowSettingsCommand}" ToolTip="{x:Static project:Resources.SettingsButtonTooltip}">
+            <Button Grid.Column="2" Margin="3" Command="{Binding ShowSettingsCommand}" ToolTip="{x:Static project:Resources.SettingsButtonTooltip}">
                 <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="/Resources/SettingsIcon.ico" />
             </Button>
         </Grid>

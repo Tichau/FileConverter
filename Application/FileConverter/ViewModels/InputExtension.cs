@@ -2,8 +2,6 @@
 
 namespace FileConverter.ViewModels
 {
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
     using System.Windows.Media;
 
     using CommonServiceLocator;

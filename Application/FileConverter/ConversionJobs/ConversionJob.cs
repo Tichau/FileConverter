@@ -20,7 +20,7 @@ namespace FileConverter.ConversionJobs
         private string userState = string.Empty;
         private RelayCommand cancelCommand;
 
-        private string initialInputPath;
+        private readonly string initialInputPath;
         private int currentOutputFilePathIndex;
 
         public ConversionJob()
@@ -101,10 +101,7 @@ namespace FileConverter.ConversionJobs
 
         public string UserState
         {
-            get
-            {
-                return this.userState;
-            }
+            get => this.userState;
 
             protected set
             {
@@ -115,10 +112,7 @@ namespace FileConverter.ConversionJobs
 
         public float Progress
         {
-            get
-            {
-                return this.progress;
-            }
+            get => this.progress;
 
             protected set
             {
@@ -127,12 +121,9 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        public System.DateTime StartTime
+        public DateTime StartTime
         {
-            get
-            {
-                return this.startTime;
-            }
+            get => this.startTime;
 
             protected set
             {
@@ -143,10 +134,7 @@ namespace FileConverter.ConversionJobs
 
         public string ErrorMessage
         {
-            get
-            {
-                return this.errorMessage;
-            }
+            get => this.errorMessage;
 
             private set
             {
@@ -182,10 +170,7 @@ namespace FileConverter.ConversionJobs
 
         protected int CurrentOutputFilePathIndex
         {
-            get
-            {
-                return this.currentOutputFilePathIndex;
-            }
+            get => this.currentOutputFilePathIndex;
 
             set
             {

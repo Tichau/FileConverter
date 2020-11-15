@@ -282,21 +282,22 @@ namespace FileConverterExtension
         {
             if (string.IsNullOrEmpty(this.FileConverterPath))
             {
-                MessageBox.Show(string.Format("Can't retrieve the file converter executable path. You should try to reinstall the application."));
+                MessageBox.Show("Can't retrieve the file converter executable path. You should try to reinstall the application.");
                 return;
             }
 
             if (!File.Exists(this.FileConverterPath))
             {
-                MessageBox.Show(string.Format("Can't find the file converter executable ({0}). You should try to reinstall the application.", this.FileConverterPath));
+                MessageBox.Show($"Can't find the file converter executable ({this.FileConverterPath}). You should try to reinstall the application.");
                 return;
             }
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(this.FileConverterPath);
-
-            processStartInfo.CreateNoWindow = false;
-            processStartInfo.UseShellExecute = false;
-            processStartInfo.RedirectStandardOutput = false;
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(this.FileConverterPath)
+            {
+                CreateNoWindow = false, 
+                UseShellExecute = false, 
+                RedirectStandardOutput = false,
+            };
 
             // Build arguments string.
             StringBuilder stringBuilder = new StringBuilder();
@@ -310,21 +311,22 @@ namespace FileConverterExtension
         {
             if (string.IsNullOrEmpty(this.FileConverterPath))
             {
-                MessageBox.Show(string.Format("Can't retrieve the file converter executable path. You should try to reinstall the application."));
+                MessageBox.Show("Can't retrieve the file converter executable path. You should try to reinstall the application.");
                 return;
             }
 
             if (!File.Exists(this.FileConverterPath))
             {
-                MessageBox.Show(string.Format("Can't find the file converter executable ({0}). You should try to reinstall the application.", this.FileConverterPath));
+                MessageBox.Show($"Can't find the file converter executable ({this.FileConverterPath}). You should try to reinstall the application.");
                 return;
             }
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(this.FileConverterPath);
-
-            processStartInfo.CreateNoWindow = false;
-            processStartInfo.UseShellExecute = false;
-            processStartInfo.RedirectStandardOutput = false;
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(this.FileConverterPath)
+            {
+                CreateNoWindow = false, 
+                UseShellExecute = false, 
+                RedirectStandardOutput = false,
+            };
 
             // Build arguments string.
             StringBuilder stringBuilder = new StringBuilder();

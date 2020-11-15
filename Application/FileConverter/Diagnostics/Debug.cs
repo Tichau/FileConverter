@@ -12,10 +12,10 @@ namespace FileConverter.Diagnostics
 
     public static class Debug
     {
-        private static string diagnosticsFolderPath;
-        private static Dictionary<int, DiagnosticsData> diagnosticsDataById = new Dictionary<int, DiagnosticsData>();
+        private static readonly string diagnosticsFolderPath;
+        private static readonly Dictionary<int, DiagnosticsData> diagnosticsDataById = new Dictionary<int, DiagnosticsData>();
         private static int threadCount = 0;
-        private static int mainThreadId = 0;
+        private static readonly int mainThreadId = 0;
 
         static Debug()
         {
@@ -45,13 +45,7 @@ namespace FileConverter.Diagnostics
 
         public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
 
-        public static DiagnosticsData[] Data
-        {
-            get
-            {
-                return Debug.diagnosticsDataById.Values.ToArray();
-            }
-        }
+        public static DiagnosticsData[] Data => Debug.diagnosticsDataById.Values.ToArray();
 
         public static void Log(string message, params object[] arguments)
         {

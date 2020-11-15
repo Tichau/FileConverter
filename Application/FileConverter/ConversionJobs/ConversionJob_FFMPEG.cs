@@ -21,7 +21,7 @@ namespace FileConverter.ConversionJobs
 
         private ProcessStartInfo ffmpegProcessStartInfo;
 
-        private List<FFMpegPass> ffmpegArgumentStringByPass = new List<FFMpegPass>();
+        private readonly List<FFMpegPass> ffmpegArgumentStringByPass = new List<FFMpegPass>();
 
         public ConversionJob_FFMPEG() : base()
         {
@@ -72,12 +72,13 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            this.ffmpegProcessStartInfo = new ProcessStartInfo(ffmpegPath);
-
-            this.ffmpegProcessStartInfo.CreateNoWindow = true;
-            this.ffmpegProcessStartInfo.UseShellExecute = false;
-            this.ffmpegProcessStartInfo.RedirectStandardOutput = true;
-            this.ffmpegProcessStartInfo.RedirectStandardError = true;
+            this.ffmpegProcessStartInfo = new ProcessStartInfo(ffmpegPath)
+            {
+                CreateNoWindow = true, 
+                UseShellExecute = false, 
+                RedirectStandardOutput = true, 
+                RedirectStandardError = true
+            };
 
             this.FillFFMpegArgumentsList();
         }
