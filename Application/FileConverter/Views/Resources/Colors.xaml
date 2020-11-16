@@ -5,17 +5,22 @@
     <Color x:Key="MainColor">#0171BB</Color>
     <Color x:Key="MainDarkColor">#004B82</Color>
     <Color x:Key="MainDarkerColor">#074078</Color>
-    <Color x:Key="LighterForegroundColor">Gray</Color>
-    <Color x:Key="LightForegroundColor">#4D4D4D</Color>
-    <Color x:Key="AccentForegroundColor">#DF3900</Color>
 
-    <Color x:Key="BackgroundColor">white</Color>
-    <Color x:Key="DarkBackgroundColor">WhiteSmoke</Color>
+    <Color x:Key="LighterForegroundColor">#808080</Color>
+    <Color x:Key="LightForegroundColor">#4D4D4D</Color>
+    <Color x:Key="DarkForegroundColor">#202020</Color>
+    <Color x:Key="SuccessForegroundColor">#388E3C</Color>
+    <Color x:Key="PendingForegroundColor">#FFA000</Color>
+    <Color x:Key="AccentForegroundColor">#DF3900</Color>
+    <Color x:Key="ErrorForegroundColor">#FF5252</Color>
+
+    <Color x:Key="BackgroundColor">#FFFFFF</Color>
+    <Color x:Key="DarkBackgroundColor">#F5F5F5</Color>
     <Color x:Key="DarkerBackgroundColor">#E0E0E0</Color>
     <Color x:Key="AccentBackgroundColor">#FFA88C</Color>
-
-    <Color x:Key="BorderColor">DarkGray</Color>
-    <Color x:Key="ErrorColor">#F44336</Color>
+    <Color x:Key="PendingBackgroundColor">#FAECB3</Color>
+    <Color x:Key="SuccessBackgroundColor">#C8E6C9</Color>
+    <Color x:Key="ErrorBackgroundColor">#FFCDD2</Color>
 
     <SolidColorBrush x:Key="MainLightBrush" Color="{StaticResource MainLightColor}" />
     <SolidColorBrush x:Key="MainBrush" Color="{StaticResource MainColor}" />
@@ -30,6 +35,18 @@
     <SolidColorBrush x:Key="AccentBackgroundBrush" Color="{StaticResource AccentBackgroundColor}" />
     <SolidColorBrush x:Key="DarkBackgroundBrush" Color="{StaticResource DarkBackgroundColor}" />
 
-    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}" />
+    <SolidColorBrush x:Key="ErrorForegroundBrush" Color="{StaticResource ErrorForegroundColor}" />
+
+    <SolidColorBrush x:Key="UnknownForegroundBrush" Color="{StaticResource LighterForegroundColor}" />
+    <SolidColorBrush x:Key="ReadyForegroundBrush" Color="{StaticResource DarkForegroundColor}" />
+    <SolidColorBrush x:Key="InProgressForegroundBrush" Color="{StaticResource PendingForegroundColor}" />
+    <SolidColorBrush x:Key="DoneForegroundBrush" Color="{StaticResource SuccessForegroundColor}" />
+    <SolidColorBrush x:Key="FailedForegroundBrush" Color="{StaticResource ErrorForegroundColor}" />
+
+    <SolidColorBrush x:Key="UnknownBackgroundBrush" Color="{StaticResource DarkerBackgroundColor}" />
+    <SolidColorBrush x:Key="ReadyBackgroundBrush" Color="{StaticResource DarkerBackgroundColor}" />
+    <SolidColorBrush x:Key="InProgressBackgroundBrush" Color="{StaticResource PendingBackgroundColor}" />
+    <SolidColorBrush x:Key="DoneBackgroundBrush" Color="{StaticResource SuccessBackgroundColor}" />
+    <SolidColorBrush x:Key="FailedBackgroundBrush" Color="{StaticResource ErrorBackgroundColor}" />
 </ResourceDictionary>
     

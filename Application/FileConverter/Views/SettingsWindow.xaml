@@ -271,7 +271,7 @@
                                 <Style TargetType="{x:Type TreeViewItem}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding HasError, FallbackValue=False}" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+                                            <Setter Property="Background" Value="{StaticResource ErrorForegroundBrush}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                     <Style.Resources>
