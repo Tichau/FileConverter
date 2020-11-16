@@ -24,7 +24,6 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/CustomStyles.xaml"/>
                 <ResourceDictionary Source="Resources/ConversionPresetTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
