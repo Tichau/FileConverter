@@ -11,7 +11,7 @@
     <Grid Background="{Binding State, Converter={StaticResource ConversionStateToBrush}, ConverterParameter=Background}" Margin="0,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="64"/>
         </Grid.ColumnDefinitions>
 
         <Grid Margin="10" Grid.Column="0">
