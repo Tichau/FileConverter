@@ -47,7 +47,7 @@
                         </Grid.RowDefinitions>
 
                         <DockPanel Grid.Row="0" Grid.Column="0">
-                            <Label Content="{x:Static project:Resources.PresetFolderName}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                            <Label Content="{x:Static project:Resources.PresetFolderName}" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
                             <TextBox Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" FontSize="15"
                                      Loaded="SelectedFolderName_OnLoaded"
                                      Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
@@ -78,14 +78,14 @@
                         <GroupBox Header="{x:Static project:Resources.OutputFormat}" Grid.Row="1" Grid.Column="0" Margin="5">
                             <StackPanel>
                                 <ComboBox Margin="5" Height="29" VerticalAlignment="Top" 
-                                              ItemsSource="{Binding OutputTypes}"
-                                              SelectedItem="{Binding SelectedPreset.Preset.OutputType, Converter={StaticResource OutputTypeEnumToViewModel}, Mode=TwoWay}">
+                                          ItemsSource="{Binding OutputTypes}"
+                                          SelectedItem="{Binding SelectedPreset.Preset.OutputType, Converter={StaticResource OutputTypeEnumToViewModel}, Mode=TwoWay}">
                                     <ComboBox.GroupStyle>
                                         <GroupStyle>
                                             <GroupStyle.HeaderTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Foreground="{StaticResource MainDarkBrush}" Background="{StaticResource MainLightBrush}" FontWeight="Bold" Padding="5,5,5,5"
-                                                                   Text="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"/>
+                                                                Text="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"/>
                                                 </DataTemplate>
                                             </GroupStyle.HeaderTemplate>
                                         </GroupStyle>
@@ -98,7 +98,7 @@
                                 </ComboBox>
 
                                 <ContentControl Content="{Binding SelectedPreset.Preset}"
-                                                    Style="{StaticResource ConversionSettingsSelectorStyle}">
+                                                Style="{StaticResource ConversionSettingsSelectorStyle}">
                                 </ContentControl>
 
                                 <Separator/>
@@ -299,33 +299,27 @@
                             </i:Interaction.Behaviors>
                             <TreeView.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="{x:Static project:Resources.CreateANewFolder}"
-                                              Command="{Binding CreateFolderCommand}">
+                                    <MenuItem Header="{x:Static project:Resources.CreateANewFolder}" Command="{Binding CreateFolderCommand}">
                                         <MenuItem.Icon>
                                             <Image Source="{Binding Source=/FileConverter;component/Resources/FolderIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
                                                    Style="{StaticResource EnableDisableImageStyle}"/>
                                         </MenuItem.Icon>
                                     </MenuItem>
-                                    <MenuItem Header="{x:Static project:Resources.AddNewPreset}"
-                                              Command="{Binding AddNewPresetCommand}">
+                                    <MenuItem Header="{x:Static project:Resources.AddNewPreset}" Command="{Binding AddNewPresetCommand}">
                                     </MenuItem>
-                                    <MenuItem Header="{x:Static project:Resources.DuplicatePreset}"
-                                              Command="{Binding DuplicatePresetCommand}">
+                                    <MenuItem Header="{x:Static project:Resources.DuplicatePreset}" Command="{Binding DuplicatePresetCommand}">
                                         <MenuItem.Icon>
                                             <Image Source="{Binding Source=/FileConverter;component/Resources/PresetIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
                                                    Style="{StaticResource EnableDisableImageStyle}"/>
                                         </MenuItem.Icon>
                                     </MenuItem>
                                     <Separator />
-                                    <MenuItem Header="{x:Static project:Resources.ImportPresets}"
-                                              Command="{Binding ImportPresetCommand}">
+                                    <MenuItem Header="{x:Static project:Resources.ImportPresets}" Command="{Binding ImportPresetCommand}">
                                     </MenuItem>
-                                    <MenuItem Header="{x:Static project:Resources.ExportSelectedPresets}"
-                                              Command="{Binding ExportPresetCommand}">
+                                    <MenuItem Header="{x:Static project:Resources.ExportSelectedPresets}" Command="{Binding ExportPresetCommand}">
                                     </MenuItem>
                                     <Separator />
-                                    <MenuItem Header="{x:Static project:Resources.RemoveSelectedPreset}"
-                                              Command="{Binding RemoveSelectedPresetCommand}">
+                                    <MenuItem Header="{x:Static project:Resources.RemoveSelectedPreset}" Command="{Binding RemoveSelectedPresetCommand}">
                                         <MenuItem.Icon>
                                             <Image Source="{Binding Source=/FileConverter;component/Resources/DeleteIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
                                                    Style="{StaticResource EnableDisableImageStyle}"/>

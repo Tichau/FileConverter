@@ -280,7 +280,7 @@ namespace FileConverter.ViewModels
 
         public ICommand CreateFolderCommand => this.createFolderCommand;
 
-        public ICommand NewPresetCommand => this.newPresetCommand;
+        public ICommand AddNewPresetCommand => this.newPresetCommand;
 
         public ICommand DuplicatePresetCommand => this.duplicatePresetCommand;
 
