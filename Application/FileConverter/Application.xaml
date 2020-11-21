@@ -12,7 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Resources/Colors.xaml"/>
-                <ResourceDictionary Source="../Views/Resources/CustomStyles.xaml"/>
+                <ResourceDictionary Source="Views/Resources/CustomStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!--Global View Model Locator-->

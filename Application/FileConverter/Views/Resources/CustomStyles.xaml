@@ -17,12 +17,12 @@
 
     <Style x:Key="DonateButton" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Background" Value="#F95B5C"/>
+        <Setter Property="Background" Value="#0467B4"/>
         <Setter Property="Foreground" Value="WhiteSmoke"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Name="border" BorderThickness="1" Padding="4,2" BorderBrush="#F96D6C" CornerRadius="3" Background="{TemplateBinding Background}">
+                    <Border Name="border" BorderThickness="1" Padding="4,2" BorderBrush="#045899" CornerRadius="5" Background="{TemplateBinding Background}">
                         <Grid>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="contentShadow" Style="{StaticResource ShadowStyle}">
                                 <ContentPresenter.RenderTransform>
@@ -34,12 +34,12 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="#F96D6C" />
-                            <Setter Property="Background" Value="#F78A8C"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="#003087" />
+                            <Setter Property="Background" Value="#0F4199"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="#F75B5B" />
-                            <Setter Property="Background" Value="#F4ADB0"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="#002668" />
+                            <Setter Property="Background" Value="#003087"/>
                             <Setter TargetName="content" Property="RenderTransform" >
                                 <Setter.Value>
                                     <TranslateTransform Y="1.0" />

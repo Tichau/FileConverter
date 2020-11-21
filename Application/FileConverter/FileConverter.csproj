@@ -389,9 +389,6 @@
     <Resource Include="Resources\WebSite-Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ItchIO-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\SayThanks-Icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -420,6 +417,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\LogIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PaypalIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

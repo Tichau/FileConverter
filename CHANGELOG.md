@@ -19,7 +19,7 @@
 - Added: "Say thanks" button if you can't donate and want to keep my motivation up :).
 - Added: Messages logged from main thread are now displayed in the console standard output.
 - Change: Some UX improvements.
-- Change: Replace Pledgie donation button by Itch.io donation button since Pledgie does not exist anymore.
+- Change: Replace Pledgie donation button by Paypal donation button since Pledgie does not exist anymore.
 - Change: Correction of spell mistakes in the french translation (thanks to Sylvain Pollet-Villard).
 - Change: Change output files timestamp to match original file (github issue #33) (thanks to Diego López Bugna).
 - Fixed: Issue where File Converter version upgrade download was not working due to an issue with https encryption.

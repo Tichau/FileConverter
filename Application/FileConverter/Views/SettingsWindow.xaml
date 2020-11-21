@@ -426,10 +426,10 @@
 
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center" FontStyle="Italic"/>
-                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://tichau.itch.io/file-converter/purchase">
+                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=3BDWQTYTTA3D8&amp;item_name=File+Converter+Donations&amp;currency_code=EUR">
                             <Button.Content>
                                 <DockPanel>
-                                    <Image Source="/FileConverter;component/Resources/ItchIO-icon.png"></Image>
+                                    <Image Source="/FileConverter;component/Resources/PaypalIcon.png"></Image>
                                     <Label Content="{x:Static project:Resources.DonateButtonTitle}" Margin="5,0,5,0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" FontWeight="Bold" FontSize="14"/>
                                 </DockPanel>
                             </Button.Content>
