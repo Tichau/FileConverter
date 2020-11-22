@@ -9,6 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
+        xmlns:controls="clr-namespace:FileConverter.Controls"
         x:Class="FileConverter.Views.SettingsWindow"
         MinWidth="800" MinHeight="600" 
         Width="1050" Height="700"
@@ -426,22 +427,12 @@
 
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center" FontStyle="Italic"/>
-                        <Button Style="{StaticResource DonateButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=3BDWQTYTTA3D8&amp;item_name=File+Converter+Donations&amp;currency_code=EUR">
-                            <Button.Content>
-                                <DockPanel>
-                                    <Image Source="/FileConverter;component/Resources/PaypalIcon.png"></Image>
-                                    <Label Content="{x:Static project:Resources.DonateButtonTitle}" Margin="5,0,5,0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" FontWeight="Bold" FontSize="14"/>
-                                </DockPanel>
-                            </Button.Content>
-                        </Button>
-                        <Button Style="{StaticResource SayThanksButton}" Margin="5,0,5,0" Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://saythanks.io/to/adrien.allard.pro%40gmail.com">
-                            <Button.Content>
-                                <DockPanel>
-                                    <Image Source="/FileConverter;component/Resources/SayThanks-icon.png"></Image>
-                                    <Label Content="{x:Static project:Resources.SayThanksButtonTitle}" Margin="5,0,5,0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" FontWeight="Bold" FontSize="14"/>
-                                </DockPanel>
-                            </Button.Content>
-                        </Button>
+                        <controls:IconButton Margin="5,0,5,0" Background="#0467B4" Foreground="White" MouseOverBrush="#007AD8" PressedBrush="#0F4199"
+                                      Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=3BDWQTYTTA3D8&amp;item_name=File+Converter+Donations&amp;currency_code=EUR"
+                                      IconSource="/FileConverter;component/Resources/PaypalIcon.png" Content="{x:Static project:Resources.DonateButtonTitle}" FontWeight="Bold" FontSize="14" />
+                        <controls:IconButton Margin="5,0,5,0" Background="#BBBBBB" Foreground="#505050" MouseOverBrush="#CCCCCC" PressedBrush="#AAAAAA"
+                                             Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://saythanks.io/to/adrien.allard.pro%40gmail.com"
+                                             IconSource="/FileConverter;component/Resources/SayThanksIcon.png" Content="{x:Static project:Resources.SayThanksButtonTitle}" FontWeight="Bold" FontSize="14" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">

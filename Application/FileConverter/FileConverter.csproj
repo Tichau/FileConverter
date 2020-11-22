@@ -144,6 +144,7 @@
     <Compile Include="Controls\ConversionJobControl.xaml.cs">
       <DependentUpon>ConversionJobControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IconButton.cs" />
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
     </Compile>
@@ -389,9 +390,6 @@
     <Resource Include="Resources\WebSite-Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\SayThanks-Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\FileConverterExtension\FileConverterExtension.csproj">
       <Project>{0c44ca69-42d6-4357-bdfd-83069d1aba2f}</Project>
       <Name>FileConverterExtension</Name>
@@ -420,6 +418,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\PaypalIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SayThanksIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

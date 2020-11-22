@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FileConverter.Controls">
 
     <Style x:Key="EnableDisableImageStyle" TargetType="{x:Type Image}">
         <Style.Triggers>
@@ -7,88 +8,6 @@
                 <Setter Property="Opacity" Value="0.25"/>
             </Trigger>
         </Style.Triggers>
-    </Style>
-
-    <!-- Donation button style -->
-
-    <Style x:Key="ShadowStyle">
-        <Setter Property="Control.Foreground" Value="LightGray" />
-    </Style>
-
-    <Style x:Key="DonateButton" TargetType="Button">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Background" Value="#0467B4"/>
-        <Setter Property="Foreground" Value="WhiteSmoke"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Name="border" BorderThickness="1" Padding="4,2" BorderBrush="#045899" CornerRadius="5" Background="{TemplateBinding Background}">
-                        <Grid>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="contentShadow" Style="{StaticResource ShadowStyle}">
-                                <ContentPresenter.RenderTransform>
-                                    <TranslateTransform X="1.0" Y="1.0" />
-                                </ContentPresenter.RenderTransform>
-                            </ContentPresenter>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="#003087" />
-                            <Setter Property="Background" Value="#0F4199"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="#002668" />
-                            <Setter Property="Background" Value="#003087"/>
-                            <Setter TargetName="content" Property="RenderTransform" >
-                                <Setter.Value>
-                                    <TranslateTransform Y="1.0" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- SayThanks button style -->
-
-    <Style x:Key="SayThanksButton" TargetType="Button">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Background" Value="#E5E5E5"/>
-        <Setter Property="Foreground" Value="DimGray"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Name="border" BorderThickness="1" Padding="4,2" BorderBrush="#D0D0D0" CornerRadius="3" Background="{TemplateBinding Background}">
-                        <Grid>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="contentShadow" Style="{StaticResource ShadowStyle}">
-                                <ContentPresenter.RenderTransform>
-                                    <TranslateTransform X="1.0" Y="1.0" />
-                                </ContentPresenter.RenderTransform>
-                            </ContentPresenter>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="#B0B0B0" />
-                            <Setter Property="Background" Value="#CCCCCC"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="#808080" />
-                            <Setter Property="Background" Value="#BBBBBB"/>
-                            <Setter TargetName="content" Property="RenderTransform" >
-                                <Setter.Value>
-                                    <TranslateTransform Y="1.0" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <!-- Data validation styles -->
@@ -116,6 +35,38 @@
     <Style TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource DarkBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource LighterForegroundBrush}"/>
+    </Style>
+
+    <Style TargetType="{x:Type controls:IconButton}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:IconButton">
+                    <Border Name="border" Padding="4,2" CornerRadius="15" 
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" >
+                        <DockPanel Name="content">
+                            <Image Margin="5, 2, 0, 2" Source="{TemplateBinding IconSource}" />
+                            <Label Margin="0,0,5,0" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"/>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=controls:IconButton}, Path=MouseOverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=controls:IconButton}, Path=PressedBrush}"/>
+                            <Setter TargetName="content" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>
