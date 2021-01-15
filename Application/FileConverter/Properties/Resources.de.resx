@@ -150,7 +150,7 @@
     </data>
     <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
         <value>Clamp to lowest power of 2 size</value>
-        <comment>++++</comment>
+        <comment></comment>
     </data>
     <data name="Close" xml:space="preserve">
         <value>Schließen</value>
@@ -291,8 +291,7 @@
         <value>Ausgabe</value>
     </data>
     <data name="OutputFilePathTemplateHelp" xml:space="preserve">
-        <value>(p): Eingabe Dateipfad(f): Eingabe Dateiname(o): output extension type(i): input extension type(d0): input parent folder(d1): input sub parent folder...(n:i): page number index(n:c): total page countSpecial paths:(p:d): my documents path(p:m): my music path(p:v): my videos path(p:p): my pictures pathuse maj for uppercase version</value>
-        <comment>++++</comment>
+        <value>(p): Eingabe Dateipfad(f): Eingabe Dateiname(o): Ausgabe Erweiterungstyp(i): Eingabe Erweiterungstyp(d0): Eingabe Oberordner(d1): Eingabe Unter-Oberordner...(n:i): Seitennummer(n:c): total page countSpecial paths:(p:d): Meine Dokumente Pfad(p:m): Meine Musik Pfad(p:v): Meine Videos Pfad(p:p): Meine Vilder Pfad </value>
     </data>
     <data name="OutputFormat" xml:space="preserve">
         <value>Ausgabeformat</value>
@@ -338,8 +337,7 @@
         <value>90° im Uhrzeigersinn rotieren</value>
     </data>
     <data name="UpgradeAvailable" xml:space="preserve">
-        <value>An update for File Converter is available. It is strongly recommended that you install it as soon as possible!</value>
-        <comment>++++</comment>
+        <value>Eine Aktualisierung für File Converter ist verfügbar. Es wird stark empfohlen, dass Sie dies so früh wie möglich installieren!</value>
     </data>
     <data name="UpgradeDownloadInProgress" xml:space="preserve">
         <value>Aktualisierung wird heruntergeladen</value>
@@ -348,8 +346,7 @@
         <value>File Converter Aktualisierungen</value>
     </data>
     <data name="VideoEncodingQualityTooltip" xml:space="preserve">
-        <value>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</value>
-        <comment>++++</comment>
+        <value>Definieren Sie das Verhältnis zwischen Dateigröße und Videoqualität. Ein niedrigerer Wert wird Ihnen eine kleinere Datei geben, ein größerer Wert wird Ihnen bessere Videoqualität geben.</value>
     </data>
     <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
         <value>Schneller</value>
@@ -371,8 +368,7 @@
         <value>Super schnell</value>
     </data>
     <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
-        <value>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</value>
-        <comment>++++</comment>
+        <value>Definieren Sie das Verhältnis zwischen Dateigröße und Komprimierungsdauer. Eine langasme Komprimierung wird Ihnen eine kleinere Datei(bei selber Qualität) geben als schnellere Komprimierung.</value>
     </data>
     <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
         <value>Ultra schnell</value>
