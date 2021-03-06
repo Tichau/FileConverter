@@ -20,7 +20,7 @@
             <Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />        
         <?endif ?>
         
-        <Icon Id="icon.ico" SourceFile="..\Resources\ApplicationIcon.ico"/>
+        <Icon Id="icon.ico" SourceFile="..\Resources\Icons\ApplicationIcon.ico"/>
         <Property Id="ARPPRODUCTICON" Value="icon.ico" />
         <SetProperty Id="ARPINSTALLLOCATION" Value="[ApplicationFolder]" After="CostFinalize" />
       
