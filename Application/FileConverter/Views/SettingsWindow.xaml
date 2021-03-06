@@ -307,10 +307,14 @@
                                         </MenuItem.Icon>
                                     </MenuItem>
                                     <MenuItem Header="{x:Static project:Resources.AddNewPreset}" Command="{Binding AddNewPresetCommand}">
+                                        <MenuItem.Icon>
+                                            <Image Source="{Binding Source=/FileConverter;component/Resources/PresetIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                                   Style="{StaticResource EnableDisableImageStyle}"/>
+                                        </MenuItem.Icon>
                                     </MenuItem>
                                     <MenuItem Header="{x:Static project:Resources.DuplicatePreset}" Command="{Binding DuplicatePresetCommand}">
                                         <MenuItem.Icon>
-                                            <Image Source="{Binding Source=/FileConverter;component/Resources/PresetIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                            <Image Source="{Binding Source=/FileConverter;component/Resources/DuplicatePresetIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
                                                    Style="{StaticResource EnableDisableImageStyle}"/>
                                         </MenuItem.Icon>
                                     </MenuItem>
