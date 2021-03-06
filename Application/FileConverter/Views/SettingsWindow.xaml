@@ -316,8 +316,16 @@
                                     </MenuItem>
                                     <Separator />
                                     <MenuItem Header="{x:Static project:Resources.ImportPresets}" Command="{Binding ImportPresetCommand}">
+                                        <MenuItem.Icon>
+                                            <Image Source="{Binding Source=/FileConverter;component/Resources/ImportIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                                   Style="{StaticResource EnableDisableImageStyle}"/>
+                                        </MenuItem.Icon>
                                     </MenuItem>
                                     <MenuItem Header="{x:Static project:Resources.ExportSelectedPresets}" Command="{Binding ExportPresetCommand}">
+                                        <MenuItem.Icon>
+                                            <Image Source="{Binding Source=/FileConverter;component/Resources/ExportIcon.ico, Converter={StaticResource IcoFileSizeSelector}, ConverterParameter=48}" 
+                                                   Style="{StaticResource EnableDisableImageStyle}"/>
+                                        </MenuItem.Icon>
                                     </MenuItem>
                                     <Separator />
                                     <MenuItem Header="{x:Static project:Resources.RemoveSelectedPreset}" Command="{Binding RemoveSelectedPresetCommand}">
