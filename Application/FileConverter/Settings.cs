@@ -16,7 +16,7 @@ namespace FileConverter
     {
         public const int Version = 4;
 
-        private bool exitApplicationWhenConversionsFinished = true;
+        private bool exitApplicationWhenConversionsFinished = false;
         private float durationBetweenEndOfConversionsAndApplicationExit = 3f;
         private ObservableCollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
         private bool checkUpgradeAtStartup = true;

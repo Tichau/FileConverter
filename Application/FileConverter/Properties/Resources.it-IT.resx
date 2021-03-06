@@ -173,7 +173,7 @@
     <value>Log</value>
     <comment>Logs</comment>
   </data>
-  <data name="DiagnosticsButtonTitle" xml:space="preserve">
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
     <value>Log</value>
     <comment>Logs</comment>
   </data>
@@ -361,7 +361,7 @@ use maj for uppercase version</comment>
     <value>Qualità :</value>
     <comment>Quality :</comment>
   </data>
-  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
     <value>In blu l'intervallo di bitrate consigliato</value>
     <comment>Recommended bitrate range in blue</comment>
   </data>
@@ -389,7 +389,7 @@ use maj for uppercase version</comment>
     <value>Impostazioni</value>
     <comment>Settings</comment>
   </data>
-  <data name="SettingsButtonTitle" xml:space="preserve">
+  <data name="SettingsButtonTooltip" xml:space="preserve">
     <value>Impostazioni</value>
     <comment>Settings</comment>
   </data>

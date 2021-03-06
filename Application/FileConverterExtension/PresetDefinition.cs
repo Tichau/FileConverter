@@ -14,19 +14,16 @@ namespace FileConverterExtension
         public string FullName
         {
             get;
-            private set;
         }
 
         public string Name
         {
             get;
-            private set;
         }
 
         public string[] Folders
         {
             get;
-            private set;
         }
 
         public bool Enabled

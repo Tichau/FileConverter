@@ -161,7 +161,7 @@
   <data name="Diagnostics" xml:space="preserve">
     <value>Historique d'activité</value>
   </data>
-  <data name="DiagnosticsButtonTitle" xml:space="preserve">
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
     <value>Historique d'activité</value>
   </data>
   <data name="DocumentationButtonDescription" xml:space="preserve">
@@ -300,7 +300,7 @@ utilisez maj pour une version en majuscules</value>
   <data name="Quality" xml:space="preserve">
     <value>Qualité :</value>
   </data>
-  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
     <value>Taux recommandés en bleu</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">
@@ -321,7 +321,7 @@ utilisez maj pour une version en majuscules</value>
   <data name="Settings" xml:space="preserve">
     <value>Configuration de File Converter</value>
   </data>
-  <data name="SettingsButtonTitle" xml:space="preserve">
+  <data name="SettingsButtonTooltip" xml:space="preserve">
     <value>Configuration</value>
   </data>
   <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
@@ -567,5 +567,17 @@ utilisez maj pour une version en majuscules</value>
   </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>L'initialisation du processus de conversion a échoué.</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Mode avancé</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Arguments personalisés</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Arguments de ligne de commande FFMPEG personalisés</value>
   </data>
 </root>

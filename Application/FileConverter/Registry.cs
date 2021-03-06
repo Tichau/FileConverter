@@ -80,14 +80,13 @@ namespace FileConverter
             }
         }
 
-        public static T GetValue<T>(string key)
+        public static T GetValue<T>(string key, T defaultValue = default(T))
         {
             Registry registry = Registry.Instance;
 
-            string stringValue;
-            if (!registry.registryEntries.TryGetValue(key, out stringValue))
+            if (!registry.registryEntries.TryGetValue(key, out string stringValue))
             {
-                return default(T);
+                return defaultValue;
             }
 
             try
@@ -100,7 +99,7 @@ namespace FileConverter
                 Diagnostics.Debug.LogError("Can't convert registry value: {0}.", exception.Message);
             }
 
-            return default(T);
+            return defaultValue;
         }
 
         public static void SetValue<T>(string key, T value)
@@ -198,6 +197,7 @@ namespace FileConverter
         public static class Keys
         {
             public static readonly string LastUpdateCheckDate = "LastUpdateCheckDate";
+            public static readonly string ImportInitialFolder = "ImportInitialFolder";
         }
     }
 }

@@ -12,7 +12,7 @@ namespace FileConverter.ValueConverters.Generic
         {
             if (value == null)
             {
-                throw new System.ArgumentNullException("value.");
+                throw new System.ArgumentNullException(nameof(value));
             }
 
             string stringValue = value.ToString();

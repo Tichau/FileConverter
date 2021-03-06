@@ -35,7 +35,7 @@
                                   Document="{Binding UpgradeVersionDescription.ChangeLog, Source={StaticResource Upgrade}, Converter={StaticResource ChangelogToMarkdown}}"/>
 
         <!-- Download button -->
-        <Button Background="WhiteSmoke" Grid.Row="3" Padding="10,5,10,5" Margin="5" HorizontalContentAlignment="Left" Command="{Binding DownloadInstallerCommand}" 
+        <Button Grid.Row="3" Padding="10,5,10,5" Margin="5" HorizontalContentAlignment="Left" Command="{Binding DownloadInstallerCommand}" 
                 Visibility="{Binding UpgradeVersionDescription.InstallerDownloadNotStarted, Source={StaticResource Upgrade}, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed}">
             <Button.Content>
                 <Grid>
@@ -70,13 +70,13 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="{x:Static project:Resources.UpgradeDownloadInProgress}" FontSize="14.667"/>
-                <ProgressBar Grid.Row="1" Margin="5" Height="30" Foreground="#004B82" Minimum="0" Maximum="100"
+                <ProgressBar Grid.Row="1" Margin="5" Height="30" Foreground="{StaticResource MainDarkBrush}" Minimum="0" Maximum="100"
                      Value="{Binding UpgradeVersionDescription.InstallerDownloadProgress, Source={StaticResource Upgrade}}"/>
             </Grid>
         </Grid>
 
         <!-- Install button -->
-        <Button Background="WhiteSmoke" Grid.Row="3" Padding="10,5,10,5" Margin="5" HorizontalContentAlignment="Left" Command="{Binding LaunchInstallerCommand}" 
+        <Button Grid.Row="3" Padding="10,5,10,5" Margin="5" HorizontalContentAlignment="Left" Command="{Binding LaunchInstallerCommand}" 
                 Visibility="{Binding UpgradeVersionDescription.InstallerDownloadDone, Source={StaticResource Upgrade}, Converter={StaticResource BoolToVisibility}, ConverterParameter=Collapsed}">
             <Button.Content>
                 <Grid>

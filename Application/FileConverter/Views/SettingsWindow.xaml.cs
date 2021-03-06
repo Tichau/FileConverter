@@ -19,6 +19,11 @@ namespace FileConverter.Views
     /// </summary>
     public partial class SettingsWindow : Window
     {
+        private TextBox selectedPresetNameTextBox;
+        private TextBox selectedFolderNameTextBox;
+        private string focusMessage;
+        private bool dragInProgress = false;
+
         private enum DragDropTargetPosition
         {
             Before,
@@ -31,109 +36,63 @@ namespace FileConverter.Views
             this.InitializeComponent();
 
             Messenger.Default.Register<string>(this, "DoFocus", this.DoFocus);
+
+            (this.DataContext as SettingsViewModel).PropertyChanged += this.SettingsWindow_PropertyChanged;
+
+            this.PresetTreeView.MouseDown += this.TreeView_MouseDown;
+            this.PresetTreeView.MouseUp += this.TreeView_MouseUp;
+        }
+
+        private void SettingsWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "SelectedItem")
+            {
+                TreeViewItem selectedItem = this.GetTreeViewItem(this.PresetTreeView, this.PresetTreeView.SelectedItem);
+                selectedItem?.BringIntoView();
+            }
         }
 
         public void DoFocus(string message)
         {
+            this.focusMessage = message;
             switch (message)
             {
                 case "PresetName":
-                    this.PresetNameTextBox.Focus();
-                    this.PresetNameTextBox.SelectAll();
+                    this.selectedPresetNameTextBox?.Focus();
+                    this.selectedPresetNameTextBox?.SelectAll();
                     break;
 
                 case "FolderName":
-                    this.FolderNameTextBox.Focus();
-                    this.FolderNameTextBox.SelectAll();
+                    this.selectedFolderNameTextBox?.Focus();
+                    this.selectedFolderNameTextBox?.SelectAll();
                     break;
             }
         }
 
-        private void OnInputTypeChecked(object sender, RoutedEventArgs e)
+        private void TreeView_MouseDown(object sender, MouseButtonEventArgs args)
         {
-            SettingsViewModel dataContext = this.DataContext as SettingsViewModel;
-            if (dataContext.SelectedPreset == null)
+            FrameworkElement element = args.OriginalSource as FrameworkElement;
+            TreeViewItem treeViewItem = this.GetNearestContainer(element);
+            if (treeViewItem != null)
             {
-                return;
+                treeViewItem.IsSelected = true;
+                this.dragInProgress = args.ChangedButton == MouseButton.Left;
             }
-
-            CheckBox checkBox = sender as CheckBox;
-            if (!checkBox.IsVisible)
+            else
             {
-                return;
-            }
-
-            string inputFormat = (checkBox.Content as string).ToLowerInvariant();
-
-            dataContext.SelectedPreset.Preset.AddInputType(inputFormat);
-        }
-
-        private void OnInputTypeUnchecked(object sender, RoutedEventArgs e)
-        {
-            SettingsViewModel dataContext = this.DataContext as SettingsViewModel;
-            if (dataContext.SelectedPreset == null)
-            {
-                return;
-            }
-
-            CheckBox checkBox = sender as CheckBox;
-            if (!checkBox.IsVisible)
-            {
-                return;
-            }
-
-            string inputFormat = (checkBox.Content as string).ToLowerInvariant();
-
-            dataContext.SelectedPreset.Preset.RemoveInputType(inputFormat);
-        }
-
-        private void OnInputTypeCategoryChecked(object sender, RoutedEventArgs e)
-        {
-            SettingsViewModel dataContext = this.DataContext as SettingsViewModel;
-            if (dataContext.SelectedPreset == null)
-            {
-                return;
-            }
-
-            CheckBox checkBox = sender as CheckBox;
-            string categoryName = checkBox.Content as string;
-            InputExtensionCategory category = dataContext.InputCategories.FirstOrDefault(match => match.Name == categoryName);
-            if (category == null)
-            {
-                return;
-            }
-
-            foreach (string inputExtension in category.InputExtensionNames)
-            {
-                dataContext.SelectedPreset.Preset.AddInputType(inputExtension);
+                this.dragInProgress = false;
             }
         }
 
-        private void OnInputTypeCategoryUnchecked(object sender, RoutedEventArgs e)
+        private void TreeView_MouseUp(object sender, MouseButtonEventArgs args)
         {
-            SettingsViewModel dataContext = this.DataContext as SettingsViewModel;
-            if (dataContext.SelectedPreset == null)
-            {
-                return;
-            }
-
-            CheckBox checkBox = sender as CheckBox;
-            string categoryName = checkBox.Content as string;
-            InputExtensionCategory category = dataContext.InputCategories.FirstOrDefault(match => match.Name == categoryName);
-            if (category == null)
-            {
-                return;
-            }
-
-            foreach (string inputExtension in category.InputExtensionNames)
-            {
-                dataContext.SelectedPreset.Preset.RemoveInputType(inputExtension);
-            }
+            this.dragInProgress = false;
         }
-        
+
         private void TreeView_MouseMove(object sender, MouseEventArgs args)
         {
-            if (args.LeftButton == MouseButtonState.Pressed && 
+            if (this.dragInProgress &&
+                args.LeftButton == MouseButtonState.Pressed && 
                 this.PresetTreeView.SelectedItem is AbstractTreeNode nodeToDrag)
             {
                 var dataObj = new DataObject();
@@ -379,6 +338,26 @@ namespace FileConverter.Views
             }
 
             return null;
+        }
+
+        private void SelectedPresetName_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.selectedPresetNameTextBox = (TextBox)sender;
+            if (this.focusMessage == "PresetName")
+            {
+                this.DoFocus(this.focusMessage);
+                this.focusMessage = null;
+            }
+        }
+
+        private void SelectedFolderName_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.selectedFolderNameTextBox = (TextBox)sender;
+            if (this.focusMessage == "FolderName")
+            {
+                this.DoFocus(this.focusMessage);
+                this.focusMessage = null;
+            }
         }
     }
 }

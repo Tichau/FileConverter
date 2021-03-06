@@ -26,18 +26,9 @@ namespace FileConverter.ConversionJobs
         {
         }
 
-        protected override ApplicationName Application
-        {
-            get
-            {
-                return ApplicationName.Word;
-            }
-        }
+        protected override ApplicationName Application => ApplicationName.Word;
 
-        protected override bool IsCancelable()
-        {
-            return false;
-        }
+        protected override bool IsCancelable => false;
 
         protected override int GetOutputFilesCount()
         {

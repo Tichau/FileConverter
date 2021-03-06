@@ -2,6 +2,8 @@
 
 namespace FileConverter.ViewModels
 {
+    using System;
+    using System.IO;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -11,6 +13,7 @@ namespace FileConverter.ViewModels
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using FileConverter.Annotations;
     using FileConverter.Services;
     using FileConverter.Views;
 
@@ -45,9 +48,10 @@ namespace FileConverter.ViewModels
         private RelayCommand<string> openUrlCommand;
         private RelayCommand getChangeLogContentCommand;
         private RelayCommand createFolderCommand;
-        private RelayCommand movePresetUpCommand;
-        private RelayCommand movePresetDownCommand;
-        private RelayCommand addNewPresetCommand;
+        private RelayCommand newPresetCommand;
+        private RelayCommand duplicatePresetCommand;
+        private RelayCommand importPresetCommand;
+        private RelayCommand exportPresetCommand;
         private RelayCommand removePresetCommand;
         private RelayCommand saveCommand;
         private RelayCommand<CancelEventArgs> closeCommand;
@@ -63,9 +67,10 @@ namespace FileConverter.ViewModels
             this.getChangeLogContentCommand = new RelayCommand(this.DownloadChangeLogAction);
             this.openUrlCommand = new RelayCommand<string>((url) => Process.Start(url));
             this.createFolderCommand = new RelayCommand(this.CreateFolder);
-            this.movePresetUpCommand = new RelayCommand(this.MoveSelectedPresetUp, this.CanMoveSelectedPresetUp);
-            this.movePresetDownCommand = new RelayCommand(this.MoveSelectedPresetDown, this.CanMoveSelectedPresetDown);
-            this.addNewPresetCommand = new RelayCommand(this.AddNewPreset);
+            this.newPresetCommand = new RelayCommand(() => this.AddNewPreset(false));
+            this.duplicatePresetCommand = new RelayCommand(() => this.AddNewPreset(true), this.CanDuplicateSelectedPreset);
+            this.importPresetCommand = new RelayCommand(this.ImportPreset);
+            this.exportPresetCommand = new RelayCommand(this.ExportSelectedPreset, this.CanExportSelectedPreset);
             this.removePresetCommand = new RelayCommand(this.RemoveSelectedPreset, this.CanRemoveSelectedPreset);
             this.saveCommand = new RelayCommand(this.SaveSettings, this.CanSaveSettings);
             this.closeCommand = new RelayCommand<CancelEventArgs>(this.CloseSettings);
@@ -190,9 +195,9 @@ namespace FileConverter.ViewModels
 
                 this.RaisePropertyChanged();
                 this.RaisePropertyChanged(nameof(this.SelectedItem));
-                this.movePresetUpCommand?.RaiseCanExecuteChanged();
-                this.movePresetDownCommand?.RaiseCanExecuteChanged();
                 this.removePresetCommand?.RaiseCanExecuteChanged();
+                this.exportPresetCommand?.RaiseCanExecuteChanged();
+                this.duplicatePresetCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -217,9 +222,9 @@ namespace FileConverter.ViewModels
                 this.RaisePropertyChanged();
                 this.RaisePropertyChanged(nameof(this.SelectedItem));
                 this.RaisePropertyChanged(nameof(this.InputCategories));
-                this.movePresetUpCommand?.RaiseCanExecuteChanged();
-                this.movePresetDownCommand?.RaiseCanExecuteChanged();
                 this.removePresetCommand?.RaiseCanExecuteChanged();
+                this.exportPresetCommand?.RaiseCanExecuteChanged();
+                this.duplicatePresetCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -275,11 +280,13 @@ namespace FileConverter.ViewModels
 
         public ICommand CreateFolderCommand => this.createFolderCommand;
 
-        public ICommand MovePresetUpCommand => this.movePresetUpCommand;
+        public ICommand AddNewPresetCommand => this.newPresetCommand;
 
-        public ICommand MovePresetDownCommand => this.movePresetDownCommand;
+        public ICommand DuplicatePresetCommand => this.duplicatePresetCommand;
 
-        public ICommand AddNewPresetCommand => this.addNewPresetCommand;
+        public ICommand ImportPresetCommand => this.importPresetCommand;
+
+        public ICommand ExportPresetCommand => this.exportPresetCommand;
 
         public ICommand RemoveSelectedPresetCommand => this.removePresetCommand;
 
@@ -315,6 +322,31 @@ namespace FileConverter.ViewModels
         }
 
         public string this[string columnName] => this.Error;
+
+        [NotNull]
+        public string ImportDirectoryPath
+        {
+            get
+            {
+                string path = FileConverter.Registry.GetValue(FileConverter.Registry.Keys.ImportInitialFolder, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+                if (!Directory.Exists(path))
+                {
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                }
+
+                return path;
+            }
+
+            set
+            {
+                if (!Directory.Exists(value))
+                {
+                    return;
+                }
+
+                FileConverter.Registry.SetValue(FileConverter.Registry.Keys.ImportInitialFolder, value);
+            }
+        }
 
         private string CheckErrorRecursively(AbstractTreeNode node)
         {
@@ -409,19 +441,13 @@ namespace FileConverter.ViewModels
                     PresetFolderNode subFolder = parent.Children.FirstOrDefault(match => match is PresetFolderNode && ((PresetFolderNode)match).Name == folderName) as PresetFolderNode;
                     if (subFolder == null)
                     {
-                        subFolder = new PresetFolderNode(folderName, parent);
-                        parent.Children.Add(subFolder);
-
-                        subFolder.PropertyChanged += this.NodePropertyChanged;
+                        subFolder = this.CreateFolderNode(folderName, parent);
                     }
 
                     parent = subFolder;
                 }
 
-                PresetNode presetNode = new PresetNode(preset, parent);
-                parent.Children.Add(presetNode);
-
-                presetNode.PropertyChanged += this.NodePropertyChanged;
+                this.CreatePresetNode(preset, parent);
             }
 
             this.RaisePropertyChanged(nameof(this.PresetsRootFolder));
@@ -525,120 +551,12 @@ namespace FileConverter.ViewModels
             Messenger.Default.Send<string>("FolderName", "DoFocus");
         }
 
-        private bool CanMoveSelectedPresetUp()
+        private bool CanDuplicateSelectedPreset()
         {
-            if (this.SelectedItem == null)
-            {
-                // no preset selected.
-                return false;
-            }
-
-            if (this.SelectedItem.Parent != this.presetsRootFolder)
-            {
-                // The parent is not the root, we can move the preset up.
-                return true;
-            }
-
-            int indexOfSelectedPreset = this.SelectedItem.Parent.Children.IndexOf(this.SelectedItem);
-            return indexOfSelectedPreset > 0;
+            return this.SelectedPreset != null;
         }
 
-        private void MoveSelectedPresetUp()
-        {
-            Diagnostics.Debug.Assert(this.SelectedItem != null, "this.SelectedItem != null");
-
-            AbstractTreeNode itemToMoveUp = this.SelectedItem;
-            PresetFolderNode currentParent = itemToMoveUp.Parent;
-            int indexOfSelectedPreset = currentParent.Children.IndexOf(itemToMoveUp);
-            if (indexOfSelectedPreset == 0)
-            {
-                // Move to the parent folder.
-                int indexOfFolder = currentParent.Parent.Children.IndexOf(currentParent);
-                currentParent.Children.RemoveAt(indexOfSelectedPreset);
-                currentParent.Parent.Children.Insert(indexOfFolder, itemToMoveUp);
-                itemToMoveUp.Parent = currentParent.Parent;
-            }
-            else
-            {
-                int newIndexOfSelectedPreset = System.Math.Max(0, indexOfSelectedPreset - 1);
-                if (currentParent.Children[newIndexOfSelectedPreset] is PresetFolderNode newParent)
-                {
-                    // Move to child folder.
-                    currentParent.Children.RemoveAt(indexOfSelectedPreset);
-                    newParent.Children.Add(itemToMoveUp);
-                    itemToMoveUp.Parent = newParent;
-                }
-                else
-                {
-                    // Swap nodes.
-                    currentParent.Children.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
-                }
-            }
-
-            this.SelectedItem = itemToMoveUp;
-            this.movePresetUpCommand.RaiseCanExecuteChanged();
-            this.movePresetDownCommand.RaiseCanExecuteChanged();
-            this.saveCommand.RaiseCanExecuteChanged();
-        }
-
-        private bool CanMoveSelectedPresetDown()
-        {
-            if (this.SelectedItem == null)
-            {
-                // no preset selected.
-                return false;
-            }
-
-            if (this.SelectedItem.Parent != this.presetsRootFolder)
-            {
-                // The parent is not the root, we can move the preset down.
-                return true;
-            }
-
-            int indexOfSelectedPreset = this.SelectedItem.Parent.Children.IndexOf(this.SelectedItem);
-            return indexOfSelectedPreset < this.SelectedItem.Parent.Children.Count - 1;
-        }
-
-        private void MoveSelectedPresetDown()
-        {
-            Diagnostics.Debug.Assert(this.SelectedItem != null, "this.SelectedItem != null");
-
-            AbstractTreeNode itemToMoveDown = this.SelectedItem;
-            PresetFolderNode currentParent = itemToMoveDown.Parent;
-            int indexOfSelectedPreset = currentParent.Children.IndexOf(itemToMoveDown);
-            if (indexOfSelectedPreset == currentParent.Children.Count - 1)
-            {
-                // Move to the parent folder.
-                int indexOfFolder = currentParent.Parent.Children.IndexOf(currentParent);
-                currentParent.Children.RemoveAt(indexOfSelectedPreset);
-                currentParent.Parent.Children.Insert(indexOfFolder  + 1, itemToMoveDown);
-                itemToMoveDown.Parent = currentParent.Parent;
-            }
-            else
-            {
-                int newIndexOfSelectedPreset = System.Math.Min(this.SelectedItem.Parent.Children.Count - 1, indexOfSelectedPreset + 1);
-                if (currentParent.Children[newIndexOfSelectedPreset] is PresetFolderNode newParent)
-                {
-                    // Move to child folder.
-                    currentParent.Children.RemoveAt(indexOfSelectedPreset);
-                    newParent.Children.Insert(0, itemToMoveDown);
-                    itemToMoveDown.Parent = newParent;
-                }
-                else
-                {
-                    // Swap nodes.
-                    currentParent.Children.Move(indexOfSelectedPreset, newIndexOfSelectedPreset);
-                }
-            }
-
-            this.SelectedItem = itemToMoveDown;
-
-            this.movePresetUpCommand.RaiseCanExecuteChanged();
-            this.movePresetDownCommand.RaiseCanExecuteChanged();
-            this.saveCommand.RaiseCanExecuteChanged();
-        }
-
-        private void AddNewPreset()
+        private void AddNewPreset(bool duplicate)
         {
             PresetFolderNode parent;
             if (this.SelectedFolder != null)
@@ -671,7 +589,7 @@ namespace FileConverter.ViewModels
 
             // Create preset by copying the selected one.
             ConversionPreset newPreset = null;
-            if (this.SelectedPreset != null)
+            if (this.SelectedPreset != null && duplicate)
             {
                 newPreset = new ConversionPreset(presetName, this.SelectedPreset.Preset);
             }
@@ -692,6 +610,101 @@ namespace FileConverter.ViewModels
 
             this.removePresetCommand.RaiseCanExecuteChanged();
             this.saveCommand.RaiseCanExecuteChanged();
+        }
+
+        private void ImportPreset()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Import presets",
+                Filter = "Preset file (*.xml)|*.xml",
+                InitialDirectory = this.ImportDirectoryPath,
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                if (!File.Exists(openFileDialog.FileName))
+                {
+                    Diagnostics.Debug.LogError("File does not exists.");
+                }
+
+                string directoryPath = Path.GetDirectoryName(openFileDialog.FileName);
+                if (!string.IsNullOrEmpty(directoryPath))
+                {
+                    this.ImportDirectoryPath = directoryPath;
+                }
+
+                List<ConversionPreset> presetsToImport = new List<ConversionPreset>();
+                XmlHelpers.LoadFromFile("Presets", openFileDialog.FileName, out presetsToImport);
+
+                // Add imported preset to preset tree.
+                bool itemSelected = false;
+                foreach (ConversionPreset conversionPreset in presetsToImport)
+                {
+                    PresetFolderNode parent = this.PresetsRootFolder;
+                    foreach (string folderName in conversionPreset.ParentFoldersNames)
+                    {
+                        PresetFolderNode folderNode = parent.Children.FirstOrDefault(match => match is PresetFolderNode && match.Name == folderName) as PresetFolderNode;
+                        if (folderNode == null)
+                        {
+                            folderNode = this.CreateFolderNode(folderName, parent);
+
+                            if (!itemSelected)
+                            {
+                                this.SelectedItem = folderNode;
+                                itemSelected = true;
+                            }
+                        }
+
+                        parent = folderNode;
+                    }
+
+                    PresetNode node = this.CreatePresetNode(conversionPreset, parent);
+                    if (!itemSelected)
+                    {
+                        this.SelectedItem = node;
+                        itemSelected = true;
+                    }
+                }
+            }
+        }
+
+        private void ExportSelectedPreset()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Title = "Export selected preset or folder",
+                Filter = "Preset file (*.xml)|*.xml",
+                InitialDirectory = this.ImportDirectoryPath,
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string filePath = saveFileDialog.FileName;
+                string directoryPath = Path.GetDirectoryName(filePath);
+                if (!string.IsNullOrEmpty(directoryPath))
+                {
+                    this.ImportDirectoryPath = directoryPath;
+                }
+
+                if (Path.GetExtension(filePath) != ".xml")
+                {
+                    filePath += ".xml";
+                }
+
+                this.settings.ConversionPresets.Clear();
+                this.ComputePresetsParentFoldersNamesAndFillSettings(this.presetsRootFolder, new List<string>());
+
+                List<ConversionPreset> presetsToExport = new List<ConversionPreset>();
+                this.FillWithPresetsRecursively(this.SelectedItem, presetsToExport);
+
+                XmlHelpers.SaveToFile("Presets", filePath, presetsToExport);
+            }
+        }
+
+        private bool CanExportSelectedPreset()
+        {
+            return this.SelectedItem != null;
         }
 
         private void RemoveSelectedPreset()
@@ -729,6 +742,39 @@ namespace FileConverter.ViewModels
                     this.UnbindNode(child);
                 }
             }
+        }
+
+        private void FillWithPresetsRecursively(AbstractTreeNode node, List<ConversionPreset> presets)
+        {
+            if (node is PresetNode presetNode)
+            {
+                presets.Add(presetNode.Preset);
+            }
+            else if (node is PresetFolderNode folder)
+            {
+                foreach (AbstractTreeNode childNode in folder.Children)
+                {
+                    this.FillWithPresetsRecursively(childNode, presets);
+                }
+            }
+        }
+
+        private PresetFolderNode CreateFolderNode(string folderName, PresetFolderNode parent)
+        {
+            PresetFolderNode subFolder = new PresetFolderNode(folderName, parent);
+            parent.Children.Add(subFolder);
+
+            subFolder.PropertyChanged += this.NodePropertyChanged;
+            return subFolder;
+        }
+
+        private PresetNode CreatePresetNode(ConversionPreset preset, PresetFolderNode parent)
+        {
+            PresetNode presetNode = new PresetNode(preset, parent);
+            parent.Children.Add(presetNode);
+
+            presetNode.PropertyChanged += this.NodePropertyChanged;
+            return presetNode;
         }
     }
 }

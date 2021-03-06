@@ -9,7 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d" x:Class="FileConverter.Views.MainWindow"
-        Height="500" Width="950" MinHeight="250" MinWidth="500" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
+        Height="500" Width="950" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -31,26 +31,30 @@
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
+            <RowDefinition Height="64" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="64" />
+                <ColumnDefinition Width="64" />
             </Grid.ColumnDefinitions>
 
             <DockPanel Grid.Column="0">
-                <Label Content="{x:Static project:Resources.ConversionQueueTitle}" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold"/>
-                <Label Content="{Binding InformationMessage}" VerticalAlignment="Top" Height="30" FontSize="13.333" HorizontalAlignment="Right"/>
+                <Label Content="{x:Static project:Resources.ConversionQueueTitle}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                <Label Content="{Binding InformationMessage}" VerticalAlignment="Center" FontSize="13.333" HorizontalAlignment="Right"/>
             </DockPanel>
-            <Button x:Name="DiagnosticsButton" Grid.Column="1" Content="{x:Static project:Resources.DiagnosticsButtonTitle}" Margin="3,3" Command="{Binding ShowDiagnosticsCommand}"/>
-            <Button x:Name="SettingsButton"  Grid.Column="2" Content="{x:Static project:Resources.SettingsButtonTitle}" Margin="3,3" Command="{Binding ShowSettingsCommand}"/>
+            <Button Grid.Column="1" Margin="3" Command="{Binding ShowDiagnosticsCommand}" ToolTip="{x:Static project:Resources.DiagnosticsButtonTooltip}">
+                <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="/Resources/LogIcon.png" />
+            </Button>
+            <Button Grid.Column="2" Margin="3" Command="{Binding ShowSettingsCommand}" ToolTip="{x:Static project:Resources.SettingsButtonTooltip}">
+                <Image HorizontalAlignment="Left" Height="48" Width="48" VerticalAlignment="Top" Source="/Resources/SettingsIcon.ico" />
+            </Button>
         </Grid>
 
-        <ScrollViewer x:Name="ScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
             <ItemsControl ItemsSource="{Binding ConversionJobs}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

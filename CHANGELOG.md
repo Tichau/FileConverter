@@ -4,6 +4,7 @@
 - Added: Possibility to create custom command line preset for types converted with FFMPEG (video and audio).
 - Added: Possibility to create preset folders in File Converter context menu.
 - Added: Ability to drag and drop to move conversion presets.
+- Added: Possibility to export and import conversion presets to share it with other users.
 - Added: Brazilian Portuguese translation (thanks to Marhc).
 - Added: Spanish translation (thanks to Chachak).
 - Added: Italian translation (thanks to Davide).
@@ -17,7 +18,8 @@
 - Added: Highlight in red elements that contains errors in the preset list.
 - Added: "Say thanks" button if you can't donate and want to keep my motivation up :).
 - Added: Messages logged from main thread are now displayed in the console standard output.
-- Change: Replace Pledgie donation button by Itch.io donation button since Pledgie does not exist anymore.
+- Change: Some UX improvements.
+- Change: Replace Pledgie donation button by Paypal donation button since Pledgie does not exist anymore.
 - Change: Correction of spell mistakes in the french translation (thanks to Sylvain Pollet-Villard).
 - Change: Change output files timestamp to match original file (github issue #33) (thanks to Diego López Bugna).
 - Fixed: Issue where File Converter version upgrade download was not working due to an issue with https encryption.
@@ -28,6 +30,7 @@
 - Tech: Update SharpShell to v2.7.1. 
 - Tech: Update project to Visual Studio 2017 and installer Wix 3.11.
 - Tech: Update project to .NET framework 4.6.1 (the last .NET version compatible with Windows Vista).
+- Tech: Check for .NET framework version in installer and prompt the user if the required version is not installed.
 - Tech: Remove sharpshell tools from installer dependencies. The shell extension is now registered by File Converter application (github issue #39 #46).
 
 ## Version 1.2.3

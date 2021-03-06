@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SerializationVersion="4">
-    <ExitApplicationWhenConversionsFinished>true</ExitApplicationWhenConversionsFinished>
-    <DurationBetweenEndOfConversionsAndApplicationExit>3</DurationBetweenEndOfConversionsAndApplicationExit>
     <MaximumNumberOfSimultaneousConversions>2</MaximumNumberOfSimultaneousConversions>
     <ConversionPreset Name="To Mkv" OutputType="Mkv" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
@@ -1126,7 +1124,7 @@
         <Settings Key="AudioBitrate" Value="155" />
         <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
         <Settings Key="FFMPEGCustomCommand" Value="-c:v libx264 -preset medium -crf 21 -c:a aac -qscale:a 1.3 -vf &quot;scale=1920:1080,format=yuv420p&quot;" />
-        <OutputFileNameTemplate>(p)(f) (720p)</OutputFileNameTemplate>
+        <OutputFileNameTemplate>(p)(f) (1080p)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 1080p/To Mp4" OutputType="Mp4" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
@@ -1151,7 +1149,7 @@
         <Settings Key="AudioBitrate" Value="128" />
         <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
         <Settings Key="FFMPEGCustomCommand" Value="-c:v libx264 -preset medium -crf 21 -c:a aac -qscale:a 1.3 -vf &quot;scale=1920:1080,format=yuv420p&quot;" />
-        <OutputFileNameTemplate>(p)(f) (720p)</OutputFileNameTemplate>
+        <OutputFileNameTemplate>(p)(f) (1080p)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 1080p/To Webm" OutputType="Webm" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
@@ -1175,7 +1173,7 @@
         <Settings Key="VideoRotation" Value="0" />
         <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
         <Settings Key="FFMPEGCustomCommand" Value="-c:v libvpx-vp9 -crf 23 -b:v 0 -c:a libvorbis -qscale:a 5 -vf &quot;scale=1920:1080,format=yuv420p&quot;" />
-        <OutputFileNameTemplate>(p)(f) (720p)</OutputFileNameTemplate>
+        <OutputFileNameTemplate>(p)(f) (1080p)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 1080p/To Ogv" OutputType="Ogv" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
@@ -1199,7 +1197,7 @@
         <Settings Key="AudioBitrate" Value="160" />
         <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
         <Settings Key="FFMPEGCustomCommand" Value="-codec:v libtheora -qscale:v 8 -codec:a libvorbis -qscale:a 5 -vf &quot;scale=1920:1080,format=yuv420p&quot;" />
-        <OutputFileNameTemplate>(p)(f) (720p)</OutputFileNameTemplate>
+        <OutputFileNameTemplate>(p)(f) (1080p)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 1080p/To Avi" OutputType="Avi" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
@@ -1223,7 +1221,7 @@
         <Settings Key="AudioBitrate" Value="190" />
         <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
         <Settings Key="FFMPEGCustomCommand" Value="-c:v mpeg4 -vtag xvid -qscale:v 4 -c:a libmp3lame -qscale:a 2  -id3v2_version 3 -write_id3v1 1 -vf &quot;scale=1920:1080,format=yuv420p&quot;" />
-        <OutputFileNameTemplate>(p)(f) (720p)</OutputFileNameTemplate>
+        <OutputFileNameTemplate>(p)(f) (1080p)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Rotate left/To Mkv" OutputType="Mkv" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>

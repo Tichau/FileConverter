@@ -2,11 +2,7 @@
 
 namespace FileConverter.Services
 {
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
     using System.Xml.Serialization;
-
-    using FileConverter.Annotations;
 
     using GalaSoft.MvvmLight;
 
@@ -52,10 +48,7 @@ namespace FileConverter.Services
         [XmlIgnore]
         public bool InstallerDownloadInProgress
         {
-            get
-            {
-                return this.installerDownloadInProgress;
-            }
+            get => this.installerDownloadInProgress;
 
             set
             {
@@ -69,10 +62,7 @@ namespace FileConverter.Services
         [XmlIgnore]
         public int InstallerDownloadProgress
         {
-            get
-            {
-                return this.installerDownloadProgress;
-            }
+            get => this.installerDownloadProgress;
 
             set
             {
@@ -84,22 +74,10 @@ namespace FileConverter.Services
         }
 
         [XmlIgnore]
-        public bool InstallerDownloadDone
-        {
-            get
-            {
-                return !this.InstallerDownloadInProgress && this.InstallerDownloadProgress == 100;
-            }
-        }
+        public bool InstallerDownloadDone => !this.InstallerDownloadInProgress && this.InstallerDownloadProgress == 100;
 
         [XmlIgnore]
-        public bool InstallerDownloadNotStarted
-        {
-            get
-            {
-                return !this.InstallerDownloadInProgress && this.InstallerDownloadProgress == 0;
-            }
-        }
+        public bool InstallerDownloadNotStarted => !this.InstallerDownloadInProgress && this.InstallerDownloadProgress == 0;
 
         [XmlIgnore]
         public bool NeedToUpgrade

@@ -127,7 +127,7 @@
     <value>Action when conversion succeed</value>
   </data>
   <data name="AddNewPreset" xml:space="preserve">
-    <value>Add new preset (duplicate selected preset)</value>
+    <value>New preset</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Application</value>
@@ -159,7 +159,7 @@
   <data name="Diagnostics" xml:space="preserve">
     <value>Logs</value>
   </data>
-  <data name="DiagnosticsButtonTitle" xml:space="preserve">
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
     <value>Logs</value>
   </data>
   <data name="DocumentationButtonDescription" xml:space="preserve">
@@ -289,11 +289,11 @@ use maj for uppercase version</value>
   <data name="Quality" xml:space="preserve">
     <value>Quality :</value>
   </data>
-  <data name="RecommendeBitrateRangeInBlue" xml:space="preserve">
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
     <value>Recommended bitrate range in blue</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">
-    <value>Remove selected preset</value>
+    <value>Delete</value>
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>Rotate :</value>
@@ -310,7 +310,7 @@ use maj for uppercase version</value>
   <data name="Settings" xml:space="preserve">
     <value>File Converter Settings</value>
   </data>
-  <data name="SettingsButtonTitle" xml:space="preserve">
+  <data name="SettingsButtonTooltip" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
@@ -549,5 +549,26 @@ use maj for uppercase version</value>
   </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>Error during conversion job initialization.</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>Duplicate preset</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Custom Arguments</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Custom FFMPEG command line arguments</value>
   </data>
 </root>

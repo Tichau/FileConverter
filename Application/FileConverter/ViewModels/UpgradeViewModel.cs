@@ -3,7 +3,6 @@
 namespace FileConverter.ViewModels
 {
     using System.ComponentModel;
-    using System.Threading.Tasks;
     using System.Windows.Input;
 
     using FileConverter.Services;

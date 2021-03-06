@@ -17,7 +17,7 @@ namespace FileConverter.ValueConverters
 
             double bitrate = (double)value;
             
-            return string.Format("{0} kbit/s", bitrate.ToString("0"));
+            return $"{bitrate:0} kbit/s";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

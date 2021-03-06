@@ -2,14 +2,15 @@
 
 namespace FileConverter.ViewModels
 {
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
     using System.Windows.Media;
+
+    using CommonServiceLocator;
+    using GalaSoft.MvvmLight;
 
     using FileConverter.Annotations;
     using FileConverter.ConversionJobs;
 
-    public class InputExtension : INotifyPropertyChanged
+    public class InputExtension : ObservableObject
     {
         private readonly Brush defaultBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
         private readonly Brush errorBrush = new SolidColorBrush(Color.FromRgb(255, 65, 0));
@@ -48,54 +49,69 @@ namespace FileConverter.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get => this.name;
 
             set
             {
                 this.name = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
         public Brush ForegroundBrush
         {
-            get
-            {
-                return this.foregroundBrush;
-            }
+            get => this.foregroundBrush;
 
             set
             {
                 this.foregroundBrush = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
         public string ToolTip
         {
-            get
-            {
-                return this.toolTip;
-            }
+            get => this.toolTip;
 
             set
             {
                 this.toolTip = value;
-                this.OnPropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public bool IsChecked
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get
+            {
+                SettingsViewModel settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+                PresetNode selectedPreset = settingsViewModel.SelectedPreset;
+                if (selectedPreset == null)
+                {
+                    return false;
+                }
+
+                return selectedPreset.Preset.InputTypes.Contains(this.name.ToLowerInvariant());
+            }
+
+            set
+            {
+                SettingsViewModel settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+                PresetNode selectedPreset = settingsViewModel.SelectedPreset;
+
+                if (value)
+                {
+                    selectedPreset?.Preset.AddInputType(this.name.ToLowerInvariant());
+                }
+                else
+                {
+                    selectedPreset?.Preset.RemoveInputType(this.name.ToLowerInvariant());
+                }
+
+                this.RaisePropertyChanged(nameof(this.IsChecked));
+            }
         }
     }
 }

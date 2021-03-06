@@ -16,7 +16,7 @@ namespace FileConverter.ConversionJobs
                 return string.Empty;
             }
 
-            return string.Format("{0} \"{1}\"", optionName, args);
+            return $"{optionName} \"{args}\"";
         }
 
         /// <summary>

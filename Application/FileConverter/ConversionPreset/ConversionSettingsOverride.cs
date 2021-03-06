@@ -16,13 +16,7 @@ namespace FileConverter
             this.value = value;
         }
 
-        public int Count
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public int Count => 1;
 
         public IEnumerable<string> Keys
         {

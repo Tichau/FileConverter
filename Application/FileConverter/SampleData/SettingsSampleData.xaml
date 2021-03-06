@@ -55,7 +55,7 @@
         </viewModels:PresetFolderNode>
     </viewModels:SettingsViewModel.PresetsRootFolder>
 
-    <viewModels:SettingsViewModel.SelectedPreset>
+    <viewModels:SettingsViewModel.SelectedItem>
         <viewModels:PresetNode>
             <viewModels:PresetNode.Preset>
                 <fileConverter:ConversionPreset ShortName="To Avi" 
@@ -64,6 +64,6 @@
                                                 InputPostConversionAction="None" />
             </viewModels:PresetNode.Preset>
         </viewModels:PresetNode>
-    </viewModels:SettingsViewModel.SelectedPreset>
+    </viewModels:SettingsViewModel.SelectedItem>
 </viewModels:SettingsViewModel>
 

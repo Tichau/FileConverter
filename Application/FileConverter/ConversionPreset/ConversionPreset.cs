@@ -4,16 +4,12 @@ namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Globalization;
-    using System.Linq;
     using System.Xml.Serialization;
 
     using FileConverter.Controls;
-    using FileConverter.Services;
 
     using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Ioc;
 
     [XmlRoot]
     [XmlType]
@@ -332,7 +328,7 @@ namespace FileConverter
         {
             if (string.IsNullOrEmpty(settingsKey))
             {
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(settingsKey));
             }
 
             if (value == null)
@@ -359,7 +355,7 @@ namespace FileConverter
         {
             if (string.IsNullOrEmpty(settingsKey))
             {
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(settingsKey));
             }
 
             if (this.settings.ContainsKey(settingsKey))
@@ -382,10 +378,10 @@ namespace FileConverter
             Type type = typeof(T);
             if (type.IsEnum)
             {
-                return (T)System.Enum.Parse(type, settingsValue);
+                return (T)Enum.Parse(type, settingsValue);
             }
 
-            return (T)System.Convert.ChangeType(settingsValue, type, NumberFormatInfo.InvariantInfo);
+            return (T)Convert.ChangeType(settingsValue, type, NumberFormatInfo.InvariantInfo);
         }
 
         public bool IsRelevantSetting(string settingsKey)

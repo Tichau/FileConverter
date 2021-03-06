@@ -21,10 +21,19 @@
     </Window.Title>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label  Grid.Row="0" Content="{x:Static project:Resources.Diagnostics}" VerticalAlignment="Top" Height="30" FontSize="16" FontWeight="Bold" />
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Height="48" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Resources/LogIcon.png" />
+            <Label Grid.Column="1" Content="{x:Static project:Resources.Diagnostics}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
+        </Grid>
 
         <TabControl Grid.Row="1" Margin="5" ItemsSource="{Binding Path=(diagnostics:Debug.Data), Mode=OneWay}">
             <TabControl.ItemTemplate>
@@ -33,9 +42,11 @@
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="{x:Type diagnostics:DiagnosticsData}">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                        <TextBlock Name="Diagnostics" TextWrapping="NoWrap" Text="{Binding Content}" FontFamily="Consolas" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False"/>
+                        <TextBox TextWrapping="NoWrap" FontFamily="Consolas" IsReadOnly="True"
+                                   ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="False"
+                                   Text="{Binding Content, Mode=OneWay}" />
                     </ScrollViewer>
                 </DataTemplate>
             </TabControl.ContentTemplate>
