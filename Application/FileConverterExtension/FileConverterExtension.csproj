@@ -57,10 +57,13 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileConverterExtension.cs" />
-    <Compile Include="PresetDefinition.cs" />
+    <Compile Include="ConversionPresetReference.cs" />
+    <Compile Include="PathHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -69,6 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="XmlHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
