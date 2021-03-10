@@ -194,9 +194,8 @@ namespace FileConverter.Services
                 catch (Exception)
                 {
                     MessageBoxResult messageBoxResult =
-                        MessageBox.Show(
-                            "Can't load file converter user settings. Do you want to fall back to default settings ?",
-                            "Error",
+                        MessageBox.Show(Resources.ErrorCantLoadSettings,
+                            Resources.Error,
                             MessageBoxButton.YesNo,
                             MessageBoxImage.Exclamation);
 
