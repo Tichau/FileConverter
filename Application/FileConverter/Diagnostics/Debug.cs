@@ -90,6 +90,14 @@ namespace FileConverter.Diagnostics
             diagnosticsData.Log(log);
         }
 
+        public static void Assert(bool condition)
+        {
+            if (!condition)
+            {
+                LogError("Assertion failed");
+            }
+        }
+
         public static void Assert(bool condition, string message)
         {
             if (!condition)
