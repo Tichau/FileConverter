@@ -138,19 +138,6 @@ namespace FileConverter
             return true;
         }
 
-        public static string GetUserDataFolderPath()
-        {
-            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
-            path = System.IO.Path.Combine(path, "FileConverter");
-
-            if (!System.IO.Directory.Exists(path))
-            {
-                System.IO.Directory.CreateDirectory(path);
-            }
-
-            return path;
-        }
-
         public static string GenerateFilePathFromTemplate(string inputFilePath, OutputType outputFileExtension, string outputFilePathTemplate, int numberIndex, int numberMax)
         {
             if (string.IsNullOrEmpty(inputFilePath))

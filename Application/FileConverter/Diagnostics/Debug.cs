@@ -21,7 +21,7 @@ namespace FileConverter.Diagnostics
         {
             Debug.mainThreadId = Thread.CurrentThread.ManagedThreadId;
 
-            string path = PathHelpers.GetUserDataFolderPath();
+            string path = FileConverterExtension.PathHelpers.GetUserDataFolderPath;
 
             // Delete old diagnostics folder (1 day).
             DateTime expirationDate = DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0));

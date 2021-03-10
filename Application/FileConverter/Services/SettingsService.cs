@@ -34,39 +34,12 @@ namespace FileConverter.Services
             get;
             private set;
         }
-
-        private string DefaultSettingsFilePath
-        {
-            get
-            {
-                string path = Assembly.GetEntryAssembly().Location;
-                path = Path.GetDirectoryName(path);
-
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
-                path = Path.Combine(path, "Settings.default.xml");
-                return path;
-            }
-        }
-
-        private string UserSettingsFilePath
-        {
-            get
-            {
-                string path = PathHelpers.GetUserDataFolderPath();
-                path = Path.Combine(path, "Settings.user.xml");
-                return path;
-            }
-        }
-
+        
         private string UserSettingsTemporaryFilePath
         {
             get
             {
-                string path = PathHelpers.GetUserDataFolderPath();
+                string path = FileConverterExtension.PathHelpers.GetUserDataFolderPath;
                 path = Path.Combine(path, "Settings.temp.xml");
                 return path;
             }
@@ -79,11 +52,11 @@ namespace FileConverter.Services
             Settings defaultSettings = null;
 
             // Load the default settings.
-            if (File.Exists(this.DefaultSettingsFilePath))
+            if (File.Exists(FileConverterExtension.PathHelpers.DefaultSettingsFilePath))
             {
                 try
                 {
-                    XmlHelpers.LoadFromFile<Settings>("Settings", this.DefaultSettingsFilePath, out defaultSettings);
+                    XmlHelpers.LoadFromFile<Settings>("Settings", FileConverterExtension.PathHelpers.DefaultSettingsFilePath, out defaultSettings);
                 }
                 catch (Exception exception)
                 {
@@ -93,21 +66,21 @@ namespace FileConverter.Services
             }
             else
             {
-                Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", this.DefaultSettingsFilePath);
+                Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", FileConverterExtension.PathHelpers.DefaultSettingsFilePath);
                 return false;
             }
 
             // Load user settings if exists.
             Settings userSettings = null;
-            if (File.Exists(this.UserSettingsFilePath))
+            if (File.Exists(FileConverterExtension.PathHelpers.UserSettingsFilePath))
             {
                 try
                 {
-                    XmlHelpers.LoadFromFile<Settings>("Settings", this.UserSettingsFilePath, out userSettings);
+                    XmlHelpers.LoadFromFile<Settings>("Settings", FileConverterExtension.PathHelpers.UserSettingsFilePath, out userSettings);
                 }
                 catch (Exception)
                 {
-                    File.Delete(this.UserSettingsFilePath);
+                    File.Delete(FileConverterExtension.PathHelpers.UserSettingsFilePath);
                 }
 
                 if (userSettings != null)
@@ -183,12 +156,12 @@ namespace FileConverter.Services
         private Settings Load()
         {
             Settings settings = null;
-            if (File.Exists(this.UserSettingsFilePath))
+            if (File.Exists(FileConverterExtension.PathHelpers.UserSettingsFilePath))
             {
                 Settings userSettings = null;
                 try
                 {
-                    XmlHelpers.LoadFromFile<Settings>("Settings", this.UserSettingsFilePath, out userSettings);
+                    XmlHelpers.LoadFromFile<Settings>("Settings", FileConverterExtension.PathHelpers.UserSettingsFilePath, out userSettings);
                     settings = userSettings;
                 }
                 catch (Exception)
@@ -201,7 +174,7 @@ namespace FileConverter.Services
 
                     if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        File.Delete(this.UserSettingsFilePath);
+                        File.Delete(FileConverterExtension.PathHelpers.UserSettingsFilePath);
                         return this.Load();
                     }
                     else if (messageBoxResult == MessageBoxResult.No)
@@ -222,12 +195,11 @@ namespace FileConverter.Services
             else
             {
                 // Load the default settings.
-                if (File.Exists(this.DefaultSettingsFilePath))
+                if (File.Exists(FileConverterExtension.PathHelpers.DefaultSettingsFilePath))
                 {
-                    Settings defaultSettings = null;
                     try
                     {
-                        XmlHelpers.LoadFromFile<Settings>("Settings", this.DefaultSettingsFilePath, out defaultSettings);
+                        XmlHelpers.LoadFromFile<Settings>("Settings", FileConverterExtension.PathHelpers.DefaultSettingsFilePath, out Settings defaultSettings);
                         settings = defaultSettings;
                     }
                     catch (Exception exception)
@@ -237,7 +209,7 @@ namespace FileConverter.Services
                 }
                 else
                 {
-                    Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", this.DefaultSettingsFilePath);
+                    Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", FileConverterExtension.PathHelpers.DefaultSettingsFilePath);
                 }
             }
 

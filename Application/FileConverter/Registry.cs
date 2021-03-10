@@ -80,6 +80,16 @@ namespace FileConverter
             }
         }
 
+        private static string GetUserRegistryFilePath
+        {
+            get
+            {
+                string path = FileConverterExtension.PathHelpers.GetUserDataFolderPath;
+                path = Path.Combine(path, "Registry.xml");
+                return path;
+            }
+        }
+
         public static T GetValue<T>(string key, T defaultValue = default(T))
         {
             Registry registry = Registry.Instance;
@@ -125,7 +135,7 @@ namespace FileConverter
         public void Dispose()
         {
             // SAVE
-            string registryFilePath = Registry.GetUserRegistryFilePath();
+            string registryFilePath = Registry.GetUserRegistryFilePath;
 
             try
             {
@@ -139,7 +149,7 @@ namespace FileConverter
         
         private static void Load()
         {
-            string registryFilePath = Registry.GetUserRegistryFilePath();
+            string registryFilePath = Registry.GetUserRegistryFilePath;
             if (!File.Exists(registryFilePath))
             {
                 Registry.instance = new Registry();
@@ -161,13 +171,6 @@ namespace FileConverter
                     Diagnostics.Debug.LogError("Inner exception: {0}", exception.Message);
                 }
             }
-        }
-
-        private static string GetUserRegistryFilePath()
-        {
-            string path = PathHelpers.GetUserDataFolderPath();
-            path = Path.Combine(path, "Registry.xml");
-            return path;
         }
 
         [XmlRoot("Entry")]
