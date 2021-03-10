@@ -21,6 +21,84 @@ namespace FileConverter
 
     public static class Helpers
     {
+        public static readonly string[] CompatibleInputExtensions = {
+            "3gp","aac","aiff","ape","arw","avi","bik","bmp","cda","cr2","dng","doc","docx","exr",
+            "flac","flv","gif","ico","jpg","jpeg","m4a","m4v","mkv","mov","mp3","mp4","mpeg","nef",
+            "odp","ods","odt","oga","ogg","ogv","pdf","png","ppt","pptx","psd","raf","svg",
+            "tga","tif","tiff","vob","wav","webm","webp","wma","wmv","xls","xlsx"
+        };
+
+        public static string GetExtensionCategory(string extension)
+        {
+            switch (extension)
+            {
+                case "aac":
+                case "aiff":
+                case "ape":
+                case "cda":
+                case "flac":
+                case "mp3":
+                case "m4a":
+                case "oga":
+                case "ogg":
+                case "wav":
+                case "wma":
+                    return InputCategoryNames.Audio;
+
+                case "3gp":
+                case "avi":
+                case "bik":
+                case "flv":
+                case "m4v":
+                case "mp4":
+                case "mpeg":
+                case "mov":
+                case "mkv":
+                case "ogv":
+                case "vob":
+                case "webm":
+                case "wmv":
+                    return InputCategoryNames.Video;
+
+                case "arw":
+                case "bmp":
+                case "cr2":
+                case "dng":
+                case "exr":
+                case "ico":
+                case "jpg":
+                case "jpeg":
+                case "nef":
+                case "png":
+                case "psd":
+                case "raf":
+                case "tga":
+                case "tif":
+                case "tiff":
+                case "svg":
+                case "xcf":
+                case "webp":
+                    return InputCategoryNames.Image;
+
+                case "gif":
+                    return InputCategoryNames.AnimatedImage;
+
+                case "pdf":
+                case "doc":
+                case "docx":
+                case "ppt":
+                case "pptx":
+                case "odp":
+                case "ods":
+                case "odt":
+                case "xls":
+                case "xlsx":
+                    return InputCategoryNames.Document;
+            }
+
+            return InputCategoryNames.Misc;
+        }
+
         public static bool RegisterShellExtension(string shellExtensionPath)
         {
             if (!Application.IsInAdmininstratorPrivileges)
@@ -120,77 +198,6 @@ namespace FileConverter
                     yield return cultureInfo;
                 }
             }
-        }
-
-        public static string GetExtensionCategory(string extension)
-        {
-            switch (extension)
-            {
-                case "aac":
-                case "aiff":
-                case "ape":
-                case "cda":
-                case "flac":
-                case "mp3":
-                case "m4a":
-                case "oga":
-                case "ogg":
-                case "wav":
-                case "wma":
-                    return InputCategoryNames.Audio;
-
-                case "3gp":
-                case "avi":
-                case "bik":
-                case "flv":
-                case "m4v":
-                case "mp4":
-                case "mpeg":
-                case "mov":
-                case "mkv":
-                case "ogv":
-                case "vob":
-                case "webm":
-                case "wmv":
-                    return InputCategoryNames.Video;
-
-                case "arw":
-                case "bmp":
-                case "cr2":
-                case "dng":
-                case "exr":
-                case "ico":
-                case "jpg":
-                case "jpeg":
-                case "nef":
-                case "png":
-                case "psd":
-                case "raf":
-                case "tga":
-                case "tif":
-                case "tiff":
-                case "svg":
-                case "xcf":
-                case "webp":
-                    return InputCategoryNames.Image;
-
-                case "gif":
-                    return InputCategoryNames.AnimatedImage;
-
-                case "pdf":
-                case "doc":
-                case "docx":
-                case "ppt":
-                case "pptx":
-                case "odp":
-                case "ods":
-                case "odt":
-                case "xls":
-                case "xlsx":
-                    return InputCategoryNames.Document;
-            }
-
-            return InputCategoryNames.Misc;
         }
 
         public static bool IsOutputTypeCompatibleWithCategory(OutputType outputType, string category)

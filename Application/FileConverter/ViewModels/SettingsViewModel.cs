@@ -395,26 +395,10 @@ namespace FileConverter.ViewModels
 
         private void InitializeCompatibleInputExtensions()
         {
-            RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
-            if (registryKey == null)
-            {
-                MessageBox.Show("Can't retrieve the list of compatible input extensions. (code 0x09)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            string registryValue = registryKey.GetValue("CompatibleInputExtensions") as string;
-            if (registryValue == null)
-            {
-                MessageBox.Show("Can't retrieve the list of compatible input extensions. (code 0x0A)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            string[] compatibleInputExtensions = registryValue.Split(';');
-
             List<InputExtensionCategory> categories = new List<InputExtensionCategory>();
-            for (int index = 0; index < compatibleInputExtensions.Length; index++)
+            for (int index = 0; index < Helpers.CompatibleInputExtensions.Length; index++)
             {
-                string compatibleInputExtension = compatibleInputExtensions[index];
+                string compatibleInputExtension = Helpers.CompatibleInputExtensions[index];
                 string extensionCategory = Helpers.GetExtensionCategory(compatibleInputExtension);
                 InputExtensionCategory category = categories.Find(match => match.Name == extensionCategory);
                 if (category == null)
