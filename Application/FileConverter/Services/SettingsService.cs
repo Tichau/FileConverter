@@ -5,6 +5,7 @@ using FileConverter.Properties;
 namespace FileConverter.Services
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Windows;
 
@@ -125,7 +126,12 @@ namespace FileConverter.Services
                 Settings userSettings = null;
                 try
                 {
+                    var stopwatch = new Stopwatch();
+                    stopwatch.Start();
                     XmlHelpers.LoadFromFile<Settings>("Settings", FileConverterExtension.PathHelpers.UserSettingsFilePath, out userSettings);
+                    stopwatch.Stop();
+                    Debug.Log($"Settings load time: {stopwatch.Elapsed.TotalMilliseconds}ms");
+
                     settings = userSettings;
                 }
                 catch (Exception)
