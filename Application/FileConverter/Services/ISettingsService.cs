@@ -11,8 +11,6 @@ namespace FileConverter.Services
 
         bool PostInstallationInitialization();
 
-        void ApplyTemporarySettings();
-
         void SaveSettings();
 
         void RevertSettings();

@@ -2,7 +2,6 @@
 
 namespace FileConverterExtension
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
@@ -11,8 +10,6 @@ namespace FileConverterExtension
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Windows.Forms;
-
-    using Microsoft.Win32;
 
     using SharpShell.Attributes;
     using SharpShell.SharpContextMenu;
@@ -24,46 +21,30 @@ namespace FileConverterExtension
     [COMServerAssociation(AssociationType.AllFiles)]
     public class FileConverterExtension : SharpContextMenu
     {
-        private string fileConverterPath;
-        private RegistryKey fileConverterRegistryKey;
-        private List<PresetDefinition> presetList = new List<PresetDefinition>();
-        private List<string> compatibleInputExtensions = new List<string>();
+        private PresetReference[] presetReferences = null;
+        private List<MenuEntry> menuEntries = new List<MenuEntry>();
 
-        private RegistryKey FileConverterRegistryKey
+        private HashSet<string> extensionCache = new HashSet<string>();
+
+        private class MenuEntry
         {
-            get
-            {
-                if (this.fileConverterRegistryKey == null)
-                {
-                    this.fileConverterRegistryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
-                    if (this.fileConverterRegistryKey == null)
-                    {
-                        throw new Exception("Can't retrieve file converter registry entry.");
-                    }
-                }
+            public PresetReference PresetReference;
+            public bool Enabled;
+            public int ExtensionRefCount;
 
-                return this.fileConverterRegistryKey;
+            public MenuEntry(PresetReference presetReference)
+            {
+                this.PresetReference = presetReference;
+                this.Enabled = false;
+                this.ExtensionRefCount = 0;
             }
         }
-
-        private string FileConverterPath
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(this.fileConverterPath))
-                {
-                    this.fileConverterPath = this.FileConverterRegistryKey.GetValue("Path") as string;
-                }
-
-                return this.fileConverterPath;
-            }
-        }
-
+        
         private bool DisplayPresetIcons
         {
             get
             {
-                string displayPresetIcons = this.FileConverterRegistryKey.GetValue("DisplayPresetIcons") as string;
+                string displayPresetIcons = PathHelpers.FileConverterRegistryKey.GetValue("DisplayPresetIcons") as string;
                 if (displayPresetIcons == null)
                 {
                     return false;
@@ -78,41 +59,29 @@ namespace FileConverterExtension
             }
         }
 
-        private IEnumerable<string> CompatibleInputExtensions
+        private PresetReference[] PresetReferences
         {
             get
             {
-                if (this.compatibleInputExtensions != null && this.compatibleInputExtensions.Count > 0)
-                {
-                    return this.compatibleInputExtensions;
-                }
+                this.LoadExtensionSettingsIfNecessary();
 
-                this.compatibleInputExtensions.Clear();
-                string registryValue = this.FileConverterRegistryKey.GetValue("CompatibleInputExtensions") as string;
-                string[] extensions = registryValue.Split(';');
-                for (int index = 0; index < extensions.Length; index++)
-                {
-                    this.compatibleInputExtensions.Add(extensions[index]);
-                }
-
-                return this.compatibleInputExtensions;
+                return this.presetReferences;
             }
         }
 
         protected override bool CanShowMenu()
         {
-            foreach (string filePath in this.SelectedItemPaths)
-            {
-                string extension = Path.GetExtension(filePath);
-                if (string.IsNullOrEmpty(extension))
-                {
-                    continue;
-                }
+            this.RefreshExtensionCacheFromSelectedItems();
 
-                extension = extension.Substring(1).ToLowerInvariant();
-                if (this.CompatibleInputExtensions.Contains(extension))
+            PresetReference[] presets = this.PresetReferences;
+            foreach (string extension in this.extensionCache)
+            {
+                foreach (PresetReference presetReference in presets)
                 {
-                    return true;
+                    if (presetReference.InputTypes.Contains(extension))
+                    {
+                        return true;
+                    }
                 }
             }
 
@@ -133,12 +102,12 @@ namespace FileConverterExtension
                 Image = new Icon(Properties.Resources.ApplicationIcon, SystemInformation.SmallIconSize).ToBitmap(),
             };
 
-            foreach (PresetDefinition preset in this.presetList)
+            foreach (MenuEntry menuEntry in this.menuEntries)
             {
                 ToolStripMenuItem root = fileConverterItem;
-                if (preset.Folders != null)
+                if (menuEntry.PresetReference.Folders != null)
                 {
-                    foreach (string folder in preset.Folders)
+                    foreach (string folder in menuEntry.PresetReference.Folders)
                     {
                         ToolStripItem[] folderItems = root.DropDownItems.Find(folder, false);
                         if (folderItems.Length == 0)
@@ -173,8 +142,8 @@ namespace FileConverterExtension
 
                 ToolStripMenuItem subItem = new ToolStripMenuItem
                 {
-                    Text = preset.Name,
-                    Enabled = preset.Enabled
+                    Text = menuEntry.PresetReference.Name,
+                    Enabled = menuEntry.Enabled
                 };
 
                 if (displayPresetIcons)
@@ -183,10 +152,10 @@ namespace FileConverterExtension
                 }
 
                 root.DropDownItems.Add(subItem);
-                subItem.Click += (sender, args) => this.ConvertFiles(preset.FullName);
+                subItem.Click += (sender, args) => this.ConvertFiles(menuEntry.PresetReference.FullName);
             }
 
-            if (this.presetList.Count > 0)
+            if (this.menuEntries.Count > 0)
             {
                 fileConverterItem.DropDownItems.Add(new ToolStripSeparator());
             }
@@ -207,10 +176,10 @@ namespace FileConverterExtension
             return menu;
         }
 
-        private void RefreshPresetList()
+        private void RefreshExtensionCacheFromSelectedItems()
         {
             // Retrieve selected files extensions.
-            List<string> extensions = new List<string>();
+            this.extensionCache.Clear();
             foreach (string filePath in this.SelectedItemPaths)
             {
                 string extension = Path.GetExtension(filePath);
@@ -220,79 +189,90 @@ namespace FileConverterExtension
                 }
 
                 extension = extension.Substring(1).ToLowerInvariant();
-                if (extensions.Contains(extension))
-                {
-                    continue;
-                }
 
-                extensions.Add(extension);
+                this.extensionCache.Add(extension);
             }
+        }
 
-            // Compute preset list.
-            this.presetList.Clear();
-            RegistryKey fileConverterKey = this.FileConverterRegistryKey;
-            for (int extensionIndex = 0; extensionIndex < extensions.Count; extensionIndex++)
+        private void RefreshPresetList()
+        {
+            this.RefreshExtensionCacheFromSelectedItems();
+
+            // Activate compatible menu entries.
+            PresetReference[] presets = this.presetReferences;
+            this.menuEntries.Clear();
+            foreach (string extension in this.extensionCache)
             {
-                string extension = extensions[extensionIndex];
-                RegistryKey extensionKey = fileConverterKey.OpenSubKey(extension);
-                if (extensionKey == null)
+                foreach (PresetReference presetReference in presets)
                 {
-                    continue;
-                }
-
-                string presetsString = extensionKey.GetValue("Presets") as string;
-                if (presetsString == null)
-                {
-                    continue;
-                }
-
-                string[] presets = presetsString.Split(';');
-                
-                for (int presetIndex = 0; presetIndex < presets.Length; presetIndex++)
-                {
-                    string presetName = presets[presetIndex];
-                    PresetDefinition presetDefinition = this.presetList.FirstOrDefault(match => match.FullName == presetName);
-                    if (presetDefinition == null)
+                    if (!presetReference.InputTypes.Contains(extension))
                     {
-                        string[] folders = presetName.Split('/');
-                        if (folders.Length == 0)
-                        {
-                            continue;
-                        }
-
-                        string name = folders[folders.Length - 1];
-                        Array.Resize(ref folders, folders.Length - 1);
-
-                        presetDefinition = new PresetDefinition(presetName, name, folders);
-                        this.presetList.Add(presetDefinition);
+                        continue;
                     }
 
-                    presetDefinition.ExtensionRefCount++;
+                    MenuEntry menuEntry = this.menuEntries.Find(entry => entry.PresetReference.FullName == presetReference.FullName);
+                    if (menuEntry == null)
+                    {
+                        menuEntry = new MenuEntry(presetReference);
+                        this.menuEntries.Add(menuEntry);
+                    }
+
+                    menuEntry.ExtensionRefCount++;
                 }
             }
 
-            // Update enable states.
-            for (int index = 0; index < this.presetList.Count; index++)
+            // Enable presets compatible with all input files.
+            foreach (MenuEntry menuEntry in this.menuEntries)
             {
-                this.presetList[index].Enabled = this.presetList[index].ExtensionRefCount == extensions.Count;
+                menuEntry.Enabled = menuEntry.ExtensionRefCount == this.extensionCache.Count;
+            }
+        }
+
+        private void LoadExtensionSettingsIfNecessary()
+        {
+            if (this.presetReferences != null)
+            {
+                return;
+            }
+
+            if (File.Exists(PathHelpers.UserSettingsFilePath))
+            {
+                try
+                {
+                    XmlHelpers.LoadFromFile("Settings", PathHelpers.UserSettingsFilePath, out this.presetReferences);
+                    return;
+                }
+                catch
+                {
+                    // Can't handle this error in the explorer extension.
+                }
+            }
+
+            try
+            {
+                XmlHelpers.LoadFromFile("Settings", PathHelpers.DefaultSettingsFilePath, out this.presetReferences);
+            }
+            catch
+            {
+                // Can't handle this error in the explorer extension.
             }
         }
 
         private void OpenSettings()
         {
-            if (string.IsNullOrEmpty(this.FileConverterPath))
+            if (string.IsNullOrEmpty(PathHelpers.FileConverterPath))
             {
                 MessageBox.Show("Can't retrieve the file converter executable path. You should try to reinstall the application.");
                 return;
             }
 
-            if (!File.Exists(this.FileConverterPath))
+            if (!File.Exists(PathHelpers.FileConverterPath))
             {
-                MessageBox.Show($"Can't find the file converter executable ({this.FileConverterPath}). You should try to reinstall the application.");
+                MessageBox.Show($"Can't find the file converter executable ({PathHelpers.FileConverterPath}). You should try to reinstall the application.");
                 return;
             }
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(this.FileConverterPath)
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(PathHelpers.FileConverterPath)
             {
                 CreateNoWindow = false, 
                 UseShellExecute = false, 
@@ -309,19 +289,19 @@ namespace FileConverterExtension
 
         private void ConvertFiles(string presetName)
         {
-            if (string.IsNullOrEmpty(this.FileConverterPath))
+            if (string.IsNullOrEmpty(PathHelpers.FileConverterPath))
             {
                 MessageBox.Show("Can't retrieve the file converter executable path. You should try to reinstall the application.");
                 return;
             }
 
-            if (!File.Exists(this.FileConverterPath))
+            if (!File.Exists(PathHelpers.FileConverterPath))
             {
-                MessageBox.Show($"Can't find the file converter executable ({this.FileConverterPath}). You should try to reinstall the application.");
+                MessageBox.Show($"Can't find the file converter executable ({PathHelpers.FileConverterPath}). You should try to reinstall the application.");
                 return;
             }
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(this.FileConverterPath)
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(PathHelpers.FileConverterPath)
             {
                 CreateNoWindow = false, 
                 UseShellExecute = false, 

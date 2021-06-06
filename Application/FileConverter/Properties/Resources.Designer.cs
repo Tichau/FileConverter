@@ -19,7 +19,7 @@ namespace FileConverter.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -448,6 +448,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Canceled..
         /// </summary>
         public static string ErrorCanceled {
@@ -471,6 +480,15 @@ namespace FileConverter.Properties {
         public static string ErrorCantFindOutputFiles {
             get {
                 return ResourceManager.GetString("ErrorCantFindOutputFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t load file converter user settings. Do you want to fall back to default settings ?.
+        /// </summary>
+        public static string ErrorCantLoadSettings {
+            get {
+                return ResourceManager.GetString("ErrorCantLoadSettings", resourceCulture);
             }
         }
         

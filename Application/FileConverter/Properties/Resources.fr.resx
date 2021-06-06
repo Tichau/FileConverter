@@ -580,4 +580,10 @@ utilisez maj pour une version en majuscules</value>
   <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
     <value>Arguments de ligne de commande FFMPEG personalisés</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>Impossible de charger la configuration de File Converter. Voulez vous appliquer la configuration par défaut ?</value>
+  </data>
 </root>

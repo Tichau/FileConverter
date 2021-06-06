@@ -12,38 +12,7 @@ namespace FileConverter
     {
         public static void LoadFromFile<T>(string root, string path, out T deserializedObject)
         {
-            if (string.IsNullOrEmpty(path))
-            {
-                throw new ArgumentNullException(nameof(path));
-            }
-
-            XmlRootAttribute xmlRoot = new XmlRootAttribute
-            {
-                ElementName = root
-            };
-
-            XmlSerializer serializer = new XmlSerializer(typeof(T), xmlRoot);
-
-            try
-            {
-                using (StreamReader reader = new StreamReader(path))
-                {
-                    XmlReaderSettings xmlReaderSettings = new XmlReaderSettings
-                    {
-                        IgnoreWhitespace = true,
-                        IgnoreComments = true
-                    };
-
-                    using (XmlReader xmlReader = XmlReader.Create(reader, xmlReaderSettings))
-                    {
-                        deserializedObject = (T)serializer.Deserialize(xmlReader);
-                    }
-                }
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            FileConverterExtension.XmlHelpers.LoadFromFile(root, path, out deserializedObject);
 
             if (deserializedObject is IXmlSerializable xmlSerializableObject)
             {
@@ -53,38 +22,9 @@ namespace FileConverter
         
         public static void SaveToFile<T>(string root, string path, T objectToSerialize)
         {
-            if (string.IsNullOrEmpty(path))
-            {
-                throw new ArgumentNullException(nameof(path));
-            }
-
-            if (objectToSerialize == null)
-            {
-                throw new ArgumentNullException(nameof(objectToSerialize));
-            }
-            
-            XmlRootAttribute xmlRoot = new XmlRootAttribute
-            {
-                ElementName = root
-            };
-
-            XmlSerializer serializer = new XmlSerializer(typeof(T), xmlRoot);
-
             try
             {
-                using (StreamWriter writer = new StreamWriter(path))
-                {
-                    XmlWriterSettings xmlWriterSettings = new XmlWriterSettings
-                    {
-                        Indent = true,
-                        IndentChars = "    "
-                    };
-
-                    using (XmlWriter xmlWriter = XmlWriter.Create(writer, xmlWriterSettings))
-                    {
-                        serializer.Serialize(xmlWriter, objectToSerialize);
-                    }
-                }
+                FileConverterExtension.XmlHelpers.SaveToFile(root, path, objectToSerialize);
             }
             catch (System.Exception exception)
             {

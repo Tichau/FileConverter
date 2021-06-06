@@ -571,4 +571,10 @@ use maj for uppercase version</value>
   <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
     <value>Custom FFMPEG command line arguments</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>Can't load file converter user settings. Do you want to fall back to default settings ?</value>
+  </data>
 </root>

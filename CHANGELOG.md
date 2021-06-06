@@ -18,6 +18,7 @@
 - Added: Highlight in red elements that contains errors in the preset list.
 - Added: "Say thanks" button if you can't donate and want to keep my motivation up :).
 - Added: Messages logged from main thread are now displayed in the console standard output.
+- Change: Rework extension so it uses the settings file on disk instead of registry settings (github issue #22 #32).
 - Change: Some UX improvements.
 - Change: Replace Pledgie donation button by Paypal donation button since Pledgie does not exist anymore.
 - Change: Correction of spell mistakes in the french translation (thanks to Sylvain Pollet-Villard).

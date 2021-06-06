@@ -315,11 +315,6 @@ namespace FileConverter
                             this.showSettings = true;
                             break;
 
-                        case "apply-settings":
-                            settingsService.ApplyTemporarySettings();
-                            quitAfterStartup = true;
-                            break;
-
                         case "conversion-preset":
                             if (index >= args.Length - 1)
                             {
