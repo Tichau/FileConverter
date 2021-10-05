@@ -128,7 +128,7 @@
     <value>Action après conversion réussie</value>
   </data>
   <data name="AddNewPreset" xml:space="preserve">
-    <value>Ajoute un nouveau preset (duplique le preset selectionné)</value>
+    <value>Ajoute un nouveau profil (duplique le profil selectionné)</value>
   </data>
   <data name="Application" xml:space="preserve">
     <value>Application</value>
@@ -141,7 +141,7 @@
     <comment>Automatically check for updates when File Converter starts</comment>
   </data>
   <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
-    <value>Terminer File Converter lorsque toutes les conversions ont réussi</value>
+    <value>Fermer File Converter après que toutes les conversions ont réussis</value>
   </data>
   <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
     <value>Ajuster la taille à la puissance de 2 la plus proche</value>
@@ -217,7 +217,7 @@
     <value>Formats compatibles</value>
   </data>
   <data name="InputPostConversionActionDeleteName" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Supprimer l'original</value>
   </data>
   <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
     <value>Déplacer dans un dossier d'archive</value>
@@ -286,7 +286,7 @@ Chemins spéciaux:
 (p:v): chemin vers mes vidéos
 (p:p): chemin vers mes images
 
-utilisez maj pour une version en majuscules</value>
+utilisez MAJ pour une version en majuscules</value>
   </data>
   <data name="OutputFormat" xml:space="preserve">
     <value>Format de destination</value>
@@ -304,7 +304,7 @@ utilisez maj pour une version en majuscules</value>
     <value>Taux recommandés en bleu</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">
-    <value>Supprime le preset selectionné</value>
+    <value>Supprime le profil selectionné</value>
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>Rotation :</value>
@@ -313,7 +313,7 @@ utilisez maj pour une version en majuscules</value>
     <value>Enregistrer</value>
   </data>
   <data name="Scale" xml:space="preserve">
-    <value>Echelle :</value>
+    <value>Échelle :</value>
   </data>
   <data name="SeeChangeLog" xml:space="preserve">
     <value>Voir les changements ...</value>
@@ -457,7 +457,7 @@ utilisez maj pour une version en majuscules</value>
     <value>L'exécutable ffmpeg n'a pas été trouvé. Vous pouvez essayer de réinstaller l'application pour corriger le problème.</value>
   </data>
   <data name="ErrorCDAExtractionFailed" xml:space="preserve">
-    <value>Echec de l'extraction de la piste audio.</value>
+    <value>Échec de l'extraction de la piste audio.</value>
   </data>
   <data name="ErrorCDDriveNotReady" xml:space="preserve">
     <value>Le lecteur CD n'est pas prêt.</value>
