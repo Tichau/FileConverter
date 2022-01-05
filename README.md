@@ -60,7 +60,7 @@ Thanks to ffmpeg devs for this awesome open source file conversion tool. [Web si
 
 **ImageMagick** as image edition and conversion software.
 Thanks to image magick devs for this awesome open source image edition software suite.  [Web site link](http://imagemagick.net)
-And thanks to dlemstra for the C# wrapper of this software. [CodePlex link](https://magick.codeplex.com)
+And thanks to dlemstra for the C# wrapper of this software. [Github link](https://github.com/ImageMagick/ImageMagick)
 
 **Ghostscript** as pdf edition software.
 Thanks to ghostscript devs. [Download link](https://www.ghostscript.com/download/gsdnld.html)
