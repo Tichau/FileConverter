@@ -38,7 +38,7 @@ namespace FileConverter
         
         public Settings Merge(Settings settings)
         {
-            if (settings == null || settings.conversionPresets == null)
+            if (settings?.conversionPresets == null)
             {
                 return this;
             }
