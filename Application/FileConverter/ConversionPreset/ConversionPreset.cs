@@ -1,4 +1,4 @@
-﻿// <copyright file="ConversionPreset.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="ConversionPreset.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter
 {
@@ -94,7 +94,7 @@ namespace FileConverter
                     return;
                 }
 
-                this.ShortName = folders[folders.Length - 1];
+                this.ShortName = folders[^1];
                 Array.Resize(ref folders, folders.Length - 1);
 
                 this.ParentFoldersNames = folders;

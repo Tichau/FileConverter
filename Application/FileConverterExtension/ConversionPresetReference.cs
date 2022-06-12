@@ -27,7 +27,7 @@ namespace FileConverterExtension
                     string[] folders = this.fullName.Split('/');
                     if (folders.Length > 0)
                     {
-                        this.Name = folders[folders.Length - 1];
+                        this.Name = folders[^1];
                         System.Array.Resize(ref folders, folders.Length - 1);
                         this.Folders = folders;
                     }
