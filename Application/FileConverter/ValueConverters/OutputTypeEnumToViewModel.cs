@@ -1,4 +1,4 @@
-﻿// <copyright file="OutputTypeEnumToViewModel.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="OutputTypeEnumToViewModel.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters
 {
@@ -30,8 +30,7 @@ namespace FileConverter.ValueConverters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            OutputTypeViewModel outputTypeViewModel = value as OutputTypeViewModel;
-            if (outputTypeViewModel == null)
+            if (value is not OutputTypeViewModel outputTypeViewModel)
             {
                 return OutputType.None;
             }

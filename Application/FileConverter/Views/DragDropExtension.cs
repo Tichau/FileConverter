@@ -1,4 +1,4 @@
-﻿// <copyright file="DragDropExtension.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="DragDropExtension.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.Views
 {
@@ -61,9 +61,7 @@ namespace FileConverter.Views
         {
             const double Tolerance = 60;
             const double Offset = 20;
-
-            FrameworkElement container = sender as FrameworkElement;
-            if (container == null)
+            if (sender is not FrameworkElement container)
             {
                 return;
             }
