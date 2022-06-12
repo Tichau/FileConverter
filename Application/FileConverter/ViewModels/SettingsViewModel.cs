@@ -579,7 +579,7 @@ namespace FileConverter.ViewModels
             }
             else
             {
-                newPreset = new ConversionPreset(presetName, OutputType.Mkv, new string[0]);
+                newPreset = new ConversionPreset(presetName, OutputType.Mkv, Array.Empty<string>());
             }
 
             PresetNode node = new PresetNode(newPreset, parent);
