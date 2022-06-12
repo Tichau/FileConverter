@@ -1,4 +1,4 @@
-﻿// <copyright file="ConversionJob.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="ConversionJob.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ConversionJobs
 {
@@ -81,7 +81,7 @@ namespace FileConverter.ConversionJobs
 
                 if (this.CurrentOutputFilePathIndex >= this.OutputFilePaths.Length)
                 {
-                    return this.OutputFilePaths[this.OutputFilePaths.Length - 1];
+                    return this.OutputFilePaths[^1];
                 }
 
                 return this.OutputFilePaths[this.CurrentOutputFilePathIndex];
