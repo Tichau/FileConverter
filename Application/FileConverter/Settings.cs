@@ -1,4 +1,4 @@
-﻿// <copyright file="Settings.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="Settings.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter
 {
@@ -219,7 +219,7 @@ namespace FileConverter
             // Initialize application if it was not deserialized from the settings.
             if (this.ApplicationLanguage == null)
             {
-                CultureInfo bestCandidate = null;
+                CultureInfo? bestCandidate = null;
                 CultureInfo currentUICulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
                 foreach (CultureInfo culture in Helpers.GetSupportedCultures())
                 {

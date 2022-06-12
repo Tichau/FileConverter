@@ -572,7 +572,7 @@ namespace FileConverter.ViewModels
             }
 
             // Create preset by copying the selected one.
-            ConversionPreset newPreset = null;
+            ConversionPreset? newPreset = null;
             if (this.SelectedPreset != null && duplicate)
             {
                 newPreset = new ConversionPreset(presetName, this.SelectedPreset.Preset);
