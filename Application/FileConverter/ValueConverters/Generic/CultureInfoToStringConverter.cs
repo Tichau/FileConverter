@@ -1,4 +1,4 @@
-﻿// <copyright file="CultureInfoToStringConverter.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="CultureInfoToStringConverter.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters.Generic
 {
@@ -10,8 +10,7 @@ namespace FileConverter.ValueConverters.Generic
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            CultureInfo cultureInfo = value as CultureInfo;
-            if (cultureInfo == null)
+            if (value is not CultureInfo cultureInfo)
             {
                 throw new System.ArgumentException("The object must be a culture info instance.");
             }

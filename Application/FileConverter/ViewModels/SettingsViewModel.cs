@@ -422,8 +422,7 @@ namespace FileConverter.ViewModels
                 PresetFolderNode parent = this.presetsRootFolder;
                 foreach (string folderName in preset.ParentFoldersNames)
                 {
-                    PresetFolderNode subFolder = parent.Children.FirstOrDefault(match => match is PresetFolderNode && ((PresetFolderNode)match).Name == folderName) as PresetFolderNode;
-                    if (subFolder == null)
+                    if (parent.Children.FirstOrDefault(match => match is PresetFolderNode && ((PresetFolderNode)match).Name == folderName) is not PresetFolderNode subFolder)
                     {
                         subFolder = this.CreateFolderNode(folderName, parent);
                     }
@@ -628,8 +627,7 @@ namespace FileConverter.ViewModels
                     PresetFolderNode parent = this.PresetsRootFolder;
                     foreach (string folderName in conversionPreset.ParentFoldersNames)
                     {
-                        PresetFolderNode folderNode = parent.Children.FirstOrDefault(match => match is PresetFolderNode && match.Name == folderName) as PresetFolderNode;
-                        if (folderNode == null)
+                        if (parent.Children.FirstOrDefault(match => match is PresetFolderNode && match.Name == folderName) is not PresetFolderNode folderNode)
                         {
                             folderNode = this.CreateFolderNode(folderName, parent);
 

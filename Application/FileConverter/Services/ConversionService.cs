@@ -139,8 +139,7 @@ namespace FileConverter.Services
 
         private void ExecuteConversionJob(object parameter)
         {
-            ConversionJob conversionJob = parameter as ConversionJob;
-            if (conversionJob == null)
+            if (parameter is not ConversionJob conversionJob)
             {
                 throw new System.ArgumentException("The parameter must be a conversion job.", nameof(parameter));
             }

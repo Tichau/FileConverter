@@ -1,4 +1,4 @@
-﻿// <copyright file="SettingsWindow.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="SettingsWindow.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.Views
 {
@@ -295,9 +295,7 @@ namespace FileConverter.Views
 
         private TreeViewItem GetNearestContainer(UIElement element)
         {
-            // Walk up the element tree to the nearest tree view item.
-            TreeViewItem container = element as TreeViewItem;
-            while (container == null && element != null)
+            while (element is not TreeViewItem container&& element != null)
             {
                 element = VisualTreeHelper.GetParent(element) as UIElement;
                 container = element as TreeViewItem;
