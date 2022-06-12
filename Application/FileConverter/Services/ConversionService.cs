@@ -1,4 +1,4 @@
-﻿// <copyright file="ConversionService.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="ConversionService.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.Services
 {
@@ -95,7 +95,7 @@ namespace FileConverter.Services
                     if (conversionJob.State == ConversionState.Ready && conversionJob.CanStartConversion(conversionFlags))
                     {
                         // Find a thread to execute the job.
-                        Thread jobThread = null;
+                        Thread? jobThread = null;
                         for (int threadIndex = 0; threadIndex < jobThreads.Length; threadIndex++)
                         {
                             Thread thread = jobThreads[threadIndex];

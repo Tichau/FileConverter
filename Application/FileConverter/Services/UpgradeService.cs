@@ -1,4 +1,4 @@
-﻿// <copyright file="UpgradeService.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="UpgradeService.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.Services
 {
@@ -50,7 +50,7 @@ namespace FileConverter.Services
         
         public async Task<UpgradeVersionDescription> CheckForUpgrade()
         {
-            Task<UpgradeVersionDescription> task = null;
+            Task<UpgradeVersionDescription>? task = null;
             try
             {
 #if DEBUG
@@ -163,7 +163,7 @@ namespace FileConverter.Services
             Uri uri = new Uri(UpgradeService.BaseURI + "version.xml");
 #endif
 
-            UpgradeVersionDescription description = null;
+            UpgradeVersionDescription? description = null;
             try
             {
                 Stream stream = await this.webClient.OpenReadTaskAsync(uri);

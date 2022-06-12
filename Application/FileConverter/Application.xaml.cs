@@ -1,4 +1,4 @@
-﻿// <copyright file="Application.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="Application.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 /*  File Converter - This program allow you to convert file format to another.
     Copyright (C) 2017 Adrien Allard
@@ -234,7 +234,7 @@ namespace FileConverter
             bool quitAfterStartup = false;
             int quitExitCode = 0;
             List<string> filePaths = new List<string>();
-            string conversionPresetName = null;
+            string? conversionPresetName = null;
             for (int index = 1; index < args.Length; index++)
             {
                 string argument = args[index];
@@ -369,7 +369,7 @@ namespace FileConverter
                 upgradeService.CheckForUpgrade();
             }
 
-            ConversionPreset conversionPreset = null;
+            ConversionPreset? conversionPreset = null;
             if (!string.IsNullOrEmpty(conversionPresetName))
             {
                 conversionPreset = settingsService.Settings.GetPresetFromName(conversionPresetName);

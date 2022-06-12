@@ -1,4 +1,4 @@
-﻿// <copyright file="SettingsService.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="SettingsService.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 using FileConverter.Properties;
 
@@ -45,7 +45,7 @@ namespace FileConverter.Services
         {
             Debug.Log("Execute post installation initialization.");
 
-            Settings defaultSettings = null;
+            Settings? defaultSettings = null;
 
             // Load the default settings.
             if (File.Exists(FileConverterExtension.PathHelpers.DefaultSettingsFilePath))
@@ -67,7 +67,7 @@ namespace FileConverter.Services
             }
 
             // Load user settings if exists.
-            Settings userSettings = null;
+            Settings? userSettings = null;
             if (File.Exists(FileConverterExtension.PathHelpers.UserSettingsFilePath))
             {
                 try
@@ -120,10 +120,10 @@ namespace FileConverter.Services
 
         private Settings Load()
         {
-            Settings settings = null;
+            Settings? settings = null;
             if (File.Exists(FileConverterExtension.PathHelpers.UserSettingsFilePath))
             {
-                Settings userSettings = null;
+                Settings? userSettings = null;
                 try
                 {
                     var stopwatch = new Stopwatch();

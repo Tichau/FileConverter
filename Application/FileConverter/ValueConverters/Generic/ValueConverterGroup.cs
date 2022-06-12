@@ -1,4 +1,4 @@
-﻿// <copyright file="ValueConverterGroup.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+// <copyright file="ValueConverterGroup.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter.ValueConverters.Generic
 {
@@ -11,7 +11,7 @@ namespace FileConverter.ValueConverters.Generic
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            string[] parameters = null;
+            string[]? parameters = null;
             if (parameter == null)
             {
                 parameters = new string[this.Count];
