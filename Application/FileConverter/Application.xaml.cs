@@ -17,45 +17,81 @@ namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Security.Principal;
+    using System.Collections.ObjectModel;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows;
 
     using FileConverter.ConversionJobs;
-    using FileConverter.Services;
-    using FileConverter.Views;
-
-    using GalaSoft.MvvmLight.Ioc;
-
-    using Debug = FileConverter.Diagnostics.Debug;
+    using FileConverter.Diagnostics;
+    using FileConverter.Windows;
 
     public partial class Application : System.Windows.Application
     {
         private static readonly Version Version = new Version()
-                                                      {
-                                                          Major = 1,
-                                                          Minor = 2,
-                                                          Patch = 3,
-                                                      };
+                                            {
+                                                Major = 1, 
+                                                Minor = 2,
+                                                Patch = 5,
+                                            };
+
+        private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
+
+        private int numberOfConversionThread = 1;
 
         private bool needToRunConversionThread;
         private bool cancelAutoExit;
         private bool isSessionEnding;
-        private bool verbose;
-        private bool showSettings;
-        private bool showHelp;
         
+        public Application()
+        {
+            this.ConvertionJobs = this.conversionJobs.AsReadOnly();
+        }
+
         public event EventHandler<ApplicationTerminateArgs> OnApplicationTerminate;
 
-        public static Version ApplicationVersion => Application.Version;
-
-        public static bool IsInAdmininstratorPrivileges
+        public static Version ApplicationVersion
         {
             get
             {
-                return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+                return Application.Version;
             }
+        }
+
+        public ReadOnlyCollection<ConversionJob> ConvertionJobs
+        {
+            get;
+            private set;
+        }
+
+        public Settings Settings
+        {
+            get;
+            set;
+        }
+
+        public bool ShowSettings
+        {
+            get;
+            set;
+        }
+
+        public bool HideMainWindow
+        {
+            get;
+            set;
+        }
+
+        public UpgradeVersionDescription UpgradeVersionDescription
+        {
+            get;
+            private set;
+        }
+
+        public bool Verbose
+        {
+            get;
+            set;
         }
 
         public void CancelAutoExit()
@@ -72,36 +108,12 @@ namespace FileConverter
         {
             base.OnStartup(e);
 
-            this.RegisterServices();
-
             this.Initialize();
-
-            // Navigate to the wanted view.
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-
-            if (this.showHelp)
-            {
-                navigationService.Show(Pages.Help);
-                return;
-            }
 
             if (this.needToRunConversionThread)
             {
-                navigationService.Show(Pages.Main);
-
-                IConversionService conversionService = SimpleIoc.Default.GetInstance<IConversionService>();
-                conversionService.ConversionJobsTerminated += this.ConversionService_ConversionJobsTerminated;
-                conversionService.ConvertFilesAsync();
-            }
-
-            if (this.showSettings)
-            {
-                navigationService.Show(Pages.Settings);
-            }
-
-            if (this.verbose)
-            {
-                navigationService.Show(Pages.Diagnostics);
+                Thread fileConvertionThread = Helpers.InstantiateThread("ConversionQueueThread", this.ConvertFiles);
+                fileConvertionThread.Start();
             }
         }
 
@@ -110,26 +122,24 @@ namespace FileConverter
             base.OnExit(e);
 
             Debug.Log("Exit application.");
-
-            IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
-
-            if (!this.isSessionEnding && upgradeService.UpgradeVersionDescription != null && upgradeService.UpgradeVersionDescription.NeedToUpgrade)
+            
+            if (!this.isSessionEnding && this.UpgradeVersionDescription != null && this.UpgradeVersionDescription.NeedToUpgrade)
             {
-                Debug.Log("A new version of file converter has been found: {0}.", upgradeService.UpgradeVersionDescription.LatestVersion);
+                Debug.Log("A new version of file converter has been found: {0}.", this.UpgradeVersionDescription.LatestVersion);
 
-                if (string.IsNullOrEmpty(upgradeService.UpgradeVersionDescription.InstallerPath))
+                if (string.IsNullOrEmpty(this.UpgradeVersionDescription.InstallerPath))
                 {
                     Debug.LogError("Invalid installer path.");
                 }
                 else
                 {
                     Debug.Log("Wait for the end of the installer download.");
-                    while (upgradeService.UpgradeVersionDescription.InstallerDownloadInProgress)
+                    while (this.UpgradeVersionDescription.InstallerDownloadInProgress)
                     {
                         Thread.Sleep(1000);
                     }
 
-                    string installerPath = upgradeService.UpgradeVersionDescription.InstallerPath;
+                    string installerPath = this.UpgradeVersionDescription.InstallerPath;
                     if (!System.IO.File.Exists(installerPath))
                     {
                         Debug.LogError("Can't find upgrade installer ({0}). Try to restart the application.", installerPath);
@@ -137,12 +147,18 @@ namespace FileConverter
                     }
 
                     // Start process.
-                    Debug.Log("Start file converter upgrade from version {0} to {1}.", ApplicationVersion, upgradeService.UpgradeVersionDescription.LatestVersion);
+                    Debug.Log("Start file converter upgrade from version {0} to {1}.", ApplicationVersion, this.UpgradeVersionDescription.LatestVersion);
 
-                    ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(installerPath) { UseShellExecute = true, };
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(installerPath)
+                        {
+                            UseShellExecute = true,
+                        };
 
                     Debug.Log("Start upgrade process: {0}{1}.", System.IO.Path.GetFileName(startInfo.FileName), startInfo.Arguments);
-                    Process process = new System.Diagnostics.Process { StartInfo = startInfo };
+                    System.Diagnostics.Process process = new System.Diagnostics.Process
+                    {
+                        StartInfo = startInfo
+                    };
 
                     process.Start();
                 }
@@ -159,47 +175,6 @@ namespace FileConverter
             this.Shutdown();
         }
 
-        private void RegisterServices()
-        {
-            if (this.TryFindResource("Settings") == null)
-            {
-                Debug.LogError("Can't retrieve conversion service.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-            }
-
-            if (this.TryFindResource("Locator") == null)
-            {
-                Debug.LogError("Can't retrieve view model locator.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-            }
-
-            if (this.TryFindResource("Conversions") == null)
-            {
-                Debug.LogError("Can't retrieve conversion service.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-            }
-
-            if (this.TryFindResource("Navigation") == null)
-            {
-                Debug.LogError("Can't retrieve navigation service.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-            }
-
-            if (this.TryFindResource("Upgrade") == null)
-            {
-                Debug.LogError("Can't retrieve navigation service.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-            }
-
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-
-            navigationService.RegisterPage<HelpWindow>(Pages.Help, false, true);
-            navigationService.RegisterPage<MainWindow>(Pages.Main, false, true);
-            navigationService.RegisterPage<SettingsWindow>(Pages.Settings, true, true);
-            navigationService.RegisterPage<DiagnosticsWindow>(Pages.Diagnostics, true, false);
-            navigationService.RegisterPage<UpgradeWindow>(Pages.Upgrade, true, false);
-        }
-
         private void Initialize()
         {
 #if BUILD32
@@ -211,7 +186,17 @@ namespace FileConverter
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
             string[] args = Environment.GetCommandLineArgs();
-            
+
+#if (DEBUG)
+            {
+                ////System.Array.Resize(ref args, 5);
+                ////args[1] = "--conversion-preset";
+                ////args[2] = "To Png";
+                ////args[3] = "--verbose";
+                ////args[4] = @"D:\Test\images\Mario Big.png";
+            }
+#endif
+
             // Log arguments.
             for (int index = 0; index < args.Length; index++)
             {
@@ -223,16 +208,14 @@ namespace FileConverter
 
             if (args.Length == 1)
             {
-                // Display help windows to explain that this application is a context menu extension.
-                this.showHelp = true;
+                // Diplay help windows to explain that this application is a context menu extension.
+                ApplicationStartHelp applicationStartHelp = new ApplicationStartHelp();
+                applicationStartHelp.Show();
+                this.HideMainWindow = true;
                 return;
             }
 
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
-
             // Parse arguments.
-            bool quitAfterStartup = false;
-            int quitExitCode = 0;
             List<string> filePaths = new List<string>();
             string conversionPresetName = null;
             for (int index = 1; index < args.Length; index++)
@@ -251,86 +234,40 @@ namespace FileConverter
                     switch (parameterTitle)
                     {
                         case "post-install-init":
-                            if (!settingsService.PostInstallationInitialization())
-                            {
-                                quitExitCode = 0x0F;
-                                Debug.LogError(quitExitCode, $"Failed to execute post install initialization.");
-                            }
-
-                            quitAfterStartup = true;
-                            break;
-
-                        case "register-shell-extension":
-                        {
-                            quitAfterStartup = true;
-
-                            if (index >= args.Length - 1)
-                            {
-                                quitExitCode = 0x0B;
-                                Debug.LogError(quitExitCode, $"Invalid format.");
-                                break;
-                            }
-
-                            string shellExtensionPath = args[index + 1];
-                            index++;
-
-                            if (!Helpers.RegisterShellExtension(shellExtensionPath))
-                            {
-                                quitExitCode = 0x0C;
-                                Debug.LogError(quitExitCode, $"Failed to register shell extension {shellExtensionPath}.");
-                            }
-
-                            break;
-                        }
-
-                        case "unregister-shell-extension":
-                        {
-                            quitAfterStartup = true;
-
-                            if (index >= args.Length - 1)
-                            {
-                                quitExitCode = 0x0D;
-                                Debug.LogError(quitExitCode, $"Invalid format.");
-                                break;
-                            }
-
-                            string shellExtensionPath = args[index + 1];
-                            index++;
-                                
-                            if (!Helpers.UnregisterExtension(shellExtensionPath))
-                            {
-                                quitExitCode = 0x0E;
-                                Debug.LogError(quitExitCode, $"Failed to unregister shell extension {shellExtensionPath}.");
-                            }
-
-                            break;
-                        }
+                            Settings.PostInstallationInitialization();
+                            Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                            return;
 
                         case "version":
-                            Console.WriteLine(ApplicationVersion.ToString());
-                            quitAfterStartup = true;
-                            break;
+                            Console.Write(ApplicationVersion.ToString());
+                            Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                            return;
 
                         case "settings":
-                            this.showSettings = true;
+                            this.ShowSettings = true;
+                            this.HideMainWindow = true;
                             break;
+
+                        case "apply-settings":
+                            Settings.ApplyTemporarySettings();
+                            Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                            return;
 
                         case "conversion-preset":
                             if (index >= args.Length - 1)
                             {
-                                quitAfterStartup = true;
-                                quitExitCode = 0x01;
-                                Debug.LogError(quitExitCode, $"Invalid format.");
-                                break;
+                                Debug.LogError("Invalid format. (code 0x01)");
+                                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                                return;
                             }
 
                             conversionPresetName = args[index + 1];
                             index++;
-                            break;
+                            continue;
 
                         case "verbose":
                             {
-                                this.verbose = true;
+                                this.Verbose = true;
                             }
 
                             break;
@@ -346,33 +283,46 @@ namespace FileConverter
                 }
             }
 
-            if (settingsService.Settings == null)
+            // Load settigns.
+            Debug.Log("Load settings...");
+            this.Settings = Settings.Load();
+            if (this.Settings == null)
             {
-                Debug.LogError("Can't load File Converter settings. The application will now shutdown, if you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
-                quitAfterStartup = true;
-                quitExitCode = 13;
-            }
-
-            if (quitAfterStartup)
-            {
-                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown(quitExitCode)));
+                Diagnostics.Debug.LogError("The application will now shutdown. If you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
+                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                 return;
             }
 
-            Debug.Assert(quitExitCode == 0, "An error happened during the initialization.");
-            
-            // Check for upgrade.
-            if (settingsService.Settings.CheckUpgradeAtStartup)
+            if (this.Settings.MaximumNumberOfSimultaneousConversions <= 0)
             {
-                IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
-                upgradeService.NewVersionAvailable += this.UpgradeService_NewVersionAvailable;
-                upgradeService.CheckForUpgrade();
+                this.Settings.MaximumNumberOfSimultaneousConversions = System.Math.Max(1, Environment.ProcessorCount / 2);
+                Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", this.Settings.MaximumNumberOfSimultaneousConversions);
+            }
+
+            this.numberOfConversionThread = this.Settings.MaximumNumberOfSimultaneousConversions;
+            Diagnostics.Debug.Log("Maximum number of conversion threads: {0}", this.numberOfConversionThread);
+
+            // Check upgrade.
+            if (this.Settings.CheckUpgradeAtStartup)
+            {
+#if DEBUG
+                Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+#else
+                long fileTime = Registry.GetValue<long>(Registry.Keys.LastUpdateCheckDate);
+                DateTime lastUpdateDateTime = DateTime.FromFileTime(fileTime);
+
+                TimeSpan durationSinceLastUpdate = DateTime.Now.Subtract(lastUpdateDateTime);
+                if (durationSinceLastUpdate > new TimeSpan(1, 0, 0, 0))
+                {
+                    Task<UpgradeVersionDescription> task = Upgrade.Helpers.GetLatestVersionDescriptionAsync(this.OnGetLatestVersionDescription);
+                }
+#endif
             }
 
             ConversionPreset conversionPreset = null;
             if (!string.IsNullOrEmpty(conversionPresetName))
             {
-                conversionPreset = settingsService.Settings.GetPresetFromName(conversionPresetName);
+                conversionPreset = this.Settings.GetPresetFromName(conversionPresetName);
                 if (conversionPreset == null)
                 {
                     Debug.LogError("Invalid conversion preset '{0}'. (code 0x02)", conversionPresetName);
@@ -383,18 +333,16 @@ namespace FileConverter
 
             if (conversionPreset != null)
             {
-                IConversionService conversionService = SimpleIoc.Default.GetInstance<IConversionService>();
-
-                // Create conversion jobs.
-                Debug.Log("Create jobs for conversion preset: '{0}'", conversionPreset.FullName);
+                // Create convertion jobs.
+                Debug.Log("Create jobs for conversion preset: '{0}'", conversionPreset.Name);
                 try
                 {
                     for (int index = 0; index < filePaths.Count; index++)
                     {
                         string inputFilePath = filePaths[index];
                         ConversionJob conversionJob = ConversionJobFactory.Create(conversionPreset, inputFilePath);
-
-                        conversionService.RegisterConversionJob(conversionJob);
+                        
+                        this.conversionJobs.Add(conversionJob);
                     }
                 }
                 catch (Exception exception)
@@ -407,57 +355,158 @@ namespace FileConverter
             }
         }
 
-        private void UpgradeService_NewVersionAvailable(object sender, UpgradeVersionDescription e)
+        private void ConvertFiles()
         {
-            SimpleIoc.Default.GetInstance<INavigationService>().Show(Pages.Upgrade);
-
-            IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
-            upgradeService.NewVersionAvailable -= this.UpgradeService_NewVersionAvailable;
-        }
-
-        private void ConversionService_ConversionJobsTerminated(object sender, ConversionJobsTerminatedEventArgs e)
-        {
-            IConversionService conversionService = SimpleIoc.Default.GetInstance<IConversionService>();
-            conversionService.ConversionJobsTerminated -= this.ConversionService_ConversionJobsTerminated;
-
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
-
-            if (!settingsService.Settings.ExitApplicationWhenConversionsFinished)
+            // Prepare conversions.
+            for (int index = 0; index < this.ConvertionJobs.Count; index++)
             {
-                return;
+                this.ConvertionJobs[index].PrepareConversion();
             }
             
-            if (this.cancelAutoExit)
+            // Convert!
+            Thread[] jobThreads = new Thread[this.numberOfConversionThread];
+            while (true)
             {
-                return;
+                // Compute conversion flags.
+                ConversionFlags conversionFlags = ConversionFlags.None;
+                bool allJobAreFinished = true;
+                for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
+                {
+                    ConversionJob conversionJob = this.conversionJobs[jobIndex];
+                    allJobAreFinished &= !(conversionJob.State == ConversionJob.ConversionState.Ready ||
+                                         conversionJob.State == ConversionJob.ConversionState.InProgress);
+
+                    if (conversionJob.State == ConversionJob.ConversionState.InProgress)
+                    {
+                        conversionFlags |= conversionJob.StateFlags;
+                    }
+                }
+
+                if (allJobAreFinished)
+                {
+                    break;
+                }
+
+                // Start job if possible.
+                for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
+                {
+                    ConversionJob conversionJob = this.conversionJobs[jobIndex];
+                    if (conversionJob.State == ConversionJob.ConversionState.Ready &&
+                        conversionJob.CanStartConversion(conversionFlags))
+                    {
+                        // Find a thread to execute the job.
+                        Thread jobThread = null;
+                        for (int threadIndex = 0; threadIndex < jobThreads.Length; threadIndex++)
+                        {
+                            Thread thread = jobThreads[threadIndex];
+                            if (thread == null || !thread.IsAlive)
+                            {
+                                jobThread = Helpers.InstantiateThread(conversionJob.GetType().Name, this.ExecuteConversionJob);
+                                jobThreads[threadIndex] = jobThread;
+                                break;
+                            }
+                        }
+
+                        if (jobThread != null)
+                        {
+                            jobThread.Start(conversionJob);
+
+                            while (conversionJob.State == ConversionJob.ConversionState.Ready)
+                            {
+                                Debug.Log("Wait the launch of the conversion thread before launching any other thread.");
+                                Thread.Sleep(20);
+                            }
+                        }
+
+                        break;
+                    }
+                }
+
+                Thread.Sleep(50);
             }
 
-            if (e.AllConversionsSucceed)
+            if (this.Settings.ExitApplicationWhenConversionsFinished)
             {
-                float remainingTime = settingsService.Settings.DurationBetweenEndOfConversionsAndApplicationExit;
-                while (remainingTime > 0f)
+                bool allConversionsSucceed = true;
+                for (int index = 0; index < this.conversionJobs.Count; index++)
                 {
+                    allConversionsSucceed &= this.conversionJobs[index].State == ConversionJob.ConversionState.Done;
+                }
+
+                if (this.cancelAutoExit)
+                {
+                    return;
+                }
+
+                if (allConversionsSucceed)
+                {
+                    float remainingTime = this.Settings.DurationBetweenEndOfConversionsAndApplicationExit;
+                    while (remainingTime > 0f)
+                    {
+                        if (this.OnApplicationTerminate != null)
+                        {
+                            this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(remainingTime));
+                        }
+
+                        System.Threading.Thread.Sleep(1000);
+                        remainingTime--;
+
+                        if (this.cancelAutoExit)
+                        {
+                            return;
+                        }
+                    }
+
                     if (this.OnApplicationTerminate != null)
                     {
                         this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(remainingTime));
                     }
 
-                    Thread.Sleep(1000);
-                    remainingTime--;
-
-                    if (this.cancelAutoExit)
-                    {
-                        return;
-                    }
+                    Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
                 }
-
-                if (this.OnApplicationTerminate != null)
-                {
-                    this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(remainingTime));
-                }
-
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
             }
+        }
+
+        private void ExecuteConversionJob(object parameter)
+        {
+            ConversionJob conversionJob = parameter as ConversionJob;
+            if (conversionJob == null)
+            {
+                throw new System.ArgumentException("The parameter must be a conversion job.", "parameter");
+            }
+
+            if (conversionJob.State != ConversionJob.ConversionState.Ready)
+            {
+                Debug.LogError("Fail to execute conversion job.");
+                return;
+            }
+
+            try
+            {
+                conversionJob.StartConvertion();
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError("Failure during conversion: {0}", exception.ToString());
+            }
+        }
+
+        private void OnGetLatestVersionDescription(UpgradeVersionDescription upgradeVersionDescription)
+        {
+            if (upgradeVersionDescription == null)
+            {
+                return;
+            }
+            
+            Registry.SetValue(Registry.Keys.LastUpdateCheckDate, DateTime.Now.ToFileTime());
+
+            if (upgradeVersionDescription.LatestVersion <= ApplicationVersion)
+            {
+                return;
+            }
+
+            this.UpgradeVersionDescription = upgradeVersionDescription;
+            (this.MainWindow as MainWindow).OnNewVersionReleased(upgradeVersionDescription);
         }
     }
 }

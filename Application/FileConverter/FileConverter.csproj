@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,11 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FileConverter</RootNamespace>
     <AssemblyName>FileConverter</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,20 +66,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonServiceLocator.2.0.4\lib\net45\CommonServiceLocator.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.12.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.7.12.0\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
+    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.7.0.5.502\lib\net40-client\Magick.NET-Q16-AnyCPU.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Markdown.Xaml">
       <HintPath>..\..\Middleware\Markdown.Xaml.dll</HintPath>
@@ -106,16 +94,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Middleware\Ripper.dll</HintPath>
     </Reference>
-    <Reference Include="SharpShell, Version=2.7.1.0, Culture=neutral, PublicKeyToken=f14dc899472fe6fb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SharpShell.2.7.1\lib\net40-client\SharpShell.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -141,13 +121,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationTerminateArgs.cs" />
-    <Compile Include="Controls\ConversionJobControl.xaml.cs">
-      <DependentUpon>ConversionJobControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IconButton.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\OpenUrlCommand.cs" />
     <Compile Include="Controls\EncodingQualitySliderControl.xaml.cs">
       <DependentUpon>EncodingQualitySliderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\CancelConversionJobCommand.cs" />
     <Compile Include="ConversionJobs\ConversionFlags.cs" />
     <Compile Include="ConversionJobs\ConversionJob_Office.cs" />
     <Compile Include="ConversionJobs\ConversionJob_PowerPoint.cs" />
@@ -160,7 +139,6 @@
     <Compile Include="ConversionJobs\ConversionJob_Excel.cs" />
     <Compile Include="ConversionJobs\ConversionJob_Word.cs" />
     <Compile Include="ConversionJobs\ConversionJob_ImageMagick.cs" />
-    <Compile Include="ConversionJobs\ConversionState.cs" />
     <Compile Include="ConversionJobs\VideoEncodingSpeed.cs" />
     <Compile Include="ConversionPreset\ConversionSettingsOverride.cs" />
     <Compile Include="ConversionPreset\ConversionSettings.cs" />
@@ -170,13 +148,6 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="InputPostConversionAction.cs" />
     <Compile Include="IXmlSerializable.cs" />
-    <Compile Include="Services\ConversionJobsTerminatedEventArgs.cs" />
-    <Compile Include="Services\ConversionService.cs" />
-    <Compile Include="Services\IConversionService.cs" />
-    <Compile Include="Services\INavigationService.cs" />
-    <Compile Include="Services\ISettingsService.cs" />
-    <Compile Include="Services\IUpgradeService.cs" />
-    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="PathHelpers.cs" />
     <Compile Include="Properties\Resources.fr.Designer.cs">
       <DependentUpon>Resources.fr.resx</DependentUpon>
@@ -191,19 +162,12 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Registry.cs" />
-    <Compile Include="Pages.cs" />
-    <Compile Include="Services\SettingsService.Migration.cs" />
-    <Compile Include="Services\SettingsService.cs" />
-    <Compile Include="Services\UpgradeService.cs" />
-    <Compile Include="Services\UpgradeVersionDescription.cs" />
-    <Compile Include="ValueConverters\ConversionJobsToProgressState.cs" />
+    <Compile Include="Settings.Migration.cs" />
+    <Compile Include="Settings.Settings.cs" />
+    <Compile Include="Upgrade\Helpers.cs" />
+    <Compile Include="Upgrade\UpgradeVersionDescription.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset\ConversionPreset.cs" />
-    <Compile Include="ValueConverters\ChangelogConverter.cs" />
-    <Compile Include="ValueConverters\ConversionJobToEstimatedRemainingDuration.cs" />
-    <Compile Include="ValueConverters\ConversionJobsToProgressValue.cs" />
-    <Compile Include="ValueConverters\ConversionSettingsRelevant.cs" />
-    <Compile Include="ValueConverters\Generic\IcoFileSizeSelectorConverter.cs" />
     <Compile Include="ValueConverters\OutputTypeEnumToViewModel.cs" />
     <Compile Include="ValueConverters\BitrateToString.cs" />
     <Compile Include="ValueConverters\FileNameConverter.cs" />
@@ -223,57 +187,37 @@
     <Compile Include="ValueConverters\OutputTypeToVisibility.cs" />
     <Compile Include="ValueConverters\Generic\StringToEnum.cs" />
     <Compile Include="ValueConverters\Generic\ValueConverterGroup.cs" />
-    <Compile Include="ViewModels\DiagnosticsViewModel.cs" />
-    <Compile Include="ViewModels\PresetNode.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\HelpViewModel.cs" />
-    <Compile Include="ViewModels\UpgradeViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\BindableSelectedItemBehavior.cs" />
-    <Compile Include="Views\DragDropExtension.cs" />
-    <Compile Include="Views\HelpWindow.xaml.cs">
-      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    <Compile Include="Windows\ApplicationStartHelp.xaml.cs">
+      <DependentUpon>ApplicationStartHelp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DiagnosticsWindow.xaml.cs">
+    <Compile Include="Windows\DiagnosticsWindow.xaml.cs">
       <DependentUpon>DiagnosticsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\InputExtension.cs" />
-    <Compile Include="ViewModels\InputExtensionCategory.cs" />
-    <Compile Include="ViewModels\OutputTypeViewModel.cs" />
-    <Compile Include="Views\SettingsWindow.xaml.cs">
+    <Compile Include="Windows\ConversionSettingsTemplateSelector.cs" />
+    <Compile Include="Windows\InputExtension.cs" />
+    <Compile Include="Windows\InputExtensionCategory.cs" />
+    <Compile Include="Windows\OutputTypeViewModel.cs" />
+    <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Version.cs" />
-    <Compile Include="Views\UpgradeWindow.xaml.cs">
+    <Compile Include="Windows\UpgradeWindow.xaml.cs">
       <DependentUpon>UpgradeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="XmlHelpers.cs" />
-    <Page Include="Controls\ConversionJobControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\EncodingQualitySliderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <DesignData Include="SampleData\ConversionJobSampleData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </DesignData>
-    <Page Include="SampleData\SettingsSampleData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\HelpWindow.xaml">
+    <Page Include="Windows\ApplicationStartHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DiagnosticsWindow.xaml">
+    <Page Include="Windows\DiagnosticsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -284,27 +228,15 @@
     <Compile Include="ValueConverters\ConversionStateToBrush.cs" />
     <Compile Include="ConversionJobs\ConversionJob.cs" />
     <Compile Include="Diagnostics\Debug.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Resources\ConversionPresetTemplates.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Resources\Colors.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Resources\CustomStyles.xaml">
+    <Page Include="Windows\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UpgradeWindow.xaml">
+    <Page Include="Windows\UpgradeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -328,19 +260,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.de.resx" />
-    <EmbeddedResource Include="Properties\Resources.es-ES.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.it-IT.resx" />
-    <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
-    <EmbeddedResource Include="Properties\Resources.pt.resx" />
+    <EmbeddedResource Include="Properties\Resources.pt.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -356,9 +288,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ApplicationIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ApplicationIcon.ico" />
@@ -385,50 +318,16 @@
     <Resource Include="Resources\GitHub-Documentation-Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Pledge-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\FileConverterUsage.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Settings-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\WebSite-Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FileConverterExtension\FileConverterExtension.csproj">
-      <Project>{0c44ca69-42d6-4357-bdfd-83069d1aba2f}</Project>
-      <Name>FileConverterExtension</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\SettingsIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\FolderIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\UpIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\DownIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\PresetIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\DeleteIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\LogIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\PaypalIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\SayThanksIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ExportIcon.ico" />
-    <Resource Include="Resources\ImportIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\DuplicatePresetIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
