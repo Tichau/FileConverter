@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Directory Id="dir59665241F3CDDE1A2AC55595EAB82331" Name="Languages" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="Languages">
+            <Component Id="cmp416BC2ED150FADE2B6C889B2E30BEFF1" Directory="dir69039193B93E3CF7D8D647984CD644EA" Guid="{5C10D836-53F3-4599-B877-49A03D81C3B0}">
+                <File Id="fil5460820E8FE9AB69A71E15E4E9BEB1E2" KeyPath="yes" Source="$(var.FileConverter.TargetDir)\en\FileConverter.resources.dll" />
+            </Component>
+            <Component Id="cmpF149529191A3B87AAB82B9301A2CAB8B" Directory="dir6DD71661C1CC5A2A0CCF37D75E6494F1" Guid="{98C72CBA-8447-4B32-A368-31E1F96BEBEA}">
+                <File Id="fil47BB5F07444A2330EB2978EA5E7A488E" KeyPath="yes" Source="$(var.FileConverter.TargetDir)\fr\FileConverter.resources.dll" />
+            </Component>
+            <Component Id="cmpC469F0A53170F3C72108F7F4FF31EE21" Directory="dir30DABB95455C2A2E954A8E7F38618DB3" Guid="{66918A1D-F63D-46E0-BE9F-F55FC8E23A7D}">
+                <File Id="fil847F668365CF477A8917E8265A6A89FD" KeyPath="yes" Source="$(var.FileConverter.TargetDir)\pt\FileConverter.resources.dll" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir59665241F3CDDE1A2AC55595EAB82331">
+            <Directory Id="dir30DABB95455C2A2E954A8E7F38618DB3" Name="pt" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir59665241F3CDDE1A2AC55595EAB82331">
+            <Directory Id="dir69039193B93E3CF7D8D647984CD644EA" Name="en" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir59665241F3CDDE1A2AC55595EAB82331">
+            <Directory Id="dir6DD71661C1CC5A2A0CCF37D75E6494F1" Name="fr" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>
