@@ -50,6 +50,10 @@ Thanks to **Khidreal** for the Portuguese localization.
 Thanks to **Marhc** for the Brazilian localization.
 Thanks to **Chachak** for the Spanish localization.
 Thanks to **Davide** for the Italian localization.
+Thanks to **nikotschierske** for the German localization.
+Thanks to **Snoopy1866** for the Simplified Chinese localization.
+Thanks to **MayaC0re** for the Turkish localization.
+Thanks to **vishveshjain** for the Hindi localization.
 
 ## Middlewares
 

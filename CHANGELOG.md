@@ -8,6 +8,10 @@
 - Added: Brazilian Portuguese translation (thanks to Marhc).
 - Added: Spanish translation (thanks to Chachak).
 - Added: Italian translation (thanks to Davide).
+- Added: German translation (thanks to nikotschierske).
+- Added: Simplified Chinese translation (thanks to Snoopy1866).
+- Added: Turkish translation (thanks to MayaC0re).
+- Added: Hindi translation (thanks to vishveshjain).
 - Added: More presets for scale and rotation in File Converter default configuration.
 - Added: Support new raw image input formats: arw, dng, nef, raf and cr2.
 - Added: Display conversion progress on the Windows taskbar item.
