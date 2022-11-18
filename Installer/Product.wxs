@@ -44,9 +44,9 @@
             <ProgressText Action="PostInstallInit">Initialize conversion presets</ProgressText>
         </UI>
 
-        <PropertyRef Id="WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED"/>
-        <Condition Message="This application requires .NET Framework 4.6.1. Please install the .NET Framework then run this installer again.">
-            <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED]]>
+        <PropertyRef Id="WIX_IS_NETFRAMEWORK_462_OR_LATER_INSTALLED"/>
+        <Condition Message="This application requires .NET Framework 4.6.2. Please install the .NET Framework then run this installer again.">
+            <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_462_OR_LATER_INSTALLED]]>
         </Condition>
 
         <InstallExecuteSequence>

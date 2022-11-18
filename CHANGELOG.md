@@ -30,7 +30,7 @@
 - Tech: Update ffmpeg to v4.0.0 and ImageMagick to v7.12.0.
 - Tech: Update SharpShell to v2.7.1. 
 - Tech: Update project to Visual Studio 2017 and installer Wix 3.11.
-- Tech: Update project to .NET framework 4.6.1 (the last .NET version compatible with Windows Vista).
+- Tech: Update project to .NET framework 4.6.2.
 - Tech: Check for .NET framework version in installer and prompt the user if the required version is not installed.
 - Tech: Remove sharpshell tools from installer dependencies. The shell extension is now registered by File Converter application (github issue #39 #46).
 
