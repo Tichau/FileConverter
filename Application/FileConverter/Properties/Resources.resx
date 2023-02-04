@@ -1,595 +1,595 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
+<!--
+Microsoft ResX Schema
 
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="About" xml:space="preserve">
-    <value>About</value>
-  </data>
-  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
-    <value>Allow you to chose what you want to do with your input files if the conversion succeed</value>
-  </data>
-  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
-    <value>Action when conversion succeed</value>
-  </data>
-  <data name="AddNewPreset" xml:space="preserve">
-    <value>New preset</value>
-  </data>
-  <data name="Application" xml:space="preserve">
-    <value>Application</value>
-  </data>
-  <data name="AudioTitle" xml:space="preserve">
-    <value>Audio</value>
-  </data>
-  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
-    <value>Automatically check for updates when File Converter starts</value>
-  </data>
-  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
-    <value>Automatically exit when all conversions finished</value>
-  </data>
-  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
-    <value>Clamp to lowest power of 2 size</value>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="ConversionPresets" xml:space="preserve">
-    <value>Conversion Presets</value>
-  </data>
-  <data name="ConversionQueueTitle" xml:space="preserve">
-    <value>Files to convert</value>
-  </data>
-  <data name="ConvertedFrom" xml:space="preserve">
-    <value>Converted from</value>
-  </data>
-  <data name="Diagnostics" xml:space="preserve">
-    <value>Logs</value>
-  </data>
-  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
-    <value>Logs</value>
-  </data>
-  <data name="DocumentationButtonDescription" xml:space="preserve">
-    <value>Open documentation</value>
-  </data>
-  <data name="DonateButtonTitle" xml:space="preserve">
-    <value>Donate</value>
-  </data>
-  <data name="DonateDescription" xml:space="preserve">
-    <value>Don't forget to reward my work if you like it :)</value>
-  </data>
-  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
-    <value>The update will be downloaded in background, and installed once you exit File Converter.</value>
-  </data>
-  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
-    <value>Install when I exit File Converter</value>
-  </data>
-  <data name="Encoding" xml:space="preserve">
-    <value>Encoding :</value>
-  </data>
-  <data name="EncodingSpeed" xml:space="preserve">
-    <value>Encoding speed :</value>
-  </data>
-  <data name="FileConverterStartHelp1" xml:space="preserve">
-    <value>File Converter is a shell extension.</value>
-  </data>
-  <data name="FileConverterStartHelp2" xml:space="preserve">
-    <value>That means it is integrated into the Windows explorer.</value>
-  </data>
-  <data name="FileConverterStartHelp3" xml:space="preserve">
-    <value>To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the readme file to see the list of compatible file formats).</value>
-  </data>
-  <data name="FileNameTemplate" xml:space="preserve">
-    <value>File name template</value>
-  </data>
-  <data name="FramesPerSecond" xml:space="preserve">
-    <value>Frames per second :</value>
-  </data>
-  <data name="GitHubButtonDescription" xml:space="preserve">
-    <value>Open GitHub project page</value>
-  </data>
-  <data name="Help" xml:space="preserve">
-    <value>help ?</value>
-  </data>
-  <data name="InputExample" xml:space="preserve">
-    <value>Input example</value>
-  </data>
-  <data name="InputFormats" xml:space="preserve">
-    <value>Input formats</value>
-  </data>
-  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
-    <value>Move in an archive folder</value>
-  </data>
-  <data name="InputPostConversionActionNoneName" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="InstallButtonDescription" xml:space="preserve">
-    <value>The update has been downloaded. Exit File Converter and install the update now.</value>
-  </data>
-  <data name="InstallButtonTitle" xml:space="preserve">
-    <value>Install when I exit File Converter</value>
-  </data>
-  <data name="IssueButtonDescription" xml:space="preserve">
-    <value>Report an issue</value>
-  </data>
-  <data name="MoveDownSelectedPreset" xml:space="preserve">
-    <value>Move down selected preset</value>
-  </data>
-  <data name="MoveUpSelectedPreset" xml:space="preserve">
-    <value>Move up selected preset</value>
-  </data>
-  <data name="Mp3CbrDescription" xml:space="preserve">
-    <value>Constant bitrate encoding</value>
-  </data>
-  <data name="Mp3VbrDescription" xml:space="preserve">
-    <value>Variable bitrate encoding</value>
-  </data>
-  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
-    <value>90°</value>
-  </data>
-  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
-    <value>90° counter clockwise rotation</value>
-  </data>
-  <data name="Ok" xml:space="preserve">
-    <value>Ok</value>
-  </data>
-  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
-    <value>180°</value>
-  </data>
-  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
-    <value>180° rotation</value>
-  </data>
-  <data name="OutputFileNameTemplateSample" xml:space="preserve">
-    <value>C:\Music\Artist\Album\Song.wav</value>
-  </data>
-  <data name="OutputExample" xml:space="preserve">
-    <value>Output</value>
-  </data>
-  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
-    <value>(p): input file path
-(f): input filename
-(o): output extension type
-(i): input extension type
-(d0): input parent folder
-(d1): input sub parent folder
+Version 2.0
+
+The primary goals of this format is to allow a simple XML format
+that is mostly human readable. The generation and parsing of the
+various data types are done through the TypeConverter classes
+associated with the data types.
+
+Example:
+
+... ado.net/XML headers & schema ...
+<resheader name="resmimetype">text/microsoft-resx</resheader>
+<resheader name="version">2.0</resheader>
+<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+<data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+<value>[base64 mime encoded serialized .NET Framework object]</value>
+</data>
+<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+<value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+<comment>This is a comment</comment>
+</data>
+
+There are any number of "resheader" rows that contain simple
+name/value pairs.
+
+Each data row contains a name, and value. The row also contains a
+type or mimetype. Type corresponds to a .NET class that support
+text/value conversion through the TypeConverter architecture.
+Classes that don't support this are serialized and stored with the
+mimetype set.
+
+The mimetype is used for serialized objects, and tells the
+ResXResourceReader how to depersist the object. This is currently not
+extensible. For a given mimetype the value must be set accordingly:
+
+Note - application/x-microsoft.net.object.binary.base64 is the format
+that the ResXResourceWriter will generate, however the reader can
+read any of the formats listed below.
+
+mimetype: application/x-microsoft.net.object.binary.base64
+value   : The object must be serialized with
+: System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+: and then encoded with base64 encoding.
+
+mimetype: application/x-microsoft.net.object.soap.base64
+value   : The object must be serialized with
+: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+: and then encoded with base64 encoding.
+
+mimetype: application/x-microsoft.net.object.bytearray.base64
+value   : The object must be serialized into a byte array
+: using a System.ComponentModel.TypeConverter
+: and then encoded with base64 encoding.
+-->
+<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+<xsd:element name="root" msdata:IsDataSet="true">
+<xsd:complexType>
+<xsd:choice maxOccurs="unbounded">
+<xsd:element name="metadata">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="value" type="xsd:string" minOccurs="0" />
+</xsd:sequence>
+<xsd:attribute name="name" use="required" type="xsd:string" />
+<xsd:attribute name="type" type="xsd:string" />
+<xsd:attribute name="mimetype" type="xsd:string" />
+<xsd:attribute ref="xml:space" />
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="assembly">
+<xsd:complexType>
+<xsd:attribute name="alias" type="xsd:string" />
+<xsd:attribute name="name" type="xsd:string" />
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="data">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+</xsd:sequence>
+<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+<xsd:attribute ref="xml:space" />
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="resheader">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+</xsd:sequence>
+<xsd:attribute name="name" type="xsd:string" use="required" />
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+<resheader name="resmimetype">
+<value>text/microsoft-resx</value>
+</resheader>
+<resheader name="version">
+<value>2.0</value>
+</resheader>
+<resheader name="reader">
+<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+</resheader>
+<resheader name="writer">
+<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+</resheader>
+<data name="About" xml:space="preserve">
+<value>О</value>
+</data>
+<data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+<value>Позвольте вам выбрать то, что вы хотите делать со своими входными файлами, если преобразование преуспевает</value>
+</data>
+<data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+<value>Действие, когда преобразование преуспевает</value>
+</data>
+<data name="AddNewPreset" xml:space="preserve">
+<value>Новый пресет</value>
+</data>
+<data name="Application" xml:space="preserve">
+<value>заявка</value>
+</data>
+<data name="AudioTitle" xml:space="preserve">
+<value>Аудио</value>
+</data>
+<data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+<value>Автоматически проверяйте обновления при запуске конвертера файла</value>
+</data>
+<data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+<value>Автоматически выходит, когда все преобразования закончились</value>
+</data>
+<data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+<value>Зажим до самой низкой мощности 2 размера</value>
+</data>
+<data name="Close" xml:space="preserve">
+<value>Закрывать</value>
+</data>
+<data name="ConversionPresets" xml:space="preserve">
+<value>Конверсионные пресеты</value>
+</data>
+<data name="ConversionQueueTitle" xml:space="preserve">
+<value>Файлы для конвертации</value>
+</data>
+<data name="ConvertedFrom" xml:space="preserve">
+<value>Преобразовано из</value>
+</data>
+<data name="Diagnostics" xml:space="preserve">
+<value>Журналы</value>
+</data>
+<data name="DiagnosticsButtonTooltip" xml:space="preserve">
+<value>Журналы</value>
+</data>
+<data name="DocumentationButtonDescription" xml:space="preserve">
+<value>Открытая документация</value>
+</data>
+<data name="DonateButtonTitle" xml:space="preserve">
+<value>Пожертвовать</value>
+</data>
+<data name="DonateDescription" xml:space="preserve">
+#REF!
+</data>
+<data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+<value>Обновление будет загружено в фоновом режиме и установлено после того, как вы выйдете из конвертера файла.</value>
+</data>
+<data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+<value>Установите, когда я выхожу из файла конвертера</value>
+</data>
+<data name="Encoding" xml:space="preserve">
+<value>Кодирование:</value>
+</data>
+<data name="EncodingSpeed" xml:space="preserve">
+<value>Скорость кодирования:</value>
+</data>
+<data name="FileConverterStartHelp1" xml:space="preserve">
+<value>Конвертер файлов - это расширение оболочки.</value>
+</data>
+<data name="FileConverterStartHelp2" xml:space="preserve">
+<value>Это означает, что он интегрирован в проводник Windows.</value>
+</data>
+<data name="FileConverterStartHelp3" xml:space="preserve">
+<value>To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the readme file to see the list of compatible file formats).</value>
+</data>
+<data name="FileNameTemplate" xml:space="preserve">
+<value>Шаблон имени файла</value>
+</data>
+<data name="FramesPerSecond" xml:space="preserve">
+<value>Кадров в секунду :</value>
+</data>
+<data name="GitHubButtonDescription" xml:space="preserve">
+<value>Открыть страницу проекта GitHub</value>
+</data>
+<data name="Help" xml:space="preserve">
+<value>помощь ??</value>
+</data>
+<data name="InputExample" xml:space="preserve">
+<value>Входной пример</value>
+</data>
+<data name="InputFormats" xml:space="preserve">
+<value>Входные форматы</value>
+</data>
+<data name="InputPostConversionActionDeleteName" xml:space="preserve">
+<value>Удалить</value>
+</data>
+<data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+<value>Переместить в архивной папке</value>
+</data>
+<data name="InputPostConversionActionNoneName" xml:space="preserve">
+<value>Никто</value>
+</data>
+<data name="InstallButtonDescription" xml:space="preserve">
+<value>Обновление было загружено. Выйдите из файла конвертера и установите обновление сейчас.</value>
+</data>
+<data name="InstallButtonTitle" xml:space="preserve">
+<value>Установите, когда я выхожу из файла конвертера</value>
+</data>
+<data name="IssueButtonDescription" xml:space="preserve">
+<value>Сообщить о проблеме</value>
+</data>
+<data name="MoveDownSelectedPreset" xml:space="preserve">
+<value>Переместите выбранную предустановку</value>
+</data>
+<data name="MoveUpSelectedPreset" xml:space="preserve">
+<value>Переместить выбранную предустановку</value>
+</data>
+<data name="Mp3CbrDescription" xml:space="preserve">
+<value>Постоянное кодирование битрейта</value>
+</data>
+<data name="Mp3VbrDescription" xml:space="preserve">
+<value>Переменная кодировка битрейта</value>
+</data>
+<data name="NinetyDegreesRotationTitle" xml:space="preserve">
+<value>90 °</value>
+</data>
+<data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+<value>90 ° вращение по часовой стрелке</value>
+</data>
+<data name="Ok" xml:space="preserve">
+<value>Хорошо</value>
+</data>
+<data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+<value>180 °</value>
+</data>
+<data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+<value>Вращение 180 °</value>
+</data>
+<data name="OutputFileNameTemplateSample" xml:space="preserve">
+#REF!
+</data>
+<data name="OutputExample" xml:space="preserve">
+<value>Выход</value>
+</data>
+<data name="OutputFilePathTemplateHelp" xml:space="preserve">
+<value>(pПуть ввода файла
+(f):Входное имя файла
+(o):Выходная расширение тип
+(i):Тип расширения ввода
+(d0):Введите родительскую папку
+(d1):Входная папка Sub Parent
 ...
-(n:i): page number index
-(n:c): total page count
+(n:i):Индекс номера страницы
+(n:c):Общее количество страниц
 
-Special paths:
-(p:d): my documents path
-(p:m): my music path
-(p:v): my videos path
-(p:p): my pictures path
+SpecialСпециальные пути:
+(p:d):мой путь документов
+(p:m):мой музыкальный путь
+(p:v):мой видео
+(p:p):мои картинки пути
 
-use maj for uppercase version</value>
-  </data>
-  <data name="OutputFormat" xml:space="preserve">
-    <value>Output format</value>
-  </data>
-  <data name="Preset" xml:space="preserve">
-    <value>Preset</value>
-  </data>
-  <data name="PresetName" xml:space="preserve">
-    <value>Preset Name</value>
-  </data>
-  <data name="Quality" xml:space="preserve">
-    <value>Quality :</value>
-  </data>
-  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
-    <value>Recommended bitrate range in blue</value>
-  </data>
-  <data name="RemoveSelectedPreset" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="Rotate" xml:space="preserve">
-    <value>Rotate :</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Scale" xml:space="preserve">
-    <value>Scale :</value>
-  </data>
-  <data name="SeeChangeLog" xml:space="preserve">
-    <value>See change log ...</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="SettingsButtonTooltip" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
-    <value>270°</value>
-  </data>
-  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
-    <value>90° clockwise rotation</value>
-  </data>
-  <data name="UpgradeAvailable" xml:space="preserve">
-    <value>An update for File Converter is available. It is strongly recommended that you install it as soon as possible!</value>
-  </data>
-  <data name="UpgradeDownloadInProgress" xml:space="preserve">
-    <value>Upgrade download in progress...</value>
-  </data>
-  <data name="UpgradeWindowTitle" xml:space="preserve">
-    <value>File Converter Updates</value>
-  </data>
-  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
-    <value>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</value>
-  </data>
-  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
-    <value>Faster</value>
-  </data>
-  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
-    <value>Fast</value>
-  </data>
-  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
-    <value>Medium</value>
-  </data>
-  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
-    <value>Slower</value>
-  </data>
-  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
-    <value>Slow</value>
-  </data>
-  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
-    <value>Super Fast</value>
-  </data>
-  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
-    <value>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</value>
-  </data>
-  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
-    <value>Ultra Fast</value>
-  </data>
-  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
-    <value>Very Fast</value>
-  </data>
-  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
-    <value>Very Slow</value>
-  </data>
-  <data name="VideoTitle" xml:space="preserve">
-    <value>Video</value>
-  </data>
-  <data name="Wav16bitsDescription" xml:space="preserve">
-    <value>PCM signed 16-bit little-endian</value>
-  </data>
-  <data name="Wav24bitsDescription" xml:space="preserve">
-    <value>PCM signed 24-bit little-endian</value>
-  </data>
-  <data name="Wav32bitsDescription" xml:space="preserve">
-    <value>PCM signed 32-bit little-endian</value>
-  </data>
-  <data name="Wav8bitsDescription" xml:space="preserve">
-    <value>PCM signed 8-bit little-endian</value>
-  </data>
-  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
-    <value>No rotation</value>
-  </data>
-  <data name="ConversionStateConversion" xml:space="preserve">
-    <value>Conversion</value>
-  </data>
-  <data name="ConversionStateDone" xml:space="preserve">
-    <value>Done</value>
-  </data>
-  <data name="ConversionStateExtraction" xml:space="preserve">
-    <value>Extraction</value>
-  </data>
-  <data name="ConversionStateFailed" xml:space="preserve">
-    <value>Failed</value>
-  </data>
-  <data name="ConversionStateInQueue" xml:space="preserve">
-    <value>In queue</value>
-  </data>
-  <data name="ConversionStateReadIntputImage" xml:space="preserve">
-    <value>Read input image</value>
-  </data>
-  <data name="ConversionStateReadDocument" xml:space="preserve">
-    <value>Read document</value>
-  </data>
-  <data name="StringAnimatedImageName" xml:space="preserve">
-    <value>Animated Image</value>
-  </data>
-  <data name="StringAudioName" xml:space="preserve">
-    <value>Audio</value>
-  </data>
-  <data name="StringDocumentName" xml:space="preserve">
-    <value>Document</value>
-  </data>
-  <data name="StringImageName" xml:space="preserve">
-    <value>Image</value>
-  </data>
-  <data name="StringVideoName" xml:space="preserve">
-    <value>Video</value>
-  </data>
-  <data name="ExitWaitingDuration" xml:space="preserve">
-    <value>Waiting duration before application exit</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
-    <value>Maximum number of simultaneous conversions</value>
-  </data>
-  <data name="DefaultPresetName" xml:space="preserve">
-    <value>New preset</value>
-  </data>
-  <data name="DownloadingChangeLog" xml:space="preserve">
-    <value>###Downloading change log ...</value>
-  </data>
-  <data name="ConversionArchives" xml:space="preserve">
-    <value>Conversion Archives</value>
-  </data>
-  <data name="ErrorCanceled" xml:space="preserve">
-    <value>Canceled.</value>
-  </data>
-  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
-    <value>Fail to find ffmpeg executable. You should try to reinstall the application.</value>
-  </data>
-  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
-    <value>Audio CD track extraction failed.</value>
-  </data>
-  <data name="ErrorCDDriveNotReady" xml:space="preserve">
-    <value>CD drive is not ready.</value>
-  </data>
-  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
-    <value>Fail to launch ffmpeg.</value>
-  </data>
-  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
-    <value>Fail to create output path folders.</value>
-  </data>
-  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
-    <value>Fail to generate a unique output file path.</value>
-  </data>
-  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
-    <value>Fail to read cd drive '{0}'.</value>
-  </data>
-  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
-    <value>Fail to retrieve input path drive letter.</value>
-  </data>
-  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
-    <value>Fail to retrieve track number from the cda input path.</value>
-  </data>
-  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
-    <value>Fail to use the CD drive because it is oppened.</value>
-  </data>
-  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
-    <value>The input file type is not compatible with the selected output file type.</value>
-  </data>
-  <data name="ErrorInvalidOutputPath" xml:space="preserve">
-    <value>Invalid output path generated by output file path template.</value>
-  </data>
-  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
-    <value>Unsupported output format '{0}'.</value>
-  </data>
-  <data name="ChannelCountTitle" xml:space="preserve">
-    <value>Channel count :</value>
-  </data>
-  <data name="ChannelCountTooltip" xml:space="preserve">
-    <value>Change the number of channels of the input file.</value>
-  </data>
-  <data name="MonoOption" xml:space="preserve">
-    <value>Mono</value>
-  </data>
-  <data name="SameChannelCountOption" xml:space="preserve">
-    <value>Same than input file</value>
-  </data>
-  <data name="StereoOption" xml:space="preserve">
-    <value>Stereo</value>
-  </data>
-  <data name="LicenceHeader1" xml:space="preserve">
-    <value>**This program is free software**.</value>
-  </data>
-  <data name="LicenceHeader2" xml:space="preserve">
-    <value>You can redistribute it and/or modify it under the terms of the GNU General Public License.</value>
-  </data>
-  <data name="LicenceHeader3" xml:space="preserve">
-    <value>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.</value>
-  </data>
-  <data name="ApplicationIsTerminating" xml:space="preserve">
-    <value>The application is terminating.</value>
-  </data>
-  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
-    <value>The application will automatically terminate in {0} seconds.</value>
-  </data>
-  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
-    <value>The application will automatically terminate in 1 second.</value>
-  </data>
-  <data name="StringMiscName" xml:space="preserve">
-    <value>Misc</value>
-  </data>
-  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
-    <value>Can't find the output file(s).</value>
-  </data>
-  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
-    <value>The conversion job failed but there is an output file that does exists.</value>
-  </data>
-  <data name="ConversionStatePrepareConversion" xml:space="preserve">
-    <value>Prepare conversion</value>
-  </data>
-  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
-    <value>Microsoft Office must be installed in order to convert Office documents.</value>
-  </data>
-  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
-    <value>Fail to open document with Microsoft Office (check if your licence/installation is valid).</value>
-  </data>
-  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
-    <value>Microsoft Excel must be installed in order to convert Excel documents.</value>
-  </data>
-  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
-    <value>Microsoft PowerPoint must be installed in order to convert PowerPoint documents.</value>
-  </data>
-  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
-    <value>Microsoft Word must be installed in order to convert Word documents.</value>
-  </data>
-  <data name="WebsiteButtonDescription" xml:space="preserve">
-    <value>Open File Converter website</value>
-  </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>Say Thanks!</value>
-  </data>
-  <data name="ErrorDuringJobInitialization" xml:space="preserve">
-    <value>Error during conversion job initialization.</value>
-  </data>
-  <data name="CreateANewFolder" xml:space="preserve">
-    <value>New folder</value>
-  </data>
-  <data name="DefaultFolderName" xml:space="preserve">
-    <value>New folder</value>
-  </data>
-  <data name="PresetFolder" xml:space="preserve">
-    <value>Folder</value>
-  </data>
-  <data name="PresetFolderName" xml:space="preserve">
-    <value>Folder Name</value>
-  </data>
-  <data name="AdvancedMode" xml:space="preserve">
-    <value>Advanced mode</value>
-  </data>
-  <data name="FFMPEGCustomArguments" xml:space="preserve">
-    <value>Custom Arguments</value>
-  </data>
-  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
-    <value>Custom FFMPEG command line arguments</value>
-  </data>
-  <data name="NoPresetSelected" xml:space="preserve">
-    <value>No preset selected</value>
-  </data>
-  <data name="ExportSelectedPresets" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="ImportPresets" xml:space="preserve">
-    <value>Import</value>
-  </data>
-  <data name="DuplicatePreset" xml:space="preserve">
-    <value>Duplicate preset</value>
-  </data>
-  <data name="CancelJobTooltip" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="ErrorCantLoadSettings" xml:space="preserve">
-    <value>Can't load file converter user settings. Do you want to fall back to default settings ?</value>
-  </data>
+useИспользуйте MAJ для верхней версии </value>
+</data>
+<data name="OutputFormat" xml:space="preserve">
+<value>Выходной формат</value>
+</data>
+<data name="Preset" xml:space="preserve">
+<value>Предустановка</value>
+</data>
+<data name="PresetName" xml:space="preserve">
+<value>Предустановленное название</value>
+</data>
+<data name="Quality" xml:space="preserve">
+<value>Качество :</value>
+</data>
+<data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+<value>Рекомендуемый битрейный диапазон в синем</value>
+</data>
+<data name="RemoveSelectedPreset" xml:space="preserve">
+<value>Удалить</value>
+</data>
+<data name="Rotate" xml:space="preserve">
+<value>Поверните:</value>
+</data>
+<data name="Save" xml:space="preserve">
+<value>Сохранить</value>
+</data>
+<data name="Scale" xml:space="preserve">
+<value>Шкала :</value>
+</data>
+<data name="SeeChangeLog" xml:space="preserve">
+<value>Смотрите журнал об изменении ...</value>
+</data>
+<data name="Settings" xml:space="preserve">
+<value>Настройки</value>
+</data>
+<data name="SettingsButtonTooltip" xml:space="preserve">
+<value>Настройки</value>
+</data>
+<data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+<value>270 °</value>
+</data>
+<data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+<value>90 ° вращение по часовой стрелке</value>
+</data>
+<data name="UpgradeAvailable" xml:space="preserve">
+<value>Обновление для преобразователя файлов доступно. Настоятельно рекомендуется установить его как можно скорее!</value>
+</data>
+<data name="UpgradeDownloadInProgress" xml:space="preserve">
+<value>Обновить скачать в процессе ...</value>
+</data>
+<data name="UpgradeWindowTitle" xml:space="preserve">
+<value>Обновления конвертера файла</value>
+</data>
+<data name="VideoEncodingQualityTooltip" xml:space="preserve">
+<value>Определите соотношение «размер файла» против «качества видео». Более низкое значение даст вам меньший файл, более высокое значение дает вам лучшее качество видео.</value>
+</data>
+<data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+<value>Быстрее</value>
+</data>
+<data name="VideoEncodingSpeedFastName" xml:space="preserve">
+<value>Быстрый</value>
+</data>
+<data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+<value>Середина</value>
+</data>
+<data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+<value>Помедленнее</value>
+</data>
+<data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+<value>Медленный</value>
+</data>
+<data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+<value>Сверх быстрый</value>
+</data>
+<data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+<value>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</value>
+</data>
+<data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+<value>Ультра быстро</value>
+</data>
+<data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+<value>Очень быстро</value>
+</data>
+<data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+<value>Очень медленно</value>
+</data>
+<data name="VideoTitle" xml:space="preserve">
+<value>видео</value>
+</data>
+<data name="Wav16bitsDescription" xml:space="preserve">
+<value>PCM подписан 16-битный маленький</value>
+</data>
+<data name="Wav24bitsDescription" xml:space="preserve">
+<value>PCM подписан 24-битный маленький</value>
+</data>
+<data name="Wav32bitsDescription" xml:space="preserve">
+<value>PCM подписал 32-битный маленький эндиан</value>
+</data>
+<data name="Wav8bitsDescription" xml:space="preserve">
+<value>PCM подписан 8-битный маленький</value>
+</data>
+<data name="ZeroDegreesRotationTitle" xml:space="preserve">
+<value>Никто</value>
+</data>
+<data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+<value>Нет ротации</value>
+</data>
+<data name="ConversionStateConversion" xml:space="preserve">
+<value>Обращение</value>
+</data>
+<data name="ConversionStateDone" xml:space="preserve">
+<value>Сделанный</value>
+</data>
+<data name="ConversionStateExtraction" xml:space="preserve">
+<value>Извлечение</value>
+</data>
+<data name="ConversionStateFailed" xml:space="preserve">
+<value>Не удалось</value>
+</data>
+<data name="ConversionStateInQueue" xml:space="preserve">
+<value>В очереди</value>
+</data>
+<data name="ConversionStateReadIntputImage" xml:space="preserve">
+<value>Прочитайте входное изображение</value>
+</data>
+<data name="ConversionStateReadDocument" xml:space="preserve">
+<value>Прочитать документ</value>
+</data>
+<data name="StringAnimatedImageName" xml:space="preserve">
+<value>Анимированное изображение</value>
+</data>
+<data name="StringAudioName" xml:space="preserve">
+<value>Аудио</value>
+</data>
+<data name="StringDocumentName" xml:space="preserve">
+<value>Документ</value>
+</data>
+<data name="StringImageName" xml:space="preserve">
+<value>Изображение</value>
+</data>
+<data name="StringVideoName" xml:space="preserve">
+<value>видео</value>
+</data>
+<data name="ExitWaitingDuration" xml:space="preserve">
+<value>Продолжительность ожидания перед выходом заявки</value>
+</data>
+<data name="Language" xml:space="preserve">
+<value>Язык</value>
+</data>
+<data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+<value>Максимальное количество одновременных преобразований</value>
+</data>
+<data name="DefaultPresetName" xml:space="preserve">
+<value>Новый пресет</value>
+</data>
+<data name="DownloadingChangeLog" xml:space="preserve">
+<value>###Downloading change log ...</value>
+</data>
+<data name="ConversionArchives" xml:space="preserve">
+<value>Архив конверсии</value>
+</data>
+<data name="ErrorCanceled" xml:space="preserve">
+<value>Отменен.</value>
+</data>
+<data name="ErrorCantFindFFMPEG" xml:space="preserve">
+<value>Не найти исполняемого файла ffmpeg. Вы должны попытаться переустановить приложение.</value>
+</data>
+<data name="ErrorCDAExtractionFailed" xml:space="preserve">
+<value>Аудио CD -трек удалил.</value>
+</data>
+<data name="ErrorCDDriveNotReady" xml:space="preserve">
+<value>CD Drive не готов.</value>
+</data>
+<data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+<value>Не запустить FFMPEG.</value>
+</data>
+<data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+<value>Не создать папки выходных путей.</value>
+</data>
+<data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+<value>Не сгенерирует уникальный путь выходного файла.</value>
+</data>
+<data name="ErrorFailToReadCDDrive" xml:space="preserve">
+<value>Не прочитайте диск CD '{0}'.0}'.</value>
+</data>
+<data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+<value>Не удастся получить букву привода пути ввода.</value>
+</data>
+<data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+<value>Не удалось получить номер трека из пути ввода CDA.</value>
+</data>
+<data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+<value>Не используйте диск компакт -диска, потому что он противоречит.</value>
+</data>
+<data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+<value>Тип ввода файла не совместим с выбранным типом выходного файла.</value>
+</data>
+<data name="ErrorInvalidOutputPath" xml:space="preserve">
+<value>Неверный выходной путь, сгенерированный шаблоном пути выходного файла.</value>
+</data>
+<data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+<value>Неподдерживаемый выходной формат '{0}'.0}'.</value>
+</data>
+<data name="ChannelCountTitle" xml:space="preserve">
+<value>Количество каналов:</value>
+</data>
+<data name="ChannelCountTooltip" xml:space="preserve">
+<value>Измените количество каналов входного файла.</value>
+</data>
+<data name="MonoOption" xml:space="preserve">
+<value>Мононуклеоз</value>
+</data>
+<data name="SameChannelCountOption" xml:space="preserve">
+<value>То же самое, чем входной файл</value>
+</data>
+<data name="StereoOption" xml:space="preserve">
+<value>Стерео</value>
+</data>
+<data name="LicenceHeader1" xml:space="preserve">
+<value>**This program is free software**.</value>
+</data>
+<data name="LicenceHeader2" xml:space="preserve">
+<value>Вы можете перераспределить его и/или изменить его в соответствии с условиями общей публичной лицензии GNU.</value>
+</data>
+<data name="LicenceHeader3" xml:space="preserve">
+<value>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.</value>
+</data>
+<data name="ApplicationIsTerminating" xml:space="preserve">
+<value>Приложение завершается.</value>
+</data>
+<data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+<value>The application will automatically terminate in {0} seconds.</value>
+</data>
+<data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+<value>Приложение автоматически завершится через 1 секунду.</value>
+</data>
+<data name="StringMiscName" xml:space="preserve">
+<value>Разное</value>
+</data>
+<data name="ErrorCantFindOutputFiles" xml:space="preserve">
+<value>Can't find the output file(s).</value>
+</data>
+<data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+<value>Задача преобразования не удалась, но существует выходной файл, который существует.</value>
+</data>
+<data name="ConversionStatePrepareConversion" xml:space="preserve">
+<value>Подготовьте конверсию</value>
+</data>
+<data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+<value>Microsoft Office должен быть установлен для преобразования офисных документов.</value>
+</data>
+<data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+<value>Fail to open document with Microsoft Office (check if your licence/installation is valid).</value>
+</data>
+<data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+<value>Microsoft Excel должна быть установлена ​​для преобразования документов Excel.</value>
+</data>
+<data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+<value>Microsoft PowerPoint должен быть установлен для преобразования документов PowerPoint.</value>
+</data>
+<data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+<value>Microsoft Word должен быть установлен для преобразования документов Word.</value>
+</data>
+<data name="WebsiteButtonDescription" xml:space="preserve">
+<value>Веб -сайт Open File Converter</value>
+</data>
+<data name="SayThanksButtonTitle" xml:space="preserve">
+<value>Скажи спасибо!</value>
+</data>
+<data name="ErrorDuringJobInitialization" xml:space="preserve">
+<value>Ошибка во время инициализации задания преобразования.</value>
+</data>
+<data name="CreateANewFolder" xml:space="preserve">
+<value>Новая папка</value>
+</data>
+<data name="DefaultFolderName" xml:space="preserve">
+<value>Новая папка</value>
+</data>
+<data name="PresetFolder" xml:space="preserve">
+<value>Папка</value>
+</data>
+<data name="PresetFolderName" xml:space="preserve">
+<value>Имя папки</value>
+</data>
+<data name="AdvancedMode" xml:space="preserve">
+<value>Расширенный режим</value>
+</data>
+<data name="FFMPEGCustomArguments" xml:space="preserve">
+<value>Пользовательские аргументы</value>
+</data>
+<data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+<value>Пользовательские аргументы командной строки ffmpeg</value>
+</data>
+<data name="NoPresetSelected" xml:space="preserve">
+<value>Не выбрана предустановка</value>
+</data>
+<data name="ExportSelectedPresets" xml:space="preserve">
+<value>Экспорт</value>
+</data>
+<data name="ImportPresets" xml:space="preserve">
+<value>Импортировать</value>
+</data>
+<data name="DuplicatePreset" xml:space="preserve">
+<value>Дублировать предустановку</value>
+</data>
+<data name="CancelJobTooltip" xml:space="preserve">
+<value>Отмена</value>
+</data>
+<data name="Error" xml:space="preserve">
+<value>Ошибка</value>
+</data>
+<data name="ErrorCantLoadSettings" xml:space="preserve">
+<value>Не могу загрузить настройки пользователя конвертера файла. Вы хотите вернуться к настройкам по умолчанию??</value>
+</data>
 </root>
