@@ -22,7 +22,8 @@ namespace FileConverter
         private bool checkUpgradeAtStartup = true;
         private CultureInfo applicationLanguage;
         private int maximumNumberOfSimultaneousConversions;
-        
+        private bool checkCopyFileAfterConverting = false;
+
         public ConversionPreset GetPresetFromName(string presetName)
         {
             return this.conversionPresets.FirstOrDefault(match => match.FullName == presetName);
@@ -207,6 +208,20 @@ namespace FileConverter
             }
         }
 
+        [XmlElement]
+        public bool CheckCopyFileAfterConverting
+        {
+            get
+            {
+                return this.checkCopyFileAfterConverting;
+            }
+
+            set
+            {
+                this.checkCopyFileAfterConverting = value;
+                this.RaisePropertyChanged();
+            }
+        }
         public void OnDeserializationComplete()
         {
             this.DurationBetweenEndOfConversionsAndApplicationExit = System.Math.Max(0, System.Math.Min(10, this.DurationBetweenEndOfConversionsAndApplicationExit));

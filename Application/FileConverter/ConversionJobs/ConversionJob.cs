@@ -8,6 +8,9 @@ namespace FileConverter.ConversionJobs
     using System.Windows.Input;
 
     using FileConverter.Diagnostics;
+    using GalaSoft.MvvmLight.Ioc;
+    using System.Threading;
+    using FileConverter.Services;
 
     using GalaSoft.MvvmLight.Command;
 
@@ -445,6 +448,15 @@ namespace FileConverter.ConversionJobs
             this.State = ConversionState.Done;
             this.UserState = Properties.Resources.ConversionStateDone;
             Debug.Log("Conversion Done!");
+
+            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            // Copy the output file to the clipboard using Task
+            if (settingsService.Settings.CheckCopyFileAfterConverting)
+            {
+                Thread clipboardThread = new Thread(CopyFileToClipboard);
+                clipboardThread.SetApartmentState(ApartmentState.STA);
+                clipboardThread.Start();
+            }
         }
 
         protected void ConversionFailed(string exitingMessage)
@@ -525,6 +537,20 @@ namespace FileConverter.ConversionJobs
             }
 
             return false;
+        }
+
+        private void CopyFileToClipboard()
+        {
+            try
+            {
+                System.Windows.Forms.Clipboard.SetFileDropList(new System.Collections.Specialized.StringCollection { OutputFilePath });
+                Debug.Log("Output file copied to the clipboard: '{0}'", OutputFilePath);
+            }
+            catch (Exception exception)
+            {
+                Debug.Log("Can't copy file '{0}' to the clipboard.", OutputFilePath);
+                Debug.Log("An exception has been thrown: {0}.", exception.ToString());
+            }
         }
     }
 }
