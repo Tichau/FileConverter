@@ -65,6 +65,7 @@ namespace FileConverter.Services
                 this.ConversionJobs[index].PrepareConversion();
             }
 
+            System.Collections.Specialized.StringCollection files = new System.Collections.Specialized.StringCollection();
             // Convert!
             Thread[] jobThreads = new Thread[this.numberOfConversionThread];
             while (true)
@@ -118,11 +119,25 @@ namespace FileConverter.Services
                             }
                         }
 
+                        if (!files.Contains(conversionJob.OutputFilePath))
+                        {
+                            files.Add(conversionJob.OutputFilePath);
+                        }
+
                         break;
                     }
                 }
 
                 Thread.Sleep(50);
+            }
+
+            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            // Copy the output files to the clipboard
+            if (settingsService.Settings.CheckCopyFilesAfterConverting && files.Count > 0)
+            {
+                Thread clipboardThread = Helpers.InstantiateThread("CopyFilesToClipboardThread", this.CopyFilesToClipboard);
+                clipboardThread.SetApartmentState(ApartmentState.STA);
+                clipboardThread.Start(files);
             }
 
             bool allConversionsSucceed = true;
@@ -158,6 +173,25 @@ namespace FileConverter.Services
             catch (Exception exception)
             {
                 Debug.LogError("Failure during conversion: {0}", exception.ToString());
+            }
+        }
+
+        private void CopyFilesToClipboard(object _filePaths)
+        {
+            try
+            {
+                System.Collections.Specialized.StringCollection FilePaths = _filePaths as System.Collections.Specialized.StringCollection;
+                System.Windows.Forms.Clipboard.SetFileDropList(FilePaths);
+                Debug.Log("Output files copied to the clipboard:");
+                for (int index = 0; index < FilePaths.Count; index++)
+                {
+                    Debug.Log("  {0}", FilePaths[index]);
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.Log("Can't copy files to the clipboard.");
+                Debug.Log("An exception has been thrown: {0}.", exception.ToString());
             }
         }
     }

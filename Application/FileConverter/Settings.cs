@@ -209,7 +209,7 @@ namespace FileConverter
         }
 
         [XmlElement]
-        public bool CheckCopyFileAfterConverting
+        public bool CheckCopyFilesAfterConverting
         {
             get
             {
