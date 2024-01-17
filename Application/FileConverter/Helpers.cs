@@ -15,9 +15,9 @@ namespace FileConverter
 
     using SharpShell;
     using SharpShell.ServerRegistration;
-    using GalaSoft.MvvmLight.Ioc;
 
     using Microsoft.Win32;
+    using CommunityToolkit.Mvvm.DependencyInjection;
 
     public static class Helpers
     {
@@ -243,7 +243,7 @@ namespace FileConverter
 
         public static Thread InstantiateThread(string name, ThreadStart threadStart)
         {
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(threadStart);
@@ -260,7 +260,7 @@ namespace FileConverter
 
         public static Thread InstantiateThread(string name, ParameterizedThreadStart parameterizedThreadStart)
         {
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(parameterizedThreadStart);

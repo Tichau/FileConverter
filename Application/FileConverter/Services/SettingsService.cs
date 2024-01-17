@@ -9,8 +9,7 @@ namespace FileConverter.Services
     using System.IO;
     using System.Windows;
 
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Ioc;
+    using CommunityToolkit.Mvvm.ComponentModel;
 
     using Debug = FileConverter.Diagnostics.Debug;
 
@@ -21,8 +20,6 @@ namespace FileConverter.Services
             // Load settigns.
             Debug.Log("Load settings...");
             this.Settings = this.Load();
-
-            SimpleIoc.Default.Register<ISettingsService>(() => this);
         }
 
         public Settings Settings

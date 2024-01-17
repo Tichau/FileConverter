@@ -26,7 +26,7 @@ namespace FileConverter.ConversionJobs
             get;
         }
 
-        protected override bool IsCancelable => false;
+        protected override bool IsCancelable() => false;
 
         protected override void Initialize()
         {

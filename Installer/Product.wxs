@@ -84,22 +84,6 @@
             </Component>
             
             <!-- Third parties -->
-            <Component Guid="{FF99FD36-9C73-472D-AA18-9384DB7708A6}">
-              <File Id="CommonServiceLocator.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)CommonServiceLocator.dll" Checksum="yes" />
-            </Component>
-            <Component Guid="{2D5509A2-A752-4E4D-A706-E90F041D0B7D}">
-              <File Id="GalaSoft.MvvmLight.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)GalaSoft.MvvmLight.dll" Checksum="yes" />
-            </Component>
-            <Component Guid="{D4F2C1DD-800D-407D-B863-1FE6C3069D3C}">
-              <File Id="GalaSoft.MvvmLight.Extras.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)GalaSoft.MvvmLight.Extras.dll" Checksum="yes" />
-            </Component>
-            <Component Guid="{48D1EE43-F7D7-4611-B3AC-B2652ED68261}">
-              <File Id="GalaSoft.MvvmLight.Platform.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)GalaSoft.MvvmLight.Platform.dll" Checksum="yes" />
-            </Component>
-            <Component Guid="{08FB2B2B-7686-4698-B864-0AD39CF3128D}">
-              <File Id="System.Windows.Interactivity.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)System.Windows.Interactivity.dll" Checksum="yes" />
-            </Component>
-
             <Component Guid="{BEEAAC73-C479-4080-83B1-2B1448C7378C}">
                 <File Id="___var.FileConverter.TargetDir_ffmpeg.exe" Source="$(var.FileConverter.TargetDir)ffmpeg.exe" KeyPath="yes" Checksum="yes" />
             </Component>

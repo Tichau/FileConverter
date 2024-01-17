@@ -9,34 +9,23 @@ namespace FileConverter.ViewModels
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
-    using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
+
+    using Microsoft.Win32;
+    
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    using CommunityToolkit.Mvvm.Input;
 
     using FileConverter.Annotations;
     using FileConverter.Services;
     using FileConverter.Views;
 
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Command;
-    using GalaSoft.MvvmLight.Ioc;
-    using GalaSoft.MvvmLight.Messaging;
-
-    using Microsoft.Win32;
-
     /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
+    /// This class contains properties that the settings View can data bind to.
     /// </summary>
-    public class SettingsViewModel : ViewModelBase, IDataErrorInfo
+    public class SettingsViewModel : ObservableRecipient, IDataErrorInfo
     {
         private InputExtensionCategory[] inputCategories;
         private PresetFolderNode presetsRootFolder;
@@ -59,6 +48,9 @@ namespace FileConverter.ViewModels
         private ListCollectionView outputTypes;
         private CultureInfo[] supportedCultures;
 
+        public event Action OnPresetCreated;
+        public event Action OnFolderCreated;
+
         /// <summary>
         /// Initializes a new instance of the SettingsViewModel class.
         /// </summary>
@@ -75,42 +67,33 @@ namespace FileConverter.ViewModels
             this.saveCommand = new RelayCommand(this.SaveSettings, this.CanSaveSettings);
             this.closeCommand = new RelayCommand<CancelEventArgs>(this.CloseSettings);
 
-            if (this.IsInDesignMode)
-            {
-                // Code runs in Blend --> create design time data.
-                this.Settings = new Settings();
-                this.Settings.ConversionPresets.Add(new ConversionPreset("Test", OutputType.Mp3));
-            }
-            else
-            {
-                ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
-                this.Settings = settingsService.Settings;
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
+            this.Settings = settingsService.Settings;
 
-                List<OutputTypeViewModel> outputTypeViewModels = new List<OutputTypeViewModel>();
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ogg));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Mp3));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Aac));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Flac));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Wav));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Mkv));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Mp4));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ogv));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Webm));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Avi));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Png));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Jpg));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Webp));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ico));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Gif));
-                outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Pdf));
-                this.outputTypes = new ListCollectionView(outputTypeViewModels);
-                this.outputTypes.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
+            List<OutputTypeViewModel> outputTypeViewModels = new List<OutputTypeViewModel>();
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ogg));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Mp3));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Aac));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Flac));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Wav));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Mkv));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Mp4));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ogv));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Webm));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Avi));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Png));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Jpg));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Webp));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ico));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Gif));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Pdf));
+            this.outputTypes = new ListCollectionView(outputTypeViewModels);
+            this.outputTypes.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
 
-                this.SupportedCultures = Helpers.GetSupportedCultures().ToArray();
+            this.SupportedCultures = Helpers.GetSupportedCultures().ToArray();
 
-                this.InitializeCompatibleInputExtensions();
-                this.InitializePresetFolders();
-            }
+            this.InitializeCompatibleInputExtensions();
+            this.InitializePresetFolders();
         }
 
         public IEnumerable<InputExtensionCategory> InputCategories
@@ -147,7 +130,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.presetsRootFolder = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -181,7 +164,7 @@ namespace FileConverter.ViewModels
                     this.SelectedFolder = null;
                 }
 
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -193,11 +176,11 @@ namespace FileConverter.ViewModels
             {
                 this.selectedFolder = value;
 
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged(nameof(this.SelectedItem));
-                this.removePresetCommand?.RaiseCanExecuteChanged();
-                this.exportPresetCommand?.RaiseCanExecuteChanged();
-                this.duplicatePresetCommand?.RaiseCanExecuteChanged();
+                this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.SelectedItem));
+                this.removePresetCommand?.NotifyCanExecuteChanged();
+                this.exportPresetCommand?.NotifyCanExecuteChanged();
+                this.duplicatePresetCommand?.NotifyCanExecuteChanged();
             }
         }
 
@@ -219,12 +202,12 @@ namespace FileConverter.ViewModels
                     this.selectedPreset.Preset.PropertyChanged += this.SelectedPresetPropertyChanged;
                 }
 
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged(nameof(this.SelectedItem));
-                this.RaisePropertyChanged(nameof(this.InputCategories));
-                this.removePresetCommand?.RaiseCanExecuteChanged();
-                this.exportPresetCommand?.RaiseCanExecuteChanged();
-                this.duplicatePresetCommand?.RaiseCanExecuteChanged();
+                this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.SelectedItem));
+                this.OnPropertyChanged(nameof(this.InputCategories));
+                this.removePresetCommand?.NotifyCanExecuteChanged();
+                this.exportPresetCommand?.NotifyCanExecuteChanged();
+                this.duplicatePresetCommand?.NotifyCanExecuteChanged();
             }
         }
 
@@ -235,7 +218,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.settings = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -245,7 +228,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.supportedCultures = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -255,7 +238,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.outputTypes = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
         
@@ -270,7 +253,7 @@ namespace FileConverter.ViewModels
             {
                 this.displaySeeChangeLogLink = value;
 
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
         
@@ -375,20 +358,20 @@ namespace FileConverter.ViewModels
         {
             if (eventArgs.PropertyName == "OutputType")
             {
-                this.RaisePropertyChanged(nameof(this.InputCategories));
+                this.OnPropertyChanged(nameof(this.InputCategories));
             }
 
-            this.saveCommand.RaiseCanExecuteChanged();
+            this.saveCommand.NotifyCanExecuteChanged();
         }
 
         private void NodePropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
         {
-            this.saveCommand.RaiseCanExecuteChanged();
+            this.saveCommand.NotifyCanExecuteChanged();
         }
 
         private void DownloadChangeLogAction()
         {
-            IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+            IUpgradeService upgradeService = Ioc.Default.GetRequiredService<IUpgradeService>();
             upgradeService.DownloadChangeLog();
             this.DisplaySeeChangeLogLink = false;
         }
@@ -411,7 +394,7 @@ namespace FileConverter.ViewModels
             }
 
             this.inputCategories = categories.ToArray();
-            this.RaisePropertyChanged(nameof(this.InputCategories));
+            this.OnPropertyChanged(nameof(this.InputCategories));
         }
 
         private void InitializePresetFolders()
@@ -434,7 +417,7 @@ namespace FileConverter.ViewModels
                 this.CreatePresetNode(preset, parent);
             }
 
-            this.RaisePropertyChanged(nameof(this.PresetsRootFolder));
+            this.OnPropertyChanged(nameof(this.PresetsRootFolder));
         }
 
         private void ComputePresetsParentFoldersNamesAndFillSettings(AbstractTreeNode node, List<string> folderNamesCache)
@@ -465,10 +448,10 @@ namespace FileConverter.ViewModels
 
         private void CloseSettings(CancelEventArgs args)
         {
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             settingsService.RevertSettings();
 
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
             navigationService.Close(Pages.Settings, args != null);
         }
 
@@ -484,10 +467,10 @@ namespace FileConverter.ViewModels
             this.ComputePresetsParentFoldersNamesAndFillSettings(this.presetsRootFolder, new List<string>());
             
             // Save changes.
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             settingsService.SaveSettings();
 
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
             navigationService.Close(Pages.Settings, false);
         }
 
@@ -530,9 +513,9 @@ namespace FileConverter.ViewModels
 
             this.SelectedItem = newFolder;
 
-            this.saveCommand.RaiseCanExecuteChanged();
+            this.saveCommand.NotifyCanExecuteChanged();
 
-            Messenger.Default.Send<string>("FolderName", "DoFocus");
+            this.OnFolderCreated();
         }
 
         private bool CanDuplicateSelectedPreset()
@@ -590,10 +573,10 @@ namespace FileConverter.ViewModels
 
             this.SelectedItem = node;
 
-            Messenger.Default.Send<string>("PresetName", "DoFocus");
+            this.OnPresetCreated.Invoke();
 
-            this.removePresetCommand.RaiseCanExecuteChanged();
-            this.saveCommand.RaiseCanExecuteChanged();
+            this.removePresetCommand.NotifyCanExecuteChanged();
+            this.saveCommand.NotifyCanExecuteChanged();
         }
 
         private void ImportPreset()
@@ -699,8 +682,8 @@ namespace FileConverter.ViewModels
 
             this.SelectedItem = null;
 
-            this.removePresetCommand.RaiseCanExecuteChanged();
-            this.saveCommand.RaiseCanExecuteChanged();
+            this.removePresetCommand.NotifyCanExecuteChanged();
+            this.saveCommand.NotifyCanExecuteChanged();
         }
 
         private bool CanRemoveSelectedPreset()
@@ -708,9 +691,9 @@ namespace FileConverter.ViewModels
             return this.SelectedItem != null;
         }
 
-        public override void Cleanup()
+        protected override void OnDeactivated()
         {
-            base.Cleanup();
+            base.OnDeactivated();
 
             this.UnbindNode(this.presetsRootFolder);
         }

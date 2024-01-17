@@ -7,8 +7,8 @@ namespace FileConverter.ValueConverters
     using System.Linq;
     using System.Windows.Data;
 
-    using CommonServiceLocator;
-
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    
     using FileConverter.ViewModels;
 
     public class OutputTypeEnumToViewModel : IValueConverter
@@ -22,7 +22,7 @@ namespace FileConverter.ValueConverters
 
             OutputType outputType = (OutputType)value;
 
-            SettingsViewModel settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+            SettingsViewModel settingsViewModel = Ioc.Default.GetRequiredService<SettingsViewModel>();
 
             return settingsViewModel.OutputTypes.Cast<OutputTypeViewModel>()
                 .FirstOrDefault(match => match.Type == outputType);

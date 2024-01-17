@@ -3,7 +3,6 @@
 namespace FileConverter.Services
 {
     using System;
-    using System.ComponentModel;
     using System.IO;
     using System.Net;
     using System.Text.RegularExpressions;
@@ -11,11 +10,10 @@ namespace FileConverter.Services
     using System.Xml;
     using System.Xml.Serialization;
 
+    using CommunityToolkit.Mvvm.ComponentModel;
+
     using FileConverter.Annotations;
     using FileConverter.Diagnostics;
-
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Ioc;
 
     public class UpgradeService : ObservableObject, IUpgradeService
     {
@@ -33,7 +31,6 @@ namespace FileConverter.Services
         public UpgradeService()
         {
             this.UpgradeVersionDescription = new UpgradeVersionDescription();
-            SimpleIoc.Default.Register<IUpgradeService>(() => this);
         }
 
         public event EventHandler<UpgradeVersionDescription> NewVersionAvailable;
@@ -44,7 +41,7 @@ namespace FileConverter.Services
             private set
             {
                 this.upgradeVersionDescription = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
         

@@ -2,10 +2,11 @@
 
 namespace FileConverter.ViewModels
 {
-    using CommonServiceLocator;
-    using GalaSoft.MvvmLight;
     using System.ComponentModel;
     using System.Collections.Generic;
+
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.DependencyInjection;
 
     public class InputExtensionCategory : ObservableObject
     {
@@ -24,7 +25,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.name = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -51,9 +52,9 @@ namespace FileConverter.ViewModels
 
                 inputExtension.PropertyChanged += this.OnExtensionPropertyChange;
 
-                this.RaisePropertyChanged(nameof(this.InputExtensions));
-                this.RaisePropertyChanged(nameof(this.InputExtensionNames));
-                this.RaisePropertyChanged(nameof(this.IsChecked));
+                this.OnPropertyChanged(nameof(this.InputExtensions));
+                this.OnPropertyChanged(nameof(this.InputExtensionNames));
+                this.OnPropertyChanged(nameof(this.IsChecked));
             }
         }
 
@@ -61,7 +62,7 @@ namespace FileConverter.ViewModels
         {
             get
             {
-                SettingsViewModel settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+                SettingsViewModel settingsViewModel = Ioc.Default.GetRequiredService<SettingsViewModel>();
                 PresetNode selectedPreset = settingsViewModel.SelectedPreset;
                 if (selectedPreset == null)
                 {
@@ -91,7 +92,7 @@ namespace FileConverter.ViewModels
 
             set
             {
-                SettingsViewModel settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+                SettingsViewModel settingsViewModel = Ioc.Default.GetRequiredService<SettingsViewModel>();
                 PresetNode selectedPreset = settingsViewModel.SelectedPreset;
                 
                 foreach (string extension in this.InputExtensionNames)
@@ -109,16 +110,16 @@ namespace FileConverter.ViewModels
                 // Raise property change for extensions.
                 foreach (InputExtension inputExtension in this.InputExtensions)
                 {
-                    inputExtension.RaisePropertyChanged(nameof(inputExtension.IsChecked));
+                    inputExtension.OnCategoryChanged();
                 }
 
-                this.RaisePropertyChanged(nameof(this.IsChecked));
+                this.OnPropertyChanged(nameof(this.IsChecked));
             }
         }
 
         private void OnExtensionPropertyChange(object sender, PropertyChangedEventArgs e)
         {
-            this.RaisePropertyChanged(nameof(this.IsChecked));
+            this.OnPropertyChanged(nameof(this.IsChecked));
         }
     }
 }

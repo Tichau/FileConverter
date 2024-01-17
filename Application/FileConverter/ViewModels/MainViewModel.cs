@@ -6,26 +6,17 @@ namespace FileConverter.ViewModels
     using System.ComponentModel;
     using System.Windows.Input;
 
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    using CommunityToolkit.Mvvm.Input;
+
     using FileConverter.ConversionJobs;
     using FileConverter.Services;
 
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Command;
-    using GalaSoft.MvvmLight.Ioc;
-
     /// <summary>
     /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ObservableRecipient
     {
         private string informationMessage;
         private ObservableCollection<ConversionJob> conversionJobs;
@@ -39,21 +30,11 @@ namespace FileConverter.ViewModels
         /// </summary>
         public MainViewModel()
         {
-            if (this.IsInDesignMode)
-            {
-                // Code runs in Blend --> create design time data.
-                this.InformationMessage = "Design time mode.";
-                this.ConversionJobs = new ObservableCollection<ConversionJob>();
-                //this.ConversionJobs.Add(new ConversionJob());
-            }
-            else
-            {
-                IConversionService settingsService = SimpleIoc.Default.GetInstance<IConversionService>();
-                this.ConversionJobs = new ObservableCollection<ConversionJob>(settingsService.ConversionJobs);
+            IConversionService settingsService = Ioc.Default.GetRequiredService<IConversionService>();
+            this.ConversionJobs = new ObservableCollection<ConversionJob>(settingsService.ConversionJobs);
 
-                Application application = Application.Current as Application;
-                application.OnApplicationTerminate += this.Application_OnApplicationTerminate;
-            }
+            Application application = Application.Current as Application;
+            application.OnApplicationTerminate += this.Application_OnApplicationTerminate;
         }
 
         public string InformationMessage
@@ -62,7 +43,7 @@ namespace FileConverter.ViewModels
 
             private set
             {
-                this.Set(ref this.informationMessage, value);
+                this.SetProperty(ref this.informationMessage, value);
             }
         }
 
@@ -72,7 +53,7 @@ namespace FileConverter.ViewModels
 
             private set
             {
-                this.Set(ref this.conversionJobs, value);
+                this.SetProperty(ref this.conversionJobs, value);
 
                 foreach (var job in this.conversionJobs)
                 {
@@ -87,7 +68,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.showSettingsCommand == null)
                 {
-                    this.showSettingsCommand = new RelayCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().Show(Pages.Settings));
+                    this.showSettingsCommand = new RelayCommand(() => Ioc.Default.GetRequiredService<INavigationService>().Show(Pages.Settings));
                 }
 
                 return this.showSettingsCommand;
@@ -100,7 +81,7 @@ namespace FileConverter.ViewModels
             {
                 if (this.showDiagnosticsCommand == null)
                 {
-                    this.showDiagnosticsCommand = new RelayCommand(() => SimpleIoc.Default.GetInstance<INavigationService>().Show(Pages.Diagnostics));
+                    this.showDiagnosticsCommand = new RelayCommand(() => Ioc.Default.GetRequiredService<INavigationService>().Show(Pages.Diagnostics));
                 }
 
                 return this.showDiagnosticsCommand;
@@ -122,7 +103,7 @@ namespace FileConverter.ViewModels
 
         private void Close(CancelEventArgs args)
         {
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
             navigationService.Close(Pages.Main, args != null);
         }
 
@@ -133,7 +114,7 @@ namespace FileConverter.ViewModels
                 return;
             }
 
-            this.RaisePropertyChanged(nameof(this.ConversionJobs));
+            this.OnPropertyChanged(nameof(this.ConversionJobs));
         }
 
         private void Application_OnApplicationTerminate(object sender, ApplicationTerminateArgs eventArgs)
