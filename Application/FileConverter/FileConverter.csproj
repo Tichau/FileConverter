@@ -453,8 +453,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"
-copy /Y "$(SolutionDir)Middleware\gs\x86\gsdll32.dll" "$(TargetDir)gsdll32.dll"
-copy /Y "$(SolutionDir)Middleware\gs\x86\gswin32c.exe" "$(TargetDir)gswin32c.exe"
+copy /Y "$(SolutionDir)Middleware\gs\gsdll64.dll" "$(TargetDir)gsdll64.dll"
+copy /Y "$(SolutionDir)Middleware\gs\gswin64c.exe" "$(TargetDir)gswin64c.exe"
 copy /Y "$(ProjectDir)Settings.default.xml" "$(TargetDir)Settings.default.xml"
 robocopy $(TargetDir) $(TargetDir)\Languages "$(TargetName).resources.dll" /CREATE /S /XD Languages /IS /IT /NFL /NDL /NJH /NJS /NC /NS /NP
 if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25

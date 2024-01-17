@@ -91,10 +91,10 @@
                 <File Id="Magick.NET.dll" Source="$(var.FileConverter.TargetDir)Magick.NET-Q16-AnyCPU.dll" KeyPath="yes" Checksum="yes" />
             </Component>
             <Component Guid="{6925974E-AFE0-4833-B797-36AE33DF9D4D}">
-                <File Id="gsdll32.dll" Source="$(var.FileConverter.TargetDir)gsdll32.dll" KeyPath="yes" Checksum="yes" />
+                <File Id="gsdll64.dll" Source="$(var.FileConverter.TargetDir)gsdll64.dll" KeyPath="yes" Checksum="yes" />
             </Component>
             <Component Guid="{DC549AF7-6004-423E-BFE3-3508F4AC4682}">
-                <File Id="gswin32c.exe" Source="$(var.FileConverter.TargetDir)gswin32c.exe" KeyPath="yes" Checksum="yes" />
+                <File Id="gswin64c.exe" Source="$(var.FileConverter.TargetDir)gswin64c.exe" KeyPath="yes" Checksum="yes" />
             </Component>
             <Component Guid="{12B808AB-C4E3-4B0D-B34B-0124C75B2279}">
                 <File Id="Markdown.Xaml.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)Markdown.Xaml.dll" Checksum="yes" />
