@@ -452,7 +452,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg\$(PlatformName)\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"
+    <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"
 copy /Y "$(SolutionDir)Middleware\gs\x86\gsdll32.dll" "$(TargetDir)gsdll32.dll"
 copy /Y "$(SolutionDir)Middleware\gs\x86\gswin32c.exe" "$(TargetDir)gswin32c.exe"
 copy /Y "$(ProjectDir)Settings.default.xml" "$(TargetDir)Settings.default.xml"
