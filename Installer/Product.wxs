@@ -49,23 +49,23 @@
     </Package>
 
     <Fragment>
-            <Directory Id="ProgramFiles64Folder">
-                <Directory Id="INSTALLFOLDER" Name="File Converter" />
-            </Directory>
-            <StandardDirectory Id="ProgramMenuFolder">
-                <Directory Id="ApplicationStartMenuShortcut" Name="File Converter" />
-            </StandardDirectory>
-        </Fragment>
+        <StandardDirectory Id="ProgramFiles64Folder">
+            <Directory Id="INSTALLFOLDER" Name="!(bind.Property.ProductName)" />
+        </StandardDirectory>
+        <StandardDirectory Id="ProgramMenuFolder">
+            <Directory Id="ApplicationStartMenuShortcut" Name="File Converter" />
+        </StandardDirectory>
+    </Fragment>
 
     <Fragment>
         <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
             <!-- Application -->
             <Component Guid="{EFA8CCE9-E501-4C80-AE33-710D11CC2525}">
                 <File Id="FileConverter.exe" Source="$(var.FileConverter.TargetPath)" KeyPath="yes" Checksum="yes">
-                    <Shortcut Id="ApplicationStartMenuShortcut" Directory="ApplicationStartMenuShortcut" Advertise="yes" WorkingDirectory="INSTALLDIR" Name="File Converter" Description="Convert and compress everything in 2 clicks!" Icon="Icon.exe">
+                    <Shortcut Id="ApplicationStartMenuShortcut" Directory="ApplicationStartMenuShortcut" Advertise="yes" WorkingDirectory="INSTALLFOLDER" Name="File Converter" Description="Convert and compress everything in 2 clicks!" Icon="Icon.exe">
                         <Icon Id="Icon.exe" SourceFile="$(var.FileConverter.TargetPath)" />
                     </Shortcut>
-                    <Shortcut Id="ApplicationSettingsStartMenuShortcut" Directory="ApplicationStartMenuShortcut" Advertise="yes" WorkingDirectory="INSTALLDIR" Name="File Converter Settings" Description="Configure the conversion and compression presets" Arguments="--settings" Icon="SettingsIcon.exe">
+                    <Shortcut Id="ApplicationSettingsStartMenuShortcut" Directory="ApplicationStartMenuShortcut" Advertise="yes" WorkingDirectory="INSTALLFOLDER" Name="File Converter Settings" Description="Configure the conversion and compression presets" Arguments="--settings" Icon="SettingsIcon.exe">
                         <Icon Id="SettingsIcon.exe" SourceFile="$(var.FileConverter.TargetPath)" />
                     </Shortcut>
                 </File>
