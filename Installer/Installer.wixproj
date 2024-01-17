@@ -21,6 +21,7 @@
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="WixToolset.Heat" Version="4.0.3" />
     <PackageReference Include="WixToolset.NetFx.wixext" Version="4.0.3" />
     <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
   </ItemGroup>
@@ -45,7 +46,12 @@
   <!-- congigure the project to sign the installer. Comment this line to produce an unsigned installer. -->
   <Import Project=".\Installer.sign" />
   <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.3" />
-  <PropertyGroup>
-    <PreBuildEvent>"C:\Program Files (x86)\WiX Toolset v3.11\bin\heat.exe" dir "$(SolutionDir)Application\FileConverter\$(OutDir)Languages" -gg -template fragment -cg "Languages" -dr "INSTALLFOLDER" -var "var.FileConverter.TargetDir" -out "$(ProjectDir)Languages.wxs"</PreBuildEvent>
-  </PropertyGroup>
+  <ItemGroup>
+    <HarvestDirectory Include="..\Application\FileConverter\$(OutputPath)Languages">
+      <ComponentGroupName>Languages</ComponentGroupName>
+      <DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
+      <PreprocessorVariable>var.FileConverter.TargetDir</PreprocessorVariable>
+      <SuppressRegistry>true</SuppressRegistry>
+    </HarvestDirectory>
+  </ItemGroup>
 </Project>
