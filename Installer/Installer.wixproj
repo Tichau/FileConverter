@@ -32,8 +32,6 @@
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
   </ItemGroup>
-  <!-- congigure the project to sign the installer. Comment this line to produce an unsigned installer. -->
-  <Import Project=".\Installer.sign" />
   <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.3" />
   <ItemGroup>
     <HarvestDirectory Include="..\Application\FileConverter\$(OutputPath)Languages">
@@ -43,4 +41,6 @@
       <SuppressRegistry>true</SuppressRegistry>
     </HarvestDirectory>
   </ItemGroup>
+  <!-- congigure the project to sign the installer. Comment this line to produce an unsigned installer. -->
+  <Import Project=".\Installer.sign" Condition=" '$(Configuration)' == 'Release' " />
 </Project>
