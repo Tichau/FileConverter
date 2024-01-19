@@ -33,6 +33,7 @@
 - Change: Replace Pledgie donation button by Paypal donation button since Pledgie does not exist anymore.
 - Change: Correction of spell mistakes in the french translation (thanks to Sylvain Pollet-Villard).
 - Change: Change output files timestamp to match original file (github issue #33) (thanks to Diego López Bugna).
+- Fixed: Issue where there was a maximum number of files to convert at the same time depending on the length of file paths (github issue #86).
 - Fixed: Issue where File Converter version upgrade download was not working due to an issue with https encryption.
 - Fixed: Issue where output video was not working correclty on some video players like Quick time (github issue #34) (thanks to Diego López Bugna).
 - Fixed: Issue where icons and images were blurry on high dpi device.
