@@ -16,6 +16,7 @@ namespace FileConverter
         private static Regex pathRegex = new Regex(@"^(?:\\\\[^\\/:*?""<>|\r\n]+\\|[a-zA-Z]:\\)(?:[^\\/:*?""<>|\r\n]+\\)*[^\.\\/:*?""<>|\r\n][^\\/:*?""<>|\r\n]*$");
         private static Regex filenameRegex = new Regex(@"[^\\]*", RegexOptions.RightToLeft);
         private static Regex directoryRegex = new Regex(@"^(?<drive>\\\\[^\\/:*?""""<>|\r\n]+\\|[A-Za-z]:\\)(?:(?<folders>[^\\]*)\\)*");
+        private static Regex dateRegex = new Regex(@"\(d:(?<format>[^)]*)\)");
 
         public static bool IsPathDriveLetterValid(string path)
         {
@@ -206,6 +207,8 @@ namespace FileConverter
 
             outputPath = outputPath.Replace("(n:i)", numberIndex.ToString());
             outputPath = outputPath.Replace("(n:c)", numberMax.ToString());
+
+            outputPath = dateRegex.Replace(outputPath, match => DateTime.Now.ToString(match.Groups["format"].Value).Replace('/', '-').Replace(':', '\''));
 
             outputPath += "." + outputExtension;
 

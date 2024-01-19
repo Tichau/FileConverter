@@ -18,6 +18,7 @@ namespace FileConverter
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Security.Principal;
     using System.Threading;
     using System.Windows;
@@ -325,6 +326,37 @@ namespace FileConverter
                             }
 
                             conversionPresetName = args[index + 1];
+                            index++;
+                            break;
+
+                        case "input-files":
+                            if (index >= args.Length - 1)
+                            {
+                                quitAfterStartup = true;
+                                quitExitCode = 0x02;
+                                Debug.LogError(quitExitCode, $"Invalid format.");
+                                break;
+                            }
+
+                            string fileListPath = args[index + 1];
+                            try
+                            {
+                                using (FileStream file = File.OpenRead(fileListPath))
+                                using (StreamReader reader = new StreamReader(file))
+                                {
+                                    while (!reader.EndOfStream)
+                                    {
+                                        filePaths.Add(reader.ReadLine());
+                                    }
+                                }
+                            }
+                            catch (Exception exception)
+                            {
+                                quitAfterStartup = true;
+                                quitExitCode = 0x03;
+                                Debug.LogError(quitExitCode, $"Can't read input files list: {exception}");
+                            }
+
                             index++;
                             break;
 

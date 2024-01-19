@@ -22,10 +22,10 @@ namespace FileConverter
     public static class Helpers
     {
         public static readonly string[] CompatibleInputExtensions = {
-            "3gp","aac","aiff","ape","arw","avi","bik","bmp","cda","cr2","dng","doc","docx","exr",
-            "flac","flv","gif","ico","jpg","jpeg","m4a","m4v","mkv","mov","mp3","mp4","mpeg","nef",
-            "odp","ods","odt","oga","ogg","ogv","pdf","png","ppt","pptx","psd","raf","svg",
-            "tga","tif","tiff","vob","wav","webm","webp","wma","wmv","xls","xlsx"
+            "3gp","3gpp","aac","aiff","ape","arw","avi","bik","bmp","cda","cr2","dds","dng","doc","docx",
+            "exr","flac","flv","gif","heic","ico","jfif","jpg","jpeg","m4a","m4b","m4v","mkv","mov","mp3","mp4",
+            "mpg","mpeg","nef","odp","ods","odt","oga","ogg","ogv","opus","pdf","png","ppt","pptx","psd",
+            "raf", "rm","svg","tga","tif","tiff", "ts", "vob","wav","webm","webp","wma","wmv","xls","xlsx"
         };
 
         public static string GetExtensionCategory(string extension)
@@ -39,22 +39,28 @@ namespace FileConverter
                 case "flac":
                 case "mp3":
                 case "m4a":
+                case "m4b":
                 case "oga":
                 case "ogg":
+                case "opus":
                 case "wav":
                 case "wma":
                     return InputCategoryNames.Audio;
 
                 case "3gp":
+                case "3gpp":
                 case "avi":
                 case "bik":
                 case "flv":
                 case "m4v":
                 case "mp4":
+                case "mpg":
                 case "mpeg":
                 case "mov":
                 case "mkv":
                 case "ogv":
+                case "rm":
+                case "ts":
                 case "vob":
                 case "webm":
                 case "wmv":
@@ -63,9 +69,12 @@ namespace FileConverter
                 case "arw":
                 case "bmp":
                 case "cr2":
+                case "dds":
                 case "dng":
                 case "exr":
+                case "heic":
                 case "ico":
+                case "jfif":
                 case "jpg":
                 case "jpeg":
                 case "nef":

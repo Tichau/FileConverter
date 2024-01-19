@@ -2,37 +2,41 @@
 
 ## Next version
 
-- Added: Possibility to create custom command line preset for types converted with FFMPEG (video and audio).
-- Added: Possibility to create preset folders in File Converter context menu.
-- Added: Ability to drag and drop to move conversion presets.
-- Added: Possibility to export and import conversion presets to share it with other users.
-- Added: More presets for scale and rotation in File Converter default configuration.
-- Added: Support new raw image input formats: arw, dng, nef, raf and cr2.
-- Added: Display conversion progress on the Windows taskbar item.
-- Added: Display estimated remaining time for each jobs.
-- Added: Support tif input extension (only tiff was handled) (github issue #29).
-- Added: Icons on context menu elements and conversion preset list actions.
-- Added: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).
-- Added: Highlight in red elements that contains errors in the preset list.
-- Added: "Say thanks" button if you can't donate and want to keep my motivation up :).
-- Added: Messages logged from main thread are now displayed in the console standard output.
-- Added: Add the bookmarks in pdf when converting from word file (thanks to wangweirui).
-- Added: Brazilian Portuguese translation (thanks to Marhc).
-- Added: Spanish translation (thanks to Chachak).
-- Added: Italian translation (thanks to Davide).
-- Added: German translation (thanks to nikotschierske).
-- Added: Simplified Chinese translation (thanks to Snoopy1866).
-- Added: Turkish translation (thanks to MayaC0re).
-- Added: Hindi translation (thanks to vishveshjain).
-- Added: Arabic translation (thanks to Mahmoud0Sultan).
-- Change: Rework extension so it uses the settings file on disk instead of registry settings (github issue #22 #32).
+- New: Possibility to create custom command line preset for types converted with FFMPEG (video and audio) (github issue #19 #18 #41 #61 #73 #128 #140 #153 #177 #182 #225 #255 #310 #314 #316 #325).
+- New: Possibility to create preset folders in File Converter context menu.
+- New: Ability to drag and drop to move conversion presets.
+- New: Possibility to export and import conversion presets to share it with other users.
+- New: More presets for scale and rotation in File Converter default configuration.
+- New: Display conversion progress on the Windows taskbar item.
+- New: Display estimated remaining time for each jobs.
+- New: Support new image input formats: arw, cr2, dds, dng, jfif, nef, raf, tif and heic (github issue #29 #96 #113 #130).
+- New: Support new video input formats: 3gpp, mpg, rm, ts (github issue #23 #59 #101 #318).
+- New: Support new audio input formats: m4b, opus (github issue #111 #351).
+- New: Icons on context menu elements and conversion preset list actions.
+- New: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).
+- New: Highlight in red elements that contains errors in the preset list.
+- New: "Say thanks" button if you can't donate and want to keep my motivation up :).
+- New: Messages logged from main thread are now displayed in the console standard output.
+- New: Add the bookmarks in pdf when converting from word file (thanks to wangweirui).
+- New: Possibility to use conversion date in output file path template (github issue #56).
+- New: Brazilian Portuguese translation (thanks to Marhc).
+- New: Spanish translation (thanks to Chachak).
+- New: Italian translation (thanks to Davide).
+- New: German translation (thanks to nikotschierske).
+- New: Simplified Chinese translation (thanks to Snoopy1866).
+- New: Turkish translation (thanks to MayaC0re).
+- New: Hindi translation (thanks to vishveshjain).
+- New: Arabic translation (thanks to Mahmoud0Sultan).
+- Change: Rework extension so it uses the settings file on disk instead of registry settings (github issue #22 #32 #176 #340 #343).
 - Change: Some UX improvements.
 - Change: Replace Pledgie donation button by Paypal donation button since Pledgie does not exist anymore.
 - Change: Correction of spell mistakes in the french translation (thanks to Sylvain Pollet-Villard).
 - Change: Change output files timestamp to match original file (github issue #33) (thanks to Diego López Bugna).
-- Fixed: Issue where File Converter version upgrade download was not working due to an issue with https encryption.
-- Fixed: Issue where output video was not working correclty on some video players like Quick time (github issue #34) (thanks to Diego López Bugna).
-- Fixed: Issue where icons and images were blurry on high dpi device.
+- Fixes: Issue where there was a maximum number of files to convert at the same time depending on the length of file paths (github issue #86).
+- Fixes: Issue where File Converter version upgrade download was not working due to an issue with https encryption.
+- Fixes: Issue where output video was not working correclty on some video players like Quick time (github issue #34) (thanks to Diego López Bugna).
+- Fixes: Issue where icons and images were blurry on high dpi device.
+- Fixes: Issue where file 'Error' in there name were generating false negative result (github issue #247).
 - Tech: Complete rework of the project architecture to be able to improve it in a long term perspective. The project is now using the MVVM Community Toolkit and is following more closely this design pattern.
 - Tech: Update ffmpeg to v6.1.1 and ImageMagick to v13.5.
 - Tech: Update SharpShell to v2.7.2.
@@ -45,24 +49,24 @@
 
 ## Version 1.2.3
 
-- Fixed: Issue where the scale was not working for image conversions depending on the application current language.
+- Fixes: Issue where the scale was not working for image conversions depending on the application current language.
 - Tech: Include office library dependencies in package config (now you don't need to install office to build the project).
 - Tech: Upgrade Ghostscript to version 9.21.
 - Tech: Update ImageMagick to version 7.0.5.
 
 ## Version 1.2.2
 
-- Added: Portuguese translation (thanks to Khidreal).
-- Fixed: Issue where scale was corrupted when switching application language (github issue #5).
-- Fixed: Issue where file metadata were not copied when converting to aac format (github issue #15).
+- New: Portuguese translation (thanks to Khidreal).
+- Fixes: Issue where scale was corrupted when switching application language (github issue #5).
+- Fixes: Issue where file metadata were not copied when converting to aac format (github issue #15).
 - Tech: Update to ffmpeg 3.2.2 version.
 - Tech: Improve security using https instead of http for upgrade system and links (thanks to TheAresjej).
 
 ## Version 1.2.1
 
-- Fixed: Issue where audio file tags were not copied in a format readable by Windows.
-- Fixed: Issue where the default language was set to french (github issue #6).
-- Fixed: Issue where the size of a pdf generated from images was not consistent.
+- Fixes: Issue where audio file tags were not copied in a format readable by Windows.
+- Fixes: Issue where the default language was set to french (github issue #6).
+- Fixes: Issue where the size of a pdf generated from images was not consistent.
 - Change: Small improvements of File Converter application and installer interface thanks to TheAresjej (github issues #7 and #8).
 
 ## Version 1.2
@@ -73,7 +77,7 @@
 - New: Possibility to convert images and documents to webp format.
 - New: Support new image input format: webp.
 - New: Add the possibility to cancel image, CDA extraction and gif conversions.
-- Fixed: Issue where multiple conversion jobs were created for the same file resulting in an error message.
+- Fixes: Issue where multiple conversion jobs were created for the same file resulting in an error message.
 - Tech: Improve application performances on startup.
 - Tech: Improve diagnostics.
 
@@ -91,7 +95,7 @@
 - New: Add an application option to choose the maximum number of simultaneous conversions.
 - Change: Improve the application help start page (when you launch File Converter directly from the executable) with an animated picture.
 - Change: Improve the output type dropdown visualization (splitting it by categories).
-- Fixed: Issue where it was impossible to rotate an image for the output types: jpg and png.
+- Fixes: Issue where it was impossible to rotate an image for the output types: jpg and png.
 
 ## Version 1.0
 
@@ -101,8 +105,8 @@
 - New: Add help shortcuts in the conversion preset edition interface that links directly to the corresponding documentation page.
 - New: Add shortcuts in start menu.
 - New: Create a donation campaign on Pledgie and linked it in the about section.
-- Fixed: Issue with Avast antivirus where File Converter and Windows explorer was frozen when the user tried to use File Converter.
-- Fixed: Issue where it was impossible to convert files from a network path.
+- Fixes: Issue with Avast antivirus where File Converter and Windows explorer was frozen when the user tried to use File Converter.
+- Fixes: Issue where it was impossible to convert files from a network path.
 
 ## Version 0.7
 
@@ -114,12 +118,12 @@
 - New: Support new video input formats: ogv and mpeg.
 - New: Support new audio input format: oga.
 - New: Possibility to cancel some conversion jobs (gif/cda and image conversion jobs are not cancelable for now).
-- Fixed: Issue where video can't be compressed using H.264 codec (mp4 or mkv presets) when its size (width or height) is not divisible by 2 (append a lot when the user tries to scale a video) (github issue #2).
-- Fixed: Issue where "Clamp to power of 2 size" option didn't work well with images that already have a power of 2 size.
-- Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg).
-- Fixed: Issue where converting a video into the ogg format did not extract audio in an ogg file correctly.
-- Fixed: Issue where simultaneous read on the same CD drive was performed when files from different conversions came from the same drive (other than cda extraction preset).
-- Fixed: Issue where the path generator was unable to create a valid path if the input file was at the root of a drive.
+- Fixes: Issue where video can't be compressed using H.264 codec (mp4 or mkv presets) when its size (width or height) is not divisible by 2 (append a lot when the user tries to scale a video) (github issue #2).
+- Fixes: Issue where "Clamp to power of 2 size" option didn't work well with images that already have a power of 2 size.
+- Fixes: Issue where conversion progress was not updated correctly (for converters based on ffmpeg).
+- Fixes: Issue where converting a video into the ogg format did not extract audio in an ogg file correctly.
+- Fixes: Issue where simultaneous read on the same CD drive was performed when files from different conversions came from the same drive (other than cda extraction preset).
+- Fixes: Issue where the path generator was unable to create a valid path if the input file was at the root of a drive.
 - Tech: Annotate the conversion presets to know if there are default preset or user preset in order to improve the upgrade process.
 
 ## Version 0.6
@@ -131,12 +135,12 @@
 - New: Remove restriction on image size to convert to ico file format (it is now possible to convert all images to ico).
 - New: Add "Clamp to power of 2 size" option in image conversion.
 - New: Support input images encoded in 16 bits or 32 bits per color channel.
-- Fixed: Issue where the installer detects the uses of the extension dll in explorer, ask the user to restart it and fail to do it.
-- Fixed: Issue where it is impossible to delete a conversion preset defined in default settings.
-- Fixed: Issue where the Windows context menu does not contain user preset after an application upgrade.
-- Fixed: Issue where some registry keys remain after file converter uninstall.
-- Fixed: Issue where aac bitrate was not saved.
-- Fixed: Issue where settings serialization version was not updated.
+- Fixes: Issue where the installer detects the uses of the extension dll in explorer, ask the user to restart it and fail to do it.
+- Fixes: Issue where it is impossible to delete a conversion preset defined in default settings.
+- Fixes: Issue where the Windows context menu does not contain user preset after an application upgrade.
+- Fixes: Issue where some registry keys remain after file converter uninstall.
+- Fixes: Issue where aac bitrate was not saved.
+- Fixes: Issue where settings serialization version was not updated.
 - Change: Allow the user to scale images until 1600% size (useful to scale pixel art images).
 
 ## Version 0.5
@@ -146,7 +150,7 @@
 - New: Possibility to encode videos (avi output file format) using Xvid video codec and Mp3 audio codec.
 - New: Support new video input file formats: 3gp, webm and wmv.
 - New: Add a help window to explain how file converter works when you launch it without using the context menu.
-- Fixed: Problem to convert images when accentuated characters were present in their path.
+- Fixes: Problem to convert images when accentuated characters were present in their path.
 - Tech: Update ffmpeg version (aac encoding is not anymore experimental).
 
 ## Version 0.4
@@ -162,8 +166,8 @@
 - New: Copy the currently selected preset when clicking on the add preset button.
 - New: Add "My Documents", "My Music", "My Videos" and "My Pictures" folder to output file name generator.
 - New: Possibility to choose if the application quit after succeeded conversions.
-- Fixed: Reordering presets does not update the registry.
-- Fixed: Merge default settings with user settings to prevent errors when upgrading the application.
+- Fixes: Reordering presets does not update the registry.
+- Fixes: Merge default settings with user settings to prevent errors when upgrading the application.
 - Tech: Handle incorrect user settings case.
 - Tech: Improve diagnostics system (compatibility with logs from multiple threads, dump files in AppData folder and error messages).
 - Tech: Update ffmpeg version.
@@ -179,8 +183,8 @@
 - New: Add button to move up or down a preset.
 - New: Add input files post conversion action (No action, move in archive folder or delete).
 - New: Add categories on input file extensions.
-- Fixed: Lose focus of main window don't terminate the application.
-- Fixed: The application icon now have a correct resolution at any size.
+- Fixes: Lose focus of main window don't terminate the application.
+- Fixes: The application icon now have a correct resolution at any size.
 - Tech: Add error codes on error messages.
 
 ## Version 0.2

@@ -4,7 +4,9 @@
 
 **File Converter** is a very simple tool which allows you to convert and compress one or several file(s) using the context menu of windows explorer.
 
-You can download it here: [www.file-converter.org](https://file-converter.org/?from=readme.md).
+![File Converter Usage](Resources/FileConverterUsage.gif)
+
+You can download it here: [file-converter.org](https://file-converter.org/?from=readme.md).
 
 You can find more information about what's in File converter and how to use it on the [wiki](https://github.com/Tichau/FileConverter/wiki).
 
