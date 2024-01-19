@@ -15,7 +15,6 @@
 - New: Icons on context menu elements and conversion preset list actions.
 - New: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).
 - New: Highlight in red elements that contains errors in the preset list.
-- New: "Say thanks" button if you can't donate and want to keep my motivation up :).
 - New: Messages logged from main thread are now displayed in the console standard output.
 - New: Add the bookmarks in pdf when converting from word file (thanks to wangweirui).
 - New: Possibility to use conversion date in output file path template (github issue #56).

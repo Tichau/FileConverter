@@ -444,9 +444,6 @@
     <Resource Include="Resources\PaypalIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\SayThanksIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\ExportIcon.ico" />
     <Resource Include="Resources\ImportIcon.ico" />
   </ItemGroup>

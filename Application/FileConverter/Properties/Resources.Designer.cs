@@ -1139,15 +1139,6 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Say Thanks!.
-        /// </summary>
-        public static string SayThanksButtonTitle {
-            get {
-                return ResourceManager.GetString("SayThanksButtonTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Scale :.
         /// </summary>
         public static string Scale {

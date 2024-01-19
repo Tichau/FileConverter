@@ -697,10 +697,6 @@ use maj for uppercase version</comment>
     <value>Apri il sito di File Converter</value>
     <comment>Open File Converter website</comment>
   </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>Di grazie!</value>
-    <comment>Say Thanks!</comment>
-  </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>Errore durante l'inizializzazione del processo di conversione.</value>
     <comment>Error during conversion job initialization.</comment>

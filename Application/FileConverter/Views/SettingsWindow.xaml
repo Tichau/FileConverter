@@ -445,9 +445,6 @@
                         <controls:IconButton Margin="5,0,5,0" Background="#0467B4" Foreground="White" MouseOverBrush="#007AD8" PressedBrush="#0F4199"
                                       Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=3BDWQTYTTA3D8&amp;item_name=File+Converter+Donations&amp;currency_code=EUR"
                                       IconSource="/FileConverter;component/Resources/PaypalIcon.png" Content="{x:Static project:Resources.DonateButtonTitle}" FontWeight="Bold" FontSize="14" />
-                        <controls:IconButton Margin="5,0,5,0" Background="#BBBBBB" Foreground="#505050" MouseOverBrush="#CCCCCC" PressedBrush="#AAAAAA"
-                                             Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://saythanks.io/to/adrien.allard.pro%40gmail.com"
-                                             IconSource="/FileConverter;component/Resources/SayThanksIcon.png" Content="{x:Static project:Resources.SayThanksButtonTitle}" FontWeight="Bold" FontSize="14" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">

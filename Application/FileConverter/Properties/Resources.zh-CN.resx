@@ -544,9 +544,6 @@
   <data name="WebsiteButtonDescription" xml:space="preserve">
     <value>打开 File Converter 网址</value>
   </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>Say Thanks!</value>
-  </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>转换任务初始化时出错。</value>
   </data>

@@ -544,9 +544,6 @@ Use May para versión en mayúsculas</value>
   <data name="WebsiteButtonDescription" xml:space="preserve">
     <value>Abrir la web de File Converter</value>
   </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>¡Dar las gracias!</value>
-  </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>Error al iniciar el trabajo de conversión.</value>
   </data>

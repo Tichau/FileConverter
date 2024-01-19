@@ -544,9 +544,6 @@
   <data name="WebsiteButtonDescription" xml:space="preserve">
     <value>फ़ाइल कनवर्टर वेबसाइट खोलें</value>
   </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>धन्यवाद कहें!</value>
-  </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>रूपांतरण कार्य प्रारंभ करने के दौरान त्रुटि।</value>
   </data>

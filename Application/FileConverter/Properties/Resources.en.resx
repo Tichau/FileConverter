@@ -544,9 +544,6 @@ use maj for uppercase version</value>
   <data name="WebsiteButtonDescription" xml:space="preserve">
     <value>Open File Converter website</value>
   </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>Say Thanks!</value>
-  </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>Error during conversion job initialization.</value>
   </data>
