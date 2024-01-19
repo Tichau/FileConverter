@@ -23,9 +23,9 @@ namespace FileConverter
     {
         public static readonly string[] CompatibleInputExtensions = {
             "3gp","aac","aiff","ape","arw","avi","bik","bmp","cda","cr2","dds","dng","doc","docx","exr",
-            "flac","flv","gif","heic","ico","jpg","jpeg","m4a","m4v","mkv","mov","mp3","mp4","mpg","mpeg",
-            "nef","odp","ods","odt","oga","ogg","ogv","opus","pdf","png","ppt","pptx","psd","raf", "rm", 
-            "svg","tga","tif","tiff", "ts", "vob","wav","webm","webp","wma","wmv","xls","xlsx"
+            "flac","flv","gif","heic","ico","jfif","jpg","jpeg","m4a","m4v","mkv","mov","mp3","mp4",
+            "mpg","mpeg","nef","odp","ods","odt","oga","ogg","ogv","opus","pdf","png","ppt","pptx","psd",
+            "raf", "rm","svg","tga","tif","tiff", "ts", "vob","wav","webm","webp","wma","wmv","xls","xlsx"
         };
 
         public static string GetExtensionCategory(string extension)
@@ -72,6 +72,7 @@ namespace FileConverter
                 case "exr":
                 case "heic":
                 case "ico":
+                case "jfif":
                 case "jpg":
                 case "jpeg":
                 case "nef":
