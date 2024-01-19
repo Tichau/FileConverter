@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>حول البرنامج</value>
+    <comment>about</comment>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>السماح لك لاختيار ماذا تريد أن تفعل مع الملف المدخل عند انتهاء التحويل</value>
+    <comment>Allow you to chose what you want to do with your input files if the conversion succeed</comment>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>افعل عند انتهاء التحويل بنجاح</value>
+    <comment>Action when conversion succeed</comment>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>ضبط مسبق جديد</value>
+    <comment>New preset</comment>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>البرنامج</value>
+    <comment>Application</comment>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>الصوت</value>
+    <comment>Audio</comment>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>البحث عن التحديثات تلقائياً عند فتح البرنامج</value>
+    <comment>Automatically check for updates when File Converter starts</comment>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>الخروج من البرنامج عند انتهاء كل التحويلات</value>
+    <comment>Automatically exit when all conversions finished</comment>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>ثبت لأدنى طاقة بحجم 2</value>
+    <comment>Clamp to lowest power of 2 size</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>إغلاق</value>
+    <comment>Close</comment>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>أرشيف الضبط المسبق</value>
+    <comment>Conversion Presets</comment>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>ملفات للتحويل</value>
+    <comment>Files to convert</comment>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>محول من</value>
+    <comment>Converted from</comment>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>السجلات</value>
+    <comment>Logs</comment>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>السجلات</value>
+    <comment>Logs</comment>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>فتح الوثائق</value>
+    <comment>Open documentation</comment>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>تبرع</value>
+    <comment>Donate</comment>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>لا تنسي مكافأة عملي لو أعجبك</value>
+    <comment>Don't forget to reward my work if you like it :)</comment>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>التحديث سوف يقوم بالتنزيل في الخلفية و سوف يتم تثبيت التحديث عند غلق البرنامج</value>
+    <comment>The update will be downloaded in background, and installed once you exit File Converter.</comment>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>تثبيت عندما اقوم بإغلاق البرنامج</value>
+    <comment>Install when I exit File Converter</comment>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>الترميز:</value>
+    <comment>Encoding :</comment>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>سرعة الترميز:</value>
+    <comment>Encoding speed :</comment>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>shell يكون صيغة  File Converter</value>
+    <comment>File Converter is a shell extension.</comment>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>Windows explorer. ذلك معناه انه مدمج مع</value>
+    <comment>That means it is integrated into the Windows explorer.</comment>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>لاستخدام File Converter قم بفتح explorer وقم بالضغط مرتين يمين علي الملف الذي تريد جلبة الي القائمة حيث سوف تجد اوامر البرنامج (انظر ملف readme لتري مجموعه الصيغ المتوافقة </value>
+    <comment>To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the readme file to see the list of compatible file formats).</comment>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>نموذج اسم الملف</value>
+    <comment>File name template</comment>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>إطار لكل ثانية</value>
+    <comment>Frames per second :</comment>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>افتح صفحة مشاريع GitHub</value>
+    <comment>Open GitHub project page</comment>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>مساعدة ؟</value>
+    <comment>help ?</comment>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>نموذج المدخلات</value>
+    <comment>Input example</comment>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>صيغ المدخلات</value>
+    <comment>Input formats</comment>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>حذف</value>
+    <comment>Delete</comment>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>نقل الي مجلد الارشيف</value>
+    <comment>Move in an archive folder</comment>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>فارغ</value>
+    <comment>None</comment>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>التحديث تم تنزيله.اغلق البرنامج و قم بتثبيت التحديث الان</value>
+    <comment>The update has been downloaded. Exit File Converter and install the update now.</comment>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>تثبيت عندما اقوم بغلق البرنامج</value>
+    <comment>Install when I exit File Converter</comment>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>تقرير عن مشكلة</value>
+    <comment>Report an issue</comment>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>تحرك لأسفل الإعداد المسبق المحدد</value>
+    <comment>Move down selected preset</comment>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>تحرك لأعلي الإعداد المسبق المحدد</value>
+    <comment>Move up selected preset</comment>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>ترميز معدل البت الثابت</value>
+    <comment>Constant bitrate encoding</comment>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>ترميز معدل البت المتغير</value>
+    <comment>Variable bitrate encoding</comment>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>90 درجة دوران عقارب الساعة</value>
+    <comment>90° counter clockwise rotation</comment>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>موافق</value>
+    <comment>Ok</comment>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>180° دوران</value>
+    <comment>180° rotation</comment>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Music\Artist\Album\Song.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>الاخراج</value>
+    <comment>Output</comment>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): مسار الملف المخل
+(f): اسم الملف المدخل
+(o): نوع صيغه الاخراج
+(i): نوع صيغة المدخل
+(d0): إدخال المجلد الأصل
+(d1): إدخال المجلد الأصل الفرعي
+...
+(n:i): فهرس رقم الصفحة
+(n:c): إجمالي عدد الصفحات
+
+مسارات خاصة:
+(p:d): documents مسار
+(p:m): music مسار
+(p:v): videos مسار
+(p:p): pictures مسار
+
+استخدم maj لإصدار الأحرف الكبيرة</value>
+    <comment>(p): input file path
+(f): input filename
+(o): output extension type
+(i): input extension type
+(d0): input parent folder
+(d1): input sub parent folder
+...
+(n:i): page number index
+(n:c): total page count
+
+Special paths:
+(p:d): my documents path
+(p:m): my music path
+(p:v): my videos path
+(p:p): my pictures path
+
+use maj for uppercase version</comment>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>صيغة الاخراج</value>
+    <comment>Output format</comment>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>ضبط</value>
+    <comment>Preset</comment>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>اسم الضبط</value>
+    <comment>Preset Name</comment>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>الجوده:</value>
+    <comment>Quality :</comment>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>نطاق معدل البت الموصى به باللون الأزرق</value>
+    <comment>Recommended bitrate range in blue</comment>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>حذف</value>
+    <comment>Delete</comment>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>دوران:</value>
+    <comment>Rotate :</comment>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+    <comment>Save</comment>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>الحجم:</value>
+    <comment>Scale :</comment>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>انظر سجل التغيرات..</value>
+    <comment>See change log ...</comment>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>الاعدادات</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>الاعدادات</value>
+    <comment>Settings</comment>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>90 درجة دوران في اتجاه عقارب الساعة</value>
+    <comment>90° clockwise rotation</comment>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>يتوفر تحديث للبرنامج. يوصى بشدة بتثبيته في أسرع وقت ممكن!</value>
+    <comment>An update for File Converter is available. It is strongly recommended that you install it as soon as possible!</comment>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>ترقية التنزيل قيد التقدم ...</value>
+    <comment>Upgrade download in progress...</comment>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>تحديثات File Converter</value>
+    <comment>File Converter Updates</comment>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>حدد نسبة "حجم الملف" مقابل "جودة الفيديو". ستمنحك القيمة الأقل ملفًا أصغر ، بينما تمنحك القيمة الأكبر جودة فيديو أفضل.</value>
+    <comment>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</comment>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>اسرع</value>
+    <comment>Faster</comment>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>سريع</value>
+    <comment>Fast</comment>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>متوسط</value>
+    <comment>Medium</comment>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>ابطئ</value>
+    <comment>Slower</comment>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>بطئ</value>
+    <comment>Slow</comment>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>خارق السرعه</value>
+    <comment>Super Fast</comment>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>حدد نسبة "حجم الملف" مقابل "مدة الضغط". يمنحك الضغط البطيء ملفًا أصغر (لنفس جودة الفيديو) من ضغط أسرع.</value>
+    <comment>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</comment>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>سريع للغاية</value>
+    <comment>Ultra Fast</comment>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>سريع جداً</value>
+    <comment>Very Fast</comment>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>بطئ جداً</value>
+    <comment>Very Slow</comment>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>فيديو</value>
+    <comment>Video</comment>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM signed 16-bit little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM signed 24-bit little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM signed 32-bit little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM signed 8-bit little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>فارغ</value>
+    <comment>None</comment>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>لا دوران</value>
+    <comment>No rotation</comment>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>التحويل</value>
+    <comment>Conversion</comment>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>أنتهي</value>
+    <comment>Done</comment>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>الاخراج</value>
+    <comment>Extraction</comment>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>فشل</value>
+    <comment>Failed</comment>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>في قائمة الانتظار</value>
+    <comment>In queue</comment>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>قرأت الصوره المدخلة</value>
+    <comment>Read input image</comment>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>قرأت الملف</value>
+    <comment>Read document</comment>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>صورة متحركة</value>
+    <comment>Animated Image</comment>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>الصوت</value>
+    <comment>Audio</comment>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>مستند</value>
+    <comment>Document</comment>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>صوره</value>
+    <comment>Image</comment>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>فيديو</value>
+    <comment>Video</comment>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>فترة انتظار قبل اغلاق البرنامج</value>
+    <comment>Waiting duration before application exit</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>اللغة</value>
+    <comment>Language</comment>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>الحد الأقصى لعدد التحويلات المتزامنة</value>
+    <comment>Maximum number of simultaneous conversions</comment>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>ضبط مسبق جديد</value>
+    <comment>New preset</comment>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###تنزيل سجل التغييرات</value>
+    <comment>###Downloading change log ...</comment>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>أرشيف التحويلات</value>
+    <comment>Conversion Archives</comment>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>ألغي</value>
+    <comment>Canceled.</comment>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>فشل في ايجاد ffmpeg executable ,يجب ان تحاول اعادة تثبيت البرنامج</value>
+    <comment>Fail to find ffmpeg executable. You should try to reinstall the application.</comment>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>فشل في اخراج صوت CD</value>
+    <comment>Audio CD track extraction failed.</comment>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>قرص CD غير جاهز</value>
+    <comment>CD drive is not ready.</comment>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>فشل في بدأ ffmpeg</value>
+    <comment>Fail to launch ffmpeg.</comment>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>فشل في انشاء مسار مجلد الاخراج</value>
+    <comment>Fail to create output path folders.</comment>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>فشل في انشاء مسار فريد لملف الاخراج</value>
+    <comment>Fail to generate a unique output file path.</comment>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>فشل في قرأت قرص CD '{0}'.</value>
+    <comment>Fail to read cd drive '{0}'.</comment>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>فشل في استعاده مسار القرص المدخل</value>
+    <comment>Fail to retrieve input path drive letter.</comment>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>فشل في استعاده رقم المسار من المسار المدخل لcda</value>
+    <comment>Fail to retrieve track number from the cda input path.</comment>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>فشل في استخدام  قرص الCD بسبب انه مستخدم</value>
+    <comment>Fail to use the CD drive because it is oppened.</comment>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>نوع الملف المدخل لايتوافق مع نوع الملف المخرج المختار</value>
+    <comment>The input file type is not compatible with the selected output file type.</comment>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>مسار مخرج غير صحيح تم انشائه بواسطه قالب مسار الملف المخرج</value>
+    <comment>Invalid output path generated by output file path template.</comment>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>  '{0}'.صيغة الاخراج غير مدعومة</value>
+    <comment>Unsupported output format '{0}'.</comment>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>عدد القنوات:</value>
+    <comment>Channel count :</comment>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>تغيير عدد قنوات الملف المدخل</value>
+    <comment>Change the number of channels of the input file.</comment>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Mono</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>نفس ملف الإدخال</value>
+    <comment>Same than input file</comment>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>استيريو</value>
+    <comment>Stereo</comment>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**هذا البرنامج مجاني**.</value>
+    <comment>**This program is free software**.</comment>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>يمكنك إعاده توزيعه او تعديلة تحت رخصة GNU  General Public License.</value>
+    <comment>You can redistribute it and/or modify it under the terms of the GNU General Public License.</comment>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>هذا البرنامح موزع املاً ان يكون مفيد , بدون اي تحذير انظر GNU General Public License (متوافر في مجلد التثبيت LICENSE.md` لمزيد من التفاصيل</value>
+    <comment>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.</comment>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>البرنامج ينتهي</value>
+    <comment>The application is terminating.</comment>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>البرنامج سوف ينتهي تلقائيا في {0} ثانية</value>
+    <comment>The application will automatically terminate in {0} seconds.</comment>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>البرنامج سوف ينتهي تلقائيا في {1} ثانية</value>
+    <comment>The application will automatically terminate in 1 second.</comment>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Misc</value>
+    <comment>Misc</comment>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>لا يمكن ايجاد الملف المخرج </value>
+    <comment>Can't find the output file(s).</comment>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>فشل عملية التحويل لكن هناك ملف مخرج ليس موجود</value>
+    <comment>The conversion job failed but there is an output file that does exists.</comment>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>تجهيز التحويل</value>
+    <comment>Prepare conversion</comment>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>لتحويل ملفات Microsoft Office يجب ان يتم تثبيت  Office</value>
+    <comment>Microsoft Office must be installed in order to convert Office documents.</comment>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>فشل في فتح مستند بواسطه Microsoft Office (تحقق من تثبيت رخصة صالحة)</value>
+    <comment>Fail to open document with Microsoft Office (check if your licence/installation is valid).</comment>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>لتحويل ملفات Microsoft Excel يجب ان يتم تثبيت  Excel</value>
+    <comment>Microsoft Excel must be installed in order to convert Excel documents.</comment>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>لتحويل ملفات Microsoft PowerPoint يجب ان يتم تثبيت  PowerPoint</value>
+    <comment>Microsoft PowerPoint must be installed in order to convert PowerPoint documents.</comment>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>لتحويل ملفات Microsoft Word يجب ان يتم تثبيت  Word</value>
+    <comment>Microsoft Word must be installed in order to convert Word documents.</comment>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>فتح موقع البرناج</value>
+    <comment>Open File Converter website</comment>
+  </data>
+  <data name="SayThanksButtonTitle" xml:space="preserve">
+    <value>قل شكراً</value>
+    <comment>Say Thanks!</comment>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>خطأ اثناء عملية تثبيت التحويل</value>
+    <comment>Error during conversion job initialization.</comment>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>مجلد جديد</value>
+    <comment>New folder</comment>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>مجلد جديد</value>
+    <comment>New folder</comment>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>مجلد</value>
+    <comment>Folder</comment>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>اسم المجلد</value>
+    <comment>Folder Name</comment>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>الوضع المتقدم</value>
+    <comment>Advanced mode</comment>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>تخصيص وسائط</value>
+    <comment>Custom Arguments</comment>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>وسائط سطر الاومر FFMPEG  تخصيص</value>
+    <comment>Custom FFMPEG command line arguments</comment>
+  </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>لم يتم اختيار إعداد مسبق</value>
+    <comment>No preset selected</comment>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>تصدير</value>
+    <comment>Export</comment>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>استيراد</value>
+    <comment>Import</comment>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>نسخ الضبط</value>
+    <comment>Duplicate preset</comment>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>إلغاء</value>
+    <comment>Cancel</comment>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>خطأ</value>
+    <comment>Error</comment>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>لا يمكن تحميل ملف الضبط  ,هل تريد ان تعود الي الضبط الرئيسي</value>
+    <comment>Can't load file converter user settings. Do you want to fall back to default settings ?</comment>
+  </data>
+</root>
