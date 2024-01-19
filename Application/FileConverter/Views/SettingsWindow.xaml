@@ -482,8 +482,6 @@
             </TabItem>
         </TabControl>
 
-        <Button Grid.Row="2" Content="{x:Static project:Resources.Close}" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0"
-                Command="{Binding CloseCommand}"/>
         <Button Grid.Row="2" Content="{x:Static project:Resources.Save}" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" 
                 Command="{Binding SaveCommand}"/>
 
