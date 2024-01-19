@@ -505,9 +505,12 @@ namespace FileConverter.ConversionJobs
                 }
             }
 
-            if (input.Contains("Exiting.") || input.Contains("Error") || input.Contains("Unsupported dimensions") || input.Contains("No such file or directory"))
+            // Remove file names from log to avoid false negative when some words like 'Error' are in file name (github issue #247).
+            string inputWithoutFileNames = input.Replace(this.InputFilePath, string.Empty).Replace(this.OutputFilePath, string.Empty);
+
+            if (inputWithoutFileNames.Contains("Exiting.") || inputWithoutFileNames.Contains("Error") || inputWithoutFileNames.Contains("Unsupported dimensions") || inputWithoutFileNames.Contains("No such file or directory"))
             {
-                if (input.StartsWith("Error while decoding stream") && input.EndsWith("Invalid data found when processing input"))
+                if (inputWithoutFileNames.StartsWith("Error while decoding stream") && inputWithoutFileNames.EndsWith("Invalid data found when processing input"))
                 {
                     // It is normal for a transport stream to start with a broken frame.
                     // https://trac.ffmpeg.org/ticket/1622
