@@ -2,7 +2,7 @@
 
 ## Next version
 
-- Added: Possibility to create custom command line preset for types converted with FFMPEG (video and audio).
+- Added: Possibility to create custom command line preset for types converted with FFMPEG (video and audio) (github issue #19 #18 #41 #61 #73 #128 #140 #153 #177 #182 #225 #255 #310 #314 #316 #325).
 - Added: Possibility to create preset folders in File Converter context menu.
 - Added: Ability to drag and drop to move conversion presets.
 - Added: Possibility to export and import conversion presets to share it with other users.
@@ -27,7 +27,7 @@
 - Added: Turkish translation (thanks to MayaC0re).
 - Added: Hindi translation (thanks to vishveshjain).
 - Added: Arabic translation (thanks to Mahmoud0Sultan).
-- Change: Rework extension so it uses the settings file on disk instead of registry settings (github issue #22 #32).
+- Change: Rework extension so it uses the settings file on disk instead of registry settings (github issue #22 #32 #176 #340 #343).
 - Change: Some UX improvements.
 - Change: Replace Pledgie donation button by Paypal donation button since Pledgie does not exist anymore.
 - Change: Correction of spell mistakes in the french translation (thanks to Sylvain Pollet-Villard).
