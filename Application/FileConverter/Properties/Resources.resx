@@ -121,7 +121,7 @@
     <value>About</value>
   </data>
   <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
-    <value>Allow you to chose what you want to do with your input files if the conversion succeed</value>
+    <value>Allow you to choose what you want to do with your input files if the conversion succeed</value>
   </data>
   <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
     <value>Action when conversion succeed</value>
