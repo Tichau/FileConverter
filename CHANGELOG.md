@@ -10,9 +10,7 @@
 - Added: Display conversion progress on the Windows taskbar item.
 - Added: Display estimated remaining time for each jobs.
 - Added: Support new raw image input formats: arw, dng, nef, raf, cr2 and heic (github issue #96).
-- Added: Support tif input extension (only tiff was handled) (github issue #29).
-- Added: Support ts input extension (github issue #23)
-- Added: Support mpg input extension as an alias for mpeg (github issue #59)
+- Added: Support mpg, rm, tif, ts input extension (github issue #23 #29 #59 #101).
 - Added: Icons on context menu elements and conversion preset list actions.
 - Added: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).
 - Added: Highlight in red elements that contains errors in the preset list.
