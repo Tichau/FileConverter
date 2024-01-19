@@ -9,8 +9,9 @@
 - Added: More presets for scale and rotation in File Converter default configuration.
 - Added: Display conversion progress on the Windows taskbar item.
 - Added: Display estimated remaining time for each jobs.
-- Added: Support new raw image input formats: arw, dng, nef, raf, cr2 and heic (github issue #96).
-- Added: Support mpg, opus, rm, tif, ts input extension (github issue #23 #29 #59 #101 #111).
+- Added: Support new image input formats: arw, cr2, dds, dng, nef, raf, tif and heic (github issue #29 #96 #113).
+- Added: Support new video input formats: mpg, rm, ts (github issue #23 #59 #101).
+- Added: Support new audio input formats: opus (github issue #111).
 - Added: Icons on context menu elements and conversion preset list actions.
 - Added: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).
 - Added: Highlight in red elements that contains errors in the preset list.
