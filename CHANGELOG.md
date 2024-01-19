@@ -7,9 +7,9 @@
 - Added: Ability to drag and drop to move conversion presets.
 - Added: Possibility to export and import conversion presets to share it with other users.
 - Added: More presets for scale and rotation in File Converter default configuration.
-- Added: Support new raw image input formats: arw, dng, nef, raf and cr2.
 - Added: Display conversion progress on the Windows taskbar item.
 - Added: Display estimated remaining time for each jobs.
+- Added: Support new raw image input formats: arw, dng, nef, raf, cr2 and heic (github issue #96).
 - Added: Support tif input extension (only tiff was handled) (github issue #29).
 - Added: Support ts input extension (github issue #23)
 - Added: Support mpg input extension as an alias for mpeg (github issue #59)
