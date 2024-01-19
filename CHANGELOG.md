@@ -18,6 +18,7 @@
 - Added: "Say thanks" button if you can't donate and want to keep my motivation up :).
 - Added: Messages logged from main thread are now displayed in the console standard output.
 - Added: Add the bookmarks in pdf when converting from word file (thanks to wangweirui).
+- Added: Possibility to use conversion date in output file path template (github issue #56).
 - Added: Brazilian Portuguese translation (thanks to Marhc).
 - Added: Spanish translation (thanks to Chachak).
 - Added: Italian translation (thanks to Davide).
