@@ -11,7 +11,7 @@
 - Added: Display estimated remaining time for each jobs.
 - Added: Support new image input formats: arw, cr2, dds, dng, jfif, nef, raf, tif and heic (github issue #29 #96 #113 #130).
 - Added: Support new video input formats: 3gpp, mpg, rm, ts (github issue #23 #59 #101 #318).
-- Added: Support new audio input formats: opus (github issue #111).
+- Added: Support new audio input formats: m4b, opus (github issue #111 #351).
 - Added: Icons on context menu elements and conversion preset list actions.
 - Added: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).
 - Added: Highlight in red elements that contains errors in the preset list.

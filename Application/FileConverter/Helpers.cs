@@ -23,7 +23,7 @@ namespace FileConverter
     {
         public static readonly string[] CompatibleInputExtensions = {
             "3gp","3gpp","aac","aiff","ape","arw","avi","bik","bmp","cda","cr2","dds","dng","doc","docx",
-            "exr","flac","flv","gif","heic","ico","jfif","jpg","jpeg","m4a","m4v","mkv","mov","mp3","mp4",
+            "exr","flac","flv","gif","heic","ico","jfif","jpg","jpeg","m4a","m4b","m4v","mkv","mov","mp3","mp4",
             "mpg","mpeg","nef","odp","ods","odt","oga","ogg","ogv","opus","pdf","png","ppt","pptx","psd",
             "raf", "rm","svg","tga","tif","tiff", "ts", "vob","wav","webm","webp","wma","wmv","xls","xlsx"
         };
@@ -39,6 +39,7 @@ namespace FileConverter
                 case "flac":
                 case "mp3":
                 case "m4a":
+                case "m4b":
                 case "oga":
                 case "ogg":
                 case "opus":
