@@ -16,6 +16,7 @@
 - Added: Highlight in red elements that contains errors in the preset list.
 - Added: "Say thanks" button if you can't donate and want to keep my motivation up :).
 - Added: Messages logged from main thread are now displayed in the console standard output.
+- Added: Add the bookmarks in pdf when converting from word file (thanks to wangweirui).
 - Added: Brazilian Portuguese translation (thanks to Marhc).
 - Added: Spanish translation (thanks to Chachak).
 - Added: Italian translation (thanks to Davide).
@@ -23,6 +24,7 @@
 - Added: Simplified Chinese translation (thanks to Snoopy1866).
 - Added: Turkish translation (thanks to MayaC0re).
 - Added: Hindi translation (thanks to vishveshjain).
+- Added: Arabic translation (thanks to Mahmoud0Sultan).
 - Change: Rework extension so it uses the settings file on disk instead of registry settings (github issue #22 #32).
 - Change: Some UX improvements.
 - Change: Replace Pledgie donation button by Paypal donation button since Pledgie does not exist anymore.

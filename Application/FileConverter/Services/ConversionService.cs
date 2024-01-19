@@ -19,6 +19,8 @@ namespace FileConverter.Services
 
         private readonly int numberOfConversionThread = 1;
 
+        private ISettingsService settingsService;
+
         public ConversionService(ISettingsService settingsService)
         {
             if (settingsService == null)
@@ -26,9 +28,11 @@ namespace FileConverter.Services
                 throw new ArgumentNullException(nameof(settingsService));
             }
 
+            this.settingsService = settingsService;
+
             this.ConversionJobs = this.conversionJobs.AsReadOnly();
 
-            this.numberOfConversionThread = settingsService.Settings.MaximumNumberOfSimultaneousConversions;
+            this.numberOfConversionThread = this.settingsService.Settings.MaximumNumberOfSimultaneousConversions;
             Diagnostics.Debug.Log("Maximum number of conversion threads: {0}", this.numberOfConversionThread);
 
             if (this.numberOfConversionThread <= 0)

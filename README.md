@@ -58,6 +58,7 @@ Thanks to **nikotschierske** for the German localization.
 Thanks to **Snoopy1866** for the Simplified Chinese localization.
 Thanks to **MayaC0re** for the Turkish localization.
 Thanks to **vishveshjain** for the Hindi localization.
+Thanks to **Mahmoud0Sultan** for the Arabic localization.
 
 ## Middlewares
 

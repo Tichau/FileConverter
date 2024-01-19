@@ -132,7 +132,9 @@ namespace FileConverter.ConversionJobs
 
                     if (PdfSuperSamplingRatio > 1)
                     {
+#pragma warning disable CS0162 // Unreachable code detected
                         image.Scale(new Percentage(100 / PdfSuperSamplingRatio));
+#pragma warning restore CS0162 // Unreachable code detected
                     }
 
                     this.ConvertImage(image, true);
