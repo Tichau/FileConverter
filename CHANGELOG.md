@@ -11,6 +11,7 @@
 - Added: Display conversion progress on the Windows taskbar item.
 - Added: Display estimated remaining time for each jobs.
 - Added: Support tif input extension (only tiff was handled) (github issue #29).
+- Added: Support ts input extension (github issue #23)
 - Added: Icons on context menu elements and conversion preset list actions.
 - Added: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).
 - Added: Highlight in red elements that contains errors in the preset list.
