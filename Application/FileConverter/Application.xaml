@@ -17,9 +17,6 @@
 
             <!--Global View Model Locator-->
             <viewModels:ViewModelLocator x:Key="Locator" />
-            <services:NavigationService x:Key="Navigation" />
-            <services:ConversionService x:Key="Conversions" />
-            <services:SettingsService x:Key="Settings" />
             <services:UpgradeService x:Key="Upgrade" />
 
             <!-- Markdown style -->

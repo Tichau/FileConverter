@@ -2,13 +2,12 @@
 
 namespace FileConverter
 {
-    using System.ComponentModel;
     using System.Linq;
     using System.Xml.Serialization;
     using System.Collections.ObjectModel;
     using System.Globalization;
 
-    using GalaSoft.MvvmLight;
+    using CommunityToolkit.Mvvm.ComponentModel;
 
     [XmlRoot]
     [XmlType]
@@ -86,7 +85,7 @@ namespace FileConverter
                     System.Threading.Thread.CurrentThread.CurrentUICulture = this.applicationLanguage;
                 }
 
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -126,7 +125,7 @@ namespace FileConverter
             set
             {
                 this.conversionPresets = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -141,7 +140,7 @@ namespace FileConverter
             set
             {
                 this.exitApplicationWhenConversionsFinished = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -156,7 +155,7 @@ namespace FileConverter
             set
             {
                 this.durationBetweenEndOfConversionsAndApplicationExit = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -171,7 +170,7 @@ namespace FileConverter
             set
             {
                 this.maximumNumberOfSimultaneousConversions = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -203,7 +202,7 @@ namespace FileConverter
             set
             {
                 this.checkUpgradeAtStartup = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 

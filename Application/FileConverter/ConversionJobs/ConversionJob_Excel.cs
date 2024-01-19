@@ -28,7 +28,7 @@ namespace FileConverter.ConversionJobs
 
         protected override ApplicationName Application => ApplicationName.Excel;
 
-        protected override bool IsCancelable => false;
+        protected override bool IsCancelable() => false;
 
         protected override int GetOutputFilesCount()
         {

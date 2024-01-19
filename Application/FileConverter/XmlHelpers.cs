@@ -2,12 +2,6 @@
 
 namespace FileConverter
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Xml;
-    using System.Xml.Serialization;
-
     public class XmlHelpers
     {
         public static void LoadFromFile<T>(string root, string path, out T deserializedObject)

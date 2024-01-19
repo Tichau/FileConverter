@@ -6,10 +6,10 @@ namespace FileConverter
     using System.Collections.Generic;
     using System.Globalization;
     using System.Xml.Serialization;
+    
+    using CommunityToolkit.Mvvm.ComponentModel;
 
     using FileConverter.Controls;
-
-    using GalaSoft.MvvmLight;
 
     [XmlRoot]
     [XmlType]
@@ -109,7 +109,7 @@ namespace FileConverter
             set
             {
                 this.shortName = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -129,7 +129,7 @@ namespace FileConverter
             {
                 this.outputType = value;
                 this.InitializeDefaultSettings(this.outputType);
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
                 this.CoerceInputTypes();
             }
         }
@@ -157,7 +157,7 @@ namespace FileConverter
                     this.inputTypes[index] = this.inputTypes[index].ToLowerInvariant();
                 }
                 
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -172,7 +172,7 @@ namespace FileConverter
             set
             {
                 this.inputPostConversionAction = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -216,7 +216,7 @@ namespace FileConverter
                     }
                 }
 
-                this.RaisePropertyChanged(nameof(this.Settings));
+                this.OnPropertyChanged(nameof(this.Settings));
             }
         }
 
@@ -231,7 +231,7 @@ namespace FileConverter
             set
             {
                 this.outputFileNameTemplate = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -268,7 +268,7 @@ namespace FileConverter
                     }
                 }
 
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -308,14 +308,14 @@ namespace FileConverter
             }
 
             this.inputTypes.Add(inputType);
-            this.RaisePropertyChanged(nameof(this.InputTypes));
+            this.OnPropertyChanged(nameof(this.InputTypes));
         }
 
         public void RemoveInputType(string inputType)
         {
             if (this.inputTypes.Remove(inputType))
             {
-                this.RaisePropertyChanged(nameof(this.InputTypes));
+                this.OnPropertyChanged(nameof(this.InputTypes));
             }
         }
 
@@ -348,7 +348,7 @@ namespace FileConverter
 
             this.settings[settingsKey] = value;
 
-            this.RaisePropertyChanged(nameof(this.Settings));
+            this.OnPropertyChanged(nameof(this.Settings));
         }
 
         public string GetSettingsValue(string settingsKey)
@@ -544,7 +544,7 @@ namespace FileConverter
                     throw new System.Exception("Missing default settings for type " + outputType);
             }
 
-            this.RaisePropertyChanged(nameof(this.Settings));
+            this.OnPropertyChanged(nameof(this.Settings));
         }
 
         private void InitializeSettingsValue(string settingsKey, string value, bool force = false)

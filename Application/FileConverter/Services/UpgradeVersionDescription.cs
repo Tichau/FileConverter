@@ -4,7 +4,7 @@ namespace FileConverter.Services
 {
     using System.Xml.Serialization;
 
-    using GalaSoft.MvvmLight;
+    using CommunityToolkit.Mvvm.ComponentModel;
 
     public class UpgradeVersionDescription : ObservableObject
     {
@@ -34,7 +34,7 @@ namespace FileConverter.Services
             set
             {
                 this.changeLog = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -53,9 +53,9 @@ namespace FileConverter.Services
             set
             {
                 this.installerDownloadInProgress = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged(nameof(this.InstallerDownloadDone));
-                this.RaisePropertyChanged(nameof(this.InstallerDownloadNotStarted));
+                this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.InstallerDownloadDone));
+                this.OnPropertyChanged(nameof(this.InstallerDownloadNotStarted));
             }
         }
 
@@ -67,9 +67,9 @@ namespace FileConverter.Services
             set
             {
                 this.installerDownloadProgress = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged(nameof(this.InstallerDownloadDone));
-                this.RaisePropertyChanged(nameof(this.InstallerDownloadNotStarted));
+                this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.InstallerDownloadDone));
+                this.OnPropertyChanged(nameof(this.InstallerDownloadNotStarted));
             }
         }
 

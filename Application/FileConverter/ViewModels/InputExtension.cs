@@ -4,10 +4,9 @@ namespace FileConverter.ViewModels
 {
     using System.Windows.Media;
 
-    using CommonServiceLocator;
-    using GalaSoft.MvvmLight;
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.DependencyInjection;
 
-    using FileConverter.Annotations;
     using FileConverter.ConversionJobs;
 
     public class InputExtension : ObservableObject
@@ -56,7 +55,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.name = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -67,7 +66,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.foregroundBrush = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -78,7 +77,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.toolTip = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -86,7 +85,7 @@ namespace FileConverter.ViewModels
         {
             get
             {
-                SettingsViewModel settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+                SettingsViewModel settingsViewModel = Ioc.Default.GetRequiredService<SettingsViewModel>();
                 PresetNode selectedPreset = settingsViewModel.SelectedPreset;
                 if (selectedPreset == null)
                 {
@@ -98,7 +97,7 @@ namespace FileConverter.ViewModels
 
             set
             {
-                SettingsViewModel settingsViewModel = ServiceLocator.Current.GetInstance<SettingsViewModel>();
+                SettingsViewModel settingsViewModel = Ioc.Default.GetRequiredService<SettingsViewModel>();
                 PresetNode selectedPreset = settingsViewModel.SelectedPreset;
 
                 if (value)
@@ -110,8 +109,13 @@ namespace FileConverter.ViewModels
                     selectedPreset?.Preset.RemoveInputType(this.name.ToLowerInvariant());
                 }
 
-                this.RaisePropertyChanged(nameof(this.IsChecked));
+                this.OnPropertyChanged(nameof(this.IsChecked));
             }
+        }
+
+        internal void OnCategoryChanged()
+        {
+            this.OnPropertyChanged(nameof(this.IsChecked));
         }
     }
 }

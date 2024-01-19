@@ -6,10 +6,10 @@ namespace FileConverter.Services
     using System.Collections.Generic;
     using System.Windows;
 
-    using FileConverter.Annotations;
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.DependencyInjection;
 
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Ioc;
+    using FileConverter.Annotations;
 
     using Application = FileConverter.Application;
 
@@ -21,8 +21,6 @@ namespace FileConverter.Services
         public NavigationService()
         {
             this.pageInfoByType = new Dictionary<string, PageInfo>();
-
-            SimpleIoc.Default.Register<INavigationService>(() => this);
         }
         
         public void Show([NotNull] string pageKey)
@@ -104,7 +102,7 @@ namespace FileConverter.Services
                 // If this is the last window.
                 if (this.numberOfPageShowed == 0)
                 {
-                    IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+                    IUpgradeService upgradeService = Ioc.Default.GetRequiredService<IUpgradeService>();
                     bool upgradeInProgress = upgradeService.UpgradeVersionDescription != null &&
                              upgradeService.UpgradeVersionDescription.NeedToUpgrade &&
                              !upgradeService.UpgradeVersionDescription.InstallerDownloadDone;
@@ -118,7 +116,7 @@ namespace FileConverter.Services
                         }
                         else
                         {
-                            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+                            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
                             navigationService.Show(Pages.Upgrade);
                             Diagnostics.Debug.Log("There is an upgrade in progress, display the upgrade window.");
                         }
