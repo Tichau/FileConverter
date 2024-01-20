@@ -19,6 +19,7 @@
 - New: Messages logged from main thread are now displayed in the console standard output.
 - New: Add the bookmarks in pdf when converting from word file (thanks to wangweirui).
 - New: Possibility to use conversion date in output file path template (github issue #56).
+- New: Option to copy files in clipboard after conversion (thanks to hsayed21).
 - New: Brazilian Portuguese translation (thanks to Marhc).
 - New: Spanish translation (thanks to Chachak).
 - New: Italian translation (thanks to Davide).

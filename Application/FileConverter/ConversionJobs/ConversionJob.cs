@@ -10,8 +10,6 @@ namespace FileConverter.ConversionJobs
     using CommunityToolkit.Mvvm.Input;
 
     using FileConverter.Diagnostics;
-    using System.Threading;
-    using FileConverter.Services;
 
     public class ConversionJob : INotifyPropertyChanged
     {
@@ -447,7 +445,6 @@ namespace FileConverter.ConversionJobs
             this.State = ConversionState.Done;
             this.UserState = Properties.Resources.ConversionStateDone;
             Debug.Log("Conversion Done!");
-
         }
 
         protected void ConversionFailed(string exitingMessage)
