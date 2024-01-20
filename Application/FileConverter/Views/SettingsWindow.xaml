@@ -370,6 +370,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Language}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
@@ -397,6 +398,9 @@
 
                     <Label Grid.Row="4" Grid.Column="0" Content="{x:Static project:Resources.AutomaticallyCheckForUpdates}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
                     <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding Settings.CheckUpgradeAtStartup, Mode=TwoWay}" Margin="0,5,0,5" />
+
+                    <Label Grid.Row="5" Grid.Column="0" Content="{x:Static project:Resources.CopyFilesInClipboardAfterConversion}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <CheckBox Grid.Row="5" Grid.Column="1" x:Name="CopyFilesInClipboardAfterConversionCheckBox" IsChecked="{Binding Settings.CopyFilesInClipboardAfterConversion, Mode=TwoWay}"  Margin="0,5,0,5" />
                 </Grid>
             </TabItem>
 

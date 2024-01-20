@@ -322,6 +322,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy files in clipboard after conversion.
+        /// </summary>
+        public static string CopyFilesInClipboardAfterConversion {
+            get {
+                return ResourceManager.GetString("CopyFilesInClipboardAfterConversion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New folder.
         /// </summary>
         public static string CreateANewFolder {
