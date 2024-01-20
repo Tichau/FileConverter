@@ -5,25 +5,16 @@ namespace FileConverter.ViewModels
     using System.ComponentModel;
     using System.Windows.Input;
 
-    using FileConverter.Services;
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    using CommunityToolkit.Mvvm.Input;
 
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Command;
-    using GalaSoft.MvvmLight.Ioc;
+    using FileConverter.Services;
 
     /// <summary>
     /// This class contains properties that the diagnostics View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
     /// </summary>
-    public class DiagnosticsViewModel : ViewModelBase
+    public class DiagnosticsViewModel : ObservableRecipient
     {
         private RelayCommand<CancelEventArgs> closeCommand;
 
@@ -32,13 +23,6 @@ namespace FileConverter.ViewModels
         /// </summary>
         public DiagnosticsViewModel()
         {
-            if (this.IsInDesignMode)
-            {
-                // Code runs in Blend --> create design time data.
-            }
-            else
-            {
-            }
         }
 
         public ICommand CloseCommand
@@ -56,7 +40,7 @@ namespace FileConverter.ViewModels
 
         private void Close(CancelEventArgs args)
         {
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
             navigationService.Close(Pages.Diagnostics, args != null);
         }
     }

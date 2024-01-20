@@ -4,19 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:project="clr-namespace:FileConverter.Properties"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="{x:Static project:Resources.UpgradeWindowTitle}"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         MinHeight="300" MinWidth="450"
         Height="450" Width="450" WindowStyle="ToolWindow"
         DataContext="{Binding Upgrade, Source={StaticResource Locator}}">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
-            <command:EventToCommand Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="Closing">
+            <behaviors:InvokeCommandAction Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
     <Window.Resources>
     </Window.Resources>
     <Grid>

@@ -6,13 +6,13 @@ namespace FileConverter.ConversionJobs
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
+    
+    using CommunityToolkit.Mvvm.Input;
 
     using FileConverter.Diagnostics;
     using GalaSoft.MvvmLight.Ioc;
     using System.Threading;
     using FileConverter.Services;
-
-    using GalaSoft.MvvmLight.Command;
 
     public class ConversionJob : INotifyPropertyChanged
     {
@@ -195,7 +195,7 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        protected virtual bool IsCancelable => this.State == ConversionState.InProgress;
+        protected virtual bool IsCancelable() => this.State == ConversionState.InProgress;
 
         protected string[] OutputFilePaths
         {
@@ -366,7 +366,7 @@ namespace FileConverter.ConversionJobs
 
         public virtual void Cancel()
         {
-            if (!this.IsCancelable)
+            if (!this.IsCancelable())
             {
                 return;
             }

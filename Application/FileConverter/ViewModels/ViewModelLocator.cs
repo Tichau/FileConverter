@@ -9,21 +9,12 @@
   
   In the View:
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-
-  You can also use Blend to do all this with the tool's support.
-  See http://www.galasoft.ch/mvvm
 */
 
 namespace FileConverter.ViewModels
 {
-    using System;
-
-    using CommonServiceLocator;
-
-    using FileConverter.Views;
-
-    using GalaSoft.MvvmLight.Ioc;
-    using GalaSoft.MvvmLight.Views;
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
     /// This class contains static references to all the view models in the
@@ -36,34 +27,26 @@ namespace FileConverter.ViewModels
         /// </summary>
         public ViewModelLocator()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
-
-            SimpleIoc.Default.Register<HelpViewModel>();
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<UpgradeViewModel>();
-            SimpleIoc.Default.Register<SettingsViewModel>();
-            SimpleIoc.Default.Register<DiagnosticsViewModel>();
         }
 
-        public HelpViewModel Help => ServiceLocator.Current.GetInstance<HelpViewModel>();
+        public HelpViewModel Help => Ioc.Default.GetRequiredService<HelpViewModel>();
 
-        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public MainViewModel Main => Ioc.Default.GetRequiredService<MainViewModel>();
 
-        public UpgradeViewModel Upgrade => ServiceLocator.Current.GetInstance<UpgradeViewModel>();
+        public UpgradeViewModel Upgrade => Ioc.Default.GetRequiredService<UpgradeViewModel>();
 
-        public SettingsViewModel Settings => ServiceLocator.Current.GetInstance<SettingsViewModel>();
+        public SettingsViewModel Settings => Ioc.Default.GetRequiredService<SettingsViewModel>();
 
-        public DiagnosticsViewModel Diagnostics => ServiceLocator.Current.GetInstance<DiagnosticsViewModel>();
+        public DiagnosticsViewModel Diagnostics => Ioc.Default.GetRequiredService<DiagnosticsViewModel>();
+
+        internal void RegisterViewModels(ServiceCollection services)
+        {
+            services
+                .AddSingleton<HelpViewModel>()
+                .AddSingleton<MainViewModel>()
+                .AddSingleton<UpgradeViewModel>()
+                .AddSingleton<SettingsViewModel>()
+                .AddSingleton<DiagnosticsViewModel>();
+        }
     }
 }

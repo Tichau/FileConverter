@@ -1,12 +1,13 @@
 // <copyright file="PresetNode.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using GalaSoft.MvvmLight;
-
 namespace FileConverter.ViewModels
 {
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Linq;
+
+    using CommunityToolkit.Mvvm.ComponentModel;
+
     public abstract class AbstractTreeNode : ObservableObject, IDataErrorInfo
     {
         private PresetFolderNode parent;
@@ -28,7 +29,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.parent = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -135,8 +136,8 @@ namespace FileConverter.ViewModels
             set
             {
                 this.Preset.ShortName = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged(nameof(this.HasError));
+                this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.HasError));
             }
         }
 
@@ -147,7 +148,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.Preset.OutputFileNameTemplate = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -255,8 +256,8 @@ namespace FileConverter.ViewModels
             set
             {
                 this.name = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged(nameof(this.HasError));
+                this.OnPropertyChanged();
+                this.OnPropertyChanged(nameof(this.HasError));
             }
         }
 
@@ -267,7 +268,7 @@ namespace FileConverter.ViewModels
             set
             {
                 this.children = value;
-                this.RaisePropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 

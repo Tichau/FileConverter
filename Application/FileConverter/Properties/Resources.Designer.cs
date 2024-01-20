@@ -70,7 +70,7 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allow you to chose what you want to do with your input files if the conversion succeed.
+        ///   Looks up a localized string similar to Allow you to choose what you want to do with your input files if the conversion succeed.
         /// </summary>
         public static string ActionWhenConversionSucceedDescription {
             get {

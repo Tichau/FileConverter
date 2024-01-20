@@ -1,9 +1,12 @@
 # File Converter
 
 ## Description
+
 **File Converter** is a very simple tool which allows you to convert and compress one or several file(s) using the context menu of windows explorer.
 
-You can download it here: [www.file-converter.org](https://file-converter.org/?from=readme.md).
+![File Converter Usage](Resources/FileConverterUsage.gif)
+
+You can download it here: [file-converter.org](https://file-converter.org/?from=readme.md).
 
 You can find more information about what's in File converter and how to use it on the [wiki](https://github.com/Tichau/FileConverter/wiki).
 
@@ -13,7 +16,7 @@ File Converter is a personal open source project started in 2014. I have put hun
 
 You can help me by [contributing to the project](https://github.com/Tichau/FileConverter/wiki#contribute), by [making a donation](https://www.paypal.com/donate/?cmd=_donations&business=3BDWQTYTTA3D8&item_name=File+Converter+Donations&currency_code=EUR&Z3JncnB0=) or just by [saying thanks​](https://saythanks.io/to/Tichau) :).
 
-##  Troubleshooting
+## Troubleshooting
 
 If you encounter any problem with File Converter, you can:
 
@@ -29,16 +32,19 @@ When you report an issue, please join the following informations:
 
 You will find the xml files and diagnostics folder in `c:\Users\[UserName]\AppData\Local\FileConverter\`.
 
-## Setup development environement
+## Setup development environment
 
 ### Requirements
 
 For File Converter and its explorer extension:
-- Visual Studio 2017
+
+* Visual Studio 2022
 
 For the installer:
-- [Wix toolset build tool v3.11 and visual studio extension](http://wixtoolset.org/)
-- [Windows SDK Signing Tools for Desktop Apps](https://developer.microsoft.com/fr-fr/windows/downloads/windows-10-sdk)
+
+* [Wix 4](http://wixtoolset.org/)
+  * [Community Visual Studio Extension](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17)
+* [Windows SDK Signing Tools for Desktop Apps](https://developer.microsoft.com/fr-fr/windows/downloads/windows-10-sdk)
 
 ## Thanks
 
@@ -54,6 +60,7 @@ Thanks to **nikotschierske** for the German localization.
 Thanks to **Snoopy1866** for the Simplified Chinese localization.
 Thanks to **MayaC0re** for the Turkish localization.
 Thanks to **vishveshjain** for the Hindi localization.
+Thanks to **Mahmoud0Sultan** for the Arabic localization.
 
 ## Middlewares
 

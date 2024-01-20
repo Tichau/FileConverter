@@ -6,8 +6,7 @@
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:views="clr-namespace:FileConverter.Views"
         xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         xmlns:controls="clr-namespace:FileConverter.Controls"
         x:Class="FileConverter.Views.SettingsWindow"
@@ -17,11 +16,11 @@
         mc:Ignorable="d"
         DataContext="{Binding Settings, Source={StaticResource Locator}}"
         d:DataContext="{d:DesignData /SampleData/SettingsSampleData.xaml}">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
-            <command:EventToCommand Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="Closing">
+            <behaviors:InvokeCommandAction Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -292,12 +291,12 @@
                                     <EventSetter Event="MouseMove" Handler="TreeView_MouseMove"/>
                                 </Style>
                             </TreeView.ItemContainerStyle>
-                            <i:Interaction.Behaviors>
+                            <behaviors:Interaction.Behaviors>
                                 <views:TreeViewSelectionBehavior
                                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                                     HierarchyPredicate="{Binding PresetsHierarchyPredicate}"
                                     ExpandSelected="False"/>
-                            </i:Interaction.Behaviors>
+                            </behaviors:Interaction.Behaviors>
                             <TreeView.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="{x:Static project:Resources.CreateANewFolder}" Command="{Binding CreateFolderCommand}">

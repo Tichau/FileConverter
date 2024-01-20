@@ -5,25 +5,16 @@ namespace FileConverter.ViewModels
     using System.ComponentModel;
     using System.Windows.Input;
 
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    using CommunityToolkit.Mvvm.Input;
+
     using FileConverter.Services;
 
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Command;
-    using GalaSoft.MvvmLight.Ioc;
-
     /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
+    /// This class contains properties that the upgrade View can data bind to.
     /// </summary>
-    public class UpgradeViewModel : ViewModelBase
+    public class UpgradeViewModel : ObservableRecipient
     {
         private readonly IUpgradeService upgradeService;
 
@@ -36,7 +27,7 @@ namespace FileConverter.ViewModels
         /// </summary>
         public UpgradeViewModel()
         {
-            this.upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+            this.upgradeService = Ioc.Default.GetRequiredService<IUpgradeService>();
             this.upgradeService.DownloadChangeLog();
         }
 
@@ -83,19 +74,19 @@ namespace FileConverter.ViewModels
         {
             this.upgradeService.StartUpgrade();
 
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
             navigationService.Close(Pages.Upgrade, false);
         }
 
         private void ExecuteLaunchInstallerCommand()
         {
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
             navigationService.Close(Pages.Upgrade, false);
         }
 
         private void Close(CancelEventArgs args)
         {
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
             navigationService.Close(Pages.Upgrade, args != null);
         }
     }

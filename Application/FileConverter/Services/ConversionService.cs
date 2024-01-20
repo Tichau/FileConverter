@@ -7,11 +7,11 @@ namespace FileConverter.Services
     using System.Collections.ObjectModel;
     using System.Threading;
 
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.DependencyInjection;
+
     using FileConverter.ConversionJobs;
     using FileConverter.Diagnostics;
-
-    using GalaSoft.MvvmLight;
-    using GalaSoft.MvvmLight.Ioc;
 
     public class ConversionService : ObservableObject, IConversionService
     {
@@ -19,13 +19,20 @@ namespace FileConverter.Services
 
         private readonly int numberOfConversionThread = 1;
 
-        public ConversionService()
+        private ISettingsService settingsService;
+
+        public ConversionService(ISettingsService settingsService)
         {
+            if (settingsService == null)
+            {
+                throw new ArgumentNullException(nameof(settingsService));
+            }
+
+            this.settingsService = settingsService;
+
             this.ConversionJobs = this.conversionJobs.AsReadOnly();
 
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
-
-            this.numberOfConversionThread = settingsService.Settings.MaximumNumberOfSimultaneousConversions;
+            this.numberOfConversionThread = this.settingsService.Settings.MaximumNumberOfSimultaneousConversions;
             Diagnostics.Debug.Log("Maximum number of conversion threads: {0}", this.numberOfConversionThread);
 
             if (this.numberOfConversionThread <= 0)
@@ -33,8 +40,6 @@ namespace FileConverter.Services
                 this.numberOfConversionThread = System.Math.Max(1, Environment.ProcessorCount / 2);
                 Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", settingsService.Settings.MaximumNumberOfSimultaneousConversions);
             }
-
-            SimpleIoc.Default.Register<IConversionService>(() => this);
         }
 
         public event System.EventHandler<ConversionJobsTerminatedEventArgs> ConversionJobsTerminated;
@@ -48,7 +53,7 @@ namespace FileConverter.Services
         public void RegisterConversionJob(ConversionJob conversionJob)
         {
             this.conversionJobs.Add(conversionJob);
-            this.RaisePropertyChanged(nameof(this.ConversionJobs));
+            this.OnPropertyChanged(nameof(this.ConversionJobs));
         }
 
         public void ConvertFilesAsync()

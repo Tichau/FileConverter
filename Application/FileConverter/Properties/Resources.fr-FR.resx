@@ -122,7 +122,7 @@
   </data>
   <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
     <value>Cette option vous permet de choisir ce que vous souhaitez faire du fichier d'origine après une conversion réussie</value>
-    <comment>Allow you to chose what you want to do with your input files if the conversion succeed</comment>
+    <comment>Allow you to choose what you want to do with your input files if the conversion succeed</comment>
   </data>
   <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
     <value>Action après conversion réussie</value>

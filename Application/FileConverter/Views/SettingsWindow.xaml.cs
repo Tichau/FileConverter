@@ -2,8 +2,7 @@
 
 namespace FileConverter.Views
 {
-    using System;
-    using System.Linq;
+    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -11,8 +10,6 @@ namespace FileConverter.Views
 
     using FileConverter.Diagnostics;
     using FileConverter.ViewModels;
-
-    using GalaSoft.MvvmLight.Messaging;
 
     /// <summary>
     /// Interaction logic for Settings.
@@ -35,12 +32,28 @@ namespace FileConverter.Views
         {
             this.InitializeComponent();
 
-            Messenger.Default.Register<string>(this, "DoFocus", this.DoFocus);
+            SettingsViewModel settingsViewModel = this.DataContext as SettingsViewModel;
+            settingsViewModel.OnPresetCreated += this.SettingsWindow_OnPresetCreated;
+            settingsViewModel.OnFolderCreated += this.SettingsWindow_OnFolderCreated;
 
-            (this.DataContext as SettingsViewModel).PropertyChanged += this.SettingsWindow_PropertyChanged;
+            settingsViewModel.PropertyChanged += this.SettingsWindow_PropertyChanged;
 
             this.PresetTreeView.MouseDown += this.TreeView_MouseDown;
             this.PresetTreeView.MouseUp += this.TreeView_MouseUp;
+        }
+
+        private void SettingsWindow_OnPresetCreated()
+        {
+            this.focusMessage = "PresetName";
+            this.selectedPresetNameTextBox?.Focus();
+            this.selectedPresetNameTextBox?.SelectAll();
+        }
+
+        private void SettingsWindow_OnFolderCreated()
+        {
+            this.focusMessage = "FolderName";
+            this.selectedFolderNameTextBox?.Focus();
+            this.selectedFolderNameTextBox?.SelectAll();
         }
 
         private void SettingsWindow_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs args)
@@ -49,23 +62,6 @@ namespace FileConverter.Views
             {
                 TreeViewItem selectedItem = this.GetTreeViewItem(this.PresetTreeView, this.PresetTreeView.SelectedItem);
                 selectedItem?.BringIntoView();
-            }
-        }
-
-        public void DoFocus(string message)
-        {
-            this.focusMessage = message;
-            switch (message)
-            {
-                case "PresetName":
-                    this.selectedPresetNameTextBox?.Focus();
-                    this.selectedPresetNameTextBox?.SelectAll();
-                    break;
-
-                case "FolderName":
-                    this.selectedFolderNameTextBox?.Focus();
-                    this.selectedFolderNameTextBox?.SelectAll();
-                    break;
             }
         }
 
@@ -345,7 +341,7 @@ namespace FileConverter.Views
             this.selectedPresetNameTextBox = (TextBox)sender;
             if (this.focusMessage == "PresetName")
             {
-                this.DoFocus(this.focusMessage);
+                this.selectedPresetNameTextBox.Focus();
                 this.focusMessage = null;
             }
         }
@@ -355,7 +351,7 @@ namespace FileConverter.Views
             this.selectedFolderNameTextBox = (TextBox)sender;
             if (this.focusMessage == "FolderName")
             {
-                this.DoFocus(this.focusMessage);
+                this.selectedFolderNameTextBox.Focus();
                 this.focusMessage = null;
             }
         }

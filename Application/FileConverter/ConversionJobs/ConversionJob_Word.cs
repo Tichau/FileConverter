@@ -28,7 +28,7 @@ namespace FileConverter.ConversionJobs
 
         protected override ApplicationName Application => ApplicationName.Word;
 
-        protected override bool IsCancelable => false;
+        protected override bool IsCancelable() => false;
 
         protected override int GetOutputFilesCount()
         {
@@ -100,7 +100,18 @@ namespace FileConverter.ConversionJobs
             this.UserState = Properties.Resources.ConversionStateConversion;
 
             Diagnostics.Debug.Log("Convert word document to pdf.");
-            this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
+            // this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
+            this.document.ExportAsFixedFormat(this.intermediateFilePath, 
+                Word.WdExportFormat.wdExportFormatPDF, 
+                false, 
+                Word.WdExportOptimizeFor.wdExportOptimizeForPrint, 
+                Word.WdExportRange.wdExportAllDocument, 
+                1, 1, 
+                Word.WdExportItem.wdExportDocumentContent, 
+                true, 
+                true, 
+                Word.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, 
+                true);
 
             Diagnostics.Debug.Log("Close word document '{0}'.", this.InputFilePath);
             this.document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);

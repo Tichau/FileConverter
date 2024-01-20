@@ -21,6 +21,8 @@ namespace FileConverterExtension
     [COMServerAssociation(AssociationType.AllFiles)]
     public class FileConverterExtension : SharpContextMenu
     {
+        private const int MaximumProcessArgumentsLength = 8000; // https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/command-line-string-limitation
+
         private PresetReference[] presetReferences = null;
         private List<MenuEntry> menuEntries = new List<MenuEntry>();
 
@@ -301,29 +303,80 @@ namespace FileConverterExtension
                 return;
             }
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(PathHelpers.FileConverterPath)
+            void BuildConversionPresetArgument(StringBuilder sb)
             {
-                CreateNoWindow = false, 
-                UseShellExecute = false, 
-                RedirectStandardOutput = false,
-            };
+                sb.Append("--conversion-preset ");
+                sb.Append(" \"");
+                sb.Append(presetName);
+                sb.Append("\"");
+            }
 
             // Build arguments string.
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("--conversion-preset ");
-            stringBuilder.Append(" \"");
-            stringBuilder.Append(presetName);
-            stringBuilder.Append("\"");
-
+            BuildConversionPresetArgument(stringBuilder);
+            
+            string fileListPath = null;
             foreach (var filePath in this.SelectedItemPaths)
             {
                 stringBuilder.Append(" \"");
                 stringBuilder.Append(filePath);
                 stringBuilder.Append("\"");
+
+                if (stringBuilder.Length >= MaximumProcessArgumentsLength)
+                {
+                    // Alternative way of passing arguments to not overflow the command line.
+                    stringBuilder.Clear();
+                    BuildConversionPresetArgument(stringBuilder);
+
+                    // Store list of file to convert in a file in Temp folder.
+                    fileListPath = Path.Combine(Path.GetTempPath(), "file-converter-input-list.txt");
+                    int index = 1;
+                    while (File.Exists(fileListPath))
+                    {
+                        fileListPath = Path.Combine(Path.GetTempPath(), $"file-converter-input-list-{index}.txt");
+                        index++;
+                    }
+
+                    using (FileStream file = File.OpenWrite(fileListPath))
+                    using (StreamWriter writer = new StreamWriter(file))
+                    {
+                        foreach (var path in this.SelectedItemPaths)
+                        {
+                            writer.WriteLine(path);
+                        }
+                    }
+
+                    stringBuilder.Append(" --input-files ");
+                    stringBuilder.Append(" \"");
+                    stringBuilder.Append(fileListPath);
+                    stringBuilder.Append("\"");
+                    break;
+                }
             }
 
-            processStartInfo.Arguments = stringBuilder.ToString();
+            var processStartInfo = new ProcessStartInfo(PathHelpers.FileConverterPath)
+            {
+                CreateNoWindow = false,
+                UseShellExecute = false,
+                RedirectStandardOutput = false,
+                Arguments = stringBuilder.ToString(),
+            };
+
             Process exeProcess = Process.Start(processStartInfo);
+            exeProcess.EnableRaisingEvents = true;
+            exeProcess.Exited += (sender, args) =>
+            {
+                if (fileListPath != null)
+                {
+                    try
+                    {
+                        File.Delete(fileListPath);
+                    }
+                    catch 
+                    { 
+                    }
+                }
+            };
         }
     }
 }

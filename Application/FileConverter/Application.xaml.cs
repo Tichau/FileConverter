@@ -18,16 +18,18 @@ namespace FileConverter
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Security.Principal;
     using System.Threading;
     using System.Windows;
 
+    using CommunityToolkit.Mvvm.DependencyInjection;
+
     using FileConverter.ConversionJobs;
     using FileConverter.Services;
+    using FileConverter.ViewModels;
     using FileConverter.Views;
-
-    using GalaSoft.MvvmLight.Ioc;
-
+    using Microsoft.Extensions.DependencyInjection;
     using Debug = FileConverter.Diagnostics.Debug;
 
     public partial class Application : System.Windows.Application
@@ -77,7 +79,7 @@ namespace FileConverter
             this.Initialize();
 
             // Navigate to the wanted view.
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
 
             if (this.showHelp)
             {
@@ -89,7 +91,7 @@ namespace FileConverter
             {
                 navigationService.Show(Pages.Main);
 
-                IConversionService conversionService = SimpleIoc.Default.GetInstance<IConversionService>();
+                IConversionService conversionService = Ioc.Default.GetRequiredService<IConversionService>();
                 conversionService.ConversionJobsTerminated += this.ConversionService_ConversionJobsTerminated;
                 conversionService.ConvertFilesAsync();
             }
@@ -111,7 +113,7 @@ namespace FileConverter
 
             Debug.Log("Exit application.");
 
-            IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+            IUpgradeService upgradeService = Ioc.Default.GetRequiredService<IUpgradeService>();
 
             if (!this.isSessionEnding && upgradeService.UpgradeVersionDescription != null && upgradeService.UpgradeVersionDescription.NeedToUpgrade)
             {
@@ -161,37 +163,36 @@ namespace FileConverter
 
         private void RegisterServices()
         {
-            if (this.TryFindResource("Settings") == null)
-            {
-                Debug.LogError("Can't retrieve conversion service.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-            }
+            var services = new ServiceCollection();
 
-            if (this.TryFindResource("Locator") == null)
+            if (this.TryFindResource("Locator") is ViewModelLocator viewModelLocator)
+            {
+                viewModelLocator.RegisterViewModels(services);
+            }
+            else
             {
                 Debug.LogError("Can't retrieve view model locator.");
                 this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
             }
 
-            if (this.TryFindResource("Conversions") == null)
+            if (this.TryFindResource("Upgrade") is UpgradeService upgradeService)
             {
-                Debug.LogError("Can't retrieve conversion service.");
+                services.AddSingleton<IUpgradeService>(upgradeService);
+            }
+            else
+            {
+                Debug.LogError("Can't retrieve Upgrade service.");
                 this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
             }
 
-            if (this.TryFindResource("Navigation") == null)
-            {
-                Debug.LogError("Can't retrieve navigation service.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-            }
+            services
+              .AddSingleton<INavigationService, NavigationService>()
+              .AddSingleton<IConversionService, ConversionService>()
+              .AddSingleton<ISettingsService, SettingsService>();
 
-            if (this.TryFindResource("Upgrade") == null)
-            {
-                Debug.LogError("Can't retrieve navigation service.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
-            }
+            Ioc.Default.ConfigureServices(services.BuildServiceProvider());
 
-            INavigationService navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
 
             navigationService.RegisterPage<HelpWindow>(Pages.Help, false, true);
             navigationService.RegisterPage<MainWindow>(Pages.Main, false, true);
@@ -228,7 +229,7 @@ namespace FileConverter
                 return;
             }
 
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
 
             // Parse arguments.
             bool quitAfterStartup = false;
@@ -328,6 +329,37 @@ namespace FileConverter
                             index++;
                             break;
 
+                        case "input-files":
+                            if (index >= args.Length - 1)
+                            {
+                                quitAfterStartup = true;
+                                quitExitCode = 0x02;
+                                Debug.LogError(quitExitCode, $"Invalid format.");
+                                break;
+                            }
+
+                            string fileListPath = args[index + 1];
+                            try
+                            {
+                                using (FileStream file = File.OpenRead(fileListPath))
+                                using (StreamReader reader = new StreamReader(file))
+                                {
+                                    while (!reader.EndOfStream)
+                                    {
+                                        filePaths.Add(reader.ReadLine());
+                                    }
+                                }
+                            }
+                            catch (Exception exception)
+                            {
+                                quitAfterStartup = true;
+                                quitExitCode = 0x03;
+                                Debug.LogError(quitExitCode, $"Can't read input files list: {exception}");
+                            }
+
+                            index++;
+                            break;
+
                         case "verbose":
                             {
                                 this.verbose = true;
@@ -364,7 +396,7 @@ namespace FileConverter
             // Check for upgrade.
             if (settingsService.Settings.CheckUpgradeAtStartup)
             {
-                IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+                IUpgradeService upgradeService = Ioc.Default.GetRequiredService<IUpgradeService>();
                 upgradeService.NewVersionAvailable += this.UpgradeService_NewVersionAvailable;
                 upgradeService.CheckForUpgrade();
             }
@@ -383,7 +415,7 @@ namespace FileConverter
 
             if (conversionPreset != null)
             {
-                IConversionService conversionService = SimpleIoc.Default.GetInstance<IConversionService>();
+                IConversionService conversionService = Ioc.Default.GetRequiredService<IConversionService>();
 
                 // Create conversion jobs.
                 Debug.Log("Create jobs for conversion preset: '{0}'", conversionPreset.FullName);
@@ -409,18 +441,18 @@ namespace FileConverter
 
         private void UpgradeService_NewVersionAvailable(object sender, UpgradeVersionDescription e)
         {
-            SimpleIoc.Default.GetInstance<INavigationService>().Show(Pages.Upgrade);
+            Ioc.Default.GetRequiredService<INavigationService>().Show(Pages.Upgrade);
 
-            IUpgradeService upgradeService = SimpleIoc.Default.GetInstance<IUpgradeService>();
+            IUpgradeService upgradeService = Ioc.Default.GetRequiredService<IUpgradeService>();
             upgradeService.NewVersionAvailable -= this.UpgradeService_NewVersionAvailable;
         }
 
         private void ConversionService_ConversionJobsTerminated(object sender, ConversionJobsTerminatedEventArgs e)
         {
-            IConversionService conversionService = SimpleIoc.Default.GetInstance<IConversionService>();
+            IConversionService conversionService = Ioc.Default.GetRequiredService<IConversionService>();
             conversionService.ConversionJobsTerminated -= this.ConversionService_ConversionJobsTerminated;
 
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
 
             if (!settingsService.Settings.ExitApplicationWhenConversionsFinished)
             {

@@ -6,16 +6,15 @@
         xmlns:diagnostics="clr-namespace:FileConverter.Diagnostics"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:local="clr-namespace:FileConverter"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Height="600" Width="800" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         DataContext="{Binding Diagnostics, Source={StaticResource Locator}}">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
-            <command:EventToCommand Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="Closing">
+            <behaviors:InvokeCommandAction Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
     </Window.Title>
