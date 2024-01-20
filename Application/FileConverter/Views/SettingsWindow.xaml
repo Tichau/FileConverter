@@ -474,7 +474,7 @@
                         </Button>
                     </StackPanel>
 
-                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2020, Adrien Allard. All right reserved." Foreground="{StaticResource LightForegroundBrush}" Margin="0,2,0,2"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2024, Adrien Allard. All right reserved." Foreground="{StaticResource LightForegroundBrush}" Margin="0,2,0,2"/>
                 </Grid>
             </TabItem>
         </TabControl>
