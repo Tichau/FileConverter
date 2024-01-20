@@ -322,11 +322,11 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy Files After Converting.
+        ///   Looks up a localized string similar to Copy files in clipboard after conversion.
         /// </summary>
-        public static string CopyFilesAfterConverting {
+        public static string CopyFilesInClipboardAfterConversion {
             get {
-                return ResourceManager.GetString("CopyFilesAfterConverting", resourceCulture);
+                return ResourceManager.GetString("CopyFilesInClipboardAfterConversion", resourceCulture);
             }
         }
         

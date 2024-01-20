@@ -592,7 +592,7 @@ use maj for uppercase version</value>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
     <value>Can't load file converter user settings. Do you want to fall back to default settings ?</value>
   </data>
-  <data name="CopyFilesAfterConverting" xml:space="preserve">
-    <value>Copy Files After Converting</value>
+  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
+    <value>Copy files in clipboard after conversion</value>
   </data>
 </root>

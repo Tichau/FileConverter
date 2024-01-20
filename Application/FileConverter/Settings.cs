@@ -21,7 +21,7 @@ namespace FileConverter
         private bool checkUpgradeAtStartup = true;
         private CultureInfo applicationLanguage;
         private int maximumNumberOfSimultaneousConversions;
-        private bool checkCopyFileAfterConverting = false;
+        private bool copyFilesInClipboardAfterConversion = false;
 
         public ConversionPreset GetPresetFromName(string presetName)
         {
@@ -208,17 +208,17 @@ namespace FileConverter
         }
 
         [XmlElement]
-        public bool CheckCopyFilesAfterConverting
+        public bool CopyFilesInClipboardAfterConversion
         {
             get
             {
-                return this.checkCopyFileAfterConverting;
+                return this.copyFilesInClipboardAfterConversion;
             }
 
             set
             {
-                this.checkCopyFileAfterConverting = value;
-                this.RaisePropertyChanged();
+                this.copyFilesInClipboardAfterConversion = value;
+                this.OnPropertyChanged();
             }
         }
         public void OnDeserializationComplete()

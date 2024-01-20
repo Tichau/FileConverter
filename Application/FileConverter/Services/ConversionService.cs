@@ -136,9 +136,8 @@ namespace FileConverter.Services
                 Thread.Sleep(50);
             }
 
-            ISettingsService settingsService = SimpleIoc.Default.GetInstance<ISettingsService>();
             // Copy the output files to the clipboard
-            if (settingsService.Settings.CheckCopyFilesAfterConverting && files.Count > 0)
+            if (this.settingsService.Settings.CopyFilesInClipboardAfterConversion && files.Count > 0)
             {
                 Thread clipboardThread = Helpers.InstantiateThread("CopyFilesToClipboardThread", this.CopyFilesToClipboard);
                 clipboardThread.SetApartmentState(ApartmentState.STA);

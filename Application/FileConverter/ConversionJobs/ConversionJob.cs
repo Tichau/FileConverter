@@ -10,7 +10,6 @@ namespace FileConverter.ConversionJobs
     using CommunityToolkit.Mvvm.Input;
 
     using FileConverter.Diagnostics;
-    using GalaSoft.MvvmLight.Ioc;
     using System.Threading;
     using FileConverter.Services;
 
