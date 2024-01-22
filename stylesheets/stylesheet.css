@@ -4,7 +4,7 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #606c71; }
@@ -97,15 +97,18 @@ a {
 .project-tagline {
   margin-bottom: 2rem;
   font-weight: normal;
-  opacity: 0.7; }
+  opacity: 0.7; 
+  font-size: 1.2rem;
+  font-style: italic;
+  font-family: 'Alegreya';}
 
 @media screen and (min-width: 64em) {
   .project-tagline {
-    font-size: 1.25rem; } }
+    font-size: 1.5rem; } }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
   .project-tagline {
-    font-size: 1.15rem; } }
+    font-size: 1.35rem; } }
 
 @media screen and (max-width: 42em) {
   .project-tagline {
@@ -119,7 +122,8 @@ a {
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-weight: normal;
-  color: #DF3900; }
+  color: #DF3900;
+  font-style: italic; }
 .main-content p {
   margin-bottom: 1em; }
 .main-content code {
