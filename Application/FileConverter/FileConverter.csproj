@@ -367,6 +367,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
+    <EmbeddedResource Include="Properties\Resources.el-GR.resx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
