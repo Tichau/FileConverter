@@ -470,7 +470,7 @@
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.WebsiteButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="www.file-converter.org?from=about">
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://file-converter.io?from=about">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/WebSite-Icon.png"></Image>
                             </Button.Content>
