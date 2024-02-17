@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="256"
    height="256"
    viewBox="0 0 256.00001 256.00001"
    id="svg2"
    version="1.1"
-   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
    sodipodi:docname="CancelIcon.svg"
-   inkscape:export-filename="D:\Users\adrie\Documents\GitHub\FileConverter\Resources\CancelIcon.png"
+   inkscape:export-filename="CancelIcon.png"
    inkscape:export-xdpi="36"
-   inkscape:export-ydpi="36">
+   inkscape:export-ydpi="36"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -27,18 +27,21 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2"
-     inkscape:cx="102.11763"
-     inkscape:cy="151.52912"
+     inkscape:cx="102.25"
+     inkscape:cy="151.75"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:window-width="2498"
-     inkscape:window-height="1417"
-     inkscape:window-x="54"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:document-rotation="0" />
+     inkscape:document-rotation="0"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -62,7 +65,7 @@
        id="path3338"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:#ff5252;fill-opacity:1;stroke-width:0.5"
+       style="fill:#e91101;fill-opacity:1;stroke-width:0.5"
        d="m 116.86763,248.4844 c -14.88741,-1.43081 -29.313565,-5.57993 -42.75,-12.29536 C 21.391233,209.83678 -4.8133375,149.35669 12.159977,93.190925 16.27553,79.572295 22.726845,66.8775 31.553261,55.02912 36.336082,48.608771 49.373805,35.670851 55.746361,31.021217 72.520045,18.782568 90.459055,11.352567 110.86763,8.1910246 c 8.0292,-1.2438223 26.47607,-1.2410092 34.35546,0.00524 29.62675,4.6859384 56.51351,19.5441464 74.7413,41.3036704 14.75761,17.616976 24.20945,38.138071 27.64894,60.029185 1.12939,7.1882 1.53745,22.81572 0.79064,30.27934 -2.75293,27.51286 -15.19011,53.79495 -34.78314,73.50331 -25.3223,25.47135 -61.36458,38.57378 -96.7532,35.17263 z m 31,-21.18387 c 13.08929,-2.77014 25.83559,-8.07348 36.5,-15.18652 5.69714,-3.79993 13.75,-10.51943 13.75,-11.47333 0,-0.57168 -153.696733,-129.850925 -153.98646,-129.522945 -0.921094,1.042705 -4.24579,6.885555 -6.665517,11.71404 -13.922835,27.782575 -14.23017,60.713425 -0.827204,88.634805 5.368904,11.18462 11.298786,19.60992 19.749831,28.06097 13.476625,13.47662 29.75522,22.5775 48.22935,26.96359 9.13861,2.16967 12.86591,2.51168 25.25,2.3169 10.35596,-0.16287 12.49151,-0.34173 18,-1.50751 z m 66.18521,-45.89641 c 3.29623,-5.29587 7.99534,-15.35193 9.98835,-21.375 10.4551,-31.59628 4.8019,-66.449715 -15.07502,-92.941345 -3.67796,-4.90193 -12.31075,-13.843747 -17.03243,-17.642142 -38.30865,-30.81773 -92.02129,-30.16288 -129.7335,1.581677 -4.76122,4.007797 -4.888255,4.168073 -4,5.046742 0.85925,0.849978 153.31301,128.904508 153.50687,128.939108 0.0492,0.009 1.1048,-1.61529 2.34573,-3.60904 z"
        id="path24"
        transform="translate(0,796.3622)" />

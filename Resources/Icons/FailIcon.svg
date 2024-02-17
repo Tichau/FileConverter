@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="256"
    height="256"
    viewBox="0 0 256.00001 256.00001"
    id="svg2"
    version="1.1"
-   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
    sodipodi:docname="FailIcon.svg"
-   inkscape:export-filename="D:\Users\adrie\Documents\GitHub\FileConverter\Resources\FailIcon.png"
+   inkscape:export-filename="FailIcon.png"
    inkscape:export-xdpi="36"
-   inkscape:export-ydpi="36">
+   inkscape:export-ydpi="36"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -27,18 +27,21 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="163.07811"
-     inkscape:cy="85.239641"
+     inkscape:cx="163.16489"
+     inkscape:cy="85.383145"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:window-width="2498"
-     inkscape:window-height="1417"
-     inkscape:window-x="54"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:document-rotation="0" />
+     inkscape:document-rotation="0"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -73,22 +76,22 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot4356"
-       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff5252;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e91101;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        transform="matrix(5.3949876,0,0,5.3949876,99.524316,781.6645)"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><flowRegion
          id="flowRegion4358"
-         style="fill:#ff5252;fill-opacity:1"><rect
+         style="fill:#e91101;fill-opacity:1"><rect
            id="rect4360"
            width="49.5"
            height="47.5"
            x="0.875"
            y="0.875"
-           style="fill:#ff5252;fill-opacity:1;" /></flowRegion><flowPara
+           style="fill:#e91101;fill-opacity:1" /></flowRegion><flowPara
          id="flowPara4362"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'MS UI Gothic';-inkscape-font-specification:'MS UI Gothic';fill:#ff5252;fill-opacity:1">!</flowPara></flowRoot>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'MS UI Gothic';-inkscape-font-specification:'MS UI Gothic';fill:#e91101;fill-opacity:1">!</flowPara></flowRoot>
     <path
-       style="fill:#ff5252;fill-opacity:1;stroke:none;stroke-width:0.502957"
+       style="fill:#e91101;fill-opacity:1;stroke:none;stroke-width:0.502957"
        d="m 112.5261,1043.9007 c -12.866526,-1.7662 -25.64742,-5.7332 -37.981544,-11.7888 -13.03541,-6.4001 -23.007178,-13.6923 -33.463015,-24.4714 C 26.863216,992.98263 17.383636,976.57034 11.680434,956.73753 8.5148027,945.72908 7.7771728,940.61049 7.5131069,927.81941 7.1871658,912.0311 8.0202477,904.53852 11.490618,892.04646 c 10.684023,-38.45858 40.365081,-69.65987 78.145946,-82.14851 13.819816,-4.56821 23.191776,-6.08037 37.730016,-6.08771 13.97502,-0.007 20.41485,0.81246 32.19628,4.09727 44.66259,12.45249 78.63191,49.48676 86.79245,94.62343 0.55751,3.08363 1.27703,9.63974 1.59896,14.56913 1.16514,17.84103 -1.10216,32.95071 -7.40793,49.36767 -9.5307,24.81296 -24.72818,43.64446 -47.59328,58.97346 -11.17499,7.4919 -27.61806,14.1584 -42.44257,17.2072 -9.57177,1.9687 -28.27444,2.5852 -37.98439,1.2523 z m 31.44169,-18.5546 c 32.82651,-5.9748 58.57292,-24.2546 74.07517,-52.59278 4.05243,-7.40786 7.83265,-17.92464 10.48328,-29.1651 0.68972,-2.92487 0.93693,-6.67724 1.10142,-16.71811 0.23502,-14.34679 -0.0905,-17.99903 -2.42308,-27.19165 -9.59189,-37.80005 -37.35236,-65.4665 -75.32221,-75.06709 -7.7844,-1.96826 -14.62149,-2.71439 -24.76732,-2.70286 -9.81992,0.0112 -15.53168,0.67425 -23.79065,2.76186 -25.812087,6.52453 -46.441312,20.90699 -60.946704,42.49137 -3.8258,5.69288 -9.888357,18.09926 -12.037414,24.63329 -0.955112,2.90394 -2.373607,8.1084 -3.152212,11.56547 -1.367111,6.07008 -1.415941,6.76831 -1.424221,20.36529 -0.0077,12.73597 0.102399,14.62946 1.154213,19.84017 5.774211,28.60553 22.944969,53.29191 47.468923,68.24614 11.728558,7.1517 26.258885,12.191 40.954615,14.2034 5.29294,0.7248 23.27695,0.3043 28.62619,-0.6694 z"
        id="path846" />
   </g>
