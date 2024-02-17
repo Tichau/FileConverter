@@ -84,7 +84,7 @@
                                         <GroupStyle>
                                             <GroupStyle.HeaderTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Foreground="{StaticResource MainDarkBrush}" Background="{StaticResource MainLightBrush}" FontWeight="Bold" Padding="5,5,5,5"
+                                                    <TextBlock Foreground="{StaticResource MainDarkBrush}" Background="{StaticResource MainLighterBrush}" FontWeight="Bold" Padding="5,5,5,5"
                                                                 Text="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"/>
                                                 </DataTemplate>
                                             </GroupStyle.HeaderTemplate>
@@ -275,8 +275,8 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                     <Style.Resources>
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource AccentBackgroundColor}" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{StaticResource AccentForegroundColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource MainLighterColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{StaticResource MainDarkerColor}" />
                                         <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource DarkerBackgroundColor}" />
                                         <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{StaticResource LightForegroundColor}" />
                                     </Style.Resources>

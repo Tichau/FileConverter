@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="MainLightColor">#86C8F6</Color>
+    <Color x:Key="MainLighterColor">#BAE3FF</Color>
+    <Color x:Key="MainLightColor">#76C8FE</Color>
     <Color x:Key="MainColor">#0171BB</Color>
     <Color x:Key="MainDarkColor">#004B82</Color>
     <Color x:Key="MainDarkerColor">#074078</Color>
@@ -22,6 +23,7 @@
     <Color x:Key="SuccessBackgroundColor">#C8E6C9</Color>
     <Color x:Key="ErrorBackgroundColor">#FFCDD2</Color>
 
+    <SolidColorBrush x:Key="MainLighterBrush" Color="{StaticResource MainLighterColor}" />
     <SolidColorBrush x:Key="MainLightBrush" Color="{StaticResource MainLightColor}" />
     <SolidColorBrush x:Key="MainBrush" Color="{StaticResource MainColor}" />
     <SolidColorBrush x:Key="MainDarkBrush" Color="{StaticResource MainDarkColor}" />
