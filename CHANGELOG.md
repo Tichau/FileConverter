@@ -30,6 +30,7 @@
 - New: Arabic translation (thanks to Mahmoud0Sultan).
 - New: Traditional Chinese translation (thanks to Sedimentary-Rock).
 - New: Greek translation (thanks to CrisBalGreece).
+- Change: Portuguese translation improvement (thanks to hugok79).
 - Change: Rework extension so it uses the settings file on disk instead of registry settings (github issue #22 #32 #176 #340 #343).
 - Change: Some UX improvements.
 - Change: Replace Pledgie donation button by Paypal donation button since Pledgie does not exist anymore.

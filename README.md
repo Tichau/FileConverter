@@ -52,7 +52,7 @@ Thanks to all the contributors of File Converter project.
 
 ### Localization
 
-Thanks to **Khidreal** for the Portuguese localization.
+Thanks to **Khidreal** and **hugok79** for the Portuguese localization.
 Thanks to **Marhc** for the Brazilian localization.
 Thanks to **Chachak** for the Spanish localization.
 Thanks to **Davide** for the Italian localization.
