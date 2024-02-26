@@ -14,8 +14,7 @@
         Width="1050" Height="700"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         mc:Ignorable="d"
-        DataContext="{Binding Settings, Source={StaticResource Locator}}"
-        d:DataContext="{d:DesignData /SampleData/SettingsSampleData.xaml}">
+        DataContext="{Binding Settings, Source={StaticResource Locator}}">
     <behaviors:Interaction.Triggers>
         <behaviors:EventTrigger EventName="Closing">
             <behaviors:InvokeCommandAction Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
