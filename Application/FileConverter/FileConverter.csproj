@@ -277,10 +277,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <DesignData Include="SampleData\ConversionJobSampleData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </DesignData>
     <Page Include="SampleData\SettingsSampleData.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
