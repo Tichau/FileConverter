@@ -36,9 +36,9 @@ namespace FileConverter
     {
         private static readonly Version Version = new Version()
                                                       {
-                                                          Major = 1,
-                                                          Minor = 2,
-                                                          Patch = 3,
+                                                          Major = 2,
+                                                          Minor = 0,
+                                                          Patch = 0,
                                                       };
 
         private bool needToRunConversionThread;
