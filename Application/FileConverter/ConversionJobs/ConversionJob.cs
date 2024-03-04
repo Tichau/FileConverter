@@ -25,11 +25,16 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob()
         {
-            this.State = ConversionState.InProgress;
+            this.UserState = "Design Mode";
+
             this.ConversionPreset = null;
             this.initialInputPath = string.Empty;
-            this.InputFilePath = "C:\\My file.png";
-            this.UserState = "Design Mode";
+            this.InputFilePath = @"C:\Path\To\AVery\Long\Location\WithAVeryNiceFile.png";
+            this.OutputFilePaths = new[] { "C:\\Path\\To\\AVery\\Long\\Location\\WithAVeryNiceFile.jpg" };
+            this.StartTime = DateTime.Now - TimeSpan.FromMinutes(1.2);
+            this.State = ConversionState.InProgress;
+            this.StateFlags = ConversionFlags.None;
+            this.Progress = 0.6f;
         }
 
         public ConversionJob(ConversionPreset conversionPreset, string inputFilePath)
@@ -96,6 +101,7 @@ namespace FileConverter.ConversionJobs
             {
                 this.state = value;
                 this.NotifyPropertyChanged();
+                Application.Current.Dispatcher.Invoke(() => this.cancelCommand?.NotifyCanExecuteChanged());
             }
         }
 

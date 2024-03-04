@@ -688,10 +688,6 @@ use maj for uppercase version</comment>
     <value>فتح موقع البرناج</value>
     <comment>Open File Converter website</comment>
   </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>قل شكراً</value>
-    <comment>Say Thanks!</comment>
-  </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>خطأ اثناء عملية تثبيت التحويل</value>
     <comment>Error during conversion job initialization.</comment>

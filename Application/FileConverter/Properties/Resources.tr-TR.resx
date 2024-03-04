@@ -544,9 +544,6 @@
   <data name="WebsiteButtonDescription" xml:space="preserve">
     <value>File Converter internet sitesini aç</value>
   </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>Teşekkürler!</value>
-  </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>Dönüştürme başlatma sırasında hata meydana geldi.</value>
   </data>

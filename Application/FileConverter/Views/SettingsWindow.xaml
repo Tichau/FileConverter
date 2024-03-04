@@ -14,8 +14,7 @@
         Width="1050" Height="700"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         mc:Ignorable="d"
-        DataContext="{Binding Settings, Source={StaticResource Locator}}"
-        d:DataContext="{d:DesignData /SampleData/SettingsSampleData.xaml}">
+        DataContext="{Binding Settings, Source={StaticResource Locator}}">
     <behaviors:Interaction.Triggers>
         <behaviors:EventTrigger EventName="Closing">
             <behaviors:InvokeCommandAction Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
@@ -84,7 +83,7 @@
                                         <GroupStyle>
                                             <GroupStyle.HeaderTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Foreground="{StaticResource MainDarkBrush}" Background="{StaticResource MainLightBrush}" FontWeight="Bold" Padding="5,5,5,5"
+                                                    <TextBlock Foreground="{DynamicResource MainDarkBrush}" Background="{DynamicResource MainLighterBrush}" FontWeight="Bold" Padding="5,5,5,5"
                                                                 Text="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"/>
                                                 </DataTemplate>
                                             </GroupStyle.HeaderTemplate>
@@ -119,10 +118,10 @@
                                     <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" 
                                                  ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}"
                                                  Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                                    <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10"/>
-                                    <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center"/>
-                                    <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center">
+                                    <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10"/>
+                                    <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center"/>
+                                    <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center">
                                         <TextBlock.Text>
                                             <MultiBinding Converter="{StaticResource FileNameConverter}">
                                                 <Binding Source="{x:Static project:Resources.OutputFileNameTemplateSample}"/>
@@ -132,7 +131,7 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                     <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
-                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                     </TextBlock>
                                 </Grid>
 
@@ -184,7 +183,7 @@
                                 </ComboBox>
 
                                 <TextBlock Grid.Row="3" Margin="0,5,0,0">
-                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                 </TextBlock>
                             </Grid>
                         </GroupBox>
@@ -214,7 +213,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="53"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="28"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
@@ -230,11 +229,11 @@
 
             <Label Grid.Column="1" Content="{x:Static project:Resources.Settings}" FontSize="20" Margin="4" VerticalAlignment="Center" />
         </Grid>
-
+        
         <TabControl Grid.Row="1">
 
             <!-- Conversion presets settings -->
-            <TabItem Header="{x:Static project:Resources.ConversionPresets}">
+            <TabItem Header="{x:Static project:Resources.ConversionPresets}" Height="28">
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -275,14 +274,13 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                     <Style.Resources>
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource AccentBackgroundColor}" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{StaticResource AccentForegroundColor}" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource DarkerBackgroundColor}" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{StaticResource LightForegroundColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource MainLighterColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{DynamicResource MainDarkerColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{DynamicResource DarkBackgroundColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{DynamicResource LightForegroundColor}" />
                                     </Style.Resources>
 
                                     <Setter Property="IsExpanded" Value="True"/>
-                                    <Setter Property="BorderBrush" Value="{StaticResource HyperlinkBrush}"/>
 
                                     <EventSetter Event="PreviewMouseLeftButtonDown"  Handler="TreeView_MouseDown"/>
                                     <EventSetter Event="MouseUp"  Handler="TreeView_MouseUp"/>
@@ -345,7 +343,7 @@
                         </TreeView>
 
                         <TextBlock Margin="4" Grid.Row="1">
-                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                         </TextBlock>
                     </Grid>
 
@@ -375,7 +373,7 @@
 
                     <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Language}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
                     <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding SupportedCultures, Mode=OneTime}" Margin="0,0,0,1"
-                            SelectedValue="{Binding Settings.ApplicationLanguage, Mode=TwoWay}">
+                              SelectedValue="{Binding Settings.ApplicationLanguage, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <ContentPresenter Content="{Binding Converter={StaticResource CultureInfoToString}}" />
@@ -432,7 +430,7 @@
 
                         <TextBlock Margin="5" DockPanel.Dock="Top" FontSize="14" HorizontalAlignment="Center" 
                                    Visibility="{Binding DisplaySeeChangeLogLink, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">
-                            <Hyperlink Foreground="{StaticResource HyperlinkBrush}" Command="{Binding GetChangeLogContentCommand, Mode=OneWay}"><x:Static Member="project:Resources.SeeChangeLog" /></Hyperlink>
+                            <Hyperlink Command="{Binding GetChangeLogContentCommand, Mode=OneWay}"><x:Static Member="project:Resources.SeeChangeLog" /></Hyperlink>
                         </TextBlock>
                     </DockPanel>
 
@@ -445,47 +443,46 @@
                         <controls:IconButton Margin="5,0,5,0" Background="#0467B4" Foreground="White" MouseOverBrush="#007AD8" PressedBrush="#0F4199"
                                       Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=3BDWQTYTTA3D8&amp;item_name=File+Converter+Donations&amp;currency_code=EUR"
                                       IconSource="/FileConverter;component/Resources/PaypalIcon.png" Content="{x:Static project:Resources.DonateButtonTitle}" FontWeight="Bold" FontSize="14" />
-                        <controls:IconButton Margin="5,0,5,0" Background="#BBBBBB" Foreground="#505050" MouseOverBrush="#CCCCCC" PressedBrush="#AAAAAA"
-                                             Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://saythanks.io/to/adrien.allard.pro%40gmail.com"
-                                             IconSource="/FileConverter;component/Resources/SayThanksIcon.png" Content="{x:Static project:Resources.SayThanksButtonTitle}" FontWeight="Bold" FontSize="14" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
                         <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/?from=about">
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/?from=about"
+                                Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/issues?from=about">
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/issues?from=about"
+                                Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Issue-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/wiki?from=about">
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/wiki?from=about"
+                                Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.WebsiteButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://file-converter.io?from=about">
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://file-converter.io?from=about"
+                                Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/WebSite-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                     </StackPanel>
 
-                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2020, Adrien Allard. All right reserved." Foreground="{StaticResource LightForegroundBrush}" Margin="0,2,0,2"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2024, Adrien Allard. All right reserved." Foreground="{DynamicResource LighterForegroundBrush}" Margin="0,2,0,2"/>
                 </Grid>
             </TabItem>
         </TabControl>
 
-        <Button Grid.Row="2" Content="{x:Static project:Resources.Close}" HorizontalAlignment="Right" Width="100" Margin="0,4,105,0"
-                Command="{Binding CloseCommand}"/>
         <Button Grid.Row="2" Content="{x:Static project:Resources.Save}" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" 
-                Command="{Binding SaveCommand}"/>
+                Command="{Binding SaveCommand}" />
 
     </Grid>
 

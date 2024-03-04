@@ -562,9 +562,6 @@ utilisez MAJ pour une version en majuscules</value>
   <data name="WebsiteButtonDescription" xml:space="preserve">
     <value>Ouvrir le site web de File Converter</value>
   </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>Dire Merci !</value>
-  </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>L'initialisation du processus de conversion a échoué.</value>
   </data>

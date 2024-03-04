@@ -5,7 +5,6 @@ namespace FileConverter.ValueConverters
     using System;
     using System.Globalization;
     using System.Windows.Data;
-    using System.Windows.Media;
 
     using FileConverter.ConversionJobs;
 
