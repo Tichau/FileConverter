@@ -83,7 +83,7 @@
                                         <GroupStyle>
                                             <GroupStyle.HeaderTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Foreground="{StaticResource MainDarkBrush}" Background="{StaticResource MainLighterBrush}" FontWeight="Bold" Padding="5,5,5,5"
+                                                    <TextBlock Foreground="{DynamicResource MainDarkBrush}" Background="{DynamicResource MainLighterBrush}" FontWeight="Bold" Padding="5,5,5,5"
                                                                 Text="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"/>
                                                 </DataTemplate>
                                             </GroupStyle.HeaderTemplate>
@@ -118,10 +118,10 @@
                                     <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" 
                                                  ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}"
                                                  Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                                    <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10"/>
-                                    <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center"/>
-                                    <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="{StaticResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center">
+                                    <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10"/>
+                                    <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center"/>
+                                    <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center">
                                         <TextBlock.Text>
                                             <MultiBinding Converter="{StaticResource FileNameConverter}">
                                                 <Binding Source="{x:Static project:Resources.OutputFileNameTemplateSample}"/>
@@ -131,7 +131,7 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                     <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
-                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                     </TextBlock>
                                 </Grid>
 
@@ -183,7 +183,7 @@
                                 </ComboBox>
 
                                 <TextBlock Grid.Row="3" Margin="0,5,0,0">
-                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                 </TextBlock>
                             </Grid>
                         </GroupBox>
@@ -274,14 +274,13 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                     <Style.Resources>
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource MainLighterColor}" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{StaticResource MainDarkerColor}" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource DarkerBackgroundColor}" />
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{StaticResource LightForegroundColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource MainLighterColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{DynamicResource MainDarkerColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{DynamicResource DarkBackgroundColor}" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{DynamicResource LightForegroundColor}" />
                                     </Style.Resources>
 
                                     <Setter Property="IsExpanded" Value="True"/>
-                                    <Setter Property="BorderBrush" Value="{StaticResource HyperlinkBrush}"/>
 
                                     <EventSetter Event="PreviewMouseLeftButtonDown"  Handler="TreeView_MouseDown"/>
                                     <EventSetter Event="MouseUp"  Handler="TreeView_MouseUp"/>
@@ -431,7 +430,7 @@
 
                         <TextBlock Margin="5" DockPanel.Dock="Top" FontSize="14" HorizontalAlignment="Center" 
                                    Visibility="{Binding DisplaySeeChangeLogLink, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">
-                            <Hyperlink Foreground="{StaticResource HyperlinkBrush}" Command="{Binding GetChangeLogContentCommand, Mode=OneWay}"><x:Static Member="project:Resources.SeeChangeLog" /></Hyperlink>
+                            <Hyperlink Command="{Binding GetChangeLogContentCommand, Mode=OneWay}"><x:Static Member="project:Resources.SeeChangeLog" /></Hyperlink>
                         </TextBlock>
                     </DockPanel>
 
@@ -477,7 +476,7 @@
                         </Button>
                     </StackPanel>
 
-                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2024, Adrien Allard. All right reserved." Foreground="{StaticResource LightForegroundBrush}" Margin="0,2,0,2"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2024, Adrien Allard. All right reserved." Foreground="{DynamicResource LighterForegroundBrush}" Margin="0,2,0,2"/>
                 </Grid>
             </TabItem>
         </TabControl>

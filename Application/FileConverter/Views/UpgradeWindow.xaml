@@ -69,7 +69,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="{x:Static project:Resources.UpgradeDownloadInProgress}" FontSize="14.667"/>
-                <ProgressBar Grid.Row="1" Margin="5" Height="30" Foreground="{StaticResource MainDarkBrush}" Minimum="0" Maximum="100"
+                <ProgressBar Grid.Row="1" Margin="5" Height="30" Foreground="{DynamicResource MainDarkBrush}" Minimum="0" Maximum="100"
                      Value="{Binding UpgradeVersionDescription.InstallerDownloadProgress, Source={StaticResource Upgrade}}"/>
             </Grid>
         </Grid>

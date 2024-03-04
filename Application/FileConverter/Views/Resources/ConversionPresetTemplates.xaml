@@ -196,7 +196,7 @@
 
             <Label Content="{x:Static project:Resources.FramesPerSecond}" Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right"/>
             <Slider x:Name="QualitySlider" Grid.Row="0" Grid.Column="1" Value="{Binding Settings, ConverterParameter=VideoFramesPerSecond|System.Int32, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}"
-                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="10" SelectionEnd="20" Minimum="1" Maximum="30" TickPlacement="BottomRight" SmallChange="1" LargeChange="4" TickFrequency="1" Foreground="{StaticResource MainDarkBrush}" />
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="10" SelectionEnd="20" Minimum="1" Maximum="30" TickPlacement="BottomRight" SmallChange="1" LargeChange="4" TickFrequency="1" Foreground="{DynamicResource MainDarkBrush}" />
 
             <!-- Scale -->
             <Label Content="{x:Static project:Resources.Scale}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
@@ -205,7 +205,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{StaticResource MainDarkBrush}"/>
+                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{DynamicResource MainDarkBrush}"/>
                 <Label Grid.Column="1">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -248,12 +248,12 @@
 
             <DockPanel Grid.Row="0" Grid.Column="0">
                 <Label Content="{x:Static project:Resources.VideoTitle}" FontWeight="Bold" Margin="17,0,0,0" />
-                <Label Content="(Xvid)" FontWeight="Light" Foreground="{StaticResource MainDarkBrush}" />
+                <Label Content="(Xvid)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" />
             </DockPanel>
 
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
             <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}"
-                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="28" Minimum="0" Maximum="30" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" TickFrequency="1" Foreground="{StaticResource MainDarkBrush}" />
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="28" Minimum="0" Maximum="30" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" TickFrequency="1" Foreground="{DynamicResource MainDarkBrush}" />
 
             <!-- Scale -->
             <Label Content="{x:Static project:Resources.Scale}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
@@ -262,7 +262,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{StaticResource MainDarkBrush}"/>
+                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{DynamicResource MainDarkBrush}"/>
                 <Label Grid.Column="1">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -289,7 +289,7 @@
             <DockPanel Grid.Row="4" Grid.Column="0">
                 <CheckBox IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
                 <Label Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
-                <Label Content="(Mp3)" FontWeight="Light" Foreground="{StaticResource MainDarkBrush}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+                <Label Content="(Mp3)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
             </DockPanel>
 
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
@@ -316,13 +316,13 @@
 
             <DockPanel Grid.Row="0" Grid.Column="0">
                 <Label Content="{x:Static project:Resources.VideoTitle}" FontWeight="Bold" Margin="17,0,0,0"/>
-                <Label Content="(H.264)" FontWeight="Light" Foreground="{StaticResource MainDarkBrush}" />
+                <Label Content="(H.264)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" />
             </DockPanel>
 
             <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.Quality}" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
             <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" 
                     Value="{Binding Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}"
-                    Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="1" LargeChange="6" TickFrequency="1" Foreground="{StaticResource MainDarkBrush}" />
+                    Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="33" Minimum="0" Maximum="51" TickPlacement="BottomRight" SmallChange="1" LargeChange="6" TickFrequency="1" Foreground="{DynamicResource MainDarkBrush}" />
 
             <Label Grid.Row="2" Grid.Column="0" Content="{x:Static project:Resources.EncodingSpeed}" ToolTip="{x:Static project:Resources.VideoEncodingSpeedTooltip}" HorizontalContentAlignment="Right"/>
             <ComboBox Grid.Row="2" Grid.Column="1" 
@@ -341,7 +341,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{StaticResource MainDarkBrush}"/>
+                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{DynamicResource MainDarkBrush}"/>
                 <Label Grid.Column="1">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -368,7 +368,7 @@
             <DockPanel Grid.Row="5" Grid.Column="0">
                 <CheckBox IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
                 <Label Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
-                <Label Content="(AAC)" FontWeight="Light" Foreground="{StaticResource MainDarkBrush}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+                <Label Content="(AAC)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
             </DockPanel>
 
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
@@ -394,12 +394,12 @@
 
             <DockPanel Grid.Row="0" Grid.Column="0">
                 <Label Content="{x:Static project:Resources.VideoTitle}" FontWeight="Bold" Margin="17,0,0,0"/>
-                <Label Content="(theora)" FontWeight="Light" Foreground="{StaticResource MainDarkBrush}" />
+                <Label Content="(theora)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" />
             </DockPanel>
 
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
             <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}"
-                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="5" SelectionEnd="8" Minimum="0" Maximum="10" TickPlacement="BottomRight" SmallChange="1" LargeChange="3" TickFrequency="1" Foreground="{StaticResource MainDarkBrush}" />
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="5" SelectionEnd="8" Minimum="0" Maximum="10" TickPlacement="BottomRight" SmallChange="1" LargeChange="3" TickFrequency="1" Foreground="{DynamicResource MainDarkBrush}" />
 
             <Label Content="{x:Static project:Resources.Scale}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
             <Grid Grid.Row="2" Grid.Column="1">
@@ -407,7 +407,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{StaticResource MainDarkBrush}"/>
+                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{DynamicResource MainDarkBrush}"/>
                 <Label Grid.Column="1">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -434,7 +434,7 @@
             <DockPanel Grid.Row="4" Grid.Column="0">
                 <CheckBox IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
                 <Label Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
-                <Label Content="(vorbis)" FontWeight="Light" Foreground="{StaticResource MainDarkBrush}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+                <Label Content="(vorbis)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
             </DockPanel>
 
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
@@ -460,12 +460,12 @@
 
             <DockPanel Grid.Row="0" Grid.Column="0">
                 <Label Content="{x:Static project:Resources.VideoTitle}" FontWeight="Bold" Margin="17,0,0,0" />
-                <Label Content="(vp9)" FontWeight="Light" Foreground="{StaticResource MainDarkBrush}" />
+                <Label Content="(vp9)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" />
             </DockPanel>
 
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="1" Grid.Column="0" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
             <Slider x:Name="QualitySlider" Grid.Row="1" Grid.Column="1" Value="{Binding Settings, ConverterParameter=VideoQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}"
-                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="40" Minimum="0" Maximum="63" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" TickFrequency="1" Foreground="{StaticResource MainDarkBrush}" />
+                            Margin="0,2,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="20" SelectionEnd="40" Minimum="0" Maximum="63" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" TickFrequency="1" Foreground="{DynamicResource MainDarkBrush}" />
 
             <!-- Scale -->
             <Label Content="{x:Static project:Resources.Scale}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
@@ -474,7 +474,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{StaticResource MainDarkBrush}"/>
+                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=VideoScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="2" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2" Foreground="{DynamicResource MainDarkBrush}"/>
                 <Label Grid.Column="1">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -501,7 +501,7 @@
             <DockPanel Grid.Row="4" Grid.Column="0">
                 <CheckBox IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
                 <Label Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
-                <Label Content="(Ogg vorbis)" FontWeight="Light" Foreground="{StaticResource MainDarkBrush}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+                <Label Content="(Ogg vorbis)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
             </DockPanel>
 
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
@@ -524,7 +524,7 @@
             <!--Quality-->
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"/>
             <Slider Grid.Row="0" Grid.Column="1" x:Name="QualitySlider" Value="{Binding Settings, ConverterParameter=ImageQuality|System.Double, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay, TargetNullValue=25}"
-                        Margin="0,5,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="30" SelectionEnd="100" Minimum="0" Maximum="100" TickPlacement="BottomRight" SmallChange="5" LargeChange="15" TickFrequency="5" Foreground="{StaticResource MainDarkBrush}" />
+                        Margin="0,5,0,0" VerticalAlignment="Top" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" SelectionStart="30" SelectionEnd="100" Minimum="0" Maximum="100" TickPlacement="BottomRight" SmallChange="5" LargeChange="15" TickFrequency="5" Foreground="{DynamicResource MainDarkBrush}" />
             <!--Scale-->
             <Label Content="{x:Static project:Resources.Scale}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
             <Grid Grid.Row="1" Grid.Column="1">
@@ -536,7 +536,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=ImageScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="{StaticResource MainDarkBrush}"/>
+                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=ImageScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="{DynamicResource MainDarkBrush}"/>
                 <Label Grid.Row="0"  Grid.Column="1">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -585,7 +585,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=ImageScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="{StaticResource MainDarkBrush}"/>
+                <Slider x:Name="ScaleSlider" Grid.Column="0" Value="{Binding Settings, ConverterParameter=ImageScale|System.Double, ConverterCulture={x:Static globalization:CultureInfo.InvariantCulture}, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,2,0,0" VerticalAlignment="Top" IsSnapToTickEnabled="True" Minimum="0.075" Maximum="16" SmallChange="0.075" LargeChange="0.25" TickPlacement="BottomRight" Ticks="0.075 0.125 0.25 0.5 0.75 1 1.25 1.5 1.75 2 3 4 6 8 12 16" Foreground="{DynamicResource MainDarkBrush}"/>
                 <Label Grid.Column="1">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource FormatStringConverter}" Mode="OneWay">
@@ -685,7 +685,7 @@
                          ToolTip="{x:Static project:Resources.FFMPEGCustomArgumentsTooltip}"
                          Text="{Binding Settings, ConverterParameter=FFMPEGCustomCommand|System.String, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,5,5,0">
-                    <Hyperlink CommandParameter="https://ffmpeg.org/ffmpeg.html" Command="{Binding DataContext.OpenUrlCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                    <Hyperlink CommandParameter="https://ffmpeg.org/ffmpeg.html" Command="{Binding DataContext.OpenUrlCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                 </TextBlock>
 
             </Grid>

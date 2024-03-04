@@ -20,37 +20,39 @@
             <services:UpgradeService x:Key="Upgrade" />
 
             <!-- Markdown style -->
-            <Style TargetType="FlowDocument" x:Key="DocumentStyle">
-                <Setter Property="FontFamily" Value="Segoe UI" />
-                <Setter Property="TextAlignment" Value="Left" />
-                <Setter Property="Foreground" Value="{StaticResource LighterForegroundBrush}" />
-                <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
-                <Setter Property="LineHeight" Value="9"/>
-                <Setter Property="FontSize" Value="13" />
-            </Style>
+            <xaml:Markdown x:Key="Markdown">
+                <xaml:Markdown.DocumentStyle>
+                    <Style TargetType="FlowDocument">
+                        <Setter Property="FontFamily" Value="Segoe UI" />
+                        <Setter Property="TextAlignment" Value="Left" />
+                        <Setter Property="Foreground" Value="{DynamicResource Markdown_ForegroundBrush}" />
+                        <Setter Property="Background" Value="{DynamicResource Markdown_BackgroundBrush}" />
+                        <Setter Property="LineHeight" Value="9"/>
+                        <Setter Property="FontSize" Value="13" />
+                    </Style>
+                </xaml:Markdown.DocumentStyle>
 
-            <Style x:Key="PageHeader" TargetType="Paragraph">
-                <Setter Property="FontSize" Value="24" />
-                <Setter Property="Foreground" Value="{StaticResource MainBrush}" />
-            </Style>
+                <xaml:Markdown.Heading1Style>
+                    <Style TargetType="Paragraph">
+                        <Setter Property="FontSize" Value="24" />
+                        <Setter Property="Foreground" Value="{DynamicResource Markdown_Heading1ForegroundBrush}" />
+                    </Style>
+                </xaml:Markdown.Heading1Style>
 
-            <Style x:Key="SubHeader"
-               TargetType="Paragraph">
-                <Setter Property="FontSize" Value="20" />
-                <Setter Property="Foreground" Value="{StaticResource AccentForegroundBrush}" />
-            </Style>
+                <xaml:Markdown.Heading2Style>
+                    <Style TargetType="Paragraph">
+                        <Setter Property="FontSize" Value="20" />
+                        <Setter Property="Foreground" Value="{DynamicResource Markdown_Heading2ForegroundBrush}" />
+                    </Style>
+                </xaml:Markdown.Heading2Style>
 
-            <Style x:Key="SubHeaderSecondary"
-               TargetType="Paragraph">
-                <Setter Property="FontSize" Value="20" />
-                <Setter Property="Foreground" Value="{StaticResource AccentForegroundBrush}" />
-            </Style>
-
-            <xaml:Markdown x:Key="Markdown"
-                       DocumentStyle="{StaticResource DocumentStyle}"
-                       Heading1Style="{StaticResource PageHeader}"
-                       Heading2Style="{StaticResource SubHeader}"
-                       Heading3Style="{StaticResource SubHeaderSecondary}"/>
+                <xaml:Markdown.Heading3Style>
+                    <Style TargetType="Paragraph">
+                        <Setter Property="FontSize" Value="20" />
+                        <Setter Property="Foreground" Value="{DynamicResource Markdown_Heading3ForegroundBrush}" />
+                    </Style>
+                </xaml:Markdown.Heading3Style>
+            </xaml:Markdown>
 
             <!-- Converters -->
             <valueConverters:ApplicationVersionToApplicationName x:Key="ApplicationVersionToApplicationName"/>
