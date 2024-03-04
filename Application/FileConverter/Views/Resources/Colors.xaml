@@ -23,6 +23,63 @@
     <Color x:Key="SuccessBackgroundColor">#BFFAE8</Color>
     <Color x:Key="ErrorBackgroundColor">#FFD4D1</Color>
 
+    <Color x:Key="Button_BackgroundColor">#FDFDFD</Color>
+    <Color x:Key="Button_BorderColor">#D0D0D0</Color>
+    <Color x:Key="Button_MouseOver_BackgroundColor">#E0EEF9</Color>
+    <Color x:Key="Button_MouseOver_BorderColor">#0078D4</Color>
+    <Color x:Key="Button_Pressed_BackgroundColor">#CCE4F7</Color>
+    <Color x:Key="Button_Pressed_BorderColor">#005499</Color>
+
+    <Color x:Key="TileButton_MouseOver_BackgroundColor">#F3EFED</Color>
+    <Color x:Key="TileButton_MouseOver_BorderColor">#D3D0CE</Color>
+    <Color x:Key="TileButton_Pressed_BackgroundColor">#F1F4F6</Color>
+    <Color x:Key="TileButton_Pressed_BorderColor">#00FFFFFF</Color>
+
+    <Color x:Key="Window_Background">#FCF8F6</Color>
+    
+    <Color x:Key="TabItem_BackgroundColor">#DDDDDD</Color>
+    <Color x:Key="TabItem_BorderColor">#D0D0D0</Color>
+    <Color x:Key="TabItem_IsSelected_BackgroundColor">#FFFFFF</Color>
+    <Color x:Key="TabItem_IsSelected_BorderColor">#CFCFCF</Color>
+
+    <Color x:Key="TransparentColor">#00FFFFFF</Color>
+    <Color x:Key="WindowBackgroundColor">#FCF8F6</Color>
+    <Color x:Key="ControlBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="ControlBorderColor">#D0D0D0</Color>
+
+    <!-- Custom styles colors -->
+    <SolidColorBrush x:Key="Button_BackgroundBrush" Color="{StaticResource Button_BackgroundColor}" />
+    <SolidColorBrush x:Key="Button_BorderBrush" Color="{StaticResource Button_BorderColor}" />
+    <SolidColorBrush x:Key="Button_IsMouseOver_BackgroundBrush" Color="{StaticResource Button_MouseOver_BackgroundColor}" />
+    <SolidColorBrush x:Key="Button_IsMouseOver_BorderBrush" Color="{StaticResource Button_MouseOver_BorderColor}" />
+    <SolidColorBrush x:Key="Button_IsPressed_BackgroundBrush" Color="{StaticResource Button_Pressed_BackgroundColor}" />
+    <SolidColorBrush x:Key="Button_IsPressed_BorderBrush" Color="{StaticResource Button_Pressed_BorderColor}" />
+
+    <SolidColorBrush x:Key="Hyperlink_ForegroundBrush" Color="{StaticResource MainColor}" />
+
+    <SolidColorBrush x:Key="TabControl_BackgroundBrush" Color="{StaticResource ControlBackgroundColor}" />
+    <SolidColorBrush x:Key="TabControl_BorderBrush" Color="{StaticResource ControlBorderColor}" />
+    <SolidColorBrush x:Key="TabItem_BackgroundBrush" Color="{StaticResource ControlBorderColor}" />
+    <SolidColorBrush x:Key="TabItem_BorderBrush" Color="{StaticResource TransparentColor}" />
+    <SolidColorBrush x:Key="TabItem_IsSelected_BackgroundBrush" Color="{StaticResource ControlBackgroundColor}" />
+    <SolidColorBrush x:Key="TabItem_IsSelected_BorderBrush" Color="{StaticResource ControlBorderColor}" />
+
+    <SolidColorBrush x:Key="TextBox_BackgroundBrush" Color="{StaticResource ControlBackgroundColor}" />
+    
+    <SolidColorBrush x:Key="TileButton_BackgroundBrush" Color="{StaticResource TransparentColor}" />
+    <SolidColorBrush x:Key="TileButton_BorderBrush" Color="{StaticResource TransparentColor}" />
+    <SolidColorBrush x:Key="TileButton_IsMouseOver_BackgroundBrush" Color="{StaticResource TileButton_MouseOver_BackgroundColor}" />
+    <SolidColorBrush x:Key="TileButton_IsMouseOver_BorderBrush" Color="{StaticResource TileButton_MouseOver_BorderColor}" />
+    <SolidColorBrush x:Key="TileButton_IsPressed_BackgroundBrush" Color="{StaticResource TileButton_Pressed_BackgroundColor}" />
+    <SolidColorBrush x:Key="TileButton_IsPressed_BorderBrush" Color="{StaticResource TileButton_Pressed_BorderColor}" />
+    
+    <SolidColorBrush x:Key="TreeView_BackgroundBrush" Color="{StaticResource ControlBackgroundColor}" />
+    <SolidColorBrush x:Key="TreeView_BorderBrush" Color="{StaticResource ControlBorderColor}" />
+    
+    <SolidColorBrush x:Key="Window_BackgroundBrush" Color="{StaticResource WindowBackgroundColor}" />
+
+
+
     <SolidColorBrush x:Key="MainLighterBrush" Color="{StaticResource MainLighterColor}" />
     <SolidColorBrush x:Key="MainLightBrush" Color="{StaticResource MainLightColor}" />
     <SolidColorBrush x:Key="MainBrush" Color="{StaticResource MainColor}" />
@@ -35,6 +92,7 @@
 
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
     <SolidColorBrush x:Key="AccentBackgroundBrush" Color="{StaticResource AccentBackgroundColor}" />
+    <SolidColorBrush x:Key="DimBackgroundBrush" Color="{StaticResource DimBackgroundColor}" />
     <SolidColorBrush x:Key="DarkBackgroundBrush" Color="{StaticResource DarkBackgroundColor}" />
 
     <SolidColorBrush x:Key="ErrorForegroundBrush" Color="{StaticResource ErrorForegroundColor}" />

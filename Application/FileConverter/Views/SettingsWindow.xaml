@@ -213,7 +213,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="53"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="28"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
@@ -229,11 +229,11 @@
 
             <Label Grid.Column="1" Content="{x:Static project:Resources.Settings}" FontSize="20" Margin="4" VerticalAlignment="Center" />
         </Grid>
-
+        
         <TabControl Grid.Row="1">
 
             <!-- Conversion presets settings -->
-            <TabItem Header="{x:Static project:Resources.ConversionPresets}">
+            <TabItem Header="{x:Static project:Resources.ConversionPresets}" Height="28">
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -344,7 +344,7 @@
                         </TreeView>
 
                         <TextBlock Margin="4" Grid.Row="1">
-                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}" Foreground="{StaticResource HyperlinkBrush}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                         </TextBlock>
                     </Grid>
 
@@ -374,7 +374,7 @@
 
                     <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Language}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
                     <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding SupportedCultures, Mode=OneTime}" Margin="0,0,0,1"
-                            SelectedValue="{Binding Settings.ApplicationLanguage, Mode=TwoWay}">
+                              SelectedValue="{Binding Settings.ApplicationLanguage, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <ContentPresenter Content="{Binding Converter={StaticResource CultureInfoToString}}" />
@@ -448,25 +448,29 @@
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
                         <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/?from=about">
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/?from=about"
+                                Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/issues?from=about">
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/issues?from=about"
+                                Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Issue-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/wiki?from=about">
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/wiki?from=about"
+                                Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.WebsiteButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://file-converter.io?from=about">
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://file-converter.io?from=about"
+                                Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/WebSite-Icon.png"></Image>
                             </Button.Content>
@@ -479,7 +483,7 @@
         </TabControl>
 
         <Button Grid.Row="2" Content="{x:Static project:Resources.Save}" HorizontalAlignment="Right" Width="100" Margin="0,4,0,0" 
-                Command="{Binding SaveCommand}"/>
+                Command="{Binding SaveCommand}" />
 
     </Grid>
 
