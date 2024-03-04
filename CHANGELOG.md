@@ -1,6 +1,6 @@
 # Change Log
 
-## Next version
+## Version 2.0
 
 - New: Possibility to create custom command line preset for types converted with FFMPEG (video and audio) (github issue #19 #18 #41 #61 #73 #128 #140 #153 #177 #182 #225 #255 #310 #314 #316 #325).
 - New: Possibility to create preset folders in File Converter context menu.
@@ -49,6 +49,8 @@
 - Tech: Check for .NET framework version in installer and prompt the user if the required version is not installed.
 - Tech: Remove sharpshell tools from installer dependencies. The shell extension is now registered by File Converter application (github issue #39 #46).
 - Tech: Remove Windows Vista support and 32bit platform support. Use File Converter 1.2.3 if you need these.
+
+-------------------------------------------------------------------------------------------------------------
 
 ## Version 1.2.3
 
