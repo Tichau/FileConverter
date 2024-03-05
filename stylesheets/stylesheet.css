@@ -64,7 +64,8 @@ a {
 .page-header {
   color: #fff;
   text-align: center;
-  background-color: #01578E; }
+  background-color: #01578E; 
+  background-image:linear-gradient(0deg, #017FD3, #014979) }
 
 @media screen and (min-width: 64em) {
   .page-header {
@@ -123,7 +124,8 @@ a {
   margin-bottom: 1rem;
   font-weight: normal;
   color: #DF3900;
-  font-style: italic; }
+  font-style: italic; 
+  font-size: 2rem; }
 .main-content p {
   margin-bottom: 1em; }
 .main-content code {
@@ -193,6 +195,7 @@ a {
   word-break: normal;
   word-break: keep-all; }
   .main-content table th {
+    background-color: #F5F5F5;
     font-weight: bold; }
   .main-content table th, .main-content table td {
     padding: 0.5rem 1rem;
@@ -260,12 +263,12 @@ a {
 }
 
 .main-content .btn {
-  color: #01578E;
-  border-color: #7094AA;
-  background: #B9D1E0;
+  color: #202020;
+  border-color: #D0D0D0;
+  background: #FCF8F6;
 }
 .main-content .btn:hover {
   color: #1F7EBA;
-  border-color: #93AEBF;
-  background: #D6E4ED;
+  border-color: #D3D0CE;
+  background: #E0EEF9;
 }
