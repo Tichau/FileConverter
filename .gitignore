@@ -4,5 +4,6 @@ obj/
 Application/
 Installer/
 packages/
+TestData/
 
 *.user
