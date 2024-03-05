@@ -60,11 +60,252 @@
       </a>
     </p>
 
-    <div w3-include-html="change-log.html"></div>
-    <script>
-      w3IncludeHTML();
-    </script>
+    <h2>
+      <a id="change-log" class="anchor" href="#change-log" aria-hidden="true">
+        <span class="octicon octicon-link"></span>
+      </a>Change Log
+    </h2>
+    
+    <h3>Version 2.0</h3>
+    
+    <ul>
+      <li>New: Possibility to create custom command line preset for types converted with FFMPEG (video and audio) (github issue #19 #18 #41 #61 #73 #128 #140 #153 #177 #182 #225 #255 #310 #314 #316 #325).</li>
+      <li>New: Possibility to create preset folders in File Converter context menu.</li>
+      <li>New: Ability to drag and drop to move conversion presets.</li>
+      <li>New: Possibility to export and import conversion presets to share it with other users.</li>
+      <li>New: More presets for scale and rotation in File Converter default configuration.</li>
+      <li>New: Display conversion progress on the Windows taskbar item.</li>
+      <li>New: Display estimated remaining time for each jobs.</li>
+      <li>New: Support new image input formats: arw, cr2, dds, dng, jfif, nef, raf, tif and heic (github issue #29 #96 #113 #130).</li>
+      <li>New: Support new video input formats: 3gpp, mpg, rm, ts (github issue #23 #59 #101 #318).</li>
+      <li>New: Support new audio input formats: m4b, opus (github issue #111 #351).</li>
+      <li>New: Icons on context menu elements and conversion preset list actions.</li>
+      <li>New: Remove the need to ask administrator privileges to edit File Converter settings (github issue #4 #30 #32).</li>
+      <li>New: Highlight in red elements that contains errors in the preset list.</li>
+      <li>New: Messages logged from main thread are now displayed in the console standard output.</li>
+      <li>New: Add the bookmarks in pdf when converting from word file (thanks to wangweirui).</li>
+      <li>New: Possibility to use conversion date in output file path template (github issue #56).</li>
+      <li>New: Option to copy files in clipboard after conversion (thanks to hsayed21).</li>
+      <li>New: Brazilian Portuguese translation (thanks to Marhc).</li>
+      <li>New: Spanish translation (thanks to Chachak).</li>
+      <li>New: Italian translation (thanks to Davide).</li>
+      <li>New: German translation (thanks to nikotschierske).</li>
+      <li>New: Simplified Chinese translation (thanks to Snoopy1866).</li>
+      <li>New: Turkish translation (thanks to MayaC0re).</li>
+      <li>New: Hindi translation (thanks to vishveshjain).</li>
+      <li>New: Arabic translation (thanks to Mahmoud0Sultan).</li>
+      <li>New: Traditional Chinese translation (thanks to Sedimentary-Rock).</li>
+      <li>New: Greek translation (thanks to CrisBalGreece).</li>
+      <li>Change: Portuguese translation improvement (thanks to hugok79).</li>
+      <li>Change: Rework extension so it uses the settings file on disk instead of registry settings (github issue #22 #32 #176 #340 #343).</li>
+      <li>Change: Some UX improvements.</li>
+      <li>Change: Replace Pledgie donation button by Paypal donation button since Pledgie does not exist anymore.</li>
+      <li>Change: Correction of spell mistakes in the french translation (thanks to Sylvain Pollet-Villard).</li>
+      <li>Change: Change output files timestamp to match original file (github issue #33) (thanks to Diego López Bugna).</li>
+      <li>Fixes: Issue where there was a maximum number of files to convert at the same time depending on the length of file paths (github issue #86).</li>
+      <li>Fixes: Issue where File Converter version upgrade download was not working due to an issue with https encryption.</li>
+      <li>Fixes: Issue where output video was not working correclty on some video players like Quick time (github issue #34) (thanks to Diego López Bugna).</li>
+      <li>Fixes: Issue where icons and images were blurry on high dpi device.</li>
+      <li>Fixes: Issue where file 'Error' in there name were generating false negative result (github issue #247).</li>
+      <li>Tech: Complete rework of the project architecture to be able to improve it in a long term perspective. The project is now using the MVVM Community Toolkit and is following more closely this design pattern.</li>
+      <li>Tech: Update ffmpeg to v6.1.1 and ImageMagick to v13.5.</li>
+      <li>Tech: Update SharpShell to v2.7.2.</li>
+      <li>Tech: Change ghostscript version from 9.21 to 10.02.1.</li>
+      <li>Tech: Update project to Visual Studio 2022 and installer Wix 4.</li>
+      <li>Tech: Update project to .NET framework 4.8.</li>
+      <li>Tech: Check for .NET framework version in installer and prompt the user if the required version is not installed.</li>
+      <li>Tech: Remove sharpshell tools from installer dependencies. The shell extension is now registered by File Converter application (github issue #39 #46).</li>
+      <li>Tech: Remove Windows Vista support and 32bit platform support. Use File Converter 1.2.3 if you need these.</li>
+    </ul>
+    
+    <hr>
+    
+    <h3>Version 1.2.3</h3>
+    <ul>
+      <li>Fixed: Issue where the scale was not working for image conversions depending on the application current language.</li>
+      <li>Tech: Include office library dependencies in package config (now you don't need to install office to build the project).</li>
+      <li>Tech: Upgrade Ghostscript to version 9.21.</li>
+      <li>Tech: Update ImageMagick to version 7.0.5.</li>
+    </ul>
+    
+    <h3>Version 1.2.2</h3>
+    <ul>
+      <li>Added: Portuguese translation (thanks to Khidreal).</li>
+      <li>Fixed: Issue where scale was corrupted when switching application language (github issue #5).</li>
+      <li>Fixed: Issue where file metadata were not copied when converting to aac format (github issue #15).</li>
+      <li>Tech: Update to ffmpeg 3.2.2 version.</li>
+      <li>Tech: Improve security using https instead of http for upgrade system and links (thanks to TheAresjej).</li>
+    </ul>
+    
+    <h3>Version 1.2.1</h3>
+    <ul>
+      <li>Fixed: Issue where audio file tags were not copied in a format readable by Windows.</li>
+      <li>Fixed: Issue where the default language was set to french (github issue #6).</li>
+      <li>Fixed: Issue where the size of a pdf generated from images was not consistent.</li>
+      <li>Change: Small improvements of File Converter application and installer interface thanks to TheAresjej (github issues #7
+        and #8).</li>
+    </ul>
+    
+    <h3>Version 1.2</h3>
+    <ul>
+      <li>New: Possibility to convert Word documents (docx, odt and doc) to pdf and images (this feature is only available if you
+        have Microsoft Word installed).</li>
+      <li>New: Possibility to convert Excel documents (xlsx, ods and xls) to pdf and images (this feature is only available if you
+        have Microsoft Excel installed).</li>
+      <li>New: Possibility to convert PowerPoint documents (pptx, odp and ppt) to pdf and images (this feature is only available
+        if you have Microsoft PowerPoint installed).</li>
+      <li>New: Possibility to convert images and documents to webp format.</li>
+      <li>New: Support new image input format: webp.</li>
+      <li>New: Add the possibility to cancel image, CDA extraction and gif conversions.</li>
+      <li>Fixed: Issue where multiple conversion jobs were created for the same file resulting in an error message.</li>
+      <li>Tech: Improve application performances on startup.</li>
+      <li>Tech: Improve diagnostics.</li>
+    </ul>
+    
+    <h3>Version 1.1</h3>
+    <ul>
+      <li>New: Localization system. File Converter can now be translated in multiple languages. The default language is the same
+        than your OS language (if available).</li>
+      <li>New: Add the possibility to choose the application language in the application settings.</li>
+      <li>New: Add french localization.</li>
+      <li>New: Possibility to convert a Pdf file into image files (one image per page).</li>
+      <li>New: Possibility to convert an image into a Pdf file.</li>
+      <li>New: Possibility to encode videos using theora video codec and Ogg vorbis audio codec in a ogv container.</li>
+      <li>New: Possibility to change the number of channels of an audio file (stereo -> mono, 5.1 -> stereo, ...).</li>
+      <li>New: Improve the application upgrade UI. If you quit the application during the upgrade downloading, you will now see the
+        download progress.</li>
+      <li>New: File converter is now available for Windows 32 bits systems (download the x86 installer).</li>
+      <li>New: Add an application option to choose the maximum number of simultaneous conversions.</li>
+      <li>Change: Improve the application help start page (when you launch File Converter directly from the executable) with an animated
+        picture.</li>
+      <li>Change: Improve the output type dropdown visualization (splitting it by categories).</li>
+      <li>Fixed: Issue where it was impossible to rotate an image for the output types: jpg and png.</li>
+    </ul>
+    
+    <h3>Version 1.0</h3>
+    <ul>
+      <li>New: File Converter is now certified by Microsoft Authenticode.</li>
+      <li>New: Add an about section that contains information on the software development (change log, documentation link, report
+        issue link).</li>
+      <li>New: Split conversion preset settings and application settings to improve ergonomy.</li>
+      <li>New: Add help shortcut in the conversion preset edition interface that links directly to the corresponding documentation
+        page.</li>
+      <li>New: Add shortcuts in start menu.</li>
+      <li>New: Create a donation campaign on Pledgie and linked it in the about section.</li>
+      <li>Fixed: Issue with Avast antivirus where File Converter and Windows explorer was frozen when the user tried to use File
+        Converter.</li>
+      <li>Fixed: Issue where it was impossible to convert files from a network path.</li>
+    </ul>
 
+    <hr>
+    
+    <h3>Version 0.7</h3>
+    <ul>
+      <li>New: Possibility to encode videos using VP9 video codec and Ogg vorbis audio codec in a webm container.</li>
+      <li>New: Possibility to convert videos and images to gif.</li>
+      <li>New: Possibility to convert gif files to videos.</li>
+      <li>New: Possibility to remove audio from video files (mkv, mp4, avi and webm output file formats).</li>
+      <li>New: Add feedback to indicate that the application will automatically terminate (after conversions) (github issue #1).</li>
+      <li>New: Support new video input formats: ogv and mpeg.</li>
+      <li>New: Support new audio input format: oga.</li>
+      <li>New: Possibility to cancel some conversion jobs (gif/cda and image conversion jobs are not cancelable for now).</li>
+      <li>Fixed: Issue where video can't be compressed using H.264 codec (mp4 or mkv presets) when its size (width or height) is
+        not divisible by 2 (append a lot when the user tries to scale a video) (github issue #2).</li>
+      <li>Fixed: Issue where "Clamp to power of 2 size" option didn't work well with images that already have a power of 2 size.</li>
+      <li>Fixed: Issue where conversion progress was not updated correctly (for converters based on ffmpeg).</li>
+      <li>Fixed: Issue where converting a video into the ogg format did not extract audio in an ogg file correctly.</li>
+      <li>Fixed: Issue where simultaneous read on the same CD drive was performed when files from differents conversions come from
+        the same drive (other than cda extraction preset).</li>
+      <li>Fixed: Issue where the path generator was unable to create a valid path if the input file was at the root of a drive.</li>
+      <li>Tech: Annotate the conversion presets to know if there are default preset or user preset in order to improve the upgrade
+        process.</li>
+    </ul>
+    
+    <h3>Version 0.6</h3>
+    <ul>
+      <li>New: Possibility to encode videos using H.264 video codec and AAC audio codec in a mp4 container (more portable than mkv).</li>
+      <li>New: Support new image input file formats: psd, tga, svg and exr.</li>
+      <li>New: Support new video input file format: m4v.</li>
+      <li>New: Possibility to rotate images and videos.</li>
+      <li>New: Remove restriction on image size to convert to ico file format (it is now possible to convert all images to ico).</li>
+      <li>New: Add "Clamp to power of 2 size" option in image conversion.</li>
+      <li>New: Support input images encoded in 16 bits or 32 bits per color channel.</li>
+      <li>Fixed: Issue where the installer detects the utilisation of the extension dll in explorer, ask the user to restart it and
+        fail to do it.</li>
+      <li>Fixed: Issue where it is impossible to delete a conversion preset defined in default settings.</li>
+      <li>Fixed: Issue where the Windows context menu does not contain user preset after an application upgrade.</li>
+      <li>Fixed: Issue where some registry keys remain after file converter uninstallation.</li>
+      <li>Fixed: Issue where aac bitrate was not saved.</li>
+      <li>Fixed: Issue where settings serialization version was not updated.</li>
+      <li>Change: Allow the user to scale images until 1600% size (useful to scale pixel art images).</li>
+    </ul>
+    
+    <h3>Version 0.5</h3>
+    <ul>
+      <li>New: Software update system. The application now checks if a new version of File Converter is available.</li>
+      <li>New: Possibility to scale images and videos.</li>
+      <li>New: Possibility to encode videos (avi output file format) using Xvid video codec and Mp3 audio codec.</li>
+      <li>New: Support new video input file formats: 3gp, webm and wmv.</li>
+      <li>New: Add a help window to explain how file converter works when you launch it without using the context menu.</li>
+      <li>Fixed: Problem to convert images when accentuated characters were present in their path.</li>
+      <li>Tech: Update ffmpeg version (aac encoding is not anymore experimental).</li>
+    </ul>
+    
+    <h3>Version 0.4</h3>
+    <ul>
+      <li>New: Possibility to encode videos (mkv output file format) using H.264 video codec and AAC audio codec.</li>
+      <li>New: Possibility to extract Audio CD content.</li>
+      <li>New: Possibility to encode audio in aac format.</li>
+      <li>New: Possibility to encode images (png, jpg and ico formats).</li>
+      <li>New: Support new audio input file format: aac</li>
+      <li>New: Support new video input file formats: bik, flv, mov, mkv</li>
+      <li>New: Support new image input file formats: bmp, tiff, png, jpg and ico.</li>
+      <li>New: Multi-thread conversion (file converter will now start multiple conversions at the time depending on your number of
+        cores).</li>
+      <li>New: Copy the currently selected preset when clicking on the add preset button.</li>
+      <li>New: Add “My Documents”, “My Music”, “My Videos” and “My Pictures” folder to output file name generator.</li>
+      <li>New: Possibility to choose if the application quit after succeeded conversions.</li>
+      <li>Fixed: Reordering presets does not update the registry.</li>
+      <li>Fixed: Merge default settings with user settings to prevent errors when upgrading the application.</li>
+      <li>Tech: Handle incorrect user settings case.</li>
+      <li>Tech: Improve diagnostics system (compatibility with logs from multiple threads, dump files in AppData folder and error
+        messages).</li>
+      <li>Tech: Update ffmpeg version.</li>
+    </ul>
+    
+    <h3>Version 0.3</h3>
+    <ul>
+      <li>New: Possibility to extract audio from videos.</li>
+      <li>New: Support new input file formats: aiff, m4a, avi, mp4.</li>
+      <li>New: Quality settings for Mp3 (Encoding mode vbr/cbr and bitrate).</li>
+      <li>New: Quality settings for Ogg (Bitrate).</li>
+      <li>New: Quality settings for Wav (bits per sample: 8, 16, 24 or 32).</li>
+      <li>New: Add output file path template system.</li>
+      <li>New: Add button to move up or down a preset.</li>
+      <li>New: Add input files post conversion action (No action, move in archive folder or delete).</li>
+      <li>New: Add categories on input file extensions.</li>
+      <li>Fixed: Lose focus of main window don't terminate the application.</li>
+      <li>Fixed: The application icon now have a correct resolution at any size.</li>
+      <li>Tech: Add error codes on error messages.</li>
+    </ul>
+    
+    <h3>Version 0.2</h3>
+    <ul>
+      <li>New: Support new input file format: ape.</li>
+      <li>New: Add notion of conversion preset (in order to customize the conversion possibilities).</li>
+      <li>New: Add settings window to edit conversion presets.</li>
+      <li>New: Add application icon.</li>
+      <li>New: Customize application installer.</li>
+      <li>New: Add diagnostic window to read the application logs.</li>
+    </ul>
+    
+    <h3>Version 0.1</h3>
+    <ul>
+      <li>New: Add decode support for file formats Mp3, Ogg, Wav, Flac, Wma </li>
+      <li>New: Add encode support for file formats Mp3, Ogg, Wav, Flac</li>
+      <li>New: UI to visualize the conversion progress</li>
+    </ul>
+    
     <footer class="site-footer">
       <span class="site-footer-owner">
         <a href="https://github.com/Tichau/FileConverter">File Converter</a> is maintained by

@@ -125,7 +125,10 @@ a {
   font-weight: normal;
   color: #DF3900;
   font-style: italic; 
-  font-size: 2rem; }
+  }
+.main-content h2 {
+    font-size: 2rem; 
+}
 .main-content p {
   margin-bottom: 1em; }
 .main-content code {
