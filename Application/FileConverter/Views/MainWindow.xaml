@@ -57,7 +57,7 @@
             <ItemsControl ItemsSource="{Binding ConversionJobs}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:ConversionJobControl></controls:ConversionJobControl>
+                        <controls:ConversionJobControl Margin="5"></controls:ConversionJobControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

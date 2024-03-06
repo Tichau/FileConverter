@@ -25,8 +25,8 @@
             <ProgressText Action="PostInstallInit" Message="Initialize conversion presets" />
         </UI>
 
-        <PropertyRef Id="WIX_IS_NETFRAMEWORK_462_OR_LATER_INSTALLED" />
-        <Launch Condition="Installed OR WIX_IS_NETFRAMEWORK_462_OR_LATER_INSTALLED" Message="This application requires .NET Framework 4.6.2. Please install the .NET Framework then run this installer again." />
+        <PropertyRef Id="WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" />
+        <Launch Condition="Installed OR WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" Message="This application requires .NET Framework 4.8. Please install the .NET Framework then run this installer again." />
 
         <InstallExecuteSequence>
             <Custom Action="UninstallShell" Before="RemoveFiles" Condition="(NOT UPGRADINGPRODUCTCODE) AND (REMOVE=&quot;ALL&quot;)" />

@@ -8,7 +8,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize" 
-        Width="640" Height="545"
+        Width="1000" Height="880"
         DataContext="{Binding Help, Source={StaticResource Locator}}">
     <behaviors:Interaction.Triggers>
         <behaviors:EventTrigger EventName="Closing">
