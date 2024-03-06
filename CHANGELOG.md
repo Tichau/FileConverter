@@ -39,7 +39,7 @@
 - Fixes: Issue where File Converter version upgrade download was not working due to an issue with https encryption.
 - Fixes: Issue where output video was not working correclty on some video players like Quick time (github issue #34) (thanks to Diego López Bugna).
 - Fixes: Issue where icons and images were blurry on high dpi device.
-- Fixes: Issue where file 'Error' in there name were generating false negative result (github issue #247).
+- Fixes: Issue where file with 'Error' in there name were generating false negative result (github issue #247).
 - Tech: Complete rework of the project architecture to be able to improve it in a long term perspective. The project is now using the MVVM Community Toolkit and is following more closely this design pattern.
 - Tech: Update ffmpeg to v6.1.1 and ImageMagick to v13.5.
 - Tech: Update SharpShell to v2.7.2.
