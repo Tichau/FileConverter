@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   viewBox="0 0 256.00001 256.00001"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="DeleteIcon.svg"
+   inkscape:export-filename="C:\Users\Adrien\Documents\GitHub\FileConverter\Resources\FailIcon.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2"
+     inkscape:cx="208.1541"
+     inkscape:cy="4.358179"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="2848"
+     inkscape:window-height="1955"
+     inkscape:window-x="139"
+     inkscape:window-y="-13"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-796.3622)">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4348"
+       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#f44336;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(0,1004.3622)"><flowRegion
+         id="flowRegion4350"><rect
+           id="rect4352"
+           width="24"
+           height="44.75"
+           x="12"
+           y="2.625"
+           style="fill:#f44336;fill-opacity:1" /></flowRegion><flowPara
+         id="flowPara4354"
+         style="font-size:40px;line-height:1.25">!</flowPara></flowRoot>    <path
+       style="fill:none;stroke:#d32f2f;stroke-width:9.75045013;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 36.375052,843.1122 H 219.62495 v 0"
+       id="path845"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#d32f2f;fill-opacity:1;stroke:none;stroke-width:10.07606792;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 53,859.3622 v 21.6875 24.4375 92.1875 c 0,12.0153 9.672176,21.6875 21.6875,21.6875 h 106.625 c 12.01532,0 21.6875,-9.6722 21.6875,-21.6875 V 905.4872 881.0497 859.3622 H 181.3125 74.6875 Z m 41.523438,29.58789 c 4.700845,0 8.486332,4.06374 8.486332,9.11133 v 87.31445 c 0,5.0476 -3.785487,9.11133 -8.486332,9.11133 -4.700846,0 -8.484375,-4.06373 -8.484376,-9.11133 v -87.31445 c 0,-5.04759 3.78353,-9.11133 8.484376,-9.11133 z M 158,889.59267 c 4.70085,0 8.48438,4.06373 8.48438,9.11133 v 87.3164 c 0,5.0476 -3.78353,9.11133 -8.48438,9.11133 -4.70085,0 -8.48438,-4.06373 -8.48438,-9.11133 V 898.704 c 0,-5.0476 3.78353,-9.11133 8.48438,-9.11133 z"
+       id="rect881"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#d32f2f;fill-opacity:1;stroke:none;stroke-width:16.16783905;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect964"
+       width="39.355076"
+       height="21.25"
+       x="108.32246"
+       y="821.23718"
+       ry="6" />
+  </g>
+</svg>

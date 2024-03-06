@@ -1,4 +1,4 @@
-﻿// // <copyright file="Helpers.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
+﻿// <copyright file="Helpers.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
 namespace FileConverter
 {
@@ -6,32 +6,27 @@ namespace FileConverter
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
     using System.Threading;
+    using System.ComponentModel.Composition.Hosting;
 
     using FileConverter.ConversionJobs;
+    using FileConverter.Services;
+
+    using SharpShell;
+    using SharpShell.ServerRegistration;
+
     using Microsoft.Win32;
+    using CommunityToolkit.Mvvm.DependencyInjection;
 
     public static class Helpers
     {
-        public static IEnumerable<CultureInfo> GetSupportedCultures()
-        {
-            // Get all cultures.
-            CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
-
-            // Find the location where application installed.
-            string exeLocation = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
-
-            // Return all culture for which satellite folder found with culture code.
-            foreach (CultureInfo cultureInfo in cultures)
-            {
-                if (!string.IsNullOrEmpty(cultureInfo.Name) && Directory.Exists(Path.Combine(exeLocation, "Languages", cultureInfo.Name)))
-                {
-                    yield return cultureInfo;
-                }
-            }
-        }
+        public static readonly string[] CompatibleInputExtensions = {
+            "3gp","3gpp","aac","aiff","ape","arw","avi","bik","bmp","cda","cr2","dds","dng","doc","docx",
+            "exr","flac","flv","gif","heic","ico","jfif","jpg","jpeg","m4a","m4b","m4v","mkv","mov","mp3","mp4",
+            "mpg","mpeg","nef","odp","ods","odt","oga","ogg","ogv","opus","pdf","png","ppt","pptx","psd",
+            "raf", "rm","svg","tga","tif","tiff", "ts", "vob","wav","webm","webp","wma","wmv","xls","xlsx"
+        };
 
         public static string GetExtensionCategory(string extension)
         {
@@ -44,35 +39,50 @@ namespace FileConverter
                 case "flac":
                 case "mp3":
                 case "m4a":
+                case "m4b":
                 case "oga":
                 case "ogg":
+                case "opus":
                 case "wav":
                 case "wma":
                     return InputCategoryNames.Audio;
 
                 case "3gp":
+                case "3gpp":
                 case "avi":
                 case "bik":
                 case "flv":
                 case "m4v":
                 case "mp4":
+                case "mpg":
                 case "mpeg":
                 case "mov":
                 case "mkv":
                 case "ogv":
+                case "rm":
+                case "ts":
                 case "vob":
                 case "webm":
                 case "wmv":
                     return InputCategoryNames.Video;
 
+                case "arw":
                 case "bmp":
+                case "cr2":
+                case "dds":
+                case "dng":
                 case "exr":
+                case "heic":
                 case "ico":
+                case "jfif":
                 case "jpg":
                 case "jpeg":
+                case "nef":
                 case "png":
                 case "psd":
+                case "raf":
                 case "tga":
+                case "tif":
                 case "tiff":
                 case "svg":
                 case "xcf":
@@ -96,6 +106,107 @@ namespace FileConverter
             }
 
             return InputCategoryNames.Misc;
+        }
+
+        public static bool RegisterShellExtension(string shellExtensionPath)
+        {
+            if (!Application.IsInAdmininstratorPrivileges)
+            {
+                Diagnostics.Debug.LogError("File Converter needs administrator privileges to register the shell extension.");
+                return false;
+            }
+
+            if (!File.Exists(shellExtensionPath))
+            {
+                Diagnostics.Debug.LogError($"Shell extension {shellExtensionPath} does not exists.");
+                return false;
+            }
+
+            Diagnostics.Debug.Log($"Install and register shell extension: {shellExtensionPath}.");
+
+            try
+            {
+                var catalog = new AssemblyCatalog(shellExtensionPath);
+                var container = new CompositionContainer(catalog);
+                var server = container.GetExport<ISharpShellServer>().Value;
+
+                RegistrationType registrationType = RegistrationType.OS64Bit;
+#if BUILD32
+                registrationType = RegistrationType.OS32Bit;
+#endif
+
+                ServerRegistrationManager.InstallServer(server, registrationType, true);
+                Diagnostics.Debug.Log($"Shell extension has been installed correctly.");
+
+                ServerRegistrationManager.RegisterServer(server, registrationType);
+                Diagnostics.Debug.Log($"Shell extension has been registered correctly.");
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.LogError($"An exception has been thrown during shell extension {shellExtensionPath} registration.\n{exception}");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool UnregisterExtension(string shellExtensionPath)
+        {
+            if (!Application.IsInAdmininstratorPrivileges)
+            {
+                Diagnostics.Debug.LogError("File Converter needs administrator privileges to unregister the shell extension.");
+                return false;
+            }
+
+            if (!File.Exists(shellExtensionPath))
+            {
+                Diagnostics.Debug.LogError($"Shell extension {shellExtensionPath} does not exists.");
+                return false;
+            }
+
+            Diagnostics.Debug.Log($"Unregister and uninstall shell extension: {shellExtensionPath}.");
+
+            try
+            {
+                var catalog = new AssemblyCatalog(shellExtensionPath);
+                var container = new CompositionContainer(catalog);
+                var server = container.GetExport<ISharpShellServer>().Value;
+
+                RegistrationType registrationType = RegistrationType.OS64Bit;
+#if BUILD32
+                registrationType = RegistrationType.OS32Bit;
+#endif
+
+                ServerRegistrationManager.UnregisterServer(server, registrationType);
+                Diagnostics.Debug.Log($"Shell extension has been successfully unregistered.");
+                ServerRegistrationManager.UninstallServer(server, registrationType);
+                Diagnostics.Debug.Log($"Shell extension has been successfully uninstalled.");
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.LogError($"An exception has been thrown during shell extension {shellExtensionPath} unregistration.\n{exception}");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static IEnumerable<CultureInfo> GetSupportedCultures()
+        {
+            // Get all cultures.
+            CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+
+            // Find the location where application installed.
+            string exeLocation = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
+
+            // Return all culture for which satellite folder found with culture code.
+            foreach (CultureInfo cultureInfo in cultures)
+            {
+                if (!string.IsNullOrEmpty(cultureInfo.Name) && Directory.Exists(Path.Combine(exeLocation, "Languages", cultureInfo.Name)))
+                {
+                    yield return cultureInfo;
+                }
+            }
         }
 
         public static bool IsOutputTypeCompatibleWithCategory(OutputType outputType, string category)
@@ -141,8 +252,8 @@ namespace FileConverter
 
         public static Thread InstantiateThread(string name, ThreadStart threadStart)
         {
-            Application application = Application.Current as Application;
-            CultureInfo currentCulture = application?.Settings?.ApplicationLanguage;
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
+            CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(threadStart);
             thread.Name = name;
@@ -158,8 +269,8 @@ namespace FileConverter
 
         public static Thread InstantiateThread(string name, ParameterizedThreadStart parameterizedThreadStart)
         {
-            Application application = Application.Current as Application;
-            CultureInfo currentCulture = application?.Settings?.ApplicationLanguage;
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
+            CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(parameterizedThreadStart);
             thread.Name = name;
@@ -176,6 +287,7 @@ namespace FileConverter
         /// <summary>
         /// Check whether Microsoft office is available or not.
         /// </summary>
+        /// <param name="application">The office application name.</param>
         /// <returns>Returns true if Office is installed on the computer.</returns>
         /// source: http://stackoverflow.com/questions/3266675/how-to-detect-installed-version-of-ms-office/3267832#3267832
         /// source: http://www.codeproject.com/Articles/26520/Getting-Office-s-Version

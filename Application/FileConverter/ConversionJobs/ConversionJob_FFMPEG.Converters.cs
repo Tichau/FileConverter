@@ -16,7 +16,7 @@ namespace FileConverter.ConversionJobs
                 return string.Empty;
             }
 
-            return string.Format("{0} \"{1}\"", optionName, args);
+            return $"{optionName} \"{args}\"";
         }
 
         /// <summary>
@@ -94,6 +94,14 @@ namespace FileConverter.ConversionJobs
                 }
 
                 transformArgs += rotationArgs;
+            }
+
+            if (conversionPreset.OutputType == OutputType.Mkv || conversionPreset.OutputType == OutputType.Mp4)
+            {
+                // http://trac.ffmpeg.org/wiki/Encode/H.264#Encodingfordumbplayers
+                // YUV planar color space with 4:2:0 chroma subsampling
+                transformArgs += (transformArgs.Length > 0 ? "," : string.Empty) + "format=yuv420p";
+                //// TODO: maybe there should be an option for this on the settings?
             }
 
             return transformArgs;

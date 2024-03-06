@@ -16,6 +16,7 @@ namespace FileConverter
         private static Regex pathRegex = new Regex(@"^(?:\\\\[^\\/:*?""<>|\r\n]+\\|[a-zA-Z]:\\)(?:[^\\/:*?""<>|\r\n]+\\)*[^\.\\/:*?""<>|\r\n][^\\/:*?""<>|\r\n]*$");
         private static Regex filenameRegex = new Regex(@"[^\\]*", RegexOptions.RightToLeft);
         private static Regex directoryRegex = new Regex(@"^(?<drive>\\\\[^\\/:*?""""<>|\r\n]+\\|[A-Za-z]:\\)(?:(?<folders>[^\\]*)\\)*");
+        private static Regex dateRegex = new Regex(@"\(d:(?<format>[^)]*)\)");
 
         public static bool IsPathDriveLetterValid(string path)
         {
@@ -129,26 +130,13 @@ namespace FileConverter
                     }
                     catch (Exception)
                     {
-                        Debug.Log(string.Format("Can't create directories for path {0}", filePath));
+                        Debug.Log($"Can't create directories for path {filePath}");
                         return false;
                     }
                 }
             }
 
             return true;
-        }
-
-        public static string GetUserDataFolderPath()
-        {
-            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
-            path = System.IO.Path.Combine(path, "FileConverter");
-
-            if (!System.IO.Directory.Exists(path))
-            {
-                System.IO.Directory.CreateDirectory(path);
-            }
-
-            return path;
         }
 
         public static string GenerateFilePathFromTemplate(string inputFilePath, OutputType outputFileExtension, string outputFilePathTemplate, int numberIndex, int numberMax)
@@ -213,12 +201,14 @@ namespace FileConverter
 
             for (int index = 0; index < directories.Length; index++)
             {
-                outputPath = outputPath.Replace(string.Format("(d{0})", directories.Length - index - 1), directories[index]);
-                outputPath = outputPath.Replace(string.Format("(D{0})", directories.Length - index - 1), directories[index].ToUpperInvariant());
+                outputPath = outputPath.Replace($"(d{directories.Length - index - 1})", directories[index]);
+                outputPath = outputPath.Replace($"(D{directories.Length - index - 1})", directories[index].ToUpperInvariant());
             }
 
             outputPath = outputPath.Replace("(n:i)", numberIndex.ToString());
             outputPath = outputPath.Replace("(n:c)", numberMax.ToString());
+
+            outputPath = dateRegex.Replace(outputPath, match => DateTime.Now.ToString(match.Groups["format"].Value).Replace('/', '-').Replace(':', '\''));
 
             outputPath += "." + outputExtension;
 

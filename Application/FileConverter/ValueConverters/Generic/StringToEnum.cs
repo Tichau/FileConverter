@@ -20,7 +20,7 @@ namespace FileConverter.ValueConverters.Generic
             string typeName = parameter as string;
             if (typeName == null)
             {
-                throw new ArgumentNullException("parameter", "The parameter must contains the enum type.");
+                throw new ArgumentNullException(nameof(parameter), "The parameter must contains the enum type.");
             }
 
             Type enumType = Type.GetType(typeName);

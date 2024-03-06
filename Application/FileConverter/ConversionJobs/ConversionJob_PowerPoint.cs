@@ -27,15 +27,11 @@ namespace FileConverter.ConversionJobs
         {
         }
 
-        protected override ApplicationName Application
-        {
-            get
-            {
-                return ApplicationName.PowerPoint;
-            }
-        }
+        protected override ApplicationName Application => ApplicationName.PowerPoint;
 
-        protected override int GetOuputFilesCount()
+        protected override bool IsCancelable() => false;
+
+        protected override int GetOutputFilesCount()
         {
             if (this.ConversionPreset.OutputType == OutputType.Pdf)
             {
@@ -121,7 +117,7 @@ namespace FileConverter.ConversionJobs
 
                 Diagnostics.Debug.Log("Convert pdf to images.");
 
-                this.pdf2ImageConversionJob.StartConvertion();
+                this.pdf2ImageConversionJob.StartConversion();
 
                 if (this.pdf2ImageConversionJob.State != ConversionState.Done)
                 {

@@ -5,31 +5,39 @@ namespace FileConverter.ConversionJobs
     using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using System.Text;
+    using System.Windows.Input;
+    
+    using CommunityToolkit.Mvvm.Input;
 
-    using FileConverter.Commands;
     using FileConverter.Diagnostics;
 
     public class ConversionJob : INotifyPropertyChanged
     {
         private float progress = 0f;
+        private DateTime startTime;
         private ConversionState state = ConversionState.Unknown;
         private string errorMessage = string.Empty;
         private string userState = string.Empty;
-        private CancelConversionJobCommand cancelCommand;
+        private RelayCommand cancelCommand;
 
-        private string initialInputPath = string.Empty;
-        private int currentOuputFilePathIndex;
+        private readonly string initialInputPath;
+        private int currentOutputFilePathIndex;
 
         public ConversionJob()
         {
-            this.State = ConversionState.Unknown;
+            this.UserState = "Design Mode";
+
             this.ConversionPreset = null;
             this.initialInputPath = string.Empty;
-            this.InputFilePath = string.Empty;
+            this.InputFilePath = @"C:\Path\To\AVery\Long\Location\WithAVeryNiceFile.png";
+            this.OutputFilePaths = new[] { "C:\\Path\\To\\AVery\\Long\\Location\\WithAVeryNiceFile.jpg" };
+            this.StartTime = DateTime.Now - TimeSpan.FromMinutes(1.2);
+            this.State = ConversionState.InProgress;
+            this.StateFlags = ConversionFlags.None;
+            this.Progress = 0.6f;
         }
 
-        public ConversionJob(ConversionPreset conversionPreset, string inputFilePath) : this()
+        public ConversionJob(ConversionPreset conversionPreset, string inputFilePath)
         {
             if (conversionPreset == null)
             {
@@ -41,6 +49,7 @@ namespace FileConverter.ConversionJobs
                 throw new ArgumentNullException(nameof(inputFilePath));
             }
 
+            this.State = ConversionState.Unknown;
             this.initialInputPath = inputFilePath;
             this.InputFilePath = inputFilePath;
             this.ConversionPreset = conversionPreset;
@@ -48,17 +57,7 @@ namespace FileConverter.ConversionJobs
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public enum ConversionState
-        {
-            Unknown,
-
-            Ready,
-            InProgress,
-            Done,
-            Failed,
-        }
-
+        
         public ConversionPreset ConversionPreset
         {
             get;
@@ -68,7 +67,7 @@ namespace FileConverter.ConversionJobs
         public string InputFilePath
         {
             get;
-            private set;
+            set;
         }
 
         public string OutputFilePath
@@ -80,40 +79,35 @@ namespace FileConverter.ConversionJobs
                     return string.Empty;
                 }
 
-                if (this.CurrentOuputFilePathIndex < 0)
+                if (this.CurrentOutputFilePathIndex < 0)
                 {
                     return this.OutputFilePaths[0];
                 }
 
-                if (this.CurrentOuputFilePathIndex >= this.OutputFilePaths.Length)
+                if (this.CurrentOutputFilePathIndex >= this.OutputFilePaths.Length)
                 {
                     return this.OutputFilePaths[this.OutputFilePaths.Length - 1];
                 }
 
-                return this.OutputFilePaths[this.CurrentOuputFilePathIndex];
+                return this.OutputFilePaths[this.CurrentOutputFilePathIndex];
             }
         }
 
         public ConversionState State
         {
-            get
-            {
-                return this.state;
-            }
+            get => this.state;
 
             private set
             {
                 this.state = value;
                 this.NotifyPropertyChanged();
+                Application.Current.Dispatcher.Invoke(() => this.cancelCommand?.NotifyCanExecuteChanged());
             }
         }
 
         public string UserState
         {
-            get
-            {
-                return this.userState;
-            }
+            get => this.userState;
 
             protected set
             {
@@ -124,10 +118,7 @@ namespace FileConverter.ConversionJobs
 
         public float Progress
         {
-            get
-            {
-                return this.progress;
-            }
+            get => this.progress;
 
             protected set
             {
@@ -136,12 +127,20 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        public DateTime StartTime
+        {
+            get => this.startTime;
+
+            protected set
+            {
+                this.startTime = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
         public string ErrorMessage
         {
-            get
-            {
-                return this.errorMessage;
-            }
+            get => this.errorMessage;
 
             private set
             {
@@ -156,23 +155,17 @@ namespace FileConverter.ConversionJobs
             protected set;
         }
 
-        public CancelConversionJobCommand CancelCommand
+        public ICommand CancelCommand
         {
             get
             {
                 if (this.cancelCommand == null)
                 {
-                    this.cancelCommand = new CancelConversionJobCommand(this);
+                    this.cancelCommand = new RelayCommand(this.Cancel, this.IsCancelable);
                 }
 
                 return this.cancelCommand;
             }
-        }
-
-        public bool IsCancelable
-        {
-            get;
-            protected set;
         }
 
         protected bool CancelIsRequested
@@ -181,16 +174,13 @@ namespace FileConverter.ConversionJobs
             private set;
         }
 
-        protected int CurrentOuputFilePathIndex
+        protected int CurrentOutputFilePathIndex
         {
-            get
-            {
-                return this.currentOuputFilePathIndex;
-            }
+            get => this.currentOutputFilePathIndex;
 
             set
             {
-                this.currentOuputFilePathIndex = value;
+                this.currentOutputFilePathIndex = value;
                 this.NotifyPropertyChanged(nameof(this.OutputFilePath));
             }
         }
@@ -207,6 +197,8 @@ namespace FileConverter.ConversionJobs
                 return this.ConversionPreset.InputPostConversionAction;
             }
         }
+
+        protected virtual bool IsCancelable() => this.State == ConversionState.InProgress;
 
         protected string[] OutputFilePaths
         {
@@ -240,7 +232,7 @@ namespace FileConverter.ConversionJobs
             this.OutputFilePaths = outputFilePaths;
             if (this.OutputFilePaths.Length == 0)
             {
-                int outputFilesCount = this.GetOuputFilesCount();
+                int outputFilesCount = this.GetOutputFilesCount();
                 this.OutputFilePaths = new string[outputFilesCount];
             }
 
@@ -296,7 +288,7 @@ namespace FileConverter.ConversionJobs
                 this.OutputFilePaths[index] = path;
             }
 
-            this.CurrentOuputFilePathIndex = 0;
+            this.CurrentOutputFilePathIndex = 0;
 
             // Check if the input file is located on a cd drive.
             if (PathHelpers.IsOnCDDrive(this.InputFilePath))
@@ -304,14 +296,23 @@ namespace FileConverter.ConversionJobs
                 this.StateFlags = ConversionFlags.CdDriveExtraction;
             }
 
-            this.Initialize();
+            try
+            {
+                this.Initialize();
+            }
+            catch (Exception exception)
+            {
+                this.ConversionFailed(Properties.Resources.ErrorDuringJobInitialization);
+                Debug.Log(exception.ToString());
+                return;
+            }
 
             if (this.State == ConversionState.Unknown)
             {
                 this.State = ConversionState.Ready;
             }
 
-            Debug.Log("Job initialized: Preset: '{0}' Input: {1} Output: {2}", this.ConversionPreset.Name, this.InputFilePath, this.OutputFilePath);
+            Debug.Log("Job initialized: Preset: '{0}' Input: {1} Output: {2}", this.ConversionPreset.FullName, this.InputFilePath, this.OutputFilePath);
 
             if (this.State != ConversionState.Failed)
             {
@@ -319,7 +320,7 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        public void StartConvertion()
+        public void StartConversion()
         {
             if (this.ConversionPreset == null)
             {
@@ -333,6 +334,7 @@ namespace FileConverter.ConversionJobs
 
             Debug.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
 
+            this.StartTime = DateTime.Now;
             this.State = ConversionState.InProgress;
             
             try
@@ -355,11 +357,11 @@ namespace FileConverter.ConversionJobs
                 this.OnConversionSucceed();
             }
 
-            if (this.State == ConversionJob.ConversionState.Done && !this.AllOuputFilesExists())
+            if (this.State == ConversionState.Done && !this.AllOutputFilesExists())
             {
                 Debug.LogError(Properties.Resources.ErrorCantFindOutputFiles);
             }
-            else if (this.State == ConversionJob.ConversionState.Failed && this.AtLeastOneOuputFilesExists())
+            else if (this.State == ConversionState.Failed && this.AtLeastOneOutputFilesExists())
             {
                 Debug.Log(Properties.Resources.ErrorConversionFailedWithOutput);
             }
@@ -367,7 +369,7 @@ namespace FileConverter.ConversionJobs
 
         public virtual void Cancel()
         {
-            if (!this.IsCancelable || this.State != ConversionState.InProgress)
+            if (!this.IsCancelable())
             {
                 return;
             }
@@ -376,7 +378,7 @@ namespace FileConverter.ConversionJobs
             this.ConversionFailed(Properties.Resources.ErrorCanceled);
         }
 
-        protected virtual int GetOuputFilesCount()
+        protected virtual int GetOutputFilesCount()
         {
             return 1;
         }
@@ -414,6 +416,8 @@ namespace FileConverter.ConversionJobs
         protected virtual void OnConversionSucceed()
         {
             Debug.Log("Conversion Succeed!");
+
+            this.ChangeOutputFileTimestampToMatchOriginal();
 
             // Apply the input post conversion action.
             switch (this.InputPostConversionAction)
@@ -456,7 +460,7 @@ namespace FileConverter.ConversionJobs
             if (this.State == ConversionState.Failed)
             {
                 // Already failed, don't override informations.
-                return;    
+                return;
             }
 
             this.State = ConversionState.Failed;
@@ -472,7 +476,36 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        private bool AllOuputFilesExists()
+        private void ChangeOutputFileTimestampToMatchOriginal()
+        {
+            Debug.Log("Changing output files timestamp to match original timestamp ...");
+
+            var originalFileCreationTime = System.IO.File.GetCreationTimeUtc(this.InputFilePath);
+            var originalFileLastAccesTime = System.IO.File.GetLastAccessTimeUtc(this.InputFilePath);
+            var originalFileLastWriteTime = System.IO.File.GetLastWriteTimeUtc(this.InputFilePath);
+            Debug.Log("  original timestamp: {0}, {1}, {2}", originalFileCreationTime, originalFileLastAccesTime, originalFileLastWriteTime);
+
+            for (int index = 0; index < this.OutputFilePaths.Length; index++)
+            {
+                string outputFilePath = this.OutputFilePaths[index];
+                try
+                {
+                    System.IO.File.SetCreationTimeUtc(outputFilePath, originalFileCreationTime);
+                    System.IO.File.SetLastAccessTimeUtc(outputFilePath, originalFileLastAccesTime);
+                    System.IO.File.SetLastWriteTimeUtc(outputFilePath, originalFileLastWriteTime);
+                    Debug.Log("  output file '{0}' timestamp changed", outputFilePath);
+                }
+                catch (Exception exception)
+                {
+                    Debug.Log("Can't change timestamp from file '{0}'", outputFilePath);
+                    Debug.Log("An exception as been thrown: {0}.", exception.ToString());
+                }
+            }
+
+            Debug.Log("... timestamp matching finished.");
+        }
+
+        private bool AllOutputFilesExists()
         {
             for (int index = 0; index < this.OutputFilePaths.Length; index++)
             {
@@ -486,7 +519,7 @@ namespace FileConverter.ConversionJobs
             return true;
         }
 
-        private bool AtLeastOneOuputFilesExists()
+        private bool AtLeastOneOutputFilesExists()
         {
             for (int index = 0; index < this.OutputFilePaths.Length; index++)
             {

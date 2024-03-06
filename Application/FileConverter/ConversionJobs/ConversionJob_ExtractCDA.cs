@@ -22,12 +22,10 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_ExtractCDA() : base()
         {
-            this.IsCancelable = true;
         }
 
         public ConversionJob_ExtractCDA(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
-            this.IsCancelable = true;
         }
 
         protected override InputPostConversionAction InputPostConversionAction
@@ -220,7 +218,7 @@ namespace FileConverter.ConversionJobs
 
         private void CompressAsync()
         {
-            this.compressionConversionJob.StartConvertion();
+            this.compressionConversionJob.StartConversion();
         }
     }
 }

@@ -21,18 +21,29 @@ namespace FileConverter.ConversionJobs
 
         private ProcessStartInfo ffmpegProcessStartInfo;
 
-        private List<FFMpegPass> ffmpegArgumentStringByPass = new List<FFMpegPass>();
+        private readonly List<FFMpegPass> ffmpegArgumentStringByPass = new List<FFMpegPass>();
 
         public ConversionJob_FFMPEG() : base()
         {
-            this.IsCancelable = true;
         }
 
         public ConversionJob_FFMPEG(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
-            this.IsCancelable = true;
         }
-        
+
+        public static VideoEncodingSpeed[] VideoEncodingSpeeds => new[]
+           {
+               VideoEncodingSpeed.UltraFast,
+               VideoEncodingSpeed.SuperFast,
+               VideoEncodingSpeed.VeryFast,
+               VideoEncodingSpeed.Faster,
+               VideoEncodingSpeed.Fast,
+               VideoEncodingSpeed.Medium,
+               VideoEncodingSpeed.Slow,
+               VideoEncodingSpeed.Slower,
+               VideoEncodingSpeed.VerySlow,
+           };
+
         protected virtual string FfmpegPath
         {
             get
@@ -61,22 +72,36 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            this.ffmpegProcessStartInfo = new ProcessStartInfo(ffmpegPath);
-
-            this.ffmpegProcessStartInfo.CreateNoWindow = true;
-            this.ffmpegProcessStartInfo.UseShellExecute = false;
-            this.ffmpegProcessStartInfo.RedirectStandardOutput = true;
-            this.ffmpegProcessStartInfo.RedirectStandardError = true;
+            this.ffmpegProcessStartInfo = new ProcessStartInfo(ffmpegPath)
+            {
+                CreateNoWindow = true, 
+                UseShellExecute = false, 
+                RedirectStandardOutput = true, 
+                RedirectStandardError = true
+            };
 
             this.FillFFMpegArgumentsList();
         }
 
         protected virtual void FillFFMpegArgumentsList()
         {
+            bool customCommandEnabled = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand);
+            if (customCommandEnabled)
+            {
+                // Custom command override other settings.
+                string customCommand = this.ConversionPreset.GetSettingsValue<string>(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand) ?? string.Empty;
+
+                string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, customCommand);
+                this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
+
+                return;
+            }
+
             // This option are necessary to be able to read metadata on Windows. src: http://jonhall.info/how_to/create_id3_tags_using_ffmpeg
-            const string mp3MetadataArgs = "-id3v2_version 3 -write_id3v1 1";
+            const string MP3MetadataArgs = "-id3v2_version 3 -write_id3v1 1";
+
             // AAC have no standard tag system, use ApeV2 (that are compatible). src: http://eolindel.free.fr/foobar/tags.shtml
-            const string aacMetadataArgs = "-write_apetag 1";
+            const string AACMetadataArgs = "-write_apetag 1";
 
             switch (this.ConversionPreset.OutputType)
             {
@@ -86,7 +111,7 @@ namespace FileConverter.ConversionJobs
 
                         // https://trac.ffmpeg.org/wiki/Encode/AAC
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
-                        string encoderArgs = $"-c:a aac -q:a {this.AACBitrateToQualityIndex(audioEncodingBitrate)} {channelArgs} {aacMetadataArgs}";
+                        string encoderArgs = $"-c:a aac -q:a {this.AACBitrateToQualityIndex(audioEncodingBitrate)} {channelArgs} {AACMetadataArgs}";
 
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
@@ -111,7 +136,7 @@ namespace FileConverter.ConversionJobs
 
                         // Compute final arguments.
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
-                        string encoderArgs = $"-c:v mpeg4 -vtag xvid -qscale:v {this.MPEG4QualityToQualityIndex(videoEncodingQuality)} {audioArgs} {videoFilteringArgs} {mp3MetadataArgs}";
+                        string encoderArgs = $"-c:v mpeg4 -vtag xvid -qscale:v {this.MPEG4QualityToQualityIndex(videoEncodingQuality)} {audioArgs} {videoFilteringArgs} {MP3MetadataArgs}";
                         string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
@@ -203,11 +228,11 @@ namespace FileConverter.ConversionJobs
                         switch (encodingMode)
                         {
                             case EncodingMode.Mp3VBR:
-                                encoderArgs = $"-codec:a libmp3lame -q:a {this.MP3VBRBitrateToQualityIndex(encodingQuality)} {channelArgs} {mp3MetadataArgs}";
+                                encoderArgs = $"-codec:a libmp3lame -q:a {this.MP3VBRBitrateToQualityIndex(encodingQuality)} {channelArgs} {MP3MetadataArgs}";
                                 break;
 
                             case EncodingMode.Mp3CBR:
-                                encoderArgs = $"-codec:a libmp3lame -b:a {encodingQuality}k {channelArgs} {mp3MetadataArgs}";
+                                encoderArgs = $"-codec:a libmp3lame -b:a {encodingQuality}k {channelArgs} {MP3MetadataArgs}";
                                 break;
 
                             default:
@@ -480,9 +505,12 @@ namespace FileConverter.ConversionJobs
                 }
             }
 
-            if (input.Contains("Exiting.") || input.Contains("Error") || input.Contains("Unsupported dimensions") || input.Contains("No such file or directory"))
+            // Remove file names from log to avoid false negative when some words like 'Error' are in file name (github issue #247).
+            string inputWithoutFileNames = input.Replace(this.InputFilePath, string.Empty).Replace(this.OutputFilePath, string.Empty);
+
+            if (inputWithoutFileNames.Contains("Exiting.") || inputWithoutFileNames.Contains("Error") || inputWithoutFileNames.Contains("Unsupported dimensions") || inputWithoutFileNames.Contains("No such file or directory"))
             {
-                if (input.StartsWith("Error while decoding stream") && input.EndsWith("Invalid data found when processing input"))
+                if (inputWithoutFileNames.StartsWith("Error while decoding stream") && inputWithoutFileNames.EndsWith("Invalid data found when processing input"))
                 {
                     // It is normal for a transport stream to start with a broken frame.
                     // https://trac.ffmpeg.org/ticket/1622

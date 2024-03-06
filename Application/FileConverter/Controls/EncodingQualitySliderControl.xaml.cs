@@ -2,7 +2,6 @@
 
 namespace FileConverter.Controls
 {
-    using System.Diagnostics;
     using System.Windows;
     using System.Windows.Controls;
 

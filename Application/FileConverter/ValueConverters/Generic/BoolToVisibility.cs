@@ -10,18 +10,35 @@ namespace FileConverter.ValueConverters.Generic
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is bool))
+            if (value != null && !(value is bool))
             {
                 throw new ArgumentException("The value must be a boolean.");
             }
 
+            bool booleanValue = (bool?) value ?? false;
+
             string stringParameter = parameter as string;
 
-            string falseResult = stringParameter ?? "Hidden";
+            string trueResult = "Visible";
+            string falseResult = "Hidden";
+            if (!string.IsNullOrEmpty(stringParameter))
+            {
+                string[] results = stringParameter.Split(';');
+                Diagnostics.Debug.Assert(results.Length <= 2, "results.Length <= 2");
 
-            bool booleanValue = (bool)value;
+                if (results.Length >= 1)
+                {
+                    falseResult = results[0];
+                }
 
-            return booleanValue ? "Visible" : falseResult;
+                if (results.Length >= 2)
+                {
+                    trueResult = results[1];
+                }
+            }
+
+
+            return booleanValue ? trueResult : falseResult;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

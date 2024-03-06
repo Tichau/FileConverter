@@ -1,0 +1,175 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:FileConverter.Controls">
+
+    <Style x:Key="EnableDisableImageStyle" TargetType="{x:Type Image}">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.25"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Data validation styles -->
+
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="true">
+                        <Border Background="{DynamicResource AccentForegroundBrush}" DockPanel.Dock="right" Margin="5,0,0,0" Width="20" Height="20" CornerRadius="10"
+                                    ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=customAdorner}">
+                            <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white"/>
+                        </Border>
+                        <AdornedElementPlaceholder x:Name="customAdorner" VerticalAlignment="Center" >
+                            <Border BorderBrush="{DynamicResource AccentForegroundBrush}" BorderThickness="1" />
+                        </AdornedElementPlaceholder>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Button -->
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid">
+                        <Border x:Name="border" CornerRadius="3" BorderThickness="1"
+                                Background="{DynamicResource Button_BackgroundBrush}"
+                                BorderBrush="{DynamicResource Button_BorderBrush}">
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      TextElement.FontWeight="Normal">
+                        </ContentPresenter>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Button_IsMouseOver_BackgroundBrush}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button_IsMouseOver_BorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Button_IsPressed_BackgroundBrush}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button_IsPressed_BorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TileButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid">
+                        <Border x:Name="border" CornerRadius="8" BorderThickness="1"
+                                Background="{DynamicResource TileButton_BackgroundBrush}"
+                                BorderBrush="{DynamicResource TileButton_BorderBrush}">
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontWeight="Normal">
+                        </ContentPresenter>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource TileButton_IsMouseOver_BackgroundBrush}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource TileButton_IsMouseOver_BorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource TileButton_IsPressed_BackgroundBrush}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource TileButton_IsPressed_BorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Hyperlink}">
+        <Setter Property="Foreground" Value="{DynamicResource Hyperlink_ForegroundBrush}" />
+    </Style>
+
+    <Style TargetType="{x:Type controls:IconButton}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:IconButton">
+                    <Border Name="border" Padding="4,2" CornerRadius="15" 
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" >
+                        <DockPanel Name="content">
+                            <Image Margin="5, 2, 0, 2" Source="{TemplateBinding IconSource}" />
+                            <Label Margin="0,0,5,0" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"/>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=controls:IconButton}, Path=MouseOverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=controls:IconButton}, Path=PressedBrush}"/>
+                            <Setter TargetName="content" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="border" BorderThickness="1,1,1,0" CornerRadius="3,3,0,0"
+                            Background="{DynamicResource TabItem_BackgroundBrush}"
+                            BorderBrush="{DynamicResource TabItem_BorderBrush}">
+                        <ContentPresenter x:Name="contentSite"  
+                            VerticalAlignment="Center"  
+                            HorizontalAlignment="Center"  
+                            ContentSource="Header"  
+                            Margin="18,4"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource TabItem_IsSelected_BackgroundBrush}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource TabItem_IsSelected_BorderBrush}" />
+                            <Setter Property="TextElement.FontWeight" TargetName="contentSite" Value="Bold" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabControl}">
+        <Setter Property="Background" Value="{DynamicResource TabControl_BackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TabControl_BorderBrush}" />
+    </Style>
+
+    <Style TargetType="{x:Type TreeView}">
+        <Setter Property="Background" Value="{DynamicResource TreeView_BackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TreeView_BorderBrush}" />
+    </Style>
+
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="Background" Value="{DynamicResource Window_BackgroundBrush}" />
+    </Style>
+
+</ResourceDictionary>
+    

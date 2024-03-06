@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Hakkında</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Dönüşüm başarılı olursa, giriş dosyasıyla ne yapmak istediğinize karar verir</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Dönüşüm işlemi başarılı olduğunda yapılacak işlem</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Yeni ön ayar</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Uygulama</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>Ses</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>File Converter başladığında otomatik olarak güncellemeleri denetle</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Tüm dönüşümler bittiğinde otomatik olarak çıkış yap</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>2 boyutun en düşük kuvvetine sıkıştır (?)</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Dönüşüm Ön Ayarları</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>Dönüştürülecek dosyalar</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>'den/'dan dönüştürüldü</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>kayıtlar</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>kayıtlar</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Açık Belgeler</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Bağış yap</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Eğer beğendiysen işimde bana yardımcı olmayı unutma :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>Güncelleme arkaplanda iniyor olacak, ve File Converter'dan çıktığınızda kurulacak.</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>File Converter'dan çıktığımda kur</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Şifreleniyor :</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>Şifreleme hızı :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter bir kabuk uzantısıdır.</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>Bu, Windows gezgini ile birleşik çalıştığı anlamına geliyor.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>File converter'ı kullanmak için lütfen dosya gezginini açın ve File Converter komutlarını bulacağınız bağlam menüsüne ulaşmak için istediğiniz herhangi bir dosyaya sağ tıklayın (tüm uyumlu dosya türleri için readme dosyasına bakın).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>Dosya ismi şablonu</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>Saniyedeki kare sayısı :</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>GitHub proje sayfasını aç</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>yardım ?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Giriş örneği</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Giriş türleri</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Bir arşiv klasörüne taşı</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>Hiçbiri</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>Güncelleme indirildi. File Converter'dan çıkın ve şimdi kurun.</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>Ben File Converter'dan çıktığımda kur</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>Bir problem raporla</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>Seçilen ön ayarı aşağı kaydır</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>Seçilen ön ayarı yukarı kaydır</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>Sabit bithızı şifreleme</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>Değişken bithızı şifreleme</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° saat yönünün tersi dönme</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Tamam</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>180° dönme</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Müzil\Sanatçı\Albüm\şarkı.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>Çıktı</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): giriş dosyası yolu
+(f): giriş dosyası ismi
+(o): çıktı dosyası türü
+(i): girdi dosyası türü
+(d0): girdi üst klasörü
+(d1): input sub parent folder
+...
+(n:i): sayfa sayısı indeksi
+(n:c): toplam sayfa sayısı
+
+Özel yollar:
+(p:d): belgeler yolu
+(p:m): müzikler yolu
+(p:v): videolar yolu
+(p:p): resimler yolu
+
+</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Çıktı türü</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Ön ayar</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Ön ayar adı</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Kalite :</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>Önerilen bithızı değeri mavi aralığında</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Döndür :</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Ölçek :</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>Kayıtlara bakın ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° saat yönünün tersine dönme</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>File Converter için bir güncelleme mevcut. Mümkün olan en yakın zamanda kurmanız şiddetle tavsiye edilir!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>Yükseltme indiriliyor...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>File Converter Güncellemeleri</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>'dosya boyutu' ve 'video kalitesi' arasındaki oranı tanımla. Düşük bir değer daha küçük dosya boyutu demek, Yüksek bir değer daha kaliteli video demek.</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Daha hızlı</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Hızlı</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Orta</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Daha yavaş</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Yavaş</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Çok hızlı</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>'dosya boyutu' ve 'sıkıştırma süreci' arasındaki oranı tanımla. Yavaş bir sıkıştırma, daha hızlı sıkıştırmaya göre daha küçük bir dosya anlamına geliyor. (Aynı video kalitesi için geçerli)</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Aşırı hızlı</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Epey hızlı</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Epey yavaş</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM imzalı 16-bit little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM imzalı 24-bit little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM imzalı 32-bit little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM imzalı 8-bit little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>Hiç</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>Dönme yok</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Dönüşüm</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Bitti</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Çıkartma</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Başarısız</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>Sırada</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>Giriş görüntüsünü oku</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>Dökümanı oku</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Canlı görüntü</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Ses</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Döküman</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Görüntü</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>Uygulamadan çıkılmadan önceki bekleme süresi</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Azami eş zamanlı çevirme sayısı</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>Yeni ön ayar</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###Değişim kaydı indiriliyor ...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>Dönüşüm Arşivleri</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>İptal edildi.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>Çalıştırılabilir ffmpeg bulunamadı. Uygulamayı yeniden kurmayı deneyin.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>Ses CD çıkarma işlemi başarısız.</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>CD sürücü hazır değil.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>ffmpeg başlatılamadı.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>Çıktı yolu klasörü oluşturması başarısız.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>Özgün çıktı yolu klasörü oluşturması başarısız.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>cd sürücü okuma başarısız '{0}'.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>Giriş yolu sürücü harfi alınamadı.</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>cda giriş yolundan parça numarası alınamadı.</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>CD sürücüsü açık olduğu için kullanılamıyor..</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>Giriş dosya türü seçilen çıktı dosya türü ile uyumlu değil.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>Çıktı dosyası yolu şablonu tarafından oluşturulan geçersiz çıktı yolu.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>Desteklenmeyen çıktı dosyası türü '{0}'.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>Kanal sayısı :</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>Giriş dosyasının kanal sayısını değiştirin.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Mono</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>Giriş dosyası ile aynı</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Stereo</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**Bu ücretsiz bir yazılımdır**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>GNU Genel Kamu Lisansı koşulları altında yeniden dağıtabilir ve/veya değiştirebilirsiniz.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>Bu program, yararlı olacağı ümidiyle dağıtılmıştır, ancak HİÇBİR GARANTİSİ YOKTUR. Daha fazla ayrıntı için GNU Genel Kamu Lisansına (kurulum klasöründe bulunur: `LICENSE.md`) bakın.</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>Uygulama sonlandırılıyor.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>Uygulama {0} saniye içinde otomatik olarak sonlandırılacak.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>Uygulama 1 saniye içinde otomatik olarak sonlandırılacaktır.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Diğer</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Çıktı dosyası/dosyaları bulunamıyor.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>Dönüştürme başarısız oldu, ancak var olan bir çıktı dosyası var.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Dönüştürmeyi hazırla</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Office belgelerini dönüştürmek için Microsoft Office yüklü olmalıdır.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Belge Microsoft Office ile açılamadı (lisansınızın/kurulumunuzun geçerli olup olmadığını kontrol edin).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Excel belgelerini dönüştürmek için Microsoft Excel'in kurulu olması gerekir.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>PowerPoint belgelerini dönüştürmek için Microsoft PowerPoint yüklü olmalıdır.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Word belgelerini dönüştürmek için Microsoft Word yüklü olmalıdır.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>File Converter internet sitesini aç</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>Dönüştürme başlatma sırasında hata meydana geldi.</value>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>Yeni klasör</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>Yeni klasör</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>Klasör</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>Klasör ismi</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Gelişmiş mod</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Özel parametreler</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Özel FFMPEG komut satırı parametreleri</value>
+  </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>Hiçbir ön ayar seçilmedi</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>Dışa aktar</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>İçeri aktar</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>Ön ayarı kopyala</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>Dosya dönüştürücü kullanıcı ayarları yüklenemiyor. Varsayılan ayarlara geri dönmek istiyor musunuz?</value>
+  </data>
+</root>

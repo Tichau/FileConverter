@@ -80,14 +80,23 @@ namespace FileConverter
             }
         }
 
-        public static T GetValue<T>(string key)
+        private static string GetUserRegistryFilePath
+        {
+            get
+            {
+                string path = FileConverterExtension.PathHelpers.GetUserDataFolderPath;
+                path = Path.Combine(path, "Registry.xml");
+                return path;
+            }
+        }
+
+        public static T GetValue<T>(string key, T defaultValue = default(T))
         {
             Registry registry = Registry.Instance;
 
-            string stringValue;
-            if (!registry.registryEntries.TryGetValue(key, out stringValue))
+            if (!registry.registryEntries.TryGetValue(key, out string stringValue))
             {
-                return default(T);
+                return defaultValue;
             }
 
             try
@@ -100,7 +109,7 @@ namespace FileConverter
                 Diagnostics.Debug.LogError("Can't convert registry value: {0}.", exception.Message);
             }
 
-            return default(T);
+            return defaultValue;
         }
 
         public static void SetValue<T>(string key, T value)
@@ -126,7 +135,7 @@ namespace FileConverter
         public void Dispose()
         {
             // SAVE
-            string registryFilePath = Registry.GetUserRegistryFilePath();
+            string registryFilePath = Registry.GetUserRegistryFilePath;
 
             try
             {
@@ -140,7 +149,7 @@ namespace FileConverter
         
         private static void Load()
         {
-            string registryFilePath = Registry.GetUserRegistryFilePath();
+            string registryFilePath = Registry.GetUserRegistryFilePath;
             if (!File.Exists(registryFilePath))
             {
                 Registry.instance = new Registry();
@@ -162,13 +171,6 @@ namespace FileConverter
                     Diagnostics.Debug.LogError("Inner exception: {0}", exception.Message);
                 }
             }
-        }
-
-        private static string GetUserRegistryFilePath()
-        {
-            string path = PathHelpers.GetUserDataFolderPath();
-            path = Path.Combine(path, "Registry.xml");
-            return path;
         }
 
         [XmlRoot("Entry")]
@@ -198,6 +200,7 @@ namespace FileConverter
         public static class Keys
         {
             public static readonly string LastUpdateCheckDate = "LastUpdateCheckDate";
+            public static readonly string ImportInitialFolder = "ImportInitialFolder";
         }
     }
 }

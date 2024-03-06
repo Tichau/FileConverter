@@ -18,7 +18,7 @@ namespace FileConverter.ValueConverters.Generic
             string typeName = parameter as string;
             if (typeName == null)
             {
-                throw new ArgumentNullException("parameter", "The parameter must contains a convertible type.");
+                throw new ArgumentNullException(nameof(parameter), "The parameter must contains a convertible type.");
             }
 
             Type type = Type.GetType(typeName);

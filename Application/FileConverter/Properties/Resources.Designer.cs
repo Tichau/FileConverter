@@ -19,7 +19,7 @@ namespace FileConverter.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -70,7 +70,7 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allow you to chose what you want to do with your input files if the conversion succeed.
+        ///   Looks up a localized string similar to Allow you to choose what you want to do with your input files if the conversion succeed.
         /// </summary>
         public static string ActionWhenConversionSucceedDescription {
             get {
@@ -88,11 +88,20 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new preset (duplicate selected preset).
+        ///   Looks up a localized string similar to New preset.
         /// </summary>
         public static string AddNewPreset {
             get {
                 return ResourceManager.GetString("AddNewPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced mode.
+        /// </summary>
+        public static string AdvancedMode {
+            get {
+                return ResourceManager.GetString("AdvancedMode", resourceCulture);
             }
         }
         
@@ -156,6 +165,15 @@ namespace FileConverter.Properties {
         public static string AutomaticallyExitWhenAllConversionsFinished {
             get {
                 return ResourceManager.GetString("AutomaticallyExitWhenAllConversionsFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelJobTooltip {
+            get {
+                return ResourceManager.GetString("CancelJobTooltip", resourceCulture);
             }
         }
         
@@ -304,6 +322,33 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy files in clipboard after conversion.
+        /// </summary>
+        public static string CopyFilesInClipboardAfterConversion {
+            get {
+                return ResourceManager.GetString("CopyFilesInClipboardAfterConversion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New folder.
+        /// </summary>
+        public static string CreateANewFolder {
+            get {
+                return ResourceManager.GetString("CreateANewFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New folder.
+        /// </summary>
+        public static string DefaultFolderName {
+            get {
+                return ResourceManager.GetString("DefaultFolderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New preset.
         /// </summary>
         public static string DefaultPresetName {
@@ -324,9 +369,9 @@ namespace FileConverter.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Logs.
         /// </summary>
-        public static string DiagnosticsButtonTitle {
+        public static string DiagnosticsButtonTooltip {
             get {
-                return ResourceManager.GetString("DiagnosticsButtonTitle", resourceCulture);
+                return ResourceManager.GetString("DiagnosticsButtonTooltip", resourceCulture);
             }
         }
         
@@ -385,6 +430,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duplicate preset.
+        /// </summary>
+        public static string DuplicatePreset {
+            get {
+                return ResourceManager.GetString("DuplicatePreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Encoding :.
         /// </summary>
         public static string Encoding {
@@ -399,6 +453,15 @@ namespace FileConverter.Properties {
         public static string EncodingSpeed {
             get {
                 return ResourceManager.GetString("EncodingSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
@@ -430,6 +493,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t load file converter user settings. Do you want to fall back to default settings ?.
+        /// </summary>
+        public static string ErrorCantLoadSettings {
+            get {
+                return ResourceManager.GetString("ErrorCantLoadSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Audio CD track extraction failed..
         /// </summary>
         public static string ErrorCDAExtractionFailed {
@@ -453,6 +525,15 @@ namespace FileConverter.Properties {
         public static string ErrorConversionFailedWithOutput {
             get {
                 return ResourceManager.GetString("ErrorConversionFailedWithOutput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error during conversion job initialization..
+        /// </summary>
+        public static string ErrorDuringJobInitialization {
+            get {
+                return ResourceManager.GetString("ErrorDuringJobInitialization", resourceCulture);
             }
         }
         
@@ -601,6 +682,33 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string ExportSelectedPresets {
+            get {
+                return ResourceManager.GetString("ExportSelectedPresets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Arguments.
+        /// </summary>
+        public static string FFMPEGCustomArguments {
+            get {
+                return ResourceManager.GetString("FFMPEGCustomArguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom FFMPEG command line arguments.
+        /// </summary>
+        public static string FFMPEGCustomArgumentsTooltip {
+            get {
+                return ResourceManager.GetString("FFMPEGCustomArgumentsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File Converter is a shell extension..
         /// </summary>
         public static string FileConverterStartHelp1 {
@@ -660,6 +768,15 @@ namespace FileConverter.Properties {
         public static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        public static string ImportPresets {
+            get {
+                return ResourceManager.GetString("ImportPresets", resourceCulture);
             }
         }
         
@@ -844,6 +961,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No preset selected.
+        /// </summary>
+        public static string NoPresetSelected {
+            get {
+                return ResourceManager.GetString("NoPresetSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string Ok {
@@ -871,20 +997,20 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Music\Artist\Album\Song.wav.
-        /// </summary>
-        public static string OuputFileNameTemplateSample {
-            get {
-                return ResourceManager.GetString("OuputFileNameTemplateSample", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Output.
         /// </summary>
         public static string OutputExample {
             get {
                 return ResourceManager.GetString("OutputExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C:\Music\Artist\Album\Song.wav.
+        /// </summary>
+        public static string OutputFileNameTemplateSample {
+            get {
+                return ResourceManager.GetString("OutputFileNameTemplateSample", resourceCulture);
             }
         }
         
@@ -932,6 +1058,24 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Folder.
+        /// </summary>
+        public static string PresetFolder {
+            get {
+                return ResourceManager.GetString("PresetFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder Name.
+        /// </summary>
+        public static string PresetFolderName {
+            get {
+                return ResourceManager.GetString("PresetFolderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preset Name.
         /// </summary>
         public static string PresetName {
@@ -952,14 +1096,14 @@ namespace FileConverter.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Recommended bitrate range in blue.
         /// </summary>
-        public static string RecommendeBitrateRangeInBlue {
+        public static string RecommendedBitrateRangeInBlue {
             get {
-                return ResourceManager.GetString("RecommendeBitrateRangeInBlue", resourceCulture);
+                return ResourceManager.GetString("RecommendedBitrateRangeInBlue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove selected preset.
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string RemoveSelectedPreset {
             get {
@@ -1024,9 +1168,9 @@ namespace FileConverter.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
-        public static string SettingsButtonTitle {
+        public static string SettingsButtonTooltip {
             get {
-                return ResourceManager.GetString("SettingsButtonTitle", resourceCulture);
+                return ResourceManager.GetString("SettingsButtonTooltip", resourceCulture);
             }
         }
         

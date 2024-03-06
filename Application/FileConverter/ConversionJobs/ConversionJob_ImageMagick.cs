@@ -17,12 +17,10 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_ImageMagick() : base()
         {
-            this.IsCancelable = true;
         }
 
         public ConversionJob_ImageMagick(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
-            this.IsCancelable = true;
         }
 
         protected override void Initialize()
@@ -40,7 +38,7 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        protected override int GetOuputFilesCount()
+        protected override int GetOutputFilesCount()
         {
             if (System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant() == ".pdf")
             {
@@ -64,7 +62,7 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("The conversion preset must be valid.");
             }
 
-            this.CurrentOuputFilePathIndex = 0;
+            this.CurrentOutputFilePathIndex = 0;
 
             if (this.isInputFilePdf)
             {
@@ -73,10 +71,28 @@ namespace FileConverter.ConversionJobs
             else
             {
                 this.pageCount = 1;
-                using (MagickImage image = new MagickImage(this.InputFilePath))
+                MagickReadSettings readSettings = new MagickReadSettings();
+
+                string inputExtension = System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant();
+                switch (inputExtension)
+                {
+                    case ".cr2":
+                        // Requires an explicit image format otherwise the image is interpreted as a TIFF image.
+                        readSettings.Format = MagickFormat.Cr2;
+                        break;
+
+                    case ".dng":
+                        // Requires an explicit image format otherwise the image is interpreted as a TIFF image.
+                        readSettings.Format = MagickFormat.Dng;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                using (MagickImage image = new MagickImage(this.InputFilePath, readSettings))
                 {
                     Debug.Log("Load image {0} succeed.", this.InputFilePath);
-
                     this.ConvertImage(image);
                 }
             }
@@ -112,16 +128,18 @@ namespace FileConverter.ConversionJobs
 
                 foreach (MagickImage image in images)
                 {
-                    Debug.Log("Write page {0}/{1}.", this.CurrentOuputFilePathIndex + 1, this.pageCount);
+                    Debug.Log("Write page {0}/{1}.", this.CurrentOutputFilePathIndex + 1, this.pageCount);
 
                     if (PdfSuperSamplingRatio > 1)
                     {
+#pragma warning disable CS0162 // Unreachable code detected
                         image.Scale(new Percentage(100 / PdfSuperSamplingRatio));
+#pragma warning restore CS0162 // Unreachable code detected
                     }
 
                     this.ConvertImage(image, true);
                     
-                    this.CurrentOuputFilePathIndex++;
+                    this.CurrentOutputFilePathIndex++;
                 }
             }
         }
@@ -223,7 +241,7 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            float alreadyCompletedPages = this.CurrentOuputFilePathIndex / (float)this.pageCount;
+            float alreadyCompletedPages = this.CurrentOutputFilePathIndex / (float)this.pageCount;
             this.Progress = alreadyCompletedPages + ((float)eventArgs.Progress.ToDouble() / (100f * this.pageCount));
         }
     }

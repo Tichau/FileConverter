@@ -4,22 +4,19 @@ namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Globalization;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
     using System.Xml.Serialization;
+    
+    using CommunityToolkit.Mvvm.ComponentModel;
 
-    using FileConverter.Annotations;
     using FileConverter.Controls;
-    using FileConverter.Diagnostics;
-    using FileConverter.ValueConverters;
 
     [XmlRoot]
     [XmlType]
-    public class ConversionPreset : INotifyPropertyChanged, IDataErrorInfo, IXmlSerializable
+    public class ConversionPreset : ObservableObject, IXmlSerializable
     {
-        private string name;
+        private string shortName;
+
         private OutputType outputType;
         private List<string> inputTypes;
         private InputPostConversionAction inputPostConversionAction;
@@ -28,12 +25,12 @@ namespace FileConverter
 
         public ConversionPreset()
         {
-            this.Name = Properties.Resources.DefaultPresetName;
+            this.FullName = Properties.Resources.DefaultPresetName;
         }
 
-        public ConversionPreset(string name, OutputType outputType, params string[] inputTypes)
+        public ConversionPreset(string shortName, OutputType outputType, params string[] inputTypes)
         {
-            this.Name = name;
+            this.ShortName = shortName;
             this.OutputType = outputType;
             List<string> inputTypeList = new List<string>();
             inputTypeList.AddRange(inputTypes);
@@ -42,9 +39,10 @@ namespace FileConverter
             this.outputFileNameTemplate = "(p)(f)";
         }
 
-        public ConversionPreset(string name, ConversionPreset source, params string[] additionalInputTypes)
+        public ConversionPreset(string shortName, ConversionPreset source, params string[] additionalInputTypes)
         {
-            this.Name = name;
+            this.ShortName = shortName;
+            this.ParentFoldersNames = source.ParentFoldersNames;
             this.OutputType = source.outputType;
             List<string> inputTypeList = new List<string>();
             if (source.inputTypes != null)
@@ -67,30 +65,65 @@ namespace FileConverter
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [XmlAttribute]
-        public string Name
+        [XmlAttribute("Name")]
+        public string FullName
         {
             get
             {
-                return this.name;
+                string fullName = string.Empty;
+                if (this.ParentFoldersNames != null)
+                {
+                    foreach (string folder in this.ParentFoldersNames)
+                    {
+                        fullName += $"{folder}/";
+                    }
+                }
+
+                fullName += this.shortName;
+
+                return fullName;
             }
 
             set
             {
-                this.name = value;
+                string[] folders = value.Split('/');
+                if (folders.Length == 0)
+                {
+                    Diagnostics.Debug.Log("Invalid full name.");
+                    this.ShortName = value;
+                    return;
+                }
+
+                this.ShortName = folders[folders.Length - 1];
+                Array.Resize(ref folders, folders.Length - 1);
+
+                this.ParentFoldersNames = folders;
+            }
+        }
+
+        [XmlIgnore]
+        public string ShortName
+        {
+            get => this.shortName;
+
+            set
+            {
+                this.shortName = value;
                 this.OnPropertyChanged();
             }
+        }
+
+        [XmlIgnore]
+        public string[] ParentFoldersNames
+        {
+            get;
+            set;
         }
 
         [XmlAttribute]
         public OutputType OutputType
         {
-            get
-            {
-                return this.outputType;
-            }
+            get => this.outputType;
 
             set
             {
@@ -106,7 +139,7 @@ namespace FileConverter
         {
             get;
             set;
-        } = false;
+        }
 
         [XmlElement]
         public List<string> InputTypes
@@ -214,10 +247,7 @@ namespace FileConverter
         [XmlIgnore]
         public IConversionSettings Settings
         {
-            get
-            {
-                return this.settings;
-            }
+            get => this.settings;
 
             set
             {
@@ -239,34 +269,6 @@ namespace FileConverter
                 }
 
                 this.OnPropertyChanged();
-            }
-        }
-
-        public string Error
-        {
-            get
-            {
-                string errorString = this.Validate("Name");
-                if (!string.IsNullOrEmpty(errorString))
-                {
-                    return errorString;
-                }
-
-                errorString = this.Validate("OutputFileNameTemplate");
-                if (!string.IsNullOrEmpty(errorString))
-                {
-                    return errorString;
-                }
-
-                return string.Empty;
-            }
-        }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                return this.Validate(columnName);
             }
         }
 
@@ -326,12 +328,12 @@ namespace FileConverter
         {
             if (string.IsNullOrEmpty(settingsKey))
             {
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(settingsKey));
             }
 
-            if (string.IsNullOrEmpty(value))
+            if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             if (!this.IsRelevantSetting(settingsKey))
@@ -353,7 +355,7 @@ namespace FileConverter
         {
             if (string.IsNullOrEmpty(settingsKey))
             {
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(settingsKey));
             }
 
             if (this.settings.ContainsKey(settingsKey))
@@ -376,21 +378,15 @@ namespace FileConverter
             Type type = typeof(T);
             if (type.IsEnum)
             {
-                return (T)System.Enum.Parse(type, settingsValue);
+                return (T)Enum.Parse(type, settingsValue);
             }
 
-            return (T)System.Convert.ChangeType(settingsValue, type, NumberFormatInfo.InvariantInfo);
+            return (T)Convert.ChangeType(settingsValue, type, NumberFormatInfo.InvariantInfo);
         }
 
         public bool IsRelevantSetting(string settingsKey)
         {
             return this.Settings.ContainsKey(settingsKey);
-        }
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void CoerceInputTypes()
@@ -422,26 +418,36 @@ namespace FileConverter
                 case OutputType.Aac:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Flac:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Ogg:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Mp3:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Mp3VBR.ToString(), true);
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Wav:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioEncodingMode, EncodingMode.Wav16.ToString(), true);
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioChannelCount, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 // Video
@@ -451,6 +457,8 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Mkv:
@@ -460,6 +468,8 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Mp4:
@@ -469,6 +479,8 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Ogv:
@@ -477,6 +489,8 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 case OutputType.Webm:
@@ -485,6 +499,8 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoQuality, "40");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
                     break;
 
                 // Images
@@ -538,9 +554,9 @@ namespace FileConverter
                 throw new ArgumentNullException("key");
             }
 
-            if (string.IsNullOrEmpty(value))
+            if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             if (!this.settings.ContainsKey(settingsKey))
@@ -553,102 +569,6 @@ namespace FileConverter
             }
         }
 
-        private string Validate(string propertyName)
-        {
-            // Return error message if there is an error, else return empty or null string.
-            switch (propertyName)
-            {
-                case "Name":
-                    {
-                        if (string.IsNullOrEmpty(this.Name))
-                        {
-                            return "The preset name can't be empty.";
-                        }
-
-                        if (this.Name.Contains(";"))
-                        {
-                            return "The preset name can't contains the character ';'.";
-                        }
-
-                        Application application = Application.Current as Application;
-                        int? count = application?.Settings?.ConversionPresets?.Count(match => match?.name == this.Name);
-                        if (count > 1)
-                        {
-                            return "The preset name is already used.";
-                        }
-                    }
-
-                    break;
-
-                case "OutputFileNameTemplate":
-                    {
-                        string sampleOutputFilePath = this.GenerateOutputFilePath(FileConverter.Properties.Resources.OuputFileNameTemplateSample, 1, 3);
-                        if (string.IsNullOrEmpty(sampleOutputFilePath))
-                        {
-                            return "The output filename template must produce a non empty result.";
-                        }
-
-                        if (!PathHelpers.IsPathValid(sampleOutputFilePath))
-                        {
-                            // Diagnostic to feedback purpose.
-                            // Drive letter.
-                            if (!PathHelpers.IsPathDriveLetterValid(sampleOutputFilePath))
-                            {
-                                return "The output filename template must define a root (for example c:\\, use (p) to use the input file path).";
-                            }
-
-                            // File name.
-                            string filename = PathHelpers.GetFileName(sampleOutputFilePath);
-                            if (filename == null)
-                            {
-                                return "The output file name must not be empty (use (f) to use the name of the input file).";
-                            }
-
-                            char[] invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
-                            for (int index = 0; index < invalidFileNameChars.Length; index++)
-                            {
-                                if (filename.Contains(invalidFileNameChars[index]))
-                                {
-                                    return "The output file name must not contains the character '" + invalidFileNameChars[index] + "'.";
-                                }
-                            }
-
-                            // Directory names.
-                            string path = sampleOutputFilePath.Substring(3, sampleOutputFilePath.Length - 3 - filename.Length);
-                            char[] invalidPathChars = System.IO.Path.GetInvalidPathChars();
-                            for (int index = 0; index < invalidPathChars.Length; index++)
-                            {
-                                if (string.IsNullOrEmpty(path))
-                                {
-                                    return "The output directory name must not be empty (use (d0), (d1), ... to use the name of the parent directories of the input file).";
-                                }
-
-                                if (path.Contains(invalidPathChars[index]))
-                                {
-                                    return "The output directory name must not contains the character '" + invalidPathChars[index] + "'.";
-                                }
-                            }
-
-                            string[] directories = path.Split('\\');
-                            for (int index = 0; index < directories.Length; ++index)
-                            {
-                                string directoryName = directories[index];
-                                if (string.IsNullOrEmpty(directoryName))
-                                {
-                                    return "The output directory name must not be empty (use (d0), (d1), ... to use the name of the parent directories of the input file).";
-                                }
-                            }
-
-                            return "The output filename template is invalid";
-                        }
-                    }
-
-                    break;
-            }
-
-            return string.Empty;
-        }
-        
         public struct ConversionSetting
         {
             public ConversionSetting(KeyValuePair<string, string> keyValuePair)
@@ -687,9 +607,11 @@ namespace FileConverter
             public const string VideoScale = "VideoScale";
             public const string VideoRotation = "VideoRotation";
             public const string VideoFramesPerSecond = "VideoFramesPerSecond";
+            public const string FFMPEGCustomCommand = "FFMPEGCustomCommand";
 
             public const string EnableAudio = "EnableAudio";
             public const string EnableVideo = "EnableVideo";
+            public const string EnableFFMPEGCustomCommand = "EnableFFMPEGCustomCommand";
         }
     }
 }

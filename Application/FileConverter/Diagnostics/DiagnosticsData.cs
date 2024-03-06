@@ -13,8 +13,8 @@ namespace FileConverter.Diagnostics
 
     public class DiagnosticsData : INotifyPropertyChanged
     {
-        private List<string> logMessages = new List<string>();
-        private StringBuilder stringBuilder = new StringBuilder();
+        private readonly List<string> logMessages = new List<string>();
+        private readonly StringBuilder stringBuilder = new StringBuilder();
         private System.IO.TextWriter logFileWriter;
         private string name;
 
@@ -28,10 +28,7 @@ namespace FileConverter.Diagnostics
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get => this.name;
 
             private set
             {
@@ -62,11 +59,11 @@ namespace FileConverter.Diagnostics
 
         public void Initialize(string diagnosticsFolderPath, int id)
         {
-            string path = Path.Combine(diagnosticsFolderPath, string.Format("Diagnostics{0}.log", id));
+            string path = Path.Combine(diagnosticsFolderPath, $"Diagnostics{id}.log");
             path = PathHelpers.GenerateUniquePath(path);
             this.logFileWriter = new StreamWriter(File.Open(path, FileMode.Create));
 
-            this.Log("{0} {1}\n", System.DateTime.Now.ToLongDateString(), System.DateTime.Now.ToLongTimeString());
+            this.Log($"{System.DateTime.Now.ToLongDateString()} {System.DateTime.Now.ToLongTimeString()}\n");
         }
 
         public void Release()
@@ -75,15 +72,13 @@ namespace FileConverter.Diagnostics
             this.logFileWriter = null;
         }
 
-        public void Log(string message, params object[] arguments)
+        public void Log(string log)
         {
-            string log = arguments.Length > 0 ? string.Format(message, arguments) : message;
-
             this.logMessages.Add(log);
             this.logFileWriter.WriteLine(log);
             this.logFileWriter.Flush();
 
-            this.OnPropertyChanged("Content");
+            this.OnPropertyChanged(nameof(this.Content));
         }
 
         [NotifyPropertyChangedInvocator]

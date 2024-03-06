@@ -1,32 +1,81 @@
 # File Converter
 
 ## Description
+
 **File Converter** is a very simple tool which allows you to convert and compress one or several file(s) using the context menu of windows explorer.
 
-You can download it here: [www.file-converter.org](http://file-converter.org/?from=readme.md).
+![File Converter Usage](Resources/FileConverterUsage.gif)
+
+You can download it here: [file-converter.io](https://file-converter.io/?from=readme.md).
 
 You can find more information about what's in File converter and how to use it on the [wiki](https://github.com/Tichau/FileConverter/wiki).
 
-You can help this project by contributing on [Github](https://github.com/Tichau/FileConverter) or by making a donation on [Pledgie](https://pledgie.com/campaigns/31615) :).
+## Donate
+
+File Converter is a personal open source project started in 2014. I have put hundreds of hours adding, refining and tuning File Converter with the goal of making the conversion and compression of files an easy task for everyone.
+
+You can help me by [contributing to the project](https://github.com/Tichau/FileConverter/wiki#contribute), by [making a donation](https://www.paypal.com/donate/?cmd=_donations&business=3BDWQTYTTA3D8&item_name=File+Converter+Donations&currency_code=EUR&Z3JncnB0=) or just by [saying thanks​](https://saythanks.io/to/Tichau) :).
+
+## Troubleshooting
+
+If you encounter any problem with File Converter, you can:
+
+* See the already known problems in the [troubleshooting section of the documentation](https://github.com/Tichau/FileConverter/wiki/Troubleshooting).
+* Or report an issue on the [bug tracker](https://github.com/Tichau/FileConverter/issues).
+
+When you report an issue, please join the following informations:
+
+* Registry.xml
+* Settings.user.xml
+* The Diagnostics folder of the session that encountered the issue.
+* A screenshot (if possible) and a description that shows/explain the issue.
+
+You will find the xml files and diagnostics folder in `c:\Users\[UserName]\AppData\Local\FileConverter\`.
+
+## Setup development environment
+
+### Requirements
+
+For File Converter and its explorer extension:
+
+* Visual Studio 2022
+
+For the installer:
+
+* [Wix 4](http://wixtoolset.org/)
+  * [Community Visual Studio Extension](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17)
+* [Windows SDK Signing Tools for Desktop Apps](https://developer.microsoft.com/fr-fr/windows/downloads/windows-10-sdk)
 
 ## Thanks
 
+Thanks to all the contributors of File Converter project.
+
 ### Localization
 
-Thanks to **Khidreal** for the Portuguese localization.
+Thanks to **Khidreal** and **hugok79** for the Portuguese localization.
+Thanks to **Marhc** for the Brazilian localization.
+Thanks to **Chachak** for the Spanish localization.
+Thanks to **Davide** for the Italian localization.
+Thanks to **nikotschierske** for the German localization.
+Thanks to **Snoopy1866** for the Simplified Chinese localization.
+Thanks to **MayaC0re** for the Turkish localization.
+Thanks to **vishveshjain** for the Hindi localization.
+Thanks to **Mahmoud0Sultan** for the Arabic localization.
+Thanks to **Sedimentary-Rock** for the Traditional Chinese localization.
+Thanks to **CrisBalGreece** for the Greek localization.
 
 ## Middlewares
 
 File converter uses the following middlewares:
 
-**ffmpeg** as file conversion software.
+**ffmpeg** (v6.1.1) as file conversion software.
 Thanks to ffmpeg devs for this awesome open source file conversion tool. [Web site link](https://ffmpeg.org)
 
-**ImageMagick** as image edition and conversion software.
+**ImageMagick** (v13.5) as image edition and conversion software.
 Thanks to image magick devs for this awesome open source image edition software suite.  [Web site link](http://imagemagick.net)
-And thanks to dlemstra for the C# wrapper of this software. [CodePlex link](https://magick.codeplex.com)
+And thanks to dlemstra for the C# wrapper of this software. [Github link](https://github.com/ImageMagick/ImageMagick)
 
-**Ghostscript** as pdf edition software.
+**Ghostscript** (10.02.1) as pdf edition software.
 Thanks to ghostscript devs. [Download link](https://www.ghostscript.com/download/gsdnld.html)
 
 **SharpShell** to easily create windows context menu extensions.

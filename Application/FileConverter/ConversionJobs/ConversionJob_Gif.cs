@@ -14,7 +14,6 @@ namespace FileConverter.ConversionJobs
 
         public ConversionJob_Gif(ConversionPreset conversionPreset, string inputFilePath) : base(conversionPreset, inputFilePath)
         {
-            this.IsCancelable = true;
         }
 
         public override void Cancel()
@@ -79,7 +78,7 @@ namespace FileConverter.ConversionJobs
 
                 Diagnostics.Debug.Log(string.Empty);
                 Diagnostics.Debug.Log("Convert image to PNG (intermediate format).");
-                this.pngConversionJob.StartConvertion();
+                this.pngConversionJob.StartConversion();
 
                 if (this.pngConversionJob.State != ConversionState.Done)
                 {
@@ -90,7 +89,7 @@ namespace FileConverter.ConversionJobs
 
             Diagnostics.Debug.Log(string.Empty);
             Diagnostics.Debug.Log("Convert png intermediate image to gif.");
-            this.gifConversionJob.StartConvertion();
+            this.gifConversionJob.StartConversion();
 
             if (this.gifConversionJob.State != ConversionState.Done)
             {

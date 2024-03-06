@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Σχετικά</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Σας επιτρέπει να επιλέξετε τι θέλετε να κάνετε με τα αρχεία που επιλέξατε, αν η μετατροπή τους πετύχει</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Ενέργεια που θα γίνει όταν η μετατροπή επιτύχει</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Νέα προκαθορισμένη ρύθμιση</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Εφαρμογή</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>Ήχος</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>Αυτόματος έλεγχος για ενημερώσεις κατά την εκκίνηση του μετατροπέα αρχείων</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Αυτόματη έξοδος όταν ολοκληρωθούν όλες οι μετατροπές</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Συμπίεση στη χαμηλότερη τιμή σε μέγεθος 2</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Κλείσιμο</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Προκαθορισμένες ρυθμίσεις μετατροπής</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>Αρχεία για μετατροπή</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>Έγινε μετατροπή από</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Αρχεία διάγνωσης</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>Αρχεία καταγραφής-διάγνωσης</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Άνοιγμα εγγράφων τεκμηρίωσης</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Δωρεά</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Μην ξεχάσεις να ανταμείψεις τη δουλειά μου αν σου αρέσει η εφαρμογή :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>Η ενημέρωση θα ληφθεί στο παρασκήνιο και θα εγκατασταθεί μόλις πραγματοποιήσετε έξοδο από τον Μετατροπέα αρχείων.</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>Εγκατάσταση κατά την έξοδο από τον Μετατροπέα Αρχείων</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Κωδικοποίηση :</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>Τχύτητα Κωδικοποίησης :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>Ο μετατροπέας αρχείων είναι επέκταση shell-κελύφους.</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>Αυτό σημαίνει ότι είναι ενσωματωμένη στην εξερεύνηση των Windows.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>Για να χρησιμοποιήσετε το μετατροπέα αρχείων ανοίξτε την εξερεύνηση και κάντε δεξί κλικ σε οποιοδήποτε αρχείο θέλετε να εμφανιστεί το μενού περιβάλλοντος όπου θα βρείτε τις εντολές του μετατροπέα αρχείων (δείτε το αρχείο readme για να δείτε τη λίστα με τις συμβατές μορφές αρχείων).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>Πρότυπο ονόματος αρχείου</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>Καρέ ανά δευτερόλεπτο :</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>Άνοιγμα σελίδας της εφαρμογής στο GitHub</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Βοήθεια</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Παράδειγμα εισαγωγής</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Μορφές εισόδου</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Διαγραφή</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Μετακίνηση σε φάκελο αρχειοθέτησης</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>Καμία</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>Έγινε λήψη της ενημέρωσης. Κλείστε τον Μετατροπέα Αρχείων και εγκαταστήστε την ενημέρωση τώρα.</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>Εγκατάσταση κατά την έξοδο από τον Μετατροπέα Αρχείων</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>Αναφορά προβλήματος</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>Μετακίνηση της επιλεγμένης προεπιλογής κάτω</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>Μετακίνηση της επιλεγμένης προεπιλογής επάνω</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>Κωδικοποίηση σταθερού ρυθμού bit</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>Κωδικοποίηση μεταβλητού ρυθμού bit</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° αριστερόστροφη περιστροφή</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>180° περιστροφή</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Music\Artist\Album\Song.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>Έξοδος</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): διαδρομή αρχείου εισόδου
+(f): όνομα αρχείου εισόδου
+(o): τύπος επέκτασης εξόδου
+(i): τύπος επέκτασης εισόδου
+(d0): γονικός φάκελος εισόδου
+(d1): εισαγωγή δευτερεύοντος γονικού φακέλου
+..
+(n:i): δείκτης αριθμού σελίδας
+(n:c): συνολικός αριθμός σελίδων
+
+Ειδικές διαδρομές:
+(p:d): διαδρομή εγγράφων
+(p:m): η μουσική μου διαδρομή
+(p:v): η διαδρομή των βίντεό μου
+(p:p): διαδρομή εικόνων
+
+χρήση maj για έκδοση με κεφαλαία</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Μορφή εξόδου</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Προεπιλογή</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Όνομα προεπιλογής</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Ποιότητα :</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>Προτεινόμενο εύρος ρυθμού bit σε μπλε</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>Διαγραφή</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Περιστροφή :</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Αποθήκευση</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Κλίμακα :</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>Έμφάνιση αλλαγών ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Ρυθμίσεις μετατροπέα αρχείων</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>Ρυθμίσεις</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° δεξιόστροφη περιστροφή</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>Υπάρχει διαθέσιμη ενημέρωση για το πρόγραμμα μετατροπής αρχείων. Συνιστάται η εγκατάστασή του το συντομότερο δυνατό!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>Λήψη αναβάθμισης σε εξέλιξη...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>Ενημερώσεις Μετατροπέα Αρχείων</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>Ορίστε την αναλογία "μέγεθος αρχείου" έναντι "ποιότητα βίντεο". Με χαμηλότερη τιμή έχετε μικρότερο μέγεθος αρχείου, με μεγαλύτερη τιμή έχετε καλύτερη ποιότητα βίντεο.</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Πολύ γρήγορη</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Γρήγορη</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Μεσαία</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Πολύ αργή</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Αργή</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Ταχύτερη</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>Ορίστε την αναλογία 'μέγεθος αρχείου' έναντι 'διάρκειας συμπίεσης'. Η αργή συμπίεση θα σας δώσει ένα μικρότερο αρχείο (για την ίδια ποιότητα βίντεο) σε σύγκριση με την ταχύτερη συμπίεση.</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Εξαιρετικά γρήγορη</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Πολύ γρήγορη</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Πολύ αργή</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Βίντεο</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM υπογεγραμμένο με 16-bit little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM υπογεγραμμένο με 24-bit little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM υπογεγραμμένο με 32-bit little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM υπογεγραμμένο με 8-bit little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>Καμία</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>Χωρίς περιστροφή</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Μετατροπή</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Έγινε</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Εξαγωγή</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Απέτυχε</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>Σε ουρά</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>Ανάγνωση Εικόνας εισόδου</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>Ανάγνωση εγγράφου</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Κινούμενη εικόνα</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Ήχος</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Έγγραφο</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Εικόνα</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Βίντεο</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>Διάρκεια αναμονής πριν από την έξοδο της εφαρμογής</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Γλώσσα</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Μέγιστος αριθμός ταυτόχρονων μετατροπών</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>Νέα προκαθορισμένη ρύθμιση</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###Λήψη αρχείου καταγραφής αλλαγών ...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>Αρχειοθήκες μετατροπής</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>Ακυρώθηκε.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>Αποτυχία εύρεσης του εκτελέσιμου ffmpeg. Θα πρέπει να προσπαθήσετε να εγκαταστήσετε ξανά την εφαρμογή.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>Η εξαγωγή κομματιού του CD ήχου απέτυχε</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>Η μονάδα CD/DVD δεν είναι έτοιμη.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>Αποτυχία εκκίνησης του ffmpeg.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>Αποτυχία δημιουργίας φακέλων διαδρομής εξόδου.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>Αποτυχία δημιουργίας μιας μοναδικής διαδρομής του αρχείου εξόδου.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>Αποτυχία ανάγνωσης μονάδας CD/DVD '{0}'.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>Αποτυχία ανάκτησης του γράμματος της μονάδας διαδρομής εισόδου.</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>Αποτυχία ανάκτησης αριθμού κομματιού από τη διαδρομή εισόδου cda.</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>Αποτυχία χρήσης της μονάδας CD/DVD επειδή είναι ανοιχτή.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>Ο τύπος αρχείου εισόδου δεν είναι συμβατός με τον επιλεγμένο τύπο αρχείου εξόδου.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>Δημιουργήθηκε μη έγκυρη διαδρομή εξόδου από το πρότυπο διαδρομής αρχείου εξόδου.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>Μη υποστηριζόμενη μορφή εξόδου '{0}'.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>Πλήθος καναλιών :</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>Αλλαγή του αριθμού καναλιών του αρχείου εισόδου.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Μονοφωνικό</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>Ίδιο με το αρχείο εισόδου</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Stereo</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**Αυτό το πρόγραμμα είναι ελεύθερο λογισμικό**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>Μπορείτε να το αναδιανείμετε ή/και να το τροποποιήσετε σύμφωνα με τους όρους της Γενικής Δημόσιας Άδειας GNU.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>Αυτό το πρόγραμμα διανέμεται με την ελπίδα ότι θα είναι χρήσιμο, αλλά ΧΩΡΙΣ ΚΑΜΙΑ ΕΓΓΥΗΣΗ. Δείτε την Γενική Δημόσια Άδεια GNU (διαθέσιμη στον φάκελο εγκατάστασης: `LICENSE.md`) για περισσότερες λεπτομέρειες.</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>Η εφαρμογή τερματίζεται.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>Η εφαρμογή θα τερματιστεί αυτόματα σε {0} δευτερόλεπτα.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>Η εφαρμογή θα τερματιστεί αυτόματα σε 1 δευτερόλεπτο.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Διάφορα</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Δεν είναι δυνατή η εύρεση του αρχείου(ων) εξόδου.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>Η εργασία μετατροπής απέτυχε αλλά υπάρχει ένα αρχείο εξόδου που δημιουργήθηκε.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Προετοιμασία μετατροπής</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Το Microsoft Office πρέπει να εγκατασταθεί για να μετατρέψετε έγγραφα του Office.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Αποτυχία ανοίγματος εγγράφου με το Microsoft Office (ελέγξτε αν η άδεια χρήσης/εγκατάσταση είναι έγκυρη).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Το Microsoft Excel πρέπει να εγκατασταθεί για να μετατρέψετε έγγραφα του Excel.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>Το Microsoft PowerPoint πρέπει να είναι εγκατεστημένο, για να μετατρέψετε έγγραφα του PowerPoint.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Το Microsoft Word πρέπει να εγκατασταθεί για να μετατρέψετε έγγραφα του Word.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Τοποθεσία Web του Open File Converter</value>
+  </data>
+  <data name="SayThanksButtonTitle" xml:space="preserve">
+    <value>Πείτε ένα ευχαριστώ!</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>Σφάλμα κατά την προετοιμασία της εργασίας μετατροπής.</value>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>Δημιουργία νέου φακέλου</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>Νέος φάκελος</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>Φάκελος</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>Όνομα φακέλου</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Προηγμένη κατάσταση λειτουργίας</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Προσαρμοσμένοι ορισμοί</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Προσαρμοσμένοι ορισμοί γραμμής εντολών FFMPEG</value>
+  </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>Δεν έχει επιλεγεί προκαθορισμένη ρύθμιση</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>Εξαγωγή</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>Εισαγωγή</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>Προκαθορισμένο Διπλότυπο</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Ακύρωση</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Σφάλμα</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>Δεν είναι δυνατή η φόρτωση των ρυθμίσεων χρήστη του μετατροπέα αρχείων. Θέλετε να επιστρέψετε στις προεπιλεγμένες ρυθμίσεις?</value>
+  </data>
+  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
+    <value>Αντιγραφή αρχείων στο πρόχειρο μετά τη μετατροπή</value>
+  </data>
+</root>

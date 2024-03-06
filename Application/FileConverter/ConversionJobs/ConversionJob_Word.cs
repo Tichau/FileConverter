@@ -26,15 +26,11 @@ namespace FileConverter.ConversionJobs
         {
         }
 
-        protected override ApplicationName Application
-        {
-            get
-            {
-                return ApplicationName.Word;
-            }
-        }
+        protected override ApplicationName Application => ApplicationName.Word;
 
-        protected override int GetOuputFilesCount()
+        protected override bool IsCancelable() => false;
+
+        protected override int GetOutputFilesCount()
         {
             if (this.ConversionPreset.OutputType == OutputType.Pdf)
             {
@@ -104,7 +100,18 @@ namespace FileConverter.ConversionJobs
             this.UserState = Properties.Resources.ConversionStateConversion;
 
             Diagnostics.Debug.Log("Convert word document to pdf.");
-            this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
+            // this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
+            this.document.ExportAsFixedFormat(this.intermediateFilePath, 
+                Word.WdExportFormat.wdExportFormatPDF, 
+                false, 
+                Word.WdExportOptimizeFor.wdExportOptimizeForPrint, 
+                Word.WdExportRange.wdExportAllDocument, 
+                1, 1, 
+                Word.WdExportItem.wdExportDocumentContent, 
+                true, 
+                true, 
+                Word.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, 
+                true);
 
             Diagnostics.Debug.Log("Close word document '{0}'.", this.InputFilePath);
             this.document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
@@ -124,7 +131,7 @@ namespace FileConverter.ConversionJobs
 
                 Diagnostics.Debug.Log("Convert pdf to images.");
 
-                this.pdf2ImageConversionJob.StartConvertion();
+                this.pdf2ImageConversionJob.StartConversion();
 
                 if (this.pdf2ImageConversionJob.State != ConversionState.Done)
                 {

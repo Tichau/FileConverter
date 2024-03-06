@@ -17,7 +17,7 @@ namespace FileConverter.ValueConverters.Generic
 
             double doubleValue = (double)value;
             
-            return string.Format("{0} second{1}", doubleValue.ToString("0.#"), doubleValue >= 2 ? "s" : string.Empty);
+            return $"{doubleValue:0.#} second{(doubleValue >= 2 ? "s" : string.Empty)}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
