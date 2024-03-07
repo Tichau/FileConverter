@@ -15,6 +15,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -27,19 +31,23 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Mp4" OutputType="Mp4" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
-        <InputTypes>3gp</InputTypes>
-        <InputTypes>webm</InputTypes>
-        <InputTypes>wmv</InputTypes>
-        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
-        <InputTypes>gif</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -52,7 +60,9 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Mp4 (low quality)" OutputType="Mp4" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -60,11 +70,13 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
-        <InputTypes>gif</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="20" />
@@ -77,19 +89,23 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Webm" OutputType="Webm" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
-        <InputTypes>3gp</InputTypes>
-        <InputTypes>webm</InputTypes>
-        <InputTypes>wmv</InputTypes>
-        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
-        <InputTypes>gif</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="AudioBitrate" Value="160" />
@@ -101,7 +117,9 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Ogv" OutputType="Ogv" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -109,11 +127,13 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
-        <InputTypes>gif</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="8" />
@@ -125,7 +145,9 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Avi" OutputType="Avi" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -133,11 +155,13 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
-        <InputTypes>gif</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="27" />
@@ -149,22 +173,10 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Gif" OutputType="Gif" IsDefaultSettings="true">
-        <InputTypes>arw</InputTypes>
-        <InputTypes>bmp</InputTypes>
-        <InputTypes>cr2</InputTypes>
-        <InputTypes>exr</InputTypes>
-        <InputTypes>ico</InputTypes>
-        <InputTypes>jpg</InputTypes>
-        <InputTypes>jpeg</InputTypes>
-        <InputTypes>png</InputTypes>
-        <InputTypes>psd</InputTypes>
-        <InputTypes>raf</InputTypes>
-        <InputTypes>svg</InputTypes>
-        <InputTypes>tga</InputTypes>
-        <InputTypes>tif</InputTypes>
-        <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
+        <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -172,11 +184,32 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
-        <InputTypes>gif</InputTypes>
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>nef</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="VideoScale" Value="1" />
@@ -185,22 +218,10 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Gif (low quality)" OutputType="Gif" IsDefaultSettings="true">
-        <InputTypes>arw</InputTypes>
-        <InputTypes>bmp</InputTypes>
-        <InputTypes>cr2</InputTypes>
-        <InputTypes>exr</InputTypes>
-        <InputTypes>ico</InputTypes>
-        <InputTypes>jpg</InputTypes>
-        <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
-        <InputTypes>png</InputTypes>
-        <InputTypes>psd</InputTypes>
-        <InputTypes>svg</InputTypes>
-        <InputTypes>tga</InputTypes>
-        <InputTypes>tif</InputTypes>
-        <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
+        <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -208,11 +229,32 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
-        <InputTypes>gif</InputTypes>
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>nef</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="VideoScale" Value="0.75" />
@@ -221,15 +263,8 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Ogg" OutputType="Ogg" IsDefaultSettings="true">
-        <InputTypes>aac</InputTypes>
-        <InputTypes>aiff</InputTypes>
-        <InputTypes>ape</InputTypes>
-        <InputTypes>flac</InputTypes>
-        <InputTypes>m4a</InputTypes>
-        <InputTypes>mp3</InputTypes>
-        <InputTypes>wma</InputTypes>
-        <InputTypes>wav</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -237,11 +272,25 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
+        <InputTypes>aac</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>flac</InputTypes>
+        <InputTypes>m4a</InputTypes>
+        <InputTypes>m4b</InputTypes>
+        <InputTypes>mp3</InputTypes>
         <InputTypes>oga</InputTypes>
+        <InputTypes>ogg</InputTypes>
+        <InputTypes>opus</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>wma</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioBitrate" Value="160" />
         <Settings Key="AudioChannelCount" Value="0" />
@@ -254,6 +303,7 @@
         <InputTypes>ape</InputTypes>
         <InputTypes>wma</InputTypes>
         <InputTypes>aiff</InputTypes>
+        <InputTypes>flac</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioChannelCount" Value="0" />
         <Settings Key="EnableFFMPEGCustomCommand" Value="False" />
@@ -269,19 +319,26 @@
         <InputTypes>mp3</InputTypes>
         <InputTypes>ogg</InputTypes>
         <InputTypes>wma</InputTypes>
+        <InputTypes>oga</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
-        <InputTypes>3gp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
-        <InputTypes>m4v</InputTypes>
-        <InputTypes>oga</InputTypes>
-        <InputTypes>ogv</InputTypes>
-        <InputTypes>mpeg</InputTypes>
+        <InputTypes>m4b</InputTypes>
+        <InputTypes>opus</InputTypes>
+        <InputTypes>wav</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioEncodingMode" Value="Wav16" />
         <Settings Key="AudioChannelCount" Value="0" />
@@ -297,20 +354,27 @@
         <InputTypes>m4a</InputTypes>
         <InputTypes>ogg</InputTypes>
         <InputTypes>wma</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>oga</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
-        <InputTypes>wav</InputTypes>
-        <InputTypes>3gp</InputTypes>
-        <InputTypes>webm</InputTypes>
-        <InputTypes>wmv</InputTypes>
-        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
-        <InputTypes>oga</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>m4b</InputTypes>
+        <InputTypes>mp3</InputTypes>
+        <InputTypes>opus</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioEncodingMode" Value="Mp3VBR" />
         <Settings Key="AudioBitrate" Value="190" />
@@ -320,27 +384,34 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Aac" OutputType="Aac" IsDefaultSettings="true">
-        <InputTypes>aiff</InputTypes>
-        <InputTypes>ape</InputTypes>
-        <InputTypes>m4a</InputTypes>
-        <InputTypes>mp3</InputTypes>
-        <InputTypes>ogg</InputTypes>
-        <InputTypes>wma</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
-        <InputTypes>wav</InputTypes>
-        <InputTypes>flac</InputTypes>
-        <InputTypes>3gp</InputTypes>
-        <InputTypes>webm</InputTypes>
-        <InputTypes>wmv</InputTypes>
-        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>aac</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>flac</InputTypes>
+        <InputTypes>m4a</InputTypes>
+        <InputTypes>m4b</InputTypes>
+        <InputTypes>mp3</InputTypes>
         <InputTypes>oga</InputTypes>
+        <InputTypes>ogg</InputTypes>
+        <InputTypes>opus</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>wma</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="AudioBitrate" Value="128" />
         <Settings Key="AudioChannelCount" Value="0" />
@@ -429,24 +500,27 @@
         <OutputFileNameTemplate>(p:m)CDA Extraction\(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Png" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="1" />
         <Settings Key="ImageRotation" Value="0" />
@@ -474,24 +548,27 @@
         <OutputFileNameTemplate>(p)(f) (n:i) of (n:c)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Webp" OutputType="Webp" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -501,24 +578,27 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Jpg" OutputType="Jpg" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -528,39 +608,32 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Ico" OutputType="Ico" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Pdf" OutputType="Pdf" IsDefaultSettings="true">
-        <InputTypes>arw</InputTypes>
-        <InputTypes>cr2</InputTypes>
-        <InputTypes>bmp</InputTypes>
-        <InputTypes>exr</InputTypes>
-        <InputTypes>jpg</InputTypes>
-        <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
-        <InputTypes>png</InputTypes>
-        <InputTypes>psd</InputTypes>
-        <InputTypes>svg</InputTypes>
-        <InputTypes>tga</InputTypes>
-        <InputTypes>tif</InputTypes>
-        <InputTypes>tiff</InputTypes>
         <InputTypes>xcf</InputTypes>
-        <InputTypes>webp</InputTypes>
         <InputTypes>doc</InputTypes>
         <InputTypes>docx</InputTypes>
         <InputTypes>odp</InputTypes>
@@ -570,13 +643,33 @@
         <InputTypes>pptx</InputTypes>
         <InputTypes>xls</InputTypes>
         <InputTypes>xlsx</InputTypes>
+        <InputTypes>arw</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
         <InputTypes>dng</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
         <InputTypes>nef</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>webp</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 75%/To Mkv" OutputType="Mkv" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -584,11 +677,13 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
-        <InputTypes>gif</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -603,6 +698,7 @@
     <ConversionPreset Name="Scale 75%/To Mp4" OutputType="Mp4" IsDefaultSettings="true">
         <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -610,8 +706,11 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
@@ -626,19 +725,23 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 75%/To Webm" OutputType="Webm" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
-        <InputTypes>3gp</InputTypes>
-        <InputTypes>webm</InputTypes>
-        <InputTypes>wmv</InputTypes>
-        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
-        <InputTypes>gif</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="AudioBitrate" Value="160" />
@@ -650,7 +753,9 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 75%/To Ogv" OutputType="Ogv" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -658,11 +763,13 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
-        <InputTypes>gif</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="8" />
@@ -674,7 +781,9 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 75%/To Avi" OutputType="Avi" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
         <InputTypes>flv</InputTypes>
@@ -682,11 +791,13 @@
         <InputTypes>mkv</InputTypes>
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
-        <InputTypes>gif</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="27" />
@@ -698,24 +809,27 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 75%/To Png" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="0.75" />
         <Settings Key="ImageRotation" Value="0" />
@@ -724,24 +838,27 @@
         <OutputFileNameTemplate>(p)(f)-small</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 75%/To Webp" OutputType="Webp" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="0.75" />
@@ -751,24 +868,27 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 75%/To Jpg" OutputType="Jpg" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="0.75" />
@@ -791,6 +911,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -816,6 +940,10 @@
         <InputTypes>ogv</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -841,6 +969,10 @@
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="AudioBitrate" Value="160" />
@@ -865,6 +997,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="8" />
@@ -889,6 +1025,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="27" />
@@ -900,24 +1040,27 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 25%/To Png" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="0.25" />
         <Settings Key="ImageRotation" Value="0" />
@@ -926,24 +1069,27 @@
         <OutputFileNameTemplate>(p)(f)-small</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 25%/To Webp" OutputType="Webp" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="0.25" />
@@ -953,24 +1099,27 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Scale 25%/To Jpg" OutputType="Jpg" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="0.25" />
@@ -993,6 +1142,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -1018,6 +1171,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="28" />
@@ -1043,6 +1200,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="AudioBitrate" Value="160" />
@@ -1067,6 +1228,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="7" />
@@ -1091,6 +1256,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="20" />
@@ -1111,10 +1280,14 @@
         <InputTypes>mov</InputTypes>
         <InputTypes>mp4</InputTypes>
         <InputTypes>mpeg</InputTypes>
-        <InputTypes>ogv</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -1140,6 +1313,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="28" />
@@ -1165,6 +1342,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="AudioBitrate" Value="160" />
@@ -1189,6 +1370,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="7" />
@@ -1213,6 +1398,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="20" />
@@ -1237,6 +1426,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -1262,6 +1455,10 @@
         <InputTypes>ogv</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -1287,6 +1484,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="20" />
@@ -1312,6 +1513,10 @@
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="AudioBitrate" Value="160" />
@@ -1336,6 +1541,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="8" />
@@ -1360,6 +1569,10 @@
         <InputTypes>ogv</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="27" />
@@ -1374,20 +1587,23 @@
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="1" />
         <Settings Key="ImageRotation" Value="90" />
@@ -1414,6 +1630,9 @@
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
         <InputTypes>nef</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>heic</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -1441,6 +1660,9 @@
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
         <InputTypes>nef</InputTypes>
+        <InputTypes>jfif</InputTypes>
+        <InputTypes>heic</InputTypes>
+        <InputTypes>dds</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -1463,6 +1685,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -1488,6 +1714,10 @@
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="30" />
@@ -1513,6 +1743,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="20" />
@@ -1538,6 +1772,10 @@
         <InputTypes>mpeg</InputTypes>
         <InputTypes>ogv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="AudioBitrate" Value="160" />
@@ -1562,6 +1800,10 @@
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
         <InputTypes>gif</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="8" />
@@ -1586,6 +1828,10 @@
         <InputTypes>ogv</InputTypes>
         <InputTypes>webm</InputTypes>
         <InputTypes>wmv</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="EnableAudio" Value="True" />
         <Settings Key="VideoQuality" Value="27" />
@@ -1601,7 +1847,6 @@
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
         <InputTypes>exr</InputTypes>
-        <InputTypes>ico</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
         <InputTypes>raf</InputTypes>
@@ -1614,6 +1859,10 @@
         <InputTypes>webp</InputTypes>
         <InputTypes>dng</InputTypes>
         <InputTypes>nef</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>heic</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageScale" Value="1" />
         <Settings Key="ImageRotation" Value="270" />
@@ -1622,24 +1871,27 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Rotate right/To Webp" OutputType="Webp" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -1649,24 +1901,27 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="Rotate right/To Jpg" OutputType="Jpg" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
         <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
         <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
         <InputTypes>jpg</InputTypes>
         <InputTypes>jpeg</InputTypes>
-        <InputTypes>raf</InputTypes>
+        <InputTypes>nef</InputTypes>
         <InputTypes>png</InputTypes>
         <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
         <InputTypes>svg</InputTypes>
         <InputTypes>tga</InputTypes>
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
-        <InputTypes>xcf</InputTypes>
         <InputTypes>webp</InputTypes>
-        <InputTypes>dng</InputTypes>
-        <InputTypes>nef</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <Settings Key="ImageQuality" Value="40" />
         <Settings Key="ImageScale" Value="1" />
@@ -1676,4 +1931,5 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <CheckUpgradeAtStartup>true</CheckUpgradeAtStartup>
+    <CopyFilesInClipboardAfterConversion>false</CopyFilesInClipboardAfterConversion>
 </Settings>

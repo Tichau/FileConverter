@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 2.0.1
+
+- Fixes: Issue where newly supported input types (ts, heic, ...) were not used in presets (github issue #388).
+
 ## Version 2.0
 
 - New: Possibility to create custom command line preset for types converted with FFMPEG (video and audio) (github issue #19 #18 #41 #61 #73 #128 #140 #153 #177 #182 #225 #255 #310 #314 #316 #325).
