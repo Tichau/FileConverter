@@ -2,6 +2,7 @@
 
 ## Version 2.0.1
 
+- New: Tempo and pitch conversion presets in default settings (github issue #18).
 - Fixes: Issue where newly supported input types (ts, heic, ...) were not used in presets (github issue #388).
 
 ## Version 2.0

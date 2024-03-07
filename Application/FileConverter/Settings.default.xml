@@ -1930,6 +1930,154 @@
         <Settings Key="ImageMaximumSize" Value="0" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
+    <ConversionPreset Name="Tempo - Pitch/To Mp3 (25% slower)" OutputType="Mp3" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>aac</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>flac</InputTypes>
+        <InputTypes>m4a</InputTypes>
+        <InputTypes>m4b</InputTypes>
+        <InputTypes>mp3</InputTypes>
+        <InputTypes>oga</InputTypes>
+        <InputTypes>ogg</InputTypes>
+        <InputTypes>opus</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>wma</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="AudioEncodingMode" Value="Mp3VBR" />
+        <Settings Key="AudioBitrate" Value="175" />
+        <Settings Key="AudioChannelCount" Value="0" />
+        <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
+        <Settings Key="FFMPEGCustomCommand" Value="-b:a 192k -filter:a &quot;atempo=0.75&quot;" />
+        <OutputFileNameTemplate>(p)(f) (slow)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Tempo - Pitch/To Mp3 (25% faster)" OutputType="Mp3" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>aac</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>flac</InputTypes>
+        <InputTypes>m4a</InputTypes>
+        <InputTypes>m4b</InputTypes>
+        <InputTypes>mp3</InputTypes>
+        <InputTypes>oga</InputTypes>
+        <InputTypes>ogg</InputTypes>
+        <InputTypes>opus</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>wma</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="AudioEncodingMode" Value="Mp3VBR" />
+        <Settings Key="AudioBitrate" Value="175" />
+        <Settings Key="AudioChannelCount" Value="0" />
+        <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
+        <Settings Key="FFMPEGCustomCommand" Value="-b:a 192k -filter:a &quot;atempo=1.25&quot;" />
+        <OutputFileNameTemplate>(p)(f) (fast)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Tempo - Pitch/To Mp3 (pitched -1st)" OutputType="Mp3" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>aac</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>flac</InputTypes>
+        <InputTypes>m4a</InputTypes>
+        <InputTypes>m4b</InputTypes>
+        <InputTypes>mp3</InputTypes>
+        <InputTypes>oga</InputTypes>
+        <InputTypes>ogg</InputTypes>
+        <InputTypes>opus</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>wma</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="AudioEncodingMode" Value="Mp3VBR" />
+        <Settings Key="AudioBitrate" Value="175" />
+        <Settings Key="AudioChannelCount" Value="0" />
+        <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
+        <Settings Key="FFMPEGCustomCommand" Value="-filter:a &quot;rubberband=pitch=0.9438743126816935&quot;" />
+        <OutputFileNameTemplate>(p)(f) (-1st)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Tempo - Pitch/To Mp3 (pitched +1st)" OutputType="Mp3" IsDefaultSettings="false">
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>aac</InputTypes>
+        <InputTypes>aiff</InputTypes>
+        <InputTypes>ape</InputTypes>
+        <InputTypes>flac</InputTypes>
+        <InputTypes>m4a</InputTypes>
+        <InputTypes>m4b</InputTypes>
+        <InputTypes>mp3</InputTypes>
+        <InputTypes>oga</InputTypes>
+        <InputTypes>ogg</InputTypes>
+        <InputTypes>opus</InputTypes>
+        <InputTypes>wav</InputTypes>
+        <InputTypes>wma</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="AudioEncodingMode" Value="Mp3VBR" />
+        <Settings Key="AudioBitrate" Value="175" />
+        <Settings Key="AudioChannelCount" Value="0" />
+        <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
+        <Settings Key="FFMPEGCustomCommand" Value="-filter:a &quot;rubberband=pitch=1.059463094352953&quot;" />
+        <OutputFileNameTemplate>(p)(f) (+1st)</OutputFileNameTemplate>
+    </ConversionPreset>
     <CheckUpgradeAtStartup>true</CheckUpgradeAtStartup>
     <CopyFilesInClipboardAfterConversion>false</CopyFilesInClipboardAfterConversion>
 </Settings>
