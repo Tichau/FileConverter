@@ -1,6 +1,6 @@
 ﻿<!-- Upgrade documentation: http://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html -->
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
-    <Package Name="File Converter" Language="1033" Version="2.0" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b" InstallerVersion="200">
+    <Package Name="File Converter" Language="1033" Version="2.0.1" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b" InstallerVersion="500">
         <Icon Id="icon.ico" SourceFile="..\Resources\Icons\ApplicationIcon.ico" />
         <Property Id="ARPPRODUCTICON" Value="icon.ico" />
         <SetProperty Id="ARPINSTALLLOCATION" Value="[ApplicationFolder]" After="CostFinalize" />
@@ -14,8 +14,8 @@
             <ComponentGroupRef Id="Languages" />
         </Feature>
 
-        <CustomAction Id="InstallShell" ExeCommand="--register-shell-extension &quot;[INSTALLFOLDER]FileConverterExtension.dll&quot;" Execute="deferred" Impersonate="no" FileRef="FileConverter.exe" />
-        <CustomAction Id="UninstallShell" ExeCommand="--unregister-shell-extension &quot;[INSTALLFOLDER]FileConverterExtension.dll&quot;" Execute="deferred" Impersonate="no" FileRef="FileConverter.exe" />
+        <CustomAction Id="InstallShell" ExeCommand="--register-shell-extension &quot;[INSTALLFOLDER]FileConverterExtension.dll&quot;" Execute="deferred" Return="check" Impersonate="no" FileRef="FileConverter.exe" />
+        <CustomAction Id="UninstallShell" ExeCommand="--unregister-shell-extension &quot;[INSTALLFOLDER]FileConverterExtension.dll&quot;" Execute="deferred" Return="check" Impersonate="no" FileRef="FileConverter.exe" />
         <CustomAction Id="PostInstallInit" ExeCommand="--post-install-init" Execute="immediate" FileRef="FileConverter.exe" />
 
         <UI>
@@ -29,7 +29,7 @@
         <Launch Condition="Installed OR WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" Message="This application requires .NET Framework 4.8. Please install the .NET Framework then run this installer again." />
 
         <InstallExecuteSequence>
-            <Custom Action="UninstallShell" Before="RemoveFiles" Condition="(NOT UPGRADINGPRODUCTCODE) AND (REMOVE=&quot;ALL&quot;)" />
+            <Custom Action="UninstallShell" Before="RemoveFiles" Condition="(NOT UPGRADINGPRODUCTCODE) AND (REMOVE~=&quot;ALL&quot;)" />
             <Custom Action="InstallShell" After="InstallFiles" Condition="NOT Installed" />
             <Custom Action="PostInstallInit" After="InstallFinalize" Condition="NOT Installed" />
         </InstallExecuteSequence>
@@ -37,7 +37,7 @@
         <ui:WixUI Id="WixUI_InstallDir" />
         <Property Id="MSIUSEREALADMINDETECTION" Value="1" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
-        <Property Id="MSIRESTARTMANAGERCONTROL" Value="Disable" /> <!-- This avoid an issue where the installer detect the utilization of the extension dll in explorer and then, ask to the user to restart these applications. The restart fails. -->
+        <Property Id="MSIRESTARTMANAGERCONTROL" Value="Disable" Secure="yes" /> <!-- This avoid an issue where the installer detect the utilization of the extension dll in explorer and then, ask to the user to restart these applications. The restart fails. -->
       
         <WixVariable Id="WixUILicenseRtf" Value="License.rtf" /> 
         <WixVariable Id="WixUIBannerBmp" Value="..\Resources\Installer\Banner.bmp" />

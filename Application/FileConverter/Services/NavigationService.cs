@@ -112,7 +112,7 @@ namespace FileConverter.Services
                         if (pageKey == Pages.Upgrade)
                         {
                             upgradeService.CancelUpgrade();
-                            Application.Current.Shutdown();
+                            Application.AskForShutdown();
                         }
                         else
                         {
@@ -123,7 +123,7 @@ namespace FileConverter.Services
                     }
                     else
                     {
-                        Application.Current.Shutdown();
+                        Application.AskForShutdown();
                     }
                 }
             }

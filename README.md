@@ -23,15 +23,6 @@ If you encounter any problem with File Converter, you can:
 * See the already known problems in the [troubleshooting section of the documentation](https://github.com/Tichau/FileConverter/wiki/Troubleshooting).
 * Or report an issue on the [bug tracker](https://github.com/Tichau/FileConverter/issues).
 
-When you report an issue, please join the following informations:
-
-* Registry.xml
-* Settings.user.xml
-* The Diagnostics folder of the session that encountered the issue.
-* A screenshot (if possible) and a description that shows/explain the issue.
-
-You will find the xml files and diagnostics folder in `c:\Users\[UserName]\AppData\Local\FileConverter\`.
-
 ## Setup development environment
 
 ### Requirements
@@ -52,17 +43,17 @@ Thanks to all the contributors of File Converter project.
 
 ### Localization
 
-Thanks to **Khidreal** and **hugok79** for the Portuguese localization.
-Thanks to **Marhc** for the Brazilian localization.
-Thanks to **Chachak** for the Spanish localization.
-Thanks to **Davide** for the Italian localization.
-Thanks to **nikotschierske** for the German localization.
-Thanks to **Snoopy1866** for the Simplified Chinese localization.
-Thanks to **MayaC0re** for the Turkish localization.
-Thanks to **vishveshjain** for the Hindi localization.
-Thanks to **Mahmoud0Sultan** for the Arabic localization.
-Thanks to **Sedimentary-Rock** for the Traditional Chinese localization.
-Thanks to **CrisBalGreece** for the Greek localization.
+* Thanks to **Khidreal** and **hugok79** for the Portuguese localization.
+* Thanks to **Marhc** for the Brazilian localization.
+* Thanks to **Chachak** for the Spanish localization.
+* Thanks to **Davide** for the Italian localization.
+* Thanks to **nikotschierske** for the German localization.
+* Thanks to **Snoopy1866** for the Simplified Chinese localization.
+* Thanks to **MayaC0re** for the Turkish localization.
+* Thanks to **vishveshjain** for the Hindi localization.
+* Thanks to **Mahmoud0Sultan** for the Arabic localization.
+* Thanks to **Sedimentary-Rock** for the Traditional Chinese localization.
+* Thanks to **CrisBalGreece** for the Greek localization.
 
 ## Middlewares
 
@@ -79,7 +70,7 @@ And thanks to dlemstra for the C# wrapper of this software. [Github link](https:
 Thanks to ghostscript devs. [Download link](https://www.ghostscript.com/download/gsdnld.html)
 
 **SharpShell** to easily create windows context menu extensions.
-Thanks to Dave Kerr for his work on SharpShell. [CodePlex link](https://sharpshell.codeplex.com)
+Thanks to Dave Kerr for his work on SharpShell. [GitHub link](https://github.com/dwmkerr/sharpshell)
 
 **Ripper** and **yeti.mmedia** for CD Audio extraction.
 Thanks to Idael Cardoso for his work on CD Audio ripper. [Code project link](https://www.codeproject.com/Articles/5458/C-Sharp-Ripper)

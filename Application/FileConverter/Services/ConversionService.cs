@@ -33,12 +33,12 @@ namespace FileConverter.Services
             this.ConversionJobs = this.conversionJobs.AsReadOnly();
 
             this.numberOfConversionThread = this.settingsService.Settings.MaximumNumberOfSimultaneousConversions;
-            Diagnostics.Debug.Log("Maximum number of conversion threads: {0}", this.numberOfConversionThread);
+            Debug.Log($"Maximum number of conversion threads: {this.numberOfConversionThread}");
 
             if (this.numberOfConversionThread <= 0)
             {
                 this.numberOfConversionThread = System.Math.Max(1, Environment.ProcessorCount / 2);
-                Diagnostics.Debug.Log("The number of processors on this computer is {0}. Set the default number of conversion threads to {0}", settingsService.Settings.MaximumNumberOfSimultaneousConversions);
+                Debug.Log($"The number of processors on this computer is {settingsService.Settings.MaximumNumberOfSimultaneousConversions}. Set the default number of conversion threads to {settingsService.Settings.MaximumNumberOfSimultaneousConversions}");
             }
         }
 
@@ -176,7 +176,7 @@ namespace FileConverter.Services
             }
             catch (Exception exception)
             {
-                Debug.LogError("Failure during conversion: {0}", exception.ToString());
+                Debug.LogError($"Failure during conversion: {exception}");
             }
         }
 
@@ -189,13 +189,13 @@ namespace FileConverter.Services
                 Debug.Log("Output files copied to the clipboard:");
                 for (int index = 0; index < FilePaths.Count; index++)
                 {
-                    Debug.Log("  {0}", FilePaths[index]);
+                    Debug.Log($"  {FilePaths[index]}");
                 }
             }
             catch (Exception exception)
             {
                 Debug.Log("Can't copy files to the clipboard.");
-                Debug.Log("An exception has been thrown: {0}.", exception.ToString());
+                Debug.Log($"An exception has been thrown: {exception}.");
             }
         }
     }

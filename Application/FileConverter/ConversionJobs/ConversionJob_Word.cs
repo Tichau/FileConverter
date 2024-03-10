@@ -99,7 +99,7 @@ namespace FileConverter.ConversionJobs
 
             this.UserState = Properties.Resources.ConversionStateConversion;
 
-            Diagnostics.Debug.Log("Convert word document to pdf.");
+            Debug.Log("Convert word document to pdf.");
             // this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
             this.document.ExportAsFixedFormat(this.intermediateFilePath, 
                 Word.WdExportFormat.wdExportFormatPDF, 
@@ -113,7 +113,7 @@ namespace FileConverter.ConversionJobs
                 Word.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, 
                 true);
 
-            Diagnostics.Debug.Log("Close word document '{0}'.", this.InputFilePath);
+            Debug.Log($"Close word document '{this.InputFilePath}'.");
             this.document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
             this.document = null;
 
@@ -129,7 +129,7 @@ namespace FileConverter.ConversionJobs
 
                 Task updateProgress = this.UpdateProgress();
 
-                Diagnostics.Debug.Log("Convert pdf to images.");
+                Debug.Log("Convert pdf to images.");
 
                 this.pdf2ImageConversionJob.StartConversion();
 
@@ -141,7 +141,7 @@ namespace FileConverter.ConversionJobs
 
                 if (!string.IsNullOrEmpty(this.intermediateFilePath))
                 {
-                    Diagnostics.Debug.Log("Delete intermediate file {0}.", this.intermediateFilePath);
+                    Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
                     File.Delete(this.intermediateFilePath);
                 }
@@ -158,7 +158,7 @@ namespace FileConverter.ConversionJobs
             }
 
             // Initialize word application.
-            Diagnostics.Debug.Log("Instantiate word application via interop.");
+            Debug.Log("Instantiate word application via interop.");
             this.application = new Microsoft.Office.Interop.Word.Application
             {
                 Visible = false
@@ -216,7 +216,7 @@ namespace FileConverter.ConversionJobs
 
             if (this.document == null)
             {
-                Diagnostics.Debug.Log("Load word document '{0}'.", this.InputFilePath);
+                Debug.Log($"Load word document '{this.InputFilePath}'.");
 
                 this.document = this.application.Documents.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
             }

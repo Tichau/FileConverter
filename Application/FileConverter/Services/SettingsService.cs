@@ -59,7 +59,7 @@ namespace FileConverter.Services
             }
             else
             {
-                Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", FileConverterExtension.PathHelpers.DefaultSettingsFilePath);
+                Debug.LogError($"Default settings not found at path {FileConverterExtension.PathHelpers.DefaultSettingsFilePath}. You should try to reinstall the application.");
                 return false;
             }
 
@@ -82,7 +82,7 @@ namespace FileConverter.Services
                     {
                         this.MigrateSettingsToCurrentVersion(userSettings);
 
-                        Debug.Log("File converter settings have been imported from version {0} to version {1}.", userSettings.SerializationVersion, Settings.Version);
+                        Debug.Log($"File converter settings have been imported from version {userSettings.SerializationVersion} to version {Settings.Version}.");
                         userSettings.SerializationVersion = Settings.Version;
                     }
 
@@ -154,7 +154,7 @@ namespace FileConverter.Services
                 {
                     this.MigrateSettingsToCurrentVersion(userSettings);
 
-                    Diagnostics.Debug.Log("File converter settings has been imported from version {0} to version {1}.", userSettings.SerializationVersion, Settings.Version);
+                    Debug.Log($"File converter settings has been imported from version {userSettings.SerializationVersion} to version {Settings.Version}.");
                     userSettings.SerializationVersion = Settings.Version;
                     this.Save(userSettings);
                 }
@@ -171,12 +171,12 @@ namespace FileConverter.Services
                     }
                     catch (Exception exception)
                     {
-                        Debug.LogError("Fail to load file converter default settings. {0}", exception.Message);
+                        Debug.LogError($"Fail to load file converter default settings. {exception.Message}");
                     }
                 }
                 else
                 {
-                    Debug.LogError("Default settings not found at path {0}. You should try to reinstall the application.", FileConverterExtension.PathHelpers.DefaultSettingsFilePath);
+                    Debug.LogError($"Default settings not found at path {FileConverterExtension.PathHelpers.DefaultSettingsFilePath}. You should try to reinstall the application.");
                 }
             }
 

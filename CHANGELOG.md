@@ -1,5 +1,13 @@
 # Change Log
 
+## Version 2.0.1
+
+- New: Tempo and pitch conversion presets in default settings (github issue #18).
+- New: Russian translation (thanks to dragomano).
+- Fixes: Issue where File Converter was not appearing in Windows explorer after a successful install (issue #389).
+- Fixes: Issue where newly supported input types (ts, heic, ...) were not used in presets (github issue #388).
+- Fixes: Issue where standard output was not activated when started from command line.
+
 ## Version 2.0
 
 - New: Possibility to create custom command line preset for types converted with FFMPEG (video and audio) (github issue #19 #18 #41 #61 #73 #128 #140 #153 #177 #182 #225 #255 #310 #314 #316 #325).

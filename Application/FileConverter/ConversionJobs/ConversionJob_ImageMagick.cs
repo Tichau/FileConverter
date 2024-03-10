@@ -92,7 +92,7 @@ namespace FileConverter.ConversionJobs
 
                 using (MagickImage image = new MagickImage(this.InputFilePath, readSettings))
                 {
-                    Debug.Log("Load image {0} succeed.", this.InputFilePath);
+                    Debug.Log($"Load image {this.InputFilePath} succeed.");
                     this.ConvertImage(image);
                 }
             }
@@ -106,12 +106,12 @@ namespace FileConverter.ConversionJobs
             float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
             if (Math.Abs(scaleFactor - 1f) >= 0.005f)
             {
-                Debug.Log("Apply scale factor: {0}%.", scaleFactor * 100);
+                Debug.Log($"Apply scale factor: {scaleFactor * 100}%.");
 
                 dpi *= scaleFactor;
             }
 
-            Debug.Log("Density: {0}dpi.", dpi);
+            Debug.Log($"Density: {dpi}dpi.");
             settings.Density = new Density(dpi * PdfSuperSamplingRatio);
 
             this.UserState = Properties.Resources.ConversionStateReadDocument;
@@ -120,7 +120,7 @@ namespace FileConverter.ConversionJobs
             {
                 // Add all the pages of the pdf file to the collection
                 images.Read(this.InputFilePath, settings);
-                Debug.Log("Load pdf {0} succeed.", this.InputFilePath);
+                Debug.Log($"Load pdf {this.InputFilePath} succeed.");
 
                 this.pageCount = images.Count;
 
@@ -128,7 +128,7 @@ namespace FileConverter.ConversionJobs
 
                 foreach (MagickImage image in images)
                 {
-                    Debug.Log("Write page {0}/{1}.", this.CurrentOutputFilePathIndex + 1, this.pageCount);
+                    Debug.Log($"Write page {this.CurrentOutputFilePathIndex + 1}/{this.pageCount}.");
 
                     if (PdfSuperSamplingRatio > 1)
                     {
@@ -153,7 +153,7 @@ namespace FileConverter.ConversionJobs
                 float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
                 if (Math.Abs(scaleFactor - 1f) >= 0.005f)
                 {
-                    Debug.Log("Apply scale factor: {0}%.", scaleFactor * 100);
+                    Debug.Log($"Apply scale factor: {scaleFactor * 100}%.");
 
                     image.Scale(new Percentage(scaleFactor * 100f));
                 }
@@ -164,7 +164,7 @@ namespace FileConverter.ConversionJobs
                 float rotateAngleInDegrees = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageRotation);
                 if (Math.Abs(rotateAngleInDegrees - 0f) >= 0.05f)
                 {
-                    Debug.Log("Apply rotation: {0}°.", rotateAngleInDegrees);
+                    Debug.Log($"Apply rotation: {rotateAngleInDegrees}°.");
 
                     image.Rotate(rotateAngleInDegrees);
                 }
@@ -182,7 +182,7 @@ namespace FileConverter.ConversionJobs
                         size *= 2;
                     }
 
-                    Debug.Log("Clamp size to the nearest power of 2 size (from {0}x{1} to {2}x{2}).", image.Width, image.Height, size);
+                    Debug.Log($"Clamp size to the nearest power of 2 size (from {image.Width}x{image.Height} to {size}x{size}).");
 
                     image.Scale(size, size);
                 }
@@ -196,13 +196,13 @@ namespace FileConverter.ConversionJobs
                     int width = System.Math.Min(image.Width, maximumSize);
                     int height = System.Math.Min(image.Height, maximumSize);
 
-                    Debug.Log("Clamp size to maximum size of {2}x{2} (from {0}x{1} to {2}x{3}).", image.Width, image.Height, width, height);
+                    Debug.Log($"Clamp size to maximum size of {width}x{width} (from {image.Width}x{image.Height} to {width}x{height}).");
 
                     image.Scale(width, height);
                 }
             }
 
-            Debug.Log("Convert image (output: {0}).", this.OutputFilePath);
+            Debug.Log($"Convert image (output: {this.OutputFilePath}).");
             switch (this.ConversionPreset.OutputType)
             {
                 case OutputType.Png:
@@ -215,7 +215,7 @@ namespace FileConverter.ConversionJobs
                     break;
 
                 case OutputType.Pdf:
-                    Debug.Log("Density: {0}dpi.", BaseDpiForPdfConversion);
+                    Debug.Log($"Density: {BaseDpiForPdfConversion}dpi.");
                     image.Density = new Density(BaseDpiForPdfConversion);
                     break;
 

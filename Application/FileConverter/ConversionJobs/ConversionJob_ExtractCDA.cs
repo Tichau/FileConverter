@@ -167,7 +167,7 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            Debug.Log("CDA extracted to {0}.", this.intermediateFilePath);
+            Debug.Log($"CDA extracted to {this.intermediateFilePath}.");
             Debug.Log(string.Empty);
             Debug.Log("Start compression.");
 
@@ -188,7 +188,7 @@ namespace FileConverter.ConversionJobs
             }
 
             Debug.Log(string.Empty);
-            Debug.Log("Delete intermediate file {0}.", this.intermediateFilePath);
+            Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
             File.Delete(this.intermediateFilePath);
         }

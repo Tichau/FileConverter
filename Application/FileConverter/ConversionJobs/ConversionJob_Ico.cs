@@ -76,7 +76,7 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            Diagnostics.Debug.Log("Delete intermediate file {0}.", this.intermediateFilePath);
+            Diagnostics.Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
             File.Delete(this.intermediateFilePath);
         }

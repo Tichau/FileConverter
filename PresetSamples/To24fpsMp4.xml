@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Presets xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ConversionPreset OutputType="Mp4" Name="To Mp4 (24fps)" IsDefaultSettings="false">
+        <OutputFileNameTemplate>(p)(f) (24fps)</OutputFileNameTemplate>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>gif</InputTypes>
+        <Settings Key="EnableAudio" Value="True" />
+        <Settings Key="VideoQuality" Value="30" />
+        <Settings Key="VideoEncodingSpeed" Value="Medium" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="0" />
+        <Settings Key="AudioBitrate" Value="155" />
+        <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
+        <Settings Key="FFMPEGCustomCommand" Value="-c:v libx264 -preset medium -crf 21 -c:a aac -qscale:a 1.3 -vf &quot;scale=trunc(iw*1/2)*2:trunc(ih*1/2)*2,format=yuv420p&quot; -r 24" />
+    </ConversionPreset>
+</Presets>

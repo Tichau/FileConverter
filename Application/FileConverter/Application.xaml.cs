@@ -19,6 +19,7 @@ namespace FileConverter
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Runtime.InteropServices;
     using System.Security.Principal;
     using System.Threading;
     using System.Windows;
@@ -38,7 +39,7 @@ namespace FileConverter
                                                       {
                                                           Major = 2,
                                                           Minor = 0,
-                                                          Patch = 0,
+                                                          Patch = 1,
                                                       };
 
         private bool needToRunConversionThread;
@@ -47,7 +48,12 @@ namespace FileConverter
         private bool verbose;
         private bool showSettings;
         private bool showHelp;
-        
+
+        [DllImport("kernel32.dll")]
+        static extern bool AttachConsole(uint dwProcessId);
+
+        const uint ATTACH_PARENT_PROCESS = 0x0ffffffff;
+
         public event EventHandler<ApplicationTerminateArgs> OnApplicationTerminate;
 
         public static Version ApplicationVersion => Application.Version;
@@ -70,10 +76,18 @@ namespace FileConverter
             }
         }
 
+        public static void AskForShutdown()
+        {
+            Application.Current.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown(Debug.FirstErrorCode)));
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
+            // Redirect standard output to the parent process in case the application is launch from command line.
+            AttachConsole(ATTACH_PARENT_PROCESS);
+            
             this.RegisterServices();
 
             this.Initialize();
@@ -117,7 +131,7 @@ namespace FileConverter
 
             if (!this.isSessionEnding && upgradeService.UpgradeVersionDescription != null && upgradeService.UpgradeVersionDescription.NeedToUpgrade)
             {
-                Debug.Log("A new version of file converter has been found: {0}.", upgradeService.UpgradeVersionDescription.LatestVersion);
+                Debug.Log($"A new version of file converter has been found: {upgradeService.UpgradeVersionDescription.LatestVersion}.");
 
                 if (string.IsNullOrEmpty(upgradeService.UpgradeVersionDescription.InstallerPath))
                 {
@@ -134,16 +148,16 @@ namespace FileConverter
                     string installerPath = upgradeService.UpgradeVersionDescription.InstallerPath;
                     if (!System.IO.File.Exists(installerPath))
                     {
-                        Debug.LogError("Can't find upgrade installer ({0}). Try to restart the application.", installerPath);
+                        Debug.LogError($"Can't find upgrade installer ({installerPath}). Try to restart the application.");
                         return;
                     }
 
                     // Start process.
-                    Debug.Log("Start file converter upgrade from version {0} to {1}.", ApplicationVersion, upgradeService.UpgradeVersionDescription.LatestVersion);
+                    Debug.Log($"Start file converter upgrade from version {ApplicationVersion} to {upgradeService.UpgradeVersionDescription.LatestVersion}.");
 
                     ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(installerPath) { UseShellExecute = true, };
 
-                    Debug.Log("Start upgrade process: {0}{1}.", System.IO.Path.GetFileName(startInfo.FileName), startInfo.Arguments);
+                    Debug.Log($"Start upgrade process: {System.IO.Path.GetFileName(startInfo.FileName)}{startInfo.Arguments}.");
                     Process process = new System.Diagnostics.Process { StartInfo = startInfo };
 
                     process.Start();
@@ -172,7 +186,7 @@ namespace FileConverter
             else
             {
                 Debug.LogError("Can't retrieve view model locator.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                Application.AskForShutdown();
             }
 
             if (this.TryFindResource("Upgrade") is UpgradeService upgradeService)
@@ -182,7 +196,7 @@ namespace FileConverter
             else
             {
                 Debug.LogError("Can't retrieve Upgrade service.");
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                Application.AskForShutdown();
             }
 
             services
@@ -217,7 +231,7 @@ namespace FileConverter
             for (int index = 0; index < args.Length; index++)
             {
                 string argument = args[index];
-                Debug.Log("Arg{0}: {1}", index, argument);
+                Debug.Log($"Arg{index}: {argument}");
             }
 
             Debug.Log(string.Empty);
@@ -233,7 +247,6 @@ namespace FileConverter
 
             // Parse arguments.
             bool quitAfterStartup = false;
-            int quitExitCode = 0;
             List<string> filePaths = new List<string>();
             string conversionPresetName = null;
             for (int index = 1; index < args.Length; index++)
@@ -254,8 +267,7 @@ namespace FileConverter
                         case "post-install-init":
                             if (!settingsService.PostInstallationInitialization())
                             {
-                                quitExitCode = 0x0F;
-                                Debug.LogError(quitExitCode, $"Failed to execute post install initialization.");
+                                Debug.LogError(errorCode: 0x0F, $"Failed to execute post install initialization.");
                             }
 
                             quitAfterStartup = true;
@@ -267,8 +279,7 @@ namespace FileConverter
 
                             if (index >= args.Length - 1)
                             {
-                                quitExitCode = 0x0B;
-                                Debug.LogError(quitExitCode, $"Invalid format.");
+                                Debug.LogError(errorCode: 0x0B, $"Invalid format.");
                                 break;
                             }
 
@@ -277,8 +288,7 @@ namespace FileConverter
 
                             if (!Helpers.RegisterShellExtension(shellExtensionPath))
                             {
-                                quitExitCode = 0x0C;
-                                Debug.LogError(quitExitCode, $"Failed to register shell extension {shellExtensionPath}.");
+                                Debug.LogError(errorCode: 0x0C, $"Failed to register shell extension {shellExtensionPath}.");
                             }
 
                             break;
@@ -290,8 +300,7 @@ namespace FileConverter
 
                             if (index >= args.Length - 1)
                             {
-                                quitExitCode = 0x0D;
-                                Debug.LogError(quitExitCode, $"Invalid format.");
+                                Debug.LogError(errorCode: 0x0D, $"Invalid format.");
                                 break;
                             }
 
@@ -300,8 +309,7 @@ namespace FileConverter
                                 
                             if (!Helpers.UnregisterExtension(shellExtensionPath))
                             {
-                                quitExitCode = 0x0E;
-                                Debug.LogError(quitExitCode, $"Failed to unregister shell extension {shellExtensionPath}.");
+                                Debug.LogError(errorCode: 0x0E, $"Failed to unregister shell extension {shellExtensionPath}.");
                             }
 
                             break;
@@ -320,8 +328,7 @@ namespace FileConverter
                             if (index >= args.Length - 1)
                             {
                                 quitAfterStartup = true;
-                                quitExitCode = 0x01;
-                                Debug.LogError(quitExitCode, $"Invalid format.");
+                                Debug.LogError(errorCode: 0x01, $"Invalid format.");
                                 break;
                             }
 
@@ -333,8 +340,7 @@ namespace FileConverter
                             if (index >= args.Length - 1)
                             {
                                 quitAfterStartup = true;
-                                quitExitCode = 0x02;
-                                Debug.LogError(quitExitCode, $"Invalid format.");
+                                Debug.LogError(errorCode: 0x02, $"Invalid format.");
                                 break;
                             }
 
@@ -353,8 +359,7 @@ namespace FileConverter
                             catch (Exception exception)
                             {
                                 quitAfterStartup = true;
-                                quitExitCode = 0x03;
-                                Debug.LogError(quitExitCode, $"Can't read input files list: {exception}");
+                                Debug.LogError(errorCode: 0x03, $"Can't read input files list: {exception}");
                             }
 
                             index++;
@@ -368,7 +373,7 @@ namespace FileConverter
                             break;
 
                         default:
-                            Debug.LogError("Unknown application argument: '--{0}'.", parameterTitle);
+                            Debug.LogError($"Unknown application argument: '--{parameterTitle}'.");
                             return;
                     }
                 }
@@ -380,18 +385,17 @@ namespace FileConverter
 
             if (settingsService.Settings == null)
             {
-                Debug.LogError("Can't load File Converter settings. The application will now shutdown, if you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
+                Debug.LogError(errorCode: 0x04, "Can't load File Converter settings. The application will now shutdown, if you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
                 quitAfterStartup = true;
-                quitExitCode = 13;
             }
 
             if (quitAfterStartup)
             {
-                Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown(quitExitCode)));
+                Application.AskForShutdown();
                 return;
             }
 
-            Debug.Assert(quitExitCode == 0, "An error happened during the initialization.");
+            Debug.Assert(Debug.FirstErrorCode == 0, "An error happened during the initialization.");
             
             // Check for upgrade.
             if (settingsService.Settings.CheckUpgradeAtStartup)
@@ -407,8 +411,8 @@ namespace FileConverter
                 conversionPreset = settingsService.Settings.GetPresetFromName(conversionPresetName);
                 if (conversionPreset == null)
                 {
-                    Debug.LogError("Invalid conversion preset '{0}'. (code 0x02)", conversionPresetName);
-                    Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                    Debug.LogError(errorCode: 0x02, $"Invalid conversion preset '{conversionPresetName}'.");
+                    Application.AskForShutdown();
                     return;
                 }
             }
@@ -418,7 +422,7 @@ namespace FileConverter
                 IConversionService conversionService = Ioc.Default.GetRequiredService<IConversionService>();
 
                 // Create conversion jobs.
-                Debug.Log("Create jobs for conversion preset: '{0}'", conversionPreset.FullName);
+                Debug.Log($"Create jobs for conversion preset: '{conversionPreset.FullName}'");
                 try
                 {
                     for (int index = 0; index < filePaths.Count; index++)
@@ -488,7 +492,7 @@ namespace FileConverter
                     this.OnApplicationTerminate.Invoke(this, new ApplicationTerminateArgs(remainingTime));
                 }
 
-                this.Dispatcher.BeginInvoke((Action)(() => Application.Current.Shutdown()));
+                Application.AskForShutdown();
             }
         }
     }
