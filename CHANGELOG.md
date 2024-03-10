@@ -3,6 +3,7 @@
 ## Version 2.0.1
 
 - New: Tempo and pitch conversion presets in default settings (github issue #18).
+- New: Russian translation (thanks to dragomano).
 - Fixes: Issue where File Converter was not appearing in Windows explorer after a successful install (issue #389).
 - Fixes: Issue where newly supported input types (ts, heic, ...) were not used in presets (github issue #388).
 - Fixes: Issue where standard output was not activated when started from command line.
