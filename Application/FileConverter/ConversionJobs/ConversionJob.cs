@@ -312,7 +312,7 @@ namespace FileConverter.ConversionJobs
                 this.State = ConversionState.Ready;
             }
 
-            Debug.Log("Job initialized: Preset: '{0}' Input: {1} Output: {2}", this.ConversionPreset.FullName, this.InputFilePath, this.OutputFilePath);
+            Debug.Log($"Job initialized: Preset: '{this.ConversionPreset.FullName}' Input: {this.InputFilePath} Output: {this.OutputFilePath}");
 
             if (this.State != ConversionState.Failed)
             {
@@ -332,7 +332,7 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("Invalid conversion state.");
             }
 
-            Debug.Log("Convert file {0} to {1}.", this.InputFilePath, this.OutputFilePath);
+            Debug.Log($"Convert file {this.InputFilePath} to {this.OutputFilePath}.");
 
             this.StartTime = DateTime.Now;
             this.State = ConversionState.InProgress;
@@ -407,8 +407,8 @@ namespace FileConverter.ConversionJobs
                 }
                 catch (Exception exception)
                 {
-                    Debug.Log("Can't delete file '{0}' after conversion job failure.", outputFilePath);
-                    Debug.Log("An exception as been thrown: {0}.", exception.ToString());
+                    Debug.Log($"Can't delete file '{outputFilePath}' after conversion job failure.");
+                    Debug.Log($"An exception as been thrown: {exception}.");
                 }
             }
         }
@@ -436,12 +436,12 @@ namespace FileConverter.ConversionJobs
 
                     string newPath = PathHelpers.GenerateUniquePath(archivePath + "\\" + inputFilename);
                     System.IO.File.Move(this.InputFilePath, newPath);
-                    Debug.Log("Input file moved in archive folder: '{0}'", newPath);
+                    Debug.Log($"Input file moved in archive folder: '{newPath}'");
                     break;
 
                 case InputPostConversionAction.Delete:
                     System.IO.File.Delete(this.InputFilePath);
-                    Debug.Log("Input file deleted: '{0}'", this.initialInputPath);
+                    Debug.Log($"Input file deleted: '{this.initialInputPath}'");
                     break;
             }
 
@@ -455,7 +455,7 @@ namespace FileConverter.ConversionJobs
 
         protected void ConversionFailed(string exitingMessage)
         {
-            Debug.Log("Fail: {0}", exitingMessage);
+            Debug.Log($"Fail: {exitingMessage}");
 
             if (this.State == ConversionState.Failed)
             {
@@ -483,7 +483,7 @@ namespace FileConverter.ConversionJobs
             var originalFileCreationTime = System.IO.File.GetCreationTimeUtc(this.InputFilePath);
             var originalFileLastAccesTime = System.IO.File.GetLastAccessTimeUtc(this.InputFilePath);
             var originalFileLastWriteTime = System.IO.File.GetLastWriteTimeUtc(this.InputFilePath);
-            Debug.Log("  original timestamp: {0}, {1}, {2}", originalFileCreationTime, originalFileLastAccesTime, originalFileLastWriteTime);
+            Debug.Log($"  original timestamp: {originalFileCreationTime}, {originalFileLastAccesTime}, {originalFileLastWriteTime}");
 
             for (int index = 0; index < this.OutputFilePaths.Length; index++)
             {
@@ -493,12 +493,12 @@ namespace FileConverter.ConversionJobs
                     System.IO.File.SetCreationTimeUtc(outputFilePath, originalFileCreationTime);
                     System.IO.File.SetLastAccessTimeUtc(outputFilePath, originalFileLastAccesTime);
                     System.IO.File.SetLastWriteTimeUtc(outputFilePath, originalFileLastWriteTime);
-                    Debug.Log("  output file '{0}' timestamp changed", outputFilePath);
+                    Debug.Log($"  output file '{outputFilePath}' timestamp changed");
                 }
                 catch (Exception exception)
                 {
-                    Debug.Log("Can't change timestamp from file '{0}'", outputFilePath);
-                    Debug.Log("An exception as been thrown: {0}.", exception.ToString());
+                    Debug.Log($"Can't change timestamp from file '{outputFilePath}'");
+                    Debug.Log($"An exception as been thrown: {exception}.");
                 }
             }
 

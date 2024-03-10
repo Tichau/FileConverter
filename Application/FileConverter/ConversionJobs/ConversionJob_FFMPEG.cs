@@ -68,7 +68,7 @@ namespace FileConverter.ConversionJobs
             if (!System.IO.File.Exists(ffmpegPath))
             {
                 this.ConversionFailed(Properties.Resources.ErrorCantFindFFMPEG);
-                Diagnostics.Debug.Log("Can't find ffmpeg executable ({0}). Try to reinstall the application.", ffmpegPath);
+                Diagnostics.Debug.Log($"Can't find ffmpeg executable ({ffmpegPath}). Try to reinstall the application.");
                 return;
             }
 
@@ -419,7 +419,7 @@ namespace FileConverter.ConversionJobs
                 this.UserState = currentPass.Name;
                 this.ffmpegProcessStartInfo.Arguments = currentPass.Arguments;
 
-                Diagnostics.Debug.Log("Execute command: {0} {1}.", this.ffmpegProcessStartInfo.FileName, this.ffmpegProcessStartInfo.Arguments);
+                Diagnostics.Debug.Log($"Execute command: {this.ffmpegProcessStartInfo.FileName} {this.ffmpegProcessStartInfo.Arguments}.");
                 Diagnostics.Debug.Log(string.Empty);
 
                 try
@@ -439,7 +439,7 @@ namespace FileConverter.ConversionJobs
 
                                 this.ParseFFMPEGOutput(result);
 
-                                Diagnostics.Debug.Log("ffmpeg output: {0}", result);
+                                Diagnostics.Debug.Log($"ffmpeg output: {result}");
                             }
                         }
 
@@ -465,7 +465,7 @@ namespace FileConverter.ConversionJobs
                     continue;
                 }
 
-                Diagnostics.Debug.Log("Delete intermediate file {0}.", currentPass.FileToDelete);
+                Diagnostics.Debug.Log($"Delete intermediate file {currentPass.FileToDelete}.");
 
                 File.Delete(currentPass.FileToDelete);
             }

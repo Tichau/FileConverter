@@ -75,7 +75,7 @@ namespace FileConverter.ConversionJobs
                 }
                 else
                 {
-                    Diagnostics.Debug.LogError("Unsupported rotation: {0}°", rotationAngleInDegrees);
+                    Diagnostics.Debug.LogError($"Unsupported rotation: {rotationAngleInDegrees}°");
                 }
             }
 

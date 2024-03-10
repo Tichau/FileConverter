@@ -96,10 +96,10 @@ namespace FileConverter.ConversionJobs
 
             this.UserState = Properties.Resources.ConversionStateConversion;
 
-            Diagnostics.Debug.Log("Convert PowerPoint document to pdf.");
+            Debug.Log("Convert PowerPoint document to pdf.");
             this.document.ExportAsFixedFormat(this.intermediateFilePath, PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF);
 
-            Diagnostics.Debug.Log("Close PowerPoint document '{0}'.", this.InputFilePath);
+            Debug.Log($"Close PowerPoint document '{this.InputFilePath}'.");
             this.document.Close();
             this.document = null;
 
@@ -115,7 +115,7 @@ namespace FileConverter.ConversionJobs
 
                 Task updateProgress = this.UpdateProgress();
 
-                Diagnostics.Debug.Log("Convert pdf to images.");
+                Debug.Log("Convert pdf to images.");
 
                 this.pdf2ImageConversionJob.StartConversion();
 
@@ -127,7 +127,7 @@ namespace FileConverter.ConversionJobs
 
                 if (!string.IsNullOrEmpty(this.intermediateFilePath))
                 {
-                    Diagnostics.Debug.Log("Delete intermediate file {0}.", this.intermediateFilePath);
+                    Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
                     File.Delete(this.intermediateFilePath);
                 }
@@ -144,7 +144,7 @@ namespace FileConverter.ConversionJobs
             }
 
             // Initialize PowerPoint application.
-            Diagnostics.Debug.Log("Instantiate PowerPoint application via interop.");
+            Debug.Log("Instantiate PowerPoint application via interop.");
             this.application = new PowerPoint.Application();
         }
 
@@ -199,7 +199,7 @@ namespace FileConverter.ConversionJobs
 
             if (this.document == null)
             {
-                Diagnostics.Debug.Log("Load PowerPoint document '{0}'.", this.InputFilePath);
+                Debug.Log($"Load PowerPoint document '{this.InputFilePath}'.");
 
                 this.document = this.application.Presentations.Open(this.InputFilePath, ReadOnly: MsoTriState.msoTrue, WithWindow: MsoTriState.msoFalse);
             }

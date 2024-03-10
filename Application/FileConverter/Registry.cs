@@ -58,7 +58,7 @@ namespace FileConverter
 
                     if (this.registryEntries.ContainsKey(entry.Key))
                     {
-                        Diagnostics.Debug.Log("Ignore registry entry {0}.", entry.Key);
+                        Diagnostics.Debug.Log($"Ignore registry entry {entry.Key}.");
                         continue;
                     }
 
@@ -106,7 +106,7 @@ namespace FileConverter
             }
             catch (Exception exception)
             {
-                Diagnostics.Debug.LogError("Can't convert registry value: {0}.", exception.Message);
+                Diagnostics.Debug.LogError($"Can't convert registry value: {exception.Message}.");
             }
 
             return defaultValue;
@@ -128,7 +128,7 @@ namespace FileConverter
             }
             catch (Exception exception)
             {
-                Diagnostics.Debug.LogError("Can't convert registry value: {0}.", exception.Message);
+                Diagnostics.Debug.LogError($"Can't convert registry value: {exception.Message}.");
             }
         }
 
@@ -143,7 +143,7 @@ namespace FileConverter
             }
             catch (Exception exception)
             {
-                Diagnostics.Debug.LogError("Fail to save registry. {0}", exception.Message);
+                Diagnostics.Debug.LogError($"Fail to save registry. {exception.Message}");
             }
         }
         
@@ -164,11 +164,11 @@ namespace FileConverter
             catch (Exception exception)
             {
                 Registry.instance = new Registry();
-                Diagnostics.Debug.LogError("Fail to load registry. {0}", exception.Message);
+                Diagnostics.Debug.LogError($"Fail to load registry. {exception.Message}");
                 while (exception.InnerException != null)
                 {
                     exception = exception.InnerException;
-                    Diagnostics.Debug.LogError("Inner exception: {0}", exception.Message);
+                    Diagnostics.Debug.LogError($"Inner exception: {exception.Message}");
                 }
             }
         }

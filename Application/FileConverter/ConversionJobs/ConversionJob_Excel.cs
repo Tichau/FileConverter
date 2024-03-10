@@ -107,10 +107,10 @@ namespace FileConverter.ConversionJobs
 
             this.UserState = Properties.Resources.ConversionStateConversion;
 
-            Diagnostics.Debug.Log("Convert excel document to pdf.");
+            Debug.Log("Convert excel document to pdf.");
             this.document.ExportAsFixedFormat(Excel.XlFixedFormatType.xlTypePDF, this.intermediateFilePath);
 
-            Diagnostics.Debug.Log("Close excel document '{0}'.", this.InputFilePath);
+            Debug.Log($"Close excel document '{this.InputFilePath}'.");
             this.document.Close(false);
             this.document = null;
 
@@ -126,7 +126,7 @@ namespace FileConverter.ConversionJobs
 
                 Task updateProgress = this.UpdateProgress();
 
-                Diagnostics.Debug.Log("Convert pdf to images.");
+                Debug.Log("Convert pdf to images.");
 
                 this.pdf2ImageConversionJob.StartConversion();
 
@@ -138,7 +138,7 @@ namespace FileConverter.ConversionJobs
 
                 if (!string.IsNullOrEmpty(this.intermediateFilePath))
                 {
-                    Diagnostics.Debug.Log("Delete intermediate file {0}.", this.intermediateFilePath);
+                    Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
                     File.Delete(this.intermediateFilePath);
                 }
@@ -213,7 +213,7 @@ namespace FileConverter.ConversionJobs
 
             if (this.document == null)
             {
-                Diagnostics.Debug.Log("Load excel document '{0}'.", this.InputFilePath);
+                Debug.Log($"Load excel document '{this.InputFilePath}'.");
 
                 this.document = this.application.Workbooks.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
             }
