@@ -8,13 +8,11 @@ namespace FileConverter
     using System.IO;
     using System.Reflection;
     using System.Threading;
-    using System.ComponentModel.Composition.Hosting;
 
     using FileConverter.ConversionJobs;
     using FileConverter.Services;
 
-    using SharpShell;
-    using SharpShell.ServerRegistration;
+    using SharpShell.Helpers;
 
     using Microsoft.Win32;
     using CommunityToolkit.Mvvm.DependencyInjection;
@@ -124,30 +122,20 @@ namespace FileConverter
 
             Diagnostics.Debug.Log($"Install and register shell extension: {shellExtensionPath}.");
 
-            try
+            var regasm = new RegAsm();
+            var success = regasm.Register64(shellExtensionPath, true);
+            if (success)
             {
-                var catalog = new AssemblyCatalog(shellExtensionPath);
-                var container = new CompositionContainer(catalog);
-                var server = container.GetExport<ISharpShellServer>().Value;
-
-                RegistrationType registrationType = RegistrationType.OS64Bit;
-#if BUILD32
-                registrationType = RegistrationType.OS32Bit;
-#endif
-
-                ServerRegistrationManager.InstallServer(server, registrationType, true);
-                Diagnostics.Debug.Log($"Shell extension has been installed correctly.");
-
-                ServerRegistrationManager.RegisterServer(server, registrationType);
-                Diagnostics.Debug.Log($"Shell extension has been registered correctly.");
+                Diagnostics.Debug.Log($"{shellExtensionPath} installed and registered.");
+                Diagnostics.Debug.Log(regasm.StandardOutput);
+                return true;
             }
-            catch (Exception exception)
+            else
             {
-                Diagnostics.Debug.LogError($"An exception has been thrown during shell extension {shellExtensionPath} registration.\n{exception}");
+                Diagnostics.Debug.LogError(errorCode: 0x05, $"{shellExtensionPath} failed to register.");
+                Diagnostics.Debug.LogError(regasm.StandardError);
                 return false;
             }
-
-            return true;
         }
 
         public static bool UnregisterExtension(string shellExtensionPath)
@@ -166,29 +154,20 @@ namespace FileConverter
 
             Diagnostics.Debug.Log($"Unregister and uninstall shell extension: {shellExtensionPath}.");
 
-            try
+            var regasm = new RegAsm();
+            var success = regasm.Unregister64(shellExtensionPath);
+            if (success)
             {
-                var catalog = new AssemblyCatalog(shellExtensionPath);
-                var container = new CompositionContainer(catalog);
-                var server = container.GetExport<ISharpShellServer>().Value;
-
-                RegistrationType registrationType = RegistrationType.OS64Bit;
-#if BUILD32
-                registrationType = RegistrationType.OS32Bit;
-#endif
-
-                ServerRegistrationManager.UnregisterServer(server, registrationType);
-                Diagnostics.Debug.Log($"Shell extension has been successfully unregistered.");
-                ServerRegistrationManager.UninstallServer(server, registrationType);
-                Diagnostics.Debug.Log($"Shell extension has been successfully uninstalled.");
+                Diagnostics.Debug.Log($"{shellExtensionPath} uninstalled.");
+                Diagnostics.Debug.Log(regasm.StandardOutput);
+                return true;
             }
-            catch (Exception exception)
+            else
             {
-                Diagnostics.Debug.LogError($"An exception has been thrown during shell extension {shellExtensionPath} unregistration.\n{exception}");
+                Diagnostics.Debug.LogError(errorCode: 0x05, $"{shellExtensionPath} failed to uninstall.");
+                Diagnostics.Debug.LogError(regasm.StandardError);
                 return false;
             }
-
-            return true;
         }
 
         public static IEnumerable<CultureInfo> GetSupportedCultures()
