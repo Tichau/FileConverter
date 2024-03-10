@@ -19,6 +19,7 @@ namespace FileConverter
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Runtime.InteropServices;
     using System.Security.Principal;
     using System.Threading;
     using System.Windows;
@@ -47,7 +48,12 @@ namespace FileConverter
         private bool verbose;
         private bool showSettings;
         private bool showHelp;
-        
+
+        [DllImport("kernel32.dll")]
+        static extern bool AttachConsole(uint dwProcessId);
+
+        const uint ATTACH_PARENT_PROCESS = 0x0ffffffff;
+
         public event EventHandler<ApplicationTerminateArgs> OnApplicationTerminate;
 
         public static Version ApplicationVersion => Application.Version;
@@ -78,6 +84,9 @@ namespace FileConverter
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            // Redirect standard output to the parent process in case the application is launch from command line.
+            AttachConsole(ATTACH_PARENT_PROCESS);
             
             this.RegisterServices();
 

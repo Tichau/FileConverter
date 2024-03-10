@@ -4,6 +4,7 @@
 
 - New: Tempo and pitch conversion presets in default settings (github issue #18).
 - Fixes: Issue where newly supported input types (ts, heic, ...) were not used in presets (github issue #388).
+- Fixes: Issue where standard output was not activated when started from command line.
 
 ## Version 2.0
 
