@@ -3,6 +3,7 @@
 ## Next Version
 
 - New: Hebrew translation (thanks to AshiVered).
+- Fixes: Issue where installer was not working due to registry key not updated correctly during install (issue #382).
 - Fixes: Update chinese translations (thanks to jie65535).
 - Fixes: Issue where tempo/pitch conversion settings were not considered as default settings resulting is some issues during backward compatibility check.
 
