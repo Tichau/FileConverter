@@ -544,9 +544,6 @@
   <data name="WebsiteButtonDescription" xml:space="preserve">
     <value>打開File Converter網站</value>
   </data>
-  <data name="SayThanksButtonTitle" xml:space="preserve">
-    <value>感謝!</value>
-  </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
     <value>轉換作業初始化期間出錯。</value>
   </data>
@@ -591,5 +588,8 @@
   </data>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
     <value>無法載入File Converter使用者設定。 您想恢復到預設設定嗎？</value>
+  </data>
+  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
+    <value>轉換後將檔案複製到剪貼板</value>
   </data>
 </root>
