@@ -1930,7 +1930,7 @@
         <Settings Key="ImageMaximumSize" Value="0" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="Tempo - Pitch/To Mp3 (25% slower)" OutputType="Mp3" IsDefaultSettings="false">
+    <ConversionPreset Name="Tempo - Pitch/To Mp3 (25% slower)" OutputType="Mp3" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
         <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
@@ -1967,7 +1967,7 @@
         <Settings Key="FFMPEGCustomCommand" Value="-b:a 192k -filter:a &quot;atempo=0.75&quot;" />
         <OutputFileNameTemplate>(p)(f) (slow)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="Tempo - Pitch/To Mp3 (25% faster)" OutputType="Mp3" IsDefaultSettings="false">
+    <ConversionPreset Name="Tempo - Pitch/To Mp3 (25% faster)" OutputType="Mp3" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
         <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
@@ -2004,7 +2004,7 @@
         <Settings Key="FFMPEGCustomCommand" Value="-b:a 192k -filter:a &quot;atempo=1.25&quot;" />
         <OutputFileNameTemplate>(p)(f) (fast)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="Tempo - Pitch/To Mp3 (pitched -1st)" OutputType="Mp3" IsDefaultSettings="false">
+    <ConversionPreset Name="Tempo - Pitch/To Mp3 (pitched -1st)" OutputType="Mp3" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
         <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
@@ -2041,7 +2041,7 @@
         <Settings Key="FFMPEGCustomCommand" Value="-filter:a &quot;rubberband=pitch=0.9438743126816935&quot;" />
         <OutputFileNameTemplate>(p)(f) (-1st)</OutputFileNameTemplate>
     </ConversionPreset>
-    <ConversionPreset Name="Tempo - Pitch/To Mp3 (pitched +1st)" OutputType="Mp3" IsDefaultSettings="false">
+    <ConversionPreset Name="Tempo - Pitch/To Mp3 (pitched +1st)" OutputType="Mp3" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
         <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>

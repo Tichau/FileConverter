@@ -4,6 +4,7 @@
 
 - New: Hebrew translation (thanks to AshiVered).
 - Fixes: Update chinese translations (thanks to jie65535).
+- Fixes: Issue where tempo/pitch conversion settings were not considered as default settings resulting is some issues during backward compatibility check.
 
 ## Version 2.0.1
 
