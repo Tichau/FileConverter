@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,478 +118,463 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>关于</value>
+    <value>אודות</value>
   </data>
   <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
-    <value>指定转换成功后对文件的操作</value>
+    <value>מאפשר לך לבחור מה אתה רוצה לעשות עם קבצי המקור, אם ההמרה תצליח</value>
   </data>
   <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
-    <value>转换成功时的操作</value>
+    <value>פעולה לביצוע בסיום ההמרה</value>
   </data>
   <data name="AddNewPreset" xml:space="preserve">
-    <value>新的预设</value>
+    <value>הגדרה מראש חדשה</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>应用</value>
+    <value>ישום</value>
   </data>
   <data name="AudioTitle" xml:space="preserve">
-    <value>音频</value>
+    <value>שמע</value>
   </data>
   <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
-    <value>File Converter 启动时自动检查更新</value>
+    <value>בדיקה אוטומטית של עדכונים בהפעלת התוכנה</value>
   </data>
   <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
-    <value>所有转换完成后自动退出</value>
+    <value>יציאה אוטומטית בסיום כל ההמרות</value>
   </data>
   <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
-    <value>缩小到最接近的2的次方大小（例 512x512）</value>
+    <value>Clamp to lowest power of 2 size</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>关闭</value>
+    <value>סגור</value>
   </data>
   <data name="ConversionPresets" xml:space="preserve">
-    <value>转换设置</value>
+    <value>הגדרות המרה מוגדרות מראש</value>
   </data>
   <data name="ConversionQueueTitle" xml:space="preserve">
-    <value>要转换的文件</value>
+    <value>קבצים להמרה</value>
   </data>
   <data name="ConvertedFrom" xml:space="preserve">
-    <value>转换自</value>
+    <value>המרה מ:</value>
   </data>
   <data name="Diagnostics" xml:space="preserve">
-    <value>日志</value>
+    <value>לוגים</value>
   </data>
   <data name="DiagnosticsButtonTooltip" xml:space="preserve">
-    <value>日志</value>
+    <value>לוגים</value>
   </data>
   <data name="DocumentationButtonDescription" xml:space="preserve">
-    <value>打开文件</value>
+    <value>פתח תיעוד</value>
   </data>
   <data name="DonateButtonTitle" xml:space="preserve">
-    <value>捐赠</value>
+    <value>תרום</value>
   </data>
   <data name="DonateDescription" xml:space="preserve">
-    <value>如果你喜欢，别忘了鼓励我的工作^_^</value>
+    <value>אל תשכח לתגמל אותי אם אתה אוהב את זה :)</value>
   </data>
   <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
-    <value>此更新将在后台下载，并在 File Converter 退出后立即开始安装。</value>
+    <value>העדכון ירד ברקע ויותקן כשתצא מהתוכנה.</value>
   </data>
   <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
-    <value>当我退出 File Converter 时安装</value>
+    <value>התקן לאחר יציאה מהתוכנה</value>
   </data>
   <data name="Encoding" xml:space="preserve">
-    <value>正在编码：</value>
+    <value>קידוד :</value>
   </data>
   <data name="EncodingSpeed" xml:space="preserve">
-    <value>编码速度：</value>
+    <value>מהירות קידוד :</value>
   </data>
   <data name="FileConverterStartHelp1" xml:space="preserve">
-    <value>File Converter 是一个 Shell 扩展。</value>
+    <value>File covnerter הוא הרחבת מעטפת.</value>
   </data>
   <data name="FileConverterStartHelp2" xml:space="preserve">
-    <value>这意味着它被集成在 Windows 资源管理器中。</value>
-  </data>
-  <data name="FileConverterStartHelp3" xml:space="preserve">
-    <value>要使用 File Converter，请打开资源管理器并右击任意文件显示上下文菜单，您可以找到 File Converter 的一些命令（请查阅 readme 文件中列出的可兼容的文件格式）。</value>
+    <value>שמשולבת בתוך סייר הקבצים של Windows.</value>
   </data>
   <data name="FileNameTemplate" xml:space="preserve">
-    <value>文件名模板</value>
+    <value>תבנית שם קובץ</value>
   </data>
   <data name="FramesPerSecond" xml:space="preserve">
-    <value>每秒帧数：</value>
+    <value>פריימים לשניה :</value>
   </data>
   <data name="GitHubButtonDescription" xml:space="preserve">
-    <value>打开 GitHub 项目页面</value>
+    <value>פתח את דף הפרוייקט בGitHub</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>帮助？</value>
+    <value>עזרה ?</value>
   </data>
   <data name="InputExample" xml:space="preserve">
-    <value>输入示例</value>
+    <value>דוגמת קלט</value>
   </data>
   <data name="InputFormats" xml:space="preserve">
-    <value>输入格式</value>
+    <value>פורמטי קלט</value>
   </data>
   <data name="InputPostConversionActionDeleteName" xml:space="preserve">
-    <value>删除</value>
+    <value>מחיקה</value>
   </data>
   <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
-    <value>移动到压缩包中</value>
+    <value>Move in an archive folder</value>
   </data>
   <data name="InputPostConversionActionNoneName" xml:space="preserve">
-    <value>无</value>
+    <value>ללא</value>
   </data>
   <data name="InstallButtonDescription" xml:space="preserve">
-    <value>更新下载完成。现在可退出 File Converter 并安装更新。</value>
+    <value>הורדת העדכון הושלמה. סגור את File Converter כדי שהעדכון יותקן.</value>
   </data>
   <data name="InstallButtonTitle" xml:space="preserve">
-    <value>当我退出 File Converter 时安装</value>
+    <value>התקן כשאני יוצא מFiler Conveter</value>
   </data>
   <data name="IssueButtonDescription" xml:space="preserve">
-    <value>报告问题</value>
+    <value>דווח על בעיה</value>
   </data>
   <data name="MoveDownSelectedPreset" xml:space="preserve">
-    <value>将所选项下移</value>
+    <value>Move down selected preset</value>
   </data>
   <data name="MoveUpSelectedPreset" xml:space="preserve">
-    <value>将所选项上移</value>
+    <value>Move up selected preset</value>
   </data>
   <data name="Mp3CbrDescription" xml:space="preserve">
-    <value>恒定比特率编码</value>
+    <value>קידוד קצב סיביות קבוע</value>
   </data>
   <data name="Mp3VbrDescription" xml:space="preserve">
-    <value>可变比特率编码</value>
+    <value>קידוד קצב סיביות משתנה</value>
   </data>
   <data name="NinetyDegreesRotationTitle" xml:space="preserve">
     <value>90°</value>
   </data>
   <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
-    <value>逆时针旋转 90°</value>
+    <value>סיבוב נגד כיוון השעון ב-90°</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>Ok</value>
+    <value>אישור</value>
   </data>
   <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
     <value>180°</value>
   </data>
   <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
-    <value>旋转 180°</value>
+    <value>סיבוב של 180°</value>
   </data>
   <data name="OutputFileNameTemplateSample" xml:space="preserve">
     <value>C:\Music\Artist\Album\Song.wav</value>
   </data>
   <data name="OutputExample" xml:space="preserve">
-    <value>输出</value>
+    <value>פלט</value>
   </data>
   <data name="OutputFilePathTemplateHelp" xml:space="preserve">
-    <value>(p): 输入文件路径
-(f): 输入文件名
-(o): 输出扩展名
-(i): 输入扩展名
-(d0): 输入父级文件夹
-(d1): 输入次父级文件夹
+    <value>(p): input file path
+(f): input filename
+(o): output extension type
+(i): input extension type
+(d0): input parent folder
+(d1): input sub parent folder
 ...
-(n:i): 页码索引
-(n:c): 总页数
+(n:i): page number index
+(n:c): total page count
 
-特殊路径:
-(p:d): 文档
-(p:m): 音乐
-(p:v): 视频
-(p:p): 图片
+Special paths:
+(p:d): my documents path
+(p:m): my music path
+(p:v): my videos path
+(p:p): my pictures path
 
-使用 maj 表示大写</value>
+use maj for uppercase version</value>
   </data>
   <data name="OutputFormat" xml:space="preserve">
-    <value>输出格式</value>
+    <value>פורמט פלט</value>
   </data>
   <data name="Preset" xml:space="preserve">
-    <value>预设</value>
+    <value>מוגדר מראש</value>
   </data>
   <data name="PresetName" xml:space="preserve">
-    <value>预设名称</value>
+    <value>שם מוגדר מראש</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>质量：</value>
+    <value>איכות :</value>
   </data>
   <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
-    <value>建议蓝光比特率范围</value>
+    <value>טווח קצב סיביות מומלץ בכחול</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">
-    <value>删除</value>
+    <value>מחק</value>
   </data>
   <data name="Rotate" xml:space="preserve">
-    <value>旋转：</value>
+    <value>סיבוב :</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>保存</value>
+    <value>שמור</value>
   </data>
   <data name="Scale" xml:space="preserve">
-    <value>范围：</value>
+    <value>קנה מידה :</value>
   </data>
   <data name="SeeChangeLog" xml:space="preserve">
-    <value>请参阅更改日志……</value>
+    <value>הצג יומן שינויים... </value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>设置</value>
+    <value>הגדרות File Converter</value>
   </data>
   <data name="SettingsButtonTooltip" xml:space="preserve">
-    <value>设置</value>
+    <value>הגדרות</value>
   </data>
   <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
     <value>270°</value>
   </data>
   <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
-    <value>顺时针旋转 90°</value>
+    <value>סיבוב של 90° בכיוון השעון</value>
   </data>
   <data name="UpgradeAvailable" xml:space="preserve">
-    <value>File Converter 有可用更新。墙裂建议您尽快安装最新版本！</value>
+    <value>עדכון עבור File Converter זמין. מומלץ מאוד להתקין אותו בהקדם האפשרי!</value>
   </data>
   <data name="UpgradeDownloadInProgress" xml:space="preserve">
-    <value>正在下载升级包……</value>
+    <value>הורדת העדכון מתבצעת ...</value>
   </data>
   <data name="UpgradeWindowTitle" xml:space="preserve">
-    <value>File Converter 更新</value>
+    <value>עדכוני File Converter</value>
   </data>
   <data name="VideoEncodingQualityTooltip" xml:space="preserve">
-    <value>定义“文件大小”与“视频质量”的比重。较小的比重可以让您的文件占用更小，较大的比重可以让您的视频质量更高。</value>
+    <value>הגדר את היחס 'גודל קובץ' לעומת 'איכות וידאו'. ערך נמוך יותר ייתן לך קובץ קטן יותר, ערך גדול יותר ייתן לך איכות וידאו טובה יותר.</value>
   </data>
   <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
-    <value>更快</value>
+    <value>מהיר יותר</value>
   </data>
   <data name="VideoEncodingSpeedFastName" xml:space="preserve">
-    <value>快</value>
+    <value>מהיר</value>
   </data>
   <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
-    <value>中等</value>
+    <value>בינוני</value>
   </data>
   <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
-    <value>更慢</value>
+    <value>איטי יותר</value>
   </data>
   <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
-    <value>慢</value>
+    <value>איטי</value>
   </data>
   <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
-    <value>超快</value>
+    <value>סופר מהיר</value>
   </data>
   <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
-    <value>定义“文件大小”与“压缩时间”的比重。对于相同的视频质量，与快速压缩相比，慢速压缩将为您提供更小的文件。</value>
+    <value>הגדר את היחס 'גודל קובץ' לעומת 'משך דחיסה'. דחיסה איטית תעניק לך קובץ קטן יותר (עבור אותה איכות וידאו) מאשר דחיסה מהירה יותר.</value>
   </data>
   <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
-    <value>超快速</value>
+    <value>אולטרא מהיר</value>
   </data>
   <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
-    <value>极快速</value>
+    <value>מהר מאוד</value>
   </data>
   <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
-    <value>极慢速</value>
+    <value>איטי מאוד</value>
   </data>
   <data name="VideoTitle" xml:space="preserve">
-    <value>视频</value>
+    <value>וידאו</value>
   </data>
   <data name="Wav16bitsDescription" xml:space="preserve">
-    <value>带符号的16位低位编址 PCM</value>
+    <value>PCM signed 16-bit little-endian</value>
   </data>
   <data name="Wav24bitsDescription" xml:space="preserve">
-    <value>带符号的24位低位编址 PCM</value>
+    <value>PCM signed 24-bit little-endian</value>
   </data>
   <data name="Wav32bitsDescription" xml:space="preserve">
-    <value>带符号的32位低位编址 PCM</value>
+    <value>PCM signed 32-bit little-endian</value>
   </data>
   <data name="Wav8bitsDescription" xml:space="preserve">
-    <value>带符号的8位低位编址 PCM</value>
+    <value>PCM signed 8-bit little-endian</value>
   </data>
   <data name="ZeroDegreesRotationTitle" xml:space="preserve">
-    <value>无</value>
+    <value>ללא</value>
   </data>
   <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
-    <value>不旋转</value>
+    <value>ללא סיבוב</value>
   </data>
   <data name="ConversionStateConversion" xml:space="preserve">
-    <value>转换</value>
+    <value>המרה</value>
   </data>
   <data name="ConversionStateDone" xml:space="preserve">
-    <value>完成</value>
+    <value>בוצע</value>
   </data>
   <data name="ConversionStateExtraction" xml:space="preserve">
-    <value>提取</value>
+    <value>חילוץ</value>
   </data>
   <data name="ConversionStateFailed" xml:space="preserve">
-    <value>失败</value>
+    <value>נכשל</value>
   </data>
   <data name="ConversionStateInQueue" xml:space="preserve">
-    <value>在队列中</value>
+    <value>בהתליך</value>
   </data>
   <data name="ConversionStateReadIntputImage" xml:space="preserve">
-    <value>读取输入的图像</value>
+    <value>קריאת תמונת קלט</value>
   </data>
   <data name="ConversionStateReadDocument" xml:space="preserve">
-    <value>读取文档</value>
+    <value>קריאת מסמך</value>
   </data>
   <data name="StringAnimatedImageName" xml:space="preserve">
-    <value>动态图像</value>
+    <value>תמונה מונפשת</value>
   </data>
   <data name="StringAudioName" xml:space="preserve">
-    <value>音频</value>
+    <value>שמע</value>
   </data>
   <data name="StringDocumentName" xml:space="preserve">
-    <value>文档</value>
+    <value>מסמך</value>
   </data>
   <data name="StringImageName" xml:space="preserve">
-    <value>图像</value>
+    <value>תמונה</value>
   </data>
   <data name="StringVideoName" xml:space="preserve">
-    <value>视频</value>
+    <value>וידאו</value>
   </data>
   <data name="ExitWaitingDuration" xml:space="preserve">
-    <value>应用退出前的等待时间</value>
+    <value>משך ההמתנה לפני סגירת הישום</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>语言</value>
+    <value>שפה</value>
   </data>
   <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
-    <value>同时转换的最大数量</value>
+    <value>מספר מרבי של המרות בו זמנית</value>
   </data>
   <data name="DefaultPresetName" xml:space="preserve">
-    <value>新预设</value>
+    <value>הגדרה מראש חדשה</value>
   </data>
   <data name="DownloadingChangeLog" xml:space="preserve">
-    <value>###正在下载更新日志……</value>
+    <value>###מוריד יומן שינויים ...</value>
   </data>
   <data name="ConversionArchives" xml:space="preserve">
-    <value>转换压缩包</value>
+    <value>ארכיון המרות</value>
   </data>
   <data name="ErrorCanceled" xml:space="preserve">
-    <value>取消。</value>
+    <value>בוטל</value>
   </data>
   <data name="ErrorCantFindFFMPEG" xml:space="preserve">
-    <value>找不到 ffmpeg 可执行文件，您应该尝试重新安装应用程序。</value>
+    <value>לא נמצא רכיב ffmpeg. נסה להתקין את התוכנה שוב.</value>
   </data>
   <data name="ErrorCDAExtractionFailed" xml:space="preserve">
-    <value>音频CD轨道提取失败。</value>
+    <value>חילוץ שמע מCD נכשל.</value>
   </data>
   <data name="ErrorCDDriveNotReady" xml:space="preserve">
-    <value>CD 驱动器未准备好。</value>
+    <value>כונן הCD אינו מוכן.</value>
   </data>
   <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
-    <value>启动 ffmpeg 失败。</value>
+    <value>הפעלת ffmpeg נכשלה.</value>
   </data>
   <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
-    <value>创建输出路径文件夹失败。</value>
+    <value>נכשל ביצירת תיקיות נתיב פלט.</value>
   </data>
   <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
-    <value>无法生成唯一的输出文件路径。</value>
+    <value>נכשל ביצירת נתיב קובץ פלט ייחודי.</value>
   </data>
   <data name="ErrorFailToReadCDDrive" xml:space="preserve">
-    <value>无法读取CD驱动器'{0}'.</value>
+    <value>כישלון בקריאת כונן התקליטורים '{0}'.</value>
   </data>
   <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
-    <value>无法检索到输入路径的驱动器号。</value>
+    <value>נכשל באחזור אות כונן נתיב קלט.</value>
   </data>
   <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
-    <value>无法中cda输入路径检索轨道编号。</value>
+    <value>נכשל באחזור מספר הרצועה מנתיב הקלט של cda.</value>
   </data>
   <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
-    <value>无法使用 CD 驱动器，因为它已被打开。</value>
+    <value>השימוש בCD נכשל מכיוון שמגירת הדיסק פתוחה</value>
   </data>
   <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
-    <value>输入文件的类型与所选择的输出文件类型不兼容。</value>
+    <value>סוג קובץ הקלט אינו תואם לסוג קובץ הפלט שנבחר.</value>
   </data>
   <data name="ErrorInvalidOutputPath" xml:space="preserve">
-    <value>输出文件路径模板生成的输出路径无效。</value>
+    <value>נתיב פלט לא חוקי שנוצר על-ידי תבנית נתיב קובץ פלט.</value>
   </data>
   <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
-    <value>不支持的输出格式'{0}'。</value>
+    <value>פורמט פלט לא נתמך '{0}'.</value>
   </data>
   <data name="ChannelCountTitle" xml:space="preserve">
-    <value>通道计数：</value>
+    <value>ספירת ערוצים :</value>
   </data>
   <data name="ChannelCountTooltip" xml:space="preserve">
-    <value>修改输入文件的通道数量。</value>
+    <value>שנה את מספר הערוצים של קובץ הקלט.</value>
   </data>
   <data name="MonoOption" xml:space="preserve">
-    <value>单声道</value>
+    <value>מונו</value>
   </data>
   <data name="SameChannelCountOption" xml:space="preserve">
-    <value>与输入文件相同</value>
+    <value>זהה לקובץ קלט</value>
   </data>
   <data name="StereoOption" xml:space="preserve">
-    <value>立体声</value>
+    <value>סטריאו</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>כדי להשתמש בFile Converter, פתח את תפריט ההקשר על הקובץ שאותו אתה רוצה להמיר (עיין בתיעוד המקוון כדי לראות את רשימת תבניות הקובץ התואמות).</value>
   </data>
   <data name="LicenceHeader1" xml:space="preserve">
-    <value>**该软件免费**.</value>
+    <value>**התוכנה הזו היא תוכנה חינמית בקוד פתוח**.</value>
   </data>
   <data name="LicenceHeader2" xml:space="preserve">
-    <value>您可以根据GNU通用公共许可证的条款重新发布和（或）修改它。</value>
+    <value>באפשרותך להפיץ אותו מחדש ו/או לשנות אותו תחת תנאי GNU General Public License.</value>
   </data>
   <data name="LicenceHeader3" xml:space="preserve">
-    <value>本程序的发布是希望它有用，但不提供任何担保。有关更多详细信息，请参阅GNU通用公共许可证（可在安装文件夹中找到：License.md）。</value>
+    <value>תוכנית זו מופצת בתקווה שזה יהיה שימושי, אבל ללא כל אחריות. עיין ברישיון הציבורי הכללי של GNU (זמין בתיקיית ההתקנה: 'LICENSE.md') לקבלת פרטים נוספים.</value>
   </data>
   <data name="ApplicationIsTerminating" xml:space="preserve">
-    <value>应用程序正在关闭。The application is terminating.</value>
+    <value>היישום נסגר.</value>
   </data>
   <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
-    <value>应用程序将在 {0} 秒后自动关闭。</value>
+    <value>היישום יסגר אוטומטית תוך {0} שניות.</value>
   </data>
   <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
-    <value>应用程序将在 1 秒内自动关闭。</value>
+    <value>היישום יסגר אוטומטית תוך שנייה אחת.</value>
   </data>
   <data name="StringMiscName" xml:space="preserve">
-    <value>杂项</value>
+    <value>שונות</value>
   </data>
   <data name="ErrorCantFindOutputFiles" xml:space="preserve">
-    <value>无法找到输出文件。</value>
+    <value>לא ניתן למצוא את קבצי הפלט.</value>
   </data>
   <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
-    <value>转换失败，但输出文件确实存在。</value>
+    <value>משימת ההמרה נכשלה, אך קיים קובץ פלט.</value>
   </data>
   <data name="ConversionStatePrepareConversion" xml:space="preserve">
-    <value>准备转换</value>
+    <value>הכנת המרה</value>
   </data>
   <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
-    <value>要转换 Office 文档，必须安装 Microsoft Office。</value>
+    <value>יש להתקין את Microsoft Office כדי להמיר מסמכי Office.</value>
   </data>
   <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
-    <value>使用 Microsoft Office 打开文档失败（检查您的许可证/安装是否有效）。</value>
+    <value>פתיחת המסמך עם Microsoft Office נכשלה. (בדוק אם ההתקנה שלך תקינה וחוקית)</value>
   </data>
   <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
-    <value>要转换 Excel 文档，必须安装 Microsoft Excel。</value>
+    <value>יש להתקין את Microsoft Excel כדי להמיר מסמכי Excel.</value>
   </data>
   <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
-    <value>要转换 PowerPoint 文档，必须安装 Microsoft PowerPoint。</value>
+    <value>יש להתקין את Microsoft PowerPoint כדי להמיר מסמכי PowerPoint.</value>
   </data>
   <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
-    <value>要转换 Word 文档，必须安装 Microsoft Word。</value>
+    <value>יש להתקין את Microsoft Word כדי להמיר מסמכי Word.</value>
   </data>
   <data name="WebsiteButtonDescription" xml:space="preserve">
-    <value>打开 File Converter 网址</value>
+    <value>פתח את דף הבית של File Converter</value>
+  </data>
+  <data name="SayThanksButtonTitle" xml:space="preserve">
+    <value>אמור תודה !</value>
   </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
-    <value>转换任务初始化时出错。</value>
-  </data>
-  <data name="CreateANewFolder" xml:space="preserve">
-    <value>新文件夹</value>
-  </data>
-  <data name="DefaultFolderName" xml:space="preserve">
-    <value>新文件夹</value>
-  </data>
-  <data name="PresetFolder" xml:space="preserve">
-    <value>文件夹</value>
-  </data>
-  <data name="PresetFolderName" xml:space="preserve">
-    <value>文件夹名称</value>
-  </data>
-  <data name="AdvancedMode" xml:space="preserve">
-    <value>高级模式</value>
-  </data>
-  <data name="FFMPEGCustomArguments" xml:space="preserve">
-    <value>自定义参数</value>
-  </data>
-  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
-    <value>自定义 FFMPEG 命令行参数</value>
-  </data>
-  <data name="NoPresetSelected" xml:space="preserve">
-    <value>未选择预设</value>
+    <value>שגיאה במהלך אתחול משימת המרה.</value>
   </data>
   <data name="ExportSelectedPresets" xml:space="preserve">
-    <value>导出</value>
+    <value>יצוא</value>
   </data>
   <data name="ImportPresets" xml:space="preserve">
-    <value>导入</value>
+    <value>יבוא</value>
   </data>
   <data name="DuplicatePreset" xml:space="preserve">
-    <value>复制预设</value>
+    <value>שכפול קביעה מוגדרת מראש</value>
   </data>
   <data name="CancelJobTooltip" xml:space="preserve">
-    <value>取消</value>
+    <value>ביטול</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>מצב מתקדם</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>ארגומנטים מותאמים אישית</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>ארגומנטי FFPMEG מותאמים אישית עבור שורת הפקודה</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>错误</value>
+    <value>שגיאה</value>
   </data>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
-    <value>无法加载 File Converter 用户设置。您想恢复默认设置吗？</value>
-  </data>
-  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
-    <value>转换后将文件复制到剪贴板</value>
+    <value>לא ניתן לטעון את הגדרות המשתמש האם ברצונך לחזור להגדרות ברירת המחדל?</value>
   </data>
 </root>

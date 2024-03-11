@@ -342,6 +342,7 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.ar-EG.resx" />
     <EmbeddedResource Include="Properties\Resources.de-DE.resx" />
+    <EmbeddedResource Include="Properties\Resources.he-IL.resx" />
     <EmbeddedResource Include="Properties\Resources.hi-IN.resx" />
     <EmbeddedResource Include="Properties\Resources.es-ES.resx" />
     <EmbeddedResource Include="Properties\Resources.en.resx">

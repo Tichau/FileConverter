@@ -39,7 +39,7 @@ namespace FileConverter
                                                       {
                                                           Major = 2,
                                                           Minor = 0,
-                                                          Patch = 1,
+                                                          Patch = 2,
                                                       };
 
         private bool needToRunConversionThread;
@@ -226,7 +226,7 @@ namespace FileConverter
             // Retrieve arguments.
             Debug.Log("Retrieve arguments...");
             string[] args = Environment.GetCommandLineArgs();
-            
+
             // Log arguments.
             for (int index = 0; index < args.Length; index++)
             {
@@ -243,10 +243,7 @@ namespace FileConverter
                 return;
             }
 
-            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
-
             // Parse arguments.
-            bool quitAfterStartup = false;
             List<string> filePaths = new List<string>();
             string conversionPresetName = null;
             for (int index = 1; index < args.Length; index++)
@@ -265,60 +262,59 @@ namespace FileConverter
                     switch (parameterTitle)
                     {
                         case "post-install-init":
+                            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
                             if (!settingsService.PostInstallationInitialization())
                             {
                                 Debug.LogError(errorCode: 0x0F, $"Failed to execute post install initialization.");
                             }
 
-                            quitAfterStartup = true;
-                            break;
+                            Application.AskForShutdown();
+                            return;
 
                         case "register-shell-extension":
-                        {
-                            quitAfterStartup = true;
-
-                            if (index >= args.Length - 1)
                             {
-                                Debug.LogError(errorCode: 0x0B, $"Invalid format.");
-                                break;
+                                if (index >= args.Length - 1)
+                                {
+                                    Debug.LogError(errorCode: 0x0B, $"Invalid format.");
+                                    break;
+                                }
+
+                                string shellExtensionPath = args[index + 1];
+                                index++;
+
+                                if (!Helpers.RegisterShellExtension(shellExtensionPath))
+                                {
+                                    Debug.LogError(errorCode: 0x0C, $"Failed to register shell extension {shellExtensionPath}.");
+                                }
+
+                                Application.AskForShutdown();
+                                return;
                             }
-
-                            string shellExtensionPath = args[index + 1];
-                            index++;
-
-                            if (!Helpers.RegisterShellExtension(shellExtensionPath))
-                            {
-                                Debug.LogError(errorCode: 0x0C, $"Failed to register shell extension {shellExtensionPath}.");
-                            }
-
-                            break;
-                        }
 
                         case "unregister-shell-extension":
-                        {
-                            quitAfterStartup = true;
-
-                            if (index >= args.Length - 1)
                             {
-                                Debug.LogError(errorCode: 0x0D, $"Invalid format.");
-                                break;
-                            }
+                                if (index >= args.Length - 1)
+                                {
+                                    Debug.LogError(errorCode: 0x0D, $"Invalid format.");
+                                    break;
+                                }
 
-                            string shellExtensionPath = args[index + 1];
-                            index++;
-                                
-                            if (!Helpers.UnregisterExtension(shellExtensionPath))
-                            {
-                                Debug.LogError(errorCode: 0x0E, $"Failed to unregister shell extension {shellExtensionPath}.");
-                            }
+                                string shellExtensionPath = args[index + 1];
+                                index++;
 
-                            break;
-                        }
+                                if (!Helpers.UnregisterExtension(shellExtensionPath))
+                                {
+                                    Debug.LogError(errorCode: 0x0E, $"Failed to unregister shell extension {shellExtensionPath}.");
+                                }
+
+                                Application.AskForShutdown();
+                                return;
+                            }
 
                         case "version":
                             Console.WriteLine(ApplicationVersion.ToString());
-                            quitAfterStartup = true;
-                            break;
+                            Application.AskForShutdown();
+                            return;
 
                         case "settings":
                             this.showSettings = true;
@@ -327,9 +323,9 @@ namespace FileConverter
                         case "conversion-preset":
                             if (index >= args.Length - 1)
                             {
-                                quitAfterStartup = true;
                                 Debug.LogError(errorCode: 0x01, $"Invalid format.");
-                                break;
+                                Application.AskForShutdown();
+                                return;
                             }
 
                             conversionPresetName = args[index + 1];
@@ -339,9 +335,9 @@ namespace FileConverter
                         case "input-files":
                             if (index >= args.Length - 1)
                             {
-                                quitAfterStartup = true;
                                 Debug.LogError(errorCode: 0x02, $"Invalid format.");
-                                break;
+                                Application.AskForShutdown();
+                                return;
                             }
 
                             string fileListPath = args[index + 1];
@@ -358,8 +354,9 @@ namespace FileConverter
                             }
                             catch (Exception exception)
                             {
-                                quitAfterStartup = true;
                                 Debug.LogError(errorCode: 0x03, $"Can't read input files list: {exception}");
+                                Application.AskForShutdown();
+                                return;
                             }
 
                             index++;
@@ -383,20 +380,21 @@ namespace FileConverter
                 }
             }
 
+            this.RunConversions(filePaths, conversionPresetName);
+        }
+
+        private void RunConversions(List<string> filePaths, string conversionPresetName)
+        {
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             if (settingsService.Settings == null)
             {
                 Debug.LogError(errorCode: 0x04, "Can't load File Converter settings. The application will now shutdown, if you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
-                quitAfterStartup = true;
-            }
-
-            if (quitAfterStartup)
-            {
                 Application.AskForShutdown();
                 return;
             }
 
             Debug.Assert(Debug.FirstErrorCode == 0, "An error happened during the initialization.");
-            
+
             // Check for upgrade.
             if (settingsService.Settings.CheckUpgradeAtStartup)
             {
