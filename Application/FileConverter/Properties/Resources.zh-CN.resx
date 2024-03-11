@@ -142,7 +142,7 @@
     <value>所有转换完成后自动退出</value>
   </data>
   <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
-    <value>缩小到最近的2次幂尺寸（例 512x512）</value>
+    <value>缩小到最接近的2的次方大小（例 512x512）</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>关闭</value>
