@@ -1,5 +1,10 @@
 # Change Log
 
+## Next Version
+
+- New: Hebrew translation (thanks to AshiVered).
+- Fixes: Update chinese translations (thanks to jie65535).
+
 ## Version 2.0.1
 
 - New: Tempo and pitch conversion presets in default settings (github issue #18).
