@@ -1,6 +1,6 @@
 # Change Log
 
-## Next Version
+## Version 2.0.2
 
 - New: Hebrew translation (thanks to AshiVered).
 - Fixes: Issue where installer was not working due to registry key not updated correctly during install (issue #382).
