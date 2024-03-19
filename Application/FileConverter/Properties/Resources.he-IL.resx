@@ -211,7 +211,7 @@
     <value>מחיקה</value>
   </data>
   <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
-    <value>Move in an archive folder</value>
+    <value>העבר את הקובץ המקורי לארכיון</value>
   </data>
   <data name="InputPostConversionActionNoneName" xml:space="preserve">
     <value>ללא</value>
@@ -226,10 +226,10 @@
     <value>דווח על בעיה</value>
   </data>
   <data name="MoveDownSelectedPreset" xml:space="preserve">
-    <value>Move down selected preset</value>
+    <value>העבר למטה</value>
   </data>
   <data name="MoveUpSelectedPreset" xml:space="preserve">
-    <value>Move up selected preset</value>
+    <value>העבר למעלה</value>
   </data>
   <data name="Mp3CbrDescription" xml:space="preserve">
     <value>קידוד קצב סיביות קבוע</value>

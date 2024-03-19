@@ -54,6 +54,7 @@ Thanks to all the contributors of File Converter project.
 * Thanks to **Mahmoud0Sultan** for the Arabic localization.
 * Thanks to **Sedimentary-Rock** for the Traditional Chinese localization.
 * Thanks to **CrisBalGreece** for the Greek localization.
+*  Thanks to **AshiVered** for the Hebrew localization.
 
 ## Middlewares
 
@@ -85,3 +86,4 @@ Thanks to Thomas Levesque for his work on WpfAnimatedGif. [GitHub link](https://
 
 File Converter is licensed under the GPL version 3 License.
 For more information check the LICENSE.md file in your installation folder or the [gnu website](https://www.gnu.org/licenses/gpl.html).
+
