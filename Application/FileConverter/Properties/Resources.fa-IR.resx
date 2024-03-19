@@ -1,0 +1,595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>درباره</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>تبدیل موفقیت آمیز بود</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>تبدیل موفقیت آمیز بود</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>اضافه کردن پریست</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>برنامه</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>صوت</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>بررسی خودکار به روز رسانی</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>خروج خودکار بعد از تبدیل همه فایل ها</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>تلاش برای حداکثر فشرده سازی</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>خروج</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>پریست برای تبدیل</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>دسته بندی تبدیل</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>تبدیل از</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>گزارشات</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>گزارشات</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>فایل کردن سند</value>
+ </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>دونیت (حمایت)</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>اگه از برنامه رضایت داشتید دونیت فراموش نشه </value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>دانلود آپدیت و نصب آن پس از خروج از برنامه</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>بعد از خارج شدن از برنامه نصب کن</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>رمزگذاری (انکد) :</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>سرعت رمز گذاری :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>این برنامه ، یک افزونه راست کلیک است</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>کافی است بر روی فایل مورد نظر راست کلیک کنید و از برنامه استفاده کنید</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>برای استفاده از برنامه کافی است روی یک فایل کلیک کنید و گزینه تبدیل فایل را انتخاب کنید (برای اطلاع از فرمت های پشتیبانی شده فایل readme را بخوانید).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>قالب نام گذاری فایل</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>فریم بر ثانیه :</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>صفحه گیت هاب برنامه</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>راهنمایی ?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>وارد کردن نمونه</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>وارد کردن فرمت</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>انتقال به پوشه آرشیو</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>هیچ</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>آپدیت دانلود شد. از برنامه خارج شو و نصب کن</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>وقتی از برنامه خارج شدن نصب کن</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>گزارش مشکل</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>انتقال پریست به پایین</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>انتقال پریست به بالا</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>بیت ریت ثابت</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>بیت ریت متغیر</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° پاد ساعت گرد</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>180° چرخش</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Music\Artist\Album\Song.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>خروجی</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): input file path
+(f): وارد کردن نام فایل
+(o): نوع خروجی
+(i): نوع ورودی
+(d0): پوشه اصلی
+(d1): پوشه زیر مجموعه
+...
+(n:i): مخزن شماره صفحات
+(n:c): مجموع تعداد صفحات
+
+مسیر های خاص:
+(p:d): my documents مسیر
+(p:m): my music مسیر
+(p:v): my videos مسیر
+(p:p): my pictures مسیر
+
+use maj for uppercase version</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>فرمت خروجی</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>پریست</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>نام چریست</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>کیفیت :</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>بیت ریت پیشنهادی در محدوده مجاز</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>چرخش :</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>اندازه :</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>مشاهده تغییرات برنامه</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>تنظیمات</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>تنظیمات</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° ساعت گرد</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>آپدیت موجود است. پیشنهاد میشود سریعا نصب کنید</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>در حال دانلود آپدیت...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>در حال نصب آپدیت</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>در مقایسه کیفیت ویدئو با اندازه فایل هرچه کیفیت کمتر اندازه فایل کمتر و بالعکس</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>سریع ترین</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>سریع</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>متوسط</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>کند تر</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>کند</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>بسیار سریع</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>در مقایسه طول مدت فشرده سازی با اندازه فایل هرچه مقدار فشرده سازی کند تر اندازه فایل کمتر</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>فوق سریع</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>بسیار سریع</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>بسیار کند</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>ویدئو</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>16 بیت</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>24 بیت</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>32 بیت</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>8 بیت</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>هیچیک</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>بدون جرخش</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>مبادله</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>تمام</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>استخراج</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>خطا</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>در صف</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>دریافت عکس ورودی</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>دریافت سند</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>عکس پویا</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>صوت</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>سند</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>ویدئو</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>مدت زمان مورد نیاز ثبل از خروج</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>زبان</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>حداکثر تعداد تبدیل همزمان</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>پریست جدید</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>در حال دریافت لیست تغییرات</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>آرشیو تبدیل ها</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>لغو شد</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>خطا در پیدا کردن فرمت مورد نیاز. برنامه را دوباره نصب گنید</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>خطا در استخراج  فایل از دیسک</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>درایو آماده نیست</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>خطا در اجرای تبدیل کننده</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>خطا در ساخت پوشه خروجی</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>خطا در ساخت مسیر خروجی</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>خطا در خواندن دیسک نوری</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>خطا در بازخوانی درایو مبدا</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>خطا در دریافت نام ترک از مسیر مبدا</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>خطا در خواندن دیسک نوری (احتمالا دیسک بیرون است)</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>فرمت وروردی با فرمت خروجی همخوانی ندارد</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>خطا در تولید مسیر خروجی پیش فرض</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>فرمت خروجی پشتیبانی نمی شود</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>تعداد کانال</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>تعداد کانال های ورودی را تغییر دهید</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>مونو</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>کانال یکسان با ورودی</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>استریو</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>این برنامه رایگان است</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>شما میتوانید برنامه را تحت لیسانس گنو بازطراحی یا ویرایش کنید</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>امیدواریم برنامه مفید واقع شده باشد ولی هیچ تضمینی در خصوص آن وجود ندارد. در مورد لایسنس گنو بیشتر بخوانید</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>برنامه در حال بسته شدن</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>برنامه در 0 ثانیه بسته خواهد شد</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>برنامه در 1 ثانیه بسته خواهد شد</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>متفرقه</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>خطا در پیدا کردن فایل خروجی</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>تبدیل با خطا مواجه شد ولی فایل خروجی آماده است</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>آماده سازی تبدیل</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>برای تبدیل فایل متنی باید آفیس را نصب کنید</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>خطا در راه اندازی ورد</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>برای تبدیل فایل های اکسل باید برنامه اکسل را نصب کنید</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>برای تبدیل فایل های پاورپوینت باید برنامه پاورپوینت را نصب کنید</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>برای تبدیل فایل های ورد باید برنامه ورد را نصب کنید</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>سایت برنامه</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>خطا در راه اندازی عملیات تبدیل</value>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>پوشه جدید</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>پوشه جدید</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>پوشه</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>اسم پوشه</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>حالت پیشرفته</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>متغیر اختصاصی</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>خط دستوری تبدیل اختصاصی</value>
+  </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>پریست انتخاب نشده است</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>خروجی گرفتن</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>وارد کردن</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>تکثیر پریست</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>لغو</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>خطا</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>تنظیمات کاربر شناسایی نشد. با تنظیمات پیش فرض اجرا شود؟</value>
+  </data>
+  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
+    <value>کپی کردن فایل ها بعد از تبدیل</value>
+  </data>
+</root>
