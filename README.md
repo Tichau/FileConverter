@@ -54,7 +54,8 @@ Thanks to all the contributors of File Converter project.
 * Thanks to **Mahmoud0Sultan** for the Arabic localization.
 * Thanks to **Sedimentary-Rock** for the Traditional Chinese localization.
 * Thanks to **CrisBalGreece** for the Greek localization.
-*  Thanks to **AshiVered** for the Hebrew localization.
+* Thanks to **AshiVered** for the Hebrew localization.
+* Thanks to **MrHero118** for the Persian localization.
 
 ## Middlewares
 

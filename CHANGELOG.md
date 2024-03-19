@@ -1,5 +1,10 @@
 # Change Log
 
+## Next Version
+
+- New: Persian translation (thanks to MrHero118).
+- Fixes: Hebrew translation issues (thanks to AshiVered).
+
 ## Version 2.0.2
 
 - New: Hebrew translation (thanks to AshiVered).
