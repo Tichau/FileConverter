@@ -265,13 +265,13 @@ namespace FileConverter.ConversionJobs
                         }
 
                         string encoderArgs = string.Format(
-                            "-c:v libx264 -preset {0} -crf {1} {2} {3}",
+                            "-c:v h264_nvenc -preset {0} -crf {1} {2} {3}",
                             this.H264EncodingSpeedToPreset(videoEncodingSpeed), 
                             this.H264QualityToCRF(videoEncodingQuality),
                             audioArgs, 
                             videoFilteringArgs);
 
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = string.Format("-n -stats -hwaccel cuda -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
