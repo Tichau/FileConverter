@@ -349,5 +349,11 @@ namespace FileConverter
 
             public const string Misc = "Misc";
         }
+
+        public enum HardwareAccelerationMode
+        {
+            Off,
+            CUDA
+        }
     }
 }
