@@ -8,8 +8,9 @@ namespace FileConverter.ConversionJobs
     using System.Globalization;
     using System.IO;
     using System.Text.RegularExpressions;
-
+    using CommunityToolkit.Mvvm.DependencyInjection;
     using FileConverter.Controls;
+    using FileConverter.Services;
 
     public partial class ConversionJob_FFMPEG : ConversionJob
     {
@@ -22,6 +23,8 @@ namespace FileConverter.ConversionJobs
         private ProcessStartInfo ffmpegProcessStartInfo;
 
         private readonly List<FFMpegPass> ffmpegArgumentStringByPass = new List<FFMpegPass>();
+
+        ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
 
         public ConversionJob_FFMPEG() : base()
         {
@@ -255,7 +258,9 @@ namespace FileConverter.ConversionJobs
                         VideoEncodingSpeed videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<VideoEncodingSpeed>(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed);
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
 
-                        string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
+                        Helpers.HardwareAccelerationMode hwAccel = settingsService.Settings.HardwareAccelerationMode;
+
+                        string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset, hwAccel);
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
 
                         string audioArgs = "-an";
@@ -264,14 +269,23 @@ namespace FileConverter.ConversionJobs
                             audioArgs = $"-c:a aac -qscale:a {this.AACBitrateToQualityIndex(audioEncodingBitrate)}";
                         }
 
+                        string videoCodec = "libx264";
+                        string hwAccelArg = "";
+                        if (hwAccel == Helpers.HardwareAccelerationMode.CUDA)
+                        {
+                            videoCodec = "h264_nvenc";
+                            hwAccelArg = "-hwaccel cuda -hwaccel_output_format cuda";
+                        }
+
                         string encoderArgs = string.Format(
-                            "-c:v libx264 -preset {0} -crf {1} {2} {3}",
-                            this.H264EncodingSpeedToPreset(videoEncodingSpeed), 
+                            "-c:v {0} -preset {1} -crf {2} {3} {4}",
+                            videoCodec,
+                            this.H264EncodingSpeedToPreset(videoEncodingSpeed),
                             this.H264QualityToCRF(videoEncodingQuality),
-                            audioArgs, 
+                            audioArgs,
                             videoFilteringArgs);
 
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = string.Format("-n -stats {3} -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs, hwAccelArg);
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }

@@ -47,6 +47,7 @@ namespace FileConverter.ViewModels
 
         private ListCollectionView outputTypes;
         private CultureInfo[] supportedCultures;
+        private Helpers.HardwareAccelerationMode[] hardwareAccelerationModes = { Helpers.HardwareAccelerationMode.Off, Helpers.HardwareAccelerationMode.CUDA };
 
         public event Action OnPresetCreated;
         public event Action OnFolderCreated;
@@ -228,6 +229,16 @@ namespace FileConverter.ViewModels
             set
             {
                 this.supportedCultures = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public Helpers.HardwareAccelerationMode[] HardwareAccelerationModes
+        {
+            get => this.hardwareAccelerationModes;
+            set
+            {
+                this.hardwareAccelerationModes = value;
                 this.OnPropertyChanged();
             }
         }

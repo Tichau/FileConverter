@@ -37,7 +37,7 @@ namespace FileConverter.ConversionJobs
             return channelArgs;
         }
 
-        private static string ComputeTransformArgs(ConversionPreset conversionPreset)
+        private static string ComputeTransformArgs(ConversionPreset conversionPreset, Helpers.HardwareAccelerationMode hwAccel = Helpers.HardwareAccelerationMode.Off)
         {
             float scaleFactor = conversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.VideoScale);
             string scaleArgs = string.Empty;
@@ -45,7 +45,15 @@ namespace FileConverter.ConversionJobs
             if (conversionPreset.OutputType == OutputType.Mkv || conversionPreset.OutputType == OutputType.Mp4)
             {
                 // This presets use h264 codec, the size of the video need to be divisible by 2.
-                scaleArgs = string.Format("scale=trunc(iw*{0}/2)*2:trunc(ih*{0}/2)*2", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+                switch (hwAccel)
+                {
+                    case Helpers.HardwareAccelerationMode.CUDA:
+                        scaleArgs = string.Format("scale_cuda=trunc(iw*{0}/2)*2:trunc(ih*{0}/2)*2:format=yuv420p", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+                        break;
+                    default:
+                        scaleArgs = string.Format("scale=trunc(iw*{0}/2)*2:trunc(ih*{0}/2)*2", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+                        break;
+                }
             }
             else if (Math.Abs(scaleFactor - 1f) >= 0.005f)
             {
@@ -96,7 +104,7 @@ namespace FileConverter.ConversionJobs
                 transformArgs += rotationArgs;
             }
 
-            if (conversionPreset.OutputType == OutputType.Mkv || conversionPreset.OutputType == OutputType.Mp4)
+            if (hwAccel == Helpers.HardwareAccelerationMode.Off && (conversionPreset.OutputType == OutputType.Mkv || conversionPreset.OutputType == OutputType.Mp4))
             {
                 // http://trac.ffmpeg.org/wiki/Encode/H.264#Encodingfordumbplayers
                 // YUV planar color space with 4:2:0 chroma subsampling

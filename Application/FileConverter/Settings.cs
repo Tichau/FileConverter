@@ -22,6 +22,7 @@ namespace FileConverter
         private CultureInfo applicationLanguage;
         private int maximumNumberOfSimultaneousConversions;
         private bool copyFilesInClipboardAfterConversion = false;
+        private Helpers.HardwareAccelerationMode hardwareAccelerationMode = Helpers.HardwareAccelerationMode.Off;
 
         public ConversionPreset GetPresetFromName(string presetName)
         {
@@ -218,6 +219,21 @@ namespace FileConverter
             set
             {
                 this.copyFilesInClipboardAfterConversion = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        [XmlElement]
+        public Helpers.HardwareAccelerationMode HardwareAccelerationMode
+        {
+            get
+            {
+                return this.hardwareAccelerationMode;
+            }
+
+            set
+            {
+                this.hardwareAccelerationMode = value;
                 this.OnPropertyChanged();
             }
         }
