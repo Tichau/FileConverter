@@ -12,9 +12,9 @@ namespace FileConverter.ValueConverters
         {
             switch (value) {
                 case Helpers.HardwareAccelerationMode.Off:
-                    return "Off";
+                    return Properties.Resources.HardwareAccelerationModeOffName;
                 case Helpers.HardwareAccelerationMode.CUDA:
-                    return "Nvidia (CUDA)";
+                    return Properties.Resources.HardwareAccelerationModeCUDAName;
             }
             return "Unknown";
         }
