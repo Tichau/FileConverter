@@ -258,7 +258,9 @@ namespace FileConverter.ConversionJobs
                         VideoEncodingSpeed videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<VideoEncodingSpeed>(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed);
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
 
-                        string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
+                        Helpers.HardwareAccelerationMode hwAccel = settingsService.Settings.HardwareAccelerationMode;
+
+                        string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset, hwAccel);
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
 
                         string audioArgs = "-an";
@@ -269,10 +271,10 @@ namespace FileConverter.ConversionJobs
 
                         string videoCodec = "libx264";
                         string hwAccelArg = "";
-                        if (settingsService.Settings.HardwareAccelerationMode == Helpers.HardwareAccelerationMode.CUDA)
+                        if (hwAccel == Helpers.HardwareAccelerationMode.CUDA)
                         {
                             videoCodec = "h264_nvenc";
-                            hwAccelArg = "-hwaccel cuda";
+                            hwAccelArg = "-hwaccel cuda -hwaccel_output_format cuda";
                         }
 
                         string encoderArgs = string.Format(
