@@ -133,16 +133,16 @@
     <value>برنامه</value>
   </data>
   <data name="AudioTitle" xml:space="preserve">
-    <value>صوت</value>
+    <value>صدا</value>
   </data>
   <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
-    <value>بررسی خودکار به روز رسانی</value>
+    <value>بررسی خودکار به‌روزرسانی</value>
   </data>
   <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
-    <value>خروج خودکار بعد از تبدیل همه فایل ها</value>
+    <value>خروج خودکار بعد از تبدیل همه فایل‌ها</value>
   </data>
   <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
-    <value>تلاش برای حداکثر فشرده سازی</value>
+    <value>تلاش برای حداکثر فشرده‌سازی</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>خروج</value>
@@ -151,7 +151,7 @@
     <value>پریست برای تبدیل</value>
   </data>
   <data name="ConversionQueueTitle" xml:space="preserve">
-    <value>دسته بندی تبدیل</value>
+    <value>دسته‌بندی تبدیل</value>
   </data>
   <data name="ConvertedFrom" xml:space="preserve">
     <value>تبدیل از</value>
@@ -166,10 +166,10 @@
     <value>فایل کردن سند</value>
  </data>
   <data name="DonateButtonTitle" xml:space="preserve">
-    <value>دونیت (حمایت)</value>
+    <value>حمایت مالی</value>
   </data>
   <data name="DonateDescription" xml:space="preserve">
-    <value>اگه از برنامه رضایت داشتید دونیت فراموش نشه </value>
+    <value>اگر از برنامه رضایت داشتید حمایت مالی فراموش نشود </value>
   </data>
   <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
     <value>دانلود آپدیت و نصب آن پس از خروج از برنامه</value>
@@ -181,25 +181,25 @@
     <value>رمزگذاری (انکد) :</value>
   </data>
   <data name="EncodingSpeed" xml:space="preserve">
-    <value>سرعت رمز گذاری :</value>
+    <value>سرعت رمزگذاری :</value>
   </data>
   <data name="FileConverterStartHelp1" xml:space="preserve">
-    <value>این برنامه ، یک افزونه راست کلیک است</value>
+    <value>این برنامه، یک افزونه راست کلیک است</value>
   </data>
   <data name="FileConverterStartHelp2" xml:space="preserve">
-    <value>کافی است بر روی فایل مورد نظر راست کلیک کنید و از برنامه استفاده کنید</value>
+    <value>کافی است بر روی فایل مورد نظر راست کلیک کرده و از برنامه استفاده نمایید</value>
   </data>
   <data name="FileConverterStartHelp3" xml:space="preserve">
-    <value>برای استفاده از برنامه کافی است روی یک فایل کلیک کنید و گزینه تبدیل فایل را انتخاب کنید (برای اطلاع از فرمت های پشتیبانی شده فایل readme را بخوانید).</value>
+    <value>برای استفاده از برنامه کافی است روی یک فایل کلیک کرده و گزینه تبدیل فایل را انتخاب نمایید (برای اطلاع از فرمت های پشتیبانی شده فایل readme را بخوانید).</value>
   </data>
   <data name="FileNameTemplate" xml:space="preserve">
-    <value>قالب نام گذاری فایل</value>
+    <value>قالب نام‌گذاری فایل</value>
   </data>
   <data name="FramesPerSecond" xml:space="preserve">
     <value>فریم بر ثانیه :</value>
   </data>
   <data name="GitHubButtonDescription" xml:space="preserve">
-    <value>صفحه گیت هاب برنامه</value>
+    <value>صفحه گیت‌هاب برنامه</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>راهنمایی ?</value>
@@ -220,10 +220,10 @@
     <value>هیچ</value>
   </data>
   <data name="InstallButtonDescription" xml:space="preserve">
-    <value>آپدیت دانلود شد. از برنامه خارج شو و نصب کن</value>
+    <value>آپدیت دانلود شد. از برنامه خارج شده و نصب نمایید</value>
   </data>
   <data name="InstallButtonTitle" xml:space="preserve">
-    <value>وقتی از برنامه خارج شدن نصب کن</value>
+    <value>وقتی از برنامه خارج شد نصب کن</value>
   </data>
   <data name="IssueButtonDescription" xml:space="preserve">
     <value>گزارش مشکل</value>
@@ -247,7 +247,7 @@
     <value>90° پاد ساعت گرد</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>Ok</value>
+    <value>باشه</value>
   </data>
   <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
     <value>180°</value>
@@ -323,19 +323,19 @@ use maj for uppercase version</value>
     <value>90° ساعت گرد</value>
   </data>
   <data name="UpgradeAvailable" xml:space="preserve">
-    <value>آپدیت موجود است. پیشنهاد میشود سریعا نصب کنید</value>
+    <value>به‌روزرسانی موجود است. پیشنهاد می‌شود سریعا نصب نمایید</value>
   </data>
   <data name="UpgradeDownloadInProgress" xml:space="preserve">
-    <value>در حال دانلود آپدیت...</value>
+    <value>در حال دانلود به‌روزرسانی...</value>
   </data>
   <data name="UpgradeWindowTitle" xml:space="preserve">
-    <value>در حال نصب آپدیت</value>
+    <value>در حال نصب به‌روزرسانی</value>
   </data>
   <data name="VideoEncodingQualityTooltip" xml:space="preserve">
-    <value>در مقایسه کیفیت ویدئو با اندازه فایل هرچه کیفیت کمتر اندازه فایل کمتر و بالعکس</value>
+    <value>در مقایسه کیفیت ویدیو با اندازه فایل هرچه کیفیت کمتر اندازه فایل کمتر و بالعکس</value>
   </data>
   <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
-    <value>سریع ترین</value>
+    <value>سریع‌ترین</value>
   </data>
   <data name="VideoEncodingSpeedFastName" xml:space="preserve">
     <value>سریع</value>
@@ -344,7 +344,7 @@ use maj for uppercase version</value>
     <value>متوسط</value>
   </data>
   <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
-    <value>کند تر</value>
+    <value>کندتر</value>
   </data>
   <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
     <value>کند</value>
@@ -353,10 +353,10 @@ use maj for uppercase version</value>
     <value>بسیار سریع</value>
   </data>
   <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
-    <value>در مقایسه طول مدت فشرده سازی با اندازه فایل هرچه مقدار فشرده سازی کند تر اندازه فایل کمتر</value>
+    <value>در مقایسه طول مدت فشرده‌سازی با اندازه فایل هرچه مقدار فشرده‌سازی کندتر، اندازه فایل کمتر</value>
   </data>
   <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
-    <value>فوق سریع</value>
+    <value>فوق‌سریع</value>
   </data>
   <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
     <value>بسیار سریع</value>
@@ -365,7 +365,7 @@ use maj for uppercase version</value>
     <value>بسیار کند</value>
   </data>
   <data name="VideoTitle" xml:space="preserve">
-    <value>ویدئو</value>
+    <value>ویدیو</value>
   </data>
   <data name="Wav16bitsDescription" xml:space="preserve">
     <value>16 بیت</value>
@@ -410,7 +410,7 @@ use maj for uppercase version</value>
     <value>عکس پویا</value>
   </data>
   <data name="StringAudioName" xml:space="preserve">
-    <value>صوت</value>
+    <value>صدا</value>
   </data>
   <data name="StringDocumentName" xml:space="preserve">
     <value>سند</value>
@@ -419,7 +419,7 @@ use maj for uppercase version</value>
     <value>تصویر</value>
   </data>
   <data name="StringVideoName" xml:space="preserve">
-    <value>ویدئو</value>
+    <value>ویدیو</value>
   </data>
   <data name="ExitWaitingDuration" xml:space="preserve">
     <value>مدت زمان مورد نیاز ثبل از خروج</value>
@@ -443,7 +443,7 @@ use maj for uppercase version</value>
     <value>لغو شد</value>
   </data>
   <data name="ErrorCantFindFFMPEG" xml:space="preserve">
-    <value>خطا در پیدا کردن فرمت مورد نیاز. برنامه را دوباره نصب گنید</value>
+    <value>خطا در پیدا کردن فرمت مورد نیاز. برنامه را دوباره نصب کنید</value>
   </data>
   <data name="ErrorCDAExtractionFailed" xml:space="preserve">
     <value>خطا در استخراج  فایل از دیسک</value>
