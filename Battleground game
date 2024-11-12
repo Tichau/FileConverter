@@ -1,0 +1,59 @@
+// script.js
+
+let player, enemy;
+let playerPosition = { x: 50, y: 275 };
+let enemyPosition = { x: 700, y: 275 };
+
+function startGame() {
+    alert("Game Started!");
+
+    // Initialize player and enemy
+    player = document.getElementById("player");
+    enemy = document.getElementById("enemy");
+
+    // Set up event listeners for movement
+    document.addEventListener("keydown", movePlayer);
+    moveEnemy();
+}
+
+function movePlayer(event) {
+    switch(event.key) {
+        case "ArrowUp":
+            playerPosition.y = Math.max(0, playerPosition.y - 10);
+            break;
+        case "ArrowDown":
+            playerPosition.y = Math.min(550, playerPosition.y + 10);
+            break;
+        case "ArrowLeft":
+            playerPosition.x = Math.max(0, playerPosition.x - 10);
+            break;
+        case "ArrowRight":
+            playerPosition.x = Math.min(750, playerPosition.x + 10);
+            break;
+    }
+    updatePlayerPosition();
+}
+
+function updatePlayerPosition() {
+    player.style.top = playerPosition.y + "px";
+    player.style.left = playerPosition.x + "px";
+}
+
+function moveEnemy() {
+    // Simple AI movement for enemy (random)
+    setInterval(() => {
+        enemyPosition.x += Math.random() > 0.5 ? -10 : 10;
+        enemyPosition.y += Math.random() > 0.5 ? -10 : 10;
+
+        // Ensure enemy stays in bounds
+        enemyPosition.x = Math.min(750, Math.max(0, enemyPosition.x));
+        enemyPosition.y = Math.min(550, Math.max(0, enemyPosition.y));
+
+        updateEnemyPosition();
+    }, 500);
+}
+
+function updateEnemyPosition() {
+    enemy.style.top = enemyPosition.y + "px";
+    enemy.style.left = enemyPosition.x + "px";
+}
