@@ -1,0 +1,44 @@
+/* style.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #2e2e2e;
+}
+
+#game-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-color: #1d1d1d;
+    overflow: hidden;
+    border: 2px solid #fff;
+}
+
+#player, #enemy {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+
+#player {
+    background-color: #4caf50;
+    left: 50px;
+    top: 275px;
+}
+
+#enemy {
+    background-color: #f44336;
+    right: 50px;
+    top: 275px;
+}
+
+#startButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
