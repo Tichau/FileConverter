@@ -43,8 +43,9 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_ImageMagick(conversionPreset, inputFilePath);
             }
 
-            if (Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Image ||
-                Helpers.GetExtensionCategory(inputFileExtension) == Helpers.InputCategoryNames.Document)
+            if (conversionPreset.OutputType == OutputType.Jpg ||
+                conversionPreset.OutputType == OutputType.Png ||
+                conversionPreset.OutputType == OutputType.Webp)
             {
                 return new ConversionJob_ImageMagick(conversionPreset, inputFilePath);
             }
