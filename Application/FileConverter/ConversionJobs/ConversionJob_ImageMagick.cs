@@ -144,7 +144,7 @@ namespace FileConverter.ConversionJobs
                     }
 
                     this.ConvertImage(image, true);
-                    
+
                     this.CurrentOutputFilePathIndex++;
                 }
             }
@@ -181,7 +181,7 @@ namespace FileConverter.ConversionJobs
                 bool clampSizeToPowerOf2 = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2);
                 if (clampSizeToPowerOf2)
                 {
-                    int referenceSize = System.Math.Min(image.Width, image.Height);
+                    int referenceSize = System.Math.Min((int)image.Width, (int)image.Height);
                     int size = 2;
                     while (size * 2 <= referenceSize)
                     {
@@ -190,7 +190,7 @@ namespace FileConverter.ConversionJobs
 
                     Debug.Log($"Clamp size to the nearest power of 2 size (from {image.Width}x{image.Height} to {size}x{size}).");
 
-                    image.Scale(size, size);
+                    image.Scale((uint)size, (uint)size);
                 }
             }
 
@@ -199,12 +199,12 @@ namespace FileConverter.ConversionJobs
                 int maximumSize = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageMaximumSize);
                 if (maximumSize > 0)
                 {
-                    int width = System.Math.Min(image.Width, maximumSize);
-                    int height = System.Math.Min(image.Height, maximumSize);
+                    int width = System.Math.Min((int)image.Width, (int)maximumSize);
+                    int height = System.Math.Min((int)image.Height, maximumSize);
 
                     Debug.Log($"Clamp size to maximum size of {width}x{width} (from {image.Width}x{image.Height} to {width}x{height}).");
 
-                    image.Scale(width, height);
+                    image.Scale((uint)width, (uint)height);
                 }
             }
 
@@ -217,7 +217,7 @@ namespace FileConverter.ConversionJobs
                     break;
 
                 case OutputType.Jpg:
-                    image.Quality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    image.Quality = (uint)this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
                     break;
 
                 case OutputType.Pdf:
@@ -226,7 +226,7 @@ namespace FileConverter.ConversionJobs
                     break;
 
                 case OutputType.Webp:
-                    image.Quality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    image.Quality = (uint)this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
                     break;
 
                 default:

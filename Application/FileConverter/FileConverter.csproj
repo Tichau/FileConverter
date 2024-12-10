@@ -72,13 +72,11 @@
     <Reference Include="CommunityToolkit.Mvvm, Version=8.2.0.0, Culture=neutral, PublicKeyToken=4aff67a105548ee2, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommunityToolkit.Mvvm.8.2.2\lib\netstandard2.0\CommunityToolkit.Mvvm.dll</HintPath>
     </Reference>
-    <Reference Include="Magick.NET-Q16-AnyCPU, Version=13.5.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.13.5.0\lib\netstandard20\Magick.NET-Q16-AnyCPU.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Magick.NET-Q16-AnyCPU, Version=14.2.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Magick.NET-Q16-AnyCPU.14.2.0\lib\netstandard20\Magick.NET-Q16-AnyCPU.dll</HintPath>
     </Reference>
-    <Reference Include="Magick.NET.Core, Version=13.5.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Magick.NET.Core.13.5.0\lib\netstandard20\Magick.NET.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Magick.NET.Core, Version=14.2.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Magick.NET.Core.14.2.0\lib\netstandard20\Magick.NET.Core.dll</HintPath>
     </Reference>
     <Reference Include="Markdown.Xaml">
       <HintPath>..\..\Middleware\Markdown.Xaml.dll</HintPath>
@@ -456,15 +454,15 @@ if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25
 robocopy $(TargetDir) $(TargetDir)\Languages "$(TargetName).resources.dll" /MOVE /S /XD Languages /XL /IS /IT /NFL /NDL /NJH /NJS /NC /NS /NP
 if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\..\packages\Magick.NET-Q16-AnyCPU.13.5.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets" Condition="Exists('..\..\packages\Magick.NET-Q16-AnyCPU.13.5.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Magick.NET-Q16-AnyCPU.13.5.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Magick.NET-Q16-AnyCPU.13.5.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets'))" />
     <Error Condition="!Exists('..\..\packages\CommunityToolkit.Mvvm.8.2.2\build\netstandard2.0\CommunityToolkit.Mvvm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CommunityToolkit.Mvvm.8.2.2\build\netstandard2.0\CommunityToolkit.Mvvm.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Magick.NET-Q16-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Magick.NET-Q16-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets'))" />
   </Target>
   <Import Project="..\..\packages\CommunityToolkit.Mvvm.8.2.2\build\netstandard2.0\CommunityToolkit.Mvvm.targets" Condition="Exists('..\..\packages\CommunityToolkit.Mvvm.8.2.2\build\netstandard2.0\CommunityToolkit.Mvvm.targets')" />
+  <Import Project="..\..\packages\Magick.NET-Q16-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets" Condition="Exists('..\..\packages\Magick.NET-Q16-AnyCPU.14.2.0\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

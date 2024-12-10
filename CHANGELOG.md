@@ -5,6 +5,7 @@
 - New: Persian translation (thanks to MrHero118).
 - Fixes: Hebrew translation issues (thanks to AshiVered).
 - New: Add Gif to Image conversion support (issue #433, #115)
+- Fixes: Update to Magick.NET.Core 14.2.0 (issue #527)
 
 ## Version 2.0.2
 
