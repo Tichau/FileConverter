@@ -144,7 +144,7 @@
     <value>Tự động thoát khi tất cả các tệp tin được chuyển đổi</value>
   </data>
   <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
-    <value>Điều chỉnh kính thước theo lũy thừa (nhỏ nhất là 2)</value>
+    <value>Điều chỉnh kích thước theo lũy thừa (nhỏ nhất là 2)</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Đóng</value>
@@ -304,7 +304,7 @@ Nếu sử dụng MAJ, giá trị của biến sẽ được chuyển thành in 
     <value>Đề xuất bitrate (trong khoảng màu xanh dương)</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">
-    <value>Xóa lựa chọn này</value>
+    <value>Xóa thư mục/hồ sơ đã chọn</value>
   </data>
   <data name="Rotate" xml:space="preserve">
     <value>Xoay :</value>
@@ -519,7 +519,7 @@ Nếu sử dụng MAJ, giá trị của biến sẽ được chuyển thành in 
     <comment>You can redistribute it and/or modify it under the terms of the GNU General Public License.</comment>
   </data>
   <data name="LicenceHeader3" xml:space="preserve">
-    <value>Đây là phần mềm hữu ích được phát triển miễn phí, do đó không có bất kì đảm bảo nào. Hãy xem GNU General Public Licence (có sẵn trong thư mục cài đặt: `LICENCE.md`) để biết thêm chi tiết.</value>
+    <value>Đây là phần mềm hữu ích được phát triển miễn phí, do đó không có bất kỳ đảm bảo nào. Hãy xem GNU General Public Licence (có sẵn trong thư mục cài đặt: `LICENCE.md`) để biết thêm chi tiết.</value>
     <comment>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.</comment>
   </data>
   <data name="ApplicationIsTerminating" xml:space="preserve">
@@ -589,10 +589,10 @@ Nếu sử dụng MAJ, giá trị của biến sẽ được chuyển thành in 
     <value>Không có hồ sơ nào được chọn</value>
   </data>
   <data name="ExportSelectedPresets" xml:space="preserve">
-    <value>Xuất tệp</value>
+    <value>Xuất thư mục/hồ sơ</value>
   </data>
   <data name="ImportPresets" xml:space="preserve">
-    <value>Nhập tệp</value>
+    <value>Nhập thư mục/hồ sơ</value>
   </data>
   <data name="DuplicatePreset" xml:space="preserve">
     <value>Sao chép hồ sơ</value>
