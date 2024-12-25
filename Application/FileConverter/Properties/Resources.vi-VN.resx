@@ -1,0 +1,628 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Cho phép bạn chọn làm gì với các tệp tin gốc sau khi chuyển đổi thành công</value>
+    <comment>Allow you to choose what you want to do with your input files if the conversion succeed</comment>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Sau khi chuyển đổi thành công</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Hồ sơ mới</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Ứng dụng</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>Âm thanh</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>Tự động kiểm tra cập nhật khi File Converter khởi động</value>
+    <comment>Automatically check for updates when File Converter starts</comment>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Tự động thoát khi tất cả các tệp tin được chuyển đổi</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Điều chỉnh kính thước theo lũy thừa (nhỏ nhất là 2)</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Hồ sơ chuyển đổi</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>Tệp tin cần chuyển đổi</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>Đã chuyển đổi từ</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Nhật ký hoạt động</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>Nhật ký hoạt động</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Mở tài liệu</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Quyên góp</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Đừng quên ủng hộ cốc cà phê cho tôi nếu bạn thích nó :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>Bản cập nhật sẽ được tải xuống ở chế độ nền và cài đặt sau khi bạn thoát khỏi File Converter.</value>
+    <comment>The update will be downloaded in background, and installed once you exit File Converter.</comment>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>Cài đặt khi tôi thoát khỏi File Converter</value>
+    <comment>Install when I exit File Converter</comment>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Mã hóa :</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>Tốc độ mã hóa :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter là một tiện ích mở rộng shell.</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>Điều này có nghĩa là nó được tích hợp vào Windows Explorer</value>
+    <comment>That means it is integrated into the Windows explorer.</comment>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>Để sử dụng File Converter, hãy mở Explorer và nhấp chuột phải vào (các) tệp bạn muốn chuyển đổi để hiển thị menu, sau đó bạn sẽ tìm thấy File Converter (truy cập tài liệu trực tuyến để biết danh sách các phần mở rộng tệp tương thích).</value>
+    <comment>To use File Converter please open the explorer and right-click on any file you like to bring up the context menu where you will find File Converter commands (see the online documentation to see the list of compatible file formats).</comment>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>Mẫu tên tệp</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>Số khung hình trên giây :</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>Mở trang Github</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>giúp đỡ ?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Ví dụ đầu vào</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Định dạng đầu vào</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Xóa bản gốc</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Chuyển vào thư mục lưu trữ</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>Không có</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>Bản cập nhật đã được tải xuống. Thoát khỏi File Converter và cài đặt bản cập nhật ngay.</value>
+    <comment>The update has been downloaded. Exit File Converter and install the update now.</comment>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>Cài đặt khi tôi thoát khỏi File Converter</value>
+    <comment>Install when I exit File Converter</comment>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>Báo cáo sự cố</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>Chuyển hồ sơ đã chọn xuống</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>Chuyển hồ sơ đã chọn lên</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>Tốc độ mã hóa không đổi</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>Tốc độ mã hóa thay đổi</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>Xoay 90° ngược chiều kim đồng hồ</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Đồng ý</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>Xoay 180°</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Musique\Artiste\Album\baihat.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>Đầu ra</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): Đường dẫn tệp tin gốc
+(f): Tên tệp tin gốc
+(o): Loại tệp tin sau khi chuyển đổi
+(i): Loại tệp tin gốc
+(d0): Thư mục cha gốc
+(d1): Thư mục cha con gốc
+...
+(n:i): Số trang hiện tại
+(n:c): Tổng số trang
+
+Các đường dẫn đặc biệt:
+(p:d): Đường dẫn đến thư mục "Tài liệu của tôi" (My Documents)
+(p:m): Đường dẫn đến thư mục "Nhạc của tôi" (My Music)
+(p:v): Đường dẫn đến thư mục "Video của tôi" (My Videos)
+(p:p): Đường dẫn đến thư mục "Ảnh của tôi" (My Pictures)
+
+Nếu sử dụng MAJ, giá trị của biến sẽ được chuyển thành in hoa</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Định dạng đầu ra</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Hồ sơ</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Tên hồ sơ</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Chất lượng :</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>Đề xuất bitrate (trong khoảng màu xanh dương)</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>Xóa lựa chọn này</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Xoay :</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Thang đo:</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>Xem nhật ký thay đổi ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Cài đặt</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>Cài đặt</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>Xoay 90° theo chiều kim đồng hồ</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>Đã có bản cập nhật cho File Converter. Nên cài đặt nó càng sớm càng tốt!</value>
+    <comment>An update for File Converter is available. It is strongly recommended that you install it as soon as possible!</comment>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>Đang tải xuống bản cập nhật...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>Cập nhật File Converter</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>Đặt tỷ lệ giữa 'kích thước tệp' so với 'chất lượng video'. Giá trị thấp hơn sẽ dẫn đến tệp nhẹ hơn, giá trị cao hơn sẽ mang lại chất lượng video tốt hơn.</value>
+    <comment>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</comment>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Nhanh hơn</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Nhanh</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Trung bình</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Chậm hơn</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Chậm</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Siêu nhanh</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>Xác định tỷ lệ 'trọng lượng tập tin' và 'thời gian nén'. Nén chậm sẽ làm cho tệp nhẹ hơn (với cùng chất lượng video) so với nén nhanh.</value>
+    <comment>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</comment>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Nhanh nhất</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Rất nhanh</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Rất chậm</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM signed 16-bit little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM signed 24-bit little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM signed 32-bit little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM signed 8-bit little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>Không có</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>Không xoay</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Chuyển đổi</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Xong</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Trích xuất</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Thất bại</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>Đang đợi</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>Đọc hình ảnh đầu vào</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>Đọc tài liệu</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Hoạt ảnh</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Âm thanh</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Tài liệu</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Hình ảnh</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>Thời gian chờ trước khi tắt ứng dụng</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Số lượng chuyển đổi đồng thời tối đa</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>Hồ sơ mới</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###Tải nhật ký thay đổi ...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>Lưu trữ chuyển đổi</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>Đã hủy.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>Không tìm thấy tệp thực thi ffmpeg. Bạn nên thử cài đặt lại ứng dụng.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>Không trích xuất được đoạn âm thanh.</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>Ổ đĩa CD chưa sẵn sàng.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>Không thể chạy ffmpeg.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>Không tạo được thư mục đường dẫn đầu ra.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>Không tạo được đường dẫn tệp đầu ra duy nhất.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>Không đọc được ổ đĩa CD '{0}'.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>Không lấy được ký tự ổ đĩa đường dẫn đầu vào.</value>
+    <comment>Fail to retrieve input path drive letter.</comment>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>Không lấy được số bản nhạc từ đường dẫn đầu vào cda.</value>
+    <comment>Fail to retrieve track number from the cda input path.</comment>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>Không sử dụng được ổ CD vì ổ này đã mở.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>Kiểu tệp đầu vào không tương thích với kiểu tệp đầu ra đã chọn.</value>
+    <comment>The input file type is not compatible with the selected output file type.</comment>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>Đường dẫn đầu ra không hợp lệ do mẫu đường dẫn tệp đầu ra tạo ra.</value>
+    <comment>Invalid output path generated by output file path template.</comment>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>Không hỗ trợ định dạng đầu ra '{0}'.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>Số lượng kênh :</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>Thay đổi số lượng kênh của tệp gốc</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Mono</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>Giống như tệp tin gốc</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Stereo</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**Đây là phần mềm miễn phí**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>Bạn có thể phân phối lại và/hoặc sửa đổi nó theo các điều khoản của Giấy phép Công cộng GNU.</value>
+    <comment>You can redistribute it and/or modify it under the terms of the GNU General Public License.</comment>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>Đây là phần mềm hữu ích được phát triển miễn phí, do đó không có bất kì đảm bảo nào. Hãy xem GNU General Public Licence (có sẵn trong thư mục cài đặt: `LICENCE.md`) để biết thêm chi tiết.</value>
+    <comment>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. See the GNU General Public License (available in the installation folder: `LICENSE.md`) for more details.</comment>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>Ứng dụng đang đóng</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>Ứng dụng sẽ tự động kết thúc sau {0} giây.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>Ứng dụng sẽ tự động kết thúc sau 1 giây.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Khác</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Không tìm thấy tập tin đầu ra.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>Chuyển đổi thất bại nhưng hãy kiểm tra tệp tin được tạo ra</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Chuẩn bị chuyển đổi</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Bạn phải cài đặt Microsoft Office để có thể chuyển đổi tài liệu Office.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Không mở được tài liệu bằng Microsoft Office (kiểm tra xem giấy phép/cài đặt của bạn có hợp lệ không).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Bạn phải cài đặt Microsoft Excel để có thể chuyển đổi tài liệu Excel.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>Bạn phải cài đặt Microsoft PowerPoint để có thể chuyển đổi tài liệu PowerPoint.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Bạn phải cài đặt Microsoft Word để chuyển đổi tài liệu Word.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Mở trang chủ File Converter</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>Có lỗi trong quá trình khởi tạo tác vụ chuyển đổi.</value>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>Thư mục mới</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>Thư mục mới</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>Thư mục</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>Tên thư mục</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Chế độ nâng cao</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Tùy chỉnh đối số</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Tùy chỉnh đối số (Command line) của FFMPEG</value>
+  </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>Không có hồ sơ nào được chọn</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>Xuất tệp</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>Nhập tệp</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>Sao chép hồ sơ</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Hủy bỏ</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>Không thể tải cài đặt người dùng của File Converter. Bạn có muốn quay lại cài đặt mặc định không?</value>
+  </data>
+  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
+    <value>Lưu tệp tin vào bộ nhớ tạm sau khi chuyển đổi</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DiagnosticsButtonTitle" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="OuputFileNameTemplateSample" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="RecommendeBitrateRangeInBlue" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="SettingsButtonTitle" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="SayThanksButtonTitle" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+</root>
