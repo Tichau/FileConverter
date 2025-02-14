@@ -2,8 +2,19 @@
 
 ## Next Version
 
-- New: Persian translation (thanks to MrHero118).
+- New: Option to use NVidia hardware acceleration for mp4 video (thanks to tacheometry).
+- New: Persian translation (thanks to MrHero118 and Mehrdad32).
+- New: Serbian translation (thanks to crnobog69).
+- New: Japanese translation (thanks to oogamiyuta).
+- New: Czech translation (thanks to AidyTheWeird).
+- New: Korean translation (thanks to Alanimdeo).
+- New: Vietnamese translation (thanks to vrykolakas166).
+- New: Russian translation (thanks to iliamak).
 - Fixes: Hebrew translation issues (thanks to AshiVered).
+- Fixes: Traditional Chinese translation issues (thanks to NeKoOuO).
+- Tech: Update ffmpeg to v7.1 and ImageMagick to v14.4 (issue #527).
+- Tech: Update project installer to Wix 5.
+- Tech: Migrate packages.config to PackageReferences.
 
 ## Version 2.0.2
 
