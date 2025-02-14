@@ -1,18 +1,18 @@
-﻿<Project>
-  <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.3" />
+﻿<Project Sdk="WixToolset.Sdk/5.0.2">
   <PropertyGroup>
     <ProductVersion>2.0.2</ProductVersion>
-    <OutputName>FileConverter-setup</OutputName>
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <OutputName>FileConverter-setup</OutputName> <!-- https://github.com/firegiant/HeatWaveSupport/issues/73 -->
+      <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
+  <Target Name="CollectSuggestedVisualStudioComponentIds" />
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DefineConstants>Debug</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.Heat" Version="4.0.3" />
-    <PackageReference Include="WixToolset.NetFx.wixext" Version="4.0.3" />
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
+    <PackageReference Include="WixToolset.Heat" Version="5.0.2" />
+    <PackageReference Include="WixToolset.NetFx.wixext" Version="5.0.2" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\FileConverterExtension\FileConverterExtension.csproj">
@@ -32,7 +32,6 @@
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.3" />
   <ItemGroup>
     <HarvestDirectory Include="..\Application\FileConverter\$(OutputPath)Languages">
       <ComponentGroupName>Languages</ComponentGroupName>

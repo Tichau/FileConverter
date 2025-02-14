@@ -33,7 +33,7 @@ For File Converter and its explorer extension:
 
 For the installer:
 
-* [Wix 4](http://wixtoolset.org/)
+* [Wix 5](http://wixtoolset.org/) (will be installed by nuget)
   * [Community Visual Studio Extension](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17)
 * [Windows SDK Signing Tools for Desktop Apps](https://developer.microsoft.com/fr-fr/windows/downloads/windows-10-sdk)
 
