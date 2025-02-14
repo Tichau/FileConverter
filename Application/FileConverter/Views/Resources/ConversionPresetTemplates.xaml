@@ -20,6 +20,7 @@
     <generic:FormatStringConverter x:Key="FormatStringConverter"/>
     <valueConverters:OutputTypeEnumToViewModel x:Key="OutputTypeEnumToViewModel"/>
     <valueConverters:ConversionSettingsRelevant x:Key="ConversionSettingsRelevant"/>
+    <valueConverters:HardwareAccelerationModeToString x:Key="HardwareAccelerationModeToString"/>
 
     <generic:ValueConverterGroup x:Key="ConversionSettingsToEnum">
         <valueConverters:ConversionSettingsToString/>

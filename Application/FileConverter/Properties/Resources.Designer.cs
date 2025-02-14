@@ -763,6 +763,78 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hardware acceleration mode.
+        /// </summary>
+        public static string HardwareAccelerationMode {
+            get {
+                return ResourceManager.GetString("HardwareAccelerationMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced Media Framework (AMD).
+        /// </summary>
+        public static string HardwareAccelerationModeAMFName {
+            get {
+                return ResourceManager.GetString("HardwareAccelerationModeAMFName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CUDA (Nvidia).
+        /// </summary>
+        public static string HardwareAccelerationModeCUDAName {
+            get {
+                return ResourceManager.GetString("HardwareAccelerationModeCUDAName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Direct3D 11.
+        /// </summary>
+        public static string HardwareAccelerationModeD3D11Name {
+            get {
+                return ResourceManager.GetString("HardwareAccelerationModeD3D11Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Direct3D 9/DXVA2.
+        /// </summary>
+        public static string HardwareAccelerationModeDXVA2Name {
+            get {
+                return ResourceManager.GetString("HardwareAccelerationModeDXVA2Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        public static string HardwareAccelerationModeOffName {
+            get {
+                return ResourceManager.GetString("HardwareAccelerationModeOffName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OpenCL.
+        /// </summary>
+        public static string HardwareAccelerationModeOpenCLName {
+            get {
+                return ResourceManager.GetString("HardwareAccelerationModeOpenCLName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulkan.
+        /// </summary>
+        public static string HardwareAccelerationModeVulkanName {
+            get {
+                return ResourceManager.GetString("HardwareAccelerationModeVulkanName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to help ?.
         /// </summary>
         public static string Help {

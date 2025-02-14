@@ -216,6 +216,7 @@
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\UpgradeService.cs" />
     <Compile Include="Services\UpgradeVersionDescription.cs" />
+    <Compile Include="ValueConverters\HardwareAccelerationModeToString.cs" />
     <Compile Include="ValueConverters\ConversionJobsToProgressState.cs" />
     <Compile Include="ValueConverters\ApplicationVersionToApplicationName.cs" />
     <Compile Include="ConversionPreset\ConversionPreset.cs" />
