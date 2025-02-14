@@ -190,7 +190,7 @@
     <value>這表示它已整合到Windows檔案總管中。</value>
   </data>
   <data name="FileConverterStartHelp3" xml:space="preserve">
-    <value>要使用File Converter，請開啟資檔案總管並右鍵點選任何檔案以顯示選單，您可以找到File Converter的一些命令（請參閱線上文件以查看可相容的檔案格式）。</value>
+    <value>要使用File Converter，請開啟資檔案總管並右鍵點選任何檔案以顯示選單，您可以找到File Converter的一些指令（請參閱線上文件以查看可相容的檔案格式）。</value>
   </data>
   <data name="FileNameTemplate" xml:space="preserve">
     <value>檔案名稱模板</value>
@@ -434,7 +434,7 @@
     <value>新預設</value>
   </data>
   <data name="DownloadingChangeLog" xml:space="preserve">
-    <value>###正在下载更新日誌……</value>
+    <value>###正在下載更新日誌……</value>
   </data>
   <data name="ConversionArchives" xml:space="preserve">
     <value>轉換壓縮檔</value>
@@ -503,7 +503,7 @@
     <value>您可以根據 GNU 通用公共授權的條款重新分發和(或)修改它。</value>
   </data>
   <data name="LicenceHeader3" xml:space="preserve">
-    <value>分發此程序是希望它有幫助，但不提供任何保證。 有關更多詳細資訊，請參閱GNU通用公共許可證（可在安裝資料夾中找到：LICENSE.md）。</value>
+    <value>分發此程式是希望它有幫助，但不提供任何保證。 有關更多詳細資訊，請參閱GNU通用公共授權條款（可在安裝資料夾中找到：LICENSE.md）。</value>
   </data>
   <data name="ApplicationIsTerminating" xml:space="preserve">
     <value>應用程式正在關閉。.</value>
@@ -548,10 +548,10 @@
     <value>轉換作業初始化期間出錯。</value>
   </data>
   <data name="CreateANewFolder" xml:space="preserve">
-    <value>新建資料夾</value>
+    <value>建立資料夾</value>
   </data>
   <data name="DefaultFolderName" xml:space="preserve">
-    <value>新建資料夾</value>
+    <value>建立資料夾</value>
   </data>
   <data name="PresetFolder" xml:space="preserve">
     <value>資料夾</value>
@@ -560,7 +560,7 @@
     <value>資料夾名稱</value>
   </data>
   <data name="AdvancedMode" xml:space="preserve">
-    <value>高級模式</value>
+    <value>進階模式</value>
   </data>
   <data name="FFMPEGCustomArguments" xml:space="preserve">
     <value>自訂參數</value>
@@ -587,9 +587,9 @@
     <value>錯誤</value>
   </data>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
-    <value>無法載入File Converter使用者設定。 您想恢復到預設設定嗎？</value>
+    <value>無法載入File Converter使用者設定。 您想復原到預設設定嗎？</value>
   </data>
   <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
-    <value>轉換後將檔案複製到剪貼板</value>
+    <value>轉換後將檔案複製到剪貼簿</value>
   </data>
 </root>
