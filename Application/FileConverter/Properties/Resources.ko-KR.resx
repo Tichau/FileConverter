@@ -1,0 +1,595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>정보</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Allow you to choose what you want to do with your input files if the conversion succeed</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>변환 완료 후 수행할 동작</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>새 프리셋</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>애플리케이션</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>오디오</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>File Converter를 시작할 때 자동으로 업데이트 확인</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>모든 변환이 완료되었을 때 자동으로 종료</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Clamp to lowest power of 2 size</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>변환 프리셋</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>변환할 파일</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>원본 파일:</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>로그</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>로그</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>문서 열기</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>후원</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>제 작품이 마음에 드셨다면 보상해주는 것을 잊지 마세요 :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>업데이트는 백그라운드에서 다운로드되어 File Converter를 종료하면 설치됩니다.</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>File Converter를 종료할 때 설치</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>인코딩 :</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>인코딩 속도 :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter는 셸 확장입니다.</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>이것은 File Converter가 Windows 탐색기에 통합되어 있다는 것을 의미합니다.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>File Converter를 사용하시려면 탐색기를 열고 원하는 파일을 마우스 오른쪽 클릭하여 컨텍스트 메뉴를 불러오세요(readme 파일에서 호환되는 파일 유형을 확인할 수 있습니다).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>파일 이름 템플릿</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>초당 프레임 :</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>GitHub 프로젝트 페이지 열기</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>도움말</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>입력 예시</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>입력 유형</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>아카이브 폴더로 옮기기</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>없음</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>업데이트가 다운로드되었습니다. File Converter를 종료해서 업데이트를 설치하세요.</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>File Converter를 종료할 때 설치</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>문제 제보하기</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>선택된 프리셋 아래로</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>선택된 프리셋 위로</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>고정 비트레이트 인코딩</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>가변 비트레이트 인코딩</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° 시계 반대 방향 회전</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>180° 회전</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Music\Artist\Album\Song.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>출력</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): 입력 파일 경로
+(f): 입력 파일명
+(o): 출력 확장자
+(i): 입력 확장자
+(d0): 입력 상위 폴더
+(d1): 입력 폴더
+...
+(n:i): 페이지 번호
+(n:c): 전체 페이지 수
+
+특수 경로:
+(p:d): 문서 폴더
+(p:m): 음악 폴더
+(p:v): 동영상 폴더
+(p:p): 사진 폴더
+
+maj로 대문자 표시</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>출력 유형</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>프리셋</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>프리셋 이름</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>품질 :</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>파란색: 권장 비트레이트 범위</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>회전 :</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>저장</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>크기 :</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>변경 기록 보기 ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>설정</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>설정</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>90° 시계 방향 회전</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>File Converter를 업데이트할 수 있습니다. 가능한 한 빨리 설치하세요!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>업그레이드 다운로드 중...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>File Converter 업데이트</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>'파일 크기'와 '동영상 품질' 사이의 비율을 정의합니다. 값이 낮을 수록 파일 크기가 작아지고, 값이 클 수록 동영상 품질이 향상됩니다.</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Faster</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Slower</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Slow</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Super Fast</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>'파일 크기'와 '압축 시간'의 비율을 정의합니다. 느린 압축은 빠른 압축보다 같은 품질의 동영상에서 더 작은 크기의 파일을 생성합니다.</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Ultra Fast</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Very Fast</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Very Slow</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>동영상</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM signed 16-bit little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM signed 24-bit little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM signed 32-bit little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM signed 8-bit little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>없음</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>회전 없음</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>변환 중</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>완료</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>추출 중</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>실패</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>대기 중</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>입력 이미지 읽는 중</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>문서 읽는 중</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>움직이는 이미지</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>오디오</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>문서</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>이미지</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>동영상</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>애플리케이션 종료 전 대기 시간</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>언어</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>최대 동시 변환 수</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>새 프리셋</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###변경 기록 다운로드 중 ...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>변환 아카이브</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>취소되었습니다.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>ffmpeg 실행 파일을 찾지 못했습니다. 애플리케이션을 다시 설치해 보세요.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>오디오 CD 트랙 추출에 실패했습니다.</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>CD 드라이브가 준비되지 않았습니다.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>ffmpeg 실행에 실패했습니다.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>출력 경로 폴더를 만드는 데 실패했습니다.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>고유한 출력 파일 경로를 생성하는 데 실패했습니다.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>CD 드라이브 '{0}'를 읽지 못했습니다.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>입력 경로의 드라이브 문자를 가져오지 못했습니다.</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>CDA 입력 경로에서 트랙 번호를 가져오지 못했습니다.</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>CD 드라이브가 열려 있어서 사용할 수 없습니다.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>입력 파일 형식이 선택한 출력 파일 형식과 호환되지 않습니다.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>출력 파일 경로 템플릿에서 잘못된 경로를 생성했습니다.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>'{0}' 출력 형식은 지원되지 않습니다.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>채널 수 :</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>입력 파일의 채널 수를 변경합니다.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>모노</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>입력 파일과 동일</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>스테레오</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**이 프로그램은 자유 소프트웨어입니다**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>GNU 일반 공중 사용 허가서에 따라서 재배포 및 수정할 수 있습니다.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>이 프로그램은 유용하게 사용되길 바라는 마음으로 배포되지만, **어떠한 보증도 하지 않습니다**. 자세한 내용은 GNU 일반 공중 사용 허가서(설치 폴더에 있는 `LICENSE.md` 파일에 있습니다)를 참조하세요.</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>애플리케이션을 종료하고 있습니다.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>애플리케이션이 1초 뒤에 자동으로 종료됩니다.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>기타</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>출력 파일을 찾을 수 없습니다.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>변환 작업이 실패했지만 출력 파일은 존재합니다.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>변환 준비</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Office 문서를 변환하려면 Microsoft Office가 설치되어 있어야 합니다.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Microsoft Office에서 문서를 열 수 없습니다(라이선스/설치가 유효한지 확인하세요).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Excel 문서를 변환하려면 Microsoft Excel이 설치되어 있어야 합니다.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>PowerPoint 문서를 변환하려면 Microsoft PowerPoint가 설치되어 있어야 합니다.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Word 문서를 변환하려면 Microsoft Word가 설치되어 있어야 합니다.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>File Converter 웹 사이트 열기</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>변환 작업을 준비하는 중 오류가 발생했습니다.</value>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>새 폴더</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>새 폴더</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>폴더</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>폴더 이름</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Advanced mode</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>사용자 지정 인수</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>사용자 지정 FFMPEG 명령줄 인수</value>
+  </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>선택된 프리셋 없음</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>내보내기</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>가져오기</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>프리셋 복제</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>오류</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>File Converter 사용자 설정 파일을 불러올 수 없습니다. 기본 설정을 사용하시겠습니까?</value>
+  </data>
+  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
+    <value>변환 후 클립보드에 파일 복사</value>
+  </data>
+</root>

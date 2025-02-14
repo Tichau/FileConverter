@@ -470,7 +470,7 @@ use maj for uppercase version</value>
     <value>Fail to retrieve track number from the cda input path.</value>
   </data>
   <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
-    <value>Fail to use the CD drive because it is oppened.</value>
+    <value>Fail to use the CD drive because it is opened.</value>
   </data>
   <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
     <value>The input file type is not compatible with the selected output file type.</value>

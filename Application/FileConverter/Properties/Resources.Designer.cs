@@ -592,7 +592,7 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fail to use the CD drive because it is oppened..
+        ///   Looks up a localized string similar to Fail to use the CD drive because it is opened..
         /// </summary>
         public static string ErrorFailToUseCDDriveOpen {
             get {
