@@ -1,6 +1,6 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.2">
   <PropertyGroup>
-    <ProductVersion>2.0.2</ProductVersion>
+    <ProductVersion>2.1.0</ProductVersion>
     <OutputName>FileConverter-setup</OutputName> <!-- https://github.com/firegiant/HeatWaveSupport/issues/73 -->
       <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>

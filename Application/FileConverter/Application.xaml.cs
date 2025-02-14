@@ -38,8 +38,8 @@ namespace FileConverter
         private static readonly Version Version = new Version()
                                                       {
                                                           Major = 2,
-                                                          Minor = 0,
-                                                          Patch = 2,
+                                                          Minor = 1,
+                                                          Patch = 0,
                                                       };
 
         private bool needToRunConversionThread;

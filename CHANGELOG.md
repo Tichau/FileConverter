@@ -1,6 +1,6 @@
 # Change Log
 
-## Next Version
+## Version 2.1
 
 - New: Option to use NVidia hardware acceleration for mp4 video (thanks to tacheometry).
 - New: Add Gif to Image conversion support (issue #433, #115) (thanks to RTnhN)
