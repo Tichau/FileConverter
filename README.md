@@ -52,7 +52,7 @@ Thanks to all the contributors of File Converter project.
 * Thanks to **MayaC0re** for the Turkish localization.
 * Thanks to **vishveshjain** for the Hindi localization.
 * Thanks to **Mahmoud0Sultan** for the Arabic localization.
-* Thanks to **Sedimentary-Rock** and **NeKoOuO** for the Traditional Chinese localization.
+* Thanks to **Sedimentary-Rock**, **NeKoOuO** and **PeterDaveHello** for the Traditional Chinese localization.
 * Thanks to **CrisBalGreece** for the Greek localization.
 * Thanks to **AshiVered** for the Hebrew localization.
 * Thanks to **MrHero118** and **Mehrdad32** for the Persian localization.

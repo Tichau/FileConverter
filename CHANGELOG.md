@@ -12,7 +12,7 @@
 - New: Vietnamese translation (thanks to vrykolakas166).
 - New: Russian translation (thanks to iliamak).
 - Fixes: Hebrew translation issues (thanks to AshiVered).
-- Fixes: Traditional Chinese translation issues (thanks to NeKoOuO).
+- Fixes: Traditional Chinese translation issues (thanks to NeKoOuO and PeterDaveHello).
 - Tech: Update ffmpeg to v7.1 and ImageMagick to v14.4 (issue #527).
 - Tech: Update project installer to Wix 5.
 - Tech: Migrate packages.config to PackageReferences.
