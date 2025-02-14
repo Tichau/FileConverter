@@ -342,6 +342,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.ar-EG.resx" />
+    <EmbeddedResource Include="Properties\Resources.cs-CZ.resx" />
     <EmbeddedResource Include="Properties\Resources.de-DE.resx" />
     <EmbeddedResource Include="Properties\Resources.fa-IR.resx" />
     <EmbeddedResource Include="Properties\Resources.he-IL.resx" />
@@ -353,6 +354,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.fr-FR.resx" />
     <EmbeddedResource Include="Properties\Resources.it-IT.resx" />
+    <EmbeddedResource Include="Properties\Resources.ja-jp.resx" />
+    <EmbeddedResource Include="Properties\Resources.ko-KR.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-PT.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -361,7 +364,11 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx" />
+    <EmbeddedResource Include="Properties\Resources.ru.resx" />
+    <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
+    <EmbeddedResource Include="Properties\Resources.sr-Latn.resx" />
     <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
+    <EmbeddedResource Include="Properties\Resources.vi-VN.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
     <EmbeddedResource Include="Properties\Resources.el-GR.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-TW.resx" />

@@ -52,10 +52,16 @@ Thanks to all the contributors of File Converter project.
 * Thanks to **MayaC0re** for the Turkish localization.
 * Thanks to **vishveshjain** for the Hindi localization.
 * Thanks to **Mahmoud0Sultan** for the Arabic localization.
-* Thanks to **Sedimentary-Rock** for the Traditional Chinese localization.
+* Thanks to **Sedimentary-Rock** and **NeKoOuO** for the Traditional Chinese localization.
 * Thanks to **CrisBalGreece** for the Greek localization.
 * Thanks to **AshiVered** for the Hebrew localization.
-* Thanks to **MrHero118** for the Persian localization.
+* Thanks to **MrHero118** and **Mehrdad32** for the Persian localization.
+* Thanks to **crnobog69** for the Serbian localizations.
+* Thanks to **oogamiyuta** for the Japanese localization.
+* Thanks to **AidyTheWeird** for the Czech localization.
+* Thanks to **Alanimdeo** for the Korean localization.
+* Thanks to **vrykolakas166** for the Vietnamese localization.
+* Thanks to **iliamak** for the Russian localization.
 
 ## Middlewares
 
@@ -87,4 +93,3 @@ Thanks to Thomas Levesque for his work on WpfAnimatedGif. [GitHub link](https://
 
 File Converter is licensed under the GPL version 3 License.
 For more information check the LICENSE.md file in your installation folder or the [gnu website](https://www.gnu.org/licenses/gpl.html).
-
