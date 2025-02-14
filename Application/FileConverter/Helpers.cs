@@ -216,7 +216,7 @@ namespace FileConverter
                 case OutputType.Jpg:
                 case OutputType.Png:
                 case OutputType.Webp:
-                    return category == InputCategoryNames.Image || category == InputCategoryNames.Document;
+                    return category == InputCategoryNames.Image || category == InputCategoryNames.Document || category == InputCategoryNames.AnimatedImage;
 
                 case OutputType.Gif:
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;

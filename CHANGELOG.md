@@ -3,6 +3,7 @@
 ## Next Version
 
 - New: Option to use NVidia hardware acceleration for mp4 video (thanks to tacheometry).
+- New: Add Gif to Image conversion support (issue #433, #115) (thanks to RTnhN)
 - New: Persian translation (thanks to MrHero118 and Mehrdad32).
 - New: Serbian translation (thanks to crnobog69).
 - New: Japanese translation (thanks to oogamiyuta).

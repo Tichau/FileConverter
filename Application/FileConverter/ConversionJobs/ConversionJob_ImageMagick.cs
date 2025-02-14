@@ -86,6 +86,12 @@ namespace FileConverter.ConversionJobs
                         readSettings.Format = MagickFormat.Dng;
                         break;
 
+                    case ".gif":
+                        // Get the first frame of the gif for conversion.
+                        // Maybe in the future make this user selectable.
+                        readSettings.FrameIndex = 0;
+                        break;
+
                     default:
                         break;
                 }
