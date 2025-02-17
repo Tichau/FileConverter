@@ -718,7 +718,7 @@
         <Settings Key="VideoQuality" Value="30" />
         <Settings Key="VideoEncodingSpeed" Value="Medium" />
         <Settings Key="VideoScale" Value="0.75" />
-        <Settings Key="VideoRotation" Value="90" />
+        <Settings Key="VideoRotation" Value="0" />
         <Settings Key="AudioBitrate" Value="155" />
         <Settings Key="EnableFFMPEGCustomCommand" Value="False" />
         <Settings Key="FFMPEGCustomCommand" Value="" />
@@ -949,7 +949,7 @@
         <Settings Key="VideoQuality" Value="30" />
         <Settings Key="VideoEncodingSpeed" Value="Medium" />
         <Settings Key="VideoScale" Value="0.25" />
-        <Settings Key="VideoRotation" Value="90" />
+        <Settings Key="VideoRotation" Value="0" />
         <Settings Key="AudioBitrate" Value="155" />
         <Settings Key="EnableFFMPEGCustomCommand" Value="False" />
         <Settings Key="FFMPEGCustomCommand" Value="" />

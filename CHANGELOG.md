@@ -11,6 +11,7 @@
 - New: Korean translation (thanks to Alanimdeo).
 - New: Vietnamese translation (thanks to vrykolakas166).
 - New: Russian translation (thanks to iliamak).
+- Fixes: Issue where video where rotated when using the To Mp4 scale 25% and 75% presets.
 - Fixes: Hebrew translation issues (thanks to AshiVered).
 - Fixes: Traditional Chinese translation issues (thanks to NeKoOuO and PeterDaveHello).
 - Tech: Update ffmpeg to v7.1 and ImageMagick to v14.4 (issue #527).
