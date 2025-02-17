@@ -196,3 +196,4 @@ FakesAssemblies/
 
 # Ignore the installer signing commands file
 Installer/Installer.sign
+Certificate/*
