@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Что делать с исходным файлом после успешной конвертации?</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Действие после успешной конвертации</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Добавить новый пресет (дублировать выбранный)</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Приложение</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>Аудио</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>Автоматически проверять обновления при запуске File Converter</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Автоматически закрывать программу после завершения всех конвертаций</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Привести к ближайшей степени двойки</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Пресеты конвертации</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>Файлы для конвертации</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>Конвертировано из</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Логи</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>Логи</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Открыть документацию</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Поддержать проект</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Если вам нравится программа, не забудьте отблагодарить автора :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>Обновление будет загружено в фоновом режиме и установлено при закрытии File Converter.</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>установить при выходе из File Converter</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Кодирование:</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>Скорость кодирования:</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter - это расширение оболочки Windows.</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>Это означает, что он интегрирован в проводник Windows.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>Для использования File Converter откройте проводник Windows и щелкните правой кнопкой мыши по любому файлу, чтобы открыть контекстное меню, где вы найдете команды File Converter (список поддерживаемых форматов файлов смотрите в readme).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>Шаблон имени файла</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>Кадров в секунду:</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>Открыть страницу проекта на GitHub</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Пример исходного файла</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Исходные форматы</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Переместить в архив</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>Ничего</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Формат вывода</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Пресет</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Качество:</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Масштаб:</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Видео</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Конвертация</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Извлечение</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>В очереди</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Анимированное изображение</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Аудио</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Изображение</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Видео</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Максимальное количество одновременных конвертаций</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>Новый пресет</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>Отменено.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>Не удалось найти исполняемый файл ffmpeg. Попробуйте переустановить программу.</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Не удалось найти выходные файлы.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>Конвертация не удалась, но файлы присутствуют в указанном месте.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>Исходный файл несовместим с выбранным форматом.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>Неверный путь вывода, сгенерированный шаблоном.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>Неподдерживаемый выходной формат '{0}'.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Моно</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Стерео</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Открыть сайт File Converter</value>
+  </data>
+</root>

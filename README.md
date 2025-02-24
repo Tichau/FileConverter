@@ -33,7 +33,7 @@ For File Converter and its explorer extension:
 
 For the installer:
 
-* [Wix 4](http://wixtoolset.org/)
+* [Wix 5](http://wixtoolset.org/) (will be installed by nuget)
   * [Community Visual Studio Extension](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17)
 * [Windows SDK Signing Tools for Desktop Apps](https://developer.microsoft.com/fr-fr/windows/downloads/windows-10-sdk)
 
@@ -52,17 +52,25 @@ Thanks to all the contributors of File Converter project.
 * Thanks to **MayaC0re** for the Turkish localization.
 * Thanks to **vishveshjain** for the Hindi localization.
 * Thanks to **Mahmoud0Sultan** for the Arabic localization.
-* Thanks to **Sedimentary-Rock** for the Traditional Chinese localization.
+* Thanks to **Sedimentary-Rock**, **NeKoOuO** and **PeterDaveHello** for the Traditional Chinese localization.
 * Thanks to **CrisBalGreece** for the Greek localization.
+* Thanks to **AshiVered** for the Hebrew localization.
+* Thanks to **MrHero118** and **Mehrdad32** for the Persian localization.
+* Thanks to **crnobog69** for the Serbian localizations.
+* Thanks to **oogamiyuta** for the Japanese localization.
+* Thanks to **AidyTheWeird** for the Czech localization.
+* Thanks to **Alanimdeo** for the Korean localization.
+* Thanks to **vrykolakas166** for the Vietnamese localization.
+* Thanks to **iliamak** for the Russian localization.
 
 ## Middlewares
 
 File converter uses the following middlewares:
 
-**ffmpeg** (v6.1.1) as file conversion software.
+**ffmpeg** (v7.1) as file conversion software.
 Thanks to ffmpeg devs for this awesome open source file conversion tool. [Web site link](https://ffmpeg.org)
 
-**ImageMagick** (v13.5) as image edition and conversion software.
+**ImageMagick** (v14.4) as image edition and conversion software.
 Thanks to image magick devs for this awesome open source image edition software suite.  [Web site link](http://imagemagick.net)
 And thanks to dlemstra for the C# wrapper of this software. [Github link](https://github.com/ImageMagick/ImageMagick)
 

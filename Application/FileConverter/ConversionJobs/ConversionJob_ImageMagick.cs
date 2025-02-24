@@ -86,6 +86,12 @@ namespace FileConverter.ConversionJobs
                         readSettings.Format = MagickFormat.Dng;
                         break;
 
+                    case ".gif":
+                        // Get the first frame of the gif for conversion.
+                        // Maybe in the future make this user selectable.
+                        readSettings.FrameIndex = 0;
+                        break;
+
                     default:
                         break;
                 }
@@ -175,8 +181,8 @@ namespace FileConverter.ConversionJobs
                 bool clampSizeToPowerOf2 = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2);
                 if (clampSizeToPowerOf2)
                 {
-                    int referenceSize = System.Math.Min(image.Width, image.Height);
-                    int size = 2;
+                    uint referenceSize = System.Math.Min(image.Width, image.Height);
+                    uint size = 2;
                     while (size * 2 <= referenceSize)
                     {
                         size *= 2;
@@ -190,11 +196,11 @@ namespace FileConverter.ConversionJobs
 
             if (this.ConversionPreset.IsRelevantSetting(ConversionPreset.ConversionSettingKeys.ImageMaximumSize))
             {
-                int maximumSize = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageMaximumSize);
+                uint maximumSize = this.ConversionPreset.GetSettingsValue<uint>(ConversionPreset.ConversionSettingKeys.ImageMaximumSize);
                 if (maximumSize > 0)
                 {
-                    int width = System.Math.Min(image.Width, maximumSize);
-                    int height = System.Math.Min(image.Height, maximumSize);
+                    uint width = System.Math.Min(image.Width, maximumSize);
+                    uint height = System.Math.Min(image.Height, maximumSize);
 
                     Debug.Log($"Clamp size to maximum size of {width}x{width} (from {image.Width}x{image.Height} to {width}x{height}).");
 
@@ -211,7 +217,7 @@ namespace FileConverter.ConversionJobs
                     break;
 
                 case OutputType.Jpg:
-                    image.Quality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    image.Quality = this.ConversionPreset.GetSettingsValue<uint>(ConversionPreset.ConversionSettingKeys.ImageQuality);
                     break;
 
                 case OutputType.Pdf:
@@ -220,7 +226,7 @@ namespace FileConverter.ConversionJobs
                     break;
 
                 case OutputType.Webp:
-                    image.Quality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    image.Quality = this.ConversionPreset.GetSettingsValue<uint>(ConversionPreset.ConversionSettingKeys.ImageQuality);
                     break;
 
                 default:

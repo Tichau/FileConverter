@@ -1,0 +1,595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>О порграму</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Дозволите да изаберете шта желите да урадите са вашим улазним датотекама ако конверзија буде успешна.</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Акција при успешној конверзацији</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Нови присет</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Програм</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>Звук</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>Аутоматски провери ажурирања када се File Converter покрене</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Аутоматцки изађи када се све конверзије заврше</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Ограничити на најнижи степен двојке по величини</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Затвори</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Присети конверзације</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>Датотеке за конверзацију</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>Конвертовано из</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Дневници</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>Дневници</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Отвори документацију</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Донирај</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Не заборави да наградиш мој рад ако ти се свиђа :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>Ажурирање ће бити преузето у позадини и инсталирано када напустите File Converter.</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>Инсталирај када изађем из File Converter-а</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Кодирање :</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>Брзина кодирања :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter је додатак за шкољку</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>То значи да је интегрисан у Windows Explorer.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>Да бисте користили File Converter, отворите Explorer и десним кликом на било коју датотеку отворите контекст мени где ћете пронаћи команде File Converter-а (погледајте README датотеку да бисте видели списак компатибилних формата датотека).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>Шаблон имена датоеке</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>Кадрова по секунди</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>Отвори GitHub страницу пројекта</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>помоћ ?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Пример улаза</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Формати улаза</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Обриши</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Премести у архивску фасциклу</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>Ништа</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>Ажурирање је преузето. Напустите File Converter и инсталирајте ажурирање сада.</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>Инсталирај када напустим File Converter</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>Пријави проблем</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>Помери доле изабрани присет</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>Помери горе изабрани присет</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>Кодирање са константном брзином битова</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>Кодирање са променљивом брзином битова</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>Ротација од 90° у смеру супротном од казаљке на сату</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Уреду</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>Ротација од 180°</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Music\Artist\Album\Song.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>Излаз</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): пут до улазне датотеке
+(f): име улазне датотеке
+(o): тип проширења датотеке
+(i): тип проширења улазне датотеке
+(d0): родитељска фасцикла улаза
+(d1): родитељска подфасцикла улаза
+...
+(n:i): индекс броја странице
+(n:c): укупан број страница
+
+Специјални путеви:
+(p:d): пут до фасцикле документи
+(p:m): пут до фасцикле музика
+(p:v): пут до фасцикле видео
+(p:p): пут до фасцикле слике
+
+котистите maj за велика слова</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Излазни формат</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Присет</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Име присета</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Квалитет :</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>Препоручени опсег брзине преноса у плавој боји</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>Обриши</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Окрени :</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сачувај</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Скала :</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>Погледајте дневник промена ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Подешавања</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>Подешавања</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>Ротација за 90° у смеру казаљке на сату</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>Доступно је ажурирање за File Converter. Топло се препоручује да га инсталирате што је пре могуће!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>Преузимање надоградње је у току...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>Ажурирања програма</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>Дефинишите однос 'величина датотеке' у односу на 'квалитет видеа'. Нижа вредност ће вам дати мању датотеку, већа вредност ће вам дати бољи квалитет видеа.</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Брже</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Брзо</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Средње</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Спорије</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Спро</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Веома брзо</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>Дефинишите однос 'величина датотеке' у односу на 'трајање компресије'. Спора компресија ће вам дати мању датотеку (за исти квалитет видео записа) од брже компресије.</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Ултра брзина</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Веома брзо</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Веома споро</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Видео</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM signed 16-bit little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM signed 24-bit little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM signed 32-bit little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM signed 8-bit little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>Ништа</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>Без окретања</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Конверзија</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Екстракција</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Неуспешно</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>На чекању</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>Прочитајте улазну слику</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>Прочитај датотеку</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Анимирана слика</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Звук</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Датотека</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Слика</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Видео</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>Трајање чекања пре изласка из апликације</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Језик</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Максималан број истовремених конверзија</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>Нови присет</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###Преузимање дневника промена...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>Архива конверзација</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>Отказано.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>Неуспешно проналажење извршне датотеке ffmpeg. Требало би да покушате да поново инсталирате апликацију.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>Екстракција звука CD нумере није успела.</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>CD диск није спреман.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>Неуспрешно покретање ffmpeg-а.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>Неуспешно креирање фасцикли излазне путање.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>Неуспешно генерисање јединствене путање излазне датотеке.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>Неуспешно читање CD диска '{0}'.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>Није могуће преузети слово диска улазне путање.</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>Неуспешно преузимање броја нумере са cda улазне путање.</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>Није могуће користити CD диск јер је отворен.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>Тип улазне датотеке није компатибилан са изабраним типом излазне датотеке.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>Неважећа излазна путања генерисана шаблоном путање излазне датотеке.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>Неподржани излазни формат '{0}'.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>Број канала :</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>Промените број канала улазне датотеке.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Моно</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>Исто као улазна датотека</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Стерео</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**Овај програм је бесплатан софтвер**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>Можете га поново дистрибуирати и/или модификовати под условима GNU Опште јавне лиценце.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>Овај програм се дистрибуира у нади да ће бити користан, али БЕЗ ИКАКВЕ ГАРАНЦИЈЕ. За више детаља погледајте GNU Општу јавну лиценцу (доступну у инсталационој фасцикли: `LICENSE.md`).</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>Апликација се прекида.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>Апликација ће се аутоматски прекинути за {0} секунди.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>Апликација ће се аутоматски прекинути за 1 секунду.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Остало</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Немогуће пронаћи излазнз(e) датотеку(e).</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>Конверзија није успела, али постоји излазна датотека.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Припрема конверзије</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Office мора бити инсталиран да би се конвертовала Office документа.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Неуспех при отварању документа са Microsoft Office-ом (проверите да ли је ваша лиценца/инсталација важећа).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Excel мора бити инсталиран да би се конвертовала Excel документа.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>Microsoft PowerPoint мора бити инсталиран да би се конвертовала PowerPoint документа.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Word мора бити инсталиран да би се конвертовала Word документа.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Отворите File Converter интернет страницу</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>Грешка током покретања конверзије.</value>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>Нова фасцикла</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>Нова фасцикла</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>Фасцикла</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>Име фасцикле</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Напредни режим</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Прилагођени аргументи</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Прилагођени аргументи командне линије FFMPEG</value>
+  </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>Ниједан присет није изабран</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>Извоз</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>Увоз</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>Дуплирај присет</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Откажи</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Грешка</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>Није могуће учитати подешавање корисника за конвертер датотека. Желите ли да се вратите на подразумевана подешавања?</value>
+  </data>
+  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
+    <value>Копирај датотеке у међуспремник након конверзије</value>
+  </data>
+</root>
