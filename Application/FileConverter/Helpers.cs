@@ -199,6 +199,7 @@ namespace FileConverter
             switch (outputType)
             {
                 case OutputType.Aac:
+                case OutputType.m4a:
                 case OutputType.Flac:
                 case OutputType.Mp3:
                 case OutputType.Ogg:

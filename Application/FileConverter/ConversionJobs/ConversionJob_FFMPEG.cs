@@ -122,6 +122,17 @@ namespace FileConverter.ConversionJobs
                     }
 
                     break;
+                case OutputType.m4a:
+                    {
+                        string channelArgs = ConversionJob_FFMPEG.ComputeAudioChannelArgs(this.ConversionPreset);
+                        //https://stackoverflow.com/questions/62486428/using-ffmpeg-to-convert-flac-to-alac-with-cover-art
+                        string encoderArgs = $"-c:a alac -c:v copy {channelArgs}";
+
+                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+
+                        this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
+                    }
+                    break;
 
                 case OutputType.Avi:
                     {
