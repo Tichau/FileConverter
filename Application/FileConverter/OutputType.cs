@@ -7,6 +7,7 @@ namespace FileConverter
         None,
 
         Aac,
+        m4a,
         Avi,
         Flac,
         Gif,
