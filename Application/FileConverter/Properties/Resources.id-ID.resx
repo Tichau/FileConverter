@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+<!--
+  Microsoft ResX Schema
+
+  Version 2.0
+
+  The primary goals of this format is to allow a simple XML format
+  that is mostly human readable. The generation and parsing of the
+  various data types are done through the TypeConverter classes
+  associated with the data types.
+
+  Example:
+
+  ... ado.net/XML headers & schema ...
+  <resheader name="resmimetype">text/microsoft-resx</resheader>
+  <resheader name="version">2.0</resheader>
+  <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+  <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+  <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+  <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+  <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+      <value>[base64 mime encoded serialized .NET Framework object]</value>
+  </data>
+  <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+      <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+      <comment>This is a comment</comment>
+  </data>
+
+  There are any number of "resheader" rows that contain simple
+  name/value pairs.
+
+  Each data row contains a name, and value. The row also contains a
+  type or mimetype. Type corresponds to a .NET class that support
+  text/value conversion through the TypeConverter architecture.
+  Classes that don't support this are serialized and stored with the
+  mimetype set.
+
+  The mimetype is used for serialized objects, and tells the
+  ResXResourceReader how to depersist the object. This is currently not
+  extensible. For a given mimetype the value must be set accordingly:
+
+  Note - application/x-microsoft.net.object.binary.base64 is the format
+  that the ResXResourceWriter will generate, however the reader can
+  read any of the formats listed below.
+
+  mimetype: application/x-microsoft.net.object.binary.base64
+  value   : The object must be serialized with
+          : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+          : and then encoded with base64 encoding.
+
+  mimetype: application/x-microsoft.net.object.soap.base64
+  value   : The object must be serialized with
+          : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+          : and then encoded with base64 encoding.
+
+  mimetype: application/x-microsoft.net.object.bytearray.base64
+  value   : The object must be serialized into a byte array
+          : using a System.ComponentModel.TypeConverter
+          : and then encoded with base64 encoding.
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Tentang</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Memungkinkan Anda memilih apa yang ingin dilakukan dengan Berkas masukan jika konversi berhasil</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Tindakan ketika konversi berhasil</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Preset baru</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Aplikasi</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>Secara otomatis memeriksa pembaruan saat File Converter dimulai</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Keluar otomatis ketika semua konversi selesai</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Sesuaikan ke ukuran pangkat 2 terendah</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Tutup</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Preset Konversi</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>File yang akan dikonversi</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>Dikonversi dari</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Buka dokumentasi</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Donasi</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Jangan lupa untuk menghargai karya saya jika Anda menyukainya :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>Pembaruan akan diunduh di latar belakang, dan dipasang setelah Anda keluar dari File Converter</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>Pasang ketika saya keluar dari File Converter</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Pengkodean :</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>Kecepatan pengkodean :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter adalah ekstensi shell</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>Itu berarti terintegrasi ke dalam Windows explorer</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>Template nama file</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>Frame per detik :</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>Buka halaman proyek GitHub</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>bantuan ?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Contoh masukan</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Format masukan</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Pindahkan ke folder arsip</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>Tidak ada</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>Pembaruan telah diunduh. Keluar dari File Converter dan pasang pembaruan sekarang</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>Pasang ketika saya keluar dari File Converter</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>Laporkan masalah</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>Pindahkan preset terpilih ke bawah</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>Pindahkan preset terpilih ke atas</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>Pengkodean bitrate konstan</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>Pengkodean bitrate variabel</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>Rotasi 90° berlawanan arah jarum jam</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Oke</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>Rotasi 180°</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Musik\Artis\Album\Lagu.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>Keluaran</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): jalur file masukan
+(f): nama file masukan
+(o): tipe ekstensi keluaran
+(i): tipe ekstensi masukan
+(d0): folder induk masukan
+(d1): folder sub induk masukan
+...
+(n:i): indeks nomor halaman
+(n:c): jumlah total halaman
+
+Jalur khusus:
+(p:d): jalur dokumen saya
+(p:m): jalur musik saya
+(p:v): jalur video saya
+(p:p): jalur gambar saya
+
+gunakan huruf besar untuk versi kapital</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Format keluaran</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Preset</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Nama Preset</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Kualitas :</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>Rentang bitrate yang direkomendasikan dalam warna biru</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Putar :</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Simpan</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Skala :</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>Lihat log perubahan ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Pengaturan File Converter</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>Pengaturan</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>Rotasi 90° searah jarum jam</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>Pembaruan untuk File Converter tersedia. Sangat disarankan untuk memasangnya segera!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>Unduhan pembaruan sedang berlangsung...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>Pembaruan File Converter</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>Tentukan rasio 'ukuran file' berbanding 'kualitas video'. Nilai lebih rendah akan memberikan file lebih kecil, nilai lebih besar memberikan kualitas video lebih baik.</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Lebih Cepat</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Cepat</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Sedang</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Lebih Lambat</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Lambat</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Super Cepat</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>Tentukan rasio 'ukuran file' berbanding 'durasi kompresi'. Kompresi lambat akan memberikan file lebih kecil (untuk kualitas video yang sama) dibanding kompresi lebih cepat.</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Ultra Cepat</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Sangat Cepat</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Sangat Lambat</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM signed 16-bit little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM signed 24-bit little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM signed 32-bit little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM signed 8-bit little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>Tidak ada</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>Tidak ada rotasi</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Konversi</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Selesai</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Ekstraksi</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Gagal</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>Dalam antrian</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>Membaca gambar masukan</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>Membaca dokumen</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Gambar Animasi</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Dokumen</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Gambar</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>Durasi menunggu sebelum aplikasi keluar</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Bahasa</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Jumlah maksimum konversi bersamaan</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>Preset baru</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###Mengunduh log perubahan ...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>Arsip Konversi</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>Dibatalkan.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>Gagal menemukan program ffmpeg. Anda sebaiknya mencoba memasang ulang aplikasi.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>Ekstraksi trek CD Audio gagal</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>Drive CD tidak siap.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>Gagal menjalankan ffmpeg.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>Gagal membuat folder jalur keluaran.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>Gagal menghasilkan jalur file keluaran yang unik.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>Gagal membaca drive CD '{0}'.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>Gagal mengambil huruf drive dari jalur masukan.</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>Gagal mengambil nomor trek dari jalur masukan cda.</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>Gagal menggunakan drive CD karena sedang terbuka.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>Tipe file masukan tidak kompatibel dengan tipe file keluaran yang dipilih.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>Jalur keluaran yang dihasilkan oleh template jalur file keluaran tidak valid.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>Format keluaran '{0}' tidak didukung.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>Jumlah kanal :</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>Ubah jumlah kanal dari file masukan.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Mono</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>Sama dengan file masukan</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Stereo</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>Untuk menggunakan File Converter silakan buka explorer dan klik kanan pada file yang Anda inginkan untuk memunculkan menu konteks di mana Anda akan menemukan perintah File Converter (lihat dokumentasi online untuk melihat daftar format file yang kompatibel).</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**Program ini adalah perangkat lunak bebas**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>Anda dapat mendistribusikan ulang dan/atau memodifikasinya di bawah ketentuan Lisensi Publik Umum GNU.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>Program ini didistribusikan dengan harapan akan bermanfaat, tetapi TANPA JAMINAN APAPUN. Lihat Lisensi Publik Umum GNU (tersedia di folder instalasi: `LICENSE.md`) untuk detail lebih lanjut.</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>Aplikasi sedang dimatikan.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>Aplikasi akan dimatikan secara otomatis dalam {0} detik.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>Aplikasi akan dimatikan secara otomatis dalam 1 detik.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Lainnya</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Tidak dapat menemukan file keluaran.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>Tugas konversi gagal tetapi ada file keluaran yang ada.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Mempersiapkan konversi</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Office harus terpasang untuk mengkonversi dokumen Office.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Gagal membuka dokumen dengan Microsoft Office (periksa apakah lisensi/instalasi Anda valid).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Excel harus terpasang untuk mengkonversi dokumen Excel.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>Microsoft PowerPoint harus terpasang untuk mengkonversi dokumen PowerPoint.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Word harus terpasang untuk mengkonversi dokumen Word.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Buka situs web File Converter</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>Kesalahan saat inisialisasi tugas konversi.</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>Ekspor</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>Impor</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>Duplikat preset</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Batal</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Mode Lanjutan</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Argumen Kustom</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Argumen baris perintah FFMPEG kustom</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Kesalahan</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>Tidak dapat memuat pengaturan pengguna file converter. Apakah Anda ingin kembali ke pengaturan default?</value>
+  </data>
+</root>
