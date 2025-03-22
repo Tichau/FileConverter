@@ -2078,6 +2078,20 @@
         <Settings Key="FFMPEGCustomCommand" Value="-filter:a &quot;rubberband=pitch=1.059463094352953&quot;" />
         <OutputFileNameTemplate>(p)(f) (+1st)</OutputFileNameTemplate>
     </ConversionPreset>
+    <ConversionPreset Name="Extract MP4 to PNG (First Frame)" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>mp4</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
+        <Settings Key="FFMPEGCustomCommand" Value="-vframes 1" />
+        <OutputFileNameTemplate>(p)(f)_frame</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="Extract MP4 to PNG (Frames)" OutputType="Png" IsDefaultSettings="true">
+        <InputTypes>mp4</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="EnableFFMPEGCustomCommand" Value="True" />
+        <Settings Key="FFMPEGCustomCommand" Value="-vf fps=1" />
+        <OutputFileNameTemplate>(p)(f)_frame_%04d</OutputFileNameTemplate>
+    </ConversionPreset>
     <CheckUpgradeAtStartup>true</CheckUpgradeAtStartup>
     <CopyFilesInClipboardAfterConversion>false</CopyFilesInClipboardAfterConversion>
 </Settings>
