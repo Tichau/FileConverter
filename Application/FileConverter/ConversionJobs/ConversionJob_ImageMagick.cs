@@ -70,35 +70,17 @@ namespace FileConverter.ConversionJobs
             }
             else
             {
-                this.pageCount = 1;
-                MagickReadSettings readSettings = new MagickReadSettings();
-
-                string inputExtension = System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant();
-                switch (inputExtension)
-                {
-                    case ".cr2":
-                        // Requires an explicit image format otherwise the image is interpreted as a TIFF image.
-                        readSettings.Format = MagickFormat.Cr2;
-                        break;
-
-                    case ".dng":
-                        // Requires an explicit image format otherwise the image is interpreted as a TIFF image.
-                        readSettings.Format = MagickFormat.Dng;
-                        break;
-
-                    case ".gif":
-                        // Get the first frame of the gif for conversion.
-                        // Maybe in the future make this user selectable.
-                        readSettings.FrameIndex = 0;
-                        break;
-
-                    default:
-                        break;
-                }
-
+                this.UserState = Properties.Resources.ConversionStateReadIntputImage;
+                
+                // Create settings to preserve all metadata when reading
+                var readSettings = new MagickReadSettings 
+                { 
+                    PreserveMetadata = true 
+                };
+                
+                // Use the settings when reading the input file
                 using (MagickImage image = new MagickImage(this.InputFilePath, readSettings))
                 {
-                    Debug.Log($"Load image {this.InputFilePath} succeed.");
                     this.ConvertImage(image);
                 }
             }
@@ -214,6 +196,13 @@ namespace FileConverter.ConversionJobs
                 case OutputType.Png:
                     // http://stackoverflow.com/questions/27267073/imagemagick-lossless-max-compression-for-png
                     image.Quality = 95;
+
+                    image.SetProfile(Profile.Exif);
+                    image.SetProfile(Profile.Iptc);
+                    image.SetProfile(Profile.Xmp);
+                    
+                    image.SetDefine("png:preserve-iCCP", "true");
+                    image.SetDefine("png:include-exif", "true");
                     break;
 
                 case OutputType.Jpg:
@@ -235,6 +224,7 @@ namespace FileConverter.ConversionJobs
                     return;
             }
 
+            // Write image with preserved metadata
             image.Write(this.OutputFilePath);
             image.Progress -= this.Image_Progress;
         }
