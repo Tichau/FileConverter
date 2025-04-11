@@ -488,7 +488,7 @@ use maj for uppercase version</value>
     <value>Mono</value>
   </data>
   <data name="SameChannelCountOption" xml:space="preserve">
-    <value>Same than input file</value>
+    <value>Same as input file</value>
   </data>
   <data name="StereoOption" xml:space="preserve">
     <value>Stereo</value>
