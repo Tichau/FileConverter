@@ -7,10 +7,14 @@
              xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
              xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
              xmlns:services="clr-namespace:FileConverter.Services"
+             xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+             xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
              ShutdownMode="OnLastWindowClose">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ui:ThemeResources />
+                <ui:XamlControlsResources />
                 <ResourceDictionary Source="Views/Resources/Colors.xaml"/>
                 <ResourceDictionary Source="Views/Resources/CustomStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
