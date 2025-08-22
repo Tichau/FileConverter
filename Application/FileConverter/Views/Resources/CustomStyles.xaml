@@ -97,7 +97,7 @@
     </Style>
 
     <Style TargetType="{x:Type Hyperlink}">
-        <Setter Property="Foreground" Value="{DynamicResource Hyperlink_ForegroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource HyperlinkForeground}" />
     </Style>
 
     <Style TargetType="{x:Type controls:IconButton}">
@@ -137,17 +137,18 @@
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
                     <Border Name="border" BorderThickness="1,1,1,0" CornerRadius="3,3,0,0"
-                            Background="{DynamicResource TabItem_BackgroundBrush}"
+                            Background="Transparent"
                             BorderBrush="{DynamicResource TabItem_BorderBrush}">
                         <ContentPresenter x:Name="contentSite"  
                             VerticalAlignment="Center"  
                             HorizontalAlignment="Center"  
                             ContentSource="Header"  
-                            Margin="18,4"/>
+                            Margin="18,4"
+                            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource TabItem_IsSelected_BackgroundBrush}" />
+                            <Setter Property="Background" TargetName="border" Value="Transparent" />
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource TabItem_IsSelected_BorderBrush}" />
                             <Setter Property="TextElement.FontWeight" TargetName="contentSite" Value="Bold" />
                         </Trigger>
@@ -158,12 +159,12 @@
     </Style>
 
     <Style TargetType="{x:Type TabControl}">
-        <Setter Property="Background" Value="{DynamicResource TabControl_BackgroundBrush}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource TabControl_BorderBrush}" />
     </Style>
 
     <Style TargetType="{x:Type TreeView}">
-        <Setter Property="Background" Value="{DynamicResource TreeView_BackgroundBrush}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource TreeView_BorderBrush}" />
     </Style>
 
