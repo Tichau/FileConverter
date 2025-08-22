@@ -12,7 +12,7 @@
 
     <!-- Data validation styles -->
 
-    <Style TargetType="{x:Type TextBox}">
+    <!--<Style TargetType="{x:Type TextBox}">
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>
                 <ControlTemplate>
@@ -28,11 +28,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <!-- Button -->
 
-    <Style TargetType="{x:Type Button}">
+    <!--<Style TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -62,7 +62,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <Style x:Key="TileButton" TargetType="{x:Type Button}">
         <Setter Property="Template">
@@ -167,9 +167,9 @@
         <Setter Property="BorderBrush" Value="{DynamicResource TreeView_BorderBrush}" />
     </Style>
 
-    <Style TargetType="{x:Type Window}">
+    <!--<Style TargetType="{x:Type Window}">
         <Setter Property="Background" Value="{DynamicResource Window_BackgroundBrush}" />
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>
     
