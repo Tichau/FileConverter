@@ -7,6 +7,14 @@
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:controls="clr-namespace:FileConverter.Controls"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
+        ui:ThemeManager.IsThemeAware="True"
+        ui:ThemeManager.RequestedTheme="Default"
+        ui:TitleBar.ExtendViewIntoTitleBar="False"
+        ui:TitleBar.Height="48"
+        ui:WindowHelper.SystemBackdropType="Mica"
+        ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d" x:Class="FileConverter.Views.MainWindow"
         Height="500" Width="950" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -28,7 +36,7 @@
             ProgressValue="{Binding ConversionJobs, Converter={StaticResource ConversionJobsToProgressValue}}" />
     </Window.TaskbarItemInfo>
 
-    <Grid Margin="10">
+    <Grid Margin="10 0 10 10">
         <Grid.RowDefinitions>
             <RowDefinition Height="64" />
             <RowDefinition Height="*" />

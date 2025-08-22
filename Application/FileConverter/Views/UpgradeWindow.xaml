@@ -5,6 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
+        ui:ThemeManager.IsThemeAware="True"
+        ui:ThemeManager.RequestedTheme="Default"
+        ui:TitleBar.ExtendViewIntoTitleBar="False"
+        ui:TitleBar.Height="48"
+        ui:WindowHelper.SystemBackdropType="Mica"
+        ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
         Title="{x:Static project:Resources.UpgradeWindowTitle}"
         WindowStartupLocation="CenterScreen" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
@@ -18,7 +26,7 @@
     </behaviors:Interaction.Triggers>
     <Window.Resources>
     </Window.Resources>
-    <Grid>
+    <Grid Margin="10 0 10 10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

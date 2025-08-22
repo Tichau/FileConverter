@@ -7,6 +7,15 @@
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
+        ui:ThemeManager.IsThemeAware="True"
+        ui:ThemeManager.RequestedTheme="Default"
+        ui:TitleBar.ExtendViewIntoTitleBar="False"
+        ui:TitleBar.Height="48"
+        ui:WindowHelper.SystemBackdropType="Mica"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        SizeToContent="Height"
         mc:Ignorable="d" Icon="/FileConverter;component/Resources/ApplicationIcon.ico" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="NoResize" 
         Width="1000" Height="880"
         DataContext="{Binding Help, Source={StaticResource Locator}}">
@@ -20,13 +29,13 @@
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(fileConverter:Application.ApplicationVersion)"/>
     </Window.Title>
-    <StackPanel Margin="5" VerticalAlignment="Center">
+    <StackPanel Margin="10 0 10 10" VerticalAlignment="Center">
         <TextBlock Margin="0,0,0,4"  Text="{x:Static project:Resources.FileConverterStartHelp1}" TextWrapping="Wrap" FontWeight="Bold" FontSize="13.333"/>
         <TextBlock Text="{x:Static project:Resources.FileConverterStartHelp2}" TextWrapping="Wrap"/>
         <TextBlock Text="{x:Static project:Resources.FileConverterStartHelp3}" TextWrapping="Wrap" />
         <Image Margin="0,7,0,7" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" 
                gif:ImageBehavior.AnimatedSource="/FileConverter;component/Resources/FileConverterUsage.gif"
                Stretch="Fill"/>
-        <Button Content="{x:Static project:Resources.Ok}" Height="28" Command="{Binding CloseCommand}"/>
+        <Button HorizontalAlignment="Stretch" Content="{x:Static project:Resources.Ok}" Command="{Binding CloseCommand}"/>
     </StackPanel>
 </Window>

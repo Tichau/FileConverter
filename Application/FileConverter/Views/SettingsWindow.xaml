@@ -9,6 +9,14 @@
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
         xmlns:controls="clr-namespace:FileConverter.Controls"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
+        ui:ThemeManager.IsThemeAware="True"
+        ui:ThemeManager.RequestedTheme="Default"
+        ui:TitleBar.ExtendViewIntoTitleBar="False"
+        ui:TitleBar.Height="48"
+        ui:WindowHelper.SystemBackdropType="Mica"
+        ui:WindowHelper.UseModernWindowStyle="True"
         x:Class="FileConverter.Views.SettingsWindow"
         MinWidth="800" MinHeight="600" 
         Width="1050" Height="700"
@@ -209,11 +217,11 @@
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
     </Window.Title>
 
-    <Grid Margin="10">
+    <Grid Margin="10 0 10 10">
         <Grid.RowDefinitions>
             <RowDefinition Height="53"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
@@ -281,6 +289,7 @@
                                     </Style.Resources>
 
                                     <Setter Property="IsExpanded" Value="True"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
 
                                     <EventSetter Event="PreviewMouseLeftButtonDown"  Handler="TreeView_MouseDown"/>
                                     <EventSetter Event="MouseUp"  Handler="TreeView_MouseUp"/>

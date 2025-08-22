@@ -7,6 +7,14 @@
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:local="clr-namespace:FileConverter"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
+        ui:ThemeManager.IsThemeAware="True"
+        ui:ThemeManager.RequestedTheme="Default"
+        ui:TitleBar.ExtendViewIntoTitleBar="False"
+        ui:TitleBar.Height="48"
+        ui:WindowHelper.SystemBackdropType="Mica"
+        ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
         Height="600" Width="800" Icon="/FileConverter;component/Resources/ApplicationIcon.ico"
         DataContext="{Binding Diagnostics, Source={StaticResource Locator}}">
@@ -18,7 +26,7 @@
     <Window.Title>
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
     </Window.Title>
-    <Grid>
+    <Grid Margin="10 0 10 10">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition Height="*" />
