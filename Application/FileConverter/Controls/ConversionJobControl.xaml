@@ -15,7 +15,7 @@
         <Grid Margin="0,4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="64"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Grid Margin="10" Grid.Column="0">
@@ -54,7 +54,7 @@
                 </StackPanel>
             </Grid>
 
-            <Button Margin="3" Grid.Column="1" Height="57" 
+            <Button Margin="3" Grid.Column="1" Height="Auto" 
                     Visibility="{Binding State, ConverterParameter=|InProgress|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}" 
                     Command="{Binding CancelCommand}" ToolTip="{x:Static project:Resources.CancelJobTooltip}">
                 <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" Style="{StaticResource EnableDisableImageStyle}" />
