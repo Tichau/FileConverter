@@ -13,7 +13,7 @@
         xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
         ui:ThemeManager.IsThemeAware="True"
         ui:ThemeManager.RequestedTheme="Default"
-        ui:TitleBar.ExtendViewIntoTitleBar="False"
+        ui:TitleBar.ExtendViewIntoTitleBar="True"
         ui:TitleBar.Height="48"
         ui:WindowHelper.SystemBackdropType="Mica"
         ui:WindowHelper.UseModernWindowStyle="True"
@@ -219,7 +219,7 @@
         <Binding Converter="{StaticResource ApplicationVersionToApplicationName}" Mode="OneWay" Path="(local:Application.ApplicationVersion)"/>
     </Window.Title>
 
-    <Grid Margin="10 0 10 10">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="53"/>
             <RowDefinition Height="*"/>
