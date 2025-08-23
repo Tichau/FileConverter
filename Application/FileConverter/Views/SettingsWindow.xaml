@@ -65,137 +65,139 @@
 
             <DataTemplate x:Key="PresetSelectedTemplate" DataType="{x:Type viewModels:SettingsViewModel}">
                 <GroupBox Header="{x:Static project:Resources.Preset}">
-                    <Grid Margin="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2.5*"/>
-                            <ColumnDefinition Width="*" MaxWidth="240"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                    <ui:ScrollViewerEx>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2.5*"/>
+                                <ColumnDefinition Width="*" MaxWidth="240"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                        <DockPanel Grid.Row="0" Grid.Column="0">
-                            <Label Content="{x:Static project:Resources.PresetName}" Margin="0,0,5,0"/>
-                            <TextBox Margin="5,2,5,2" TextWrapping="Wrap" FontSize="15"
+                            <DockPanel Grid.Row="0" Grid.Column="0">
+                                <Label Content="{x:Static project:Resources.PresetName}" Margin="0,0,5,0"/>
+                                <TextBox Margin="5,2,5,2" TextWrapping="Wrap" FontSize="15"
                                      Loaded="SelectedPresetName_OnLoaded"
                                      Text="{Binding SelectedPreset.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                        </DockPanel>
+                            </DockPanel>
 
-                        <GroupBox Header="{x:Static project:Resources.OutputFormat}" Grid.Row="1" Grid.Column="0" Margin="5">
-                            <StackPanel>
-                                <ComboBox Margin="5" Height="29" VerticalAlignment="Top" 
+                            <GroupBox Header="{x:Static project:Resources.OutputFormat}" Grid.Row="1" Grid.Column="0" Margin="5">
+                                <StackPanel>
+                                    <ComboBox Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                           ItemsSource="{Binding OutputTypes}"
                                           SelectedItem="{Binding SelectedPreset.Preset.OutputType, Converter={StaticResource OutputTypeEnumToViewModel}, Mode=TwoWay}">
-                                    <ComboBox.GroupStyle>
-                                        <GroupStyle>
-                                            <GroupStyle.HeaderTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Foreground="{DynamicResource MainDarkBrush}" Background="{DynamicResource MainLighterBrush}" FontWeight="Bold" Padding="5,5,5,5"
+                                        <ComboBox.GroupStyle>
+                                            <GroupStyle>
+                                                <GroupStyle.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock FontWeight="Bold" Padding="5,5,5,5"
                                                                 Text="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"/>
-                                                </DataTemplate>
-                                            </GroupStyle.HeaderTemplate>
-                                        </GroupStyle>
-                                    </ComboBox.GroupStyle>
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate DataType="{x:Type viewModels:OutputTypeViewModel}">
-                                            <TextBlock Text="{Binding Type}" Padding="10,2,2,2"/>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                                    </DataTemplate>
+                                                </GroupStyle.HeaderTemplate>
+                                            </GroupStyle>
+                                        </ComboBox.GroupStyle>
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate DataType="{x:Type viewModels:OutputTypeViewModel}">
+                                                <TextBlock Text="{Binding Type}" Padding="10,2,2,2"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
 
-                                <ContentControl Content="{Binding SelectedPreset.Preset}"
+                                    <ContentControl Content="{Binding SelectedPreset.Preset}"
                                                 Style="{StaticResource ConversionSettingsSelectorStyle}">
-                                </ContentControl>
+                                    </ContentControl>
 
-                                <Separator/>
+                                    <Separator/>
 
-                                <!-- Output file name template -->
+                                    <!-- Output file name template -->
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="23"/>
+                                            <RowDefinition Height="23"/>
+                                            <RowDefinition Height="23"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Content="{x:Static project:Resources.FileNameTemplate}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                                        <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" 
+                                                 ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}"
+                                                 Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                                        <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10"/>
+                                        <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center"/>
+                                        <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center">
+                                            <TextBlock.Text>
+                                                <MultiBinding Converter="{StaticResource FileNameConverter}">
+                                                    <Binding Source="{x:Static project:Resources.OutputFileNameTemplateSample}"/>
+                                                    <Binding Path="SelectedPreset.Preset.OutputType" Mode="OneWay"/>
+                                                    <Binding Path="SelectedPreset.Preset.OutputFileNameTemplate" Mode="OneWay"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
+                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
+
+                                </StackPanel>
+                            </GroupBox>
+
+                            <GroupBox Grid.Row="1" Grid.Column="1" Header="{x:Static project:Resources.InputFormats}" Margin="5">
                                 <Grid Margin="5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="30"/>
-                                        <RowDefinition Height="23"/>
-                                        <RowDefinition Height="23"/>
-                                        <RowDefinition Height="23"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="22"/>
                                     </Grid.RowDefinitions>
-                                    <Label Content="{x:Static project:Resources.FileNameTemplate}" Grid.Row="0" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
-                                    <TextBox Grid.Row="0" Grid.Column="1" Margin="5,2,25,2" TextWrapping="Wrap" Width="Auto" 
-                                                 ToolTip="{x:Static project:Resources.OutputFilePathTemplateHelp}"
-                                                 Text="{Binding SelectedPreset.OutputFileNameTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                                    <Label Content="{x:Static project:Resources.InputExample}" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10"/>
-                                    <TextBlock Text="{x:Static project:Resources.OutputFileNameTemplateSample}" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center"/>
-                                    <Label Content="{x:Static project:Resources.OutputExample}" Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Margin="0,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="5,0,5,0" Foreground="{DynamicResource LighterForegroundBrush}" FontSize="10" VerticalAlignment="Center">
-                                        <TextBlock.Text>
-                                            <MultiBinding Converter="{StaticResource FileNameConverter}">
-                                                <Binding Source="{x:Static project:Resources.OutputFileNameTemplateSample}"/>
-                                                <Binding Path="SelectedPreset.Preset.OutputType" Mode="OneWay"/>
-                                                <Binding Path="SelectedPreset.Preset.OutputFileNameTemplate" Mode="OneWay"/>
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>
-                                    <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
-                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
-                                    </TextBlock>
-                                </Grid>
 
-                            </StackPanel>
-                        </GroupBox>
-
-                        <GroupBox Grid.Row="1" Grid.Column="1" Header="{x:Static project:Resources.InputFormats}" Margin="5">
-                            <Grid Margin="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="25"/>
-                                    <RowDefinition Height="25"/>
-                                    <RowDefinition Height="22"/>
-                                </Grid.RowDefinitions>
-
-                                <TreeView x:Name="InputTypesTreeView" ItemsSource="{Binding InputCategories}" >
-                                    <TreeView.Resources>
-                                        <HierarchicalDataTemplate DataType="{x:Type viewModels:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
-                                            <CheckBox Height="20" VerticalAlignment="Top" Margin="2" IsThreeState="True"
+                                    <TreeView x:Name="InputTypesTreeView" ItemsSource="{Binding InputCategories}" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                        <TreeView.Resources>
+                                            <HierarchicalDataTemplate DataType="{x:Type viewModels:InputExtensionCategory}" ItemsSource="{Binding InputExtensions}">
+                                                <CheckBox Height="20" VerticalAlignment="Top" Margin="2" IsThreeState="True"
                                               Content="{Binding Name, Converter={StaticResource ObjectToLocalizedString}}"
                                               IsChecked="{Binding IsChecked, Mode=TwoWay}">
-                                            </CheckBox>
-                                        </HierarchicalDataTemplate>
-                                        <DataTemplate DataType="{x:Type viewModels:InputExtension}">
-                                            <CheckBox Height="20" VerticalAlignment="Top" Margin="2"
-                                              Content="{Binding Name}" Foreground="{Binding ForegroundBrush}" ToolTip="{Binding ToolTip}"
+                                                </CheckBox>
+                                            </HierarchicalDataTemplate>
+                                            <DataTemplate DataType="{x:Type viewModels:InputExtension}">
+                                                <CheckBox Height="20" VerticalAlignment="Top" Margin="2"
+                                              Content="{Binding Name}" ToolTip="{Binding ToolTip}"
                                               IsChecked="{Binding IsChecked, Mode=TwoWay}">
-                                            </CheckBox>
-                                        </DataTemplate>
-                                    </TreeView.Resources>
-                                    <TreeView.ItemContainerStyle>
-                                        <Style TargetType="TreeViewItem">
-                                            <Setter Property="IsExpanded" Value="True"/>
-                                        </Style>
-                                    </TreeView.ItemContainerStyle>
-                                </TreeView>
+                                                </CheckBox>
+                                            </DataTemplate>
+                                        </TreeView.Resources>
+                                        <TreeView.ItemContainerStyle>
+                                            <Style TargetType="TreeViewItem">
+                                                <Setter Property="IsExpanded" Value="True"/>
+                                            </Style>
+                                        </TreeView.ItemContainerStyle>
+                                    </TreeView>
 
-                                <Label Grid.Row="1" Content="{x:Static project:Resources.ActionWhenConversionSucceedTitle}" ToolTip="{x:Static project:Resources.ActionWhenConversionSucceedDescription}" />
-                                <ComboBox Grid.Row="2" ItemsSource="{Binding InputPostConversionActions, Mode=OneTime}"
+                                    <Label Grid.Row="1" Content="{x:Static project:Resources.ActionWhenConversionSucceedTitle}" ToolTip="{x:Static project:Resources.ActionWhenConversionSucceedDescription}" />
+                                    <ComboBox Grid.Row="2" ItemsSource="{Binding InputPostConversionActions, Mode=OneTime}"
                                               SelectedItem="{Binding SelectedPreset.Preset.InputPostConversionAction, Mode=TwoWay}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}}" />
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <ContentPresenter Content="{Binding Converter={StaticResource ObjectToLocalizedString}}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
 
-                                <TextBlock Grid.Row="3" Margin="0,5,0,0">
+                                    <TextBlock Grid.Row="3" Margin="0,5,0,0">
                                         <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
-                                </TextBlock>
-                            </Grid>
-                        </GroupBox>
-                    </Grid>
+                                    </TextBlock>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </ui:ScrollViewerEx>
                 </GroupBox>
             </DataTemplate>
 

@@ -317,7 +317,7 @@
 
             <DockPanel Grid.Row="0" Grid.Column="0">
                 <Label Content="{x:Static project:Resources.VideoTitle}" FontWeight="Bold" Margin="17,0,0,0"/>
-                <Label Content="(H.264)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" />
+                <Label Content="(H.264)" FontWeight="Light" Foreground="{DynamicResource HyperlinkForeground}" />
             </DockPanel>
 
             <Label Grid.Row="1" Grid.Column="0" Content="{x:Static project:Resources.Quality}" ToolTip="{x:Static project:Resources.VideoEncodingQualityTooltip}" HorizontalContentAlignment="Right"/>
@@ -356,20 +356,21 @@
             <!--Rotate-->
             <Label Content="{x:Static project:Resources.Rotate}" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"/>
             <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
-                <RadioButton Content="{x:Static project:Resources.ZeroDegreesRotationTitle}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"
+                <RadioButton MinWidth="0" Content="{x:Static project:Resources.ZeroDegreesRotationTitle}" ToolTip="{x:Static project:Resources.ZeroDegreesRotationTooltip}" Margin="0,7,7,7"
                                  IsChecked="{Binding Settings, ConverterParameter=VideoRotation|0, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
-                <RadioButton Content="{x:Static project:Resources.NinetyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"
+                <RadioButton MinWidth="0" Content="{x:Static project:Resources.NinetyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.NinetyDegreesRotationTooltip}" Margin="7"
                                  IsChecked="{Binding Settings, ConverterParameter=VideoRotation|90, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
-                <RadioButton Content="{x:Static project:Resources.OneEightyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"
+                <RadioButton MinWidth="0" Content="{x:Static project:Resources.OneEightyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.OneEightyDegreesRotationTooltip}" Margin="7"
                                  IsChecked="{Binding Settings, ConverterParameter=VideoRotation|180, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
-                <RadioButton Content="{x:Static project:Resources.TwoSeventyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"
+                <RadioButton MinWidth="0" Content="{x:Static project:Resources.TwoSeventyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"
                                  IsChecked="{Binding Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
             </StackPanel>
 
             <DockPanel Grid.Row="5" Grid.Column="0">
-                <CheckBox IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
-                <Label Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
-                <Label Content="(AAC)" FontWeight="Light" Foreground="{DynamicResource MainDarkBrush}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+                <CheckBox
+                    Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"
+                    IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
+                <Label Content="(AAC)" FontWeight="Light" Foreground="{DynamicResource HyperlinkForeground}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
             </DockPanel>
 
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
@@ -666,10 +667,11 @@
     <DataTemplate x:Key="CustomSettingsDataTemplate" DataType="{x:Type fileConverter:ConversionPreset}">
         <StackPanel>
             <DockPanel>
-                <CheckBox Margin="0,6,0,0" 
+                <CheckBox Margin="0,6,0,0"
+                          FontWeight="Bold" 
+                          Content="{x:Static project:Resources.AdvancedMode}"
+                          IsEnabled="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"
                           IsChecked="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" />
-                <Label FontWeight="Bold" 
-                       Content="{x:Static project:Resources.AdvancedMode}" IsEnabled="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
             </DockPanel>
             <Grid Visibility="{Binding Settings, Converter={StaticResource ConversionSettingsToVisibility}, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean|Collapsed}">
                 <Grid.ColumnDefinitions>
