@@ -96,9 +96,6 @@
             <Component Guid="{301c2287-ca21-4013-82b0-5895d89216ea}">
                 <File Id="Microsoft.Extensions.DependencyInjection.dll" Source="$(var.FileConverter.TargetDir)Microsoft.Extensions.DependencyInjection.dll" KeyPath="yes" Checksum="yes" />
             </Component>
-            <Component Guid="{101923f7-d0f9-47f5-9c59-13ec5ca81b37}">
-                <File Id="Microsoft.Xaml.Behaviors.dll" Source="$(var.FileConverter.TargetDir)Microsoft.Xaml.Behaviors.dll" KeyPath="yes" Checksum="yes" />
-            </Component>
             <Component Guid="{e5a7ebe5-30ba-4ee9-be63-f1b39101dff6}">
                 <File Id="System.Buffers.dll" Source="$(var.FileConverter.TargetDir)System.Buffers.dll" KeyPath="yes" Checksum="yes" />
             </Component>
@@ -150,6 +147,16 @@
                 <File Id="WpfAnimatedGif.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)WpfAnimatedGif.dll" Checksum="yes" />
             </Component>
             
+            <Component Guid="{101923f7-d0f9-47f5-9c59-13ec5ca81b37}">
+              <File Id="iNKORE.UI.WPF.Modern.dll" Source="$(var.FileConverter.TargetDir)iNKORE.UI.WPF.Modern.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{43f9be2f-90ec-4435-acfa-4e61ee894c9e}">
+              <File Id="iNKORE.UI.WPF.Modern.Controls.dll" Source="$(var.FileConverter.TargetDir)iNKORE.UI.WPF.Modern.Controls.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{29f4ab31-dd37-42b1-a457-c72e3a91521a}">
+              <File Id="iNKORE.UI.WPF.dll" Source="$(var.FileConverter.TargetDir)iNKORE.UI.WPF.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+
             <!-- Configuration and documentation -->
             <Component Guid="{AD58807A-2AE2-48BE-AB55-9BDE9BBE37F3}">
                 <File Id="Settings.default.xml" Source="$(var.FileConverter.ProjectDir)\Settings.default.xml" KeyPath="yes" />
