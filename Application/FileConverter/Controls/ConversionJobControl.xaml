@@ -5,6 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:project="clr-namespace:FileConverter.Properties"
         xmlns:conversionJobs="clr-namespace:FileConverter.ConversionJobs"
+        xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
         x:Class="FileConverter.Controls.ConversionJobControl"
         mc:Ignorable="d" 
         d:DesignHeight="100" d:DesignWidth="800">
@@ -28,12 +30,12 @@
                     <ColumnDefinition Width="*" MinWidth="100" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding OutputFilePath}" Foreground="#DD000000" FontWeight="Bold" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding OutputFilePath}" Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontWeight="Bold" />
 
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,0,0,0">
                     <WrapPanel>
-                        <TextBlock Text="{x:Static project:Resources.ConvertedFrom}" Foreground="#AA000000" FontSize="11" FontStyle="Italic" Margin="0,0,5,0" />
-                        <TextBlock Text="{Binding InputFilePath}" Foreground="#AA000000" FontSize="11" FontStyle="Italic" />
+                        <TextBlock Text="{x:Static project:Resources.ConvertedFrom}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" FontStyle="Italic" Margin="0,0,5,0" />
+                        <TextBlock Text="{Binding InputFilePath}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" FontStyle="Italic" />
                     </WrapPanel>
                     <TextBlock Text="{Binding ErrorMessage}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}}" FontSize="14" />
                 </StackPanel>
