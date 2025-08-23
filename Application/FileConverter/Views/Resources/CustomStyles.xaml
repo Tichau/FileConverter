@@ -70,8 +70,8 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid x:Name="grid">
                         <Border x:Name="border" CornerRadius="8" BorderThickness="1"
-                                Background="{DynamicResource TileButton_BackgroundBrush}"
-                                BorderBrush="{DynamicResource TileButton_BorderBrush}">
+                                Background="{DynamicResource AppBarButtonBackground}"
+                                BorderBrush="{DynamicResource AppBarButtonBorderBrush}">
                         </Border>
                         <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
@@ -80,12 +80,12 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource TileButton_IsMouseOver_BackgroundBrush}" />
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource TileButton_IsMouseOver_BorderBrush}" />
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource AppBarButtonBackgroundPointerOver}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource AppBarButtonBorderBrushPointerOver}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource TileButton_IsPressed_BackgroundBrush}" />
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource TileButton_IsPressed_BorderBrush}" />
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource AppBarButtonBackgroundPressed}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource AppBarButtonBorderBrushPressed}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
