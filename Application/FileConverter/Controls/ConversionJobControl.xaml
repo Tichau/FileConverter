@@ -30,12 +30,12 @@
                     <ColumnDefinition Width="*" MinWidth="100" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding OutputFilePath}" Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontWeight="Bold" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding OutputFilePath}" Foreground="#E4000000" FontWeight="Bold" />
 
                 <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,0,0,0">
                     <WrapPanel>
-                        <TextBlock Text="{x:Static project:Resources.ConvertedFrom}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" FontStyle="Italic" Margin="0,0,5,0" />
-                        <TextBlock Text="{Binding InputFilePath}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="11" FontStyle="Italic" />
+                        <TextBlock Text="{x:Static project:Resources.ConvertedFrom}" Foreground="#E4000000" FontSize="11" FontStyle="Italic" Margin="0,0,5,0" />
+                        <TextBlock Text="{Binding InputFilePath}" Foreground="#E4000000" FontSize="11" FontStyle="Italic" />
                     </WrapPanel>
                     <TextBlock Text="{Binding ErrorMessage}" Foreground="{Binding State, ConverterParameter=Foreground, Converter={StaticResource ConversionStateToBrush}}" FontSize="14" />
                 </StackPanel>
