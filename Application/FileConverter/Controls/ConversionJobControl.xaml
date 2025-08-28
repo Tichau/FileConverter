@@ -61,9 +61,9 @@
                     Command="{Binding CancelCommand}" ToolTip="{x:Static project:Resources.CancelJobTooltip}">
                 <Image Source="/FileConverter;component/Resources/CancelIcon.png" Width="48" Height="48" Style="{StaticResource EnableDisableImageStyle}" />
             </Button>
-            <Image Margin="3" Grid.Column="1" Source="/FileConverter;component/Resources/SuccessIcon.png" Width="48" Height="48" 
+            <Image Margin="15,3,15,3" Grid.Column="1" Source="/FileConverter;component/Resources/SuccessIcon.png" Width="48" Height="48" 
                    Visibility="{Binding State, ConverterParameter=|Done|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
-            <Image Margin="3" Grid.Column="1" Source="/FileConverter;component/Resources/FailIcon.png" Width="48" Height="48" 
+            <Image Margin="15,3,15,3" Grid.Column="1" Source="/FileConverter;component/Resources/FailIcon.png" Width="48" Height="48" 
                    Visibility="{Binding State, ConverterParameter=|Failed|Collapsed, Converter={StaticResource EnumEqualsToVisibility}}"/>
         </Grid>
     </Border>
