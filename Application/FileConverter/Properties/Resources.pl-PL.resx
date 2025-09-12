@@ -1,0 +1,495 @@
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>Aktualizacja zostanie pobrana w tle i zainstalowana po zamknięciu File Converter.</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Konwersja</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Zakończono</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Ekstrakcja</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Niepowodzenie</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>W kolejce</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>Odczyt obrazu wejściowego</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>Odczyt dokumentu</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Obraz animowany</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Dźwięk</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Dokument</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Obraz</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Wideo</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>Czas oczekiwania przed zamknięciem aplikacji</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Język</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Maksymalna liczba jednoczesnych konwersji</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>Nowy preset</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###Pobieranie dziennika zmian ...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>Archiwa konwersji</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>Anulowano.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>Nie można znaleźć pliku wykonywalnego ffmpeg. Spróbuj ponownie zainstalować aplikację.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>Nie udało się wyodrębnić ścieżki z płyty CD.</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>Napęd CD nie jest gotowy.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>Nie udało się uruchomić ffmpeg.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>Nie udało się utworzyć folderów ścieżki wyjściowej.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>Nie udało się wygenerować unikalnej ścieżki pliku wyjściowego.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>Nie udało się odczytać napędu cd '{0}'.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>Nie udało się pobrać litery dysku ścieżki wejściowej.</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>Nie udało się pobrać numeru ścieżki z wejściowej ścieżki cda.</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>Nie można użyć napędu CD, ponieważ jest otwarty.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>Typ pliku wejściowego nie jest zgodny z wybranym typem pliku wyjściowego.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>Nieprawidłowa ścieżka wyjściowa wygenerowana przez szablon ścieżki pliku wyjściowego.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>Nieobsługiwany format wyjściowy '{0}'.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>Liczba kanałów :</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>Zmień liczbę kanałów pliku wejściowego.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Mono</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>Taka sama jak plik wejściowy</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Stereo</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**Ten program jest wolnym oprogramowaniem**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>Możesz go rozpowszechniać i/lub modyfikować na warunkach GNU General Public License.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>Ten program jest rozpowszechniany z nadzieją, że będzie użyteczny, ale BEZ ŻADNEJ GWARANCJI. Zobacz GNU General Public License (dostępna w folderze instalacyjnym: `LICENSE.md`) po więcej szczegółów.</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>Aplikacja jest zamykana.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>Aplikacja automatycznie zakończy działanie za {0} sekund.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>Aplikacja automatycznie zakończy działanie za 1 sekundę.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Różne</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>Nie można znaleźć pliku(ów) wyjściowych.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>Konwersja nie powiodła się, ale istnieje plik wyjściowy.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Przygotuj konwersję</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Office musi być zainstalowany, aby konwertować dokumenty Office.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Nie udało się otworzyć dokumentu w Microsoft Office (sprawdź, czy Twoja licencja/instalacja jest ważna).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Excel musi być zainstalowany, aby konwertować dokumenty Excel.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>Microsoft PowerPoint musi być zainstalowany, aby konwertować prezentacje PowerPoint.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Microsoft Word musi być zainstalowany, aby konwertować dokumenty Word.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Otwórz stronę File Converter</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>Błąd podczas inicjalizacji zadania konwersji.</value>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>Nowy folder</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>Nowy folder</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>Nazwa folderu</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Tryb zaawansowany</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Własne argumenty</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Własne argumenty linii poleceń FFMPEG</value>
+  </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>Nie wybrano presetu</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>Eksportuj</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>Importuj</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>Duplikuj preset</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Błąd</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>Nie można załadować ustawień użytkownika File Converter. Czy chcesz przywrócić ustawienia domyślne?</value>
+  </data>
+  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
+    <value>Kopiuj pliki do schowka po konwersji</value>
+  </data>
+  <data name="HardwareAccelerationMode" xml:space="preserve">
+    <value>Tryb akceleracji sprzętowej</value>
+  </data>
+  <data name="HardwareAccelerationModeAMFName" xml:space="preserve">
+    <value>Advanced Media Framework (AMD)</value>
+  </data>
+  <data name="HardwareAccelerationModeCUDAName" xml:space="preserve">
+    <value>CUDA (Nvidia)</value>
+  </data>
+  <data name="HardwareAccelerationModeD3D11Name" xml:space="preserve">
+    <value>Direct3D 11</value>
+  </data>
+  <data name="HardwareAccelerationModeDXVA2Name" xml:space="preserve">
+    <value>Direct3D 9/DXVA2</value>
+  </data>
+  <data name="HardwareAccelerationModeOffName" xml:space="preserve">
+    <value>Wyłączone</value>
+  </data>
+  <data name="HardwareAccelerationModeOpenCLName" xml:space="preserve">
+    <value>OpenCL</value>
+  </data>
+  <data name="HardwareAccelerationModeVulkanName" xml:space="preserve">
+    <value>Vulkan</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>Obrót o 90° w prawo</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>Dostępna jest aktualizacja File Converter. Zaleca się jej jak najszybszą instalację!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>Pobieranie aktualizacji w toku...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>Aktualizacje File Converter</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>Określ stosunek 'rozmiar pliku' do 'jakości wideo'. Niższa wartość daje mniejszy plik, wyższa lepszą jakość wideo.</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Szybciej</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Szybko</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Średnio</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Wolniej</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Wolno</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Bardzo szybko</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>Określ stosunek 'rozmiar pliku' do 'czasu kompresji'. Wolna kompresja da mniejszy plik (przy tej samej jakości wideo) niż szybka kompresja.</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Ekstra szybko</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Bardzo szybko</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Bardzo wolno</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Wideo</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM podpisany 16-bitowy little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM podpisany 24-bitowy little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM podpisany 32-bitowy little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM podpisany 8-bitowy little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>Brak obrotu</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>Przesuń wybrany preset w dół</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>Przesuń wybrany preset w górę</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>Kodowanie o stałej przepływności</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>Kodowanie o zmiennej przepływności</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>Obrót o 90° w lewo</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>Obrót o 180°</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Muzyka\Artysta\Album\Piosenka.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>Wyjście</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Format wyjściowy</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Preset</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Nazwa presetu</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Jakość :</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>Zalecany zakres bitrate na niebiesko</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Obróć :</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Skaluj :</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>Zobacz dziennik zmian ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>Zainstaluj po zamknięciu File Converter</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Kodowanie :</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>Szybkość kodowania :</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter to rozszerzenie powłoki.</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>Oznacza to, że jest zintegrowany z Eksploratorem Windows.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>Aby użyć File Converter, otwórz Eksplorator i kliknij prawym przyciskiem myszy dowolny plik, aby wywołać menu kontekstowe, w którym znajdziesz polecenia File Converter (zobacz plik readme, aby zobaczyć listę obsługiwanych formatów plików).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>Szablon nazwy pliku</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>Klatki na sekundę :</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>Otwórz stronę projektu na GitHub</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>pomoc?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Przykład wejścia</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Formaty wejściowe</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Przenieś do folderu archiwum</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>Aktualizacja została pobrana. Zamknij File Converter i zainstaluj aktualizację teraz.</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>Zainstaluj po zamknięciu File Converter</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>Zgłoś problem</value>
+  </data>
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>O programie</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Pozwala wybrać, co zrobić z plikami wejściowymi, jeśli konwersja zakończy się sukcesem</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Akcja po udanej konwersji</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Nowy preset</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Aplikacja</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>Dźwięk</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>Automatycznie sprawdzaj aktualizacje przy uruchomieniu File Converter</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Automatycznie zamknij po zakończeniu wszystkich konwersji</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Zaokrągl do najbliższej potęgi dwójki</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Zamknij</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Presety konwersji</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>Pliki do konwersji</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>Skonwertowano z</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Dzienniki</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>Dzienniki</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Otwórz dokumentację</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Wesprzyj</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Nie zapomnij docenić mojej pracy, jeśli Ci się podoba :)</value>
+  </data>
+</root>
