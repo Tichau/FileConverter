@@ -366,12 +366,12 @@
                                  IsChecked="{Binding Settings, ConverterParameter=VideoRotation|270, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
             </StackPanel>
 
-            <DockPanel Grid.Row="5" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
                 <CheckBox
                     Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold"
-                    IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
-                <Label Content="(AAC)" FontWeight="Light" Foreground="{DynamicResource HyperlinkForeground}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
-            </DockPanel>
+                    IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" />
+                <Label VerticalAlignment="Center" Content="(AAC)" FontWeight="Light" Foreground="{DynamicResource HyperlinkForeground}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
+            </StackPanel>
 
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Right" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
             <controls:EncodingQualitySliderControl Grid.Row="6" Grid.Column="1" x:Name="EncodingQualitySlider" EncodingMode="AacVBR" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"
