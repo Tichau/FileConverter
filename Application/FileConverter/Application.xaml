@@ -7,6 +7,7 @@
              xmlns:generic="clr-namespace:FileConverter.ValueConverters.Generic"
              xmlns:viewModels="clr-namespace:FileConverter.ViewModels"
              xmlns:services="clr-namespace:FileConverter.Services"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
              xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
              ShutdownMode="OnLastWindowClose">
@@ -75,6 +76,9 @@
                 <valueConverters:ChangelogConverter/>
                 <xaml:TextToFlowDocumentConverter Markdown="{StaticResource Markdown}"/>
             </generic:ValueConverterGroup>
+
+            <!--  Override styles in UI.Modern.WPF  -->
+            <sys:Double x:Key="CheckBoxMinWidth">0</sys:Double>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
