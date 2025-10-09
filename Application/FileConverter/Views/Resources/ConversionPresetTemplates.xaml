@@ -368,7 +368,7 @@
 
             <DockPanel Grid.Row="5" Grid.Column="0">
                 <CheckBox
-                    Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"
+                    Content="{x:Static project:Resources.AudioTitle}" FontWeight="Bold"
                     IsChecked="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" Margin="0,6,0,0" />
                 <Label Content="(AAC)" FontWeight="Light" Foreground="{DynamicResource HyperlinkForeground}" IsEnabled="{Binding Settings, ConverterParameter=EnableAudio|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"/>
             </DockPanel>
@@ -670,7 +670,6 @@
                 <CheckBox Margin="0,6,0,0"
                           FontWeight="Bold" 
                           Content="{x:Static project:Resources.AdvancedMode}"
-                          IsEnabled="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=OneWay}"
                           IsChecked="{Binding Settings, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" />
             </DockPanel>
             <Grid Visibility="{Binding Settings, Converter={StaticResource ConversionSettingsToVisibility}, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean|Collapsed}">
