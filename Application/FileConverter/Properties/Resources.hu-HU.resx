@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Névjegy</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Kiválaszthatja, mi történjen a forrásfájlokkal a sikeres konvertálás után</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Művelet sikeres konvertálás esetén</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Új sablon</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Alkalmazás</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>Audió</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>Frissítések automatikus keresése a File Converter indulásakor</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Automatikus kilépés az összes konvertálás befejezése után</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Igazítás a legközelebbi 2-hatvány mérethez</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Bezárás</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Konverziós sablonok</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>Konvertálandó fájlok</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>Konvertálva innen:</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Naplók</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>Naplók</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Dokumentáció megnyitása</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Adományozás</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>Ne felejtse el jutalmazni a munkámat, ha tetszik a program :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>A frissítés letöltődik a háttérben, és a File Converter bezárása után települ.</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>Telepítés kilépéskor</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Kódolás:</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>Kódolási sebesség:</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>A File Converter egy rendszerhéj-bővítmény (shell extension).</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>Ez azt jelenti, hogy beépül a Windows Intézőbe.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>A File Converter használatához nyissa meg az Intézőt, és kattintson jobb gombbal bármelyik fájlra a helyi menü megjelenítéséhez, ahol megtalálja a File Converter parancsait (a kompatibilis formátumok listáját a readme fájlban találja).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>Fájlnév sablon</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>Képkocka másodpercenként:</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>GitHub projektoldal megnyitása</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Segítség?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Bemeneti példa</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Bemeneti formátumok</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Törlés</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Áthelyezés egy archív mappába</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>Nincs</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>A frissítés letöltve. Lépjen ki a File Converter-ből a telepítéshez.</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>Telepítés kilépéskor</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>Hiba jelentése</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>Kijelölt sablon mozgatása lefelé</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>Kijelölt sablon mozgatása felfelé</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>Állandó bitsebességű kódolás (CBR)</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>Változó bitsebességű kódolás (VBR)</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>90°-os forgatás óramutató járásával ellentétesen</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Oké</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>180°-os forgatás</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Zene\Előadó\Album\Dal.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>Kimenet</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): bemeneti fájl elérési útja
+(f): bemeneti fájlnév
+(o): kimeneti kiterjesztés típusa
+(i): bemeneti kiterjesztés típusa
+(d0): bemeneti szülőmappa
+(d1): bemeneti alkönyvtár
+...
+(n:i): oldalszám index
+(n:c): összes oldalszám
+
+Speciális utak:
+(p:d): Dokumentumok mappa
+(p:m): Zenék mappa
+(p:v): Videók mappa
+(p:p): Képek mappa
+
+használjon nagybetűt a nagybetűs verzióhoz</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Kimeneti formátum</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Sablon</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Sablon neve</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Minőség:</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>Javasolt bitsebesség-tartomány kékkel</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>Törlés</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Forgatás:</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Mentés</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Méretezés:</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>Változásnapló megtekintése ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>90°-os forgatás óramutató járásával megegyezően</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>Frissítés érhető el a File Converter-hez. Javasoljuk, hogy mielőbb telepítse!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>Frissítés letöltése folyamatban...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>File Converter frissítések</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>A 'fájlméret' és a 'videóminőség' arányának meghatározása. Az alacsonyabb érték kisebb fájlt, a nagyobb érték jobb videóminőséget eredményez.</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Gyorsabb</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Gyors</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Közepes</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Lassabb</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Lassú</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Szupergyors</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>A 'fájlméret' és a 'tömörítési idő' arányának meghatározása. A lassú tömörítés kisebb fájlt eredményez (azonos videóminőség mellett), mint a gyorsabb tömörítés.</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Ultragyors</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Nagyon gyors</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Nagyon lassú</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Videó</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM előjeles 16-bit little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM előjeles 24-bit little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM előjeles 32-bit little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM előjeles 8-bit little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>Nincs</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>Nincs forgatás</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Konvertálás</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Kész</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Kibontás</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Sikertelen</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>Várakozási sorban</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>Bemeneti kép olvasása</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>Dokumentum olvasása</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Animált kép</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Audió</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Dokumentum</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Kép</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Videó</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>Várakozási idő az alkalmazásból való kilépés előtt</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Nyelv</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Párhuzamos konvertálások maximális száma</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>Új sablon</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###Változásnapló letöltése ...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>Konverziós archívumok</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>Megszakítva.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>Az FFMPEG futtatható fájl nem található. Próbálja meg újratelepíteni az alkalmazást.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>Audio CD sáv kinyerése sikertelen.</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>A CD-meghajtó nem áll készen.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>Az FFMPEG elindítása sikertelen.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>A kimeneti mappák létrehozása sikertelen.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>Egyedi kimeneti fájlútvonal létrehozása sikertelen.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>A(z) '{0}' CD-meghajtó olvasása sikertelen.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>A bemeneti útvonal meghajtóbetűjelének lekérése sikertelen.</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>A sorszám lekérése a cda bemeneti útvonalból sikertelen.</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>A CD-meghajtó nem használható, mert nyitva van.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>A bemeneti fájltípus nem kompatibilis a kiválasztott kimeneti fájltípussal.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>A fájlnév sablon által generált kimeneti útvonal érvénytelen.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>Nem támogatott kimeneti formátum: '{0}'.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>Csatornák száma:</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>A bemeneti fájl csatornaszámának módosítása.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Monó</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>Azonos a bemeneti fájllal</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Sztereó</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**Ez a program szabad szoftver**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>Továbbterjesztheti és/vagy módosíthatja a GNU General Public License feltételei szerint.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>Ezt a programot abban a reményben terjesztjük, hogy hasznos lesz, de MINDENNEMŰ GARANCIA NÉLKÜL. További részletekért lásd a GNU General Public License-t (elérhető a telepítési mappában: `LICENSE.md`).</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>Az alkalmazás leáll.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>Az alkalmazás automatikusan leáll {0} másodperc múlva.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>Az alkalmazás automatikusan leáll 1 másodperc múlva.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Egyéb</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>A kimeneti fájl(ok) nem találhatók.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>A konvertálás sikertelen volt, de létezik egy kimeneti fájl.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Konvertálás előkészítése</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Az Office dokumentumok konvertálásához telepített Microsoft Office szükséges.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>A dokumentum megnyitása a Microsoft Office-szal sikertelen (ellenőrizze a licencet vagy a telepítést).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Az Excel dokumentumok konvertálásához telepített Microsoft Excel szükséges.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>A PowerPoint dokumentumok konvertálásához telepített Microsoft PowerPoint szükséges.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>A Word dokumentumok konvertálásához telepített Microsoft Word szükséges.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>A File Converter weboldalának megnyitása</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>Hiba történt a konverziós feladat előkészítésekor.</value>
+  </data>
+  <data name="CreateANewFolder" xml:space="preserve">
+    <value>Új mappa</value>
+  </data>
+  <data name="DefaultFolderName" xml:space="preserve">
+    <value>Új mappa</value>
+  </data>
+  <data name="PresetFolder" xml:space="preserve">
+    <value>Mappa</value>
+  </data>
+  <data name="PresetFolderName" xml:space="preserve">
+    <value>Mappa neve</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>Haladó mód</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>Egyéni argumentumok</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>Egyéni FFMPEG parancssori argumentumok</value>
+  </data>
+  <data name="NoPresetSelected" xml:space="preserve">
+    <value>Nincs kiválasztott sablon</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>Exportálás</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>Importálás</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>Sablon duplázása</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>Mégse</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hiba</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>A File Converter felhasználói beállításai nem tölthetők be. Szeretne visszatérni az alapértelmezett beállításokhoz?</value>
+  </data>
+  <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
+    <value>Fájlok vágólapra másolása konvertálás után</value>
+  </data>
+  <data name="HardwareAccelerationMode" xml:space="preserve">
+    <value>Hardveres gyorsítási mód</value>
+  </data>
+  <data name="HardwareAccelerationModeAMFName" xml:space="preserve">
+    <value>Advanced Media Framework (AMD)</value>
+  </data>
+  <data name="HardwareAccelerationModeCUDAName" xml:space="preserve">
+    <value>CUDA (Nvidia)</value>
+  </data>
+  <data name="HardwareAccelerationModeD3D11Name" xml:space="preserve">
+    <value>Direct3D 11</value>
+  </data>
+  <data name="HardwareAccelerationModeDXVA2Name" xml:space="preserve">
+    <value>Direct3D 9/DXVA2</value>
+  </data>
+  <data name="HardwareAccelerationModeOffName" xml:space="preserve">
+    <value>Ki</value>
+  </data>
+  <data name="HardwareAccelerationModeOpenCLName" xml:space="preserve">
+    <value>OpenCL</value>
+  </data>
+  <data name="HardwareAccelerationModeVulkanName" xml:space="preserve">
+    <value>Vulkan</value>
+  </data>
+</root>
