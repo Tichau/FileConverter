@@ -504,6 +504,14 @@ namespace FileConverter
                     break;
 
                 // Images
+                case OutputType.Avif:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "50");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
+                    break;
+
                 case OutputType.Gif:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");

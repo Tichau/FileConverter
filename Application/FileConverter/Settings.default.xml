@@ -502,6 +502,7 @@
     <ConversionPreset Name="To Png" OutputType="Png" IsDefaultSettings="true">
         <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
+        <InputTypes>avif</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
         <InputTypes>dds</InputTypes>
@@ -550,6 +551,7 @@
     <ConversionPreset Name="To Webp" OutputType="Webp" IsDefaultSettings="true">
         <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
+        <InputTypes>avif</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
         <InputTypes>dds</InputTypes>
@@ -577,9 +579,41 @@
         <Settings Key="ImageMaximumSize" Value="0" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
+    <ConversionPreset Name="To Avif" OutputType="Avif" IsDefaultSettings="true">
+        <InputTypes>xcf</InputTypes>
+        <InputTypes>arw</InputTypes>
+        <InputTypes>avif</InputTypes>
+        <InputTypes>bmp</InputTypes>
+        <InputTypes>cr2</InputTypes>
+        <InputTypes>dds</InputTypes>
+        <InputTypes>dng</InputTypes>
+        <InputTypes>exr</InputTypes>
+        <InputTypes>heic</InputTypes>
+        <InputTypes>ico</InputTypes>
+        <InputTypes>jfif</InputTypes>
+        <InputTypes>jpg</InputTypes>
+        <InputTypes>jpeg</InputTypes>
+        <InputTypes>nef</InputTypes>
+        <InputTypes>png</InputTypes>
+        <InputTypes>psd</InputTypes>
+        <InputTypes>raf</InputTypes>
+        <InputTypes>svg</InputTypes>
+        <InputTypes>tga</InputTypes>
+        <InputTypes>tif</InputTypes>
+        <InputTypes>tiff</InputTypes>
+        <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="ImageQuality" Value="50" />
+        <Settings Key="ImageScale" Value="1" />
+        <Settings Key="ImageRotation" Value="0" />
+        <Settings Key="ImageClampSizePowerOf2" Value="False" />
+        <Settings Key="ImageMaximumSize" Value="0" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
     <ConversionPreset Name="To Jpg" OutputType="Jpg" IsDefaultSettings="true">
         <InputTypes>xcf</InputTypes>
         <InputTypes>arw</InputTypes>
+        <InputTypes>avif</InputTypes>
         <InputTypes>bmp</InputTypes>
         <InputTypes>cr2</InputTypes>
         <InputTypes>dds</InputTypes>
