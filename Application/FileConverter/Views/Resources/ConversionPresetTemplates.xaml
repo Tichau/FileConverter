@@ -163,6 +163,25 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="AlacSettingsDataTemplate" DataType="{x:Type fileConverter:ConversionPreset}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.ChannelCountTitle}" ToolTip="{x:Static project:Resources.ChannelCountTooltip}" />
+            <DockPanel Grid.Row="0" Grid.Column="1">
+                <RadioButton Content="{x:Static project:Resources.SameChannelCountOption}" Margin="5" IsChecked="{Binding Settings, ConverterParameter=AudioChannelCount|0, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}" />
+                <RadioButton Content="{x:Static project:Resources.MonoOption}" Margin="5" IsChecked="{Binding Settings, ConverterParameter=AudioChannelCount|1, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}" />
+                <RadioButton Content="{x:Static project:Resources.StereoOption}" Margin="5" IsChecked="{Binding Settings, ConverterParameter=AudioChannelCount|2, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}" />
+            </DockPanel>
+        </Grid>
+    </DataTemplate>
+
     <DataTemplate x:Key="FlacSettingsDataTemplate" DataType="{x:Type fileConverter:ConversionPreset}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -620,6 +639,9 @@
         <Style.Triggers>
             <DataTrigger Binding="{Binding OutputType}" Value="Aac">
                 <Setter Property="ContentTemplate" Value="{StaticResource AacSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Alac">
+                <Setter Property="ContentTemplate" Value="{StaticResource AlacSettingsDataTemplate}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding OutputType}" Value="Avi">
                 <Setter Property="ContentTemplate" Value="{StaticResource AviSettingsDataTemplate}"/>

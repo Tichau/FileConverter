@@ -385,6 +385,7 @@
     </ConversionPreset>
     <ConversionPreset Name="To Aac" OutputType="Aac" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
+		<InputTypes>Alac</InputTypes>
         <InputTypes>3gpp</InputTypes>
         <InputTypes>avi</InputTypes>
         <InputTypes>bik</InputTypes>
@@ -419,6 +420,42 @@
         <Settings Key="FFMPEGCustomCommand" Value="" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
+	<ConversionPreset Name="To Alac" OutputType="m4a" IsDefaultSettings="true">
+		<InputTypes>3gp</InputTypes>
+		<InputTypes>3gpp</InputTypes>
+		<InputTypes>Aac</InputTypes>
+		<InputTypes>avi</InputTypes>
+		<InputTypes>bik</InputTypes>
+		<InputTypes>flv</InputTypes>
+		<InputTypes>m4v</InputTypes>
+		<InputTypes>mkv</InputTypes>
+		<InputTypes>mov</InputTypes>
+		<InputTypes>mp4</InputTypes>
+		<InputTypes>mpg</InputTypes>
+		<InputTypes>mpeg</InputTypes>
+		<InputTypes>ogv</InputTypes>
+		<InputTypes>rm</InputTypes>
+		<InputTypes>ts</InputTypes>
+		<InputTypes>webm</InputTypes>
+		<InputTypes>wmv</InputTypes>
+		<InputTypes>aac</InputTypes>
+		<InputTypes>aiff</InputTypes>
+		<InputTypes>ape</InputTypes>
+		<InputTypes>flac</InputTypes>
+		<InputTypes>m4a</InputTypes>
+		<InputTypes>m4b</InputTypes>
+		<InputTypes>mp3</InputTypes>
+		<InputTypes>oga</InputTypes>
+		<InputTypes>ogg</InputTypes>
+		<InputTypes>opus</InputTypes>
+		<InputTypes>wav</InputTypes>
+		<InputTypes>wma</InputTypes>
+		<InputPostConversionAction>None</InputPostConversionAction>
+		<Settings Key="AudioChannelCount" Value="0" />
+		<Settings Key="EnableFFMPEGCustomCommand" Value="False" />
+		<Settings Key="FFMPEGCustomCommand" Value="" />
+		<OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+	</ConversionPreset>
     <ConversionPreset Name="Extract DVD to Mp4" OutputType="Mp4" IsDefaultSettings="true">
         <InputTypes>vob</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
