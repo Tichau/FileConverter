@@ -118,478 +118,502 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>關於</value>
+    <value>کے بارے میں</value>
   </data>
   <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
-    <value>指定轉換成功後要對原始檔案進行的操作</value>
+    <value>اگر تبدیلی کامیاب ہو جاتی ہے تو آپ کو یہ منتخب کرنے کی اجازت دیں کہ آپ اپنی ان پٹ فائلوں کے ساتھ کیا کرنا چاہتے ہیں۔</value>
   </data>
   <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
-    <value>轉換成功時的操作</value>
+    <value>تبدیلی کامیاب ہونے پر ایکشن</value>
   </data>
   <data name="AddNewPreset" xml:space="preserve">
-    <value>新增預設值</value>
+    <value>نیا پیش سیٹ</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>應用程式</value>
+    <value>درخواست</value>
   </data>
   <data name="AudioTitle" xml:space="preserve">
-    <value>音訊</value>
+    <value>آڈیو</value>
   </data>
   <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
-    <value>程式啟動時自動檢查更新</value>
+    <value>فائل کنورٹر شروع ہونے پر اپ ڈیٹس کو خود بخود چیک کریں۔</value>
   </data>
   <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
-    <value>所有轉換完成後自動關閉</value>
+    <value>تمام تبادلوں کے مکمل ہونے پر خود بخود باہر نکلیں۔</value>
   </data>
   <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
-    <value>限制為最接近的 2 的次方大小</value>
+    <value>2 سائز کی سب سے کم طاقت پر کلیمپ کریں۔</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>關閉</value>
+    <value>بند</value>
   </data>
   <data name="ConversionPresets" xml:space="preserve">
-    <value>轉換預設值</value>
+    <value>تبادلوں کے پیش سیٹ</value>
   </data>
   <data name="ConversionQueueTitle" xml:space="preserve">
-    <value>待轉換的檔案</value>
+    <value>تبدیل کرنے کے لیے فائلیں۔</value>
   </data>
   <data name="ConvertedFrom" xml:space="preserve">
-    <value>轉換自</value>
+    <value>سے تبدیل ہوا۔</value>
   </data>
   <data name="Diagnostics" xml:space="preserve">
-    <value>日誌</value>
+    <value>نوشتہ جات</value>
   </data>
   <data name="DiagnosticsButtonTooltip" xml:space="preserve">
-    <value>日誌</value>
+    <value>نوشتہ جات</value>
   </data>
   <data name="DocumentationButtonDescription" xml:space="preserve">
-    <value>開啟文件</value>
+    <value>دستاویزات کھولیں۔</value>
   </data>
   <data name="DonateButtonTitle" xml:space="preserve">
-    <value>贊助</value>
+    <value>عطیہ کریں۔</value>
   </data>
   <data name="DonateDescription" xml:space="preserve">
-    <value>如果您喜歡這個軟體，別忘了給予一些支持 :)</value>
+    <value>اگر آپ کو یہ میرا کام پسند ہے تو انعام دینا نہ بھولیں :)</value>
   </data>
   <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
-    <value>更新將會在背景下載，並在您關閉 File Converter 後安裝。</value>
+    <value>اپ ڈیٹ پس منظر میں ڈاؤن لوڈ ہو جائے گا، اور فائل کنورٹر سے باہر نکلنے کے بعد انسٹال ہو جائے گا۔</value>
   </data>
   <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
-    <value>關閉 File Converter 後安裝</value>
+    <value>جب میں فائل کنورٹر سے باہر نکلتا ہوں تو انسٹال کریں۔</value>
   </data>
   <data name="Encoding" xml:space="preserve">
-    <value>編碼：</value>
+    <value>انکوڈنگ:</value>
   </data>
   <data name="EncodingSpeed" xml:space="preserve">
-    <value>編碼速度：</value>
+    <value>انکوڈنگ کی رفتار:</value>
   </data>
   <data name="FileConverterStartHelp1" xml:space="preserve">
-    <value>File Converter 是一個檔案總管擴充功能。</value>
+    <value>فائل کنورٹر ایک شیل ایکسٹینشن ہے۔</value>
   </data>
   <data name="FileConverterStartHelp2" xml:space="preserve">
-    <value>這表示它已整合至 Windows 檔案總管中。</value>
+    <value>اس کا مطلب ہے کہ یہ ونڈوز ایکسپلورر میں ضم ہے۔</value>
   </data>
   <data name="FileConverterStartHelp3" xml:space="preserve">
-    <value>要使用 File Converter，請開啟檔案總管，並在您想要轉換的任何檔案上按滑鼠右鍵以顯示選單，您會在其中找到 File Converter 的各項指令（請參閱說明文件以了解支援的檔案格式）。</value>
+    <value>فائل کنورٹر استعمال کرنے کے لیے براہ کرم ایکسپلورر کو کھولیں اور سیاق و سباق کے مینو میں لانے کے لیے آپ جس فائل کو پسند کرتے ہیں اس پر دائیں کلک کریں جہاں آپ کو فائل کنورٹر کمانڈز ملیں گی (مطابق فائل فارمیٹس کی فہرست دیکھنے کے لیے ریڈمی فائل دیکھیں)۔</value>
   </data>
   <data name="FileNameTemplate" xml:space="preserve">
-    <value>檔案名稱格式</value>
+    <value>فائل کے نام کا سانچہ</value>
   </data>
   <data name="FramesPerSecond" xml:space="preserve">
-    <value>每秒影格數：</value>
+    <value>فریم فی سیکنڈ:</value>
   </data>
   <data name="GitHubButtonDescription" xml:space="preserve">
-    <value>開啟 GitHub 專案頁面</value>
+    <value>GitHub پروجیکٹ کا صفحہ کھولیں۔</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>說明</value>
+    <value>مدد</value>
   </data>
   <data name="InputExample" xml:space="preserve">
-    <value>輸入範例</value>
+    <value>ان پٹ کی مثال</value>
   </data>
   <data name="InputFormats" xml:space="preserve">
-    <value>輸入格式</value>
+    <value>ان پٹ فارمیٹس</value>
   </data>
   <data name="InputPostConversionActionDeleteName" xml:space="preserve">
-    <value>刪除</value>
+    <value>حذف کریں۔</value>
   </data>
   <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
-    <value>移至封存資料夾</value>
+    <value>آرکائیو فولڈر میں منتقل کریں۔</value>
   </data>
   <data name="InputPostConversionActionNoneName" xml:space="preserve">
-    <value>無</value>
+    <value>کوئی نہیں۔</value>
   </data>
   <data name="InstallButtonDescription" xml:space="preserve">
-    <value>更新下載完成。現在可以關閉 File Converter 並立即安裝更新。</value>
+    <value>اپ ڈیٹ ڈاؤن لوڈ ہو چکا ہے۔ فائل کنورٹر سے باہر نکلیں اور ابھی اپ ڈیٹ انسٹال کریں۔</value>
   </data>
   <data name="InstallButtonTitle" xml:space="preserve">
-    <value>關閉 File Converter 時安裝</value>
+    <value>جب میں فائل کنورٹر سے باہر نکلتا ہوں تو انسٹال کریں۔</value>
   </data>
   <data name="IssueButtonDescription" xml:space="preserve">
-    <value>問題回報</value>
+    <value>کسی مسئلے کی اطلاع دیں۔</value>
   </data>
   <data name="MoveDownSelectedPreset" xml:space="preserve">
-    <value>將選取的預設值向下移動</value>
+    <value>منتخب کردہ پیش سیٹ کو نیچے منتقل کریں۔</value>
   </data>
   <data name="MoveUpSelectedPreset" xml:space="preserve">
-    <value>將選取的預設值向上移動</value>
+    <value>منتخب کردہ پیش سیٹ کو اوپر منتقل کریں۔</value>
   </data>
   <data name="Mp3CbrDescription" xml:space="preserve">
-    <value>固定位元速率編碼</value>
+    <value>مستقل بٹریٹ انکوڈنگ</value>
   </data>
   <data name="Mp3VbrDescription" xml:space="preserve">
-    <value>變動位元速率編碼</value>
+    <value>متغیر بٹریٹ انکوڈنگ</value>
   </data>
   <data name="NinetyDegreesRotationTitle" xml:space="preserve">
     <value>90°</value>
   </data>
   <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
-    <value>逆時針旋轉 90°</value>
+    <value>90° مخالف گھڑی کی سمت گردش</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>確定</value>
+    <value>ٹھیک ہے</value>
   </data>
   <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
     <value>180°</value>
   </data>
   <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
-    <value>旋轉 180°</value>
+    <value>180° گردش</value>
   </data>
   <data name="OutputFileNameTemplateSample" xml:space="preserve">
     <value>C:\Music\Artist\Album\Song.wav</value>
   </data>
   <data name="OutputExample" xml:space="preserve">
-    <value>輸出範例</value>
+    <value>آؤٹ پٹ</value>
   </data>
   <data name="OutputFilePathTemplateHelp" xml:space="preserve">
-    <value>(p): 輸入檔案路徑
-(f): 輸入檔案名稱
-(o): 輸出檔案類型
-(i): 輸入檔案類型
-(d0): 輸入上層資料夾名稱
-(d1): 輸入資料夾名稱
+    <value>(p): ان پٹ فائل پاتھ
+(f): ان پٹ فائل کا نام
+(o): آؤٹ پٹ ایکسٹینشن کی قسم
+(i): ان پٹ ایکسٹینشن کی قسم
+(d0): ان پٹ پیرنٹ فولڈر
+(d1): ان پٹ ذیلی پیرنٹ فولڈر
 ...
-(n:i): 頁數
-(n:c): 總頁數
+(n:i): صفحہ نمبر انڈیکس
+(n:c): کل صفحات کی تعداد
 
-特殊路徑：
-(p:d): 我的文件路徑
-(p:m): 我的音樂路徑
-(p:v): 我的影片路徑
-(p:p): 我的圖片路徑
+خاص راستے:
+(p:d): میرے دستاویزات کا راستہ
+(p:m): میرا میوزک پاتھ
+(p:v): میرے ویڈیوز کا راستہ
+(p:p): میری تصویروں کا راستہ
 
-使用大寫表示大寫版本</value>
+بڑے ورژن کے لیے maj استعمال کریں۔</value>
   </data>
   <data name="OutputFormat" xml:space="preserve">
-    <value>輸出格式</value>
+    <value>آؤٹ پٹ فارمیٹ</value>
   </data>
   <data name="Preset" xml:space="preserve">
-    <value>預設值</value>
+    <value>پیش سیٹ</value>
   </data>
   <data name="PresetName" xml:space="preserve">
-    <value>預設值名稱</value>
+    <value>پیش سیٹ نام</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>品質：</value>
+    <value>معیار:</value>
   </data>
   <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
-    <value>藍色區域為建議的位元率範圍</value>
+    <value>نیلے رنگ میں تجویز کردہ بٹریٹ رینج</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">
-    <value>刪除</value>
+    <value>حذف کریں۔</value>
   </data>
   <data name="Rotate" xml:space="preserve">
-    <value>旋轉：</value>
+    <value>گھمائیں:</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>儲存</value>
+    <value>محفوظ کریں۔</value>
   </data>
   <data name="Scale" xml:space="preserve">
-    <value>縮放：</value>
+    <value>پیمانہ:</value>
   </data>
   <data name="SeeChangeLog" xml:space="preserve">
-    <value>請參閱更新日誌...</value>
+    <value>تبدیلی لاگ دیکھیں...</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>設定</value>
+    <value>ترتیبات</value>
   </data>
   <data name="SettingsButtonTooltip" xml:space="preserve">
-    <value>設定</value>
+    <value>ترتیبات</value>
   </data>
   <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
     <value>270°</value>
   </data>
   <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
-    <value>順時針旋轉 90°</value>
+    <value>90° گھڑی کی سمت گردش</value>
   </data>
   <data name="UpgradeAvailable" xml:space="preserve">
-    <value>File Converter 有可用的更新。建議您盡速安裝！</value>
+    <value>فائل کنورٹر کے لیے ایک اپ ڈیٹ دستیاب ہے۔ یہ سختی سے سفارش کی جاتی ہے کہ آپ اسے جلد از جلد انسٹال کریں!</value>
   </data>
   <data name="UpgradeDownloadInProgress" xml:space="preserve">
-    <value>正在下載更新...</value>
+    <value>اپ گریڈ ڈاؤن لوڈ جاری ہے...</value>
   </data>
   <data name="UpgradeWindowTitle" xml:space="preserve">
-    <value>File Converter 更新</value>
+    <value>فائل کنورٹر اپڈیٹس</value>
   </data>
   <data name="VideoEncodingQualityTooltip" xml:space="preserve">
-    <value>定義「檔案大小」與「影片品質」之間的比值。數值越低檔案越小，數值越高影片品質越好。</value>
+    <value>&apos;فائل سائز&apos; بمقابلہ &apos;ویڈیو کوالٹی&apos; کے تناسب کی وضاحت کریں۔ کم قیمت آپ کو ایک چھوٹی فائل دے گی، زیادہ قدر آپ کو بہتر ویڈیو کوالٹی دے گی۔</value>
   </data>
   <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
-    <value>較快</value>
+    <value>تیز تر</value>
   </data>
   <data name="VideoEncodingSpeedFastName" xml:space="preserve">
-    <value>快</value>
+    <value>تیز</value>
   </data>
   <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
-    <value>中等</value>
+    <value>درمیانہ</value>
   </data>
   <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
-    <value>較慢</value>
+    <value>آہستہ</value>
   </data>
   <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
-    <value>慢</value>
+    <value>سست</value>
   </data>
   <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
-    <value>超快</value>
+    <value>سپر فاسٹ</value>
   </data>
   <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
-    <value>定義「檔案大小」與「壓縮時間」之間的比值。在相同影片品質下，慢速壓縮會產生比快速壓縮更小的檔案。</value>
+    <value>تناسب &apos;فائل سائز&apos; بمقابلہ &apos;کمپریشن دورانیہ&apos; کی وضاحت کریں۔ ایک سست کمپریشن آپ کو تیز کمپریشن کے مقابلے ایک چھوٹی فائل (اسی ویڈیو کوالٹی کے لیے) دے گا۔</value>
   </data>
   <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
-    <value>極快</value>
+    <value>الٹرا فاسٹ</value>
   </data>
   <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
-    <value>非常快</value>
+    <value>بہت تیز</value>
   </data>
   <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
-    <value>非常慢</value>
+    <value>بہت سست</value>
   </data>
   <data name="VideoTitle" xml:space="preserve">
-    <value>影片</value>
+    <value>ویڈیو</value>
   </data>
   <data name="Wav16bitsDescription" xml:space="preserve">
-    <value>PCM 有號 16 位元小端序</value>
+    <value>پی سی ایم نے 16 بٹ لٹل اینڈین پر دستخط کیے۔</value>
   </data>
   <data name="Wav24bitsDescription" xml:space="preserve">
-    <value>PCM 有號 24 位元小端序</value>
+    <value>پی سی ایم نے 24 بٹ لٹل اینڈین پر دستخط کیے۔</value>
   </data>
   <data name="Wav32bitsDescription" xml:space="preserve">
-    <value>PCM 有號 32 位元小端序</value>
+    <value>پی سی ایم نے 32 بٹ لٹل اینڈین پر دستخط کیے۔</value>
   </data>
   <data name="Wav8bitsDescription" xml:space="preserve">
-    <value>PCM 有號 8 位元小端序</value>
+    <value>پی سی ایم نے 8 بٹ لٹل اینڈین پر دستخط کیے۔</value>
   </data>
   <data name="ZeroDegreesRotationTitle" xml:space="preserve">
-    <value>不旋轉</value>
+    <value>کوئی نہیں۔</value>
   </data>
   <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
-    <value>不進行旋轉</value>
+    <value>کوئی گردش نہیں۔</value>
   </data>
   <data name="ConversionStateConversion" xml:space="preserve">
-    <value>轉換中</value>
+    <value>تبدیلی</value>
   </data>
   <data name="ConversionStateDone" xml:space="preserve">
-    <value>已完成</value>
+    <value>ہو گیا</value>
   </data>
   <data name="ConversionStateExtraction" xml:space="preserve">
-    <value>提取中</value>
+    <value>نکالنا</value>
   </data>
   <data name="ConversionStateFailed" xml:space="preserve">
-    <value>失敗</value>
+    <value>ناکام</value>
   </data>
   <data name="ConversionStateInQueue" xml:space="preserve">
-    <value>佇列等待中</value>
+    <value>قطار میں</value>
   </data>
   <data name="ConversionStateReadIntputImage" xml:space="preserve">
-    <value>讀取輸入圖片</value>
+    <value>ان پٹ امیج پڑھیں</value>
   </data>
   <data name="ConversionStateReadDocument" xml:space="preserve">
-    <value>讀取文件</value>
+    <value>دستاویز پڑھیں</value>
   </data>
   <data name="StringAnimatedImageName" xml:space="preserve">
-    <value>動畫圖片</value>
+    <value>متحرک تصویر</value>
   </data>
   <data name="StringAudioName" xml:space="preserve">
-    <value>音訊</value>
+    <value>آڈیو</value>
   </data>
   <data name="StringDocumentName" xml:space="preserve">
-    <value>文件</value>
+    <value>دستاویز</value>
   </data>
   <data name="StringImageName" xml:space="preserve">
-    <value>圖片</value>
+    <value>تصویر</value>
   </data>
   <data name="StringVideoName" xml:space="preserve">
-    <value>影片</value>
+    <value>ویڈیو</value>
   </data>
   <data name="ExitWaitingDuration" xml:space="preserve">
-    <value>應用程式結束前的等待時間</value>
+    <value>درخواست سے باہر نکلنے سے پہلے انتظار کی مدت</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>語言</value>
+    <value>زبان</value>
   </data>
   <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
-    <value>最大同時轉檔數</value>
+    <value>بیک وقت تبادلوں کی زیادہ سے زیادہ تعداد</value>
   </data>
   <data name="DefaultPresetName" xml:space="preserve">
-    <value>新增預設值</value>
+    <value>نیا پیش سیٹ</value>
   </data>
   <data name="DownloadingChangeLog" xml:space="preserve">
-    <value>###正在下載更新日誌...</value>
+    <value>### تبدیلی لاگ ڈاؤن لوڈ ہو رہا ہے...</value>
   </data>
   <data name="ConversionArchives" xml:space="preserve">
-    <value>原始檔案封存資料夾</value>
+    <value>تبادلوں کے آرکائیوز</value>
   </data>
   <data name="ErrorCanceled" xml:space="preserve">
-    <value>已取消。</value>
+    <value>منسوخ</value>
   </data>
   <data name="ErrorCantFindFFMPEG" xml:space="preserve">
-    <value>找不到 ffmpeg 執行檔。請嘗試重新安裝該應用程式。</value>
+    <value>ffmpeg قابل عمل تلاش کرنے میں ناکام۔ آپ کو ایپلی کیشن کو دوبارہ انسٹال کرنے کی کوشش کرنی چاہیے۔</value>
   </data>
   <data name="ErrorCDAExtractionFailed" xml:space="preserve">
-    <value>音訊 CD 音軌提取失敗。</value>
+    <value>آڈیو سی ڈی ٹریک نکالنا ناکام ہو گیا۔</value>
   </data>
   <data name="ErrorCDDriveNotReady" xml:space="preserve">
-    <value>CD 光碟機未就緒。</value>
+    <value>سی ڈی ڈرائیو تیار نہیں ہے۔</value>
   </data>
   <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
-    <value>啟動 FFmpeg 失敗。</value>
+    <value>ffmpeg لانچ کرنے میں ناکام۔</value>
   </data>
   <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
-    <value>無法建立輸出路徑資料夾。</value>
+    <value>آؤٹ پٹ پاتھ فولڈرز بنانے میں ناکام۔</value>
   </data>
   <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
-    <value>無法產生唯一的輸出檔案路徑。</value>
+    <value>ایک منفرد آؤٹ پٹ فائل پاتھ بنانے میں ناکام۔</value>
   </data>
   <data name="ErrorFailToReadCDDrive" xml:space="preserve">
-    <value>無法讀取 CD 光碟機'{0}'。</value>
+    <value>سی ڈی ڈرائیو &apos;{0}&apos; پڑھنے میں ناکام۔</value>
   </data>
   <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
-    <value>無法取得輸入路徑的磁碟機代號。</value>
+    <value>ان پٹ پاتھ ڈرائیو لیٹر کو بازیافت کرنے میں ناکام۔</value>
   </data>
   <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
-    <value>無法從 cda 輸入路徑取得音軌編號。</value>
+    <value>سی ڈی اے ان پٹ پاتھ سے ٹریک نمبر بازیافت کرنے میں ناکام۔</value>
   </data>
   <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
-    <value>因 CD 光碟機已開啟，所以無法使用。</value>
+    <value>سی ڈی ڈرائیو استعمال کرنے میں ناکام کیونکہ یہ کھلی ہوئی ہے۔</value>
   </data>
   <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
-    <value>輸入檔案類型與所選的輸出檔案類型不相容。</value>
+    <value>ان پٹ فائل کی قسم منتخب آؤٹ پٹ فائل کی قسم کے ساتھ مطابقت نہیں رکھتی ہے۔</value>
   </data>
   <data name="ErrorInvalidOutputPath" xml:space="preserve">
-    <value>輸出檔案路徑範本產生的輸出路徑無效。</value>
+    <value>آؤٹ پٹ فائل پاتھ ٹیمپلیٹ کے ذریعہ تیار کردہ غلط آؤٹ پٹ پاتھ۔</value>
   </data>
   <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
-    <value>不支援的輸出格式 '{0}'。</value>
+    <value>غیر تعاون یافتہ آؤٹ پٹ فارمیٹ &apos;{0}&apos;۔</value>
   </data>
   <data name="ChannelCountTitle" xml:space="preserve">
-    <value>聲道數量：</value>
+    <value>چینل کی تعداد:</value>
   </data>
   <data name="ChannelCountTooltip" xml:space="preserve">
-    <value>變更輸入檔案的聲道數量。</value>
+    <value>ان پٹ فائل کے چینلز کی تعداد کو تبدیل کریں۔</value>
   </data>
   <data name="MonoOption" xml:space="preserve">
-    <value>單聲道</value>
+    <value>مونو</value>
   </data>
   <data name="SameChannelCountOption" xml:space="preserve">
-    <value>與輸入檔案相同</value>
+    <value>ان پٹ فائل سے ایک جیسا</value>
   </data>
   <data name="StereoOption" xml:space="preserve">
-    <value>立體聲</value>
+    <value>سٹیریو</value>
   </data>
   <data name="LicenceHeader1" xml:space="preserve">
-    <value>**此程式為自由軟體**</value>
+    <value>**یہ پروگرام مفت سافٹ ویئر ہے**۔</value>
   </data>
   <data name="LicenceHeader2" xml:space="preserve">
-    <value>您可以根據 GNU 通用公共授權條款來重新散布或修改本程式。</value>
+    <value>آپ اسے دوبارہ تقسیم کر سکتے ہیں اور/یا GNU جنرل پبلک لائسنس کی شرائط کے تحت اس میں ترمیم کر سکتے ہیں۔</value>
   </data>
   <data name="LicenceHeader3" xml:space="preserve">
-    <value>本程式的發布是希望它能帶來幫助，但不提供任何擔保責任。詳細資訊請參閱 GNU 通用公共授權（可在安裝資料夾中的「LICENSE.md」檔案中找到）。</value>
+    <value>یہ پروگرام اس امید پر تقسیم کیا گیا ہے کہ یہ مفید ثابت ہوگا، لیکن بغیر کسی وارنٹی کے۔ مزید تفصیلات کے لیے GNU جنرل پبلک لائسنس (انسٹالیشن فولڈر میں دستیاب ہے: `LICENSE.md`) دیکھیں۔</value>
   </data>
   <data name="ApplicationIsTerminating" xml:space="preserve">
-    <value>應用程式正在關閉。</value>
+    <value>درخواست ختم ہو رہی ہے۔</value>
   </data>
   <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
-    <value>程式將於 {0} 秒後自動關閉。</value>
+    <value>ایپلیکیشن خود بخود {0} سیکنڈ میں ختم ہو جائے گی۔</value>
   </data>
   <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
-    <value>程式將於 1 秒後自動關閉。</value>
+    <value>درخواست خود بخود 1 سیکنڈ میں ختم ہو جائے گی۔</value>
   </data>
   <data name="StringMiscName" xml:space="preserve">
-    <value>其他</value>
+    <value>متفرق</value>
   </data>
   <data name="ErrorCantFindOutputFiles" xml:space="preserve">
-    <value>找不到輸出檔案。</value>
+    <value>آؤٹ پٹ فائل (زبانیں) نہیں مل سکتی۔</value>
   </data>
   <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
-    <value>轉換失敗，但輸出檔案已存在。</value>
+    <value>تبادلوں کا کام ناکام ہوگیا لیکن ایک آؤٹ پٹ فائل موجود ہے جو موجود ہے۔</value>
   </data>
   <data name="ConversionStatePrepareConversion" xml:space="preserve">
-    <value>準備進行轉換</value>
+    <value>تبادلوں کو تیار کریں۔</value>
   </data>
   <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
-    <value>必須安裝 Microsoft Office 才能轉換 Office 文件。</value>
+    <value>آفس دستاویزات کو تبدیل کرنے کے لیے Microsoft Office کو انسٹال کرنا ضروری ہے۔</value>
   </data>
   <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
-    <value>無法使用 Microsoft Office 開啟文件（請檢查您的授權/安裝是否有效）。</value>
+    <value>مائیکروسافٹ آفس کے ساتھ دستاویز کھولنے میں ناکام (چیک کریں کہ آیا آپ کا لائسنس/انسٹالیشن درست ہے)۔</value>
   </data>
   <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
-    <value>必須安裝 Microsoft Excel 才能轉換 Excel 文件。</value>
+    <value>ایکسل دستاویزات کو تبدیل کرنے کے لیے مائیکروسافٹ ایکسل انسٹال ہونا ضروری ہے۔</value>
   </data>
   <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
-    <value>必須安裝 Microsoft PowerPoint 才能轉換 PowerPoint 文件。</value>
+    <value>پاورپوائنٹ دستاویزات کو تبدیل کرنے کے لیے مائیکروسافٹ پاورپوائنٹ انسٹال ہونا چاہیے۔</value>
   </data>
   <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
-    <value>必須安裝 Microsoft Word 才能轉換 Word 文件。</value>
+    <value>ورڈ دستاویزات کو تبدیل کرنے کے لیے Microsoft Word کو انسٹال کرنا ضروری ہے۔</value>
   </data>
   <data name="WebsiteButtonDescription" xml:space="preserve">
-    <value>開啟 File Converter 網站</value>
+    <value>فائل کنورٹر ویب سائٹ کھولیں۔</value>
   </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
-    <value>轉換作業初始化時發生錯誤。</value>
+    <value>تبادلوں کے کام کے آغاز کے دوران خرابی۔</value>
   </data>
   <data name="CreateANewFolder" xml:space="preserve">
-    <value>建立新資料夾</value>
+    <value>نیا فولڈر</value>
   </data>
   <data name="DefaultFolderName" xml:space="preserve">
-    <value>新資料夾</value>
+    <value>نیا فولڈر</value>
   </data>
   <data name="PresetFolder" xml:space="preserve">
-    <value>資料夾</value>
+    <value>فولڈر</value>
   </data>
   <data name="PresetFolderName" xml:space="preserve">
-    <value>資料夾名稱</value>
+    <value>فولڈر کا نام</value>
   </data>
   <data name="AdvancedMode" xml:space="preserve">
-    <value>進階模式</value>
+    <value>اعلی درجے کی وضع</value>
   </data>
   <data name="FFMPEGCustomArguments" xml:space="preserve">
-    <value>自訂參數</value>
+    <value>حسب ضرورت دلائل</value>
   </data>
   <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
-    <value>自訂 FFmpeg 命令列參數</value>
+    <value>اپنی مرضی کے مطابق FFMPEG کمانڈ لائن دلائل</value>
   </data>
   <data name="NoPresetSelected" xml:space="preserve">
-    <value>未選擇預設值</value>
+    <value>کوئی پیش سیٹ منتخب نہیں ہے۔</value>
   </data>
   <data name="ExportSelectedPresets" xml:space="preserve">
-    <value>匯出</value>
+    <value>برآمد کریں۔</value>
   </data>
   <data name="ImportPresets" xml:space="preserve">
-    <value>匯入</value>
+    <value>درآمد کریں۔</value>
   </data>
   <data name="DuplicatePreset" xml:space="preserve">
-    <value>複製預設值</value>
+    <value>ڈپلیکیٹ پیش سیٹ</value>
   </data>
   <data name="CancelJobTooltip" xml:space="preserve">
-    <value>取消</value>
+    <value>منسوخ کریں۔</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>錯誤</value>
+    <value>خرابی</value>
   </data>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
-    <value>無法載入 File Converter 的使用者設定。您想要回復為預設設定嗎？</value>
+    <value>فائل کنورٹر صارف کی ترتیبات کو لوڈ نہیں کیا جا سکتا۔ کیا آپ پہلے سے طے شدہ ترتیبات پر واپس آنا چاہتے ہیں؟</value>
   </data>
   <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
-    <value>轉換後將檔案複製到剪貼簿</value>
+    <value>تبادلوں کے بعد فائلوں کو کلپ بورڈ میں کاپی کریں۔</value>
+  </data>
+  <data name="HardwareAccelerationMode" xml:space="preserve">
+    <value>ہارڈ ویئر ایکسلریشن موڈ</value>
+  </data>
+  <data name="HardwareAccelerationModeAMFName" xml:space="preserve">
+    <value>ایڈوانسڈ میڈیا فریم ورک (AMD)</value>
+  </data>
+  <data name="HardwareAccelerationModeCUDAName" xml:space="preserve">
+    <value>CUDA (Nvidia)</value>
+  </data>
+  <data name="HardwareAccelerationModeD3D11Name" xml:space="preserve">
+    <value>Direct3D 11</value>
+  </data>
+  <data name="HardwareAccelerationModeDXVA2Name" xml:space="preserve">
+    <value>Direct3D 9/DXVA2</value>
+  </data>
+  <data name="HardwareAccelerationModeOffName" xml:space="preserve">
+    <value>آف</value>
+  </data>
+  <data name="HardwareAccelerationModeOpenCLName" xml:space="preserve">
+    <value>اوپن سی ایل</value>
+  </data>
+  <data name="HardwareAccelerationModeVulkanName" xml:space="preserve">
+    <value>ولکن</value>
   </data>
 </root>

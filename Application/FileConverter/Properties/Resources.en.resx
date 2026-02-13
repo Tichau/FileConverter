@@ -121,10 +121,10 @@
     <value>About</value>
   </data>
   <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
-    <value>Allow you to choose what you want to do with your input files if the conversion succeed</value>
+    <value>Allows you to choose what to do with input files after a successful conversion</value>
   </data>
   <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
-    <value>Action when conversion succeed</value>
+    <value>After conversion, do this:</value>
   </data>
   <data name="AddNewPreset" xml:space="preserve">
     <value>New preset</value>
@@ -139,10 +139,10 @@
     <value>Automatically check for updates when File Converter starts</value>
   </data>
   <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
-    <value>Automatically exit when all conversions finished</value>
+    <value>Automatically exit when all conversions are complete</value>
   </data>
   <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
-    <value>Clamp to lowest power of 2 size</value>
+    <value>Scale image with longest side set to nearest smaller power-of-two.</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
@@ -226,10 +226,10 @@
     <value>Report an issue</value>
   </data>
   <data name="MoveDownSelectedPreset" xml:space="preserve">
-    <value>Move down selected preset</value>
+    <value>Move selected preset down</value>
   </data>
   <data name="MoveUpSelectedPreset" xml:space="preserve">
-    <value>Move up selected preset</value>
+    <value>Move selected preset up</value>
   </data>
   <data name="Mp3CbrDescription" xml:space="preserve">
     <value>Constant bitrate encoding</value>
@@ -329,7 +329,7 @@ use maj for uppercase version</value>
     <value>File Converter Updates</value>
   </data>
   <data name="VideoEncodingQualityTooltip" xml:space="preserve">
-    <value>Define the ratio 'file size' versus 'video quality'. A lower value will give you a smaller file, a greater value give you a better video quality.</value>
+    <value>Defines how 'file size' relates to 'video quality'. A lower value will give you a smaller file, a greater value give you higher video quality.</value>
   </data>
   <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
     <value>Faster</value>
@@ -350,7 +350,7 @@ use maj for uppercase version</value>
     <value>Super Fast</value>
   </data>
   <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
-    <value>Define the ratio 'file size' versus 'compression duration'. A slow compression will give you a smaller file (for the same video quality) than a faster compression.</value>
+    <value>Define how 'file size' affects 'compression duration'. Slower compression will give you a smaller file (for the same video quality) than a faster compression.</value>
   </data>
   <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
     <value>Ultra Fast</value>
@@ -449,25 +449,25 @@ use maj for uppercase version</value>
     <value>CD drive is not ready.</value>
   </data>
   <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
-    <value>Fail to launch ffmpeg.</value>
+    <value>Failed to launch ffmpeg.</value>
   </data>
   <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
-    <value>Fail to create output path folders.</value>
+    <value>Failed to create output path folders.</value>
   </data>
   <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
-    <value>Fail to generate a unique output file path.</value>
+    <value>Failed to generate a unique output file path.</value>
   </data>
   <data name="ErrorFailToReadCDDrive" xml:space="preserve">
-    <value>Fail to read cd drive '{0}'.</value>
+    <value>Failed to read cd drive '{0}'.</value>
   </data>
   <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
-    <value>Fail to retrieve input path drive letter.</value>
+    <value>Failed to retrieve input path drive letter.</value>
   </data>
   <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
-    <value>Fail to retrieve track number from the cda input path.</value>
+    <value>Failed to retrieve track number from the cda input path.</value>
   </data>
   <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
-    <value>Fail to use the CD drive because it is oppened.</value>
+    <value>Failed to use the CD drive because it is oppened.</value>
   </data>
   <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
     <value>The input file type is not compatible with the selected output file type.</value>
@@ -488,7 +488,7 @@ use maj for uppercase version</value>
     <value>Mono</value>
   </data>
   <data name="SameChannelCountOption" xml:space="preserve">
-    <value>Same than input file</value>
+    <value>Same as input file</value>
   </data>
   <data name="StereoOption" xml:space="preserve">
     <value>Stereo</value>
@@ -521,7 +521,7 @@ use maj for uppercase version</value>
     <value>Can't find the output file(s).</value>
   </data>
   <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
-    <value>The conversion job failed but there is an output file that does exists.</value>
+    <value>The conversion failed, but an output file was created.</value>
   </data>
   <data name="ConversionStatePrepareConversion" xml:space="preserve">
     <value>Prepare conversion</value>
@@ -572,6 +572,6 @@ use maj for uppercase version</value>
     <value>Error</value>
   </data>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
-    <value>Can't load file converter user settings. Do you want to fall back to default settings ?</value>
+    <value>Could not load file converter user settings. Would you like to use default settings ?</value>
   </data>
 </root>

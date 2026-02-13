@@ -8,7 +8,7 @@ namespace FileConverter.ConversionJobs
 
     using FileConverter.Diagnostics;
 
-    using Excel = Microsoft.Office.Interop.Excel;
+    using Excel = NetOffice.ExcelApi;
 
     public class ConversionJob_Excel : ConversionJob_Office
     {
@@ -108,7 +108,7 @@ namespace FileConverter.ConversionJobs
             this.UserState = Properties.Resources.ConversionStateConversion;
 
             Debug.Log("Convert excel document to pdf.");
-            this.document.ExportAsFixedFormat(Excel.XlFixedFormatType.xlTypePDF, this.intermediateFilePath);
+            this.document.ExportAsFixedFormat(Excel.Enums.XlFixedFormatType.xlTypePDF, this.intermediateFilePath);
 
             Debug.Log($"Close excel document '{this.InputFilePath}'.");
             this.document.Close(false);

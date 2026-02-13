@@ -8,7 +8,7 @@ namespace FileConverter.ConversionJobs
 
     using FileConverter.Diagnostics;
 
-    using Word = Microsoft.Office.Interop.Word;
+    using Word = NetOffice.WordApi;
 
     public class ConversionJob_Word : ConversionJob_Office
     {
@@ -42,7 +42,7 @@ namespace FileConverter.ConversionJobs
                 return 1;
             }
 
-            int pagesCount = this.document.ComputeStatistics(Word.WdStatistic.wdStatisticPages);
+            int pagesCount = this.document.ComputeStatistics(Word.Enums.WdStatistic.wdStatisticPages);
 
             return pagesCount;
         }
@@ -102,19 +102,19 @@ namespace FileConverter.ConversionJobs
             Debug.Log("Convert word document to pdf.");
             // this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
             this.document.ExportAsFixedFormat(this.intermediateFilePath, 
-                Word.WdExportFormat.wdExportFormatPDF, 
+                Word.Enums.WdExportFormat.wdExportFormatPDF, 
                 false, 
-                Word.WdExportOptimizeFor.wdExportOptimizeForPrint, 
-                Word.WdExportRange.wdExportAllDocument, 
+                Word.Enums.WdExportOptimizeFor.wdExportOptimizeForPrint, 
+                Word.Enums.WdExportRange.wdExportAllDocument, 
                 1, 1, 
-                Word.WdExportItem.wdExportDocumentContent, 
+                Word.Enums.WdExportItem.wdExportDocumentContent, 
                 true, 
                 true, 
-                Word.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, 
+                Word.Enums.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, 
                 true);
 
             Debug.Log($"Close word document '{this.InputFilePath}'.");
-            this.document.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
+            this.document.Close(Word.Enums.WdSaveOptions.wdDoNotSaveChanges);
             this.document = null;
 
             this.ReleaseOfficeApplicationInstanceIfNeeded();
@@ -159,7 +159,7 @@ namespace FileConverter.ConversionJobs
 
             // Initialize word application.
             Debug.Log("Instantiate word application via interop.");
-            this.application = new Microsoft.Office.Interop.Word.Application
+            this.application = new Word.Application
             {
                 Visible = false
             };

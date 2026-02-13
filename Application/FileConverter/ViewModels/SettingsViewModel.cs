@@ -47,7 +47,7 @@ namespace FileConverter.ViewModels
 
         private ListCollectionView outputTypes;
         private CultureInfo[] supportedCultures;
-        private Helpers.HardwareAccelerationMode[] hardwareAccelerationModes = { Helpers.HardwareAccelerationMode.Off, Helpers.HardwareAccelerationMode.CUDA };
+        private Helpers.HardwareAccelerationMode[] hardwareAccelerationModes = { Helpers.HardwareAccelerationMode.Off, Helpers.HardwareAccelerationMode.CUDA, Helpers.HardwareAccelerationMode.AMF };
 
         public event Action OnPresetCreated;
         public event Action OnFolderCreated;

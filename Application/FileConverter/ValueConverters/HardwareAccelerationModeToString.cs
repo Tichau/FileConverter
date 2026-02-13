@@ -15,8 +15,10 @@ namespace FileConverter.ValueConverters
                     return Properties.Resources.HardwareAccelerationModeOffName;
                 case Helpers.HardwareAccelerationMode.CUDA:
                     return Properties.Resources.HardwareAccelerationModeCUDAName;
+                case Helpers.HardwareAccelerationMode.AMF:
+                    return Properties.Resources.HardwareAccelerationModeAMFName;
             }
-            return "Unknown";
+            return value?.ToString() ?? string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

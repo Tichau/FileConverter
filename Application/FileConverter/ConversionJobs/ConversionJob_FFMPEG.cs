@@ -15,7 +15,7 @@ namespace FileConverter.ConversionJobs
     public partial class ConversionJob_FFMPEG : ConversionJob
     {
         private readonly Regex durationRegex = new Regex(@"Duration:\s*([0-9][0-9]):([0-9][0-9]):([0-9][0-9])\.([0-9][0-9]),.*bitrate:\s*([0-9]+) kb\/s");
-        private readonly Regex progressRegex = new Regex(@"size=\s*([0-9]+)kB\s+time=([0-9][0-9]):([0-9][0-9]):([0-9][0-9]).([0-9][0-9])\s+bitrate=\s*([0-9]+.[0-9])kbits\/s");
+        private readonly Regex progressRegex = new Regex(@"size=\s*([0-9]+).*time=([0-9][0-9]):([0-9][0-9]):([0-9][0-9]).([0-9][0-9])\s+bitrate=\s*([0-9]+.[0-9])");
 
         private TimeSpan fileDuration;
         private TimeSpan actualConvertedDuration;
@@ -88,13 +88,15 @@ namespace FileConverter.ConversionJobs
 
         protected virtual void FillFFMpegArgumentsList()
         {
+            const string baseArgs = "-n -progress pipe:1";
+
             bool customCommandEnabled = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand);
             if (customCommandEnabled)
             {
                 // Custom command override other settings.
                 string customCommand = this.ConversionPreset.GetSettingsValue<string>(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand) ?? string.Empty;
 
-                string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, customCommand);
+                string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {customCommand} \"{this.OutputFilePath}\"";
                 this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
 
                 return;
@@ -116,7 +118,7 @@ namespace FileConverter.ConversionJobs
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
                         string encoderArgs = $"-c:a aac -q:a {this.AACBitrateToQualityIndex(audioEncodingBitrate)} {channelArgs} {AACMetadataArgs}";
 
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -134,13 +136,13 @@ namespace FileConverter.ConversionJobs
                         string audioArgs = "-an";
                         if (this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableAudio))
                         {
-                            audioArgs = string.Format("-c:a libmp3lame -qscale:a {0}", this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate));
+                            audioArgs = $"-c:a libmp3lame -qscale:a {this.MP3VBRBitrateToQualityIndex(audioEncodingBitrate)}";
                         }
 
                         // Compute final arguments.
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
                         string encoderArgs = $"-c:v mpeg4 -vtag xvid -qscale:v {this.MPEG4QualityToQualityIndex(videoEncodingQuality)} {audioArgs} {videoFilteringArgs} {MP3MetadataArgs}";
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -153,7 +155,7 @@ namespace FileConverter.ConversionJobs
 
                         // http://taer-naguur.blogspot.fr/2013/11/flac-audio-encoding-with-ffmpeg.html
                         string encoderArgs = $"-compression_level 12 {channelArgs}";
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -176,16 +178,16 @@ namespace FileConverter.ConversionJobs
                             transformArgs += ",";
                         }
 
-                        transformArgs += string.Format("fps={0}", framesPerSecond);
+                        transformArgs += $"fps={framesPerSecond}";
 
                         // Generate palette.
-                        string encoderArgs = string.Format("-vf \"{0},palettegen\"", transformArgs);
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, paletteFilePath, encoderArgs);
+                        string encoderArgs = $"-vf \"{transformArgs},palettegen\"";
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{paletteFilePath}\"";
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass("Indexing colors", arguments, paletteFilePath));
 
                         // Create gif.
-                        encoderArgs = string.Format("-i \"{0}\" -lavfi \"{1},paletteuse\"", paletteFilePath, transformArgs);
-                        arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        encoderArgs = $"-i \"{paletteFilePath}\" -lavfi \"{transformArgs},paletteuse\"";
+                        arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
 
@@ -194,7 +196,7 @@ namespace FileConverter.ConversionJobs
                 case OutputType.Ico:
                     {
                         string encoderArgs = string.Empty;
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -209,12 +211,12 @@ namespace FileConverter.ConversionJobs
                         string scaleArgs = string.Empty;
                         if (Math.Abs(scaleFactor - 1f) >= 0.005f)
                         {
-                            scaleArgs = string.Format("-vf scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+                            scaleArgs = $"-vf scale=iw*{scaleFactor.ToString("#.##", CultureInfo.InvariantCulture)}:ih*{scaleFactor.ToString("#.##", CultureInfo.InvariantCulture)}";
                         }
 
-                        string encoderArgs = string.Format("-q:v {0} {1}", this.JPGQualityToQualityIndex(encodingQuality), scaleArgs);
+                        string encoderArgs = $"-q:v {this.JPGQualityToQualityIndex(encodingQuality)} {scaleArgs}";
 
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -242,7 +244,7 @@ namespace FileConverter.ConversionJobs
                                 break;
                         }
 
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -270,22 +272,30 @@ namespace FileConverter.ConversionJobs
                         }
 
                         string videoCodec = "libx264";
-                        string hwAccelArg = "";
-                        if (hwAccel == Helpers.HardwareAccelerationMode.CUDA)
+                        string videoCodecArgs = $"-preset {this.H264EncodingSpeedToPreset(videoEncodingSpeed)} -crf {this.H264QualityToCRF(videoEncodingQuality)}";
+                        string hwAccelArg = string.Empty;
+
+                        switch (hwAccel)
                         {
-                            videoCodec = "h264_nvenc";
-                            hwAccelArg = "-hwaccel cuda -hwaccel_output_format cuda";
+                            case Helpers.HardwareAccelerationMode.CUDA:
+                                videoCodec = "h264_nvenc";
+                                int nvencQP = this.H264QualityToCRF(videoEncodingQuality);
+                                videoCodecArgs = $"-preset {this.H264EncodingSpeedToNVENCPreset(videoEncodingSpeed)} -rc constqp -qp {nvencQP}";
+
+                                hwAccelArg = "-hwaccel cuda -hwaccel_output_format cuda";
+                                break;
+
+                            case Helpers.HardwareAccelerationMode.AMF:
+                                int amfQP = this.H264QualityToCRF(videoEncodingQuality);
+                                int amfBFrameQP = Math.Min(51, amfQP + 2);
+                                videoCodec = "h264_amf";
+                                videoCodecArgs = $"-usage transcoding -quality {this.H264EncodingSpeedToAMFQuality(videoEncodingSpeed)} -qp_i {amfQP} -qp_p {amfQP} -qp_b {amfBFrameQP}";
+                                break;
                         }
 
-                        string encoderArgs = string.Format(
-                            "-c:v {0} -preset {1} -crf {2} {3} {4}",
-                            videoCodec,
-                            this.H264EncodingSpeedToPreset(videoEncodingSpeed),
-                            this.H264QualityToCRF(videoEncodingQuality),
-                            audioArgs,
-                            videoFilteringArgs);
+                        string encoderArgs = $"-c:v {videoCodec} {videoCodecArgs} {audioArgs} {videoFilteringArgs}";
 
-                        string arguments = string.Format("-n -stats {3} -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs, hwAccelArg);
+                        string arguments = $"{baseArgs} {hwAccelArg} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -298,7 +308,7 @@ namespace FileConverter.ConversionJobs
 
                         int encodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
                         string encoderArgs = $"-vn -codec:a libvorbis -qscale:a {this.OGGVBRBitrateToQualityIndex(encodingQuality)} {channelArgs}";
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -322,7 +332,7 @@ namespace FileConverter.ConversionJobs
 
                         string encoderArgs = $"-codec:v libtheora -qscale:v {this.OGVTheoraQualityToQualityIndex(videoEncodingQuality)} {audioArgs} {videoFilteringArgs}";
 
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -335,13 +345,13 @@ namespace FileConverter.ConversionJobs
                         string scaleArgs = string.Empty;
                         if (Math.Abs(scaleFactor - 1f) >= 0.005f)
                         {
-                            scaleArgs = string.Format("-vf scale=iw*{0}:ih*{0}", scaleFactor.ToString("#.##", CultureInfo.InvariantCulture));
+                            scaleArgs = $"-vf scale=iw*{scaleFactor.ToString("#.##", CultureInfo.InvariantCulture)}:ih*{scaleFactor.ToString("#.##", CultureInfo.InvariantCulture)}";
                         }
 
                         // http://www.howtogeek.com/203979/is-the-png-format-lossless-since-it-has-a-compression-parameter/
-                        string encoderArgs = string.Format("-compression_level 100 {0}", scaleArgs);
+                        string encoderArgs = $"-compression_level 100 {scaleArgs}";
 
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -354,7 +364,7 @@ namespace FileConverter.ConversionJobs
 
                         EncodingMode encodingMode = this.ConversionPreset.GetSettingsValue<EncodingMode>(ConversionPreset.ConversionSettingKeys.AudioEncodingMode);
                         string encoderArgs = $"-acodec {this.WAVEncodingToCodecArgument(encodingMode)} {channelArgs}";
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -384,16 +394,12 @@ namespace FileConverter.ConversionJobs
                         string audioArgs = "-an";
                         if (this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableAudio))
                         {
-                            audioArgs = string.Format("-c:a libvorbis -qscale:a {0}", this.OGGVBRBitrateToQualityIndex(audioEncodingQuality));
+                            audioArgs = $"-c:a libvorbis -qscale:a {this.OGGVBRBitrateToQualityIndex(audioEncodingQuality)}";
                         }
 
-                        string encoderArgs = string.Format(
-                            "-c:v libvpx-vp9 {0} {1} {2}", 
-                            encodingArgs,
-                            audioArgs, 
-                            videoFilteringArgs);
+                        string encoderArgs = $"-c:v libvpx-vp9 {encodingArgs} {audioArgs} {videoFilteringArgs}";
 
-                        string arguments = string.Format("-n -stats -i \"{0}\" {2} \"{1}\"", this.InputFilePath, this.OutputFilePath, encoderArgs);
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
                     }
@@ -493,7 +499,7 @@ namespace FileConverter.ConversionJobs
                 int hours = int.Parse(match.Groups[1].Value);
                 int minutes = int.Parse(match.Groups[2].Value);
                 int seconds = int.Parse(match.Groups[3].Value);
-                int milliseconds = int.Parse(match.Groups[4].Value);
+                int milliseconds = int.Parse(match.Groups[4].Value) * 10;
                 float bitrate = float.Parse(match.Groups[5].Value);
                 this.fileDuration = new TimeSpan(0, hours, minutes, seconds, milliseconds);
                 return;

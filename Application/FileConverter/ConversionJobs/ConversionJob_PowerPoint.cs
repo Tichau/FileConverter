@@ -7,9 +7,8 @@ namespace FileConverter.ConversionJobs
     using System.Threading.Tasks;
 
     using FileConverter.Diagnostics;
-    using Microsoft.Office.Core;
 
-    using PowerPoint = Microsoft.Office.Interop.PowerPoint;
+    using PowerPoint = NetOffice.PowerPointApi;
 
     public class ConversionJob_PowerPoint : ConversionJob_Office
     {
@@ -97,7 +96,7 @@ namespace FileConverter.ConversionJobs
             this.UserState = Properties.Resources.ConversionStateConversion;
 
             Debug.Log("Convert PowerPoint document to pdf.");
-            this.document.ExportAsFixedFormat(this.intermediateFilePath, PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF);
+            this.document.ExportAsFixedFormat(this.intermediateFilePath, PowerPoint.Enums.PpFixedFormatType.ppFixedFormatTypePDF);
 
             Debug.Log($"Close PowerPoint document '{this.InputFilePath}'.");
             this.document.Close();
@@ -201,7 +200,7 @@ namespace FileConverter.ConversionJobs
             {
                 Debug.Log($"Load PowerPoint document '{this.InputFilePath}'.");
 
-                this.document = this.application.Presentations.Open(this.InputFilePath, ReadOnly: MsoTriState.msoTrue, WithWindow: MsoTriState.msoFalse);
+                this.document = this.application.Presentations.Open(this.InputFilePath, readOnly: NetOffice.OfficeApi.Enums.MsoTriState.msoTrue, untitled: NetOffice.OfficeApi.Enums.MsoTriState.msoFalse, withWindow: NetOffice.OfficeApi.Enums.MsoTriState.msoFalse);
             }
 
             return this.document != null;

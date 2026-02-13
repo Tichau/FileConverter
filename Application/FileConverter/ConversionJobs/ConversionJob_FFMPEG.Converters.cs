@@ -104,10 +104,12 @@ namespace FileConverter.ConversionJobs
                 transformArgs += rotationArgs;
             }
 
-            if (hwAccel == Helpers.HardwareAccelerationMode.Off && (conversionPreset.OutputType == OutputType.Mkv || conversionPreset.OutputType == OutputType.Mp4))
+            if (hwAccel != Helpers.HardwareAccelerationMode.CUDA && (conversionPreset.OutputType == OutputType.Mkv || conversionPreset.OutputType == OutputType.Mp4))
             {
+                // For H.264 in MP4/MKV, force yuv420p for broad player compatibility:
                 // http://trac.ffmpeg.org/wiki/Encode/H.264#Encodingfordumbplayers
-                // YUV planar color space with 4:2:0 chroma subsampling
+                // - Software encoding and non-CUDA hardware (e.g., AMF) come through this path.
+                // - CUDA is excluded here because the scale_cuda path above already sets format=yuv420p.
                 transformArgs += (transformArgs.Length > 0 ? "," : string.Empty) + "format=yuv420p";
                 //// TODO: maybe there should be an option for this on the settings?
             }
@@ -324,7 +326,71 @@ namespace FileConverter.ConversionJobs
                     return "veryslow";
             }
 
-            throw new Exception("Unknown H264 encoding speed.");
+            throw new ArgumentOutOfRangeException(nameof(encodingSpeed), encodingSpeed, "Unknown H264 encoding speed.");
+        }
+
+        /// <summary>
+        /// Convert video encoding speed to NVENC preset.
+        /// </summary>
+        /// <param name="encodingSpeed">The encoding speed.</param>
+        /// <returns>The NVENC preset.</returns>
+        private string H264EncodingSpeedToNVENCPreset(VideoEncodingSpeed encodingSpeed)
+        {
+            switch (encodingSpeed)
+            {
+                case VideoEncodingSpeed.UltraFast:
+                    return "p1";
+
+                case VideoEncodingSpeed.SuperFast:
+                    return "p2";
+
+                case VideoEncodingSpeed.VeryFast:
+                    return "p3";
+
+                case VideoEncodingSpeed.Faster:
+                case VideoEncodingSpeed.Fast:
+                case VideoEncodingSpeed.Medium:
+                    return "p4";
+
+                case VideoEncodingSpeed.Slow:
+                    return "p5";
+
+                case VideoEncodingSpeed.Slower:
+                    return "p6";
+
+                case VideoEncodingSpeed.VerySlow:
+                    return "p7";
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(encodingSpeed), encodingSpeed, "Unknown H264 encoding speed.");
+        }
+
+        /// <summary>
+        /// Convert video encoding speed to AMF quality mode.
+        /// </summary>
+        /// <param name="encodingSpeed">The encoding speed.</param>
+        /// <returns>The AMF quality mode.</returns>
+        private string H264EncodingSpeedToAMFQuality(VideoEncodingSpeed encodingSpeed)
+        {
+            switch (encodingSpeed)
+            {
+                case VideoEncodingSpeed.UltraFast:
+                case VideoEncodingSpeed.SuperFast:
+                case VideoEncodingSpeed.VeryFast:
+                case VideoEncodingSpeed.Faster:
+                case VideoEncodingSpeed.Fast:
+                    return "speed";
+
+                case VideoEncodingSpeed.Medium:
+                case VideoEncodingSpeed.Slow:
+                    return "balanced";
+
+                case VideoEncodingSpeed.Slower:
+                case VideoEncodingSpeed.VerySlow:
+                    return "quality";
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(encodingSpeed), encodingSpeed, "Unknown H264 encoding speed.");
         }
 
         /// <summary>

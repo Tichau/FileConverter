@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,478 +118,502 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>關於</value>
+    <value>O programie</value>
   </data>
   <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
-    <value>指定轉換成功後要對原始檔案進行的操作</value>
+    <value>Pozwala wybrać, co zrobić z plikami wejściowymi, jeśli konwersja się powiedzie</value>
   </data>
   <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
-    <value>轉換成功時的操作</value>
+    <value>Akcja po pomyślnej konwersji</value>
   </data>
   <data name="AddNewPreset" xml:space="preserve">
-    <value>新增預設值</value>
+    <value>Nowe ustawienie</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>應用程式</value>
+    <value>Aplikacja</value>
   </data>
   <data name="AudioTitle" xml:space="preserve">
-    <value>音訊</value>
+    <value>Dźwięk</value>
   </data>
   <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
-    <value>程式啟動時自動檢查更新</value>
+    <value>Automatycznie sprawdzaj aktualizacje przy uruchomieniu File Converter</value>
   </data>
   <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
-    <value>所有轉換完成後自動關閉</value>
+    <value>Automatycznie zamknij po zakończeniu wszystkich konwersji</value>
   </data>
   <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
-    <value>限制為最接近的 2 的次方大小</value>
+    <value>Dopasuj do najbliższej niższej potęgi dwójki</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>關閉</value>
+    <value>Zamknij</value>
   </data>
   <data name="ConversionPresets" xml:space="preserve">
-    <value>轉換預設值</value>
+    <value>Ustawienia konwersji</value>
   </data>
   <data name="ConversionQueueTitle" xml:space="preserve">
-    <value>待轉換的檔案</value>
+    <value>Pliki do konwersji</value>
   </data>
   <data name="ConvertedFrom" xml:space="preserve">
-    <value>轉換自</value>
+    <value>Skonwertowano z</value>
   </data>
   <data name="Diagnostics" xml:space="preserve">
-    <value>日誌</value>
+    <value>Dzienniki</value>
   </data>
   <data name="DiagnosticsButtonTooltip" xml:space="preserve">
-    <value>日誌</value>
+    <value>Dzienniki</value>
   </data>
   <data name="DocumentationButtonDescription" xml:space="preserve">
-    <value>開啟文件</value>
+    <value>Otwórz dokumentację</value>
   </data>
   <data name="DonateButtonTitle" xml:space="preserve">
-    <value>贊助</value>
+    <value>Wesprzyj</value>
   </data>
   <data name="DonateDescription" xml:space="preserve">
-    <value>如果您喜歡這個軟體，別忘了給予一些支持 :)</value>
+    <value>Nie zapomnij wynagrodzić mojej pracy, jeśli Ci się podoba :)</value>
   </data>
   <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
-    <value>更新將會在背景下載，並在您關閉 File Converter 後安裝。</value>
+    <value>Aktualizacja zostanie pobrana w tle i zainstalowana po zamknięciu File Converter.</value>
   </data>
   <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
-    <value>關閉 File Converter 後安裝</value>
+    <value>Zainstaluj, gdy zamknę File Converter</value>
   </data>
   <data name="Encoding" xml:space="preserve">
-    <value>編碼：</value>
+    <value>Kodowanie :</value>
   </data>
   <data name="EncodingSpeed" xml:space="preserve">
-    <value>編碼速度：</value>
+    <value>Prędkość kodowania :</value>
   </data>
   <data name="FileConverterStartHelp1" xml:space="preserve">
-    <value>File Converter 是一個檔案總管擴充功能。</value>
+    <value>File Converter to rozszerzenie powłoki systemowej.</value>
   </data>
   <data name="FileConverterStartHelp2" xml:space="preserve">
-    <value>這表示它已整合至 Windows 檔案總管中。</value>
+    <value>Oznacza to, że jest zintegrowany z eksploratorem Windows.</value>
   </data>
   <data name="FileConverterStartHelp3" xml:space="preserve">
-    <value>要使用 File Converter，請開啟檔案總管，並在您想要轉換的任何檔案上按滑鼠右鍵以顯示選單，您會在其中找到 File Converter 的各項指令（請參閱說明文件以了解支援的檔案格式）。</value>
+    <value>Aby użyć File Converter, otwórz eksplorator i kliknij prawym przyciskiem myszy dowolny plik, aby otworzyć menu kontekstowe, w którym znajdziesz polecenia File Converter (zobacz plik readme, aby zobaczyć listę zgodnych formatów plików).</value>
   </data>
   <data name="FileNameTemplate" xml:space="preserve">
-    <value>檔案名稱格式</value>
+    <value>Szablon nazwy pliku</value>
   </data>
   <data name="FramesPerSecond" xml:space="preserve">
-    <value>每秒影格數：</value>
+    <value>Klatki na sekundę :</value>
   </data>
   <data name="GitHubButtonDescription" xml:space="preserve">
-    <value>開啟 GitHub 專案頁面</value>
+    <value>Otwórz stronę projektu na GitHub</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>說明</value>
+    <value>pomoc ?</value>
   </data>
   <data name="InputExample" xml:space="preserve">
-    <value>輸入範例</value>
+    <value>Przykład wejściowy</value>
   </data>
   <data name="InputFormats" xml:space="preserve">
-    <value>輸入格式</value>
+    <value>Formaty wejściowe</value>
   </data>
   <data name="InputPostConversionActionDeleteName" xml:space="preserve">
-    <value>刪除</value>
+    <value>Usuń</value>
   </data>
   <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
-    <value>移至封存資料夾</value>
+    <value>Przenieś do folderu archiwum</value>
   </data>
   <data name="InputPostConversionActionNoneName" xml:space="preserve">
-    <value>無</value>
+    <value>Brak</value>
   </data>
   <data name="InstallButtonDescription" xml:space="preserve">
-    <value>更新下載完成。現在可以關閉 File Converter 並立即安裝更新。</value>
+    <value>Aktualizacja została pobrana. Zamknij File Converter i zainstaluj teraz aktualizację.</value>
   </data>
   <data name="InstallButtonTitle" xml:space="preserve">
-    <value>關閉 File Converter 時安裝</value>
+    <value>Zainstaluj, gdy zamknę File Converter</value>
   </data>
   <data name="IssueButtonDescription" xml:space="preserve">
-    <value>問題回報</value>
+    <value>Zgłoś problem</value>
   </data>
   <data name="MoveDownSelectedPreset" xml:space="preserve">
-    <value>將選取的預設值向下移動</value>
+    <value>Przesuń wybrane ustawienie w dół</value>
   </data>
   <data name="MoveUpSelectedPreset" xml:space="preserve">
-    <value>將選取的預設值向上移動</value>
+    <value>Przesuń wybrane ustawienie w górę</value>
   </data>
   <data name="Mp3CbrDescription" xml:space="preserve">
-    <value>固定位元速率編碼</value>
+    <value>Kodowanie o stałej przepływności (CBR)</value>
   </data>
   <data name="Mp3VbrDescription" xml:space="preserve">
-    <value>變動位元速率編碼</value>
+    <value>Kodowanie o zmiennej przepływności (VBR)</value>
   </data>
   <data name="NinetyDegreesRotationTitle" xml:space="preserve">
     <value>90°</value>
   </data>
   <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
-    <value>逆時針旋轉 90°</value>
+    <value>Obrót o 90° w lewo</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>確定</value>
+    <value>Ok</value>
   </data>
   <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
     <value>180°</value>
   </data>
   <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
-    <value>旋轉 180°</value>
+    <value>Obrót o 180°</value>
   </data>
   <data name="OutputFileNameTemplateSample" xml:space="preserve">
-    <value>C:\Music\Artist\Album\Song.wav</value>
+    <value>C:\Muzyka\Artysta\Album\Piosenka.wav</value>
   </data>
   <data name="OutputExample" xml:space="preserve">
-    <value>輸出範例</value>
+    <value>Wynik</value>
   </data>
   <data name="OutputFilePathTemplateHelp" xml:space="preserve">
-    <value>(p): 輸入檔案路徑
-(f): 輸入檔案名稱
-(o): 輸出檔案類型
-(i): 輸入檔案類型
-(d0): 輸入上層資料夾名稱
-(d1): 輸入資料夾名稱
+    <value>(p): ścieżka pliku wejściowego
+(f): nazwa pliku wejściowego
+(o): typ rozszerzenia wyjściowego
+(i): typ rozszerzenia wejściowego
+(d0): folder nadrzędny wejścia
+(d1): podfolder nadrzędny wejścia
 ...
-(n:i): 頁數
-(n:c): 總頁數
+(n:i): indeks numeru strony
+(n:c): całkowita liczba stron
 
-特殊路徑：
-(p:d): 我的文件路徑
-(p:m): 我的音樂路徑
-(p:v): 我的影片路徑
-(p:p): 我的圖片路徑
+Ścieżki specjalne:
+(p:d): ścieżka moich dokumentów
+(p:m): ścieżka mojej muzyki
+(p:v): ścieżka moich wideo
+(p:p): ścieżka moich zdjęć
 
-使用大寫表示大寫版本</value>
+użyj wielkich liter dla wersji z wielkiej litery</value>
   </data>
   <data name="OutputFormat" xml:space="preserve">
-    <value>輸出格式</value>
+    <value>Format wyjściowy</value>
   </data>
   <data name="Preset" xml:space="preserve">
-    <value>預設值</value>
+    <value>Ustawienie</value>
   </data>
   <data name="PresetName" xml:space="preserve">
-    <value>預設值名稱</value>
+    <value>Nazwa ustawienia</value>
   </data>
   <data name="Quality" xml:space="preserve">
-    <value>品質：</value>
+    <value>Jakość :</value>
   </data>
   <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
-    <value>藍色區域為建議的位元率範圍</value>
+    <value>Zalecany zakres przepływności na niebiesko</value>
   </data>
   <data name="RemoveSelectedPreset" xml:space="preserve">
-    <value>刪除</value>
+    <value>Usuń</value>
   </data>
   <data name="Rotate" xml:space="preserve">
-    <value>旋轉：</value>
+    <value>Obróć :</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>儲存</value>
+    <value>Zapisz</value>
   </data>
   <data name="Scale" xml:space="preserve">
-    <value>縮放：</value>
+    <value>Skaluj :</value>
   </data>
   <data name="SeeChangeLog" xml:space="preserve">
-    <value>請參閱更新日誌...</value>
+    <value>Zobacz dziennik zmian ...</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>設定</value>
+    <value>Ustawienia</value>
   </data>
   <data name="SettingsButtonTooltip" xml:space="preserve">
-    <value>設定</value>
+    <value>Ustawienia</value>
   </data>
   <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
     <value>270°</value>
   </data>
   <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
-    <value>順時針旋轉 90°</value>
+    <value>Obrót o 90° w prawo</value>
   </data>
   <data name="UpgradeAvailable" xml:space="preserve">
-    <value>File Converter 有可用的更新。建議您盡速安裝！</value>
+    <value>Dostępna jest aktualizacja dla File Converter. Zaleca się jej jak najszybszą instalację!</value>
   </data>
   <data name="UpgradeDownloadInProgress" xml:space="preserve">
-    <value>正在下載更新...</value>
+    <value>Pobieranie aktualizacji w toku...</value>
   </data>
   <data name="UpgradeWindowTitle" xml:space="preserve">
-    <value>File Converter 更新</value>
+    <value>Aktualizacje File Converter</value>
   </data>
   <data name="VideoEncodingQualityTooltip" xml:space="preserve">
-    <value>定義「檔案大小」與「影片品質」之間的比值。數值越低檔案越小，數值越高影片品質越好。</value>
+    <value>Określ stosunek 'rozmiar pliku' do 'jakości wideo'. Niższa wartość da mniejszy plik, wyższa wartość da lepszą jakość wideo.</value>
   </data>
   <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
-    <value>較快</value>
+    <value>Szybsze</value>
   </data>
   <data name="VideoEncodingSpeedFastName" xml:space="preserve">
-    <value>快</value>
+    <value>Szybkie</value>
   </data>
   <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
-    <value>中等</value>
+    <value>Średnie</value>
   </data>
   <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
-    <value>較慢</value>
+    <value>Wolniejsze</value>
   </data>
   <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
-    <value>慢</value>
+    <value>Wolne</value>
   </data>
   <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
-    <value>超快</value>
+    <value>Super Szybkie</value>
   </data>
   <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
-    <value>定義「檔案大小」與「壓縮時間」之間的比值。在相同影片品質下，慢速壓縮會產生比快速壓縮更小的檔案。</value>
+    <value>Określ stosunek 'rozmiar pliku' do 'czasu trwania kompresji'. Wolniejsza kompresja da mniejszy plik (dla tej samej jakości wideo) niż szybsza kompresja.</value>
   </data>
   <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
-    <value>極快</value>
+    <value>Ultra Szybkie</value>
   </data>
   <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
-    <value>非常快</value>
+    <value>Bardzo Szybkie</value>
   </data>
   <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
-    <value>非常慢</value>
+    <value>Bardzo Wolne</value>
   </data>
   <data name="VideoTitle" xml:space="preserve">
-    <value>影片</value>
+    <value>Wideo</value>
   </data>
   <data name="Wav16bitsDescription" xml:space="preserve">
-    <value>PCM 有號 16 位元小端序</value>
+    <value>PCM signed 16-bit little-endian</value>
   </data>
   <data name="Wav24bitsDescription" xml:space="preserve">
-    <value>PCM 有號 24 位元小端序</value>
+    <value>PCM signed 24-bit little-endian</value>
   </data>
   <data name="Wav32bitsDescription" xml:space="preserve">
-    <value>PCM 有號 32 位元小端序</value>
+    <value>PCM signed 32-bit little-endian</value>
   </data>
   <data name="Wav8bitsDescription" xml:space="preserve">
-    <value>PCM 有號 8 位元小端序</value>
+    <value>PCM signed 8-bit little-endian</value>
   </data>
   <data name="ZeroDegreesRotationTitle" xml:space="preserve">
-    <value>不旋轉</value>
+    <value>Brak</value>
   </data>
   <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
-    <value>不進行旋轉</value>
+    <value>Bez obrotu</value>
   </data>
   <data name="ConversionStateConversion" xml:space="preserve">
-    <value>轉換中</value>
+    <value>Konwertowanie</value>
   </data>
   <data name="ConversionStateDone" xml:space="preserve">
-    <value>已完成</value>
+    <value>Ukończono</value>
   </data>
   <data name="ConversionStateExtraction" xml:space="preserve">
-    <value>提取中</value>
+    <value>Wyodrębnianie</value>
   </data>
   <data name="ConversionStateFailed" xml:space="preserve">
-    <value>失敗</value>
+    <value>Niepowodzenie</value>
   </data>
   <data name="ConversionStateInQueue" xml:space="preserve">
-    <value>佇列等待中</value>
+    <value>W kolejce</value>
   </data>
   <data name="ConversionStateReadIntputImage" xml:space="preserve">
-    <value>讀取輸入圖片</value>
+    <value>Odczyt obrazu wejściowego</value>
   </data>
   <data name="ConversionStateReadDocument" xml:space="preserve">
-    <value>讀取文件</value>
+    <value>Odczyt dokumentu</value>
   </data>
   <data name="StringAnimatedImageName" xml:space="preserve">
-    <value>動畫圖片</value>
+    <value>Animowany obraz</value>
   </data>
   <data name="StringAudioName" xml:space="preserve">
-    <value>音訊</value>
+    <value>Dźwięk</value>
   </data>
   <data name="StringDocumentName" xml:space="preserve">
-    <value>文件</value>
+    <value>Dokument</value>
   </data>
   <data name="StringImageName" xml:space="preserve">
-    <value>圖片</value>
+    <value>Obraz</value>
   </data>
   <data name="StringVideoName" xml:space="preserve">
-    <value>影片</value>
+    <value>Wideo</value>
   </data>
   <data name="ExitWaitingDuration" xml:space="preserve">
-    <value>應用程式結束前的等待時間</value>
+    <value>Czas oczekiwania przed zamknięciem aplikacji</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>語言</value>
+    <value>Język</value>
   </data>
   <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
-    <value>最大同時轉檔數</value>
+    <value>Maksymalna liczba jednoczesnych konwersji</value>
   </data>
   <data name="DefaultPresetName" xml:space="preserve">
-    <value>新增預設值</value>
+    <value>Nowe ustawienie</value>
   </data>
   <data name="DownloadingChangeLog" xml:space="preserve">
-    <value>###正在下載更新日誌...</value>
+    <value>###Pobieranie dziennika zmian ...</value>
   </data>
   <data name="ConversionArchives" xml:space="preserve">
-    <value>原始檔案封存資料夾</value>
+    <value>Archiwa konwersji</value>
   </data>
   <data name="ErrorCanceled" xml:space="preserve">
-    <value>已取消。</value>
+    <value>Anulowano.</value>
   </data>
   <data name="ErrorCantFindFFMPEG" xml:space="preserve">
-    <value>找不到 ffmpeg 執行檔。請嘗試重新安裝該應用程式。</value>
+    <value>Nie można znaleźć pliku wykonywalnego ffmpeg. Spróbuj ponownie zainstalować aplikację.</value>
   </data>
   <data name="ErrorCDAExtractionFailed" xml:space="preserve">
-    <value>音訊 CD 音軌提取失敗。</value>
+    <value>Wyodrębnianie ścieżki z Audio CD nie powiodło się.</value>
   </data>
   <data name="ErrorCDDriveNotReady" xml:space="preserve">
-    <value>CD 光碟機未就緒。</value>
+    <value>Napęd CD nie jest gotowy.</value>
   </data>
   <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
-    <value>啟動 FFmpeg 失敗。</value>
+    <value>Nie udało się uruchomić ffmpeg.</value>
   </data>
   <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
-    <value>無法建立輸出路徑資料夾。</value>
+    <value>Nie udało się utworzyć folderów ścieżki wyjściowej.</value>
   </data>
   <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
-    <value>無法產生唯一的輸出檔案路徑。</value>
+    <value>Nie udało się wygenerować unikalnej ścieżki pliku wyjściowego.</value>
   </data>
   <data name="ErrorFailToReadCDDrive" xml:space="preserve">
-    <value>無法讀取 CD 光碟機'{0}'。</value>
+    <value>Nie udało się odczytać napędu CD '{0}'.</value>
   </data>
   <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
-    <value>無法取得輸入路徑的磁碟機代號。</value>
+    <value>Nie udało się pobrać litery dysku ze ścieżki wejściowej.</value>
   </data>
   <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
-    <value>無法從 cda 輸入路徑取得音軌編號。</value>
+    <value>Nie udało się pobrać numeru ścieżki ze ścieżki wejściowej cda.</value>
   </data>
   <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
-    <value>因 CD 光碟機已開啟，所以無法使用。</value>
+    <value>Nie można użyć napędu CD, ponieważ jest otwarty.</value>
   </data>
   <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
-    <value>輸入檔案類型與所選的輸出檔案類型不相容。</value>
+    <value>Typ pliku wejściowego nie jest zgodny z wybranym typem pliku wyjściowego.</value>
   </data>
   <data name="ErrorInvalidOutputPath" xml:space="preserve">
-    <value>輸出檔案路徑範本產生的輸出路徑無效。</value>
+    <value>Nieprawidłowa ścieżka wyjściowa wygenerowana przez szablon ścieżki pliku wyjściowego.</value>
   </data>
   <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
-    <value>不支援的輸出格式 '{0}'。</value>
+    <value>Nieobsługiwany format wyjściowy '{0}'.</value>
   </data>
   <data name="ChannelCountTitle" xml:space="preserve">
-    <value>聲道數量：</value>
+    <value>Liczba kanałów :</value>
   </data>
   <data name="ChannelCountTooltip" xml:space="preserve">
-    <value>變更輸入檔案的聲道數量。</value>
+    <value>Zmień liczbę kanałów pliku wejściowego.</value>
   </data>
   <data name="MonoOption" xml:space="preserve">
-    <value>單聲道</value>
+    <value>Mono</value>
   </data>
   <data name="SameChannelCountOption" xml:space="preserve">
-    <value>與輸入檔案相同</value>
+    <value>Tak samo jak plik wejściowy</value>
   </data>
   <data name="StereoOption" xml:space="preserve">
-    <value>立體聲</value>
+    <value>Stereo</value>
   </data>
   <data name="LicenceHeader1" xml:space="preserve">
-    <value>**此程式為自由軟體**</value>
+    <value>**Ten program jest darmowym oprogramowaniem**.</value>
   </data>
   <data name="LicenceHeader2" xml:space="preserve">
-    <value>您可以根據 GNU 通用公共授權條款來重新散布或修改本程式。</value>
+    <value>Możesz go redystrybuować i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU.</value>
   </data>
   <data name="LicenceHeader3" xml:space="preserve">
-    <value>本程式的發布是希望它能帶來幫助，但不提供任何擔保責任。詳細資訊請參閱 GNU 通用公共授權（可在安裝資料夾中的「LICENSE.md」檔案中找到）。</value>
+    <value>Ten program jest rozpowszechniany w nadziei, że będzie użyteczny, ale BEZ ŻADNEJ GWARANCJI. Zobacz Powszechną Licencję Publiczną GNU (dostępną w folderze instalacyjnym: `LICENSE.md`), aby uzyskać więcej szczegółów.</value>
   </data>
   <data name="ApplicationIsTerminating" xml:space="preserve">
-    <value>應用程式正在關閉。</value>
+    <value>Aplikacja jest zamykana.</value>
   </data>
   <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
-    <value>程式將於 {0} 秒後自動關閉。</value>
+    <value>Aplikacja zostanie automatycznie zamknięta za {0} sekund.</value>
   </data>
   <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
-    <value>程式將於 1 秒後自動關閉。</value>
+    <value>Aplikacja zostanie automatycznie zamknięta za 1 sekundę.</value>
   </data>
   <data name="StringMiscName" xml:space="preserve">
-    <value>其他</value>
+    <value>Różne</value>
   </data>
   <data name="ErrorCantFindOutputFiles" xml:space="preserve">
-    <value>找不到輸出檔案。</value>
+    <value>Nie można znaleźć pliku(ów) wyjściowego(ych).</value>
   </data>
   <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
-    <value>轉換失敗，但輸出檔案已存在。</value>
+    <value>Zadanie konwersji nie powiodło się, ale istnieje plik wyjściowy.</value>
   </data>
   <data name="ConversionStatePrepareConversion" xml:space="preserve">
-    <value>準備進行轉換</value>
+    <value>Przygotowywanie konwersji</value>
   </data>
   <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
-    <value>必須安裝 Microsoft Office 才能轉換 Office 文件。</value>
+    <value>Microsoft Office musi być zainstalowany, aby konwertować dokumenty Office.</value>
   </data>
   <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
-    <value>無法使用 Microsoft Office 開啟文件（請檢查您的授權/安裝是否有效）。</value>
+    <value>Nie udało się otworzyć dokumentu za pomocą Microsoft Office (sprawdź, czy Twoja licencja/instalacja jest ważna).</value>
   </data>
   <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
-    <value>必須安裝 Microsoft Excel 才能轉換 Excel 文件。</value>
+    <value>Microsoft Excel musi być zainstalowany, aby konwertować dokumenty Excel.</value>
   </data>
   <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
-    <value>必須安裝 Microsoft PowerPoint 才能轉換 PowerPoint 文件。</value>
+    <value>Microsoft PowerPoint musi być zainstalowany, aby konwertować dokumenty PowerPoint.</value>
   </data>
   <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
-    <value>必須安裝 Microsoft Word 才能轉換 Word 文件。</value>
+    <value>Microsoft Word musi być zainstalowany, aby konwertować dokumenty Word.</value>
   </data>
   <data name="WebsiteButtonDescription" xml:space="preserve">
-    <value>開啟 File Converter 網站</value>
+    <value>Otwórz stronę internetową File Converter</value>
   </data>
   <data name="ErrorDuringJobInitialization" xml:space="preserve">
-    <value>轉換作業初始化時發生錯誤。</value>
+    <value>Błąd podczas inicjalizacji zadania konwersji.</value>
   </data>
   <data name="CreateANewFolder" xml:space="preserve">
-    <value>建立新資料夾</value>
+    <value>Nowy folder</value>
   </data>
   <data name="DefaultFolderName" xml:space="preserve">
-    <value>新資料夾</value>
+    <value>Nowy folder</value>
   </data>
   <data name="PresetFolder" xml:space="preserve">
-    <value>資料夾</value>
+    <value>Folder</value>
   </data>
   <data name="PresetFolderName" xml:space="preserve">
-    <value>資料夾名稱</value>
+    <value>Nazwa folderu</value>
   </data>
   <data name="AdvancedMode" xml:space="preserve">
-    <value>進階模式</value>
+    <value>Tryb zaawansowany</value>
   </data>
   <data name="FFMPEGCustomArguments" xml:space="preserve">
-    <value>自訂參數</value>
+    <value>Niestandardowe argumenty</value>
   </data>
   <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
-    <value>自訂 FFmpeg 命令列參數</value>
+    <value>Niestandardowe argumenty wiersza poleceń FFMPEG</value>
   </data>
   <data name="NoPresetSelected" xml:space="preserve">
-    <value>未選擇預設值</value>
+    <value>Nie wybrano ustawienia</value>
   </data>
   <data name="ExportSelectedPresets" xml:space="preserve">
-    <value>匯出</value>
+    <value>Eksportuj</value>
   </data>
   <data name="ImportPresets" xml:space="preserve">
-    <value>匯入</value>
+    <value>Importuj</value>
   </data>
   <data name="DuplicatePreset" xml:space="preserve">
-    <value>複製預設值</value>
+    <value>Duplikuj ustawienie</value>
   </data>
   <data name="CancelJobTooltip" xml:space="preserve">
-    <value>取消</value>
+    <value>Anuluj</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>錯誤</value>
+    <value>Błąd</value>
   </data>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
-    <value>無法載入 File Converter 的使用者設定。您想要回復為預設設定嗎？</value>
+    <value>Nie można wczytać ustawień użytkownika File Converter. Czy chcesz przywrócić ustawienia domyślne?</value>
   </data>
   <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
-    <value>轉換後將檔案複製到剪貼簿</value>
+    <value>Kopiuj pliki do schowka po konwersji</value>
+  </data>
+  <data name="HardwareAccelerationMode" xml:space="preserve">
+    <value>Tryb akceleracji sprzętowej</value>
+  </data>
+  <data name="HardwareAccelerationModeAMFName" xml:space="preserve">
+    <value>Advanced Media Framework (AMD)</value>
+  </data>
+  <data name="HardwareAccelerationModeCUDAName" xml:space="preserve">
+    <value>CUDA (Nvidia)</value>
+  </data>
+  <data name="HardwareAccelerationModeD3D11Name" xml:space="preserve">
+    <value>Direct3D 11</value>
+  </data>
+  <data name="HardwareAccelerationModeDXVA2Name" xml:space="preserve">
+    <value>Direct3D 9/DXVA2</value>
+  </data>
+  <data name="HardwareAccelerationModeOffName" xml:space="preserve">
+    <value>Wyłączony</value>
+  </data>
+  <data name="HardwareAccelerationModeOpenCLName" xml:space="preserve">
+    <value>OpenCL</value>
+  </data>
+  <data name="HardwareAccelerationModeVulkanName" xml:space="preserve">
+    <value>Vulkan</value>
   </data>
 </root>

@@ -76,6 +76,11 @@ namespace FileConverter.ConversionJobs
                 string inputExtension = System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant();
                 switch (inputExtension)
                 {
+                    case ".avif":
+                        // Explicitly set AVIF format for proper reading
+                        readSettings.Format = MagickFormat.Avif;
+                        break;
+
                     case ".cr2":
                         // Requires an explicit image format otherwise the image is interpreted as a TIFF image.
                         readSettings.Format = MagickFormat.Cr2;
@@ -211,6 +216,10 @@ namespace FileConverter.ConversionJobs
             Debug.Log($"Convert image (output: {this.OutputFilePath}).");
             switch (this.ConversionPreset.OutputType)
             {
+                case OutputType.Avif:
+                    image.Quality = this.ConversionPreset.GetSettingsValue<uint>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    break;
+
                 case OutputType.Png:
                     // http://stackoverflow.com/questions/27267073/imagemagick-lossless-max-compression-for-png
                     image.Quality = 95;

@@ -104,8 +104,11 @@ namespace FileConverterExtension
                 Image = new Icon(Properties.Resources.ApplicationIcon, SystemInformation.SmallIconSize).ToBitmap(),
             };
 
+            int menuItemIndex = 0;
             foreach (MenuEntry menuEntry in this.menuEntries)
             {
+                menuItemIndex++;
+                
                 ToolStripMenuItem root = fileConverterItem;
                 if (menuEntry.PresetReference.Folders != null)
                 {
@@ -142,9 +145,14 @@ namespace FileConverterExtension
                     root = fileConverterItem;
                 }
 
+                // Make each menu item text unique using invisible zero-width spaces
+                // This prevents Windows Forms menu collision while being completely invisible to users
+                string uniqueSuffix = new string('\u200B', menuItemIndex); // Zero-Width Space characters
+                string displayText = menuEntry.PresetReference.Name + uniqueSuffix;
+
                 ToolStripMenuItem subItem = new ToolStripMenuItem
                 {
-                    Text = menuEntry.PresetReference.Name,
+                    Text = displayText,
                     Enabled = menuEntry.Enabled
                 };
 

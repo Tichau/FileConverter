@@ -1,5 +1,22 @@
 # Change Log
 
+## Version 2.2
+
+- New: AMD AMF hardware acceleration option for MP4/MKV H.264 conversions (thanks to bharatvansh).
+- New: Support new image input and output format: avif (github issue #619) (thanks to Techpotato1).
+- New: Indonesian translation (thanks to itsmefdil).
+- New: Urdu translation (thanks to hamzaharoon1314).
+- New: Hungarian translation (thanks to Zyvrec7 and stohlferenc).
+- New: Polish translation (thanks to Maerek and MrPrince419).
+- New: Swedish translation (thanks to rkalitta).
+- Fixes: Issue where progress bar was not updated with ffmpeg conversions (issue #525, #603, #589, #680).
+- Fixes: Issue where wrong preset may be used when trying to convert more than 16 files (issue #614 and #567) (thanks to  cypress-exe)
+- Fixes: Various English grammar corrections and improvements (thanks to One-Hoopy-Frood).
+- Fixes: Traditional Chinese translation issues (thanks to NeKoOuO).
+- Fixes: Vietnamese translation issues (thanks to thaovd).
+- Tech: Update ffmpeg to v8.0.1 and ImageMagick to v14.10.
+- Tech: Remove deprecated dependency (Office). Replace it with NetOffice.
+
 ## Version 2.1
 
 - New: Option to use NVidia hardware acceleration for mp4 video (thanks to tacheometry).
