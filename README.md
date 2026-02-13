@@ -14,7 +14,7 @@ You can find more information about what's in File converter and how to use it o
 
 File Converter is a personal open source project started in 2014. I have put hundreds of hours adding, refining and tuning File Converter with the goal of making the conversion and compression of files an easy task for everyone.
 
-You can help me by [contributing to the project](https://github.com/Tichau/FileConverter/wiki#contribute), by [making a donation](https://www.paypal.com/donate/?cmd=_donations&business=3BDWQTYTTA3D8&item_name=File+Converter+Donations&currency_code=EUR&Z3JncnB0=) or just by [saying thanks​](https://saythanks.io/to/Tichau) :).
+You can help me by [contributing to the project](https://github.com/Tichau/FileConverter/wiki#contribute), by [making a donation](https://www.paypal.com/donate/?cmd=_donations&business=3BDWQTYTTA3D8&item_name=File+Converter+Donations&currency_code=EUR&Z3JncnB0=) or just by [saying thanks](https://saythanks.io/to/Tichau) :).
 
 ## Troubleshooting
 
@@ -72,10 +72,10 @@ Thanks to all the contributors of File Converter project.
 
 File converter uses the following middlewares:
 
-**ffmpeg** (v7.1) as file conversion software.
+**ffmpeg** (v8.0.1) as file conversion software.
 Thanks to ffmpeg devs for this awesome open source file conversion tool. [Web site link](https://ffmpeg.org)
 
-**ImageMagick** (v14.4) as image edition and conversion software.
+**ImageMagick** (v14.10) as image edition and conversion software.
 Thanks to image magick devs for this awesome open source image edition software suite.  [Web site link](http://imagemagick.net)
 And thanks to dlemstra for the C# wrapper of this software. [Github link](https://github.com/ImageMagick/ImageMagick)
 
