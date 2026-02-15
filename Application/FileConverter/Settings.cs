@@ -23,6 +23,7 @@ namespace FileConverter
         private int maximumNumberOfSimultaneousConversions;
         private bool copyFilesInClipboardAfterConversion = false;
         private Helpers.HardwareAccelerationMode hardwareAccelerationMode = Helpers.HardwareAccelerationMode.Off;
+        private bool autoRetrySoftwareEncodingOnGpuFailure = true;
 
         public ConversionPreset GetPresetFromName(string presetName)
         {
@@ -237,6 +238,22 @@ namespace FileConverter
                 this.OnPropertyChanged();
             }
         }
+
+        [XmlElement]
+        public bool AutoRetrySoftwareEncodingOnGpuFailure
+        {
+            get
+            {
+                return this.autoRetrySoftwareEncodingOnGpuFailure;
+            }
+
+            set
+            {
+                this.autoRetrySoftwareEncodingOnGpuFailure = value;
+                this.OnPropertyChanged();
+            }
+        }
+
         public void OnDeserializationComplete()
         {
             this.DurationBetweenEndOfConversionsAndApplicationExit = System.Math.Max(0, System.Math.Min(10, this.DurationBetweenEndOfConversionsAndApplicationExit));
