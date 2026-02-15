@@ -1506,6 +1506,69 @@ namespace FileConverter.Properties {
                 return ResourceManager.GetString("WebsiteButtonDescription", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-retry software encode if GPU encode fails.
+        /// </summary>
+        public static string AutoRetrySoftwareEncodingOnGpuFailureLabel {
+            get {
+                return ResourceManager.GetString("AutoRetrySoftwareEncodingOnGpuFailureLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to GPU encode failed, retrying software encode.
+        /// </summary>
+        public static string GpuEncodingFailedRetryingSoftwareEncode {
+            get {
+                return ResourceManager.GetString("GpuEncodingFailedRetryingSoftwareEncode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Done (software fallback).
+        /// </summary>
+        public static string ConversionStateDoneSoftwareFallback {
+            get {
+                return ResourceManager.GetString("ConversionStateDoneSoftwareFallback", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to GPU encoding failed and conversion automatically retried with software encoding..
+        /// </summary>
+        public static string GpuEncodingFailedAndRetriedWithSoftwareEncoding {
+            get {
+                return ResourceManager.GetString("GpuEncodingFailedAndRetriedWithSoftwareEncoding", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to GPU encoding failed. Software fallback also failed. Check hardware acceleration settings or GPU drivers and try again..
+        /// </summary>
+        public static string ErrorGpuEncodingFailedAfterFallback {
+            get {
+                return ResourceManager.GetString("ErrorGpuEncodingFailedAfterFallback", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to GPU encoding failed. Check hardware acceleration settings or GPU drivers and try again..
+        /// </summary>
+        public static string ErrorGpuEncodingFailed {
+            get {
+                return ResourceManager.GetString("ErrorGpuEncodingFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Conversion failed..
+        /// </summary>
+        public static string ErrorConversionFailed {
+            get {
+                return ResourceManager.GetString("ErrorConversionFailed", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to None.
