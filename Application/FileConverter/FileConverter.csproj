@@ -14,6 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -41,9 +42,22 @@
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <RuntimeIdentifier>win-arm64</RuntimeIdentifier>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <RuntimeIdentifier>win-arm64</RuntimeIdentifier>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\ApplicationIcon.ico</ApplicationIcon>
@@ -69,13 +83,49 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommunityToolkit.Mvvm">
+      <HintPath>$(NuGetPackageRoot)communitytoolkit.mvvm\8.4.0\lib\netstandard2.0\CommunityToolkit.Mvvm.dll</HintPath>
+    </Reference>
     <Reference Include="Markdown.Xaml">
       <HintPath>..\..\Middleware\Markdown.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Magick.NET.Core">
+      <HintPath>$(NuGetPackageRoot)magick.net.core\14.10.2\lib\netstandard20\Magick.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Magick.NET-Q16-AnyCPU">
+      <HintPath>$(NuGetPackageRoot)magick.net-q16-anycpu\14.10.2\lib\netstandard20\Magick.NET-Q16-AnyCPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>$(NuGetPackageRoot)microsoft.extensions.dependencyinjection\10.0.3\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>$(NuGetPackageRoot)microsoft.extensions.dependencyinjection.abstractions\10.0.3\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors">
+      <HintPath>$(NuGetPackageRoot)microsoft.xaml.behaviors.wpf\1.1.135\lib\net462\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="NetOffice">
+      <HintPath>$(NuGetPackageRoot)netoffice.core\1.7.4.11\lib\net45\NetOffice.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficeApi">
+      <HintPath>$(NuGetPackageRoot)netoffice.core\1.7.4.11\lib\net45\OfficeApi.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelApi">
+      <HintPath>$(NuGetPackageRoot)netoffice.excel\1.7.4.11\lib\net45\ExcelApi.dll</HintPath>
+    </Reference>
+    <Reference Include="PowerPointApi">
+      <HintPath>$(NuGetPackageRoot)netoffice.powerpoint\1.7.4.11\lib\net45\PowerPointApi.dll</HintPath>
+    </Reference>
+    <Reference Include="WordApi">
+      <HintPath>$(NuGetPackageRoot)netoffice.word\1.7.4.11\lib\net45\WordApi.dll</HintPath>
     </Reference>
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Ripper, Version=1.0.5806.33932, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Middleware\Ripper.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpShell">
+      <HintPath>$(NuGetPackageRoot)sharpshell\2.7.2\lib\net40-client\SharpShell.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -94,6 +144,12 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="System.Resources.Extensions">
+      <HintPath>$(NuGetPackageRoot)system.resources.extensions\10.0.0\lib\net462\System.Resources.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="WpfAnimatedGif">
+      <HintPath>$(NuGetPackageRoot)wpfanimatedgif\2.0.2\lib\net40\WpfAnimatedGif.dll</HintPath>
+    </Reference>
     <Reference Include="yeti.mmedia">
       <HintPath>..\..\Middleware\yeti.mmedia.dll</HintPath>
     </Reference>
@@ -413,15 +469,18 @@
     <PackageReference Include="SharpShell">
       <Version>2.7.2</Version>
     </PackageReference>
+    <PackageReference Include="System.Resources.Extensions">
+      <Version>10.0.0</Version>
+    </PackageReference>
     <PackageReference Include="WpfAnimatedGif">
       <Version>2.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(SolutionDir)Middleware\ffmpeg\ffmpeg.exe" "$(TargetDir)ffmpeg.exe"
-copy /Y "$(SolutionDir)Middleware\gs\gsdll64.dll" "$(TargetDir)gsdll64.dll"
-copy /Y "$(SolutionDir)Middleware\gs\gswin64c.exe" "$(TargetDir)gswin64c.exe"
+    <PostBuildEvent>copy /Y "$(ProjectDir)..\..\Middleware\ffmpeg\*" "$(TargetDir)"
+copy /Y "$(ProjectDir)..\..\Middleware\gs\gsdll64.dll" "$(TargetDir)gsdll64.dll"
+copy /Y "$(ProjectDir)..\..\Middleware\gs\gswin64c.exe" "$(TargetDir)gswin64c.exe"
 copy /Y "$(ProjectDir)Settings.default.xml" "$(TargetDir)Settings.default.xml"
 robocopy $(TargetDir) $(TargetDir)\Languages "$(TargetName).resources.dll" /CREATE /S /XD Languages /IS /IT /NFL /NDL /NJH /NJS /NC /NS /NP
 if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25

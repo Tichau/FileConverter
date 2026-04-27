@@ -1,11 +1,11 @@
 ﻿<!-- Upgrade documentation: http://wixtoolset.org/documentation/manual/v3/howtos/updates/major_upgrade.html -->
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
-    <Package Name="File Converter" Language="1033" Version="2.2.0" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b" InstallerVersion="500">
+    <Package Name="File Converter" Language="1033" Version="2.2.7" Manufacturer="Adrien Allard" UpgradeCode="e3ca717b-a897-418a-bbef-5c7e35c76e4b" ProductCode="*" InstallerVersion="500">
         <Icon Id="icon.ico" SourceFile="..\Resources\Icons\ApplicationIcon.ico" />
         <Property Id="ARPPRODUCTICON" Value="icon.ico" />
         <SetProperty Id="ARPINSTALLLOCATION" Value="[ApplicationFolder]" After="CostFinalize" />
       
-        <MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
+        <MajorUpgrade Schedule="afterInstallInitialize" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
         
         <Media Id="1" Cabinet="CabFile.cab" EmbedCab="yes" />
 
@@ -16,12 +16,16 @@
 
         <CustomAction Id="InstallShell" ExeCommand="--register-shell-extension &quot;[INSTALLFOLDER]FileConverterExtension.dll&quot;" Execute="deferred" Return="check" Impersonate="no" FileRef="FileConverter.exe" />
         <CustomAction Id="UninstallShell" ExeCommand="--unregister-shell-extension &quot;[INSTALLFOLDER]FileConverterExtension.dll&quot;" Execute="deferred" Return="check" Impersonate="no" FileRef="FileConverter.exe" />
+        <CustomAction Id="InstallSparsePackage" ExeCommand="--register-sparse-package &quot;[INSTALLFOLDER]AppxManifest.xml&quot; &quot;[INSTALLFOLDER].&quot;" Execute="deferred" Return="ignore" Impersonate="yes" FileRef="FileConverter.exe" />
+        <CustomAction Id="UninstallSparsePackage" ExeCommand="--unregister-sparse-package" Execute="deferred" Return="ignore" Impersonate="yes" FileRef="FileConverter.exe" />
         <CustomAction Id="PostInstallInit" ExeCommand="--post-install-init" Execute="immediate" FileRef="FileConverter.exe" />
 
         <UI>
             <ProgressText Action="InstallFiles" Template="File: [1],  Directory: [9],  Size: [6]" Message="Copying new files" />
             <ProgressText Action="InstallShell" Message="Register shell extension to Windows Explorer" />
             <ProgressText Action="UninstallShell" Message="Unregister shell extension from Windows Explorer" />
+            <ProgressText Action="InstallSparsePackage" Message="Register Windows 11 context menu package" />
+            <ProgressText Action="UninstallSparsePackage" Message="Unregister Windows 11 context menu package" />
             <ProgressText Action="PostInstallInit" Message="Initialize conversion presets" />
         </UI>
 
@@ -30,7 +34,9 @@
 
         <InstallExecuteSequence>
             <Custom Action="UninstallShell" Before="RemoveRegistryValues" Condition="(NOT UPGRADINGPRODUCTCODE) AND (REMOVE~=&quot;ALL&quot;)" />
+            <Custom Action="UninstallSparsePackage" Before="RemoveFiles" Condition="(NOT UPGRADINGPRODUCTCODE) AND (REMOVE~=&quot;ALL&quot;)" />
             <Custom Action="InstallShell" After="WriteRegistryValues" Condition="NOT Installed" />
+            <Custom Action="InstallSparsePackage" After="InstallFiles" Condition="NOT (REMOVE~=&quot;ALL&quot;)" />
             <Custom Action="PostInstallInit" After="InstallFinalize" Condition="NOT Installed" />
         </InstallExecuteSequence>
         
@@ -50,7 +56,9 @@
 
     <Fragment>
         <StandardDirectory Id="ProgramFiles64Folder">
-            <Directory Id="INSTALLFOLDER" Name="!(bind.Property.ProductName)" />
+            <Directory Id="INSTALLFOLDER" Name="!(bind.Property.ProductName)">
+                <Directory Id="SparseAssetsFolder" Name="Assets" />
+            </Directory>
         </StandardDirectory>
         <StandardDirectory Id="ProgramMenuFolder">
             <Directory Id="ApplicationStartMenuShortcut" Name="File Converter" />
@@ -81,6 +89,17 @@
             </Component>
             <Component Guid="{566A73FB-427D-43C4-9ABC-92F2528F6D0A}">
                 <File Id="SharpShell.dll" Source="$(var.FileConverterExtension.TargetDir)SharpShell.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{E4F81037-3A58-4B74-8F1E-97B20BB00F79}">
+                <File Id="FileConverterContextMenu.dll" Source="$(var.FileConverterContextMenu.TargetDir)FileConverterContextMenu.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{0E6A754A-1896-4FF8-AD0C-066C37814295}">
+                <File Id="SparseAppxManifest.xml" Name="AppxManifest.xml" Source="$(var.SparsePackageOutputDir)SparsePackage\AppxManifest.xml" KeyPath="yes" />
+            </Component>
+            <Component Directory="SparseAssetsFolder" Guid="{F95AD6C2-D359-4D7B-87E7-E4E7C26ECAB6}">
+                <File Id="SparseStoreLogo.png" Name="StoreLogo.png" Source="$(var.SparsePackageOutputDir)SparsePackage\Assets\StoreLogo.png" KeyPath="yes" />
+                <File Id="SparseSquare44x44Logo.png" Name="Square44x44Logo.png" Source="$(var.SparsePackageOutputDir)SparsePackage\Assets\Square44x44Logo.png" />
+                <File Id="SparseSquare150x150Logo.png" Name="Square150x150Logo.png" Source="$(var.SparsePackageOutputDir)SparsePackage\Assets\Square150x150Logo.png" />
             </Component>
             
             <!-- Third parties -->
@@ -119,7 +138,7 @@
             </Component>
 
             <Component Guid="{24efefd7-f7ef-4f4c-95d8-e6d136581a86}">
-              <File Id="Magick.Native.dll" Source="$(var.FileConverter.TargetDir)Magick.Native-Q16-x64.dll" KeyPath="yes" Checksum="yes" />
+              <File Id="Magick.Native.dll" Source="$(var.FileConverter.TargetDir)$(var.MagickNativeFile)" KeyPath="yes" Checksum="yes" />
             </Component>
             <Component Guid="{b3326fc3-a314-41fd-a199-ba8e07c80370}">
               <File Id="Magick.NET.Core.dll" Source="$(var.FileConverter.TargetDir)Magick.NET.Core.dll" KeyPath="yes" Checksum="yes" />
@@ -130,6 +149,30 @@
           
             <Component Guid="{BEEAAC73-C479-4080-83B1-2B1448C7378C}">
                 <File Id="ffmpeg.exe" Source="$(var.FileConverter.TargetDir)ffmpeg.exe" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{988A3898-6CBB-4F4C-8BCF-E673E1D3D74C}">
+                <File Id="avcodec61.dll" Source="$(var.FileConverter.TargetDir)avcodec-61.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{F05E36D9-4743-49E2-9207-8A20213182C9}">
+                <File Id="avdevice61.dll" Source="$(var.FileConverter.TargetDir)avdevice-61.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{4699CC7C-B56E-4A21-9837-F83522D372D1}">
+                <File Id="avfilter10.dll" Source="$(var.FileConverter.TargetDir)avfilter-10.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{2D0F970A-7277-4711-B8D3-28F07A7B2D9C}">
+                <File Id="avformat61.dll" Source="$(var.FileConverter.TargetDir)avformat-61.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{41143511-7B86-404A-A3A4-5D86F947DB6B}">
+                <File Id="avutil59.dll" Source="$(var.FileConverter.TargetDir)avutil-59.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{1E896968-C8C3-43F2-9CE5-80475F6400D6}">
+                <File Id="postproc58.dll" Source="$(var.FileConverter.TargetDir)postproc-58.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{5C534D2C-D420-44E4-863B-ED5C80DFA9CA}">
+                <File Id="swresample5.dll" Source="$(var.FileConverter.TargetDir)swresample-5.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{1E24B354-B299-471D-B2EB-18991F6813F5}">
+                <File Id="swscale8.dll" Source="$(var.FileConverter.TargetDir)swscale-8.dll" KeyPath="yes" Checksum="yes" />
             </Component>
             <Component Guid="{6925974E-AFE0-4833-B797-36AE33DF9D4D}">
                 <File Id="gsdll64.dll" Source="$(var.FileConverter.TargetDir)gsdll64.dll" KeyPath="yes" Checksum="yes" />

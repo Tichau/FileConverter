@@ -370,6 +370,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Content="{x:Static project:Resources.Language}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
@@ -401,8 +402,11 @@
                     <Label Grid.Row="5" Grid.Column="0" Content="{x:Static project:Resources.CopyFilesInClipboardAfterConversion}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
                     <CheckBox Grid.Row="5" Grid.Column="1" x:Name="CopyFilesInClipboardAfterConversionCheckBox" IsChecked="{Binding Settings.CopyFilesInClipboardAfterConversion, Mode=TwoWay}"  Margin="0,5,0,5" />
 
-                    <Label Grid.Row="6" Grid.Column="0" Content="{x:Static project:Resources.HardwareAccelerationMode}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                    <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding HardwareAccelerationModes, Mode=OneTime}" Margin="0,0,0,1"
+                    <Label Grid.Row="6" Grid.Column="0" Content="Show in Windows 11 context menu" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding Settings.ShowInNewShellContextMenu, Mode=TwoWay}" Margin="0,5,0,5" />
+
+                    <Label Grid.Row="7" Grid.Column="0" Content="{x:Static project:Resources.HardwareAccelerationMode}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <ComboBox Grid.Row="7" Grid.Column="1" ItemsSource="{Binding HardwareAccelerationModes, Mode=OneTime}" Margin="0,0,0,1"
                               SelectedValue="{Binding Settings.HardwareAccelerationMode, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>

@@ -6,13 +6,13 @@ namespace FileConverter
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
+    using System.Diagnostics;
     using System.Reflection;
+    using System.Text;
     using System.Threading;
 
     using FileConverter.ConversionJobs;
     using FileConverter.Services;
-
-    using SharpShell.Helpers;
 
     using Microsoft.Win32;
     using CommunityToolkit.Mvvm.DependencyInjection;
@@ -123,18 +123,19 @@ namespace FileConverter
 
             Diagnostics.Debug.Log($"Install and register shell extension: {shellExtensionPath}.");
 
-            var regasm = new RegAsm();
-            var success = regasm.Register64(shellExtensionPath, true);
-            if (success)
+            RegAsmResult result = RunRegAsm(shellExtensionPath, "/codebase");
+            if (result.Success)
             {
+                ApproveShellExtension();
+                RemoveLegacyExplorerCommandRegistry();
                 Diagnostics.Debug.Log($"{shellExtensionPath} installed and registered.");
-                Diagnostics.Debug.Log(regasm.StandardOutput);
+                Diagnostics.Debug.Log(result.StandardOutput);
                 return true;
             }
             else
             {
                 Diagnostics.Debug.LogError(errorCode: 0x05, $"{shellExtensionPath} failed to register.");
-                Diagnostics.Debug.LogError(regasm.StandardError);
+                Diagnostics.Debug.LogError(result.StandardError);
                 return false;
             }
         }
@@ -155,20 +156,220 @@ namespace FileConverter
 
             Diagnostics.Debug.Log($"Unregister and uninstall shell extension: {shellExtensionPath}.");
 
-            var regasm = new RegAsm();
-            var success = regasm.Unregister64(shellExtensionPath);
-            if (success)
+            RegAsmResult result = RunRegAsm(shellExtensionPath, "/unregister");
+            if (result.Success)
             {
+                UnapproveShellExtension();
                 Diagnostics.Debug.Log($"{shellExtensionPath} uninstalled.");
-                Diagnostics.Debug.Log(regasm.StandardOutput);
+                Diagnostics.Debug.Log(result.StandardOutput);
                 return true;
             }
             else
             {
                 Diagnostics.Debug.LogError(errorCode: 0x05, $"{shellExtensionPath} failed to uninstall.");
-                Diagnostics.Debug.LogError(regasm.StandardError);
+                Diagnostics.Debug.LogError(result.StandardError);
                 return false;
             }
+        }
+
+        public static bool RegisterSparsePackage(string manifestPath, string installLocation)
+        {
+            if (!File.Exists(manifestPath))
+            {
+                Diagnostics.Debug.LogError($"Sparse package manifest {manifestPath} does not exist.");
+                return false;
+            }
+
+            if (!Directory.Exists(installLocation))
+            {
+                Diagnostics.Debug.LogError($"Sparse package install location {installLocation} does not exist.");
+                return false;
+            }
+
+            string sparsePackageDirectory = GetSparsePackageDirectory();
+            string sparseAssetsDirectory = Path.Combine(sparsePackageDirectory, "Assets");
+            string sparseManifestPath = Path.Combine(sparsePackageDirectory, "AppxManifest.xml");
+            string sourceAssetsDirectory = Path.Combine(Path.GetDirectoryName(manifestPath), "Assets");
+            string sourceContextMenuPath = Path.Combine(installLocation, "FileConverterContextMenu.dll");
+            string targetContextMenuPath = Path.Combine(sparsePackageDirectory, "FileConverterContextMenu.dll");
+            string sourceExecutablePath = Path.Combine(installLocation, "FileConverter.exe");
+            string targetExecutablePath = Path.Combine(sparsePackageDirectory, "FileConverter.exe");
+
+            Directory.CreateDirectory(sparseAssetsDirectory);
+            File.Copy(manifestPath, sparseManifestPath, true);
+            File.Copy(sourceContextMenuPath, targetContextMenuPath, true);
+            File.Copy(sourceExecutablePath, targetExecutablePath, true);
+
+            foreach (string sourceAssetPath in Directory.GetFiles(sourceAssetsDirectory))
+            {
+                File.Copy(sourceAssetPath, Path.Combine(sparseAssetsDirectory, Path.GetFileName(sourceAssetPath)), true);
+            }
+
+            using (RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\FileConverter"))
+            {
+                key?.SetValue("InstallLocation", installLocation, RegistryValueKind.String);
+            }
+
+            string script = "$ErrorActionPreference = 'Stop'; " +
+                            "$ProgressPreference = 'SilentlyContinue'; " +
+                            $"Add-AppxPackage -Register {ToPowerShellString(sparseManifestPath)} -ExternalLocation {ToPowerShellString(sparsePackageDirectory)} -ForceUpdateFromAnyVersion";
+
+            RegAsmResult result = RunPowerShell(script);
+            if (result.Success)
+            {
+                Diagnostics.Debug.Log($"Sparse package manifest {manifestPath} registered.");
+                Diagnostics.Debug.Log(result.StandardOutput);
+                return true;
+            }
+
+            Diagnostics.Debug.LogError($"Sparse package manifest {manifestPath} failed to register.");
+            Diagnostics.Debug.LogError(result.StandardError);
+            return false;
+        }
+
+        public static bool UnregisterSparsePackage()
+        {
+            string script = "$ErrorActionPreference = 'Stop'; " +
+                            "$ProgressPreference = 'SilentlyContinue'; " +
+                            "$package = Get-AppxPackage -Name 'Tichau.FileConverter.ContextMenu'; if ($package) { $package | Remove-AppxPackage }";
+            RegAsmResult result = RunPowerShell(script);
+            if (result.Success)
+            {
+                Diagnostics.Debug.Log("Sparse package unregistered.");
+                Diagnostics.Debug.Log(result.StandardOutput);
+                try
+                {
+                    Directory.Delete(GetSparsePackageDirectory(), true);
+                }
+                catch (IOException)
+                {
+                }
+                catch (UnauthorizedAccessException)
+                {
+                }
+
+                return true;
+            }
+
+            Diagnostics.Debug.LogError("Sparse package failed to unregister.");
+            Diagnostics.Debug.LogError(result.StandardError);
+            return false;
+        }
+
+        private static string GetSparsePackageDirectory()
+        {
+            return Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "FileConverter",
+                "SparsePackage");
+        }
+
+        private static RegAsmResult RunRegAsm(string assemblyPath, string arguments)
+        {
+            string regAsmPath = GetRegAsmPath();
+            string escapedAssemblyPath = assemblyPath.Replace("\"", "\\\"");
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(regAsmPath)
+            {
+                Arguments = $"\"{escapedAssemblyPath}\" {arguments}",
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+            };
+
+            Diagnostics.Debug.Log($"Execute command: {processStartInfo.FileName} {processStartInfo.Arguments}.");
+
+            using (Process process = Process.Start(processStartInfo))
+            {
+                System.Threading.Tasks.Task<string> standardOutput = process.StandardOutput.ReadToEndAsync();
+                System.Threading.Tasks.Task<string> standardError = process.StandardError.ReadToEndAsync();
+                process.WaitForExit();
+
+                return new RegAsmResult(process.ExitCode == 0, standardOutput.Result, standardError.Result);
+            }
+        }
+
+        private static RegAsmResult RunPowerShell(string script)
+        {
+            string encodedScript = Convert.ToBase64String(Encoding.Unicode.GetBytes(script));
+            ProcessStartInfo processStartInfo = new ProcessStartInfo("powershell.exe")
+            {
+                Arguments = $"-NoProfile -ExecutionPolicy Bypass -EncodedCommand {encodedScript}",
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+            };
+
+            Diagnostics.Debug.Log($"Execute command: {processStartInfo.FileName} -NoProfile -ExecutionPolicy Bypass -EncodedCommand <encoded>.");
+
+            using (Process process = Process.Start(processStartInfo))
+            {
+                string standardOutput = process.StandardOutput.ReadToEnd();
+                string standardError = process.StandardError.ReadToEnd();
+                process.WaitForExit();
+
+                return new RegAsmResult(process.ExitCode == 0, standardOutput, standardError);
+            }
+        }
+
+        private static string ToPowerShellString(string value)
+        {
+            return "'" + value.Replace("'", "''") + "'";
+        }
+
+        private static void ApproveShellExtension()
+        {
+            using (RegistryKey approvedKey = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved"))
+            {
+                approvedKey?.SetValue("{AF9B72B5-F4E4-44B0-A3D9-B55B748EFE90}", "File Converter Shell Extension", RegistryValueKind.String);
+            }
+        }
+
+        private static void UnapproveShellExtension()
+        {
+            using (RegistryKey approvedKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved", true))
+            {
+                approvedKey?.DeleteValue("{AF9B72B5-F4E4-44B0-A3D9-B55B748EFE90}", false);
+            }
+        }
+
+        private static void RemoveLegacyExplorerCommandRegistry()
+        {
+            Microsoft.Win32.Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\Classes\*\shell\FileConverter", false);
+            Microsoft.Win32.Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\Classes\FileConverterExtension.FileConverterRootCommand", false);
+            Microsoft.Win32.Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\Classes\CLSID\{872FE48B-28E6-4878-9E42-FD1C794C1251}", false);
+        }
+
+        private static string GetRegAsmPath()
+        {
+            string frameworkFolder = Environment.Is64BitOperatingSystem && Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") == "ARM64"
+                ? "FrameworkArm64"
+                : "Framework64";
+
+            string regAsmPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Microsoft.NET", frameworkFolder, "v4.0.30319", "RegAsm.exe");
+            if (!File.Exists(regAsmPath))
+            {
+                throw new FileNotFoundException($"Can't find RegAsm executable ({regAsmPath}).", regAsmPath);
+            }
+
+            return regAsmPath;
+        }
+
+        private struct RegAsmResult
+        {
+            public RegAsmResult(bool success, string standardOutput, string standardError)
+            {
+                this.Success = success;
+                this.StandardOutput = standardOutput;
+                this.StandardError = standardError;
+            }
+
+            public bool Success { get; }
+
+            public string StandardOutput { get; }
+
+            public string StandardError { get; }
         }
 
         public static IEnumerable<CultureInfo> GetSupportedCultures()
@@ -209,6 +410,8 @@ namespace FileConverter
                 case OutputType.Avi:
                 case OutputType.Mkv:
                 case OutputType.Mp4:
+                    return category == InputCategoryNames.Audio || category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
+
                 case OutputType.Ogv:
                 case OutputType.Webm:
                     return category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;

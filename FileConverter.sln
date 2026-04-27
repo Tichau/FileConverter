@@ -9,24 +9,46 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter", "Applicatio
 EndProject
 Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Installer", "Installer\Installer.wixproj", "{F14673DF-DF38-44B4-AB1D-99A59182C24C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileConverterContextMenu", "Application\FileConverterContextMenu\FileConverterContextMenu.vcxproj", "{E1EF7EDE-3C4A-4F5C-9F08-3A4B3D4C4384}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM64 = Debug|ARM64
 		Debug|x64 = Debug|x64
+		Release|ARM64 = Release|ARM64
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Debug|ARM64.Build.0 = Debug|ARM64
 		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Debug|x64.ActiveCfg = Debug|x64
 		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Debug|x64.Build.0 = Debug|x64
+		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Release|ARM64.ActiveCfg = Release|ARM64
+		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Release|ARM64.Build.0 = Release|ARM64
 		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Release|x64.ActiveCfg = Release|x64
 		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Release|x64.Build.0 = Release|x64
+		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Debug|ARM64.Build.0 = Debug|ARM64
 		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Debug|x64.ActiveCfg = Debug|x64
 		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Debug|x64.Build.0 = Debug|x64
+		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Release|ARM64.ActiveCfg = Release|ARM64
+		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Release|ARM64.Build.0 = Release|ARM64
 		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Release|x64.ActiveCfg = Release|x64
 		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Release|x64.Build.0 = Release|x64
+		{F14673DF-DF38-44B4-AB1D-99A59182C24C}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{F14673DF-DF38-44B4-AB1D-99A59182C24C}.Debug|ARM64.Build.0 = Debug|ARM64
 		{F14673DF-DF38-44B4-AB1D-99A59182C24C}.Debug|x64.ActiveCfg = Debug|x64
 		{F14673DF-DF38-44B4-AB1D-99A59182C24C}.Debug|x64.Build.0 = Debug|x64
+		{F14673DF-DF38-44B4-AB1D-99A59182C24C}.Release|ARM64.ActiveCfg = Release|ARM64
+		{F14673DF-DF38-44B4-AB1D-99A59182C24C}.Release|ARM64.Build.0 = Release|ARM64
 		{F14673DF-DF38-44B4-AB1D-99A59182C24C}.Release|x64.ActiveCfg = Release|x64
 		{F14673DF-DF38-44B4-AB1D-99A59182C24C}.Release|x64.Build.0 = Release|x64
+		{E1EF7EDE-3C4A-4F5C-9F08-3A4B3D4C4384}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{E1EF7EDE-3C4A-4F5C-9F08-3A4B3D4C4384}.Debug|ARM64.Build.0 = Debug|ARM64
+		{E1EF7EDE-3C4A-4F5C-9F08-3A4B3D4C4384}.Debug|x64.ActiveCfg = Debug|ARM64
+		{E1EF7EDE-3C4A-4F5C-9F08-3A4B3D4C4384}.Release|ARM64.ActiveCfg = Release|ARM64
+		{E1EF7EDE-3C4A-4F5C-9F08-3A4B3D4C4384}.Release|ARM64.Build.0 = Release|ARM64
+		{E1EF7EDE-3C4A-4F5C-9F08-3A4B3D4C4384}.Release|x64.ActiveCfg = Release|ARM64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

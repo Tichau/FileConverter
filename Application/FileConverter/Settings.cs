@@ -13,12 +13,13 @@ namespace FileConverter
     [XmlType]
     public class Settings : ObservableObject, IXmlSerializable
     {
-        public const int Version = 4;
+        public const int Version = 5;
 
         private bool exitApplicationWhenConversionsFinished = false;
         private float durationBetweenEndOfConversionsAndApplicationExit = 3f;
         private ObservableCollection<ConversionPreset> conversionPresets = new ObservableCollection<ConversionPreset>();
         private bool checkUpgradeAtStartup = true;
+        private bool showInNewShellContextMenu = true;
         private CultureInfo applicationLanguage;
         private int maximumNumberOfSimultaneousConversions;
         private bool copyFilesInClipboardAfterConversion = false;
@@ -204,6 +205,21 @@ namespace FileConverter
             set
             {
                 this.checkUpgradeAtStartup = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        [XmlElement]
+        public bool ShowInNewShellContextMenu
+        {
+            get
+            {
+                return this.showInNewShellContextMenu;
+            }
+
+            set
+            {
+                this.showInNewShellContextMenu = value;
                 this.OnPropertyChanged();
             }
         }

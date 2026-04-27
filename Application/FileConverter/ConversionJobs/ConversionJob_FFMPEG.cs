@@ -254,6 +254,13 @@ namespace FileConverter.ConversionJobs
                 case OutputType.Mkv:
                 case OutputType.Mp4:
                     {
+                        if (this.ConversionPreset.OutputType == OutputType.Mp4 && IsMp3Input(this.InputFilePath))
+                        {
+                            string mp3ToMp4Arguments = this.BuildMp3ToMp4Arguments(baseArgs, out string artworkFilePath);
+                            this.ffmpegArgumentStringByPass.Add(new FFMpegPass(mp3ToMp4Arguments) { FileToDelete = artworkFilePath ?? string.Empty });
+                            break;
+                        }
+
                         // https://trac.ffmpeg.org/wiki/Encode/H.264
                         // https://trac.ffmpeg.org/wiki/Encode/AAC
                         int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
@@ -423,6 +430,188 @@ namespace FileConverter.ConversionJobs
                     throw new Exception("Invalid ffmpeg process arguments.");
                 }
             }
+        }
+
+        private static bool IsMp3Input(string inputFilePath)
+        {
+            return string.Equals(Path.GetExtension(inputFilePath), ".mp3", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private string BuildMp3ToMp4Arguments(string baseArgs, out string artworkFilePath)
+        {
+            artworkFilePath = ExtractMp3Artwork(this.InputFilePath);
+
+            int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
+            VideoEncodingSpeed videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<VideoEncodingSpeed>(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed);
+            int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
+
+            string videoCodecArgs = $"-c:v libx264 -preset {this.H264EncodingSpeedToPreset(videoEncodingSpeed)} -crf {this.H264QualityToCRF(videoEncodingQuality)} -tune stillimage";
+            string audioArgs = $"-c:a aac -qscale:a {this.AACBitrateToQualityIndex(audioEncodingBitrate)}";
+            string metadataArgs = "-map_metadata 1 -movflags +faststart";
+
+            if (!string.IsNullOrEmpty(artworkFilePath))
+            {
+                string videoFilterArgs = "-vf \"scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,format=yuv420p\"";
+                return $"{baseArgs} -loop 1 -i \"{artworkFilePath}\" -i \"{this.InputFilePath}\" -map 0:v:0 -map 1:a:0 {metadataArgs} {videoCodecArgs} {audioArgs} {videoFilterArgs} -shortest \"{this.OutputFilePath}\"";
+            }
+
+            return $"{baseArgs} -f lavfi -i \"color=c=black:s=1280x720:r=1\" -i \"{this.InputFilePath}\" -map 0:v:0 -map 1:a:0 {metadataArgs} {videoCodecArgs} {audioArgs} -shortest \"{this.OutputFilePath}\"";
+        }
+
+        private static string ExtractMp3Artwork(string inputFilePath)
+        {
+            try
+            {
+                using (FileStream file = File.OpenRead(inputFilePath))
+                using (BinaryReader reader = new BinaryReader(file))
+                {
+                    if (file.Length < 10 || reader.ReadByte() != 'I' || reader.ReadByte() != 'D' || reader.ReadByte() != '3')
+                    {
+                        return null;
+                    }
+
+                    int version = reader.ReadByte();
+                    reader.ReadByte();
+                    byte flags = reader.ReadByte();
+                    int tagSize = ReadSyncSafeInteger(reader.ReadBytes(4));
+                    long tagEnd = Math.Min(file.Length, 10L + tagSize);
+
+                    if ((flags & 0x40) != 0 && version >= 3)
+                    {
+                        int extendedHeaderSize = version == 4 ? ReadSyncSafeInteger(reader.ReadBytes(4)) : ReadBigEndianInteger(reader.ReadBytes(4));
+                        file.Position += Math.Max(0, extendedHeaderSize - 4);
+                    }
+
+                    while (file.Position + 10 <= tagEnd)
+                    {
+                        byte[] frameIdBytes = reader.ReadBytes(4);
+                        string frameId = System.Text.Encoding.ASCII.GetString(frameIdBytes);
+                        if (string.IsNullOrWhiteSpace(frameId.Trim('\0')))
+                        {
+                            break;
+                        }
+
+                        int frameSize = version == 4 ? ReadSyncSafeInteger(reader.ReadBytes(4)) : ReadBigEndianInteger(reader.ReadBytes(4));
+                        reader.ReadBytes(2);
+
+                        if (frameSize <= 0 || file.Position + frameSize > tagEnd)
+                        {
+                            break;
+                        }
+
+                        byte[] frameData = reader.ReadBytes(frameSize);
+                        if (frameId == "APIC" && TryWriteArtworkFrame(frameData, out string artworkFilePath))
+                        {
+                            return artworkFilePath;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+            return null;
+        }
+
+        private static bool TryWriteArtworkFrame(byte[] frameData, out string artworkFilePath)
+        {
+            artworkFilePath = null;
+            if (frameData == null || frameData.Length < 5)
+            {
+                return false;
+            }
+
+            int offset = 1;
+            int mimeEnd = Array.IndexOf(frameData, (byte)0, offset);
+            if (mimeEnd < 0 || mimeEnd + 2 >= frameData.Length)
+            {
+                return false;
+            }
+
+            string mimeType = System.Text.Encoding.ASCII.GetString(frameData, offset, mimeEnd - offset).ToLowerInvariant();
+            string extension = GetArtworkExtension(mimeType);
+            if (extension == null)
+            {
+                return false;
+            }
+
+            offset = mimeEnd + 2;
+            int descriptionEnd = FindEncodedTextTerminator(frameData, offset, frameData[0]);
+            if (descriptionEnd < 0)
+            {
+                return false;
+            }
+
+            int artworkOffset = descriptionEnd + (frameData[0] == 1 || frameData[0] == 2 ? 2 : 1);
+            if (artworkOffset >= frameData.Length)
+            {
+                return false;
+            }
+
+            artworkFilePath = PathHelpers.GenerateUniquePath(Path.Combine(Path.GetTempPath(), "file-converter-artwork" + extension));
+            using (FileStream artworkFile = File.Create(artworkFilePath))
+            {
+                artworkFile.Write(frameData, artworkOffset, frameData.Length - artworkOffset);
+            }
+
+            return true;
+        }
+
+        private static int FindEncodedTextTerminator(byte[] data, int startIndex, byte encoding)
+        {
+            if (encoding == 1 || encoding == 2)
+            {
+                for (int index = startIndex; index + 1 < data.Length; index += 2)
+                {
+                    if (data[index] == 0 && data[index + 1] == 0)
+                    {
+                        return index;
+                    }
+                }
+
+                return -1;
+            }
+
+            return Array.IndexOf(data, (byte)0, startIndex);
+        }
+
+        private static string GetArtworkExtension(string mimeType)
+        {
+            switch (mimeType)
+            {
+                case "image/jpeg":
+                case "image/jpg":
+                    return ".jpg";
+                case "image/png":
+                    return ".png";
+                case "image/bmp":
+                    return ".bmp";
+                case "image/gif":
+                    return ".gif";
+                default:
+                    return null;
+            }
+        }
+
+        private static int ReadSyncSafeInteger(byte[] bytes)
+        {
+            if (bytes == null || bytes.Length < 4)
+            {
+                return 0;
+            }
+
+            return (bytes[0] << 21) | (bytes[1] << 14) | (bytes[2] << 7) | bytes[3];
+        }
+
+        private static int ReadBigEndianInteger(byte[] bytes)
+        {
+            if (bytes == null || bytes.Length < 4)
+            {
+                return 0;
+            }
+
+            return (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
         }
         
         protected override void Convert()

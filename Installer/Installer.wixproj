@@ -1,9 +1,17 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.2">
   <PropertyGroup>
-    <ProductVersion>2.2.0</ProductVersion>
-    <OutputName>FileConverter-setup</OutputName> <!-- https://github.com/firegiant/HeatWaveSupport/issues/73 -->
-      <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <ProductVersion>2.2.7</ProductVersion>
+    <BuildId Condition=" '$(BuildId)' == '' ">$([System.DateTime]::UtcNow.ToString('yyyyMMddHHmmss'))</BuildId>
+    <OutputName>FileConverter-setup-$(Platform)-$(BuildId)</OutputName> <!-- https://github.com/firegiant/HeatWaveSupport/issues/73 -->
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>$(DefineConstants);SparsePackageOutputDir=$(MSBuildProjectDirectory)\$(IntermediateOutputPath)</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'ARM64' ">
+    <DefineConstants>$(DefineConstants);MagickNativeFile=Magick.Native-Q16-arm64.dll</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' != 'ARM64' ">
+    <DefineConstants>$(DefineConstants);MagickNativeFile=Magick.Native-Q16-x64.dll</DefineConstants>
   </PropertyGroup>
   <Target Name="CollectSuggestedVisualStudioComponentIds" />
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -15,6 +23,14 @@
     <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Application\FileConverterContextMenu\FileConverterContextMenu.vcxproj">
+      <Name>FileConverterContextMenu</Name>
+      <Project>{e1ef7ede-3c4a-4f5c-9f08-3a4b3d4c4384}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\Application\FileConverterExtension\FileConverterExtension.csproj">
       <Name>FileConverterExtension</Name>
       <Project>{0c44ca69-42d6-4357-bdfd-83069d1aba2f}</Project>
@@ -40,6 +56,9 @@
       <SuppressRegistry>true</SuppressRegistry>
     </HarvestDirectory>
   </ItemGroup>
+  <Target Name="BuildSparsePackage" BeforeTargets="BeforeBuild">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\BuildSparsePackage.ps1&quot; -PackageDirectory &quot;$(MSBuildProjectDirectory)\$(IntermediateOutputPath)SparsePackage&quot; -OutputDirectory &quot;$(MSBuildProjectDirectory)\$(IntermediateOutputPath).&quot; -ProductVersion &quot;$(ProductVersion)&quot; -RepositoryRoot &quot;$(MSBuildProjectDirectory)\..&quot;" />
+  </Target>
   <!-- congigure the project to sign the installer. Comment this line to produce an unsigned installer. -->
-  <Import Project=".\Installer.sign" Condition=" '$(Configuration)' == 'Release' " />
+  <Import Project=".\Installer.sign" Condition=" '$(Configuration)' == 'Release' And Exists('.\Installer.sign') " />
 </Project>

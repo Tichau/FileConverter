@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SerializationVersion="4">
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SerializationVersion="5">
     <MaximumNumberOfSimultaneousConversions>2</MaximumNumberOfSimultaneousConversions>
+    <ShowInNewShellContextMenu>true</ShowInNewShellContextMenu>
     <ConversionPreset Name="To Mkv" OutputType="Mkv" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
         <InputTypes>avi</InputTypes>
@@ -31,6 +32,7 @@
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
     <ConversionPreset Name="To Mp4" OutputType="Mp4" IsDefaultSettings="true">
+        <InputTypes>mp3</InputTypes>
         <InputTypes>gif</InputTypes>
         <InputTypes>3gp</InputTypes>
         <InputTypes>3gpp</InputTypes>

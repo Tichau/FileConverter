@@ -311,6 +311,38 @@ namespace FileConverter
                                 return;
                             }
 
+                        case "register-sparse-package":
+                            {
+                                if (index >= args.Length - 2)
+                                {
+                                    Debug.LogError(errorCode: 0x10, $"Invalid format.");
+                                    break;
+                                }
+
+                                string manifestPath = args[index + 1];
+                                string externalLocation = args[index + 2];
+                                index += 2;
+
+                                if (!Helpers.RegisterSparsePackage(manifestPath, externalLocation))
+                                {
+                                    Debug.LogError(errorCode: 0x11, $"Failed to register sparse package {manifestPath}.");
+                                }
+
+                                Application.AskForShutdown();
+                                return;
+                            }
+
+                        case "unregister-sparse-package":
+                            {
+                                if (!Helpers.UnregisterSparsePackage())
+                                {
+                                    Debug.LogError(errorCode: 0x12, $"Failed to unregister sparse package.");
+                                }
+
+                                Application.AskForShutdown();
+                                return;
+                            }
+
                         case "version":
                             Console.WriteLine(ApplicationVersion.ToString());
                             Application.AskForShutdown();

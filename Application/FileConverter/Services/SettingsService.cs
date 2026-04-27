@@ -10,6 +10,7 @@ namespace FileConverter.Services
     using System.Windows;
 
     using CommunityToolkit.Mvvm.ComponentModel;
+    using Microsoft.Win32;
 
     using Debug = FileConverter.Diagnostics.Debug;
 
@@ -199,7 +200,17 @@ namespace FileConverter.Services
             File.Copy(this.UserSettingsTemporaryFilePath, FileConverterExtension.PathHelpers.UserSettingsFilePath, true);
             File.Delete(this.UserSettingsTemporaryFilePath);
 
+            this.SaveShellContextMenuSettings(settings);
+
             return true;
+        }
+
+        private void SaveShellContextMenuSettings(Settings settings)
+        {
+            using (RegistryKey fileConverterKey = Registry.CurrentUser.CreateSubKey(@"Software\FileConverter"))
+            {
+                fileConverterKey?.SetValue("ShowInNewShellContextMenu", settings.ShowInNewShellContextMenu ? 1 : 0, RegistryValueKind.DWord);
+            }
         }
     }
 }
