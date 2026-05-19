@@ -81,6 +81,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -131,6 +132,7 @@
     <Compile Include="Controls\EncodingMode.cs" />
     <Compile Include="ConversionPreset\IConversionSettings.cs" />
     <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\HardwareDetector.cs" />
     <Compile Include="InputPostConversionAction.cs" />
     <Compile Include="IXmlSerializable.cs" />
     <Compile Include="Services\ConversionJobsTerminatedEventArgs.cs" />

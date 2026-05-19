@@ -2,6 +2,7 @@
 
 namespace FileConverter
 {
+    using System;
     using System.Linq;
     using System.Xml.Serialization;
     using System.Collections.ObjectModel;
@@ -223,11 +224,32 @@ namespace FileConverter
             }
         }
 
+        private static bool hwAccelAutoDetected = false;
+
         [XmlElement]
         public Helpers.HardwareAccelerationMode HardwareAccelerationMode
         {
             get
             {
+                // 首次访问时自动检测最佳硬件加速模式
+                if (!hwAccelAutoDetected)
+                {
+                    hwAccelAutoDetected = true;
+                    try
+                    {
+                        var hardware = HardwareDetector.Detect();
+                        var recommendedMode = HardwareDetector.GetRecommendedHardwareAccelerationMode(hardware);
+                        if (recommendedMode != Helpers.HardwareAccelerationMode.Off)
+                        {
+                            this.hardwareAccelerationMode = recommendedMode;
+                            Diagnostics.Debug.Log($"Auto-detected hardware acceleration: {recommendedMode}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Diagnostics.Debug.Log($"Hardware acceleration detection failed, using software encoding: {ex.Message}");
+                    }
+                }
                 return this.hardwareAccelerationMode;
             }
 

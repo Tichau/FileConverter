@@ -613,6 +613,9 @@ use maj for uppercase version</value>
   <data name="HardwareAccelerationModeOpenCLName" xml:space="preserve">
     <value>OpenCL</value>
   </data>
+  <data name="HardwareAccelerationModeQSVName" xml:space="preserve">
+    <value>QuickSync (Intel)</value>
+  </data>
   <data name="HardwareAccelerationModeVulkanName" xml:space="preserve">
     <value>Vulkan</value>
   </data>

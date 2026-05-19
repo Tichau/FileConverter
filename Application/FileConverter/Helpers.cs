@@ -356,7 +356,8 @@ namespace FileConverter
         {
             Off,
             CUDA,
-            AMF
+            AMF,
+            QSV
         }
     }
 }
