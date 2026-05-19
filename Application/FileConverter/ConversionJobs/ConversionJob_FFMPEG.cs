@@ -79,7 +79,7 @@ namespace FileConverter.ConversionJobs
             {
                 CreateNoWindow = true, 
                 UseShellExecute = false, 
-                RedirectStandardOutput = true, 
+                RedirectStandardOutput = false, 
                 RedirectStandardError = true
             };
 

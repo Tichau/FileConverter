@@ -826,6 +826,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to QuickSync (Intel).
+        /// </summary>
+        public static string HardwareAccelerationModeQSVName {
+            get {
+                return ResourceManager.GetString("HardwareAccelerationModeQSVName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vulkan.
         /// </summary>
         public static string HardwareAccelerationModeVulkanName {

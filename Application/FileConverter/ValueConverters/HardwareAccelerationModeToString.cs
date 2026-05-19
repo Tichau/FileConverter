@@ -17,6 +17,8 @@ namespace FileConverter.ValueConverters
                     return Properties.Resources.HardwareAccelerationModeCUDAName;
                 case Helpers.HardwareAccelerationMode.AMF:
                     return Properties.Resources.HardwareAccelerationModeAMFName;
+                case Helpers.HardwareAccelerationMode.QSV:
+                    return Properties.Resources.HardwareAccelerationModeQSVName;
             }
             return value?.ToString() ?? string.Empty;
         }
