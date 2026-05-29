@@ -1,0 +1,527 @@
+﻿You are completely right. Translating IT terms literally or phonetically (like using "អាគុយម៉ង់" for command-line arguments or "ការកូដកម្មវិធី" for media encoding) sounds highly unnatural and confusing in Khmer.
+
+In standard Khmer software localization (similar to the terminology used by Microsoft and Google), command-line **"Arguments"** are best translated as **"ជម្រើសពាក្យបញ្ជា"** (Command options) or **"ប៉ារ៉ាម៉ែត្រ"** (Parameters). Similarly, media **"Encoding"** is translated as **"ការបម្លែងកូដ"** (Transcoding/Encoding) rather than writing code.
+
+Here is the fully revised, professionally localized Khmer version of your `.resx` file using clear, natural, and accurate IT terminology:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>អំពីកម្មវិធី</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>ជ្រើសរើសសកម្មភាពត្រូវធ្វើចំពោះឯកសារដើម បន្ទាប់ពីការបម្លែងបានជោគជ័យ</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>បន្ទាប់ពីបម្លែងជោគជ័យ សូម៖</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>បង្កើតទម្រង់កំណត់ជាមុនថ្មី</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>កម្មវិធី</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>សំឡេង</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>ពិនិត្យរកការធ្វើបច្ចុប្បន្នភាពដោយស្វ័យប្រវត្តិ នៅពេល File Converter ចាប់ផ្តើម</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>បិទកម្មវិធីដោយស្វ័យប្រវត្តិ នៅពេលការបម្លែងទាំងអស់ត្រូវបានបញ្ចប់</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>កែតម្រូវទំហំរូបភាពដោយកំណត់ជ្រុងវែងជាងគេទៅរកស្វ័យគុណនៃ ២ ដែលជិតបំផុត និងតូចជាង។</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>បិទ</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>ទម្រង់កំណត់ជាមុននៃការបម្លែង</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>ឯកសារត្រូវបម្លែង</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>បានបម្លែងចេញពី</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>កំណត់ហេតុដំណើរការ (Logs)</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>មើលកំណត់ហេតុដំណើរការ</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>បើកមើលឯកសារណែនាំ</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>ឧបត្ថម្ភ</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>កុំភ្លេចគាំទ្រស្នាដៃរបស់ខ្ញុំ ប្រសិនបើអ្នកពេញចិត្តកម្មវិធីនេះ :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>ការធ្វើបច្ចុប្បន្នភាពនឹងត្រូវទាញយកនៅពីក្រោយ (Background) ហើយនឹងដំឡើងនៅពេលអ្នកបិទកម្មវិធី File Converter។</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>ដំឡើងនៅពេលខ្ញុំចាកចេញពី File Converter</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>ការបម្លែងកូដ (Encoding) ៖</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>ល្បឿនបម្លែងកូដ ៖</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter គឺជាកម្មវិធីជំនួយបន្ថែមរបស់ប្រព័ន្ធ (Shell Extension)។</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>វាមានន័យថា កម្មវិធីនេះត្រូវបានភ្ជាប់បញ្ចូលទៅក្នុង Windows Explorer ផ្ទាល់តែម្តង។</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>ទម្រង់គំរូឈ្មោះឯកសារ</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>ចំនួនស៊ុមក្នុងមួយវិនាទី (FPS) ៖</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>បើកទំព័រគម្រោង GitHub</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>ជំនួយ ?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>ឧទាហរណ៍ឯកសារដើម</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>ទម្រង់ឯកសារដើមដែលអាចបម្លែងបាន</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>លុបចោល</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>ផ្លាស់ទីទៅកាន់ថតផ្ទុកបណ្ណសារ</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>រក្សាទុកដដែល (គ្មានសកម្មភាព)</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>ការធ្វើបច្ចុប្បន្នភាពត្រូវបានទាញយករួចរាល់។ សូមបិទ File Converter ដើម្បីដំឡើងការធ្វើបច្ចុប្បន្នភាពឥឡូវនេះ។</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>ដំឡើងនៅពេលខ្ញុំចាកចេញពី File Converter</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>រាយការណ៍បញ្ហា ឬកំហុសកម្មវិធី</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>រំកិលទម្រង់កំណត់ជាមុនចុះក្រោម</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>រំកិលទម្រង់កំណត់ជាមុនឡើងលើ</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>ការបម្លែងកូដតាមអត្រាប៊ីតថេរ (CBR)</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>ការបម្លែងកូដតាមអត្រាប៊ីតប្រែប្រួល (VBR)</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>បង្វិល 90° ច្រាសទ្រនិចនាឡិកា</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>យល់ព្រម</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>បង្វិល 180°</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Music\Artist\Album\Song.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>ឧទាហរណ៍លទ្ធផល</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): ផ្លូវទីតាំងឯកសារដើម (input file path)
+(f): ឈ្មោះឯកសារដើម (input filename)
+(o): ប្រភេទកន្ទុយឯកសារលទ្ធផល (output extension type)
+(i): ប្រភេទកន្ទុយឯកសារដើម (input extension type)
+(d0): ថតមេនៃឯកសារដើម (input parent folder)
+(d1): ថតរងនៃឯកសារដើម (input sub parent folder)
+...
+(n:i): លិបិក្រមលេខទំព័រ (page number index)
+(n:c): ចំនួនទំព័រសរុប (total page count)
+
+ផ្លូវទីតាំងពិសេស៖
+(p:d): ផ្លូវទៅកាន់ឯកសាររបស់ខ្ញុំ (My Documents)
+(p:m): ផ្លូវទៅកាន់តន្ត្រីរបស់ខ្ញុំ (My Music)
+(p:v): ផ្លូវទៅកាន់វីដេអូរបស់ខ្ញុំ (My Videos)
+(p:p): ផ្លូវទៅកាន់រូបភាពរបស់ខ្ញុំ (My Pictures)
+
+ប្រើអក្សរធំ (MAJ) សម្រាប់បម្លែងជាអក្សរធំ</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>ទម្រង់ឯកសារលទ្ធផល</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>ទម្រង់កំណត់ជាមុន</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>ឈ្មោះទម្រង់កំណត់ជាមុន</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>គុណភាព ៖</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>ជួរអត្រាប៊ីតដែលណែនាំបង្ហាញជាពណ៌ខៀវ</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>លុបចោល</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>បង្វិល ៖</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>រក្សាទុក</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>មាសដ្ឋាន (Scale) ៖</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>មើលប្រវត្តិនៃការផ្លាស់ប្តូរ (Change log) ...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>ការកំណត់ File Converter</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>ការកំណត់</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>បង្វិល 90° ស្របទ្រនិចនាឡិកា</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>មានកំណែទម្រង់ថ្មីសម្រាប់ File Converter។ សូមណែនាំឱ្យដំឡើងវាឱ្យបានឆាប់តាមដែលអាចធ្វើទៅបាន!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>កំពុងទាញយកកំណែទម្រង់ថ្មី...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>ការធ្វើបច្ចុប្បន្នភាព File Converter</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>កំណត់ទំនាក់ទំនងរវាង 'ទំហំឯកសារ' និង 'គុណភាពវីដេអូ'។ តម្លៃកាន់តែតូច ឯកសារកាន់តែតូច ចំណែកតម្លៃកាន់តែធំ គុណភាពវីដេអូកាន់តែច្បាស់។</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>លឿនជាង</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>លឿន</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>មធ្យម</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>យឺតជាង</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>យឺត</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>លឿនបំផុត (Super Fast)</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>កំណត់ឥទ្ធិពលនៃ 'ទំហំឯកសារ' ទៅលើ 'រយៈពេលបង្ហាប់'។ ការបង្ហាប់យឺតនឹងផ្តល់ទំហំឯកសារតូចជាង (ក្នុងកម្រិតគុណភាពដូចគ្នា) ធៀបនឹងការបង្ហាប់លឿន។</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>លឿនបំផុត (Ultra Fast)</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>លឿនណាស់</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>យឺតណាស់</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>វីដេអូ</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM signed 16-bit little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM signed 24-bit little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM signed 32-bit little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM signed 8-bit little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>គ្មាន</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>មិនបង្វិល</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>កំពុងបម្លែង</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>រួចរាល់</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>កំពុងទាញយកទិន្នន័យ (Extracting)</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>បរាជ័យ</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>ស្ថិតក្នុងជួររង់ចាំ</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>កំពុងអានរូបភាពដើម</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>កំពុងអានឯកសារ</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>រូបភាពមានចលនា</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>សំឡេង</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>ឯកសារ</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>រូបភាព</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>វីដេអូ</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>រយៈពេលរង់ចាំមុនពេលបិទកម្មវិធី</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>ភាសា</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>ចំនួនអតិបរមានៃការបម្លែងក្នុងពេលតែមួយ</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>ទម្រង់កំណត់ជាមុនថ្មី</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###កំពុងទាញយកប្រវត្តិនៃការផ្លាស់ប្តូរ ...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>បណ្ណសារការបម្លែង</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>បានបោះបង់។</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>រកមិនឃើញឯកសារប្រតិបត្តិការ FFMPEG ឡើយ។ សូមព្យាយាមដំឡើងកម្មវិធីនេះឡើងវិញ។</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>ការទាញយកបទចេញពីស៊ីឌីសំឡេង (Audio CD) បានបរាជ័យ</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>ដ្រាយស៊ីឌី (CD drive) មិនទាន់រួចរាល់ទេ។</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>មិនអាចបើកដំណើរការ FFMPEG បានទេ។</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>មិនអាចបង្កើតថតសម្រាប់ផ្លូវលទ្ធផលបានទេ។</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>មិនអាចបង្កើតផ្លូវឯកសារលទ្ធផលតែមួយគត់បានទេ។</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>មិនអាចអានដ្រាយស៊ីឌី '{0}' បានឡើយ។</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>មិនអាចទាញយកឈ្មោះដ្រាយ (Drive Letter) នៃឯកសារដើមបានឡើយ។</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>មិនអាចទាញយកលេខបទពីផ្លូវបញ្ចូល .cda បានឡើយ។</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>មិនអាចប្រើប្រាស់ដ្រាយស៊ីឌីបានទេ ដោយសារថាសកំពុងបើក។</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>ប្រភេទឯកសារដើម មិនអាចបម្លែងទៅជាប្រភេទឯកសារលទ្ធផលដែលបានជ្រើសរើសឡើយ។</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>ផ្លូវលទ្ធផលដែលបង្កើតឡើងដោយទម្រង់គំរូ មិនត្រឹមត្រូវឡើយ។</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>មិនគាំទ្រទម្រង់លទ្ធផល '{0}' ឡើយ។</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>ចំនួនប៉ុស្តិ៍សំឡេង (Channels) ៖</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>ផ្លាស់ប្តូរចំនួនប៉ុស្តិ៍សំឡេងនៃឯកសារដើម។</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>ម៉ូណូ (Mono)</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>ដូចឯកសារដើម</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>ស្តេរីអូ (Stereo)</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>ដើម្បីប្រើប្រាស់ File Converter សូមបើក Windows Explorer រួចចុចស្តាំ (Right-click) លើឯកសារណាមួយដើម្បីបង្ហាញម៉ឺនុយជម្រើស (Context Menu) រួចជ្រើសរើសពាក្យបញ្ជារបស់ File Converter (សូមមើលឯកសារណែនាំតាមអនឡាញ ដើម្បីមើលបញ្ជីទម្រង់ឯកសារដែលអាចគាំទ្របាន)។</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**កម្មវិធីនេះគឺជាកម្មវិធីឥតគិតថ្លៃ (Free Software)**។</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>អ្នកអាចចែកចាយបន្ត និង/ឬ កែប្រែកម្មវិធីនេះបាន ក្រោមលក្ខខណ្ឌនៃអាជ្ញាប័ណ្ណ GNU General Public License។</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>កម្មវិធីនេះត្រូវបានចែកចាយក្នុងគោលបំណងផ្តល់ប្រយោជន៍ដល់អ្នកប្រើប្រាស់ ប៉ុន្តែគ្មានការធានាណាមួយឡើយ។ សូមអានអាជ្ញាប័ណ្ណ GNU General Public License (មាននៅក្នុងថតដំឡើងឯកសារ៖ `LICENSE.md`) សម្រាប់ព័ត៌មានលម្អិត។</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>កម្មវិធីកំពុងបិទដំណើរការ។</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>កម្មវិធីនឹងបិទដំណើរការដោយស្វ័យប្រវត្តក្នុងរយៈពេល {0} វិនាទី។</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>កម្មវិធីនឹងបិទដំណើរការដោយស្វ័យប្រវត្តក្នុងរយៈពេល 1 វិនាទី។</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>ផ្សេងៗ</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>រកមិនឃើញឯកសារលទ្ធផលឡើយ។</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>ការបម្លែងបានបរាជ័យ ប៉ុន្តែឯកសារលទ្ធផលត្រូវបានបង្កើតឡើង។</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>កំពុងរៀបចំការបម្លែង</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>ចាំបាច់ត្រូវដំឡើង Microsoft Office ដើម្បីបម្លែងឯកសារការិយាល័យទាំងនេះ។</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>មិនអាចបើកឯកសារជាមួយ Microsoft Office បានទេ (សូមពិនិត្យមើលសុពលភាពនៃអាជ្ញាប័ណ្ណ ឬការដំឡើងរបស់អ្នក)។</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>ចាំបាច់ត្រូវដំឡើង Microsoft Excel ដើម្បីបម្លែងឯកសារ Excel។</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>ចាំបាច់ត្រូវដំឡើង Microsoft PowerPoint ដើម្បីបម្លែងឯកសារ PowerPoint។</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>ចាំបាច់ត្រូវដំឡើង Microsoft Word ដើម្បីបម្លែងឯកសារ Word។</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>បើកមើលគេហទំព័រ File Converter</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>មានកំហុសអំឡុងពេលចាប់ផ្តើមដំណើរការការងារបម្លែង។</value>
+  </data>
+  <data name="ExportSelectedPresets" xml:space="preserve">
+    <value>នាំចេញ</value>
+  </data>
+  <data name="ImportPresets" xml:space="preserve">
+    <value>នាំចូល</value>
+  </data>
+  <data name="DuplicatePreset" xml:space="preserve">
+    <value>បង្កើតទម្រង់កំណត់ជាមុនស្ទួន</value>
+  </data>
+  <data name="CancelJobTooltip" xml:space="preserve">
+    <value>បោះបង់</value>
+  </data>
+  <data name="AdvancedMode" xml:space="preserve">
+    <value>របៀបកម្រិតខ្ពស់</value>
+  </data>
+  <data name="FFMPEGCustomArguments" xml:space="preserve">
+    <value>ជម្រើសពាក្យបញ្ជាបន្ថែម (Arguments)</value>
+  </data>
+  <data name="FFMPEGCustomArgumentsTooltip" xml:space="preserve">
+    <value>កំណត់ជម្រើសពាក្យបញ្ជាបន្ថែមដោយខ្លួនឯងសម្រាប់ខ្សែបន្ទាត់បញ្ជា FFMPEG</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>កំហុស</value>
+  </data>
+  <data name="ErrorCantLoadSettings" xml:space="preserve">
+    <value>មិនអាចផ្ទុកការកំណត់របស់អ្នកប្រើប្រាស់ File Converter បានទេ។ តើអ្នកចង់ប្រើប្រាស់ការកំណត់លំនាំដើមវិញដែរឬទេ?</value>
+  </data>
+</root>
+
+```
