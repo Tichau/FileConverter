@@ -9,6 +9,7 @@
 *.xaml text eol=crlf
 *.xml text eol=crlf
 *.md text eol=lf
+*.ps1 text eol=crlf
 *.yml text eol=lf
 *.yaml text eol=lf
 

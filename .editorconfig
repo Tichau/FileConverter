@@ -16,3 +16,7 @@ indent_size = 2
 [*.bat]
 indent_style = space
 indent_size = 4
+
+[*.ps1]
+indent_style = space
+indent_size = 4

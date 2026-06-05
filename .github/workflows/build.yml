@@ -28,7 +28,8 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Restore and build
-        run: msbuild FileConverter.sln /restore /m /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:Platform=${{ env.BUILD_PLATFORM }}
+        shell: pwsh
+        run: .\build.ps1 -Configuration $env:BUILD_CONFIGURATION -Platform $env:BUILD_PLATFORM
 
       - name: Upload app artifact
         uses: actions/upload-artifact@v4

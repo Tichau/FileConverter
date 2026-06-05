@@ -1,0 +1,80 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release tag, for example v2.2.0"
+        required: true
+        type: string
+      prerelease:
+        description: "Mark as prerelease"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+env:
+  BUILD_CONFIGURATION: Release
+  BUILD_PLATFORM: x64
+
+jobs:
+  windows-release:
+    name: Windows release
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build
+        shell: pwsh
+        run: .\build.ps1 -Configuration $env:BUILD_CONFIGURATION -Platform $env:BUILD_PLATFORM
+
+      - name: Prepare artifacts
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $tag = "${{ inputs.version }}"
+          $version = $tag.TrimStart("v")
+          New-Item -ItemType Directory -Force artifacts | Out-Null
+          Copy-Item "Installer\bin\x64\Release\ZFileConverter-setup.msi" "artifacts\ZFileConverter-$version-x64-setup.msi"
+          Compress-Archive -Path "Application\FileConverter\bin\x64\Release\*" -DestinationPath "artifacts\ZFileConverter-$version-x64-app.zip" -Force
+
+      - name: Upload workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ZFileConverter-release-${{ inputs.version }}
+          path: artifacts/*
+          if-no-files-found: error
+
+      - name: Create draft GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.version }}
+          PRERELEASE: ${{ inputs.prerelease }}
+        run: |
+          $ErrorActionPreference = "Stop"
+          $files = Get-ChildItem artifacts -File | ForEach-Object { $_.FullName }
+          $arguments = @(
+            "release",
+            "create",
+            $env:RELEASE_TAG
+          ) + $files + @(
+            "--target",
+            $env:GITHUB_SHA,
+            "--title",
+            "ZFileConverter $env:RELEASE_TAG",
+            "--generate-notes",
+            "--draft"
+          )
+          if ($env:PRERELEASE -eq "true") {
+            $arguments += "--prerelease"
+          }
+          gh @arguments

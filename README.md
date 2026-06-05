@@ -50,8 +50,16 @@ See [docs/BUILDING.md](docs/BUILDING.md) for the local and CI build path.
 Short version:
 
 ```powershell
-msbuild FileConverter.sln /restore /m /p:Configuration=Release /p:Platform=x64
+.\build.ps1 -Configuration Release -Platform x64
 ```
+
+## Install
+
+See [docs/INSTALLING.md](docs/INSTALLING.md).
+
+Recommended path: download the newest `ZFileConverter-*-x64-setup.msi` from
+[GitHub Releases](https://github.com/ZaidNAlAsali/FileConverter/releases), run it,
+then open Settings > Health if the Explorer menu does not appear.
 
 ## Release
 

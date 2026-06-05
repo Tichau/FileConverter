@@ -7,7 +7,7 @@ Use this before publishing a GitHub release.
 - Confirm the release branch is clean.
 - Confirm `version.xml` points to the intended GitHub release asset.
 - Update `CHANGELOG.md` with user-facing changes.
-- Confirm `README.md` and `docs/BUILDING.md` match the release process.
+- Confirm `README.md`, `docs/BUILDING.md`, and `docs/INSTALLING.md` match the release process.
 
 ## Build
 
@@ -15,7 +15,7 @@ Use this before publishing a GitHub release.
 - Run:
 
 ```powershell
-msbuild FileConverter.sln /restore /m /p:Configuration=Release /p:Platform=x64
+.\build.ps1 -Configuration Release -Platform x64
 ```
 
 - Confirm the app output exists under `Application\FileConverter\bin\x64\Release`.
@@ -46,6 +46,7 @@ msbuild FileConverter.sln /restore /m /p:Configuration=Release /p:Platform=x64
 ## GitHub Release
 
 - Create a tag matching the version, for example `v2.2.0-z1`.
+- Prefer the manual `release` workflow. It creates a draft release and uploads a versioned MSI and app zip.
 - Upload the MSI and any app artifact zip.
 - Include whether the installer is signed.
 - Include known limitations and dependency notes.

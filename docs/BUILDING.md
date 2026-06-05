@@ -1,7 +1,7 @@
 # Building ZFileConverter
 
-ZFileConverter is a .NET Framework 4.8 WPF application with a SharpShell Explorer extension
-and a WiX installer.
+ZFileConverter is a 64-bit .NET Framework 4.8 WPF application with a SharpShell Explorer
+extension and a WiX installer.
 
 ## Requirements
 
@@ -17,8 +17,12 @@ and a WiX installer.
 From a Visual Studio Developer PowerShell:
 
 ```powershell
-msbuild FileConverter.sln /restore /m /p:Configuration=Release /p:Platform=x64
+.\build.ps1 -Configuration Release -Platform x64
 ```
+
+The script checks that Visual Studio MSBuild and the .NET Framework 4.8 targeting pack are
+available before running the restore/build. Set `MSBUILD_PATH` to an explicit MSBuild path if
+you need to override discovery.
 
 The application output is expected at:
 
@@ -54,4 +58,7 @@ After a release build:
 ## CI
 
 The GitHub Actions workflow uses `microsoft/setup-msbuild`, restores the solution,
-builds Release x64, and uploads application and installer artifacts when available.
+builds Release x64 through `build.ps1`, and uploads application and installer artifacts when available.
+
+The manual `release` workflow builds the same Release x64 output, renames the MSI to a
+versioned release artifact, zips the app output, and creates a draft GitHub release.
