@@ -475,6 +475,11 @@ namespace FileConverter.ConversionJobs
                     this.ConversionFailed(Properties.Resources.ErrorFailedToLaunchFFMPEG);
                     throw;
                 }
+
+                if (this.State == ConversionState.Failed || this.CancelIsRequested)
+                {
+                    break;
+                }
             }
 
             Diagnostics.Debug.Log(string.Empty);
@@ -491,12 +496,17 @@ namespace FileConverter.ConversionJobs
 
                 Diagnostics.Debug.Log($"Delete intermediate file {currentPass.FileToDelete}.");
 
-                File.Delete(currentPass.FileToDelete);
+                this.DeleteFileIfExists(currentPass.FileToDelete);
             }
         }
 
         private void ParseFFMPEGOutput(string input)
         {
+            if (string.IsNullOrEmpty(input))
+            {
+                return;
+            }
+
             Match match = this.durationRegex.Match(input);
             if (match.Success && match.Groups.Count >= 6)
             {

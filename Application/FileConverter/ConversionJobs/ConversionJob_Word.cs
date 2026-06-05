@@ -94,30 +94,32 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            // Make this document the active document.
-            this.document.Activate();
+            try
+            {
+                // Make this document the active document.
+                this.document.Activate();
 
-            this.UserState = Properties.Resources.ConversionStateConversion;
+                this.UserState = Properties.Resources.ConversionStateConversion;
 
-            Debug.Log("Convert word document to pdf.");
-            // this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
-            this.document.ExportAsFixedFormat(this.intermediateFilePath, 
-                Word.Enums.WdExportFormat.wdExportFormatPDF, 
-                false, 
-                Word.Enums.WdExportOptimizeFor.wdExportOptimizeForPrint, 
-                Word.Enums.WdExportRange.wdExportAllDocument, 
-                1, 1, 
-                Word.Enums.WdExportItem.wdExportDocumentContent, 
-                true, 
-                true, 
-                Word.Enums.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, 
-                true);
-
-            Debug.Log($"Close word document '{this.InputFilePath}'.");
-            this.document.Close(Word.Enums.WdSaveOptions.wdDoNotSaveChanges);
-            this.document = null;
-
-            this.ReleaseOfficeApplicationInstanceIfNeeded();
+                Debug.Log("Convert word document to pdf.");
+                // this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
+                this.document.ExportAsFixedFormat(this.intermediateFilePath,
+                    Word.Enums.WdExportFormat.wdExportFormatPDF,
+                    false,
+                    Word.Enums.WdExportOptimizeFor.wdExportOptimizeForPrint,
+                    Word.Enums.WdExportRange.wdExportAllDocument,
+                    1, 1,
+                    Word.Enums.WdExportItem.wdExportDocumentContent,
+                    true,
+                    true,
+                    Word.Enums.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks,
+                    true);
+            }
+            finally
+            {
+                this.CloseDocumentIfNeeded();
+                this.ReleaseOfficeApplicationInstanceIfNeeded();
+            }
             
             if (this.pdf2ImageConversionJob != null)
             {
@@ -143,7 +145,7 @@ namespace FileConverter.ConversionJobs
                 {
                     Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
-                    File.Delete(this.intermediateFilePath);
+                    this.DeleteFileIfExists(this.intermediateFilePath);
                 }
 
                 updateProgress.Wait();
@@ -179,15 +181,11 @@ namespace FileConverter.ConversionJobs
 
         private async Task UpdateProgress()
         {
-            while (this.pdf2ImageConversionJob.State != ConversionState.Done &&
+            while (this.pdf2ImageConversionJob != null &&
+                   this.pdf2ImageConversionJob.State != ConversionState.Done &&
                    this.pdf2ImageConversionJob.State != ConversionState.Failed)
             {
-                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
-                {
-                    this.Progress = this.pdf2ImageConversionJob.Progress;
-                }
-
-                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
+                if (this.pdf2ImageConversionJob.State == ConversionState.InProgress)
                 {
                     this.Progress = this.pdf2ImageConversionJob.Progress;
                     this.UserState = this.pdf2ImageConversionJob.UserState;
@@ -222,6 +220,26 @@ namespace FileConverter.ConversionJobs
             }
 
             return this.document != null;
+        }
+
+        private void CloseDocumentIfNeeded()
+        {
+            if (this.document == null)
+            {
+                return;
+            }
+
+            try
+            {
+                Debug.Log($"Close word document '{this.InputFilePath}'.");
+                this.document.Close(Word.Enums.WdSaveOptions.wdDoNotSaveChanges);
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Failed to close word document '{this.InputFilePath}': {exception.Message}.");
+            }
+
+            this.document = null;
         }
     }
 }

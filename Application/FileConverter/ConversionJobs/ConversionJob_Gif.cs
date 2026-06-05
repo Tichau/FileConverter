@@ -20,8 +20,8 @@ namespace FileConverter.ConversionJobs
         {
             base.Cancel();
 
-            this.pngConversionJob.Cancel();
-            this.gifConversionJob.Cancel();
+            this.pngConversionJob?.Cancel();
+            this.gifConversionJob?.Cancel();
         }
 
         protected override void Initialize()
@@ -33,8 +33,7 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("The conversion preset must be valid.");
             }
 
-            string extension = System.IO.Path.GetExtension(this.InputFilePath);
-            extension = extension.ToLowerInvariant().Substring(1, extension.Length - 1);
+            string extension = PathHelpers.GetExtensionWithoutDot(this.InputFilePath);
 
             string inputFilePath = string.Empty;
 
@@ -70,8 +69,6 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("The conversion preset must be valid.");
             }
 
-            Task updateProgress = this.UpdateProgress();
-
             if (this.pngConversionJob != null)
             {
                 this.UserState = Properties.Resources.ConversionStateReadIntputImage;
@@ -89,10 +86,12 @@ namespace FileConverter.ConversionJobs
 
             Diagnostics.Debug.Log(string.Empty);
             Diagnostics.Debug.Log("Convert png intermediate image to gif.");
+            Task updateProgress = this.UpdateProgress();
             this.gifConversionJob.StartConversion();
 
             if (this.gifConversionJob.State != ConversionState.Done)
             {
+                updateProgress.Wait();
                 this.ConversionFailed(this.gifConversionJob.ErrorMessage);
                 return;
             }
@@ -101,7 +100,7 @@ namespace FileConverter.ConversionJobs
             {
                 Diagnostics.Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
-                File.Delete(this.intermediateFilePath);
+                this.DeleteFileIfExists(this.intermediateFilePath);
             }
 
             updateProgress.Wait();

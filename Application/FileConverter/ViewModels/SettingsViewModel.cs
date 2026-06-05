@@ -58,7 +58,7 @@ namespace FileConverter.ViewModels
         public SettingsViewModel()
         {
             this.getChangeLogContentCommand = new RelayCommand(this.DownloadChangeLogAction);
-            this.openUrlCommand = new RelayCommand<string>((url) => Process.Start(url));
+            this.openUrlCommand = new RelayCommand<string>(this.OpenUrl);
             this.createFolderCommand = new RelayCommand(this.CreateFolder);
             this.newPresetCommand = new RelayCommand(() => this.AddNewPreset(false));
             this.duplicatePresetCommand = new RelayCommand(() => this.AddNewPreset(true), this.CanDuplicateSelectedPreset);
@@ -84,6 +84,7 @@ namespace FileConverter.ViewModels
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Avi));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Png));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Jpg));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Avif));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Webp));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ico));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Gif));
@@ -387,6 +388,23 @@ namespace FileConverter.ViewModels
             this.DisplaySeeChangeLogLink = false;
         }
 
+        private void OpenUrl(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+            {
+                return;
+            }
+
+            try
+            {
+                Process.Start(url);
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.Log($"Failed to open URL '{url}': {exception.Message}.");
+            }
+        }
+
         private void InitializeCompatibleInputExtensions()
         {
             List<InputExtensionCategory> categories = new List<InputExtensionCategory>();
@@ -526,7 +544,7 @@ namespace FileConverter.ViewModels
 
             this.saveCommand.NotifyCanExecuteChanged();
 
-            this.OnFolderCreated();
+            this.OnFolderCreated?.Invoke();
         }
 
         private bool CanDuplicateSelectedPreset()
@@ -584,7 +602,7 @@ namespace FileConverter.ViewModels
 
             this.SelectedItem = node;
 
-            this.OnPresetCreated.Invoke();
+            this.OnPresetCreated?.Invoke();
 
             this.removePresetCommand.NotifyCanExecuteChanged();
             this.saveCommand.NotifyCanExecuteChanged();
@@ -604,6 +622,7 @@ namespace FileConverter.ViewModels
                 if (!File.Exists(openFileDialog.FileName))
                 {
                     Diagnostics.Debug.LogError("File does not exists.");
+                    return;
                 }
 
                 string directoryPath = Path.GetDirectoryName(openFileDialog.FileName);
@@ -613,7 +632,15 @@ namespace FileConverter.ViewModels
                 }
 
                 List<ConversionPreset> presetsToImport = new List<ConversionPreset>();
-                XmlHelpers.LoadFromFile("Presets", openFileDialog.FileName, out presetsToImport);
+                try
+                {
+                    XmlHelpers.LoadFromFile("Presets", openFileDialog.FileName, out presetsToImport);
+                }
+                catch (Exception exception)
+                {
+                    Diagnostics.Debug.LogError($"Failed to import presets. {exception.Message}");
+                    return;
+                }
 
                 // Add imported preset to preset tree.
                 bool itemSelected = false;
@@ -644,6 +671,8 @@ namespace FileConverter.ViewModels
                         itemSelected = true;
                     }
                 }
+
+                this.saveCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -699,7 +728,7 @@ namespace FileConverter.ViewModels
 
         private bool CanRemoveSelectedPreset()
         {
-            return this.SelectedItem != null;
+            return this.SelectedItem != null && this.SelectedItem.Parent != null;
         }
 
         protected override void OnDeactivated()

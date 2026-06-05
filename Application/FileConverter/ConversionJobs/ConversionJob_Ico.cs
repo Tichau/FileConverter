@@ -19,8 +19,8 @@ namespace FileConverter.ConversionJobs
         {
             base.Cancel();
 
-            this.pngConversionJob.Cancel();
-            this.icoConversionJob.Cancel();
+            this.pngConversionJob?.Cancel();
+            this.icoConversionJob?.Cancel();
         }
 
         protected override void Initialize()
@@ -78,7 +78,7 @@ namespace FileConverter.ConversionJobs
 
             Diagnostics.Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
-            File.Delete(this.intermediateFilePath);
+            this.DeleteFileIfExists(this.intermediateFilePath);
         }
     }
 }

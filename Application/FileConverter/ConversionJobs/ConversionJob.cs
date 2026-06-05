@@ -220,8 +220,14 @@ namespace FileConverter.ConversionJobs
 
             this.InputFilePath = this.initialInputPath;
 
-            string extension = System.IO.Path.GetExtension(this.initialInputPath);
-            extension = extension.Substring(1, extension.Length - 1);
+            string extension = PathHelpers.GetExtensionWithoutDot(this.initialInputPath);
+            if (string.IsNullOrEmpty(extension))
+            {
+                this.ConversionFailed(Properties.Resources.ErrorInputTypeIncompatibleWithOutputType);
+                Debug.Log($"Input file has no extension: {this.InputFilePath}.");
+                return;
+            }
+
             string extensionCategory = Helpers.GetExtensionCategory(extension);
             if (!Helpers.IsOutputTypeCompatibleWithCategory(this.ConversionPreset.OutputType, extensionCategory))
             {
@@ -419,30 +425,43 @@ namespace FileConverter.ConversionJobs
 
             this.ChangeOutputFileTimestampToMatchOriginal();
 
-            // Apply the input post conversion action.
-            switch (this.InputPostConversionAction)
+            try
             {
-                case InputPostConversionAction.None:
-                    break;
+                // Apply the input post conversion action.
+                switch (this.InputPostConversionAction)
+                {
+                    case InputPostConversionAction.None:
+                        break;
 
-                case InputPostConversionAction.MoveInArchiveFolder:
-                    string basePath = System.IO.Path.GetDirectoryName(this.initialInputPath);
-                    string inputFilename = System.IO.Path.GetFileName(this.initialInputPath);
-                    string archivePath = basePath + "\\" + this.ConversionPreset.ConversionArchiveFolderName;
-                    if (!System.IO.Directory.Exists(archivePath))
-                    {
-                        System.IO.Directory.CreateDirectory(archivePath);
-                    }
+                    case InputPostConversionAction.MoveInArchiveFolder:
+                        string basePath = System.IO.Path.GetDirectoryName(this.initialInputPath);
+                        if (string.IsNullOrEmpty(basePath))
+                        {
+                            basePath = System.Environment.CurrentDirectory;
+                        }
 
-                    string newPath = PathHelpers.GenerateUniquePath(archivePath + "\\" + inputFilename);
-                    System.IO.File.Move(this.InputFilePath, newPath);
-                    Debug.Log($"Input file moved in archive folder: '{newPath}'");
-                    break;
+                        string inputFilename = System.IO.Path.GetFileName(this.initialInputPath);
+                        string archivePath = basePath + "\\" + this.ConversionPreset.ConversionArchiveFolderName;
+                        if (!System.IO.Directory.Exists(archivePath))
+                        {
+                            System.IO.Directory.CreateDirectory(archivePath);
+                        }
 
-                case InputPostConversionAction.Delete:
-                    System.IO.File.Delete(this.InputFilePath);
-                    Debug.Log($"Input file deleted: '{this.initialInputPath}'");
-                    break;
+                        string newPath = PathHelpers.GenerateUniquePath(archivePath + "\\" + inputFilename);
+                        System.IO.File.Move(this.InputFilePath, newPath);
+                        Debug.Log($"Input file moved in archive folder: '{newPath}'");
+                        break;
+
+                    case InputPostConversionAction.Delete:
+                        System.IO.File.Delete(this.InputFilePath);
+                        Debug.Log($"Input file deleted: '{this.initialInputPath}'");
+                        break;
+                }
+            }
+            catch (Exception exception)
+            {
+                this.ConversionFailed($"Post conversion action failed: {exception.Message}");
+                return;
             }
 
             Debug.Log(string.Empty);
@@ -466,6 +485,27 @@ namespace FileConverter.ConversionJobs
             this.State = ConversionState.Failed;
             this.UserState = Properties.Resources.ConversionStateFailed;
             this.ErrorMessage = exitingMessage;
+        }
+
+        protected void DeleteFileIfExists(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return;
+            }
+
+            try
+            {
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Can't delete file '{filePath}'.");
+                Debug.Log($"An exception has been thrown: {exception}.");
+            }
         }
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

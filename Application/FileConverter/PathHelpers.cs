@@ -67,6 +67,17 @@ namespace FileConverter
             return PathHelpers.pathRegex.IsMatch(path);
         }
 
+        public static string GetExtensionWithoutDot(string path)
+        {
+            string extension = System.IO.Path.GetExtension(path);
+            if (string.IsNullOrEmpty(extension) || extension.Length <= 1)
+            {
+                return string.Empty;
+            }
+
+            return extension.Substring(1).ToLowerInvariant();
+        }
+
         public static string GetFileName(string path)
         {
             MatchCollection matchCollection = PathHelpers.filenameRegex.Matches(path);
@@ -158,8 +169,13 @@ namespace FileConverter
                 return "Invalid input file path (argument 0).";
             }
 
-            string inputExtension = System.IO.Path.GetExtension(inputFilePath).Substring(1);
-            string inputPathWithoutExtension = inputFilePath.Substring(0, inputFilePath.Length - inputExtension.Length - 1);
+            string inputExtension = GetExtensionWithoutDot(inputFilePath);
+            string inputPathWithoutExtension = inputFilePath;
+            if (!string.IsNullOrEmpty(inputExtension))
+            {
+                inputPathWithoutExtension = inputFilePath.Substring(0, inputFilePath.Length - inputExtension.Length - 1);
+            }
+
             string outputExtension = outputFileExtension.ToString().ToLowerInvariant();
 
             if (string.IsNullOrEmpty(outputFilePathTemplate))
@@ -170,6 +186,11 @@ namespace FileConverter
 
             string fileName = System.IO.Path.GetFileName(inputPathWithoutExtension);
             string parentDirectory = System.IO.Path.GetDirectoryName(inputPathWithoutExtension);
+            if (string.IsNullOrEmpty(parentDirectory))
+            {
+                parentDirectory = System.Environment.CurrentDirectory;
+            }
+
             if (!parentDirectory.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
             {
                 parentDirectory += System.IO.Path.DirectorySeparatorChar;

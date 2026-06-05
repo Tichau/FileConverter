@@ -40,7 +40,7 @@ namespace FileConverter.ConversionJobs
         {
             base.Cancel();
 
-            this.compressionConversionJob.Cancel();
+            this.compressionConversionJob?.Cancel();
         }
 
         protected override void Initialize()
@@ -111,6 +111,12 @@ namespace FileConverter.ConversionJobs
             // Sub conversion job (for compression).
             this.compressionConversionJob = ConversionJobFactory.Create(this.ConversionPreset, this.intermediateFilePath);
             this.compressionConversionJob.PrepareConversion(this.OutputFilePath);
+            if (this.compressionConversionJob.State == ConversionState.Failed)
+            {
+                this.ConversionFailed(this.compressionConversionJob.ErrorMessage);
+                return;
+            }
+
             this.compressionThread = Helpers.InstantiateThread("CDACompressionThread", this.CompressAsync);
         }
 
@@ -125,39 +131,44 @@ namespace FileConverter.ConversionJobs
 
             this.UserState = Properties.Resources.ConversionStateExtraction;
 
-            if (!this.diskDrive.IsCDReady())
+            bool cdLocked = false;
+            try
             {
-                this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
-                return;
-            }
+                if (!this.diskDrive.IsCDReady())
+                {
+                    this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
+                    return;
+                }
 
-            if (!this.diskDrive.Refresh())
+                if (!this.diskDrive.Refresh())
+                {
+                    Debug.Log("Can't refresh CD drive data.");
+                    this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
+                    return;
+                }
+
+                if (!this.diskDrive.LockCD())
+                {
+                    Debug.Log("Can\'t lock cd.");
+                    this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
+                    return;
+                }
+
+                cdLocked = true;
+
+                WaveFormat waveFormat = new WaveFormat(44100, 16, 2);
+
+                using (Stream waveStream = new FileStream(this.intermediateFilePath, FileMode.Create, FileAccess.Write))
+                using (this.waveWriter = new WaveWriter(waveStream, waveFormat, this.diskDrive.TrackSize(this.cdaTrackNumber)))
+                {
+                    this.diskDrive.ReadTrack(this.cdaTrackNumber, this.WriteWaveData, this.CdReadProgress);
+                }
+            }
+            finally
             {
-                Debug.Log("Can't refresh CD drive data.");
-                this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
-                return;
+                this.waveWriter = null;
+                this.ReleaseCdDrive(cdLocked);
             }
-
-            if (!this.diskDrive.LockCD())
-            {
-                Debug.Log("Can\'t lock cd.");
-                this.ConversionFailed(Properties.Resources.ErrorCDDriveNotReady);
-                return;
-            }
-
-            WaveFormat waveFormat = new WaveFormat(44100, 16, 2);
-
-            using (Stream waveStream = new FileStream(this.intermediateFilePath, FileMode.Create, FileAccess.Write))
-            using (this.waveWriter = new WaveWriter(waveStream, waveFormat, this.diskDrive.TrackSize(this.cdaTrackNumber)))
-            {
-                this.diskDrive.ReadTrack(this.cdaTrackNumber, this.WriteWaveData, this.CdReadProgress);
-            }
-
-            this.waveWriter = null;
-
-            this.diskDrive.UnLockCD();
-
-            this.diskDrive.Close();
 
             this.StateFlags = ConversionFlags.None;
 
@@ -179,18 +190,21 @@ namespace FileConverter.ConversionJobs
                 this.compressionConversionJob.State != ConversionState.Failed)
             {
                 this.Progress = this.compressionConversionJob.Progress;
+                Thread.Sleep(40);
             }
+
+            this.compressionThread.Join();
+
+            Debug.Log(string.Empty);
+            Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
+
+            this.DeleteIntermediateFileIfExists();
 
             if (this.compressionConversionJob.State == ConversionState.Failed)
             {
                 this.ConversionFailed(this.compressionConversionJob.ErrorMessage);
                 return;
             }
-
-            Debug.Log(string.Empty);
-            Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
-
-            File.Delete(this.intermediateFilePath);
         }
 
         private void WriteWaveData(object sender, DataReadEventArgs eventArgs)
@@ -219,6 +233,53 @@ namespace FileConverter.ConversionJobs
         private void CompressAsync()
         {
             this.compressionConversionJob.StartConversion();
+        }
+
+        private void ReleaseCdDrive(bool cdLocked)
+        {
+            if (this.diskDrive == null)
+            {
+                return;
+            }
+
+            if (cdLocked)
+            {
+                try
+                {
+                    this.diskDrive.UnLockCD();
+                }
+                catch (Exception exception)
+                {
+                    Debug.Log($"Failed to unlock CD drive: {exception.Message}.");
+                }
+            }
+
+            try
+            {
+                if (this.diskDrive.IsOpened)
+                {
+                    this.diskDrive.Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Failed to close CD drive: {exception.Message}.");
+            }
+        }
+
+        private void DeleteIntermediateFileIfExists()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(this.intermediateFilePath) && File.Exists(this.intermediateFilePath))
+                {
+                    File.Delete(this.intermediateFilePath);
+                }
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Failed to delete intermediate CDA file {this.intermediateFilePath}: {exception.Message}.");
+            }
         }
     }
 }

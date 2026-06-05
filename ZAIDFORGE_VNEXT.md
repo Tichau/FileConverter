@@ -56,6 +56,19 @@ A GitHub Actions workflow builds the solution on Windows with MSBuild. The insta
 signing import is skipped when the private signing file is absent, so public CI can build
 unsigned validation artifacts.
 
+### Maintenance Audit Polish
+
+The first audit pass focuses on boring, valuable things that make an abandoned utility
+feel maintained again:
+
+- No-extension inputs now fail gracefully instead of throwing during preparation.
+- Office conversions close Word, Excel, and PowerPoint even when PDF export fails.
+- CDA extraction unlocks and closes the drive on early failures and cleans temporary WAVs.
+- FFmpeg multi-pass jobs stop after a failed pass and clean intermediate files defensively.
+- Explorer extension startup failures now show useful messages and clean temp input lists.
+- Settings, registry, imported presets, and language values tolerate malformed user data.
+- AVIF appears in the output-type picker and uses the standard image quality controls.
+
 ## Next Moves
 
 - Add a conversion queue history with retry and "open output folder" actions.

@@ -276,7 +276,8 @@ namespace FileConverter
                                 if (index >= args.Length - 1)
                                 {
                                     Debug.LogError(errorCode: 0x0B, $"Invalid format.");
-                                    break;
+                                    Application.AskForShutdown();
+                                    return;
                                 }
 
                                 string shellExtensionPath = args[index + 1];
@@ -296,7 +297,8 @@ namespace FileConverter
                                 if (index >= args.Length - 1)
                                 {
                                     Debug.LogError(errorCode: 0x0D, $"Invalid format.");
-                                    break;
+                                    Application.AskForShutdown();
+                                    return;
                                 }
 
                                 string shellExtensionPath = args[index + 1];
@@ -389,6 +391,7 @@ namespace FileConverter
 
                         default:
                             Debug.LogError($"Unknown application argument: '--{parameterTitle}'.");
+                            Application.AskForShutdown();
                             return;
                     }
                 }

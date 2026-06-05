@@ -48,7 +48,7 @@ namespace FileConverter.ConversionJobs
                 Excel.Worksheet worksheet = sheet as Excel.Worksheet;
                 if (worksheet != null)
                 {
-                    pagesCount = worksheet.PageSetup.Pages.Count;
+                    pagesCount += worksheet.PageSetup.Pages.Count;
                 }
             }
 
@@ -102,19 +102,21 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            // Make this document the active document.
-            this.document.Activate();
+            try
+            {
+                // Make this document the active document.
+                this.document.Activate();
 
-            this.UserState = Properties.Resources.ConversionStateConversion;
+                this.UserState = Properties.Resources.ConversionStateConversion;
 
-            Debug.Log("Convert excel document to pdf.");
-            this.document.ExportAsFixedFormat(Excel.Enums.XlFixedFormatType.xlTypePDF, this.intermediateFilePath);
-
-            Debug.Log($"Close excel document '{this.InputFilePath}'.");
-            this.document.Close(false);
-            this.document = null;
-
-            this.ReleaseOfficeApplicationInstanceIfNeeded();
+                Debug.Log("Convert excel document to pdf.");
+                this.document.ExportAsFixedFormat(Excel.Enums.XlFixedFormatType.xlTypePDF, this.intermediateFilePath);
+            }
+            finally
+            {
+                this.CloseDocumentIfNeeded();
+                this.ReleaseOfficeApplicationInstanceIfNeeded();
+            }
             
             if (this.pdf2ImageConversionJob != null)
             {
@@ -140,7 +142,7 @@ namespace FileConverter.ConversionJobs
                 {
                     Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
-                    File.Delete(this.intermediateFilePath);
+                    this.DeleteFileIfExists(this.intermediateFilePath);
                 }
 
                 updateProgress.Wait();
@@ -176,15 +178,11 @@ namespace FileConverter.ConversionJobs
 
         private async Task UpdateProgress()
         {
-            while (this.pdf2ImageConversionJob.State != ConversionState.Done &&
+            while (this.pdf2ImageConversionJob != null &&
+                   this.pdf2ImageConversionJob.State != ConversionState.Done &&
                    this.pdf2ImageConversionJob.State != ConversionState.Failed)
             {
-                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
-                {
-                    this.Progress = this.pdf2ImageConversionJob.Progress;
-                }
-
-                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
+                if (this.pdf2ImageConversionJob.State == ConversionState.InProgress)
                 {
                     this.Progress = this.pdf2ImageConversionJob.Progress;
                     this.UserState = this.pdf2ImageConversionJob.UserState;
@@ -219,6 +217,26 @@ namespace FileConverter.ConversionJobs
             }
 
             return this.document != null;
+        }
+
+        private void CloseDocumentIfNeeded()
+        {
+            if (this.document == null)
+            {
+                return;
+            }
+
+            try
+            {
+                Debug.Log($"Close excel document '{this.InputFilePath}'.");
+                this.document.Close(false);
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Failed to close excel document '{this.InputFilePath}': {exception.Message}.");
+            }
+
+            this.document = null;
         }
     }
 }

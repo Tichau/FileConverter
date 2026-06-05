@@ -624,6 +624,9 @@
             <DataTrigger Binding="{Binding OutputType}" Value="Avi">
                 <Setter Property="ContentTemplate" Value="{StaticResource AviSettingsDataTemplate}"/>
             </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Avif">
+                <Setter Property="ContentTemplate" Value="{StaticResource JpgSettingsDataTemplate}"/>
+            </DataTrigger>
             <DataTrigger Binding="{Binding OutputType}" Value="Flac">
                 <Setter Property="ContentTemplate" Value="{StaticResource FlacSettingsDataTemplate}"/>
             </DataTrigger>
@@ -710,4 +713,3 @@
     </Style>
 
 </ResourceDictionary>
-    

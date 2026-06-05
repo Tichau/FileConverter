@@ -38,7 +38,7 @@ namespace FileConverter.Services
             if (this.numberOfConversionThread <= 0)
             {
                 this.numberOfConversionThread = System.Math.Max(1, Environment.ProcessorCount / 2);
-                Debug.Log($"The number of processors on this computer is {settingsService.Settings.MaximumNumberOfSimultaneousConversions}. Set the default number of conversion threads to {settingsService.Settings.MaximumNumberOfSimultaneousConversions}");
+                Debug.Log($"The number of processors on this computer is {Environment.ProcessorCount}. Set the default number of conversion threads to {this.numberOfConversionThread}");
             }
         }
 

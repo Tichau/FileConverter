@@ -68,6 +68,11 @@ namespace FileConverter.Services
                 Diagnostics.Debug.Log($"Failed to check upgrade: {exception.Message}.");
             }
 
+            if (task == null)
+            {
+                return null;
+            }
+
             UpgradeVersionDescription versionDescription = await task;
 
             if (versionDescription == null)
@@ -155,7 +160,7 @@ namespace FileConverter.Services
         private async Task<UpgradeVersionDescription> DownloadLatestVersionDescription()
         {
 #if BUILD32
-            Uri uri = new Uri(Helpers.BaseURI + "version (x86).xml");
+            Uri uri = new Uri(UpgradeService.BaseURI + "version (x86).xml");
 #else
             Uri uri = new Uri(UpgradeService.BaseURI + "version.xml");
 #endif
@@ -185,7 +190,7 @@ namespace FileConverter.Services
             }
             catch (Exception)
             {
-                Debug.Log("Error while retrieving change log.");
+                Debug.Log("Error while retrieving version description.");
                 return null;
             }
 
@@ -236,12 +241,13 @@ namespace FileConverter.Services
 
                 this.UpgradeVersionDescription.InstallerDownloadProgress = 100;
                 this.UpgradeVersionDescription.InstallerDownloadInProgress = false;
-                this.UpgradeVersionDescription = null;
             }
             catch (Exception exception)
             {
                 Debug.LogError("Failed to download the new File Converter upgrade. You should try again or download it manually.");
                 Debug.Log(exception.ToString());
+                this.UpgradeVersionDescription.InstallerDownloadInProgress = false;
+                this.UpgradeVersionDescription.InstallerDownloadProgress = 0;
                 this.UpgradeVersionDescription.NeedToUpgrade = false;
             }
 
@@ -250,6 +256,11 @@ namespace FileConverter.Services
         
         private void WebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs eventArgs)
         {
+            if (this.UpgradeVersionDescription == null)
+            {
+                return;
+            }
+
             this.UpgradeVersionDescription.InstallerDownloadProgress = eventArgs.ProgressPercentage;
         }
     }

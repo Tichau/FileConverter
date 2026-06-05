@@ -93,16 +93,18 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            this.UserState = Properties.Resources.ConversionStateConversion;
+            try
+            {
+                this.UserState = Properties.Resources.ConversionStateConversion;
 
-            Debug.Log("Convert PowerPoint document to pdf.");
-            this.document.ExportAsFixedFormat(this.intermediateFilePath, PowerPoint.Enums.PpFixedFormatType.ppFixedFormatTypePDF);
-
-            Debug.Log($"Close PowerPoint document '{this.InputFilePath}'.");
-            this.document.Close();
-            this.document = null;
-
-            this.ReleaseOfficeApplicationInstanceIfNeeded();
+                Debug.Log("Convert PowerPoint document to pdf.");
+                this.document.ExportAsFixedFormat(this.intermediateFilePath, PowerPoint.Enums.PpFixedFormatType.ppFixedFormatTypePDF);
+            }
+            finally
+            {
+                this.CloseDocumentIfNeeded();
+                this.ReleaseOfficeApplicationInstanceIfNeeded();
+            }
             
             if (this.pdf2ImageConversionJob != null)
             {
@@ -128,7 +130,7 @@ namespace FileConverter.ConversionJobs
                 {
                     Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
 
-                    File.Delete(this.intermediateFilePath);
+                    this.DeleteFileIfExists(this.intermediateFilePath);
                 }
 
                 updateProgress.Wait();
@@ -161,15 +163,11 @@ namespace FileConverter.ConversionJobs
 
         private async Task UpdateProgress()
         {
-            while (this.pdf2ImageConversionJob.State != ConversionState.Done &&
+            while (this.pdf2ImageConversionJob != null &&
+                   this.pdf2ImageConversionJob.State != ConversionState.Done &&
                    this.pdf2ImageConversionJob.State != ConversionState.Failed)
             {
-                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
-                {
-                    this.Progress = this.pdf2ImageConversionJob.Progress;
-                }
-
-                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
+                if (this.pdf2ImageConversionJob.State == ConversionState.InProgress)
                 {
                     this.Progress = this.pdf2ImageConversionJob.Progress;
                     this.UserState = this.pdf2ImageConversionJob.UserState;
@@ -204,6 +202,26 @@ namespace FileConverter.ConversionJobs
             }
 
             return this.document != null;
+        }
+
+        private void CloseDocumentIfNeeded()
+        {
+            if (this.document == null)
+            {
+                return;
+            }
+
+            try
+            {
+                Debug.Log($"Close PowerPoint document '{this.InputFilePath}'.");
+                this.document.Close();
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Failed to close PowerPoint document '{this.InputFilePath}': {exception.Message}.");
+            }
+
+            this.document = null;
         }
     }
 }
