@@ -268,6 +268,13 @@
 ...
 (n:i): page number index
 (n:c): total page count
+(n:i:D3): formatted page number index
+(n:c:D3): formatted page count
+(d:yyyy-MM-dd): current date
+(sc:yyyy-MM-dd): source file creation date
+(sm:yyyy-MM-dd): source file modified date
+(preset): selected preset name
+(presetpath): selected preset folder path
 
 Special paths:
 (p:d): my documents path
@@ -275,7 +282,7 @@ Special paths:
 (p:v): my videos path
 (p:p): my pictures path
 
-use maj for uppercase version</value>
+Use uppercase tokens for uppercase values when available.</value>
   </data>
   <data name="OutputFormat" xml:space="preserve">
     <value>Output format</value>

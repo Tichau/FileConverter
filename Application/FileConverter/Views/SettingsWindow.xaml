@@ -127,6 +127,8 @@
                                                 <Binding Source="{x:Static project:Resources.OutputFileNameTemplateSample}"/>
                                                 <Binding Path="SelectedPreset.Preset.OutputType" Mode="OneWay"/>
                                                 <Binding Path="SelectedPreset.Preset.OutputFileNameTemplate" Mode="OneWay"/>
+                                                <Binding Path="SelectedPreset.Preset.ShortName" Mode="OneWay"/>
+                                                <Binding Path="SelectedPreset.Preset.FullName" Mode="OneWay"/>
                                             </MultiBinding>
                                         </TextBlock.Text>
                                     </TextBlock>

@@ -4,6 +4,7 @@ namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Text;
     using System.Text.RegularExpressions;
 
@@ -17,6 +18,10 @@ namespace FileConverter
         private static Regex filenameRegex = new Regex(@"[^\\]*", RegexOptions.RightToLeft);
         private static Regex directoryRegex = new Regex(@"^(?<drive>\\\\[^\\/:*?""""<>|\r\n]+\\|[A-Za-z]:\\)(?:(?<folders>[^\\]*)\\)*");
         private static Regex dateRegex = new Regex(@"\(d:(?<format>[^)]*)\)");
+        private static Regex sourceCreatedDateRegex = new Regex(@"\((?:sourcecreated|sc):(?<format>[^)]*)\)");
+        private static Regex sourceModifiedDateRegex = new Regex(@"\((?:sourcemodified|sm):(?<format>[^)]*)\)");
+        private static Regex formattedNumberIndexRegex = new Regex(@"\(n:i:(?<format>[^)]*)\)");
+        private static Regex formattedNumberCountRegex = new Regex(@"\(n:c:(?<format>[^)]*)\)");
 
         public static bool IsPathDriveLetterValid(string path)
         {
@@ -139,7 +144,14 @@ namespace FileConverter
             return true;
         }
 
-        public static string GenerateFilePathFromTemplate(string inputFilePath, OutputType outputFileExtension, string outputFilePathTemplate, int numberIndex, int numberMax)
+        public static string GenerateFilePathFromTemplate(
+            string inputFilePath,
+            OutputType outputFileExtension,
+            string outputFilePathTemplate,
+            int numberIndex,
+            int numberMax,
+            string presetName = null,
+            string presetFullName = null)
         {
             if (string.IsNullOrEmpty(inputFilePath))
             {
@@ -208,11 +220,96 @@ namespace FileConverter
             outputPath = outputPath.Replace("(n:i)", numberIndex.ToString());
             outputPath = outputPath.Replace("(n:c)", numberMax.ToString());
 
-            outputPath = dateRegex.Replace(outputPath, match => DateTime.Now.ToString(match.Groups["format"].Value).Replace('/', '-').Replace(':', '\''));
+            outputPath = formattedNumberIndexRegex.Replace(outputPath, match => FormatNumber(numberIndex, match.Groups["format"].Value));
+            outputPath = formattedNumberCountRegex.Replace(outputPath, match => FormatNumber(numberMax, match.Groups["format"].Value));
+
+            string safePresetName = SanitizeFileSystemToken(presetName);
+            string safePresetPath = SanitizePresetPath(presetFullName ?? presetName);
+            outputPath = outputPath.Replace("(preset)", safePresetName);
+            outputPath = outputPath.Replace("(presetname)", safePresetName);
+            outputPath = outputPath.Replace("(presetpath)", safePresetPath);
+
+            outputPath = dateRegex.Replace(outputPath, match => FormatDate(DateTime.Now, match.Groups["format"].Value));
+            outputPath = sourceCreatedDateRegex.Replace(outputPath, match => FormatDate(GetCreationTime(inputFilePath), match.Groups["format"].Value));
+            outputPath = sourceModifiedDateRegex.Replace(outputPath, match => FormatDate(GetLastWriteTime(inputFilePath), match.Groups["format"].Value));
 
             outputPath += "." + outputExtension;
 
             return outputPath;
+        }
+
+        private static string FormatNumber(int number, string format)
+        {
+            if (string.IsNullOrEmpty(format))
+            {
+                return number.ToString(NumberFormatInfo.InvariantInfo);
+            }
+
+            return number.ToString(format, NumberFormatInfo.InvariantInfo);
+        }
+
+        private static string FormatDate(DateTime date, string format)
+        {
+            if (string.IsNullOrEmpty(format))
+            {
+                return date.ToString(CultureInfo.InvariantCulture).Replace('/', '-').Replace(':', '\'');
+            }
+
+            return date.ToString(format, CultureInfo.InvariantCulture).Replace('/', '-').Replace(':', '\'');
+        }
+
+        private static DateTime GetCreationTime(string path)
+        {
+            if (!System.IO.File.Exists(path))
+            {
+                return DateTime.Now;
+            }
+
+            return System.IO.File.GetCreationTime(path);
+        }
+
+        private static DateTime GetLastWriteTime(string path)
+        {
+            if (!System.IO.File.Exists(path))
+            {
+                return DateTime.Now;
+            }
+
+            return System.IO.File.GetLastWriteTime(path);
+        }
+
+        private static string SanitizePresetPath(string presetPath)
+        {
+            if (string.IsNullOrEmpty(presetPath))
+            {
+                return string.Empty;
+            }
+
+            string[] segments = presetPath.Split('/');
+            for (int index = 0; index < segments.Length; index++)
+            {
+                segments[index] = SanitizeFileSystemToken(segments[index]);
+            }
+
+            return string.Join(System.IO.Path.DirectorySeparatorChar.ToString(), segments);
+        }
+
+        private static string SanitizeFileSystemToken(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
+            char[] invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
+            StringBuilder builder = new StringBuilder(value.Length);
+            for (int index = 0; index < value.Length; index++)
+            {
+                char character = value[index];
+                builder.Append(Array.IndexOf(invalidFileNameChars, character) >= 0 ? '_' : character);
+            }
+
+            return builder.ToString();
         }
     }
 }
