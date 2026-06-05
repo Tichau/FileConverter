@@ -19,6 +19,7 @@ permissions:
 env:
   BUILD_CONFIGURATION: Release
   BUILD_PLATFORM: x64
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   windows-release:
