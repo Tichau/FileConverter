@@ -133,6 +133,7 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="InputPostConversionAction.cs" />
     <Compile Include="IXmlSerializable.cs" />
+    <Compile Include="Services\ConversionJobRegisteredEventArgs.cs" />
     <Compile Include="Services\ConversionJobsTerminatedEventArgs.cs" />
     <Compile Include="Services\ConversionService.cs" />
     <Compile Include="Services\IConversionService.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="ValueConverters\Generic\StringToEnum.cs" />
     <Compile Include="ValueConverters\Generic\ValueConverterGroup.cs" />
     <Compile Include="ViewModels\DiagnosticsViewModel.cs" />
+    <Compile Include="ViewModels\DependencyStatusViewModel.cs" />
     <Compile Include="ViewModels\PresetNode.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\HelpViewModel.cs" />

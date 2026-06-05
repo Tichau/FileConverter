@@ -1,7 +1,7 @@
 ﻿// <copyright file="Application.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-/*  File Converter - This program allow you to convert file format to another.
-    Copyright (C) 2026 Adrien Allard
+/*  ZFileConverter - This program allows you to convert one file format to another.
+    Copyright (C) 2026 ZaidNAlAsali and File Converter contributors
     email: adrien.allard.pro@gmail.com
 
     This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
@@ -218,9 +218,9 @@ namespace FileConverter
         private void Initialize()
         {
 #if BUILD32
-            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString() + " (32 bits)");
+            Diagnostics.Debug.Log("ZFileConverter v" + ApplicationVersion.ToString() + " (32 bits)");
 #else
-            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString() + " (64 bits)");
+            Diagnostics.Debug.Log("ZFileConverter v" + ApplicationVersion.ToString() + " (64 bits)");
 #endif
 
             // Retrieve arguments.
@@ -409,7 +409,7 @@ namespace FileConverter
             ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             if (settingsService.Settings == null)
             {
-                Debug.LogError(errorCode: 0x04, "Can't load File Converter settings. The application will now shutdown, if you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
+                Debug.LogError(errorCode: 0x04, "Can't load ZFileConverter settings. The application will now shutdown, if you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
                 Application.AskForShutdown();
                 return;
             }

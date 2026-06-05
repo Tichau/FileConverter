@@ -29,6 +29,16 @@
             <generic:IcoFileSizeSelectorConverter x:Key="IcoFileSizeSelector" />
             <generic:EqualsConverter x:Key="EqualsConverter"/>
 
+            <Style x:Key="HealthStatusTextStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{DynamicResource DoneForegroundBrush}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsHealthy}" Value="False">
+                        <Setter Property="Foreground" Value="{DynamicResource ErrorForegroundBrush}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
             <DataTemplate x:Key="NoPresetSelectedTemplate" DataType="{x:Type viewModels:SettingsViewModel}">
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" FontSize="20" Content="{x:Static project:Resources.NoPresetSelected}"/>
             </DataTemplate>
@@ -133,7 +143,7 @@
                                         </TextBlock.Text>
                                     </TextBlock>
                                     <TextBlock Grid.Row="3" Grid.Column="1" Margin="5,0,5,0">
-                                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                            <Hyperlink CommandParameter="https://github.com/ZaidNAlAsali/FileConverter/wiki/Output-file-path-template" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                     </TextBlock>
                                 </Grid>
 
@@ -185,7 +195,7 @@
                                 </ComboBox>
 
                                 <TextBlock Grid.Row="3" Margin="0,5,0,0">
-                                        <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                                        <Hyperlink CommandParameter="https://github.com/ZaidNAlAsali/FileConverter/wiki/Input-file-post-conversion-actions" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                                 </TextBlock>
                             </Grid>
                         </GroupBox>
@@ -345,7 +355,7 @@
                         </TreeView>
 
                         <TextBlock Margin="4" Grid.Row="1">
-                            <Hyperlink CommandParameter="https://github.com/Tichau/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
+                            <Hyperlink CommandParameter="https://github.com/ZaidNAlAsali/FileConverter/wiki/How-to-create-a-new-custom-preset%3F" Command="{Binding OpenUrlCommand, Mode=OneWay}"><x:Static Member="project:Resources.Help" /></Hyperlink>
                         </TextBlock>
                     </Grid>
 
@@ -415,6 +425,55 @@
                 </Grid>
             </TabItem>
 
+            <!-- Health and repair -->
+            <TabItem Header="Health">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Grid.Row="0" Margin="0,0,0,8">
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                            <Button Content="Refresh" Width="100" Margin="4,0,0,0" Command="{Binding RefreshDependencyHealthCommand}" />
+                            <Button Content="Repair Explorer Menu" Width="160" Margin="4,0,0,0" Command="{Binding RepairShellExtensionCommand}" />
+                        </StackPanel>
+                        <TextBlock Text="Dependency health" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" />
+                    </DockPanel>
+
+                    <ListView Grid.Row="1" ItemsSource="{Binding DependencyStatuses}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Component" Width="180">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Status" Width="130">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Status}" Style="{StaticResource HealthStatusTextStyle}" TextTrimming="CharacterEllipsis" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Details" Width="620">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Details}" TextWrapping="Wrap" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <TextBlock Grid.Row="2" Margin="0,8,0,0" Text="{Binding ShellExtensionRepairStatus}" Foreground="{DynamicResource LighterForegroundBrush}" TextWrapping="Wrap" />
+                </Grid>
+            </TabItem>
+
             <!-- About -->
             <TabItem Header="{x:Static project:Resources.About}">
                 <Grid>
@@ -452,36 +511,36 @@
                     </Image>
 
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                        <Label Content="{x:Static project:Resources.DonateDescription}" VerticalAlignment="Center" FontStyle="Italic"/>
-                        <controls:IconButton Margin="5,0,5,0" Background="#0467B4" Foreground="White" MouseOverBrush="#007AD8" PressedBrush="#0F4199"
-                                      Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=3BDWQTYTTA3D8&amp;item_name=File+Converter+Donations&amp;currency_code=EUR"
-                                      IconSource="/FileConverter;component/Resources/PaypalIcon.png" Content="{x:Static project:Resources.DonateButtonTitle}" FontWeight="Bold" FontSize="14" />
+                        <Label Content="ZFileConverter is maintained by ZaidNAlAsali as a focused fork of File Converter." VerticalAlignment="Center" FontStyle="Italic"/>
+                        <Button Margin="5,0,5,0" Padding="10,2,10,2"
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/ZaidNAlAsali/FileConverter/releases?from=about"
+                                Content="Releases" FontWeight="Bold" FontSize="14" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
                         <Button ToolTip="{x:Static project:Resources.GitHubButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/?from=about"
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/ZaidNAlAsali/FileConverter/?from=about"
                                 Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.IssueButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/issues?from=about"
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/ZaidNAlAsali/FileConverter/issues?from=about"
                                 Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Issue-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.DocumentationButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/Tichau/FileConverter/wiki?from=about"
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/ZaidNAlAsali/FileConverter/wiki?from=about"
                                 Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/GitHub-Documentation-Icon.png"></Image>
                             </Button.Content>
                         </Button>
                         <Button ToolTip="{x:Static project:Resources.WebsiteButtonDescription}" Padding="1" Margin="5,0,5,0" 
-                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://file-converter.io?from=about"
+                                Command="{Binding OpenUrlCommand, Mode=OneWay}" CommandParameter="https://github.com/ZaidNAlAsali/FileConverter/releases?from=about"
                                 Style="{DynamicResource TileButton}">
                             <Button.Content>
                                 <Image Source="/FileConverter;component/Resources/WebSite-Icon.png"></Image>
@@ -489,7 +548,7 @@
                         </Button>
                     </StackPanel>
 
-                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2026, Adrien Allard. All right reserved." Foreground="{DynamicResource LighterForegroundBrush}" Margin="0,2,0,2"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Copyright @ 2026, ZaidNAlAsali and File Converter contributors. GPL-3.0." Foreground="{DynamicResource LighterForegroundBrush}" Margin="0,2,0,2"/>
                 </Grid>
             </TabItem>
         </TabControl>

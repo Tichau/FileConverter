@@ -8,6 +8,13 @@ on:
       - "codex/**"
   pull_request:
 
+permissions:
+  contents: read
+
+env:
+  BUILD_CONFIGURATION: Release
+  BUILD_PLATFORM: x64
+
 jobs:
   windows:
     name: Windows x64
@@ -21,4 +28,18 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Restore and build
-        run: msbuild FileConverter.sln /restore /m /p:Configuration=Release /p:Platform=x64
+        run: msbuild FileConverter.sln /restore /m /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:Platform=${{ env.BUILD_PLATFORM }}
+
+      - name: Upload app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ZFileConverter-app-x64
+          path: Application/FileConverter/bin/x64/Release/**
+          if-no-files-found: error
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ZFileConverter-installer-x64
+          path: Installer/bin/x64/Release/*.msi
+          if-no-files-found: warn

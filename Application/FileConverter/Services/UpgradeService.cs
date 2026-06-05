@@ -18,9 +18,9 @@ namespace FileConverter.Services
     public class UpgradeService : ObservableObject, IUpgradeService
     {
 #if DEBUG
-        private const string BaseURI = "https://raw.githubusercontent.com/Tichau/FileConverter/integration/";
+        private const string BaseURI = "https://raw.githubusercontent.com/ZaidNAlAsali/FileConverter/integration/";
 #else
-        private const string BaseURI = "https://raw.githubusercontent.com/Tichau/FileConverter/master/";
+        private const string BaseURI = "https://raw.githubusercontent.com/ZaidNAlAsali/FileConverter/master/";
 #endif
 
         [NotNull]
@@ -211,7 +211,7 @@ namespace FileConverter.Services
 
             Uri uri = new Uri(this.UpgradeVersionDescription.InstallerURL);
 
-            string fileName = "FileConverter-setup.msi";
+            string fileName = "ZFileConverter-setup.msi";
             Regex retrieveFileNameRegex = new Regex("/([^/]*)");
             MatchCollection matchCollection = retrieveFileNameRegex.Matches(this.UpgradeVersionDescription.InstallerURL);
             if (matchCollection.Count > 0)
@@ -244,7 +244,7 @@ namespace FileConverter.Services
             }
             catch (Exception exception)
             {
-                Debug.LogError("Failed to download the new File Converter upgrade. You should try again or download it manually.");
+                Debug.LogError("Failed to download the new ZFileConverter upgrade. You should try again or download it manually.");
                 Debug.Log(exception.ToString());
                 this.UpgradeVersionDescription.InstallerDownloadInProgress = false;
                 this.UpgradeVersionDescription.InstallerDownloadProgress = 0;

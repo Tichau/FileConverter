@@ -5,10 +5,12 @@ namespace FileConverter.ViewModels
     using System;
     using System.IO;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
+    using System.Reflection;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -19,6 +21,7 @@ namespace FileConverter.ViewModels
     using CommunityToolkit.Mvvm.Input;
 
     using FileConverter.Annotations;
+    using FileConverter.ConversionJobs;
     using FileConverter.Services;
     using FileConverter.Views;
 
@@ -42,8 +45,13 @@ namespace FileConverter.ViewModels
         private RelayCommand importPresetCommand;
         private RelayCommand exportPresetCommand;
         private RelayCommand removePresetCommand;
+        private RelayCommand refreshDependencyHealthCommand;
+        private RelayCommand repairShellExtensionCommand;
         private RelayCommand saveCommand;
         private RelayCommand<CancelEventArgs> closeCommand;
+
+        private ObservableCollection<DependencyStatusViewModel> dependencyStatuses = new ObservableCollection<DependencyStatusViewModel>();
+        private string shellExtensionRepairStatus = string.Empty;
 
         private ListCollectionView outputTypes;
         private CultureInfo[] supportedCultures;
@@ -65,6 +73,8 @@ namespace FileConverter.ViewModels
             this.importPresetCommand = new RelayCommand(this.ImportPreset);
             this.exportPresetCommand = new RelayCommand(this.ExportSelectedPreset, this.CanExportSelectedPreset);
             this.removePresetCommand = new RelayCommand(this.RemoveSelectedPreset, this.CanRemoveSelectedPreset);
+            this.refreshDependencyHealthCommand = new RelayCommand(this.RefreshDependencyHealth);
+            this.repairShellExtensionCommand = new RelayCommand(this.RepairShellExtension);
             this.saveCommand = new RelayCommand(this.SaveSettings, this.CanSaveSettings);
             this.closeCommand = new RelayCommand<CancelEventArgs>(this.CloseSettings);
 
@@ -96,6 +106,7 @@ namespace FileConverter.ViewModels
 
             this.InitializeCompatibleInputExtensions();
             this.InitializePresetFolders();
+            this.RefreshDependencyHealth();
         }
 
         public IEnumerable<InputExtensionCategory> InputCategories
@@ -285,9 +296,35 @@ namespace FileConverter.ViewModels
 
         public ICommand RemoveSelectedPresetCommand => this.removePresetCommand;
 
+        public ICommand RefreshDependencyHealthCommand => this.refreshDependencyHealthCommand;
+
+        public ICommand RepairShellExtensionCommand => this.repairShellExtensionCommand;
+
         public ICommand SaveCommand => this.saveCommand;
 
         public ICommand CloseCommand => this.closeCommand;
+
+        public ObservableCollection<DependencyStatusViewModel> DependencyStatuses
+        {
+            get => this.dependencyStatuses;
+
+            private set
+            {
+                this.dependencyStatuses = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public string ShellExtensionRepairStatus
+        {
+            get => this.shellExtensionRepairStatus;
+
+            private set
+            {
+                this.shellExtensionRepairStatus = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         public TreeViewSelectionBehavior.IsChildOfPredicate PresetsHierarchyPredicate => (object nodeA, object nodeB) =>
             {
@@ -403,6 +440,144 @@ namespace FileConverter.ViewModels
             {
                 Diagnostics.Debug.Log($"Failed to open URL '{url}': {exception.Message}.");
             }
+        }
+
+        private void RefreshDependencyHealth()
+        {
+            ObservableCollection<DependencyStatusViewModel> statuses = new ObservableCollection<DependencyStatusViewModel>();
+
+            string shellExtensionPath = Helpers.GetDefaultShellExtensionPath();
+            string defaultSettingsPath = FileConverterExtension.PathHelpers.DefaultSettingsFilePath;
+            string userSettingsPath = FileConverterExtension.PathHelpers.UserSettingsFilePath;
+
+            this.AddFileStatus(statuses, "FFmpeg", GetApplicationFilePath("ffmpeg.exe"), "Required for audio and video conversions.");
+            this.AddFileStatus(statuses, "ImageMagick", GetApplicationFilePath("Magick.NET-Q16-AnyCPU.dll"), "Required for image, AVIF, PDF image, and WebP workflows.");
+            this.AddFileStatus(statuses, "ImageMagick native", GetApplicationFilePath("Magick.Native-Q16-x64.dll"), "Required native image processing runtime.");
+            this.AddFileStatus(statuses, "Ghostscript", GetApplicationFilePath("gswin64c.exe"), "Required for PDF rendering.");
+            this.AddFileStatus(statuses, "Ghostscript DLL", GetApplicationFilePath("gsdll64.dll"), "Required by ImageMagick PDF rendering.");
+            this.AddFileStatus(statuses, "Explorer extension DLL", shellExtensionPath, "Required for Windows Explorer right-click commands.");
+            this.AddFileStatus(statuses, "Default presets", defaultSettingsPath, "Required when creating or repairing user settings.");
+
+            if (File.Exists(userSettingsPath))
+            {
+                statuses.Add(new DependencyStatusViewModel("User settings", "Ready", userSettingsPath, true));
+            }
+            else
+            {
+                statuses.Add(new DependencyStatusViewModel("User settings", "Will be created", userSettingsPath, true));
+            }
+
+            this.AddOfficeStatus(statuses, "Microsoft Word", ConversionJob_Office.ApplicationName.Word, "Required for Word document conversion.");
+            this.AddOfficeStatus(statuses, "Microsoft Excel", ConversionJob_Office.ApplicationName.Excel, "Required for spreadsheet conversion.");
+            this.AddOfficeStatus(statuses, "Microsoft PowerPoint", ConversionJob_Office.ApplicationName.PowerPoint, "Required for presentation conversion.");
+            this.AddShellRegistrationStatus(statuses);
+
+            this.DependencyStatuses = statuses;
+        }
+
+        private void RepairShellExtension()
+        {
+            string shellExtensionPath = Helpers.GetDefaultShellExtensionPath();
+            if (!File.Exists(shellExtensionPath))
+            {
+                this.ShellExtensionRepairStatus = $"Can't repair Explorer integration because {shellExtensionPath} is missing.";
+                this.RefreshDependencyHealth();
+                return;
+            }
+
+            string executablePath = Assembly.GetExecutingAssembly().Location;
+            ProcessStartInfo startInfo = new ProcessStartInfo(executablePath)
+            {
+                Arguments = $"--repair-shell-extension {QuoteArgument(shellExtensionPath)}",
+                UseShellExecute = true,
+                Verb = "runas",
+            };
+
+            try
+            {
+                Process.Start(startInfo);
+                this.ShellExtensionRepairStatus = "Repair launched with administrator privileges. Reopen Explorer or retry the context menu after it finishes.";
+            }
+            catch (Win32Exception exception)
+            {
+                if (exception.NativeErrorCode == 1223)
+                {
+                    this.ShellExtensionRepairStatus = "Repair canceled by user.";
+                }
+                else
+                {
+                    this.ShellExtensionRepairStatus = $"Repair failed to start: {exception.Message}";
+                }
+            }
+            catch (Exception exception)
+            {
+                this.ShellExtensionRepairStatus = $"Repair failed to start: {exception.Message}";
+            }
+
+            this.RefreshDependencyHealth();
+        }
+
+        private void AddFileStatus(ObservableCollection<DependencyStatusViewModel> statuses, string name, string path, string purpose)
+        {
+            if (!string.IsNullOrEmpty(path) && File.Exists(path))
+            {
+                statuses.Add(new DependencyStatusViewModel(name, "Ready", $"{purpose} Found at {path}", true));
+            }
+            else
+            {
+                statuses.Add(new DependencyStatusViewModel(name, "Missing", $"{purpose} Expected at {path ?? "(unknown path)"}", false));
+            }
+        }
+
+        private void AddOfficeStatus(ObservableCollection<DependencyStatusViewModel> statuses, string name, ConversionJob_Office.ApplicationName applicationName, string purpose)
+        {
+            bool isAvailable = Helpers.IsMicrosoftOfficeApplicationAvailable(applicationName);
+            statuses.Add(new DependencyStatusViewModel(
+                name,
+                isAvailable ? "Available" : "Optional missing",
+                purpose,
+                true));
+        }
+
+        private void AddShellRegistrationStatus(ObservableCollection<DependencyStatusViewModel> statuses)
+        {
+            string registeredPath = FileConverterExtension.PathHelpers.FileConverterPath;
+            string executablePath = Assembly.GetExecutingAssembly().Location;
+
+            if (string.IsNullOrEmpty(registeredPath))
+            {
+                statuses.Add(new DependencyStatusViewModel("Explorer registration", "Needs repair", "No executable path is registered in HKCU\\Software\\FileConverter.", false));
+                return;
+            }
+
+            if (!File.Exists(registeredPath))
+            {
+                statuses.Add(new DependencyStatusViewModel("Explorer registration", "Needs repair", $"Registered executable is missing: {registeredPath}", false));
+                return;
+            }
+
+            bool matchesCurrentExecutable = string.Equals(registeredPath, executablePath, StringComparison.OrdinalIgnoreCase);
+            statuses.Add(new DependencyStatusViewModel(
+                "Explorer registration",
+                matchesCurrentExecutable ? "Ready" : "Different install",
+                matchesCurrentExecutable ? registeredPath : $"Registered path: {registeredPath}; current path: {executablePath}",
+                matchesCurrentExecutable));
+        }
+
+        private static string QuoteArgument(string value)
+        {
+            return $"\"{value.Replace("\"", "\\\"")}\"";
+        }
+
+        private static string GetApplicationFilePath(string fileName)
+        {
+            string applicationFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if (string.IsNullOrEmpty(applicationFolder))
+            {
+                return fileName;
+            }
+
+            return Path.Combine(applicationFolder, fileName);
         }
 
         private void InitializeCompatibleInputExtensions()

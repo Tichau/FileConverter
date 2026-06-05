@@ -111,7 +111,7 @@ namespace FileConverter
         {
             if (!Application.IsInAdmininstratorPrivileges)
             {
-                Diagnostics.Debug.LogError("File Converter needs administrator privileges to register the shell extension.");
+                Diagnostics.Debug.LogError("ZFileConverter needs administrator privileges to register the shell extension.");
                 return false;
             }
 
@@ -150,7 +150,7 @@ namespace FileConverter
         {
             if (!Application.IsInAdmininstratorPrivileges)
             {
-                Diagnostics.Debug.LogError("File Converter needs administrator privileges to repair the shell extension.");
+                Diagnostics.Debug.LogError("ZFileConverter needs administrator privileges to repair the shell extension.");
                 return false;
             }
 
@@ -191,7 +191,7 @@ namespace FileConverter
         {
             if (!Application.IsInAdmininstratorPrivileges)
             {
-                Diagnostics.Debug.LogError("File Converter needs administrator privileges to unregister the shell extension.");
+                Diagnostics.Debug.LogError("ZFileConverter needs administrator privileges to unregister the shell extension.");
                 return false;
             }
 

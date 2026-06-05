@@ -107,7 +107,7 @@ namespace FileConverterExtension
 
             ToolStripMenuItem fileConverterItem = new ToolStripMenuItem
             {
-                Text = "File Converter",
+                Text = "ZFileConverter",
                 Image = new Icon(Properties.Resources.ApplicationIcon, SystemInformation.SmallIconSize).ToBitmap(),
             };
 
@@ -383,13 +383,13 @@ namespace FileConverterExtension
             string fileConverterPath = PathHelpers.FileConverterPath;
             if (string.IsNullOrEmpty(fileConverterPath))
             {
-                MessageBox.Show("Can't retrieve the file converter executable path. You should try to reinstall the application.");
+                MessageBox.Show("Can't retrieve the ZFileConverter executable path. You should try to reinstall the application.");
                 return null;
             }
 
             if (!File.Exists(fileConverterPath))
             {
-                MessageBox.Show($"Can't find the file converter executable ({fileConverterPath}). You should try to reinstall the application.");
+                MessageBox.Show($"Can't find the ZFileConverter executable ({fileConverterPath}). You should try to reinstall the application.");
                 return null;
             }
 
@@ -406,11 +406,11 @@ namespace FileConverterExtension
                     return process;
                 }
 
-                MessageBox.Show("Failed to start File Converter.");
+                MessageBox.Show("Failed to start ZFileConverter.");
             }
             catch (Exception exception)
             {
-                MessageBox.Show($"Failed to start File Converter. {exception.Message}");
+                MessageBox.Show($"Failed to start ZFileConverter. {exception.Message}");
             }
 
             DeleteInputListFile(temporaryInputListPath);

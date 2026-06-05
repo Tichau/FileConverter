@@ -4,12 +4,15 @@ namespace FileConverter.ConversionJobs
 {
     using System;
     using System.ComponentModel;
+    using System.IO;
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
     
+    using CommunityToolkit.Mvvm.DependencyInjection;
     using CommunityToolkit.Mvvm.Input;
 
     using FileConverter.Diagnostics;
+    using FileConverter.Services;
 
     public class ConversionJob : INotifyPropertyChanged
     {
@@ -19,6 +22,8 @@ namespace FileConverter.ConversionJobs
         private string errorMessage = string.Empty;
         private string userState = string.Empty;
         private RelayCommand cancelCommand;
+        private RelayCommand openOutputFolderCommand;
+        private RelayCommand retryCommand;
 
         private readonly string initialInputPath;
         private int currentOutputFilePathIndex;
@@ -64,6 +69,8 @@ namespace FileConverter.ConversionJobs
             private set;
         }
 
+        public string InitialInputPath => this.initialInputPath;
+
         public string InputFilePath
         {
             get;
@@ -102,6 +109,8 @@ namespace FileConverter.ConversionJobs
                 this.state = value;
                 this.NotifyPropertyChanged();
                 Application.Current.Dispatcher.Invoke(() => this.cancelCommand?.NotifyCanExecuteChanged());
+                Application.Current.Dispatcher.Invoke(() => this.openOutputFolderCommand?.NotifyCanExecuteChanged());
+                Application.Current.Dispatcher.Invoke(() => this.retryCommand?.NotifyCanExecuteChanged());
             }
         }
 
@@ -168,6 +177,32 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        public ICommand OpenOutputFolderCommand
+        {
+            get
+            {
+                if (this.openOutputFolderCommand == null)
+                {
+                    this.openOutputFolderCommand = new RelayCommand(this.OpenOutputFolder, this.CanOpenOutputFolder);
+                }
+
+                return this.openOutputFolderCommand;
+            }
+        }
+
+        public ICommand RetryCommand
+        {
+            get
+            {
+                if (this.retryCommand == null)
+                {
+                    this.retryCommand = new RelayCommand(this.RetryConversion, this.CanRetryConversion);
+                }
+
+                return this.retryCommand;
+            }
+        }
+
         protected bool CancelIsRequested
         {
             get;
@@ -199,6 +234,18 @@ namespace FileConverter.ConversionJobs
         }
 
         protected virtual bool IsCancelable() => this.State == ConversionState.InProgress;
+
+        private bool CanOpenOutputFolder()
+        {
+            return this.State == ConversionState.Done && !string.IsNullOrEmpty(this.OutputFilePath);
+        }
+
+        private bool CanRetryConversion()
+        {
+            return this.State == ConversionState.Failed &&
+                this.ConversionPreset != null &&
+                !string.IsNullOrEmpty(this.initialInputPath);
+        }
 
         protected string[] OutputFilePaths
         {
@@ -382,6 +429,49 @@ namespace FileConverter.ConversionJobs
 
             this.CancelIsRequested = true;
             this.ConversionFailed(Properties.Resources.ErrorCanceled);
+        }
+
+        private void OpenOutputFolder()
+        {
+            if (string.IsNullOrEmpty(this.OutputFilePath))
+            {
+                return;
+            }
+
+            try
+            {
+                string outputFilePath = this.OutputFilePath;
+                if (File.Exists(outputFilePath))
+                {
+                    System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{outputFilePath}\"");
+                    return;
+                }
+
+                string outputDirectory = Path.GetDirectoryName(outputFilePath);
+                if (!string.IsNullOrEmpty(outputDirectory) && Directory.Exists(outputDirectory))
+                {
+                    System.Diagnostics.Process.Start("explorer.exe", $"\"{outputDirectory}\"");
+                    return;
+                }
+
+                Debug.Log($"Can't open output folder because the path does not exist: {outputFilePath}.");
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Can't open output folder: {exception.Message}.");
+            }
+        }
+
+        private void RetryConversion()
+        {
+            try
+            {
+                Ioc.Default.GetRequiredService<IConversionService>().RetryConversionJob(this);
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Can't retry conversion: {exception.Message}.");
+            }
         }
 
         protected virtual int GetOutputFilesCount()
