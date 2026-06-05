@@ -79,7 +79,7 @@ namespace FileConverter.ConversionJobs
             {
                 CreateNoWindow = true, 
                 UseShellExecute = false, 
-                RedirectStandardOutput = true, 
+                RedirectStandardOutput = false,
                 RedirectStandardError = true
             };
 
@@ -88,7 +88,7 @@ namespace FileConverter.ConversionJobs
 
         protected virtual void FillFFMpegArgumentsList()
         {
-            const string baseArgs = "-n -progress pipe:1";
+            const string baseArgs = "-n";
 
             bool customCommandEnabled = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand);
             if (customCommandEnabled)
@@ -464,6 +464,10 @@ namespace FileConverter.ConversionJobs
                         }
 
                         exeProcess.WaitForExit();
+                        if (exeProcess.ExitCode != 0 && !this.CancelIsRequested && this.State != ConversionState.Failed)
+                        {
+                            this.ConversionFailed($"FFmpeg exited with code {exeProcess.ExitCode}.");
+                        }
                     }
                 }
                 catch

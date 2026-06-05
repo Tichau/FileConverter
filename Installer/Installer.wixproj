@@ -41,5 +41,5 @@
     </HarvestDirectory>
   </ItemGroup>
   <!-- congigure the project to sign the installer. Comment this line to produce an unsigned installer. -->
-  <Import Project=".\Installer.sign" Condition=" '$(Configuration)' == 'Release' " />
+  <Import Project=".\Installer.sign" Condition=" '$(Configuration)' == 'Release' And Exists('.\Installer.sign') " />
 </Project>

@@ -311,6 +311,24 @@ namespace FileConverter
                                 return;
                             }
 
+                        case "repair-shell-extension":
+                            {
+                                string shellExtensionPath = Helpers.GetDefaultShellExtensionPath();
+                                if (index < args.Length - 1 && !args[index + 1].StartsWith("--"))
+                                {
+                                    shellExtensionPath = args[index + 1];
+                                    index++;
+                                }
+
+                                if (!Helpers.RepairShellExtension(shellExtensionPath))
+                                {
+                                    Debug.LogError(errorCode: 0x10, $"Failed to repair shell extension {shellExtensionPath}.");
+                                }
+
+                                Application.AskForShutdown();
+                                return;
+                            }
+
                         case "version":
                             Console.WriteLine(ApplicationVersion.ToString());
                             Application.AskForShutdown();
