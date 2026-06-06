@@ -2,6 +2,7 @@
 
 namespace FileConverterExtension
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
@@ -46,7 +47,13 @@ namespace FileConverterExtension
         {
             get
             {
-                string displayPresetIcons = PathHelpers.FileConverterRegistryKey.GetValue("DisplayPresetIcons") as string;
+                var registryKey = PathHelpers.FileConverterRegistryKey;
+                if (registryKey == null)
+                {
+                    return false;
+                }
+
+                string displayPresetIcons = registryKey.GetValue("DisplayPresetIcons") as string;
                 if (displayPresetIcons == null)
                 {
                     return false;
@@ -67,7 +74,7 @@ namespace FileConverterExtension
             {
                 this.LoadExtensionSettingsIfNecessary();
 
-                return this.presetReferences;
+                return this.presetReferences ?? new PresetReference[0];
             }
         }
 
@@ -80,7 +87,7 @@ namespace FileConverterExtension
             {
                 foreach (PresetReference presetReference in presets)
                 {
-                    if (presetReference.InputTypes.Contains(extension))
+                    if (presetReference.InputTypes != null && presetReference.InputTypes.Contains(extension))
                     {
                         return true;
                     }
@@ -100,7 +107,7 @@ namespace FileConverterExtension
 
             ToolStripMenuItem fileConverterItem = new ToolStripMenuItem
             {
-                Text = "File Converter",
+                Text = "ZFileConverter",
                 Image = new Icon(Properties.Resources.ApplicationIcon, SystemInformation.SmallIconSize).ToBitmap(),
             };
 
@@ -209,13 +216,13 @@ namespace FileConverterExtension
             this.RefreshExtensionCacheFromSelectedItems();
 
             // Activate compatible menu entries.
-            PresetReference[] presets = this.presetReferences;
+            PresetReference[] presets = this.PresetReferences;
             this.menuEntries.Clear();
             foreach (string extension in this.extensionCache)
             {
                 foreach (PresetReference presetReference in presets)
                 {
-                    if (!presetReference.InputTypes.Contains(extension))
+                    if (presetReference.InputTypes == null || !presetReference.InputTypes.Contains(extension))
                     {
                         continue;
                     }
@@ -270,19 +277,13 @@ namespace FileConverterExtension
 
         private void OpenSettings()
         {
-            if (string.IsNullOrEmpty(PathHelpers.FileConverterPath))
+            string fileConverterPath = this.GetFileConverterPathOrShowError();
+            if (string.IsNullOrEmpty(fileConverterPath))
             {
-                MessageBox.Show("Can't retrieve the file converter executable path. You should try to reinstall the application.");
                 return;
             }
 
-            if (!File.Exists(PathHelpers.FileConverterPath))
-            {
-                MessageBox.Show($"Can't find the file converter executable ({PathHelpers.FileConverterPath}). You should try to reinstall the application.");
-                return;
-            }
-
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(PathHelpers.FileConverterPath)
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(fileConverterPath)
             {
                 CreateNoWindow = false, 
                 UseShellExecute = false, 
@@ -294,29 +295,21 @@ namespace FileConverterExtension
             stringBuilder.Append("--settings");
             
             processStartInfo.Arguments = stringBuilder.ToString();
-            Process exeProcess = Process.Start(processStartInfo);
+            this.TryStartFileConverter(processStartInfo, null);
         }
 
         private void ConvertFiles(string presetName)
         {
-            if (string.IsNullOrEmpty(PathHelpers.FileConverterPath))
+            string fileConverterPath = this.GetFileConverterPathOrShowError();
+            if (string.IsNullOrEmpty(fileConverterPath))
             {
-                MessageBox.Show("Can't retrieve the file converter executable path. You should try to reinstall the application.");
-                return;
-            }
-
-            if (!File.Exists(PathHelpers.FileConverterPath))
-            {
-                MessageBox.Show($"Can't find the file converter executable ({PathHelpers.FileConverterPath}). You should try to reinstall the application.");
                 return;
             }
 
             void BuildConversionPresetArgument(StringBuilder sb)
             {
-                sb.Append("--conversion-preset ");
-                sb.Append(" \"");
-                sb.Append(presetName);
-                sb.Append("\"");
+                AppendArgument(sb, "--conversion-preset");
+                AppendArgument(sb, presetName);
             }
 
             // Build arguments string.
@@ -326,9 +319,7 @@ namespace FileConverterExtension
             string fileListPath = null;
             foreach (var filePath in this.SelectedItemPaths)
             {
-                stringBuilder.Append(" \"");
-                stringBuilder.Append(filePath);
-                stringBuilder.Append("\"");
+                AppendArgument(stringBuilder, filePath);
 
                 if (stringBuilder.Length >= MaximumProcessArgumentsLength)
                 {
@@ -337,32 +328,14 @@ namespace FileConverterExtension
                     BuildConversionPresetArgument(stringBuilder);
 
                     // Store list of file to convert in a file in Temp folder.
-                    fileListPath = Path.Combine(Path.GetTempPath(), "file-converter-input-list.txt");
-                    int index = 1;
-                    while (File.Exists(fileListPath))
-                    {
-                        fileListPath = Path.Combine(Path.GetTempPath(), $"file-converter-input-list-{index}.txt");
-                        index++;
-                    }
-
-                    using (FileStream file = File.OpenWrite(fileListPath))
-                    using (StreamWriter writer = new StreamWriter(file))
-                    {
-                        foreach (var path in this.SelectedItemPaths)
-                        {
-                            writer.WriteLine(path);
-                        }
-                    }
-
-                    stringBuilder.Append(" --input-files ");
-                    stringBuilder.Append(" \"");
-                    stringBuilder.Append(fileListPath);
-                    stringBuilder.Append("\"");
+                    fileListPath = CreateInputListFile(this.SelectedItemPaths);
+                    AppendArgument(stringBuilder, "--input-files");
+                    AppendArgument(stringBuilder, fileListPath);
                     break;
                 }
             }
 
-            var processStartInfo = new ProcessStartInfo(PathHelpers.FileConverterPath)
+            var processStartInfo = new ProcessStartInfo(fileConverterPath)
             {
                 CreateNoWindow = false,
                 UseShellExecute = false,
@@ -370,21 +343,144 @@ namespace FileConverterExtension
                 Arguments = stringBuilder.ToString(),
             };
 
-            Process exeProcess = Process.Start(processStartInfo);
+            Process exeProcess = this.TryStartFileConverter(processStartInfo, fileListPath);
+            if (exeProcess == null)
+            {
+                return;
+            }
+
             exeProcess.EnableRaisingEvents = true;
             exeProcess.Exited += (sender, args) =>
             {
-                if (fileListPath != null)
-                {
-                    try
-                    {
-                        File.Delete(fileListPath);
-                    }
-                    catch 
-                    { 
-                    }
-                }
+                DeleteInputListFile(fileListPath);
             };
+        }
+
+        private static string CreateInputListFile(IEnumerable<string> inputPaths)
+        {
+            string inputListFolder = Path.Combine(Path.GetTempPath(), "ZFileConverter");
+            Directory.CreateDirectory(inputListFolder);
+
+            string fileListPath = Path.Combine(inputListFolder, $"input-list-{Guid.NewGuid():N}.txt");
+            using (FileStream file = new FileStream(fileListPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            using (StreamWriter writer = new StreamWriter(file))
+            {
+                foreach (var path in inputPaths)
+                {
+                    writer.WriteLine(path);
+                }
+            }
+
+            return fileListPath;
+        }
+
+        private static void AppendArgument(StringBuilder stringBuilder, string argument)
+        {
+            if (stringBuilder.Length > 0)
+            {
+                stringBuilder.Append(' ');
+            }
+
+            stringBuilder.Append(QuoteProcessArgument(argument));
+        }
+
+        private static string QuoteProcessArgument(string argument)
+        {
+            if (string.IsNullOrEmpty(argument))
+            {
+                return "\"\"";
+            }
+
+            bool needsQuotes = argument.IndexOfAny(new[] { ' ', '\t', '\n', '\v', '"' }) >= 0;
+            if (!needsQuotes)
+            {
+                return argument;
+            }
+
+            StringBuilder quotedArgument = new StringBuilder(argument.Length + 2);
+            quotedArgument.Append('"');
+
+            int backslashes = 0;
+            for (int index = 0; index < argument.Length; index++)
+            {
+                char character = argument[index];
+                if (character == '\\')
+                {
+                    backslashes++;
+                    continue;
+                }
+
+                if (character == '"')
+                {
+                    quotedArgument.Append('\\', (backslashes * 2) + 1);
+                    quotedArgument.Append('"');
+                    backslashes = 0;
+                    continue;
+                }
+
+                quotedArgument.Append('\\', backslashes);
+                backslashes = 0;
+                quotedArgument.Append(character);
+            }
+
+            quotedArgument.Append('\\', backslashes * 2);
+            quotedArgument.Append('"');
+            return quotedArgument.ToString();
+        }
+
+        private string GetFileConverterPathOrShowError()
+        {
+            string fileConverterPath = PathHelpers.FileConverterPath;
+            if (string.IsNullOrEmpty(fileConverterPath))
+            {
+                MessageBox.Show("Can't retrieve the ZFileConverter executable path. You should try to reinstall the application.");
+                return null;
+            }
+
+            if (!File.Exists(fileConverterPath))
+            {
+                MessageBox.Show($"Can't find the ZFileConverter executable ({fileConverterPath}). You should try to reinstall the application.");
+                return null;
+            }
+
+            return fileConverterPath;
+        }
+
+        private Process TryStartFileConverter(ProcessStartInfo processStartInfo, string temporaryInputListPath)
+        {
+            try
+            {
+                Process process = Process.Start(processStartInfo);
+                if (process != null)
+                {
+                    return process;
+                }
+
+                MessageBox.Show("Failed to start ZFileConverter.");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"Failed to start ZFileConverter. {exception.Message}");
+            }
+
+            DeleteInputListFile(temporaryInputListPath);
+            return null;
+        }
+
+        private static void DeleteInputListFile(string fileListPath)
+        {
+            if (fileListPath == null)
+            {
+                return;
+            }
+
+            try
+            {
+                File.Delete(fileListPath);
+            }
+            catch
+            {
+            }
         }
     }
 }

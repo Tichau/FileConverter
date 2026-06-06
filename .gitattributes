@@ -1,0 +1,21 @@
+* text=auto
+
+*.bat text eol=crlf
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.resx text eol=crlf
+*.wixproj text eol=crlf
+*.wxs text eol=crlf
+*.xaml text eol=crlf
+*.xml text eol=crlf
+*.md text eol=lf
+*.ps1 text eol=crlf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+*.bmp binary
+*.gif binary
+*.ico binary
+*.jpg binary
+*.png binary
+*.rtf binary

@@ -1,100 +1,101 @@
-# File Converter
+# ZFileConverter
 
-## Description
+ZFileConverter is a maintained Windows Explorer-first file conversion utility.
+It keeps the original File Converter idea intact: select files, right-click, choose a preset,
+and get useful outputs without opening a heavy editor.
 
-**File Converter** is a very simple tool which allows you to convert and compress one or several file(s) using the context menu of windows explorer.
+This fork focuses on making the app feel alive again: smarter presets, safer conversions,
+clearer diagnostics, repair tools, and a reproducible release path.
 
 ![File Converter Usage](Resources/FileConverterUsage.gif)
 
-You can download it here: [file-converter.io](https://file-converter.io/?from=readme.md).
+## What Is Improved
 
-You can find more information about what's in File converter and how to use it on the [wiki](https://github.com/Tichau/FileConverter/wiki).
+- Smart output templates for preset names, preset folders, source dates, and formatted counters.
+- AVIF output visibility in preset settings.
+- A Settings > Health tab for FFmpeg, ImageMagick, Ghostscript, Office, settings, and Explorer integration.
+- A one-click Explorer menu repair launcher from Settings.
+- Queue actions for opening completed outputs and retrying failed conversions.
+- Diagnostics actions for copying logs and opening the log folder.
+- Safer cleanup for FFmpeg, Office, CDA, GIF, ICO, PDF/image, and Explorer temp-file flows.
+- Windows CI that builds with MSBuild and uploads validation artifacts.
 
-## Donate
+## Core Workflow
 
-File Converter is a personal open source project started in 2014. I have put hundreds of hours adding, refining and tuning File Converter with the goal of making the conversion and compression of files an easy task for everyone.
+1. Install ZFileConverter.
+2. Right-click one or more files in Windows Explorer.
+3. Choose a conversion preset.
+4. Use Settings to customize presets, output folders, file name templates, and health/repair checks.
 
-You can help me by [contributing to the project](https://github.com/Tichau/FileConverter/wiki#contribute), by [making a donation](https://www.paypal.com/donate/?cmd=_donations&business=3BDWQTYTTA3D8&item_name=File+Converter+Donations&currency_code=EUR&Z3JncnB0=) or just by [saying thanks](https://saythanks.io/to/Tichau) :).
+## Smart Template Examples
+
+Output filename templates now support tokens such as:
+
+- `(preset)` or `(presetname)` for the selected preset name.
+- `(presetpath)` for the preset folder path.
+- `(sc:yyyy-MM-dd)` for source creation date.
+- `(sm:yyyy-MM-dd)` for source modified date.
+- `(n:i:D3)` and `(n:c:D3)` for formatted page/frame counters.
+
+Example:
+
+```text
+(p:documents)ZFileConverter\(presetpath)\(sm:yyyy-MM)\(f) - (preset)
+```
+
+## Build
+
+See [docs/BUILDING.md](docs/BUILDING.md) for the local and CI build path.
+
+Short version:
+
+```powershell
+.\build.ps1 -Configuration Release -Platform x64
+```
+
+## Install
+
+See [docs/INSTALLING.md](docs/INSTALLING.md).
+
+Recommended path: download the newest `ZFileConverter-*-x64-setup.msi` from
+[GitHub Releases](https://github.com/ZaidNAlAsali/FileConverter/releases), run it,
+then open Settings > Health if the Explorer menu does not appear.
+
+## Release
+
+Use [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) before publishing a build.
+The checklist covers clean checkout, dependency restore, smoke conversions, installer verification,
+Explorer integration, diagnostics, version metadata, and GitHub release artifacts.
 
 ## Troubleshooting
 
-If you encounter any problem with File Converter, you can:
+Open Settings > Health first. It checks the common failure points:
 
-* See the already known problems in the [troubleshooting section of the documentation](https://github.com/Tichau/FileConverter/wiki/Troubleshooting).
-* Or report an issue on the [bug tracker](https://github.com/Tichau/FileConverter/issues).
+- Missing FFmpeg, ImageMagick, or Ghostscript files.
+- Missing Microsoft Office support for document conversions.
+- Broken Explorer shell registration.
+- Missing default or user settings files.
 
-## Setup development environment
+If the right-click menu is missing, use Settings > Health > Repair Explorer Menu.
+If a conversion fails, open Diagnostics, copy logs, and include them in an issue.
 
-### Requirements
+## Development Requirements
 
-For File Converter and its explorer extension:
+- Windows 10 or newer.
+- Visual Studio 2022 with .NET Framework 4.8 targeting tools.
+- MSBuild on PATH, or Visual Studio Developer PowerShell.
+- WiX 5 for installer builds. The WiX SDK packages restore through NuGet.
+- Windows SDK signing tools only when producing signed release installers.
 
-* Visual Studio 2022
+## Credits
 
-For the installer:
+ZFileConverter is a maintained fork of Adrien Allard's File Converter project.
+The original project, contributors, translators, and middleware authors made the core app possible.
 
-* [Wix 5](http://wixtoolset.org/) (will be installed by nuget)
-  * [Community Visual Studio Extension](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17)
-* [Windows SDK Signing Tools for Desktop Apps](https://developer.microsoft.com/fr-fr/windows/downloads/windows-10-sdk)
-
-## Thanks
-
-Thanks to all the contributors of File Converter project.
-
-### Localization
-
-* Thanks to **Khidreal** and **hugok79** for the Portuguese localization.
-* Thanks to **Marhc** for the Brazilian localization.
-* Thanks to **Chachak** for the Spanish localization.
-* Thanks to **Davide** for the Italian localization.
-* Thanks to **nikotschierske** for the German localization.
-* Thanks to **Snoopy1866** for the Simplified Chinese localization.
-* Thanks to **MayaC0re** for the Turkish localization.
-* Thanks to **vishveshjain** for the Hindi localization.
-* Thanks to **Mahmoud0Sultan** for the Arabic localization.
-* Thanks to **Sedimentary-Rock**, **NeKoOuO** and **PeterDaveHello** for the Traditional Chinese localization.
-* Thanks to **CrisBalGreece** for the Greek localization.
-* Thanks to **AshiVered** for the Hebrew localization.
-* Thanks to **MrHero118** and **Mehrdad32** for the Persian localization.
-* Thanks to **crnobog69** for the Serbian localizations.
-* Thanks to **oogamiyuta** for the Japanese localization.
-* Thanks to **AidyTheWeird** for the Czech localization.
-* Thanks to **Alanimdeo** for the Korean localization.
-* Thanks to **vrykolakas166** and **thaovd** for the Vietnamese localization.
-* Thanks to **iliamak** for the Russian localization.
-* Thanks to **itsmefdil** for the Indonesian localization.
-* Thanks to **hamzaharoon1314** for the Urdu localization.
-* Thanks to **Zyvrec7** and **stohlferenc** for the Hungarian localization.
-* Thanks to **Maerek** and **MrPrince419** for the Polish localization.
-* Thanks to **rkalitta** for the Swedish localization.
-
-## Middlewares
-
-File converter uses the following middlewares:
-
-**ffmpeg** (v8.0.1) as file conversion software.
-Thanks to ffmpeg devs for this awesome open source file conversion tool. [Web site link](https://ffmpeg.org)
-
-**ImageMagick** (v14.10) as image edition and conversion software.
-Thanks to image magick devs for this awesome open source image edition software suite.  [Web site link](http://imagemagick.net)
-And thanks to dlemstra for the C# wrapper of this software. [Github link](https://github.com/ImageMagick/ImageMagick)
-
-**Ghostscript** (10.02.1) as pdf edition software.
-Thanks to ghostscript devs. [Download link](https://www.ghostscript.com/download/gsdnld.html)
-
-**SharpShell** to easily create windows context menu extensions.
-Thanks to Dave Kerr for his work on SharpShell. [GitHub link](https://github.com/dwmkerr/sharpshell)
-
-**Ripper** and **yeti.mmedia** for CD Audio extraction.
-Thanks to Idael Cardoso for his work on CD Audio ripper. [Code project link](https://www.codeproject.com/Articles/5458/C-Sharp-Ripper)
-
-**Markdown.XAML** for markdown rendering in the wpf application.
-Thanks to Bevan Arps for his work on Markdown.XAML. [GitHub link](https://github.com/theunrepentantgeek/Markdown.XAML)
-
-**WpfAnimatedGif** for animated gif rendering in the wpf application.
-Thanks to Thomas Levesque for his work on WpfAnimatedGif. [GitHub link](https://github.com/XamlAnimatedGif/WpfAnimatedGif)
+Middleware used by the app includes FFmpeg, ImageMagick, Ghostscript, SharpShell, Ripper,
+yeti.mmedia, Markdown.Xaml, and WpfAnimatedGif.
 
 ## License
 
-File Converter is licensed under the GPL version 3 License.
-For more information check the LICENSE.md file in your installation folder or the [gnu website](https://www.gnu.org/licenses/gpl.html).
+ZFileConverter is licensed under the GPL version 3.
+See [LICENSE.md](LICENSE.md).

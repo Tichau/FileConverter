@@ -1,0 +1,47 @@
+name: build
+
+on:
+  push:
+    branches:
+      - integration
+      - master
+      - "codex/**"
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  BUILD_CONFIGURATION: Release
+  BUILD_PLATFORM: x64
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  windows:
+    name: Windows x64
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore and build
+        shell: pwsh
+        run: .\build.ps1 -Configuration $env:BUILD_CONFIGURATION -Platform $env:BUILD_PLATFORM
+
+      - name: Upload app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ZFileConverter-app-x64
+          path: Application/FileConverter/bin/x64/Release/**
+          if-no-files-found: error
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ZFileConverter-installer-x64
+          path: Installer/bin/x64/Release/*.msi
+          if-no-files-found: warn

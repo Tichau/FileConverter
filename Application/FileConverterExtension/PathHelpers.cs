@@ -36,7 +36,7 @@ namespace FileConverterExtension
                     PathHelpers.fileConverterRegistryKey = Registry.CurrentUser.OpenSubKey(@"Software\FileConverter");
                     if (PathHelpers.fileConverterRegistryKey == null)
                     {
-                        throw new Exception("Can't retrieve file converter registry entry.");
+                        PathHelpers.fileConverterRegistryKey = Registry.LocalMachine.OpenSubKey(@"Software\FileConverter");
                     }
                 }
 
@@ -50,10 +50,39 @@ namespace FileConverterExtension
             {
                 if (string.IsNullOrEmpty(PathHelpers.fileConverterPath))
                 {
-                    PathHelpers.fileConverterPath = PathHelpers.FileConverterRegistryKey.GetValue("Path") as string;
+                    RegistryKey registryKey = PathHelpers.FileConverterRegistryKey;
+                    if (registryKey == null)
+                    {
+                        return null;
+                    }
+
+                    PathHelpers.fileConverterPath = NormalizeFileConverterExecutablePath(registryKey.GetValue("Path") as string);
                 }
 
                 return PathHelpers.fileConverterPath;
+            }
+        }
+
+        private static string NormalizeFileConverterExecutablePath(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return null;
+            }
+
+            try
+            {
+                string normalizedPath = Path.GetFullPath(path.Trim('"'));
+                if (!string.Equals(Path.GetFileName(normalizedPath), "FileConverter.exe", StringComparison.OrdinalIgnoreCase))
+                {
+                    return null;
+                }
+
+                return normalizedPath;
+            }
+            catch
+            {
+                return null;
             }
         }
 

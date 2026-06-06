@@ -5,6 +5,7 @@ namespace FileConverter
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Xml.Serialization;
 
     public class Registry : IDisposable
@@ -24,20 +25,10 @@ namespace FileConverter
         {
             get
             {
-                Entry[] entries = new Entry[this.registryEntries.Count];
-                int index = 0;
-                foreach (KeyValuePair<string, string> kvp in this.registryEntries)
-                {
-                    if (kvp.Value == null)
-                    {
-                        continue;
-                    }
-
-                    entries[index] = new Entry(kvp.Key, kvp.Value);
-                    index++;
-                }
-
-                return entries;
+                return this.registryEntries
+                    .Where(kvp => kvp.Value != null)
+                    .Select(kvp => new Entry(kvp.Key, kvp.Value))
+                    .ToArray();
             }
 
             set

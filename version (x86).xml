@@ -1,4 +1,6 @@
 <Version>
+    <!-- ZFileConverter releases are x64-only. Keep x86 users on the last legacy x86 installer. -->
     <Latest Major="1" Minor="2" Patch="3"/>
     <URL>https://github.com/Tichau/FileConverter/releases/download/v1.2.3/FileConverter-1.2.3-x86-setup.msi</URL>
+    <!-- No SHA256 is published for this legacy installer, so the hardened updater will not auto-run it. -->
 </Version>

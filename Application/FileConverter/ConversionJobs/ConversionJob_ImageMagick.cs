@@ -3,6 +3,8 @@
 namespace FileConverter.ConversionJobs
 {
     using System;
+    using System.Globalization;
+    using System.Reflection;
 
     using FileConverter.Diagnostics;
     using ImageMagick;
@@ -11,6 +13,16 @@ namespace FileConverter.ConversionJobs
     {
         private const float BaseDpiForPdfConversion = 200f;
         private const int PdfSuperSamplingRatio = 1;
+        private const int MaxPdfPageCount = 250;
+        private const ulong MaxImagePixels = 250000000UL;
+        private const ulong MaxMagickMemoryBytes = 512UL * 1024UL * 1024UL;
+        private const ulong MaxMagickMapBytes = 1024UL * 1024UL * 1024UL;
+        private const ulong MaxMagickDiskBytes = 2048UL * 1024UL * 1024UL;
+        private const uint MaxMagickThreads = 4;
+        private const uint MaxMagickSeconds = 180;
+
+        private static readonly object ResourceLimitsLock = new object();
+        private static bool resourceLimitsApplied;
 
         private bool isInputFilePdf;
         private int pageCount;
@@ -29,6 +41,7 @@ namespace FileConverter.ConversionJobs
 
             string applicationDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             MagickNET.SetGhostscriptDirectory(applicationDirectory);
+            ApplyImageMagickResourceLimits();
 
             this.isInputFilePdf = System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant() == ".pdf";
 
@@ -40,13 +53,16 @@ namespace FileConverter.ConversionJobs
 
         protected override int GetOutputFilesCount()
         {
+            ApplyImageMagickResourceLimits();
+
             if (System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant() == ".pdf")
             {
                 using (MagickImageCollection images = new MagickImageCollection())
                 {
                     MagickReadSettings settings = new MagickReadSettings();
                     settings.Density = new Density(1, 1);
-                    images.Read(this.InputFilePath);
+                    images.Read(this.InputFilePath, settings);
+                    ValidatePdfPageCount(images.Count);
 
                     return images.Count;
                 }
@@ -134,6 +150,7 @@ namespace FileConverter.ConversionJobs
                 Debug.Log($"Load pdf {this.InputFilePath} succeed.");
 
                 this.pageCount = images.Count;
+                ValidatePdfPageCount(this.pageCount);
 
                 this.UserState = Properties.Resources.ConversionStateConversion;
 
@@ -207,7 +224,7 @@ namespace FileConverter.ConversionJobs
                     uint width = System.Math.Min(image.Width, maximumSize);
                     uint height = System.Math.Min(image.Height, maximumSize);
 
-                    Debug.Log($"Clamp size to maximum size of {width}x{width} (from {image.Width}x{image.Height} to {width}x{height}).");
+                    Debug.Log($"Clamp size to maximum size of {width}x{height} (from {image.Width}x{image.Height} to {width}x{height}).");
 
                     image.Scale(width, height);
                 }
@@ -246,6 +263,58 @@ namespace FileConverter.ConversionJobs
 
             image.Write(this.OutputFilePath);
             image.Progress -= this.Image_Progress;
+        }
+
+        private static void ApplyImageMagickResourceLimits()
+        {
+            if (resourceLimitsApplied)
+            {
+                return;
+            }
+
+            lock (ResourceLimitsLock)
+            {
+                if (resourceLimitsApplied)
+                {
+                    return;
+                }
+
+                SetResourceLimit("Memory", MaxMagickMemoryBytes);
+                SetResourceLimit("Map", MaxMagickMapBytes);
+                SetResourceLimit("Disk", MaxMagickDiskBytes);
+                SetResourceLimit("Area", MaxImagePixels);
+                SetResourceLimit("Thread", MaxMagickThreads);
+                SetResourceLimit("Time", MaxMagickSeconds);
+                SetResourceLimit("ListLength", MaxPdfPageCount);
+                resourceLimitsApplied = true;
+            }
+        }
+
+        private static void SetResourceLimit(string propertyName, object value)
+        {
+            try
+            {
+                PropertyInfo property = typeof(ResourceLimits).GetProperty(propertyName);
+                if (property == null || !property.CanWrite)
+                {
+                    return;
+                }
+
+                object typedValue = System.Convert.ChangeType(value, property.PropertyType, CultureInfo.InvariantCulture);
+                property.SetValue(null, typedValue, null);
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Failed to set ImageMagick resource limit {propertyName}: {exception.Message}");
+            }
+        }
+
+        private static void ValidatePdfPageCount(int pages)
+        {
+            if (pages > MaxPdfPageCount)
+            {
+                throw new InvalidOperationException($"PDF conversion is limited to {MaxPdfPageCount} pages per file.");
+            }
         }
 
         private void Image_Progress(object sender, ProgressEventArgs eventArgs)

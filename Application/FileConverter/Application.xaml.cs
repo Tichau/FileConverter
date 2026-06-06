@@ -1,7 +1,7 @@
 ﻿// <copyright file="Application.xaml.cs" company="AAllard">License: http://www.gnu.org/licenses/gpl.html GPL version 3.</copyright>
 
-/*  File Converter - This program allow you to convert file format to another.
-    Copyright (C) 2026 Adrien Allard
+/*  ZFileConverter - This program allows you to convert one file format to another.
+    Copyright (C) 2026 ZaidNAlAsali and File Converter contributors
     email: adrien.allard.pro@gmail.com
 
     This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
@@ -152,6 +152,12 @@ namespace FileConverter
                         return;
                     }
 
+                    if (!upgradeService.UpgradeVersionDescription.InstallerIsVerified)
+                    {
+                        Debug.LogError("Refuse to start upgrade installer because it has not passed integrity verification.");
+                        return;
+                    }
+
                     // Start process.
                     Debug.Log($"Start file converter upgrade from version {ApplicationVersion} to {upgradeService.UpgradeVersionDescription.LatestVersion}.");
 
@@ -218,9 +224,9 @@ namespace FileConverter
         private void Initialize()
         {
 #if BUILD32
-            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString() + " (32 bits)");
+            Diagnostics.Debug.Log("ZFileConverter v" + ApplicationVersion.ToString() + " (32 bits)");
 #else
-            Diagnostics.Debug.Log("File Converter v" + ApplicationVersion.ToString() + " (64 bits)");
+            Diagnostics.Debug.Log("ZFileConverter v" + ApplicationVersion.ToString() + " (64 bits)");
 #endif
 
             // Retrieve arguments.
@@ -276,7 +282,8 @@ namespace FileConverter
                                 if (index >= args.Length - 1)
                                 {
                                     Debug.LogError(errorCode: 0x0B, $"Invalid format.");
-                                    break;
+                                    Application.AskForShutdown();
+                                    return;
                                 }
 
                                 string shellExtensionPath = args[index + 1];
@@ -296,7 +303,8 @@ namespace FileConverter
                                 if (index >= args.Length - 1)
                                 {
                                     Debug.LogError(errorCode: 0x0D, $"Invalid format.");
-                                    break;
+                                    Application.AskForShutdown();
+                                    return;
                                 }
 
                                 string shellExtensionPath = args[index + 1];
@@ -305,6 +313,24 @@ namespace FileConverter
                                 if (!Helpers.UnregisterExtension(shellExtensionPath))
                                 {
                                     Debug.LogError(errorCode: 0x0E, $"Failed to unregister shell extension {shellExtensionPath}.");
+                                }
+
+                                Application.AskForShutdown();
+                                return;
+                            }
+
+                        case "repair-shell-extension":
+                            {
+                                string shellExtensionPath = Helpers.GetDefaultShellExtensionPath();
+                                if (index < args.Length - 1 && !args[index + 1].StartsWith("--"))
+                                {
+                                    shellExtensionPath = args[index + 1];
+                                    index++;
+                                }
+
+                                if (!Helpers.RepairShellExtension(shellExtensionPath))
+                                {
+                                    Debug.LogError(errorCode: 0x10, $"Failed to repair shell extension {shellExtensionPath}.");
                                 }
 
                                 Application.AskForShutdown();
@@ -371,6 +397,7 @@ namespace FileConverter
 
                         default:
                             Debug.LogError($"Unknown application argument: '--{parameterTitle}'.");
+                            Application.AskForShutdown();
                             return;
                     }
                 }
@@ -388,7 +415,7 @@ namespace FileConverter
             ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             if (settingsService.Settings == null)
             {
-                Debug.LogError(errorCode: 0x04, "Can't load File Converter settings. The application will now shutdown, if you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
+                Debug.LogError(errorCode: 0x04, "Can't load ZFileConverter settings. The application will now shutdown, if you want to fix the problem yourself please edit or delete the file: C:\\Users\\UserName\\AppData\\Local\\FileConverter\\Settings.user.xml.");
                 Application.AskForShutdown();
                 return;
             }

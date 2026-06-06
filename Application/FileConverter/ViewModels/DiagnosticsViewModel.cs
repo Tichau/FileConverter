@@ -3,6 +3,9 @@
 namespace FileConverter.ViewModels
 {
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Windows;
     using System.Windows.Input;
 
     using CommunityToolkit.Mvvm.ComponentModel;
@@ -16,7 +19,9 @@ namespace FileConverter.ViewModels
     /// </summary>
     public class DiagnosticsViewModel : ObservableRecipient
     {
+        private RelayCommand copyDiagnosticsCommand;
         private RelayCommand<CancelEventArgs> closeCommand;
+        private RelayCommand openDiagnosticsFolderCommand;
 
         /// <summary>
         /// Initializes a new instance of the DiagnosticsViewModel class.
@@ -38,10 +43,67 @@ namespace FileConverter.ViewModels
             }
         }
 
+        public ICommand CopyDiagnosticsCommand
+        {
+            get
+            {
+                if (this.copyDiagnosticsCommand == null)
+                {
+                    this.copyDiagnosticsCommand = new RelayCommand(this.CopyDiagnostics);
+                }
+
+                return this.copyDiagnosticsCommand;
+            }
+        }
+
+        public ICommand OpenDiagnosticsFolderCommand
+        {
+            get
+            {
+                if (this.openDiagnosticsFolderCommand == null)
+                {
+                    this.openDiagnosticsFolderCommand = new RelayCommand(this.OpenDiagnosticsFolder);
+                }
+
+                return this.openDiagnosticsFolderCommand;
+            }
+        }
+
         private void Close(CancelEventArgs args)
         {
             INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
             navigationService.Close(Pages.Diagnostics, args != null);
+        }
+
+        private void CopyDiagnostics()
+        {
+            try
+            {
+                Clipboard.SetText(Diagnostics.Debug.AllContent);
+            }
+            catch (System.Exception exception)
+            {
+                Diagnostics.Debug.Log($"Can't copy diagnostics to clipboard: {exception.Message}.");
+            }
+        }
+
+        private void OpenDiagnosticsFolder()
+        {
+            string diagnosticsFolderPath = Diagnostics.Debug.DiagnosticsFolderPath;
+            if (string.IsNullOrEmpty(diagnosticsFolderPath) || !Directory.Exists(diagnosticsFolderPath))
+            {
+                Diagnostics.Debug.Log($"Can't open diagnostics folder: {diagnosticsFolderPath}.");
+                return;
+            }
+
+            try
+            {
+                Process.Start("explorer.exe", $"\"{diagnosticsFolderPath}\"");
+            }
+            catch (System.Exception exception)
+            {
+                Diagnostics.Debug.Log($"Can't open diagnostics folder: {exception.Message}.");
+            }
         }
     }
 }

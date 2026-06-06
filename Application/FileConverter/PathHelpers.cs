@@ -4,6 +4,7 @@ namespace FileConverter
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Text;
     using System.Text.RegularExpressions;
 
@@ -17,6 +18,35 @@ namespace FileConverter
         private static Regex filenameRegex = new Regex(@"[^\\]*", RegexOptions.RightToLeft);
         private static Regex directoryRegex = new Regex(@"^(?<drive>\\\\[^\\/:*?""""<>|\r\n]+\\|[A-Za-z]:\\)(?:(?<folders>[^\\]*)\\)*");
         private static Regex dateRegex = new Regex(@"\(d:(?<format>[^)]*)\)");
+        private static Regex sourceCreatedDateRegex = new Regex(@"\((?:sourcecreated|sc):(?<format>[^)]*)\)");
+        private static Regex sourceModifiedDateRegex = new Regex(@"\((?:sourcemodified|sm):(?<format>[^)]*)\)");
+        private static Regex formattedNumberIndexRegex = new Regex(@"\(n:i:(?<format>[^)]*)\)");
+        private static Regex formattedNumberCountRegex = new Regex(@"\(n:c:(?<format>[^)]*)\)");
+        private static readonly HashSet<string> ReservedDeviceNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "CON",
+            "PRN",
+            "AUX",
+            "NUL",
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9",
+            "LPT1",
+            "LPT2",
+            "LPT3",
+            "LPT4",
+            "LPT5",
+            "LPT6",
+            "LPT7",
+            "LPT8",
+            "LPT9"
+        };
 
         public static bool IsPathDriveLetterValid(string path)
         {
@@ -60,6 +90,65 @@ namespace FileConverter
         public static bool IsPathValid(string path)
         {
             return PathHelpers.pathRegex.IsMatch(path);
+        }
+
+        public static bool TryNormalizeGeneratedPath(string path, out string normalizedPath, out string errorMessage)
+        {
+            normalizedPath = path;
+            errorMessage = null;
+
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                errorMessage = "The generated output path is empty.";
+                return false;
+            }
+
+            if (!PathHelpers.IsPathValid(path))
+            {
+                errorMessage = "The generated output path is not a valid absolute Windows path.";
+                return false;
+            }
+
+            if (PathHelpers.ContainsRelativeDirectorySegment(path))
+            {
+                errorMessage = "The generated output path contains a relative directory segment.";
+                return false;
+            }
+
+            try
+            {
+                normalizedPath = System.IO.Path.GetFullPath(path);
+            }
+            catch (Exception exception)
+            {
+                errorMessage = $"The generated output path could not be normalized: {exception.Message}";
+                return false;
+            }
+
+            if (!PathHelpers.IsPathValid(normalizedPath))
+            {
+                errorMessage = "The normalized output path is not valid.";
+                return false;
+            }
+
+            if (PathHelpers.ContainsReservedDeviceName(normalizedPath))
+            {
+                errorMessage = "The generated output path contains a reserved Windows device name.";
+                return false;
+            }
+
+            return true;
+        }
+
+        public static string GetExtensionWithoutDot(string path)
+        {
+            string extension = System.IO.Path.GetExtension(path);
+            if (string.IsNullOrEmpty(extension) || extension.Length <= 1)
+            {
+                return string.Empty;
+            }
+
+            return extension.Substring(1).ToLowerInvariant();
         }
 
         public static string GetFileName(string path)
@@ -110,6 +199,23 @@ namespace FileConverter
             return path;
         }
 
+        public static string GenerateTemporaryFilePath(string preferredFileName)
+        {
+            string safeFileName = SanitizeFileSystemToken(System.IO.Path.GetFileName(preferredFileName));
+            if (string.IsNullOrWhiteSpace(safeFileName))
+            {
+                safeFileName = "conversion.tmp";
+            }
+
+            string tempFolder = System.IO.Path.Combine(
+                System.IO.Path.GetTempPath(),
+                "ZFileConverter",
+                Guid.NewGuid().ToString("N"));
+            System.IO.Directory.CreateDirectory(tempFolder);
+
+            return System.IO.Path.Combine(tempFolder, safeFileName);
+        }
+
         public static bool CreateFolders(string filePath)
         {
             // Create output folders that doesn't already exist.
@@ -139,15 +245,27 @@ namespace FileConverter
             return true;
         }
 
-        public static string GenerateFilePathFromTemplate(string inputFilePath, OutputType outputFileExtension, string outputFilePathTemplate, int numberIndex, int numberMax)
+        public static string GenerateFilePathFromTemplate(
+            string inputFilePath,
+            OutputType outputFileExtension,
+            string outputFilePathTemplate,
+            int numberIndex,
+            int numberMax,
+            string presetName = null,
+            string presetFullName = null)
         {
             if (string.IsNullOrEmpty(inputFilePath))
             {
                 return "Invalid input file path (argument 0).";
             }
 
-            string inputExtension = System.IO.Path.GetExtension(inputFilePath).Substring(1);
-            string inputPathWithoutExtension = inputFilePath.Substring(0, inputFilePath.Length - inputExtension.Length - 1);
+            string inputExtension = GetExtensionWithoutDot(inputFilePath);
+            string inputPathWithoutExtension = inputFilePath;
+            if (!string.IsNullOrEmpty(inputExtension))
+            {
+                inputPathWithoutExtension = inputFilePath.Substring(0, inputFilePath.Length - inputExtension.Length - 1);
+            }
+
             string outputExtension = outputFileExtension.ToString().ToLowerInvariant();
 
             if (string.IsNullOrEmpty(outputFilePathTemplate))
@@ -158,6 +276,11 @@ namespace FileConverter
 
             string fileName = System.IO.Path.GetFileName(inputPathWithoutExtension);
             string parentDirectory = System.IO.Path.GetDirectoryName(inputPathWithoutExtension);
+            if (string.IsNullOrEmpty(parentDirectory))
+            {
+                parentDirectory = System.Environment.CurrentDirectory;
+            }
+
             if (!parentDirectory.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
             {
                 parentDirectory += System.IO.Path.DirectorySeparatorChar;
@@ -208,11 +331,129 @@ namespace FileConverter
             outputPath = outputPath.Replace("(n:i)", numberIndex.ToString());
             outputPath = outputPath.Replace("(n:c)", numberMax.ToString());
 
-            outputPath = dateRegex.Replace(outputPath, match => DateTime.Now.ToString(match.Groups["format"].Value).Replace('/', '-').Replace(':', '\''));
+            outputPath = formattedNumberIndexRegex.Replace(outputPath, match => FormatNumber(numberIndex, match.Groups["format"].Value));
+            outputPath = formattedNumberCountRegex.Replace(outputPath, match => FormatNumber(numberMax, match.Groups["format"].Value));
+
+            string safePresetName = SanitizeFileSystemToken(presetName);
+            string safePresetPath = SanitizePresetPath(presetFullName ?? presetName);
+            outputPath = outputPath.Replace("(preset)", safePresetName);
+            outputPath = outputPath.Replace("(presetname)", safePresetName);
+            outputPath = outputPath.Replace("(presetpath)", safePresetPath);
+
+            outputPath = dateRegex.Replace(outputPath, match => FormatDate(DateTime.Now, match.Groups["format"].Value));
+            outputPath = sourceCreatedDateRegex.Replace(outputPath, match => FormatDate(GetCreationTime(inputFilePath), match.Groups["format"].Value));
+            outputPath = sourceModifiedDateRegex.Replace(outputPath, match => FormatDate(GetLastWriteTime(inputFilePath), match.Groups["format"].Value));
 
             outputPath += "." + outputExtension;
 
             return outputPath;
+        }
+
+        private static string FormatNumber(int number, string format)
+        {
+            if (string.IsNullOrEmpty(format))
+            {
+                return number.ToString(NumberFormatInfo.InvariantInfo);
+            }
+
+            return number.ToString(format, NumberFormatInfo.InvariantInfo);
+        }
+
+        private static string FormatDate(DateTime date, string format)
+        {
+            if (string.IsNullOrEmpty(format))
+            {
+                return date.ToString(CultureInfo.InvariantCulture).Replace('/', '-').Replace(':', '\'');
+            }
+
+            return date.ToString(format, CultureInfo.InvariantCulture).Replace('/', '-').Replace(':', '\'');
+        }
+
+        private static DateTime GetCreationTime(string path)
+        {
+            if (!System.IO.File.Exists(path))
+            {
+                return DateTime.Now;
+            }
+
+            return System.IO.File.GetCreationTime(path);
+        }
+
+        private static DateTime GetLastWriteTime(string path)
+        {
+            if (!System.IO.File.Exists(path))
+            {
+                return DateTime.Now;
+            }
+
+            return System.IO.File.GetLastWriteTime(path);
+        }
+
+        private static bool ContainsRelativeDirectorySegment(string path)
+        {
+            string[] segments = path.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int index = 0; index < segments.Length; index++)
+            {
+                if (segments[index] == "." || segments[index] == "..")
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool ContainsReservedDeviceName(string path)
+        {
+            string root = System.IO.Path.GetPathRoot(path);
+            string pathWithoutRoot = string.IsNullOrEmpty(root) ? path : path.Substring(root.Length);
+            string[] segments = pathWithoutRoot.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int index = 0; index < segments.Length; index++)
+            {
+                string segment = segments[index].TrimEnd(' ', '.');
+                string nameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(segment);
+                if (ReservedDeviceNames.Contains(nameWithoutExtension))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static string SanitizePresetPath(string presetPath)
+        {
+            if (string.IsNullOrEmpty(presetPath))
+            {
+                return string.Empty;
+            }
+
+            string[] segments = presetPath.Split('/');
+            for (int index = 0; index < segments.Length; index++)
+            {
+                segments[index] = SanitizeFileSystemToken(segments[index]);
+            }
+
+            return string.Join(System.IO.Path.DirectorySeparatorChar.ToString(), segments);
+        }
+
+        private static string SanitizeFileSystemToken(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
+            char[] invalidFileNameChars = System.IO.Path.GetInvalidFileNameChars();
+            StringBuilder builder = new StringBuilder(value.Length);
+            for (int index = 0; index < value.Length; index++)
+            {
+                char character = value[index];
+                builder.Append(Array.IndexOf(invalidFileNameChars, character) >= 0 ? '_' : character);
+            }
+
+            return builder.ToString();
         }
     }
 }
