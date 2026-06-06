@@ -105,8 +105,7 @@ namespace FileConverter.ConversionJobs
 
             // Generate intermediate file path.
             string fileName = Path.GetFileName(this.OutputFilePath);
-            string tempPath = Path.GetTempPath();
-            this.intermediateFilePath = PathHelpers.GenerateUniquePath(tempPath + fileName + ".wav");
+            this.intermediateFilePath = PathHelpers.GenerateTemporaryFilePath(fileName + ".wav");
 
             // Sub conversion job (for compression).
             this.compressionConversionJob = ConversionJobFactory.Create(this.ConversionPreset, this.intermediateFilePath);
@@ -269,17 +268,7 @@ namespace FileConverter.ConversionJobs
 
         private void DeleteIntermediateFileIfExists()
         {
-            try
-            {
-                if (!string.IsNullOrEmpty(this.intermediateFilePath) && File.Exists(this.intermediateFilePath))
-                {
-                    File.Delete(this.intermediateFilePath);
-                }
-            }
-            catch (Exception exception)
-            {
-                Debug.Log($"Failed to delete intermediate CDA file {this.intermediateFilePath}: {exception.Message}.");
-            }
+            this.DeleteFileIfExists(this.intermediateFilePath);
         }
     }
 }

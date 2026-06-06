@@ -42,8 +42,7 @@ namespace FileConverter.ConversionJobs
             {
                 // Generate intermediate file path.
                 string fileName = Path.GetFileName(this.OutputFilePath);
-                string tempPath = Path.GetTempPath();
-                this.intermediateFilePath = PathHelpers.GenerateUniquePath(tempPath + fileName + ".png");
+                this.intermediateFilePath = PathHelpers.GenerateTemporaryFilePath(fileName + ".png");
 
                 // Convert input in png file to send it to ffmpeg for the gif conversion.
                 ConversionPreset intermediatePreset = new ConversionPreset("To compatible image", OutputType.Png, this.ConversionPreset.InputTypes.ToArray());
@@ -69,41 +68,45 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("The conversion preset must be valid.");
             }
 
-            if (this.pngConversionJob != null)
+            Task updateProgress = null;
+            try
             {
-                this.UserState = Properties.Resources.ConversionStateReadIntputImage;
+                if (this.pngConversionJob != null)
+                {
+                    this.UserState = Properties.Resources.ConversionStateReadIntputImage;
+
+                    Diagnostics.Debug.Log(string.Empty);
+                    Diagnostics.Debug.Log("Convert image to PNG (intermediate format).");
+                    this.pngConversionJob.StartConversion();
+
+                    if (this.pngConversionJob.State != ConversionState.Done)
+                    {
+                        this.ConversionFailed(this.pngConversionJob.ErrorMessage);
+                        return;
+                    }
+                }
 
                 Diagnostics.Debug.Log(string.Empty);
-                Diagnostics.Debug.Log("Convert image to PNG (intermediate format).");
-                this.pngConversionJob.StartConversion();
+                Diagnostics.Debug.Log("Convert png intermediate image to gif.");
+                updateProgress = this.UpdateProgress();
+                this.gifConversionJob.StartConversion();
 
-                if (this.pngConversionJob.State != ConversionState.Done)
+                if (this.gifConversionJob.State != ConversionState.Done)
                 {
-                    this.ConversionFailed(this.pngConversionJob.ErrorMessage);
+                    this.ConversionFailed(this.gifConversionJob.ErrorMessage);
                     return;
                 }
             }
-
-            Diagnostics.Debug.Log(string.Empty);
-            Diagnostics.Debug.Log("Convert png intermediate image to gif.");
-            Task updateProgress = this.UpdateProgress();
-            this.gifConversionJob.StartConversion();
-
-            if (this.gifConversionJob.State != ConversionState.Done)
+            finally
             {
-                updateProgress.Wait();
-                this.ConversionFailed(this.gifConversionJob.ErrorMessage);
-                return;
+                updateProgress?.Wait();
+
+                if (!string.IsNullOrEmpty(this.intermediateFilePath))
+                {
+                    Diagnostics.Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
+                    this.DeleteFileIfExists(this.intermediateFilePath);
+                }
             }
-
-            if (!string.IsNullOrEmpty(this.intermediateFilePath))
-            {
-                Diagnostics.Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
-
-                this.DeleteFileIfExists(this.intermediateFilePath);
-            }
-
-            updateProgress.Wait();
         }
 
         private async Task UpdateProgress()

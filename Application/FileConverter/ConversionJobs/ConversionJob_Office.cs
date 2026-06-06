@@ -2,8 +2,16 @@
 
 namespace FileConverter.ConversionJobs
 {
+    using System;
+    using System.Globalization;
+    using System.Reflection;
+
+    using FileConverter.Diagnostics;
+
     public abstract class ConversionJob_Office : ConversionJob
     {
+        private const int MsoAutomationSecurityForceDisable = 3;
+
         protected ConversionJob_Office() : base()
         {
         }
@@ -27,6 +35,19 @@ namespace FileConverter.ConversionJobs
         }
 
         protected override bool IsCancelable() => false;
+
+        protected void HardenOfficeApplicationInstance(object officeApplication)
+        {
+            if (officeApplication == null)
+            {
+                return;
+            }
+
+            this.TrySetOfficeApplicationProperty(officeApplication, "AutomationSecurity", MsoAutomationSecurityForceDisable);
+            this.TrySetOfficeApplicationProperty(officeApplication, "EnableEvents", false);
+            this.TrySetOfficeApplicationProperty(officeApplication, "DisplayAlerts", 0);
+            this.TrySetOfficeApplicationProperty(officeApplication, "AskToUpdateLinks", false);
+        }
 
         protected override void Initialize()
         {
@@ -65,5 +86,34 @@ namespace FileConverter.ConversionJobs
         protected abstract void InitializeOfficeApplicationInstanceIfNecessary();
 
         protected abstract void ReleaseOfficeApplicationInstanceIfNeeded();
+
+        private void TrySetOfficeApplicationProperty(object officeApplication, string propertyName, object value)
+        {
+            try
+            {
+                PropertyInfo property = officeApplication.GetType().GetProperty(propertyName);
+                if (property == null || !property.CanWrite)
+                {
+                    return;
+                }
+
+                object typedValue = this.ConvertValue(value, property.PropertyType);
+                property.SetValue(officeApplication, typedValue, null);
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Could not set Office automation property {propertyName}: {exception.Message}");
+            }
+        }
+
+        private object ConvertValue(object value, Type propertyType)
+        {
+            if (propertyType.IsEnum)
+            {
+                return Enum.ToObject(propertyType, value);
+            }
+
+            return System.Convert.ChangeType(value, propertyType, CultureInfo.InvariantCulture);
+        }
     }
 }

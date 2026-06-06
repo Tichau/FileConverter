@@ -11,6 +11,8 @@ namespace FileConverter.ViewModels
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using System.Text;
+    using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -817,6 +819,11 @@ namespace FileConverter.ViewModels
                     return;
                 }
 
+                if (!this.ReviewImportedPresets(presetsToImport))
+                {
+                    return;
+                }
+
                 // Add imported preset to preset tree.
                 bool itemSelected = false;
                 foreach (ConversionPreset conversionPreset in presetsToImport)
@@ -849,6 +856,220 @@ namespace FileConverter.ViewModels
 
                 this.saveCommand.NotifyCanExecuteChanged();
             }
+        }
+
+        private bool ReviewImportedPresets(List<ConversionPreset> presetsToImport)
+        {
+            if (presetsToImport == null || presetsToImport.Count == 0)
+            {
+                return true;
+            }
+
+            List<string> warnings = new List<string>();
+            foreach (ConversionPreset conversionPreset in presetsToImport)
+            {
+                warnings.AddRange(this.GetPresetImportWarnings(conversionPreset));
+            }
+
+            if (warnings.Count == 0)
+            {
+                return true;
+            }
+
+            StringBuilder message = new StringBuilder();
+            message.AppendLine("This preset file contains advanced settings that can affect conversion commands or output locations.");
+            message.AppendLine();
+            message.AppendLine("Choose Yes to import with risky settings disabled, No to import as-is only if you trust this file, or Cancel to stop importing.");
+            message.AppendLine();
+
+            int warningsToDisplay = Math.Min(warnings.Count, 8);
+            for (int index = 0; index < warningsToDisplay; index++)
+            {
+                message.AppendLine("- " + warnings[index]);
+            }
+
+            if (warnings.Count > warningsToDisplay)
+            {
+                message.AppendLine($"- {warnings.Count - warningsToDisplay} more warning(s).");
+            }
+
+            MessageBoxResult result = MessageBox.Show(
+                message.ToString(),
+                "Review imported presets",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Warning,
+                MessageBoxResult.Yes);
+
+            if (result == MessageBoxResult.Cancel)
+            {
+                return false;
+            }
+
+            if (result == MessageBoxResult.Yes)
+            {
+                foreach (ConversionPreset conversionPreset in presetsToImport)
+                {
+                    this.NeutralizeRiskyImportedPresetSettings(conversionPreset);
+                }
+            }
+
+            return true;
+        }
+
+        private IEnumerable<string> GetPresetImportWarnings(ConversionPreset conversionPreset)
+        {
+            if (conversionPreset == null)
+            {
+                yield break;
+            }
+
+            string presetName = string.IsNullOrWhiteSpace(conversionPreset.FullName) ? "Unnamed preset" : conversionPreset.FullName;
+
+            if (this.HasUnsafePresetName(conversionPreset))
+            {
+                yield return $"Preset '{presetName}' has a name that is unsafe for Explorer launch or folder creation.";
+            }
+
+            if (this.HasEnabledCustomFFmpegCommand(conversionPreset))
+            {
+                yield return $"Preset '{presetName}' enables a raw FFmpeg command.";
+            }
+
+            if (this.HasSuspiciousOutputTemplate(conversionPreset))
+            {
+                yield return $"Preset '{presetName}' writes to a non-standard output location.";
+            }
+        }
+
+        private void NeutralizeRiskyImportedPresetSettings(ConversionPreset conversionPreset)
+        {
+            if (conversionPreset == null)
+            {
+                return;
+            }
+
+            if (this.HasUnsafePresetName(conversionPreset))
+            {
+                conversionPreset.FullName = this.SanitizePresetFullName(conversionPreset.FullName);
+            }
+
+            if (this.HasEnabledCustomFFmpegCommand(conversionPreset))
+            {
+                conversionPreset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                conversionPreset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
+            }
+
+            if (this.HasSuspiciousOutputTemplate(conversionPreset))
+            {
+                conversionPreset.OutputFileNameTemplate = "(p)(f)";
+            }
+        }
+
+        private bool HasEnabledCustomFFmpegCommand(ConversionPreset conversionPreset)
+        {
+            bool customCommandEnabled;
+            bool.TryParse(
+                conversionPreset.GetSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand),
+                out customCommandEnabled);
+
+            return customCommandEnabled &&
+                !string.IsNullOrWhiteSpace(conversionPreset.GetSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand));
+        }
+
+        private bool HasSuspiciousOutputTemplate(ConversionPreset conversionPreset)
+        {
+            string template = conversionPreset.OutputFileNameTemplate;
+            if (string.IsNullOrWhiteSpace(template))
+            {
+                return false;
+            }
+
+            if (Path.IsPathRooted(template))
+            {
+                return true;
+            }
+
+            string[] segments = template.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int index = 0; index < segments.Length; index++)
+            {
+                if (segments[index] == "." || segments[index] == "..")
+                {
+                    return true;
+                }
+            }
+
+            string lowerTemplate = template.ToLowerInvariant();
+            return
+                lowerTemplate.Contains("(p:d)") ||
+                lowerTemplate.Contains("(p:documents)") ||
+                lowerTemplate.Contains("(p:m)") ||
+                lowerTemplate.Contains("(p:music)") ||
+                lowerTemplate.Contains("(p:v)") ||
+                lowerTemplate.Contains("(p:videos)") ||
+                lowerTemplate.Contains("(p:p)") ||
+                lowerTemplate.Contains("(p:pictures)");
+        }
+
+        private bool HasUnsafePresetName(ConversionPreset conversionPreset)
+        {
+            return this.SanitizePresetFullName(conversionPreset.FullName) != conversionPreset.FullName;
+        }
+
+        private string SanitizePresetFullName(string fullName)
+        {
+            if (string.IsNullOrWhiteSpace(fullName))
+            {
+                return "Imported preset";
+            }
+
+            string[] segments = fullName.Split('/');
+            for (int index = 0; index < segments.Length; index++)
+            {
+                segments[index] = this.SanitizePresetNameSegment(segments[index], index == segments.Length - 1);
+            }
+
+            return string.Join("/", segments);
+        }
+
+        private string SanitizePresetNameSegment(string segment, bool isPresetName)
+        {
+            if (string.IsNullOrWhiteSpace(segment))
+            {
+                return isPresetName ? "Imported preset" : "Imported";
+            }
+
+            char[] invalidFileNameChars = Path.GetInvalidFileNameChars();
+            StringBuilder builder = new StringBuilder(segment.Length);
+            for (int index = 0; index < segment.Length; index++)
+            {
+                char character = segment[index];
+                if (char.IsControl(character) ||
+                    character == '"' ||
+                    character == '/' ||
+                    character == '\\' ||
+                    Array.IndexOf(invalidFileNameChars, character) >= 0)
+                {
+                    builder.Append('_');
+                    continue;
+                }
+
+                builder.Append(character);
+            }
+
+            string sanitizedSegment = builder.ToString().Trim();
+            if (string.IsNullOrEmpty(sanitizedSegment) ||
+                sanitizedSegment == "." ||
+                sanitizedSegment == "..")
+            {
+                return isPresetName ? "Imported preset" : "Imported";
+            }
+
+            if (sanitizedSegment.StartsWith("-", StringComparison.Ordinal))
+            {
+                sanitizedSegment = "_" + sanitizedSegment;
+            }
+
+            return sanitizedSegment;
         }
 
         private void ExportSelectedPreset()

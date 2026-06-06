@@ -152,6 +152,12 @@ namespace FileConverter
                         return;
                     }
 
+                    if (!upgradeService.UpgradeVersionDescription.InstallerIsVerified)
+                    {
+                        Debug.LogError("Refuse to start upgrade installer because it has not passed integrity verification.");
+                        return;
+                    }
+
                     // Start process.
                     Debug.Log($"Start file converter upgrade from version {ApplicationVersion} to {upgradeService.UpgradeVersionDescription.LatestVersion}.");
 

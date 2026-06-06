@@ -285,7 +285,18 @@ namespace FileConverter.ConversionJobs
             this.OutputFilePaths = outputFilePaths;
             if (this.OutputFilePaths.Length == 0)
             {
-                int outputFilesCount = this.GetOutputFilesCount();
+                int outputFilesCount;
+                try
+                {
+                    outputFilesCount = this.GetOutputFilesCount();
+                }
+                catch (Exception exception)
+                {
+                    this.ConversionFailed(Properties.Resources.ErrorDuringJobInitialization);
+                    Debug.Log(exception.ToString());
+                    return;
+                }
+
                 this.OutputFilePaths = new string[outputFilesCount];
             }
 
@@ -299,12 +310,14 @@ namespace FileConverter.ConversionJobs
 
                 string path = this.ConversionPreset.GenerateOutputFilePath(this.initialInputPath, index + 1, this.OutputFilePaths.Length);
 
-                if (!PathHelpers.IsPathValid(path))
+                if (!PathHelpers.TryNormalizeGeneratedPath(path, out string normalizedPath, out string outputPathErrorMessage))
                 {
                     this.ConversionFailed(Properties.Resources.ErrorInvalidOutputPath);
-                    Debug.Log($"Invalid output path generated: {path} from input: {this.InputFilePath}.");
+                    Debug.Log($"Invalid output path generated: {path} from input: {this.InputFilePath}. {outputPathErrorMessage}");
                     return;
                 }
+
+                path = normalizedPath;
 
                 if (path == this.InputFilePath)
                 {
@@ -590,11 +603,47 @@ namespace FileConverter.ConversionJobs
                 {
                     System.IO.File.Delete(filePath);
                 }
+
+                this.DeleteEmptyTemporaryParentFolder(filePath);
             }
             catch (Exception exception)
             {
                 Debug.Log($"Can't delete file '{filePath}'.");
                 Debug.Log($"An exception has been thrown: {exception}.");
+            }
+        }
+
+        private void DeleteEmptyTemporaryParentFolder(string filePath)
+        {
+            string parentFolder = Path.GetDirectoryName(filePath);
+            if (string.IsNullOrEmpty(parentFolder))
+            {
+                return;
+            }
+
+            DirectoryInfo parent = Directory.GetParent(parentFolder);
+            if (parent == null)
+            {
+                return;
+            }
+
+            string tempRoot = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "ZFileConverter"));
+            string candidateRoot = Path.GetFullPath(parent.FullName);
+            if (!string.Equals(
+                    tempRoot.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                    candidateRoot.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            try
+            {
+                Directory.Delete(parentFolder, false);
+            }
+            catch
+            {
+                // Best effort only; concurrent conversions may still be using the folder.
             }
         }
 

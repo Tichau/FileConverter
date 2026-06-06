@@ -27,6 +27,20 @@ namespace FileConverter.Services
             set;
         }
 
+        [XmlElement("SHA256")]
+        public string InstallerSha256
+        {
+            get;
+            set;
+        }
+
+        [XmlElement("PublisherSubject")]
+        public string InstallerPublisherSubject
+        {
+            get;
+            set;
+        }
+
         [XmlIgnore]
         public string ChangeLog
         {
@@ -78,6 +92,13 @@ namespace FileConverter.Services
 
         [XmlIgnore]
         public bool InstallerDownloadNotStarted => !this.InstallerDownloadInProgress && this.InstallerDownloadProgress == 0;
+
+        [XmlIgnore]
+        public bool InstallerIsVerified
+        {
+            get;
+            set;
+        }
 
         [XmlIgnore]
         public bool NeedToUpgrade

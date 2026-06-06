@@ -78,8 +78,7 @@ namespace FileConverter.ConversionJobs
             {
                 // Generate intermediate file path.
                 string fileName = Path.GetFileNameWithoutExtension(this.InputFilePath);
-                string tempPath = Path.GetTempPath();
-                this.intermediateFilePath = PathHelpers.GenerateUniquePath(tempPath + fileName + ".pdf");
+                this.intermediateFilePath = PathHelpers.GenerateTemporaryFilePath(fileName + ".pdf");
 
                 ConversionPreset intermediatePreset = new ConversionPreset("Pdf to image", this.ConversionPreset, "pdf");
                 this.pdf2ImageConversionJob = ConversionJobFactory.Create(intermediatePreset, this.intermediateFilePath);
@@ -120,32 +119,37 @@ namespace FileConverter.ConversionJobs
             
             if (this.pdf2ImageConversionJob != null)
             {
-                if (!System.IO.File.Exists(this.intermediateFilePath))
+                Task updateProgress = null;
+                try
                 {
-                    this.ConversionFailed(Properties.Resources.ErrorCantFindOutputFiles);
-                    return;
+                    if (!System.IO.File.Exists(this.intermediateFilePath))
+                    {
+                        this.ConversionFailed(Properties.Resources.ErrorCantFindOutputFiles);
+                        return;
+                    }
+
+                    updateProgress = this.UpdateProgress();
+
+                    Debug.Log("Convert pdf to images.");
+
+                    this.pdf2ImageConversionJob.StartConversion();
+
+                    if (this.pdf2ImageConversionJob.State != ConversionState.Done)
+                    {
+                        this.ConversionFailed(this.pdf2ImageConversionJob.ErrorMessage);
+                        return;
+                    }
                 }
-
-                Task updateProgress = this.UpdateProgress();
-
-                Debug.Log("Convert pdf to images.");
-
-                this.pdf2ImageConversionJob.StartConversion();
-
-                if (this.pdf2ImageConversionJob.State != ConversionState.Done)
+                finally
                 {
-                    this.ConversionFailed(this.pdf2ImageConversionJob.ErrorMessage);
-                    return;
+                    updateProgress?.Wait();
+
+                    if (!string.IsNullOrEmpty(this.intermediateFilePath))
+                    {
+                        Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
+                        this.DeleteFileIfExists(this.intermediateFilePath);
+                    }
                 }
-
-                if (!string.IsNullOrEmpty(this.intermediateFilePath))
-                {
-                    Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
-
-                    this.DeleteFileIfExists(this.intermediateFilePath);
-                }
-
-                updateProgress.Wait();
             }
         }
 
@@ -162,6 +166,7 @@ namespace FileConverter.ConversionJobs
             {
                 Visible = false
             };
+            this.HardenOfficeApplicationInstance(this.application);
         }
 
         protected override void ReleaseOfficeApplicationInstanceIfNeeded()
@@ -213,7 +218,7 @@ namespace FileConverter.ConversionJobs
             {
                 Debug.Log($"Load excel document '{this.InputFilePath}'.");
 
-                this.document = this.application.Workbooks.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
+                this.document = this.application.Workbooks.Open(this.InputFilePath, 0, true);
             }
 
             return this.document != null;

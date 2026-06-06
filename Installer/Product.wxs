@@ -165,6 +165,11 @@
             </Component>
 
             <!-- Registry entries -->
+            <Component Id="MachineRegistryEntries" Guid="{6FC09B8D-9D36-42F8-A5C6-1DD25AE3B28B}">
+                <RegistryKey Root="HKLM" Key="Software\FileConverter">
+                    <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe" />
+                </RegistryKey>
+            </Component>
             <Component Id="RegistryEntries" Guid="{1862E9DC-1B37-4AFD-85BF-2E9CFFAFA9F8}">
                 <RegistryKey Root="HKCU" Key="Software\FileConverter" ForceDeleteOnUninstall="yes">
                     <RegistryValue Name="Path" Type="string" Value="[INSTALLFOLDER]FileConverter.exe" />

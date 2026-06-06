@@ -308,10 +308,8 @@ namespace FileConverterExtension
 
             void BuildConversionPresetArgument(StringBuilder sb)
             {
-                sb.Append("--conversion-preset ");
-                sb.Append(" \"");
-                sb.Append(presetName);
-                sb.Append("\"");
+                AppendArgument(sb, "--conversion-preset");
+                AppendArgument(sb, presetName);
             }
 
             // Build arguments string.
@@ -321,9 +319,7 @@ namespace FileConverterExtension
             string fileListPath = null;
             foreach (var filePath in this.SelectedItemPaths)
             {
-                stringBuilder.Append(" \"");
-                stringBuilder.Append(filePath);
-                stringBuilder.Append("\"");
+                AppendArgument(stringBuilder, filePath);
 
                 if (stringBuilder.Length >= MaximumProcessArgumentsLength)
                 {
@@ -332,27 +328,9 @@ namespace FileConverterExtension
                     BuildConversionPresetArgument(stringBuilder);
 
                     // Store list of file to convert in a file in Temp folder.
-                    fileListPath = Path.Combine(Path.GetTempPath(), "file-converter-input-list.txt");
-                    int index = 1;
-                    while (File.Exists(fileListPath))
-                    {
-                        fileListPath = Path.Combine(Path.GetTempPath(), $"file-converter-input-list-{index}.txt");
-                        index++;
-                    }
-
-                    using (FileStream file = File.OpenWrite(fileListPath))
-                    using (StreamWriter writer = new StreamWriter(file))
-                    {
-                        foreach (var path in this.SelectedItemPaths)
-                        {
-                            writer.WriteLine(path);
-                        }
-                    }
-
-                    stringBuilder.Append(" --input-files ");
-                    stringBuilder.Append(" \"");
-                    stringBuilder.Append(fileListPath);
-                    stringBuilder.Append("\"");
+                    fileListPath = CreateInputListFile(this.SelectedItemPaths);
+                    AppendArgument(stringBuilder, "--input-files");
+                    AppendArgument(stringBuilder, fileListPath);
                     break;
                 }
             }
@@ -376,6 +354,78 @@ namespace FileConverterExtension
             {
                 DeleteInputListFile(fileListPath);
             };
+        }
+
+        private static string CreateInputListFile(IEnumerable<string> inputPaths)
+        {
+            string inputListFolder = Path.Combine(Path.GetTempPath(), "ZFileConverter");
+            Directory.CreateDirectory(inputListFolder);
+
+            string fileListPath = Path.Combine(inputListFolder, $"input-list-{Guid.NewGuid():N}.txt");
+            using (FileStream file = new FileStream(fileListPath, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            using (StreamWriter writer = new StreamWriter(file))
+            {
+                foreach (var path in inputPaths)
+                {
+                    writer.WriteLine(path);
+                }
+            }
+
+            return fileListPath;
+        }
+
+        private static void AppendArgument(StringBuilder stringBuilder, string argument)
+        {
+            if (stringBuilder.Length > 0)
+            {
+                stringBuilder.Append(' ');
+            }
+
+            stringBuilder.Append(QuoteProcessArgument(argument));
+        }
+
+        private static string QuoteProcessArgument(string argument)
+        {
+            if (string.IsNullOrEmpty(argument))
+            {
+                return "\"\"";
+            }
+
+            bool needsQuotes = argument.IndexOfAny(new[] { ' ', '\t', '\n', '\v', '"' }) >= 0;
+            if (!needsQuotes)
+            {
+                return argument;
+            }
+
+            StringBuilder quotedArgument = new StringBuilder(argument.Length + 2);
+            quotedArgument.Append('"');
+
+            int backslashes = 0;
+            for (int index = 0; index < argument.Length; index++)
+            {
+                char character = argument[index];
+                if (character == '\\')
+                {
+                    backslashes++;
+                    continue;
+                }
+
+                if (character == '"')
+                {
+                    quotedArgument.Append('\\', (backslashes * 2) + 1);
+                    quotedArgument.Append('"');
+                    backslashes = 0;
+                    continue;
+                }
+
+                quotedArgument.Append('\\', backslashes);
+                backslashes = 0;
+                quotedArgument.Append(character);
+            }
+
+            quotedArgument.Append('\\', backslashes * 2);
+            quotedArgument.Append('"');
+            return quotedArgument.ToString();
         }
 
         private string GetFileConverterPathOrShowError()

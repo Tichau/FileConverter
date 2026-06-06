@@ -22,6 +22,31 @@ namespace FileConverter
         private static Regex sourceModifiedDateRegex = new Regex(@"\((?:sourcemodified|sm):(?<format>[^)]*)\)");
         private static Regex formattedNumberIndexRegex = new Regex(@"\(n:i:(?<format>[^)]*)\)");
         private static Regex formattedNumberCountRegex = new Regex(@"\(n:c:(?<format>[^)]*)\)");
+        private static readonly HashSet<string> ReservedDeviceNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "CON",
+            "PRN",
+            "AUX",
+            "NUL",
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9",
+            "LPT1",
+            "LPT2",
+            "LPT3",
+            "LPT4",
+            "LPT5",
+            "LPT6",
+            "LPT7",
+            "LPT8",
+            "LPT9"
+        };
 
         public static bool IsPathDriveLetterValid(string path)
         {
@@ -65,6 +90,54 @@ namespace FileConverter
         public static bool IsPathValid(string path)
         {
             return PathHelpers.pathRegex.IsMatch(path);
+        }
+
+        public static bool TryNormalizeGeneratedPath(string path, out string normalizedPath, out string errorMessage)
+        {
+            normalizedPath = path;
+            errorMessage = null;
+
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                errorMessage = "The generated output path is empty.";
+                return false;
+            }
+
+            if (!PathHelpers.IsPathValid(path))
+            {
+                errorMessage = "The generated output path is not a valid absolute Windows path.";
+                return false;
+            }
+
+            if (PathHelpers.ContainsRelativeDirectorySegment(path))
+            {
+                errorMessage = "The generated output path contains a relative directory segment.";
+                return false;
+            }
+
+            try
+            {
+                normalizedPath = System.IO.Path.GetFullPath(path);
+            }
+            catch (Exception exception)
+            {
+                errorMessage = $"The generated output path could not be normalized: {exception.Message}";
+                return false;
+            }
+
+            if (!PathHelpers.IsPathValid(normalizedPath))
+            {
+                errorMessage = "The normalized output path is not valid.";
+                return false;
+            }
+
+            if (PathHelpers.ContainsReservedDeviceName(normalizedPath))
+            {
+                errorMessage = "The generated output path contains a reserved Windows device name.";
+                return false;
+            }
+
+            return true;
         }
 
         public static string GetExtensionWithoutDot(string path)
@@ -124,6 +197,23 @@ namespace FileConverter
             }
 
             return path;
+        }
+
+        public static string GenerateTemporaryFilePath(string preferredFileName)
+        {
+            string safeFileName = SanitizeFileSystemToken(System.IO.Path.GetFileName(preferredFileName));
+            if (string.IsNullOrWhiteSpace(safeFileName))
+            {
+                safeFileName = "conversion.tmp";
+            }
+
+            string tempFolder = System.IO.Path.Combine(
+                System.IO.Path.GetTempPath(),
+                "ZFileConverter",
+                Guid.NewGuid().ToString("N"));
+            System.IO.Directory.CreateDirectory(tempFolder);
+
+            return System.IO.Path.Combine(tempFolder, safeFileName);
         }
 
         public static bool CreateFolders(string filePath)
@@ -297,6 +387,39 @@ namespace FileConverter
             }
 
             return System.IO.File.GetLastWriteTime(path);
+        }
+
+        private static bool ContainsRelativeDirectorySegment(string path)
+        {
+            string[] segments = path.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int index = 0; index < segments.Length; index++)
+            {
+                if (segments[index] == "." || segments[index] == "..")
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool ContainsReservedDeviceName(string path)
+        {
+            string root = System.IO.Path.GetPathRoot(path);
+            string pathWithoutRoot = string.IsNullOrEmpty(root) ? path : path.Substring(root.Length);
+            string[] segments = pathWithoutRoot.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int index = 0; index < segments.Length; index++)
+            {
+                string segment = segments[index].TrimEnd(' ', '.');
+                string nameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(segment);
+                if (ReservedDeviceNames.Contains(nameWithoutExtension))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private static string SanitizePresetPath(string presetPath)

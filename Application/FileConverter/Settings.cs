@@ -14,6 +14,7 @@ namespace FileConverter
     public class Settings : ObservableObject, IXmlSerializable
     {
         public const int Version = 4;
+        private const int MaximumAllowedSimultaneousConversions = 16;
 
         private bool exitApplicationWhenConversionsFinished = false;
         private float durationBetweenEndOfConversionsAndApplicationExit = 3f;
@@ -269,6 +270,9 @@ namespace FileConverter
         public void OnDeserializationComplete()
         {
             this.DurationBetweenEndOfConversionsAndApplicationExit = System.Math.Max(0, System.Math.Min(10, this.DurationBetweenEndOfConversionsAndApplicationExit));
+            this.MaximumNumberOfSimultaneousConversions = System.Math.Max(
+                0,
+                System.Math.Min(MaximumAllowedSimultaneousConversions, this.MaximumNumberOfSimultaneousConversions));
 
             for (int index = this.ConversionPresets.Count - 1; index >= 0; index--)
             {

@@ -166,8 +166,7 @@ namespace FileConverter.ConversionJobs
                     {
                         // http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
                         string fileName = Path.GetFileName(this.InputFilePath);
-                        string tempPath = Path.GetTempPath();
-                        string paletteFilePath = PathHelpers.GenerateUniquePath(tempPath + fileName + " - palette.png");
+                        string paletteFilePath = PathHelpers.GenerateTemporaryFilePath(fileName + " - palette.png");
 
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
 
