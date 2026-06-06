@@ -35,3 +35,28 @@ while making the project dependable again.
 - Add release signing documentation once signing credentials are available.
 - Replace or refresh visual branding assets when a dedicated ZFileConverter icon is ready.
 - Add an issue triage label set and first-maintainer milestones.
+
+## Later Design Overhaul
+
+This is intentionally a later phase, not part of the current stabilization pass.
+The current revival should keep the familiar File Converter workflow intact: right-click a file,
+choose a preset, get a clear result. The later design pass can make the app feel more polished,
+modern, beautiful, and user-friendly without turning it into a complicated editor.
+
+- Revisit the Settings window layout, typography, spacing, iconography, empty states, and health diagnostics.
+- Design a proper ZFileConverter app icon, installer visual identity, and GitHub release artwork.
+- Make presets easier to browse, search, edit, duplicate, import, and understand.
+- Improve queue/progress visibility while keeping the Explorer-first workflow fast.
+- Explore a more refined onboarding and troubleshooting flow for missing FFmpeg, ImageMagick, Ghostscript, and Office dependencies.
+- When Mythos is released and available, consider using it as a dedicated frontend/design exploration partner for this UI pass.
+
+## Later Product And Monetization Notes
+
+ZFileConverter should remain useful as a simple, trustworthy local Windows utility first.
+Any commercial path should protect that trust and respect GPL-3.0 continuity.
+
+- Most realistic near-term path: free open-source app with optional donations, sponsorships, and paid support.
+- Stronger business path: paid signed builds, managed enterprise packaging, deployment help, support SLAs, and custom presets/workflows.
+- Possible product path: a hosted/API conversion service, but that would be a separate product with real infrastructure, privacy, abuse, and cost concerns.
+- Avoid making core local conversion annoying, ad-heavy, account-gated, or artificially limited.
+- Before charging for binaries or services, confirm GPL source-distribution obligations and third-party middleware licenses.
