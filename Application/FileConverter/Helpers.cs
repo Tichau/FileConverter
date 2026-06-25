@@ -179,10 +179,53 @@ namespace FileConverter
             // Find the location where application installed.
             string exeLocation = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
 
-            // Return all culture for which satellite folder found with culture code.
+            // Always include English because Resources.resx is embedded in the main assembly (invariant/neutral culture).
+            yield return CultureInfo.GetCultureInfo("en");
+
+            // Return all cultures for which a satellite assembly can be located.
+            //
+            // Previously only the legacy "Languages\<culture>\FileConverter.resources.dll" path
+            // (created by the PostBuildEvent robocopy step) was probed. That approach is
+            // fragile: if the robocopy step fails, the Wix installer ships without the
+            // Languages folder and the Settings window Language ComboBox is empty, which is
+            // the root cause of the long-standing "Language setting has no effect" issue
+            // (see Tichau/FileConverter #593 #609 #646 #667 #673 #690 #692 #735 #737 #750).
+            //
+            // We now also probe the standard .NET satellite assembly location
+            // "<exe>\<culture>\FileConverter.resources.dll", which is always produced by
+            // MSBuild regardless of whether the custom robocopy step succeeds. This makes
+            // language detection resilient and works with both the legacy and modern
+            // deployment layouts.
+            string assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+            string satelliteFileName = $"{assemblyName}.resources.dll";
+
             foreach (CultureInfo cultureInfo in cultures)
             {
-                if (!string.IsNullOrEmpty(cultureInfo.Name) && Directory.Exists(Path.Combine(exeLocation, "Languages", cultureInfo.Name)))
+                if (string.IsNullOrEmpty(cultureInfo.Name))
+                {
+                    continue;
+                }
+
+                if (cultureInfo.Name.Equals("en", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Already yielded above.
+                    continue;
+                }
+
+                // Legacy path (kept for backward compatibility with existing installers).
+                string legacyDir = Path.Combine(exeLocation, "Languages", cultureInfo.Name);
+                if (Directory.Exists(legacyDir) &&
+                    (File.Exists(Path.Combine(legacyDir, satelliteFileName)) ||
+                     Directory.GetFiles(legacyDir, "*.resources.dll").Length > 0))
+                {
+                    yield return cultureInfo;
+                    continue;
+                }
+
+                // Standard .NET satellite assembly path.
+                string standardDir = Path.Combine(exeLocation, cultureInfo.Name);
+                if (Directory.Exists(standardDir) &&
+                    File.Exists(Path.Combine(standardDir, satelliteFileName)))
                 {
                     yield return cultureInfo;
                 }

@@ -1,6 +1,27 @@
 # Change Log
 
+## Version 2.2.1 (UCHIHAHA103 fork hotfix)
+
+- Fixes: **Language setting has no effect** (upstream #593, #606, #609, #646, #667, #673, #690, #692, #735, #737, #750).
+  Root cause: `GetSupportedCultures()` only probed the legacy `Languages\<culture>\` folder that
+  depends on a fragile `robocopy` post-build step. When that step failed or the installer
+  shipped without the folder, the Language ComboBox was empty (or save silently aborted),
+  so no language - including 简体中文 (zh-CN) - could ever be applied.
+  - Also probe the standard .NET satellite assembly path `<exe>\<culture>\FileConverter.resources.dll`.
+  - Replace the `robocopy /MOVE` post-build step with a `copy` so both layouts coexist.
+  - Guard `ApplicationLanguage` setter and the Settings `Save`/`Close` paths with try/catch
+    + error dialog so a culture apply error no longer silently closes the Settings window.
+- Fixes: **FFmpeg conversion hangs indefinitely (v2.2 regression)** (upstream #749, #740,
+  #739, #716, #703, #700). Cherry-picked from upstream PR #732 (thanks to HapppppyMoon):
+  remove `-progress pipe:1` and disable `RedirectStandardOutput`, which were filling the
+  stdout pipe buffer and deadlocking the ffmpeg process.
+- Tech: Add GitHub Actions workflow (`.github/workflows/build.yml`) that builds
+  `FileConverter.sln` on every push and verifies that the zh-CN satellite assembly is
+  deployed under at least one of the two supported layouts.
+
 ## Version 2.2
+
+
 
 - New: AMD AMF hardware acceleration option for MP4/MKV H.264 conversions (thanks to bharatvansh).
 - New: Support new image input and output format: avif (github issue #619) (thanks to Techpotato1).

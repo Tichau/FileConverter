@@ -459,11 +459,18 @@ namespace FileConverter.ViewModels
 
         private void CloseSettings(CancelEventArgs args)
         {
-            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
-            settingsService.RevertSettings();
+            try
+            {
+                ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
+                settingsService.RevertSettings();
 
-            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
-            navigationService.Close(Pages.Settings, args != null);
+                INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
+                navigationService.Close(Pages.Settings, args != null);
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.LogError($"Failed to close settings: {exception.Message}");
+            }
         }
 
         private bool CanSaveSettings()
@@ -473,16 +480,33 @@ namespace FileConverter.ViewModels
 
         private void SaveSettings()
         {
-            // Compute parent folder names.
-            this.settings.ConversionPresets.Clear();
-            this.ComputePresetsParentFoldersNamesAndFillSettings(this.presetsRootFolder, new List<string>());
-            
-            // Save changes.
-            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
-            settingsService.SaveSettings();
+            try
+            {
+                // Compute parent folder names.
+                this.settings.ConversionPresets.Clear();
+                this.ComputePresetsParentFoldersNamesAndFillSettings(this.presetsRootFolder, new List<string>());
 
-            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
-            navigationService.Close(Pages.Settings, false);
+                // Save changes.
+                ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
+                settingsService.SaveSettings();
+
+                INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
+                navigationService.Close(Pages.Settings, false);
+            }
+            catch (Exception exception)
+            {
+                // Previously, any exception during save (including culture/language
+                // application errors) bubbled up and caused the Settings window to close
+                // silently without persisting changes - this is the root cause of the
+                // long-standing "language setting has no effect" reports (#750 #735 #609 etc.).
+                // We now log the error and keep the window open so the user can retry.
+                Diagnostics.Debug.LogError($"Failed to save settings: {exception.Message}");
+                System.Windows.MessageBox.Show(
+                    $"Failed to save settings: {exception.Message}",
+                    Properties.Resources.Error,
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Error);
+            }
         }
 
         private void CreateFolder()

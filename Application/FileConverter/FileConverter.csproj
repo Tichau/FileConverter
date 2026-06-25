@@ -423,10 +423,22 @@
 copy /Y "$(SolutionDir)Middleware\gs\gsdll64.dll" "$(TargetDir)gsdll64.dll"
 copy /Y "$(SolutionDir)Middleware\gs\gswin64c.exe" "$(TargetDir)gswin64c.exe"
 copy /Y "$(ProjectDir)Settings.default.xml" "$(TargetDir)Settings.default.xml"
-robocopy $(TargetDir) $(TargetDir)\Languages "$(TargetName).resources.dll" /CREATE /S /XD Languages /IS /IT /NFL /NDL /NJH /NJS /NC /NS /NP
-if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25
-robocopy $(TargetDir) $(TargetDir)\Languages "$(TargetName).resources.dll" /MOVE /S /XD Languages /XL /IS /IT /NFL /NDL /NJH /NJS /NC /NS /NP
-if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25</PostBuildEvent>
+rem Copy satellite assemblies (FileConverter.resources.dll) from each &lt;culture&gt; folder
+rem into Languages\&lt;culture&gt; for installer packaging. We now COPY (not MOVE) so the
+rem original .NET default layout is preserved, which lets the application load
+rem satellite assemblies through both paths and makes language detection resilient
+rem if this post-build step ever fails. See Tichau/FileConverter #593 #609 #646 #667
+rem #673 #690 #692 #735 #737 #750 (language setting has no effect).
+if not exist "$(TargetDir)Languages" mkdir "$(TargetDir)Languages"
+for /D %25%25D in ("$(TargetDir)*") do (
+  if /I not "%25%25~nxD"=="Languages" (
+    if exist "%25%25D\$(TargetName).resources.dll" (
+      if not exist "$(TargetDir)Languages\%25%25~nxD" mkdir "$(TargetDir)Languages\%25%25~nxD"
+      copy /Y "%25%25D\$(TargetName).resources.dll" "$(TargetDir)Languages\%25%25~nxD\$(TargetName).resources.dll" &gt;nul
+    )
+  )
+)
+exit 0</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
