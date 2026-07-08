@@ -28,6 +28,11 @@ namespace FileConverter.ConversionJobs
                 return new ConversionJob_PowerPoint(conversionPreset, inputFilePath);
             }
 
+            if (inputFileExtension == "md")
+            {
+                return new ConversionJob_Markdown(conversionPreset, inputFilePath);
+            }
+
             if (conversionPreset.OutputType == OutputType.Ico)
             {
                 return new ConversionJob_Ico(conversionPreset, inputFilePath);

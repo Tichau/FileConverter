@@ -127,7 +127,16 @@
             <Component Guid="{3B94F60C-29BF-4E51-AF85-C10DF19B0B2E}">
               <File Id="Magick.NET.dll" Source="$(var.FileConverter.TargetDir)Magick.NET-Q16-AnyCPU.dll" KeyPath="yes" Checksum="yes" />
             </Component>
-          
+            <Component Guid="{78196C56-6774-4D32-B0AE-587937501A94}">
+              <File Id="Markdig.dll" Source="$(var.FileConverter.TargetDir)Markdig.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{FCD9E2B3-13A4-47B3-83CB-C26CD3EC775B}">
+              <File Id="QuestPDF.dll" Source="$(var.FileConverter.TargetDir)QuestPDF.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{ADABBC20-8FA8-4657-9524-9F3A1244893E}">
+              <File Id="QuestPdfSkia.dll" Source="$(var.FileConverter.TargetDir)QuestPdfSkia.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+
             <Component Guid="{BEEAAC73-C479-4080-83B1-2B1448C7378C}">
                 <File Id="ffmpeg.exe" Source="$(var.FileConverter.TargetDir)ffmpeg.exe" KeyPath="yes" Checksum="yes" />
             </Component>
