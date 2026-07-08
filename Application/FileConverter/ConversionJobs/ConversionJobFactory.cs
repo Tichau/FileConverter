@@ -44,8 +44,10 @@ namespace FileConverter.ConversionJobs
             }
 
             if (conversionPreset.OutputType == OutputType.Avif ||
+                conversionPreset.OutputType == OutputType.Bmp ||
                 conversionPreset.OutputType == OutputType.Jpg ||
                 conversionPreset.OutputType == OutputType.Png ||
+                conversionPreset.OutputType == OutputType.Tiff ||
                 conversionPreset.OutputType == OutputType.Webp)
             {
                 return new ConversionJob_ImageMagick(conversionPreset, inputFilePath);

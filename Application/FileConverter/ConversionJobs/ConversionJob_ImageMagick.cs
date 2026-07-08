@@ -220,9 +220,15 @@ namespace FileConverter.ConversionJobs
                     image.Quality = this.ConversionPreset.GetSettingsValue<uint>(ConversionPreset.ConversionSettingKeys.ImageQuality);
                     break;
 
+                case OutputType.Bmp:
+                    break;
+
                 case OutputType.Png:
                     // http://stackoverflow.com/questions/27267073/imagemagick-lossless-max-compression-for-png
                     image.Quality = 95;
+                    break;
+
+                case OutputType.Tiff:
                     break;
 
                 case OutputType.Jpg:
