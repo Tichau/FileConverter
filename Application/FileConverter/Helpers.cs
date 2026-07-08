@@ -214,9 +214,11 @@ namespace FileConverter
                     return category == InputCategoryNames.Video || category == InputCategoryNames.AnimatedImage;
 
                 case OutputType.Avif:
+                case OutputType.Bmp:
                 case OutputType.Ico:
                 case OutputType.Jpg:
                 case OutputType.Png:
+                case OutputType.Tiff:
                 case OutputType.Webp:
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Document || category == InputCategoryNames.AnimatedImage;
 
