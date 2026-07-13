@@ -100,18 +100,13 @@ namespace FileConverter.ConversionJobs
             this.UserState = Properties.Resources.ConversionStateConversion;
 
             Debug.Log("Convert word document to pdf.");
-            // this.document.ExportAsFixedFormat(this.intermediateFilePath, Word.WdExportFormat.wdExportFormatPDF);
-            this.document.ExportAsFixedFormat(this.intermediateFilePath, 
-                Word.Enums.WdExportFormat.wdExportFormatPDF, 
-                false, 
-                Word.Enums.WdExportOptimizeFor.wdExportOptimizeForPrint, 
-                Word.Enums.WdExportRange.wdExportAllDocument, 
-                1, 1, 
-                Word.Enums.WdExportItem.wdExportDocumentContent, 
-                true, 
-                true, 
-                Word.Enums.WdExportCreateBookmarks.wdExportCreateHeadingBookmarks, 
-                true);
+
+            // Use SaveAs with the native PDF format instead of ExportAsFixedFormat.
+            // On recent Microsoft 365 builds the late-bound ExportAsFixedFormat call
+            // throws DISP_E_TYPEMISMATCH (0x80020005), which broke docx -> pdf in v2.2.
+            // SaveAs(path, wdFormatPDF) is the robust, supported automation path and is
+            // not affected by the tightened type libraries.
+            this.document.SaveAs(this.intermediateFilePath, Word.Enums.WdSaveFormat.wdFormatPDF);
 
             Debug.Log($"Close word document '{this.InputFilePath}'.");
             this.document.Close(Word.Enums.WdSaveOptions.wdDoNotSaveChanges);
@@ -163,6 +158,10 @@ namespace FileConverter.ConversionJobs
             {
                 Visible = false
             };
+
+            // Suppress modal dialogs (e.g. format-compatibility prompts) so the headless
+            // conversion does not block waiting for user input when exporting to PDF.
+            this.application.DisplayAlerts = Word.Enums.WdAlertLevel.wdAlertsNone;
         }
 
         protected override void ReleaseOfficeApplicationInstanceIfNeeded()
