@@ -149,6 +149,28 @@
             <Component Guid="{6268D6C0-42D8-4487-AC4B-33C9874C9E2F}">
                 <File Id="WpfAnimatedGif.dll" KeyPath="yes" Source="$(var.FileConverter.TargetDir)WpfAnimatedGif.dll" Checksum="yes" />
             </Component>
+
+            <!-- NetOffice assemblies (Word/Excel/PowerPoint interop). These were missing
+                 from the v2.2 MSI, causing FileNotFoundException/TypeLoadException and
+                 breaking every Office (docx/xlsx/pptx) conversion on a clean install. -->
+            <Component Guid="{C1A2B3C4-D5E6-4F70-8A91-B2C3D4E5F607}">
+                <File Id="NetOffice.dll" Source="$(var.FileConverter.TargetDir)NetOffice.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{D2B3C4D5-E6F7-4081-9B02-C3D4E5F60718}">
+                <File Id="OfficeApi.dll" Source="$(var.FileConverter.TargetDir)OfficeApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{E3C4D5E6-F708-4192-AC13-D4E5F6071829}">
+                <File Id="WordApi.dll" Source="$(var.FileConverter.TargetDir)WordApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{F4D5E6F7-0891-42A3-BD24-E5F60718293A}">
+                <File Id="ExcelApi.dll" Source="$(var.FileConverter.TargetDir)ExcelApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{A5E6F708-192A-43B4-CE35-F60718293A4B}">
+                <File Id="PowerPointApi.dll" Source="$(var.FileConverter.TargetDir)PowerPointApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{B6F70819-2A3B-44C5-DF46-0718293A4B5C}">
+                <File Id="VBIDEApi.dll" Source="$(var.FileConverter.TargetDir)VBIDEApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
             
             <!-- Configuration and documentation -->
             <Component Guid="{AD58807A-2AE2-48BE-AB55-9BDE9BBE37F3}">

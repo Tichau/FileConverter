@@ -96,7 +96,12 @@ namespace FileConverter.ConversionJobs
             this.UserState = Properties.Resources.ConversionStateConversion;
 
             Debug.Log("Convert PowerPoint document to pdf.");
-            this.document.ExportAsFixedFormat(this.intermediateFilePath, PowerPoint.Enums.PpFixedFormatType.ppFixedFormatTypePDF);
+
+            // Use SaveAs with the native PDF file type instead of ExportAsFixedFormat.
+            // On recent Microsoft 365 builds the late-bound ExportAsFixedFormat call
+            // throws DISP_E_TYPEMISMATCH (0x80020005), which broke pptx -> pdf in v2.2.
+            // SaveAs(path, ppSaveAsPDF) is the supported, robust automation path.
+            this.document.SaveAs(this.intermediateFilePath, PowerPoint.Enums.PpSaveAsFileType.ppSaveAsPDF, NetOffice.OfficeApi.Enums.MsoTriState.msoFalse);
 
             Debug.Log($"Close PowerPoint document '{this.InputFilePath}'.");
             this.document.Close();
