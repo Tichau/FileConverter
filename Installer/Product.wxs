@@ -87,6 +87,24 @@
             <Component Guid="{bae11ca4-0842-46f0-b0e5-95ecc1c994fc}">
                 <File Id="CommunityToolkit.Mvvm.dll" Source="$(var.FileConverter.TargetDir)CommunityToolkit.Mvvm.dll" KeyPath="yes" Checksum="yes" />
             </Component>
+            <Component Guid="{0b6e3f51-7c2a-4d8e-a1f4-5e9c2b7d3a61}">
+                <File Id="NetOffice.dll" Source="$(var.FileConverter.TargetDir)NetOffice.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{1c7f4062-8d3b-4e9f-b205-6fad3c8e4b72}">
+                <File Id="OfficeApi.dll" Source="$(var.FileConverter.TargetDir)OfficeApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{2d805173-9e4c-4fa0-8316-70be4d9f5c83}">
+                <File Id="WordApi.dll" Source="$(var.FileConverter.TargetDir)WordApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{3e916284-af5d-40b1-9427-81cf5ea06d94}">
+                <File Id="ExcelApi.dll" Source="$(var.FileConverter.TargetDir)ExcelApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{4fa27395-b06e-41c2-a538-92d06fb17ea5}">
+                <File Id="PowerPointApi.dll" Source="$(var.FileConverter.TargetDir)PowerPointApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{50b384a6-c17f-42d3-b649-a3e170c28fb6}">
+                <File Id="VBIDEApi.dll" Source="$(var.FileConverter.TargetDir)VBIDEApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
             <Component Guid="{4f1c7a2e-8b3d-4e6a-9c5f-2d7b8e1a6c93}">
                 <File Id="Markdig.dll" Source="$(var.FileConverter.TargetDir)Markdig.dll" KeyPath="yes" Checksum="yes" />
             </Component>
