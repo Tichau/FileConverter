@@ -395,6 +395,9 @@
     <PackageReference Include="Magick.NET-Q16-AnyCPU">
       <Version>14.10.2</Version>
     </PackageReference>
+    <PackageReference Include="Markdig">
+      <Version>1.3.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection">
       <Version>10.0.3</Version>
     </PackageReference>

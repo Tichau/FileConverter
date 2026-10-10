@@ -87,6 +87,9 @@
             <Component Guid="{bae11ca4-0842-46f0-b0e5-95ecc1c994fc}">
                 <File Id="CommunityToolkit.Mvvm.dll" Source="$(var.FileConverter.TargetDir)CommunityToolkit.Mvvm.dll" KeyPath="yes" Checksum="yes" />
             </Component>
+            <Component Guid="{4f1c7a2e-8b3d-4e6a-9c5f-2d7b8e1a6c93}">
+                <File Id="Markdig.dll" Source="$(var.FileConverter.TargetDir)Markdig.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
             <Component Guid="{ae4d8912-9d99-4e70-8746-e0216539fbe3}">
                 <File Id="Microsoft.Bcl.AsyncInterfaces.dll" Source="$(var.FileConverter.TargetDir)Microsoft.Bcl.AsyncInterfaces.dll" KeyPath="yes" Checksum="yes" />
             </Component>
