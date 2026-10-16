@@ -125,6 +125,29 @@ namespace FileConverter.ConversionJobs
 
                     break;
 
+                case OutputType.AnimatedWebp:
+                    {
+                        int videoEncodingQuality = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoQuality);
+                        string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
+
+                        // fps.
+                        int framesPerSecond = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.VideoFramesPerSecond);
+                        if (!string.IsNullOrEmpty(transformArgs))
+                        {
+                            transformArgs += ",";
+                        }
+
+                        transformArgs += $"fps={framesPerSecond}";
+
+                        string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
+                        string encoderArgs = $"-c:v libwebp_anim -lossless 0 -quality {videoEncodingQuality} -loop 0 -an {videoFilteringArgs}";
+                        string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
+
+                        this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
+                    }
+
+                    break;
+
                 case OutputType.Avi:
                     {
                         // https://trac.ffmpeg.org/wiki/Encode/MPEG-4

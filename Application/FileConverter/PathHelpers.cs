@@ -148,7 +148,7 @@ namespace FileConverter
 
             string inputExtension = System.IO.Path.GetExtension(inputFilePath).Substring(1);
             string inputPathWithoutExtension = inputFilePath.Substring(0, inputFilePath.Length - inputExtension.Length - 1);
-            string outputExtension = outputFileExtension.ToString().ToLowerInvariant();
+            string outputExtension = outputFileExtension == OutputType.AnimatedWebp ? "webp" : outputFileExtension.ToString().ToLowerInvariant();
 
             if (string.IsNullOrEmpty(outputFilePathTemplate))
             {

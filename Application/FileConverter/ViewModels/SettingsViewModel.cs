@@ -87,6 +87,7 @@ namespace FileConverter.ViewModels
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Webp));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ico));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Gif));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.AnimatedWebp));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Pdf));
             this.outputTypes = new ListCollectionView(outputTypeViewModels);
             this.outputTypes.GroupDescriptions.Add(new PropertyGroupDescription("Category"));

@@ -46,18 +46,25 @@ namespace FileConverterExtension
         {
             get
             {
-                string displayPresetIcons = PathHelpers.FileConverterRegistryKey.GetValue("DisplayPresetIcons") as string;
-                if (displayPresetIcons == null)
+                try
+                {
+                    string displayPresetIcons = PathHelpers.FileConverterRegistryKey?.GetValue("DisplayPresetIcons") as string;
+                    if (displayPresetIcons == null)
+                    {
+                        return false;
+                    }
+
+                    if (!bool.TryParse(displayPresetIcons, out bool value))
+                    {
+                        return false;
+                    }
+
+                    return value;
+                }
+                catch
                 {
                     return false;
                 }
-
-                if (!bool.TryParse(displayPresetIcons, out bool value))
-                {
-                    return false;
-                }
-
-                return value;
             }
         }
 
