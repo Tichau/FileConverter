@@ -177,7 +177,9 @@ namespace FileConverter.ConversionJobs
                 {
                     Debug.Log($"Apply rotation: {rotateAngleInDegrees}°.");
 
-                    image.Rotate(rotateAngleInDegrees);
+                    // ImageMagick rotates clockwise for positive angles, the app expects
+                    // counter-clockwise (video path uses ffmpeg transpose=2 for 90°).
+                    image.Rotate(-rotateAngleInDegrees);
                 }
             }
 
