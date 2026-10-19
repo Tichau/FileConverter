@@ -97,6 +97,12 @@ namespace FileConverter.ConversionJobs
                         readSettings.FrameIndex = 0;
                         break;
 
+                    case ".svg":
+                        readSettings.BackgroundColor = this.ConversionPreset.OutputType == OutputType.Jpg
+                            ? MagickColors.White
+                            : MagickColors.Transparent;
+                        break;
+
                     default:
                         break;
                 }
