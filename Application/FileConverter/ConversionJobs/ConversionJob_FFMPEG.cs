@@ -195,7 +195,7 @@ namespace FileConverter.ConversionJobs
 
                 case OutputType.Ico:
                     {
-                        string encoderArgs = string.Empty;
+                        string encoderArgs = "-pix_fmt bgra";
                         string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
