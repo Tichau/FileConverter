@@ -262,6 +262,60 @@
         <Settings Key="VideoFramesPerSecond" Value="10" />
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
+    <ConversionPreset Name="To Animated Webp" OutputType="AnimatedWebp" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="VideoQuality" Value="75" />
+        <Settings Key="VideoScale" Value="1" />
+        <Settings Key="VideoRotation" Value="0" />
+        <Settings Key="VideoFramesPerSecond" Value="15" />
+        <Settings Key="EnableFFMPEGCustomCommand" Value="False" />
+        <Settings Key="FFMPEGCustomCommand" Value="" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="To Animated Webp (low quality)" OutputType="AnimatedWebp" IsDefaultSettings="true">
+        <InputTypes>gif</InputTypes>
+        <InputTypes>3gp</InputTypes>
+        <InputTypes>3gpp</InputTypes>
+        <InputTypes>avi</InputTypes>
+        <InputTypes>bik</InputTypes>
+        <InputTypes>flv</InputTypes>
+        <InputTypes>m4v</InputTypes>
+        <InputTypes>mkv</InputTypes>
+        <InputTypes>mov</InputTypes>
+        <InputTypes>mp4</InputTypes>
+        <InputTypes>mpg</InputTypes>
+        <InputTypes>mpeg</InputTypes>
+        <InputTypes>ogv</InputTypes>
+        <InputTypes>rm</InputTypes>
+        <InputTypes>ts</InputTypes>
+        <InputTypes>webm</InputTypes>
+        <InputTypes>wmv</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <Settings Key="VideoQuality" Value="50" />
+        <Settings Key="VideoScale" Value="0.75" />
+        <Settings Key="VideoRotation" Value="0" />
+        <Settings Key="VideoFramesPerSecond" Value="10" />
+        <Settings Key="EnableFFMPEGCustomCommand" Value="False" />
+        <Settings Key="FFMPEGCustomCommand" Value="" />
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
     <ConversionPreset Name="To Ogg" OutputType="Ogg" IsDefaultSettings="true">
         <InputTypes>3gp</InputTypes>
         <InputTypes>3gpp</InputTypes>

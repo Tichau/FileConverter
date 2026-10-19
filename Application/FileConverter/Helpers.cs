@@ -206,6 +206,7 @@ namespace FileConverter
                 case OutputType.Wav:
                     return category == InputCategoryNames.Audio || category == InputCategoryNames.Video;
 
+                case OutputType.AnimatedWebp:
                 case OutputType.Avi:
                 case OutputType.Mkv:
                 case OutputType.Mp4:
