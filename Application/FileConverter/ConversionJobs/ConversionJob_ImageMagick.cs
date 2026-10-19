@@ -27,8 +27,7 @@ namespace FileConverter.ConversionJobs
         {
             base.Initialize();
 
-            string applicationDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            MagickNET.SetGhostscriptDirectory(applicationDirectory);
+            SetupGhostscriptDirectory();
 
             this.isInputFilePdf = System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant() == ".pdf";
 
@@ -38,14 +37,22 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        private static void SetupGhostscriptDirectory()
+        {
+            string applicationDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            MagickNET.SetGhostscriptDirectory(applicationDirectory);
+        }
+
         protected override int GetOutputFilesCount()
         {
             if (System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant() == ".pdf")
             {
+                // PrepareConversion() calls GetOutputFilesCount() before Initialize(),
+                // so the Ghostscript directory has to be configured here too.
+                SetupGhostscriptDirectory();
+
                 using (MagickImageCollection images = new MagickImageCollection())
                 {
-                    MagickReadSettings settings = new MagickReadSettings();
-                    settings.Density = new Density(1, 1);
                     images.Read(this.InputFilePath);
 
                     return images.Count;
