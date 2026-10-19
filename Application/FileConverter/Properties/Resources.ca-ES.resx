@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Quant a...</value>
+  </data>
+  <data name="ActionWhenConversionSucceedDescription" xml:space="preserve">
+    <value>Us permet triar què fer amb els fitxers origen si la conversió té èxit</value>
+  </data>
+  <data name="ActionWhenConversionSucceedTitle" xml:space="preserve">
+    <value>Acció després de la conversió:</value>
+  </data>
+  <data name="AddNewPreset" xml:space="preserve">
+    <value>Afegir predefinició (duplicant l'actual)</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Aplicació</value>
+  </data>
+  <data name="AudioTitle" xml:space="preserve">
+    <value>Àudio</value>
+  </data>
+  <data name="AutomaticallyCheckForUpdates" xml:space="preserve">
+    <value>Cercar actualitzacions de forma automàtica quan s'executa File Converter</value>
+  </data>
+  <data name="AutomaticallyExitWhenAllConversionsFinished" xml:space="preserve">
+    <value>Sortir automàticament en acabar les conversions</value>
+  </data>
+  <data name="ClampToLowestPowerOfTwoSize" xml:space="preserve">
+    <value>Arrodonir a la mida de la potència de dos més baixa</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Tancar</value>
+  </data>
+  <data name="ConversionPresets" xml:space="preserve">
+    <value>Predefinicions de conversió</value>
+  </data>
+  <data name="ConversionQueueTitle" xml:space="preserve">
+    <value>Fitxers a convertir</value>
+  </data>
+  <data name="ConvertedFrom" xml:space="preserve">
+    <value>Convertir de</value>
+  </data>
+  <data name="Diagnostics" xml:space="preserve">
+    <value>Registres</value>
+  </data>
+  <data name="DiagnosticsButtonTooltip" xml:space="preserve">
+    <value>Registres</value>
+  </data>
+  <data name="DocumentationButtonDescription" xml:space="preserve">
+    <value>Obrir documentació</value>
+  </data>
+  <data name="DonateButtonTitle" xml:space="preserve">
+    <value>Donar</value>
+  </data>
+  <data name="DonateDescription" xml:space="preserve">
+    <value>No us oblideu de recompensar la meva feina si us ha agradat :)</value>
+  </data>
+  <data name="DownloadAndInstallButtonDescription" xml:space="preserve">
+    <value>L'actualització es descarregarà en segon pla i s'instal·larà quan sortiu de File Converter.</value>
+  </data>
+  <data name="DownloadAndInstallButtonTitle" xml:space="preserve">
+    <value>Instal·lar en sortir de File Converter</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Codificació:</value>
+  </data>
+  <data name="EncodingSpeed" xml:space="preserve">
+    <value>Vel. de codificació:</value>
+  </data>
+  <data name="FileConverterStartHelp1" xml:space="preserve">
+    <value>File Converter és una extensió de la "shell" de Windows.</value>
+  </data>
+  <data name="FileConverterStartHelp2" xml:space="preserve">
+    <value>Això vol dir que està integrat a l'Explorador de Windows.</value>
+  </data>
+  <data name="FileConverterStartHelp3" xml:space="preserve">
+    <value>Per utilitzar File Converter, obriu l'Explorador de Windows i feu clic dret en qualsevol fitxer. Al menú contextual, utilitzeu directament les ordres de File Converter (consulteu el fitxer "readme" per a la llista completa de formats de fitxer compatibles).</value>
+  </data>
+  <data name="FileNameTemplate" xml:space="preserve">
+    <value>Plantilla de nom de fitxer</value>
+  </data>
+  <data name="FramesPerSecond" xml:space="preserve">
+    <value>Fotogrames per segon:</value>
+  </data>
+  <data name="GitHubButtonDescription" xml:space="preserve">
+    <value>Obrir la pàgina del projecte a GitHub</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Ajuda?</value>
+  </data>
+  <data name="InputExample" xml:space="preserve">
+    <value>Exemple d'origen</value>
+  </data>
+  <data name="InputFormats" xml:space="preserve">
+    <value>Formats d'origen:</value>
+  </data>
+  <data name="InputPostConversionActionDeleteName" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="InputPostConversionActionMoveInArchiveFolderName" xml:space="preserve">
+    <value>Moure a carpeta d'arxius</value>
+  </data>
+  <data name="InputPostConversionActionNoneName" xml:space="preserve">
+    <value>No fer res</value>
+  </data>
+  <data name="InstallButtonDescription" xml:space="preserve">
+    <value>Actualització descarregada. S'instal·larà quan sortiu de File Converter.</value>
+  </data>
+  <data name="InstallButtonTitle" xml:space="preserve">
+    <value>Instal·lar en sortir de File Converter</value>
+  </data>
+  <data name="IssueButtonDescription" xml:space="preserve">
+    <value>Informar d'un problema</value>
+  </data>
+  <data name="MoveDownSelectedPreset" xml:space="preserve">
+    <value>Moure avall la predefinició seleccionada</value>
+  </data>
+  <data name="MoveUpSelectedPreset" xml:space="preserve">
+    <value>Moure amunt la predefinició seleccionada</value>
+  </data>
+  <data name="Mp3CbrDescription" xml:space="preserve">
+    <value>Codificació amb taxa de bits constant</value>
+  </data>
+  <data name="Mp3VbrDescription" xml:space="preserve">
+    <value>Codificació amb taxa de bits variable</value>
+  </data>
+  <data name="NinetyDegreesRotationTitle" xml:space="preserve">
+    <value>90°</value>
+  </data>
+  <data name="NinetyDegreesRotationTooltip" xml:space="preserve">
+    <value>Rotació de 90° en el sentit de les agulles del rellotge</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Acceptar</value>
+  </data>
+  <data name="OneEightyDegreesRotationTitle" xml:space="preserve">
+    <value>180°</value>
+  </data>
+  <data name="OneEightyDegreesRotationTooltip" xml:space="preserve">
+    <value>Rotació de 180° en el sentit de les agulles del rellotge</value>
+  </data>
+  <data name="OutputFileNameTemplateSample" xml:space="preserve">
+    <value>C:\Música\Artista\Àlbum\Cançó.wav</value>
+  </data>
+  <data name="OutputExample" xml:space="preserve">
+    <value>Resultat</value>
+  </data>
+  <data name="OutputFilePathTemplateHelp" xml:space="preserve">
+    <value>(p): ruta del fitxer origen
+(f): nom del fitxer origen
+(o): extensió de destinació
+(i): extensió d'origen
+(d0): carpeta contenidora d'origen
+(d1): subcarpeta contenidora d'origen
+...
+(n:i): índex de número de pàgina
+(n:c): número total de pàgines
+
+Rutes especials:
+(p:d): ruta de Documents
+(p:m): ruta de Música
+(p:v): ruta de Vídeos
+(p:p): ruta d'Imatges
+
+Useu May per a la versió en majúscules</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>Format de destinació</value>
+  </data>
+  <data name="Preset" xml:space="preserve">
+    <value>Predefinició</value>
+  </data>
+  <data name="PresetName" xml:space="preserve">
+    <value>Nom de la predefinició</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Qualitat:</value>
+  </data>
+  <data name="RecommendedBitrateRangeInBlue" xml:space="preserve">
+    <value>Rang de taxa de bits recomanat en blau</value>
+  </data>
+  <data name="RemoveSelectedPreset" xml:space="preserve">
+    <value>Eliminar la predefinició seleccionada</value>
+  </data>
+  <data name="Rotate" xml:space="preserve">
+    <value>Girar:</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Desar</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Escala:</value>
+  </data>
+  <data name="SeeChangeLog" xml:space="preserve">
+    <value>Veure registre de canvis...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Configuració</value>
+  </data>
+  <data name="SettingsButtonTooltip" xml:space="preserve">
+    <value>Configuració</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTitle" xml:space="preserve">
+    <value>270°</value>
+  </data>
+  <data name="TwoSeventyDegreesRotationTooltip" xml:space="preserve">
+    <value>Rotació de 270° en el sentit de les agulles del rellotge</value>
+  </data>
+  <data name="UpgradeAvailable" xml:space="preserve">
+    <value>Hi ha una actualització disponible per a File Converter. Es recomana instal·lar-la el més aviat possible!</value>
+  </data>
+  <data name="UpgradeDownloadInProgress" xml:space="preserve">
+    <value>Descarregant actualització...</value>
+  </data>
+  <data name="UpgradeWindowTitle" xml:space="preserve">
+    <value>Actualitzacions de File Converter</value>
+  </data>
+  <data name="VideoEncodingQualityTooltip" xml:space="preserve">
+    <value>Defineix la relació entre mida del fitxer i qualitat de vídeo. Com més baix sigui el valor, més petit i de pitjor qualitat serà el fitxer resultant i viceversa.</value>
+  </data>
+  <data name="VideoEncodingSpeedFasterName" xml:space="preserve">
+    <value>Molt ràpida</value>
+  </data>
+  <data name="VideoEncodingSpeedFastName" xml:space="preserve">
+    <value>Ràpida</value>
+  </data>
+  <data name="VideoEncodingSpeedMediumName" xml:space="preserve">
+    <value>Mitjana</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowerName" xml:space="preserve">
+    <value>Molt lenta</value>
+  </data>
+  <data name="VideoEncodingSpeedSlowName" xml:space="preserve">
+    <value>Lenta</value>
+  </data>
+  <data name="VideoEncodingSpeedSuperFastName" xml:space="preserve">
+    <value>Superràpida</value>
+  </data>
+  <data name="VideoEncodingSpeedTooltip" xml:space="preserve">
+    <value>Defineix la relació entre mida del fitxer i temps invertit en la compressió. Una compressió prolongada produeix un fitxer més petit conservant la qualitat.</value>
+  </data>
+  <data name="VideoEncodingSpeedUltraFastName" xml:space="preserve">
+    <value>Ultraràpida</value>
+  </data>
+  <data name="VideoEncodingSpeedVeryFastName" xml:space="preserve">
+    <value>Molt ràpida</value>
+  </data>
+  <data name="VideoEncodingSpeedVerySlowName" xml:space="preserve">
+    <value>Molt lenta</value>
+  </data>
+  <data name="VideoTitle" xml:space="preserve">
+    <value>Vídeo</value>
+  </data>
+  <data name="Wav16bitsDescription" xml:space="preserve">
+    <value>PCM signat 16 bits little-endian</value>
+  </data>
+  <data name="Wav24bitsDescription" xml:space="preserve">
+    <value>PCM signat 24 bits little-endian</value>
+  </data>
+  <data name="Wav32bitsDescription" xml:space="preserve">
+    <value>PCM signat 32 bits little-endian</value>
+  </data>
+  <data name="Wav8bitsDescription" xml:space="preserve">
+    <value>PCM signat 8 bits little-endian</value>
+  </data>
+  <data name="ZeroDegreesRotationTitle" xml:space="preserve">
+    <value>Zero</value>
+  </data>
+  <data name="ZeroDegreesRotationTooltip" xml:space="preserve">
+    <value>Sense rotació</value>
+  </data>
+  <data name="ConversionStateConversion" xml:space="preserve">
+    <value>Conversió</value>
+  </data>
+  <data name="ConversionStateDone" xml:space="preserve">
+    <value>Fet</value>
+  </data>
+  <data name="ConversionStateExtraction" xml:space="preserve">
+    <value>Extracció</value>
+  </data>
+  <data name="ConversionStateFailed" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ConversionStateInQueue" xml:space="preserve">
+    <value>En cua</value>
+  </data>
+  <data name="ConversionStateReadIntputImage" xml:space="preserve">
+    <value>Llegir imatge origen</value>
+  </data>
+  <data name="ConversionStateReadDocument" xml:space="preserve">
+    <value>Llegir document</value>
+  </data>
+  <data name="StringAnimatedImageName" xml:space="preserve">
+    <value>Imatge animada</value>
+  </data>
+  <data name="StringAudioName" xml:space="preserve">
+    <value>Àudio</value>
+  </data>
+  <data name="StringDocumentName" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="StringImageName" xml:space="preserve">
+    <value>Imatge</value>
+  </data>
+  <data name="StringVideoName" xml:space="preserve">
+    <value>Vídeo</value>
+  </data>
+  <data name="ExitWaitingDuration" xml:space="preserve">
+    <value>Temps d'espera abans de tancar l'aplicació</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="MaximumNumberOfSimultaneousConversions" xml:space="preserve">
+    <value>Nombre màxim de conversions simultànies</value>
+  </data>
+  <data name="DefaultPresetName" xml:space="preserve">
+    <value>Nova predefinició</value>
+  </data>
+  <data name="DownloadingChangeLog" xml:space="preserve">
+    <value>###Descarregant registre de canvis...</value>
+  </data>
+  <data name="ConversionArchives" xml:space="preserve">
+    <value>Arxius de conversió</value>
+  </data>
+  <data name="ErrorCanceled" xml:space="preserve">
+    <value>Cancel·lat.</value>
+  </data>
+  <data name="ErrorCantFindFFMPEG" xml:space="preserve">
+    <value>No es troba l'executable de ffmpeg. Hauríeu de reinstal·lar l'aplicació.</value>
+  </data>
+  <data name="ErrorCDAExtractionFailed" xml:space="preserve">
+    <value>Extracció de la pista d'àudio del CD fallida.</value>
+  </data>
+  <data name="ErrorCDDriveNotReady" xml:space="preserve">
+    <value>La unitat de CD no està preparada.</value>
+  </data>
+  <data name="ErrorFailedToLaunchFFMPEG" xml:space="preserve">
+    <value>Error en executar ffmpeg.</value>
+  </data>
+  <data name="ErrorFailToCreateOutputPathFolders" xml:space="preserve">
+    <value>Error en crear les carpetes de destinació.</value>
+  </data>
+  <data name="ErrorFailToGenerateUniqueOutputPath" xml:space="preserve">
+    <value>Error en generar la ruta d'un fitxer de destinació únic.</value>
+  </data>
+  <data name="ErrorFailToReadCDDrive" xml:space="preserve">
+    <value>Error en llegir la unitat de CD '{0}'.</value>
+  </data>
+  <data name="ErrorFailToRetrieveInputPathDriveLetter" xml:space="preserve">
+    <value>Error en obtenir la lletra de unitat de la ruta origen.</value>
+  </data>
+  <data name="ErrorFailToRetrieveTrackNumber" xml:space="preserve">
+    <value>Error en obtenir el número de pista.</value>
+  </data>
+  <data name="ErrorFailToUseCDDriveOpen" xml:space="preserve">
+    <value>Error en gestionar la unitat de CD: Safata oberta.</value>
+  </data>
+  <data name="ErrorInputTypeIncompatibleWithOutputType" xml:space="preserve">
+    <value>El tipus de fitxer origen no és compatible amb el tipus de fitxer de destinació seleccionat.</value>
+  </data>
+  <data name="ErrorInvalidOutputPath" xml:space="preserve">
+    <value>Ruta de destinació invàlida causada per una plantilla de ruta de fitxer de destinació incorrecta.</value>
+  </data>
+  <data name="ErrorUnsupportedOutputFormat" xml:space="preserve">
+    <value>Format de destinació '{0}' no suportat.</value>
+  </data>
+  <data name="ChannelCountTitle" xml:space="preserve">
+    <value>Nombre de canals:</value>
+  </data>
+  <data name="ChannelCountTooltip" xml:space="preserve">
+    <value>Canviar el nombre de canals del fitxer origen.</value>
+  </data>
+  <data name="MonoOption" xml:space="preserve">
+    <value>Mono</value>
+  </data>
+  <data name="SameChannelCountOption" xml:space="preserve">
+    <value>El mateix que el fitxer origen</value>
+  </data>
+  <data name="StereoOption" xml:space="preserve">
+    <value>Estèreo</value>
+  </data>
+  <data name="LicenceHeader1" xml:space="preserve">
+    <value>**Aquest programa és programari lliure**.</value>
+  </data>
+  <data name="LicenceHeader2" xml:space="preserve">
+    <value>Podeu redistribuir-lo i modificar-lo sota els termes de la Llicència Pública General de GNU.</value>
+  </data>
+  <data name="LicenceHeader3" xml:space="preserve">
+    <value>Aquest programa es distribueix amb l'esperança que us resulti útil, però SENSE CAP GARANTIA. Per a més detalls, consulteu la Llicència Pública General de GNU (disponible al directori d'instal·lació com a "LICENSE.md").</value>
+  </data>
+  <data name="ApplicationIsTerminating" xml:space="preserve">
+    <value>L'aplicació està a punt de tancar-se.</value>
+  </data>
+  <data name="ApplicationWillTerminateInMultipleSeconds" xml:space="preserve">
+    <value>L'aplicació es tancarà automàticament en {0} segons.</value>
+  </data>
+  <data name="ApplicationWillTerminateInOneSecond" xml:space="preserve">
+    <value>L'aplicació es tancarà automàticament en 1 segon.</value>
+  </data>
+  <data name="StringMiscName" xml:space="preserve">
+    <value>Miscel·lània</value>
+  </data>
+  <data name="ErrorCantFindOutputFiles" xml:space="preserve">
+    <value>No es poden trobar el fitxer o fitxers de destinació.</value>
+  </data>
+  <data name="ErrorConversionFailedWithOutput" xml:space="preserve">
+    <value>La tasca de conversió ha fallat perquè el fitxer de destinació ja existeix.</value>
+  </data>
+  <data name="ConversionStatePrepareConversion" xml:space="preserve">
+    <value>Preparar conversió</value>
+  </data>
+  <data name="ErrorMicrosoftOfficeIsNotAvailable" xml:space="preserve">
+    <value>Heu de tenir instal·lat Microsoft Office per poder convertir documents d'Office.</value>
+  </data>
+  <data name="ErrorUnableToUseMicrosoftOffice" xml:space="preserve">
+    <value>Error en obrir el document amb Microsoft Office (comproveu que la vostra llicència i la instal·lació són correctes).</value>
+  </data>
+  <data name="ErrorMicrosoftExcelIsNotAvailable" xml:space="preserve">
+    <value>Heu de tenir instal·lat Microsoft Excel per poder convertir documents d'Excel.</value>
+  </data>
+  <data name="ErrorMicrosoftPowerPointIsNotAvailable" xml:space="preserve">
+    <value>Heu de tenir instal·lat Microsoft PowerPoint per poder convertir documents de PowerPoint.</value>
+  </data>
+  <data name="ErrorMicrosoftWordIsNotAvailable" xml:space="preserve">
+    <value>Heu de tenir instal·lat Microsoft Word per poder convertir documents de Word.</value>
+  </data>
+  <data name="WebsiteButtonDescription" xml:space="preserve">
+    <value>Obrir el web de File Converter</value>
+  </data>
+  <data name="ErrorDuringJobInitialization" xml:space="preserve">
+    <value>Error en iniciar la tasca de conversió.</value>
+  </data>
+</root>
