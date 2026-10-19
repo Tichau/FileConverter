@@ -77,9 +77,9 @@ namespace FileConverter.ConversionJobs
 
             this.ffmpegProcessStartInfo = new ProcessStartInfo(ffmpegPath)
             {
-                CreateNoWindow = true, 
-                UseShellExecute = false, 
-                RedirectStandardOutput = true, 
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = false,
                 RedirectStandardError = true
             };
 
@@ -88,7 +88,7 @@ namespace FileConverter.ConversionJobs
 
         protected virtual void FillFFMpegArgumentsList()
         {
-            const string baseArgs = "-n -progress pipe:1";
+            const string baseArgs = "-n";
 
             bool customCommandEnabled = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand);
             if (customCommandEnabled)
@@ -424,7 +424,7 @@ namespace FileConverter.ConversionJobs
                 }
             }
         }
-        
+
         protected override void Convert()
         {
             if (this.ConversionPreset == null)
