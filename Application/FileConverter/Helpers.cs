@@ -21,7 +21,7 @@ namespace FileConverter
     {
         public static readonly string[] CompatibleInputExtensions = {
             "3gp","3gpp","aac","aiff","ape","arw","avi","avif","bik","bmp","cda","cr2","dds","dng","doc","docx",
-            "exr","flac","flv","gif","heic","ico","jfif","jpg","jpeg","m4a","m4b","m4v","mkv","mov","mp3","mp4",
+            "exr","flac","flv","gif","heic","ico","jfif","jpg","jpeg","m4a","m4b","m4v","md","mkv","mov","mp3","mp4",
             "mpg","mpeg","nef","odp","ods","odt","oga","ogg","ogv","opus","pdf","png","ppt","pptx","psd",
             "raf", "rm","svg","tga","tif","tiff", "ts", "vob","wav","webm","webp","wma","wmv","xls","xlsx"
         };
@@ -94,6 +94,7 @@ namespace FileConverter
                 case "pdf":
                 case "doc":
                 case "docx":
+                case "md":
                 case "ppt":
                 case "pptx":
                 case "odp":
@@ -226,6 +227,10 @@ namespace FileConverter
                 case OutputType.Pdf:
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Document;
 
+                // mytail: category-level check, so pdf/ppt/xls inputs also show as ticks for Docx but only Word inputs (doc, docx, odt, md) convert; filter per extension if that confuses users.
+                case OutputType.Docx:
+                    return category == InputCategoryNames.Document;
+
                 default:
                     return false;
             }
@@ -324,6 +329,7 @@ namespace FileConverter
             {
                 case "doc":
                 case "docx":
+                case "md":
                 case "odt":
                     return ConversionJob_Office.ApplicationName.Word;
 

@@ -670,6 +670,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>doc</InputTypes>
         <InputTypes>docx</InputTypes>
+        <InputTypes>md</InputTypes>
         <InputTypes>odp</InputTypes>
         <InputTypes>ods</InputTypes>
         <InputTypes>odt</InputTypes>
@@ -697,6 +698,13 @@
         <InputTypes>tif</InputTypes>
         <InputTypes>tiff</InputTypes>
         <InputTypes>webp</InputTypes>
+        <InputPostConversionAction>None</InputPostConversionAction>
+        <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
+    </ConversionPreset>
+    <ConversionPreset Name="To Docx" OutputType="Docx" IsDefaultSettings="true">
+        <InputTypes>md</InputTypes>
+        <InputTypes>doc</InputTypes>
+        <InputTypes>odt</InputTypes>
         <InputPostConversionAction>None</InputPostConversionAction>
         <OutputFileNameTemplate>(p)(f)</OutputFileNameTemplate>
     </ConversionPreset>
