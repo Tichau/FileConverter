@@ -446,6 +446,20 @@ namespace FileConverter.ConversionJobs
                 {
                     using (Process exeProcess = Process.Start(this.ffmpegProcessStartInfo))
                     {
+                        // ffmpeg is launched with "-progress pipe:1", which directs key=value progress
+                        // lines to stdout. If stdout is not drained concurrently with stderr the pipe
+                        // buffer fills up and ffmpeg blocks indefinitely, causing the conversion to
+                        // get stuck (GitHub issue #749). We drain stdout on a background thread so
+                        // that both streams are consumed without deadlocking.
+                        exeProcess.OutputDataReceived += (sender, e) =>
+                        {
+                            if (e.Data != null)
+                            {
+                                Diagnostics.Debug.Log($"ffmpeg stdout: {e.Data}");
+                            }
+                        };
+                        exeProcess.BeginOutputReadLine();
+
                         using (StreamReader reader = exeProcess.StandardError)
                         {
                             while (!reader.EndOfStream)
