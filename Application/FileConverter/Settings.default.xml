@@ -670,6 +670,7 @@
         <InputTypes>xcf</InputTypes>
         <InputTypes>doc</InputTypes>
         <InputTypes>docx</InputTypes>
+        <InputTypes>md</InputTypes>
         <InputTypes>odp</InputTypes>
         <InputTypes>ods</InputTypes>
         <InputTypes>odt</InputTypes>
