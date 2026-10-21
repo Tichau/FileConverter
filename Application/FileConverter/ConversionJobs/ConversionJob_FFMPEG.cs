@@ -23,8 +23,11 @@ namespace FileConverter.ConversionJobs
         private ProcessStartInfo ffmpegProcessStartInfo;
 
         private readonly List<FFMpegPass> ffmpegArgumentStringByPass = new List<FFMpegPass>();
+        private ISettingsService settingsService;
 
-        ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
+        private Helpers.HardwareAccelerationMode currentHardwareAccelerationMode = Helpers.HardwareAccelerationMode.Off;
+        private bool softwareFallbackSucceeded;
+        private string softwareFallbackReason = string.Empty;
 
         public ConversionJob_FFMPEG() : base()
         {
@@ -83,12 +86,16 @@ namespace FileConverter.ConversionJobs
                 RedirectStandardError = true
             };
 
-            this.FillFFMpegArgumentsList();
+            this.currentHardwareAccelerationMode = this.GetSettingsService().Settings.HardwareAccelerationMode;
+            this.softwareFallbackSucceeded = false;
+            this.softwareFallbackReason = string.Empty;
+            this.FillFFMpegArgumentsList(this.currentHardwareAccelerationMode);
         }
 
-        protected virtual void FillFFMpegArgumentsList()
+        protected virtual void FillFFMpegArgumentsList(Helpers.HardwareAccelerationMode hardwareAccelerationMode)
         {
             const string baseArgs = "-n -progress pipe:1";
+            this.ffmpegArgumentStringByPass.Clear();
 
             bool customCommandEnabled = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand);
             if (customCommandEnabled)
@@ -260,7 +267,7 @@ namespace FileConverter.ConversionJobs
                         VideoEncodingSpeed videoEncodingSpeed = this.ConversionPreset.GetSettingsValue<VideoEncodingSpeed>(ConversionPreset.ConversionSettingKeys.VideoEncodingSpeed);
                         int audioEncodingBitrate = this.ConversionPreset.GetSettingsValue<int>(ConversionPreset.ConversionSettingKeys.AudioBitrate);
 
-                        Helpers.HardwareAccelerationMode hwAccel = settingsService.Settings.HardwareAccelerationMode;
+                        Helpers.HardwareAccelerationMode hwAccel = hardwareAccelerationMode;
 
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset, hwAccel);
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
@@ -432,9 +439,89 @@ namespace FileConverter.ConversionJobs
                 throw new Exception("The conversion preset must be valid.");
             }
 
+            FFMpegExecutionResult executionResult = this.ExecuteFFMpegPasses();
+            if (executionResult.IsSuccess)
+            {
+                this.CleanIntermediateFiles();
+                return;
+            }
+
+            if (this.CanRetryWithSoftwareEncoding(executionResult))
+            {
+                string hardwareFailureReason = executionResult.ErrorMessage;
+
+                this.softwareFallbackReason = hardwareFailureReason;
+                this.UserState = Properties.Resources.GpuEncodingFailedRetryingSoftwareEncode;
+                Diagnostics.Debug.Log("GPU encoding failed. Retry with software libx264 encoder.");
+                Diagnostics.Debug.Log($"GPU encoding failure reason: {hardwareFailureReason}");
+
+                this.DeleteCurrentOutputFileForRetry();
+                this.ResetProgressForRetry();
+                this.currentHardwareAccelerationMode = Helpers.HardwareAccelerationMode.Off;
+                this.FillFFMpegArgumentsList(this.currentHardwareAccelerationMode);
+
+                executionResult = this.ExecuteFFMpegPasses();
+                if (executionResult.IsSuccess)
+                {
+                    this.softwareFallbackSucceeded = true;
+                    this.CleanIntermediateFiles();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(hardwareFailureReason))
+                {
+                    hardwareFailureReason = "Unknown GPU encoding error.";
+                }
+
+                string softwareFailureReason = executionResult.ErrorMessage;
+                if (string.IsNullOrEmpty(softwareFailureReason))
+                {
+                    softwareFailureReason = "Unknown software encoding error.";
+                }
+
+                Diagnostics.Debug.Log($"Software fallback failure reason: {softwareFailureReason}");
+                this.ConversionFailed(this.BuildEncodeFailureMessage(hardwareFailureReason));
+                this.CleanIntermediateFiles();
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(executionResult.ErrorMessage))
+            {
+                this.ConversionFailed(this.BuildEncodeFailureMessage(executionResult.ErrorMessage));
+            }
+            else
+            {
+                this.ConversionFailed(this.BuildEncodeFailureMessage(string.Empty));
+            }
+
+            this.CleanIntermediateFiles();
+        }
+
+        protected override void OnConversionSucceed()
+        {
+            base.OnConversionSucceed();
+
+            if (!this.softwareFallbackSucceeded)
+            {
+                return;
+            }
+
+            this.UserState = Properties.Resources.ConversionStateDoneSoftwareFallback;
+
+            if (string.IsNullOrEmpty(this.softwareFallbackReason))
+            {
+                this.softwareFallbackReason = "GPU encoder reported an error.";
+            }
+
+            this.SetStatusMessage(Properties.Resources.GpuEncodingFailedAndRetriedWithSoftwareEncoding);
+        }
+
+        private FFMpegExecutionResult ExecuteFFMpegPasses()
+        {
             for (int index = 0; index < this.ffmpegArgumentStringByPass.Count; index++)
             {
                 FFMpegPass currentPass = this.ffmpegArgumentStringByPass[index];
+                string lastErrorMessage = string.Empty;
 
                 this.UserState = currentPass.Name;
                 this.ffmpegProcessStartInfo.Arguments = currentPass.Arguments;
@@ -457,25 +544,139 @@ namespace FileConverter.ConversionJobs
 
                                 string result = reader.ReadLine();
 
-                                this.ParseFFMPEGOutput(result);
+                                string parsedErrorMessage = this.ParseFFMPEGOutput(result);
+                                if (!string.IsNullOrEmpty(parsedErrorMessage))
+                                {
+                                    lastErrorMessage = parsedErrorMessage;
+                                }
 
                                 Diagnostics.Debug.Log($"ffmpeg output: {result}");
                             }
                         }
 
                         exeProcess.WaitForExit();
+
+                        if (this.State == ConversionState.Failed)
+                        {
+                            return new FFMpegExecutionResult(false, this.ErrorMessage);
+                        }
+
+                        if (!string.IsNullOrEmpty(lastErrorMessage))
+                        {
+                            return new FFMpegExecutionResult(false, lastErrorMessage);
+                        }
+
+                        if (exeProcess.ExitCode != 0)
+                        {
+                            if (string.IsNullOrEmpty(lastErrorMessage))
+                            {
+                                lastErrorMessage = $"ffmpeg exited with code {exeProcess.ExitCode}.";
+                            }
+
+                            return new FFMpegExecutionResult(false, lastErrorMessage);
+                        }
                     }
                 }
-                catch
+                catch (Exception exception)
                 {
-                    this.ConversionFailed(Properties.Resources.ErrorFailedToLaunchFFMPEG);
-                    throw;
+                    Diagnostics.Debug.Log(exception.ToString());
+                    return new FFMpegExecutionResult(false, Properties.Resources.ErrorFailedToLaunchFFMPEG);
                 }
             }
 
+            return new FFMpegExecutionResult(true, string.Empty);
+        }
+
+        private bool CanRetryWithSoftwareEncoding(FFMpegExecutionResult executionResult)
+        {
+            if (executionResult.IsSuccess || this.CancelIsRequested || this.State == ConversionState.Failed)
+            {
+                return false;
+            }
+
+            if (this.ConversionPreset == null)
+            {
+                return false;
+            }
+
+            if (this.currentHardwareAccelerationMode == Helpers.HardwareAccelerationMode.Off)
+            {
+                return false;
+            }
+
+            if (!this.GetSettingsService().Settings.AutoRetrySoftwareEncodingOnGpuFailure)
+            {
+                return false;
+            }
+
+            bool customCommandEnabled = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand);
+            if (customCommandEnabled)
+            {
+                return false;
+            }
+
+            return this.ConversionPreset.OutputType == OutputType.Mp4 || this.ConversionPreset.OutputType == OutputType.Mkv;
+        }
+
+        private string BuildEncodeFailureMessage(string technicalReason)
+        {
+            bool isGpuEncodingPath =
+                this.currentHardwareAccelerationMode != Helpers.HardwareAccelerationMode.Off &&
+                this.ConversionPreset != null &&
+                (this.ConversionPreset.OutputType == OutputType.Mp4 || this.ConversionPreset.OutputType == OutputType.Mkv);
+
+            if (!isGpuEncodingPath)
+            {
+                return string.IsNullOrEmpty(technicalReason) ? Properties.Resources.ErrorConversionFailed : technicalReason;
+            }
+
+            if (this.GetSettingsService().Settings.AutoRetrySoftwareEncodingOnGpuFailure)
+            {
+                return Properties.Resources.ErrorGpuEncodingFailedAfterFallback;
+            }
+
+            return Properties.Resources.ErrorGpuEncodingFailed;
+        }
+
+        private ISettingsService GetSettingsService()
+        {
+            if (this.settingsService == null)
+            {
+                this.settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
+            }
+
+            return this.settingsService;
+        }
+
+        private void DeleteCurrentOutputFileForRetry()
+        {
+            if (!File.Exists(this.OutputFilePath))
+            {
+                return;
+            }
+
+            try
+            {
+                File.Delete(this.OutputFilePath);
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.Log($"Failed to delete incomplete output file before retry: {this.OutputFilePath}.");
+                Diagnostics.Debug.Log(exception.ToString());
+            }
+        }
+
+        private void ResetProgressForRetry()
+        {
+            this.fileDuration = TimeSpan.Zero;
+            this.actualConvertedDuration = TimeSpan.Zero;
+            this.Progress = 0f;
+        }
+
+        private void CleanIntermediateFiles()
+        {
             Diagnostics.Debug.Log(string.Empty);
 
-            // Clean intermediate files.
             for (int index = 0; index < this.ffmpegArgumentStringByPass.Count; index++)
             {
                 FFMpegPass currentPass = this.ffmpegArgumentStringByPass[index];
@@ -491,8 +692,13 @@ namespace FileConverter.ConversionJobs
             }
         }
 
-        private void ParseFFMPEGOutput(string input)
+        private string ParseFFMPEGOutput(string input)
         {
+            if (string.IsNullOrEmpty(input))
+            {
+                return string.Empty;
+            }
+
             Match match = this.durationRegex.Match(input);
             if (match.Success && match.Groups.Count >= 6)
             {
@@ -502,7 +708,7 @@ namespace FileConverter.ConversionJobs
                 int milliseconds = int.Parse(match.Groups[4].Value) * 10;
                 float bitrate = float.Parse(match.Groups[5].Value);
                 this.fileDuration = new TimeSpan(0, hours, minutes, seconds, milliseconds);
-                return;
+                return string.Empty;
             }
 
             if (this.fileDuration.Ticks > 0)
@@ -521,7 +727,7 @@ namespace FileConverter.ConversionJobs
                     this.actualConvertedDuration = new TimeSpan(0, hours, minutes, seconds, milliseconds);
 
                     this.Progress = this.actualConvertedDuration.Ticks / (float)this.fileDuration.Ticks;
-                    return;
+                    return string.Empty;
                 }
             }
 
@@ -537,8 +743,22 @@ namespace FileConverter.ConversionJobs
                 }
                 else
                 {
-                    this.ConversionFailed(input);
+                    return input;
                 }
+            }
+
+            return string.Empty;
+        }
+
+        private struct FFMpegExecutionResult
+        {
+            public bool IsSuccess;
+            public string ErrorMessage;
+
+            public FFMpegExecutionResult(bool isSuccess, string errorMessage)
+            {
+                this.IsSuccess = isSuccess;
+                this.ErrorMessage = errorMessage;
             }
         }
 

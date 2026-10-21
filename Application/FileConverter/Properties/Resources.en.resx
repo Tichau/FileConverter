@@ -574,4 +574,25 @@ use maj for uppercase version</value>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
     <value>Could not load file converter user settings. Would you like to use default settings ?</value>
   </data>
+  <data name="AutoRetrySoftwareEncodingOnGpuFailureLabel" xml:space="preserve">
+    <value>Auto-retry software encode if GPU encode fails</value>
+  </data>
+  <data name="GpuEncodingFailedRetryingSoftwareEncode" xml:space="preserve">
+    <value>GPU encode failed, retrying software encode</value>
+  </data>
+  <data name="ConversionStateDoneSoftwareFallback" xml:space="preserve">
+    <value>Done (software fallback)</value>
+  </data>
+  <data name="GpuEncodingFailedAndRetriedWithSoftwareEncoding" xml:space="preserve">
+    <value>GPU encoding failed and conversion automatically retried with software encoding.</value>
+  </data>
+  <data name="ErrorGpuEncodingFailedAfterFallback" xml:space="preserve">
+    <value>GPU encoding failed. Software fallback also failed. Check hardware acceleration settings or GPU drivers and try again.</value>
+  </data>
+  <data name="ErrorGpuEncodingFailed" xml:space="preserve">
+    <value>GPU encoding failed. Check hardware acceleration settings or GPU drivers and try again.</value>
+  </data>
+  <data name="ErrorConversionFailed" xml:space="preserve">
+    <value>Conversion failed.</value>
+  </data>
 </root>
