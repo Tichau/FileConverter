@@ -15,11 +15,13 @@ namespace FileConverter.Services
 
     public class ConversionService : ObservableObject, IConversionService
     {
+        private readonly object conversionQueueLock = new object();
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
 
         private readonly int numberOfConversionThread = 1;
 
         private ISettingsService settingsService;
+        private bool conversionQueueIsRunning;
 
         public ConversionService(ISettingsService settingsService)
         {
@@ -38,9 +40,11 @@ namespace FileConverter.Services
             if (this.numberOfConversionThread <= 0)
             {
                 this.numberOfConversionThread = System.Math.Max(1, Environment.ProcessorCount / 2);
-                Debug.Log($"The number of processors on this computer is {settingsService.Settings.MaximumNumberOfSimultaneousConversions}. Set the default number of conversion threads to {settingsService.Settings.MaximumNumberOfSimultaneousConversions}");
+                Debug.Log($"The number of processors on this computer is {Environment.ProcessorCount}. Set the default number of conversion threads to {this.numberOfConversionThread}");
             }
         }
+
+        public event System.EventHandler<ConversionJobRegisteredEventArgs> ConversionJobRegistered;
 
         public event System.EventHandler<ConversionJobsTerminatedEventArgs> ConversionJobsTerminated;
 
@@ -52,107 +56,167 @@ namespace FileConverter.Services
 
         public void RegisterConversionJob(ConversionJob conversionJob)
         {
+            if (conversionJob == null)
+            {
+                throw new ArgumentNullException(nameof(conversionJob));
+            }
+
             this.conversionJobs.Add(conversionJob);
             this.OnPropertyChanged(nameof(this.ConversionJobs));
+            this.ConversionJobRegistered?.Invoke(this, new ConversionJobRegisteredEventArgs(conversionJob));
         }
 
         public void ConvertFilesAsync()
         {
+            lock (this.conversionQueueLock)
+            {
+                if (this.conversionQueueIsRunning)
+                {
+                    Debug.Log("Conversion queue is already running.");
+                    return;
+                }
+
+                this.conversionQueueIsRunning = true;
+            }
+
             Thread fileConvertionThread = Helpers.InstantiateThread("ConversionQueueThread", this.ConvertFiles);
             fileConvertionThread.Start();
         }
 
+        public void RetryConversionJob(ConversionJob conversionJob)
+        {
+            if (conversionJob == null)
+            {
+                throw new ArgumentNullException(nameof(conversionJob));
+            }
+
+            lock (this.conversionQueueLock)
+            {
+                if (this.conversionQueueIsRunning)
+                {
+                    Debug.Log("Can't retry a conversion while the queue is running.");
+                    return;
+                }
+            }
+
+            ConversionJob retryJob = ConversionJobFactory.Create(conversionJob.ConversionPreset, conversionJob.InitialInputPath);
+            this.RegisterConversionJob(retryJob);
+            this.ConvertFilesAsync();
+        }
+
         private void ConvertFiles()
         {
-            // Prepare conversions.
-            for (int index = 0; index < this.ConversionJobs.Count; index++)
+            try
             {
-                this.ConversionJobs[index].PrepareConversion();
-            }
+                List<ConversionJob> activeJobs = new List<ConversionJob>();
 
-            System.Collections.Specialized.StringCollection files = new System.Collections.Specialized.StringCollection();
-            // Convert!
-            Thread[] jobThreads = new Thread[this.numberOfConversionThread];
-            while (true)
-            {
-                // Compute conversion flags.
-                ConversionFlags conversionFlags = ConversionFlags.None;
-                bool allJobAreFinished = true;
-                for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
+                // Prepare conversions.
+                for (int index = 0; index < this.ConversionJobs.Count; index++)
                 {
-                    ConversionJob conversionJob = this.conversionJobs[jobIndex];
-                    allJobAreFinished &= !(conversionJob.State == ConversionState.Ready || conversionJob.State == ConversionState.InProgress);
-
-                    if (conversionJob.State == ConversionState.InProgress)
+                    if (this.ConversionJobs[index].State == ConversionState.Unknown)
                     {
-                        conversionFlags |= conversionJob.StateFlags;
+                        this.ConversionJobs[index].PrepareConversion();
+                        activeJobs.Add(this.ConversionJobs[index]);
                     }
                 }
 
-                if (allJobAreFinished)
+                if (activeJobs.Count == 0)
                 {
-                    break;
+                    Debug.Log("No pending conversion jobs to run.");
+                    return;
                 }
 
-                // Start job if possible.
-                for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
+                System.Collections.Specialized.StringCollection files = new System.Collections.Specialized.StringCollection();
+                // Convert!
+                Thread[] jobThreads = new Thread[this.numberOfConversionThread];
+                while (true)
                 {
-                    ConversionJob conversionJob = this.conversionJobs[jobIndex];
-                    if (conversionJob.State == ConversionState.Ready && conversionJob.CanStartConversion(conversionFlags))
+                    // Compute conversion flags.
+                    ConversionFlags conversionFlags = ConversionFlags.None;
+                    bool allJobAreFinished = true;
+                    for (int jobIndex = 0; jobIndex < activeJobs.Count; jobIndex++)
                     {
-                        // Find a thread to execute the job.
-                        Thread jobThread = null;
-                        for (int threadIndex = 0; threadIndex < jobThreads.Length; threadIndex++)
+                        ConversionJob conversionJob = activeJobs[jobIndex];
+                        allJobAreFinished &= !(conversionJob.State == ConversionState.Ready || conversionJob.State == ConversionState.InProgress);
+
+                        if (conversionJob.State == ConversionState.InProgress)
                         {
-                            Thread thread = jobThreads[threadIndex];
-                            if (thread == null || !thread.IsAlive)
-                            {
-                                jobThread = Helpers.InstantiateThread(conversionJob.GetType().Name, this.ExecuteConversionJob);
-                                jobThreads[threadIndex] = jobThread;
-                                break;
-                            }
+                            conversionFlags |= conversionJob.StateFlags;
                         }
+                    }
 
-                        if (jobThread != null)
-                        {
-                            jobThread.Start(conversionJob);
-
-                            while (conversionJob.State == ConversionState.Ready)
-                            {
-                                Debug.Log("Wait the launch of the conversion thread before launching any other thread.");
-                                Thread.Sleep(20);
-                            }
-                        }
-
-                        if (!files.Contains(conversionJob.OutputFilePath))
-                        {
-                            files.Add(conversionJob.OutputFilePath);
-                        }
-
+                    if (allJobAreFinished)
+                    {
                         break;
                     }
+
+                    // Start job if possible.
+                    for (int jobIndex = 0; jobIndex < activeJobs.Count; jobIndex++)
+                    {
+                        ConversionJob conversionJob = activeJobs[jobIndex];
+                        if (conversionJob.State == ConversionState.Ready && conversionJob.CanStartConversion(conversionFlags))
+                        {
+                            // Find a thread to execute the job.
+                            Thread jobThread = null;
+                            for (int threadIndex = 0; threadIndex < jobThreads.Length; threadIndex++)
+                            {
+                                Thread thread = jobThreads[threadIndex];
+                                if (thread == null || !thread.IsAlive)
+                                {
+                                    jobThread = Helpers.InstantiateThread(conversionJob.GetType().Name, this.ExecuteConversionJob);
+                                    jobThreads[threadIndex] = jobThread;
+                                    break;
+                                }
+                            }
+
+                            if (jobThread != null)
+                            {
+                                jobThread.Start(conversionJob);
+
+                                while (conversionJob.State == ConversionState.Ready)
+                                {
+                                    Debug.Log("Wait the launch of the conversion thread before launching any other thread.");
+                                    Thread.Sleep(20);
+                                }
+                            }
+
+                            if (!files.Contains(conversionJob.OutputFilePath))
+                            {
+                                files.Add(conversionJob.OutputFilePath);
+                            }
+
+                            break;
+                        }
+                    }
+
+                    Thread.Sleep(50);
                 }
 
-                Thread.Sleep(50);
-            }
+                // Copy the output files to the clipboard
+                if (this.settingsService.Settings.CopyFilesInClipboardAfterConversion && files.Count > 0)
+                {
+                    Thread clipboardThread = Helpers.InstantiateThread("CopyFilesToClipboardThread", this.CopyFilesToClipboard);
+                    clipboardThread.SetApartmentState(ApartmentState.STA);
+                    clipboardThread.Start(files);
+                }
 
-            // Copy the output files to the clipboard
-            if (this.settingsService.Settings.CopyFilesInClipboardAfterConversion && files.Count > 0)
-            {
-                Thread clipboardThread = Helpers.InstantiateThread("CopyFilesToClipboardThread", this.CopyFilesToClipboard);
-                clipboardThread.SetApartmentState(ApartmentState.STA);
-                clipboardThread.Start(files);
-            }
+                bool allConversionsSucceed = true;
+                for (int index = 0; index < activeJobs.Count; index++)
+                {
+                    allConversionsSucceed &= activeJobs[index].State == ConversionState.Done;
+                }
 
-            bool allConversionsSucceed = true;
-            for (int index = 0; index < this.conversionJobs.Count; index++)
-            {
-                allConversionsSucceed &= this.conversionJobs[index].State == ConversionState.Done;
+                if (this.ConversionJobsTerminated != null)
+                {
+                    this.ConversionJobsTerminated.Invoke(this, new ConversionJobsTerminatedEventArgs(allConversionsSucceed));
+                }
             }
-
-            if (this.ConversionJobsTerminated != null)
+            finally
             {
-                this.ConversionJobsTerminated.Invoke(this, new ConversionJobsTerminatedEventArgs(allConversionsSucceed));
+                lock (this.conversionQueueLock)
+                {
+                    this.conversionQueueIsRunning = false;
+                }
             }
         }
 

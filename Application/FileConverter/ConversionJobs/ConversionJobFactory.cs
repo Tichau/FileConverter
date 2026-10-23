@@ -6,8 +6,7 @@ namespace FileConverter.ConversionJobs
     {
         public static ConversionJob Create(ConversionPreset conversionPreset, string inputFilePath)
         {
-            string inputFileExtension = System.IO.Path.GetExtension(inputFilePath);
-            inputFileExtension = inputFileExtension.ToLowerInvariant().Substring(1, inputFileExtension.Length - 1);
+            string inputFileExtension = PathHelpers.GetExtensionWithoutDot(inputFilePath);
             if (inputFileExtension == "cda")
             {
                 return new ConversionJob_ExtractCDA(conversionPreset, inputFilePath);    

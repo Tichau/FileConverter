@@ -5,10 +5,14 @@ namespace FileConverter.ViewModels
     using System;
     using System.IO;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -19,6 +23,7 @@ namespace FileConverter.ViewModels
     using CommunityToolkit.Mvvm.Input;
 
     using FileConverter.Annotations;
+    using FileConverter.ConversionJobs;
     using FileConverter.Services;
     using FileConverter.Views;
 
@@ -42,8 +47,13 @@ namespace FileConverter.ViewModels
         private RelayCommand importPresetCommand;
         private RelayCommand exportPresetCommand;
         private RelayCommand removePresetCommand;
+        private RelayCommand refreshDependencyHealthCommand;
+        private RelayCommand repairShellExtensionCommand;
         private RelayCommand saveCommand;
         private RelayCommand<CancelEventArgs> closeCommand;
+
+        private ObservableCollection<DependencyStatusViewModel> dependencyStatuses = new ObservableCollection<DependencyStatusViewModel>();
+        private string shellExtensionRepairStatus = string.Empty;
 
         private ListCollectionView outputTypes;
         private CultureInfo[] supportedCultures;
@@ -58,13 +68,15 @@ namespace FileConverter.ViewModels
         public SettingsViewModel()
         {
             this.getChangeLogContentCommand = new RelayCommand(this.DownloadChangeLogAction);
-            this.openUrlCommand = new RelayCommand<string>((url) => Process.Start(url));
+            this.openUrlCommand = new RelayCommand<string>(this.OpenUrl);
             this.createFolderCommand = new RelayCommand(this.CreateFolder);
             this.newPresetCommand = new RelayCommand(() => this.AddNewPreset(false));
             this.duplicatePresetCommand = new RelayCommand(() => this.AddNewPreset(true), this.CanDuplicateSelectedPreset);
             this.importPresetCommand = new RelayCommand(this.ImportPreset);
             this.exportPresetCommand = new RelayCommand(this.ExportSelectedPreset, this.CanExportSelectedPreset);
             this.removePresetCommand = new RelayCommand(this.RemoveSelectedPreset, this.CanRemoveSelectedPreset);
+            this.refreshDependencyHealthCommand = new RelayCommand(this.RefreshDependencyHealth);
+            this.repairShellExtensionCommand = new RelayCommand(this.RepairShellExtension);
             this.saveCommand = new RelayCommand(this.SaveSettings, this.CanSaveSettings);
             this.closeCommand = new RelayCommand<CancelEventArgs>(this.CloseSettings);
 
@@ -84,6 +96,7 @@ namespace FileConverter.ViewModels
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Avi));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Png));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Jpg));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Avif));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Webp));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ico));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Gif));
@@ -95,6 +108,7 @@ namespace FileConverter.ViewModels
 
             this.InitializeCompatibleInputExtensions();
             this.InitializePresetFolders();
+            this.RefreshDependencyHealth();
         }
 
         public IEnumerable<InputExtensionCategory> InputCategories
@@ -284,9 +298,35 @@ namespace FileConverter.ViewModels
 
         public ICommand RemoveSelectedPresetCommand => this.removePresetCommand;
 
+        public ICommand RefreshDependencyHealthCommand => this.refreshDependencyHealthCommand;
+
+        public ICommand RepairShellExtensionCommand => this.repairShellExtensionCommand;
+
         public ICommand SaveCommand => this.saveCommand;
 
         public ICommand CloseCommand => this.closeCommand;
+
+        public ObservableCollection<DependencyStatusViewModel> DependencyStatuses
+        {
+            get => this.dependencyStatuses;
+
+            private set
+            {
+                this.dependencyStatuses = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public string ShellExtensionRepairStatus
+        {
+            get => this.shellExtensionRepairStatus;
+
+            private set
+            {
+                this.shellExtensionRepairStatus = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         public TreeViewSelectionBehavior.IsChildOfPredicate PresetsHierarchyPredicate => (object nodeA, object nodeB) =>
             {
@@ -385,6 +425,161 @@ namespace FileConverter.ViewModels
             IUpgradeService upgradeService = Ioc.Default.GetRequiredService<IUpgradeService>();
             upgradeService.DownloadChangeLog();
             this.DisplaySeeChangeLogLink = false;
+        }
+
+        private void OpenUrl(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+            {
+                return;
+            }
+
+            try
+            {
+                Process.Start(url);
+            }
+            catch (Exception exception)
+            {
+                Diagnostics.Debug.Log($"Failed to open URL '{url}': {exception.Message}.");
+            }
+        }
+
+        private void RefreshDependencyHealth()
+        {
+            ObservableCollection<DependencyStatusViewModel> statuses = new ObservableCollection<DependencyStatusViewModel>();
+
+            string shellExtensionPath = Helpers.GetDefaultShellExtensionPath();
+            string defaultSettingsPath = FileConverterExtension.PathHelpers.DefaultSettingsFilePath;
+            string userSettingsPath = FileConverterExtension.PathHelpers.UserSettingsFilePath;
+
+            this.AddFileStatus(statuses, "FFmpeg", GetApplicationFilePath("ffmpeg.exe"), "Required for audio and video conversions.");
+            this.AddFileStatus(statuses, "ImageMagick", GetApplicationFilePath("Magick.NET-Q16-AnyCPU.dll"), "Required for image, AVIF, PDF image, and WebP workflows.");
+            this.AddFileStatus(statuses, "ImageMagick native", GetApplicationFilePath("Magick.Native-Q16-x64.dll"), "Required native image processing runtime.");
+            this.AddFileStatus(statuses, "Ghostscript", GetApplicationFilePath("gswin64c.exe"), "Required for PDF rendering.");
+            this.AddFileStatus(statuses, "Ghostscript DLL", GetApplicationFilePath("gsdll64.dll"), "Required by ImageMagick PDF rendering.");
+            this.AddFileStatus(statuses, "Explorer extension DLL", shellExtensionPath, "Required for Windows Explorer right-click commands.");
+            this.AddFileStatus(statuses, "Default presets", defaultSettingsPath, "Required when creating or repairing user settings.");
+
+            if (File.Exists(userSettingsPath))
+            {
+                statuses.Add(new DependencyStatusViewModel("User settings", "Ready", userSettingsPath, true));
+            }
+            else
+            {
+                statuses.Add(new DependencyStatusViewModel("User settings", "Will be created", userSettingsPath, true));
+            }
+
+            this.AddOfficeStatus(statuses, "Microsoft Word", ConversionJob_Office.ApplicationName.Word, "Required for Word document conversion.");
+            this.AddOfficeStatus(statuses, "Microsoft Excel", ConversionJob_Office.ApplicationName.Excel, "Required for spreadsheet conversion.");
+            this.AddOfficeStatus(statuses, "Microsoft PowerPoint", ConversionJob_Office.ApplicationName.PowerPoint, "Required for presentation conversion.");
+            this.AddShellRegistrationStatus(statuses);
+
+            this.DependencyStatuses = statuses;
+        }
+
+        private void RepairShellExtension()
+        {
+            string shellExtensionPath = Helpers.GetDefaultShellExtensionPath();
+            if (!File.Exists(shellExtensionPath))
+            {
+                this.ShellExtensionRepairStatus = $"Can't repair Explorer integration because {shellExtensionPath} is missing.";
+                this.RefreshDependencyHealth();
+                return;
+            }
+
+            string executablePath = Assembly.GetExecutingAssembly().Location;
+            ProcessStartInfo startInfo = new ProcessStartInfo(executablePath)
+            {
+                Arguments = $"--repair-shell-extension {QuoteArgument(shellExtensionPath)}",
+                UseShellExecute = true,
+                Verb = "runas",
+            };
+
+            try
+            {
+                Process.Start(startInfo);
+                this.ShellExtensionRepairStatus = "Repair launched with administrator privileges. Reopen Explorer or retry the context menu after it finishes.";
+            }
+            catch (Win32Exception exception)
+            {
+                if (exception.NativeErrorCode == 1223)
+                {
+                    this.ShellExtensionRepairStatus = "Repair canceled by user.";
+                }
+                else
+                {
+                    this.ShellExtensionRepairStatus = $"Repair failed to start: {exception.Message}";
+                }
+            }
+            catch (Exception exception)
+            {
+                this.ShellExtensionRepairStatus = $"Repair failed to start: {exception.Message}";
+            }
+
+            this.RefreshDependencyHealth();
+        }
+
+        private void AddFileStatus(ObservableCollection<DependencyStatusViewModel> statuses, string name, string path, string purpose)
+        {
+            if (!string.IsNullOrEmpty(path) && File.Exists(path))
+            {
+                statuses.Add(new DependencyStatusViewModel(name, "Ready", $"{purpose} Found at {path}", true));
+            }
+            else
+            {
+                statuses.Add(new DependencyStatusViewModel(name, "Missing", $"{purpose} Expected at {path ?? "(unknown path)"}", false));
+            }
+        }
+
+        private void AddOfficeStatus(ObservableCollection<DependencyStatusViewModel> statuses, string name, ConversionJob_Office.ApplicationName applicationName, string purpose)
+        {
+            bool isAvailable = Helpers.IsMicrosoftOfficeApplicationAvailable(applicationName);
+            statuses.Add(new DependencyStatusViewModel(
+                name,
+                isAvailable ? "Available" : "Optional missing",
+                purpose,
+                true));
+        }
+
+        private void AddShellRegistrationStatus(ObservableCollection<DependencyStatusViewModel> statuses)
+        {
+            string registeredPath = FileConverterExtension.PathHelpers.FileConverterPath;
+            string executablePath = Assembly.GetExecutingAssembly().Location;
+
+            if (string.IsNullOrEmpty(registeredPath))
+            {
+                statuses.Add(new DependencyStatusViewModel("Explorer registration", "Needs repair", "No executable path is registered in HKCU\\Software\\FileConverter.", false));
+                return;
+            }
+
+            if (!File.Exists(registeredPath))
+            {
+                statuses.Add(new DependencyStatusViewModel("Explorer registration", "Needs repair", $"Registered executable is missing: {registeredPath}", false));
+                return;
+            }
+
+            bool matchesCurrentExecutable = string.Equals(registeredPath, executablePath, StringComparison.OrdinalIgnoreCase);
+            statuses.Add(new DependencyStatusViewModel(
+                "Explorer registration",
+                matchesCurrentExecutable ? "Ready" : "Different install",
+                matchesCurrentExecutable ? registeredPath : $"Registered path: {registeredPath}; current path: {executablePath}",
+                matchesCurrentExecutable));
+        }
+
+        private static string QuoteArgument(string value)
+        {
+            return $"\"{value.Replace("\"", "\\\"")}\"";
+        }
+
+        private static string GetApplicationFilePath(string fileName)
+        {
+            string applicationFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if (string.IsNullOrEmpty(applicationFolder))
+            {
+                return fileName;
+            }
+
+            return Path.Combine(applicationFolder, fileName);
         }
 
         private void InitializeCompatibleInputExtensions()
@@ -526,7 +721,7 @@ namespace FileConverter.ViewModels
 
             this.saveCommand.NotifyCanExecuteChanged();
 
-            this.OnFolderCreated();
+            this.OnFolderCreated?.Invoke();
         }
 
         private bool CanDuplicateSelectedPreset()
@@ -584,7 +779,7 @@ namespace FileConverter.ViewModels
 
             this.SelectedItem = node;
 
-            this.OnPresetCreated.Invoke();
+            this.OnPresetCreated?.Invoke();
 
             this.removePresetCommand.NotifyCanExecuteChanged();
             this.saveCommand.NotifyCanExecuteChanged();
@@ -604,6 +799,7 @@ namespace FileConverter.ViewModels
                 if (!File.Exists(openFileDialog.FileName))
                 {
                     Diagnostics.Debug.LogError("File does not exists.");
+                    return;
                 }
 
                 string directoryPath = Path.GetDirectoryName(openFileDialog.FileName);
@@ -613,7 +809,20 @@ namespace FileConverter.ViewModels
                 }
 
                 List<ConversionPreset> presetsToImport = new List<ConversionPreset>();
-                XmlHelpers.LoadFromFile("Presets", openFileDialog.FileName, out presetsToImport);
+                try
+                {
+                    XmlHelpers.LoadFromFile("Presets", openFileDialog.FileName, out presetsToImport);
+                }
+                catch (Exception exception)
+                {
+                    Diagnostics.Debug.LogError($"Failed to import presets. {exception.Message}");
+                    return;
+                }
+
+                if (!this.ReviewImportedPresets(presetsToImport))
+                {
+                    return;
+                }
 
                 // Add imported preset to preset tree.
                 bool itemSelected = false;
@@ -644,7 +853,223 @@ namespace FileConverter.ViewModels
                         itemSelected = true;
                     }
                 }
+
+                this.saveCommand.NotifyCanExecuteChanged();
             }
+        }
+
+        private bool ReviewImportedPresets(List<ConversionPreset> presetsToImport)
+        {
+            if (presetsToImport == null || presetsToImport.Count == 0)
+            {
+                return true;
+            }
+
+            List<string> warnings = new List<string>();
+            foreach (ConversionPreset conversionPreset in presetsToImport)
+            {
+                warnings.AddRange(this.GetPresetImportWarnings(conversionPreset));
+            }
+
+            if (warnings.Count == 0)
+            {
+                return true;
+            }
+
+            StringBuilder message = new StringBuilder();
+            message.AppendLine("This preset file contains advanced settings that can affect conversion commands or output locations.");
+            message.AppendLine();
+            message.AppendLine("Choose Yes to import with risky settings disabled, No to import as-is only if you trust this file, or Cancel to stop importing.");
+            message.AppendLine();
+
+            int warningsToDisplay = Math.Min(warnings.Count, 8);
+            for (int index = 0; index < warningsToDisplay; index++)
+            {
+                message.AppendLine("- " + warnings[index]);
+            }
+
+            if (warnings.Count > warningsToDisplay)
+            {
+                message.AppendLine($"- {warnings.Count - warningsToDisplay} more warning(s).");
+            }
+
+            MessageBoxResult result = MessageBox.Show(
+                message.ToString(),
+                "Review imported presets",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Warning,
+                MessageBoxResult.Yes);
+
+            if (result == MessageBoxResult.Cancel)
+            {
+                return false;
+            }
+
+            if (result == MessageBoxResult.Yes)
+            {
+                foreach (ConversionPreset conversionPreset in presetsToImport)
+                {
+                    this.NeutralizeRiskyImportedPresetSettings(conversionPreset);
+                }
+            }
+
+            return true;
+        }
+
+        private IEnumerable<string> GetPresetImportWarnings(ConversionPreset conversionPreset)
+        {
+            if (conversionPreset == null)
+            {
+                yield break;
+            }
+
+            string presetName = string.IsNullOrWhiteSpace(conversionPreset.FullName) ? "Unnamed preset" : conversionPreset.FullName;
+
+            if (this.HasUnsafePresetName(conversionPreset))
+            {
+                yield return $"Preset '{presetName}' has a name that is unsafe for Explorer launch or folder creation.";
+            }
+
+            if (this.HasEnabledCustomFFmpegCommand(conversionPreset))
+            {
+                yield return $"Preset '{presetName}' enables a raw FFmpeg command.";
+            }
+
+            if (this.HasSuspiciousOutputTemplate(conversionPreset))
+            {
+                yield return $"Preset '{presetName}' writes to a non-standard output location.";
+            }
+        }
+
+        private void NeutralizeRiskyImportedPresetSettings(ConversionPreset conversionPreset)
+        {
+            if (conversionPreset == null)
+            {
+                return;
+            }
+
+            if (this.HasUnsafePresetName(conversionPreset))
+            {
+                conversionPreset.FullName = this.SanitizePresetFullName(conversionPreset.FullName);
+            }
+
+            if (this.HasEnabledCustomFFmpegCommand(conversionPreset))
+            {
+                conversionPreset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
+                conversionPreset.SetSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
+            }
+
+            if (this.HasSuspiciousOutputTemplate(conversionPreset))
+            {
+                conversionPreset.OutputFileNameTemplate = "(p)(f)";
+            }
+        }
+
+        private bool HasEnabledCustomFFmpegCommand(ConversionPreset conversionPreset)
+        {
+            bool customCommandEnabled;
+            bool.TryParse(
+                conversionPreset.GetSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand),
+                out customCommandEnabled);
+
+            return customCommandEnabled &&
+                !string.IsNullOrWhiteSpace(conversionPreset.GetSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand));
+        }
+
+        private bool HasSuspiciousOutputTemplate(ConversionPreset conversionPreset)
+        {
+            string template = conversionPreset.OutputFileNameTemplate;
+            if (string.IsNullOrWhiteSpace(template))
+            {
+                return false;
+            }
+
+            if (Path.IsPathRooted(template))
+            {
+                return true;
+            }
+
+            string[] segments = template.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int index = 0; index < segments.Length; index++)
+            {
+                if (segments[index] == "." || segments[index] == "..")
+                {
+                    return true;
+                }
+            }
+
+            string lowerTemplate = template.ToLowerInvariant();
+            return
+                lowerTemplate.Contains("(p:d)") ||
+                lowerTemplate.Contains("(p:documents)") ||
+                lowerTemplate.Contains("(p:m)") ||
+                lowerTemplate.Contains("(p:music)") ||
+                lowerTemplate.Contains("(p:v)") ||
+                lowerTemplate.Contains("(p:videos)") ||
+                lowerTemplate.Contains("(p:p)") ||
+                lowerTemplate.Contains("(p:pictures)");
+        }
+
+        private bool HasUnsafePresetName(ConversionPreset conversionPreset)
+        {
+            return this.SanitizePresetFullName(conversionPreset.FullName) != conversionPreset.FullName;
+        }
+
+        private string SanitizePresetFullName(string fullName)
+        {
+            if (string.IsNullOrWhiteSpace(fullName))
+            {
+                return "Imported preset";
+            }
+
+            string[] segments = fullName.Split('/');
+            for (int index = 0; index < segments.Length; index++)
+            {
+                segments[index] = this.SanitizePresetNameSegment(segments[index], index == segments.Length - 1);
+            }
+
+            return string.Join("/", segments);
+        }
+
+        private string SanitizePresetNameSegment(string segment, bool isPresetName)
+        {
+            if (string.IsNullOrWhiteSpace(segment))
+            {
+                return isPresetName ? "Imported preset" : "Imported";
+            }
+
+            char[] invalidFileNameChars = Path.GetInvalidFileNameChars();
+            StringBuilder builder = new StringBuilder(segment.Length);
+            for (int index = 0; index < segment.Length; index++)
+            {
+                char character = segment[index];
+                if (char.IsControl(character) ||
+                    character == '"' ||
+                    character == '/' ||
+                    character == '\\' ||
+                    Array.IndexOf(invalidFileNameChars, character) >= 0)
+                {
+                    builder.Append('_');
+                    continue;
+                }
+
+                builder.Append(character);
+            }
+
+            string sanitizedSegment = builder.ToString().Trim();
+            if (string.IsNullOrEmpty(sanitizedSegment) ||
+                sanitizedSegment == "." ||
+                sanitizedSegment == "..")
+            {
+                return isPresetName ? "Imported preset" : "Imported";
+            }
+
+            if (sanitizedSegment.StartsWith("-", StringComparison.Ordinal))
+            {
+                sanitizedSegment = "_" + sanitizedSegment;
+            }
+
+            return sanitizedSegment;
         }
 
         private void ExportSelectedPreset()
@@ -699,7 +1124,7 @@ namespace FileConverter.ViewModels
 
         private bool CanRemoveSelectedPreset()
         {
-            return this.SelectedItem != null;
+            return this.SelectedItem != null && this.SelectedItem.Parent != null;
         }
 
         protected override void OnDeactivated()

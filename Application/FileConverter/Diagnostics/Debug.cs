@@ -56,6 +56,18 @@ namespace FileConverter.Diagnostics
 
         public static DiagnosticsData[] Data => Debug.diagnosticsDataById.Values.ToArray();
 
+        public static string DiagnosticsFolderPath => Debug.diagnosticsFolderPath;
+
+        public static string AllContent
+        {
+            get
+            {
+                return string.Join(
+                    Environment.NewLine + Environment.NewLine,
+                    Debug.Data.Select(data => $"[{data.Name}]{Environment.NewLine}{data.Content}"));
+            }
+        }
+
         public static void Log(string message)
         {
             Debug.LogInternal(error: false, message, ConsoleColor.White);

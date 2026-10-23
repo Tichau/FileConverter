@@ -4,12 +4,15 @@ namespace FileConverter.ConversionJobs
 {
     using System;
     using System.ComponentModel;
+    using System.IO;
     using System.Runtime.CompilerServices;
     using System.Windows.Input;
     
+    using CommunityToolkit.Mvvm.DependencyInjection;
     using CommunityToolkit.Mvvm.Input;
 
     using FileConverter.Diagnostics;
+    using FileConverter.Services;
 
     public class ConversionJob : INotifyPropertyChanged
     {
@@ -19,6 +22,8 @@ namespace FileConverter.ConversionJobs
         private string errorMessage = string.Empty;
         private string userState = string.Empty;
         private RelayCommand cancelCommand;
+        private RelayCommand openOutputFolderCommand;
+        private RelayCommand retryCommand;
 
         private readonly string initialInputPath;
         private int currentOutputFilePathIndex;
@@ -64,6 +69,8 @@ namespace FileConverter.ConversionJobs
             private set;
         }
 
+        public string InitialInputPath => this.initialInputPath;
+
         public string InputFilePath
         {
             get;
@@ -102,6 +109,8 @@ namespace FileConverter.ConversionJobs
                 this.state = value;
                 this.NotifyPropertyChanged();
                 Application.Current.Dispatcher.Invoke(() => this.cancelCommand?.NotifyCanExecuteChanged());
+                Application.Current.Dispatcher.Invoke(() => this.openOutputFolderCommand?.NotifyCanExecuteChanged());
+                Application.Current.Dispatcher.Invoke(() => this.retryCommand?.NotifyCanExecuteChanged());
             }
         }
 
@@ -168,6 +177,32 @@ namespace FileConverter.ConversionJobs
             }
         }
 
+        public ICommand OpenOutputFolderCommand
+        {
+            get
+            {
+                if (this.openOutputFolderCommand == null)
+                {
+                    this.openOutputFolderCommand = new RelayCommand(this.OpenOutputFolder, this.CanOpenOutputFolder);
+                }
+
+                return this.openOutputFolderCommand;
+            }
+        }
+
+        public ICommand RetryCommand
+        {
+            get
+            {
+                if (this.retryCommand == null)
+                {
+                    this.retryCommand = new RelayCommand(this.RetryConversion, this.CanRetryConversion);
+                }
+
+                return this.retryCommand;
+            }
+        }
+
         protected bool CancelIsRequested
         {
             get;
@@ -200,6 +235,18 @@ namespace FileConverter.ConversionJobs
 
         protected virtual bool IsCancelable() => this.State == ConversionState.InProgress;
 
+        private bool CanOpenOutputFolder()
+        {
+            return this.State == ConversionState.Done && !string.IsNullOrEmpty(this.OutputFilePath);
+        }
+
+        private bool CanRetryConversion()
+        {
+            return this.State == ConversionState.Failed &&
+                this.ConversionPreset != null &&
+                !string.IsNullOrEmpty(this.initialInputPath);
+        }
+
         protected string[] OutputFilePaths
         {
             get;
@@ -220,8 +267,14 @@ namespace FileConverter.ConversionJobs
 
             this.InputFilePath = this.initialInputPath;
 
-            string extension = System.IO.Path.GetExtension(this.initialInputPath);
-            extension = extension.Substring(1, extension.Length - 1);
+            string extension = PathHelpers.GetExtensionWithoutDot(this.initialInputPath);
+            if (string.IsNullOrEmpty(extension))
+            {
+                this.ConversionFailed(Properties.Resources.ErrorInputTypeIncompatibleWithOutputType);
+                Debug.Log($"Input file has no extension: {this.InputFilePath}.");
+                return;
+            }
+
             string extensionCategory = Helpers.GetExtensionCategory(extension);
             if (!Helpers.IsOutputTypeCompatibleWithCategory(this.ConversionPreset.OutputType, extensionCategory))
             {
@@ -232,7 +285,18 @@ namespace FileConverter.ConversionJobs
             this.OutputFilePaths = outputFilePaths;
             if (this.OutputFilePaths.Length == 0)
             {
-                int outputFilesCount = this.GetOutputFilesCount();
+                int outputFilesCount;
+                try
+                {
+                    outputFilesCount = this.GetOutputFilesCount();
+                }
+                catch (Exception exception)
+                {
+                    this.ConversionFailed(Properties.Resources.ErrorDuringJobInitialization);
+                    Debug.Log(exception.ToString());
+                    return;
+                }
+
                 this.OutputFilePaths = new string[outputFilesCount];
             }
 
@@ -246,12 +310,14 @@ namespace FileConverter.ConversionJobs
 
                 string path = this.ConversionPreset.GenerateOutputFilePath(this.initialInputPath, index + 1, this.OutputFilePaths.Length);
 
-                if (!PathHelpers.IsPathValid(path))
+                if (!PathHelpers.TryNormalizeGeneratedPath(path, out string normalizedPath, out string outputPathErrorMessage))
                 {
                     this.ConversionFailed(Properties.Resources.ErrorInvalidOutputPath);
-                    Debug.Log($"Invalid output path generated: {path} from input: {this.InputFilePath}.");
+                    Debug.Log($"Invalid output path generated: {path} from input: {this.InputFilePath}. {outputPathErrorMessage}");
                     return;
                 }
+
+                path = normalizedPath;
 
                 if (path == this.InputFilePath)
                 {
@@ -378,6 +444,49 @@ namespace FileConverter.ConversionJobs
             this.ConversionFailed(Properties.Resources.ErrorCanceled);
         }
 
+        private void OpenOutputFolder()
+        {
+            if (string.IsNullOrEmpty(this.OutputFilePath))
+            {
+                return;
+            }
+
+            try
+            {
+                string outputFilePath = this.OutputFilePath;
+                if (File.Exists(outputFilePath))
+                {
+                    System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{outputFilePath}\"");
+                    return;
+                }
+
+                string outputDirectory = Path.GetDirectoryName(outputFilePath);
+                if (!string.IsNullOrEmpty(outputDirectory) && Directory.Exists(outputDirectory))
+                {
+                    System.Diagnostics.Process.Start("explorer.exe", $"\"{outputDirectory}\"");
+                    return;
+                }
+
+                Debug.Log($"Can't open output folder because the path does not exist: {outputFilePath}.");
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Can't open output folder: {exception.Message}.");
+            }
+        }
+
+        private void RetryConversion()
+        {
+            try
+            {
+                Ioc.Default.GetRequiredService<IConversionService>().RetryConversionJob(this);
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Can't retry conversion: {exception.Message}.");
+            }
+        }
+
         protected virtual int GetOutputFilesCount()
         {
             return 1;
@@ -419,30 +528,43 @@ namespace FileConverter.ConversionJobs
 
             this.ChangeOutputFileTimestampToMatchOriginal();
 
-            // Apply the input post conversion action.
-            switch (this.InputPostConversionAction)
+            try
             {
-                case InputPostConversionAction.None:
-                    break;
+                // Apply the input post conversion action.
+                switch (this.InputPostConversionAction)
+                {
+                    case InputPostConversionAction.None:
+                        break;
 
-                case InputPostConversionAction.MoveInArchiveFolder:
-                    string basePath = System.IO.Path.GetDirectoryName(this.initialInputPath);
-                    string inputFilename = System.IO.Path.GetFileName(this.initialInputPath);
-                    string archivePath = basePath + "\\" + this.ConversionPreset.ConversionArchiveFolderName;
-                    if (!System.IO.Directory.Exists(archivePath))
-                    {
-                        System.IO.Directory.CreateDirectory(archivePath);
-                    }
+                    case InputPostConversionAction.MoveInArchiveFolder:
+                        string basePath = System.IO.Path.GetDirectoryName(this.initialInputPath);
+                        if (string.IsNullOrEmpty(basePath))
+                        {
+                            basePath = System.Environment.CurrentDirectory;
+                        }
 
-                    string newPath = PathHelpers.GenerateUniquePath(archivePath + "\\" + inputFilename);
-                    System.IO.File.Move(this.InputFilePath, newPath);
-                    Debug.Log($"Input file moved in archive folder: '{newPath}'");
-                    break;
+                        string inputFilename = System.IO.Path.GetFileName(this.initialInputPath);
+                        string archivePath = basePath + "\\" + this.ConversionPreset.ConversionArchiveFolderName;
+                        if (!System.IO.Directory.Exists(archivePath))
+                        {
+                            System.IO.Directory.CreateDirectory(archivePath);
+                        }
 
-                case InputPostConversionAction.Delete:
-                    System.IO.File.Delete(this.InputFilePath);
-                    Debug.Log($"Input file deleted: '{this.initialInputPath}'");
-                    break;
+                        string newPath = PathHelpers.GenerateUniquePath(archivePath + "\\" + inputFilename);
+                        System.IO.File.Move(this.InputFilePath, newPath);
+                        Debug.Log($"Input file moved in archive folder: '{newPath}'");
+                        break;
+
+                    case InputPostConversionAction.Delete:
+                        System.IO.File.Delete(this.InputFilePath);
+                        Debug.Log($"Input file deleted: '{this.initialInputPath}'");
+                        break;
+                }
+            }
+            catch (Exception exception)
+            {
+                this.ConversionFailed($"Post conversion action failed: {exception.Message}");
+                return;
             }
 
             Debug.Log(string.Empty);
@@ -466,6 +588,63 @@ namespace FileConverter.ConversionJobs
             this.State = ConversionState.Failed;
             this.UserState = Properties.Resources.ConversionStateFailed;
             this.ErrorMessage = exitingMessage;
+        }
+
+        protected void DeleteFileIfExists(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return;
+            }
+
+            try
+            {
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+
+                this.DeleteEmptyTemporaryParentFolder(filePath);
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Can't delete file '{filePath}'.");
+                Debug.Log($"An exception has been thrown: {exception}.");
+            }
+        }
+
+        private void DeleteEmptyTemporaryParentFolder(string filePath)
+        {
+            string parentFolder = Path.GetDirectoryName(filePath);
+            if (string.IsNullOrEmpty(parentFolder))
+            {
+                return;
+            }
+
+            DirectoryInfo parent = Directory.GetParent(parentFolder);
+            if (parent == null)
+            {
+                return;
+            }
+
+            string tempRoot = Path.GetFullPath(Path.Combine(Path.GetTempPath(), "ZFileConverter"));
+            string candidateRoot = Path.GetFullPath(parent.FullName);
+            if (!string.Equals(
+                    tempRoot.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                    candidateRoot.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            try
+            {
+                Directory.Delete(parentFolder, false);
+            }
+            catch
+            {
+                // Best effort only; concurrent conversions may still be using the folder.
+            }
         }
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

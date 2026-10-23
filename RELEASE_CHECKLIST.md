@@ -1,0 +1,61 @@
+# ZFileConverter Release Checklist
+
+Use this before publishing a GitHub release.
+
+## Source
+
+- Confirm the release branch is clean.
+- Confirm `version.xml` points to the intended GitHub release asset.
+- Confirm `version.xml` includes the SHA-256 hash of the exact MSI uploaded to the release.
+- If the MSI is signed, confirm `version.xml` includes the expected publisher subject.
+- Update `CHANGELOG.md` with user-facing changes.
+- Confirm `README.md`, `docs/BUILDING.md`, and `docs/INSTALLING.md` match the release process.
+
+## Build
+
+- Build from a clean checkout on Windows.
+- Run:
+
+```powershell
+.\build.ps1 -Configuration Release -Platform x64
+```
+
+- Confirm the app output exists under `Application\FileConverter\bin\x64\Release`.
+- Confirm `Installer\bin\x64\Release\ZFileConverter-setup.msi` exists.
+- Confirm whether the installer is signed or intentionally unsigned.
+- Compute the MSI SHA-256 after signing and before uploading:
+
+```powershell
+Get-FileHash .\Installer\bin\x64\Release\ZFileConverter-setup.msi -Algorithm SHA256
+```
+
+## Smoke Test
+
+- Launch Settings.
+- Open Settings > Health and refresh dependency health.
+- Import a safe preset file and a test preset file with raw FFmpeg settings to confirm the import review dialog appears.
+- Run Explorer menu repair from Settings on a test machine.
+- Convert image to JPG, PNG, WebP, and AVIF.
+- Convert audio or video through FFmpeg.
+- Convert PDF to image through ImageMagick/Ghostscript.
+- Convert Office documents if Word, Excel, and PowerPoint are available.
+- Retry a failed conversion from the queue.
+- Open a completed output folder from the queue.
+- Copy diagnostics logs and open the diagnostics folder.
+
+## Installer
+
+- Install on a clean Windows VM.
+- Confirm Start Menu entries show `ZFileConverter`.
+- Confirm Explorer right-click menu shows `ZFileConverter`.
+- Confirm uninstall removes the Start Menu entry and registry path.
+- Reinstall over the previous version and confirm presets survive.
+
+## GitHub Release
+
+- Create a tag matching the version, for example `v2.2.0-z1`.
+- Prefer the manual `release` workflow. It creates a draft release and uploads a versioned MSI and app zip.
+- Upload the MSI and any app artifact zip.
+- Include whether the installer is signed.
+- Include known limitations and dependency notes.
+- Link to troubleshooting and Settings > Health.

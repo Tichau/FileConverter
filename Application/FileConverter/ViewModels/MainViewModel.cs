@@ -18,6 +18,8 @@ namespace FileConverter.ViewModels
     /// </summary>
     public class MainViewModel : ObservableRecipient
     {
+        private readonly IConversionService conversionService;
+
         private string informationMessage;
         private ObservableCollection<ConversionJob> conversionJobs;
 
@@ -30,8 +32,9 @@ namespace FileConverter.ViewModels
         /// </summary>
         public MainViewModel()
         {
-            IConversionService settingsService = Ioc.Default.GetRequiredService<IConversionService>();
-            this.ConversionJobs = new ObservableCollection<ConversionJob>(settingsService.ConversionJobs);
+            this.conversionService = Ioc.Default.GetRequiredService<IConversionService>();
+            this.conversionService.ConversionJobRegistered += this.ConversionService_ConversionJobRegistered;
+            this.ConversionJobs = new ObservableCollection<ConversionJob>(this.conversionService.ConversionJobs);
 
             Application application = Application.Current as Application;
             application.OnApplicationTerminate += this.Application_OnApplicationTerminate;
@@ -115,6 +118,21 @@ namespace FileConverter.ViewModels
             }
 
             this.OnPropertyChanged(nameof(this.ConversionJobs));
+        }
+
+        private void ConversionService_ConversionJobRegistered(object sender, ConversionJobRegisteredEventArgs eventArgs)
+        {
+            if (eventArgs?.ConversionJob == null || this.ConversionJobs.Contains(eventArgs.ConversionJob))
+            {
+                return;
+            }
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                this.ConversionJobs.Add(eventArgs.ConversionJob);
+                eventArgs.ConversionJob.PropertyChanged += this.ConversionJob_PropertyChanged;
+                this.OnPropertyChanged(nameof(this.ConversionJobs));
+            });
         }
 
         private void Application_OnApplicationTerminate(object sender, ApplicationTerminateArgs eventArgs)

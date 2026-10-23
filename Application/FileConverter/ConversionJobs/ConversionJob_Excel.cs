@@ -48,7 +48,7 @@ namespace FileConverter.ConversionJobs
                 Excel.Worksheet worksheet = sheet as Excel.Worksheet;
                 if (worksheet != null)
                 {
-                    pagesCount = worksheet.PageSetup.Pages.Count;
+                    pagesCount += worksheet.PageSetup.Pages.Count;
                 }
             }
 
@@ -78,8 +78,7 @@ namespace FileConverter.ConversionJobs
             {
                 // Generate intermediate file path.
                 string fileName = Path.GetFileNameWithoutExtension(this.InputFilePath);
-                string tempPath = Path.GetTempPath();
-                this.intermediateFilePath = PathHelpers.GenerateUniquePath(tempPath + fileName + ".pdf");
+                this.intermediateFilePath = PathHelpers.GenerateTemporaryFilePath(fileName + ".pdf");
 
                 ConversionPreset intermediatePreset = new ConversionPreset("Pdf to image", this.ConversionPreset, "pdf");
                 this.pdf2ImageConversionJob = ConversionJobFactory.Create(intermediatePreset, this.intermediateFilePath);
@@ -102,48 +101,55 @@ namespace FileConverter.ConversionJobs
                 return;
             }
 
-            // Make this document the active document.
-            this.document.Activate();
+            try
+            {
+                // Make this document the active document.
+                this.document.Activate();
 
-            this.UserState = Properties.Resources.ConversionStateConversion;
+                this.UserState = Properties.Resources.ConversionStateConversion;
 
-            Debug.Log("Convert excel document to pdf.");
-            this.document.ExportAsFixedFormat(Excel.Enums.XlFixedFormatType.xlTypePDF, this.intermediateFilePath);
-
-            Debug.Log($"Close excel document '{this.InputFilePath}'.");
-            this.document.Close(false);
-            this.document = null;
-
-            this.ReleaseOfficeApplicationInstanceIfNeeded();
+                Debug.Log("Convert excel document to pdf.");
+                this.document.ExportAsFixedFormat(Excel.Enums.XlFixedFormatType.xlTypePDF, this.intermediateFilePath);
+            }
+            finally
+            {
+                this.CloseDocumentIfNeeded();
+                this.ReleaseOfficeApplicationInstanceIfNeeded();
+            }
             
             if (this.pdf2ImageConversionJob != null)
             {
-                if (!System.IO.File.Exists(this.intermediateFilePath))
+                Task updateProgress = null;
+                try
                 {
-                    this.ConversionFailed(Properties.Resources.ErrorCantFindOutputFiles);
-                    return;
+                    if (!System.IO.File.Exists(this.intermediateFilePath))
+                    {
+                        this.ConversionFailed(Properties.Resources.ErrorCantFindOutputFiles);
+                        return;
+                    }
+
+                    updateProgress = this.UpdateProgress();
+
+                    Debug.Log("Convert pdf to images.");
+
+                    this.pdf2ImageConversionJob.StartConversion();
+
+                    if (this.pdf2ImageConversionJob.State != ConversionState.Done)
+                    {
+                        this.ConversionFailed(this.pdf2ImageConversionJob.ErrorMessage);
+                        return;
+                    }
                 }
-
-                Task updateProgress = this.UpdateProgress();
-
-                Debug.Log("Convert pdf to images.");
-
-                this.pdf2ImageConversionJob.StartConversion();
-
-                if (this.pdf2ImageConversionJob.State != ConversionState.Done)
+                finally
                 {
-                    this.ConversionFailed(this.pdf2ImageConversionJob.ErrorMessage);
-                    return;
+                    updateProgress?.Wait();
+
+                    if (!string.IsNullOrEmpty(this.intermediateFilePath))
+                    {
+                        Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
+                        this.DeleteFileIfExists(this.intermediateFilePath);
+                    }
                 }
-
-                if (!string.IsNullOrEmpty(this.intermediateFilePath))
-                {
-                    Debug.Log($"Delete intermediate file {this.intermediateFilePath}.");
-
-                    File.Delete(this.intermediateFilePath);
-                }
-
-                updateProgress.Wait();
             }
         }
 
@@ -160,6 +166,7 @@ namespace FileConverter.ConversionJobs
             {
                 Visible = false
             };
+            this.HardenOfficeApplicationInstance(this.application);
         }
 
         protected override void ReleaseOfficeApplicationInstanceIfNeeded()
@@ -176,15 +183,11 @@ namespace FileConverter.ConversionJobs
 
         private async Task UpdateProgress()
         {
-            while (this.pdf2ImageConversionJob.State != ConversionState.Done &&
+            while (this.pdf2ImageConversionJob != null &&
+                   this.pdf2ImageConversionJob.State != ConversionState.Done &&
                    this.pdf2ImageConversionJob.State != ConversionState.Failed)
             {
-                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
-                {
-                    this.Progress = this.pdf2ImageConversionJob.Progress;
-                }
-
-                if (this.pdf2ImageConversionJob != null && this.pdf2ImageConversionJob.State == ConversionState.InProgress)
+                if (this.pdf2ImageConversionJob.State == ConversionState.InProgress)
                 {
                     this.Progress = this.pdf2ImageConversionJob.Progress;
                     this.UserState = this.pdf2ImageConversionJob.UserState;
@@ -215,10 +218,30 @@ namespace FileConverter.ConversionJobs
             {
                 Debug.Log($"Load excel document '{this.InputFilePath}'.");
 
-                this.document = this.application.Workbooks.Open(this.InputFilePath, System.Reflection.Missing.Value, true);
+                this.document = this.application.Workbooks.Open(this.InputFilePath, 0, true);
             }
 
             return this.document != null;
+        }
+
+        private void CloseDocumentIfNeeded()
+        {
+            if (this.document == null)
+            {
+                return;
+            }
+
+            try
+            {
+                Debug.Log($"Close excel document '{this.InputFilePath}'.");
+                this.document.Close(false);
+            }
+            catch (Exception exception)
+            {
+                Debug.Log($"Failed to close excel document '{this.InputFilePath}': {exception.Message}.");
+            }
+
+            this.document = null;
         }
     }
 }

@@ -28,10 +28,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="130" />
             </Grid.ColumnDefinitions>
 
             <Image Grid.Column="0" Height="48" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Resources/LogIcon.png" />
             <Label Grid.Column="1" Content="{x:Static project:Resources.Diagnostics}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" />
+            <Button Grid.Column="2" Content="Copy logs" Margin="4,12,4,12" Command="{Binding CopyDiagnosticsCommand}" />
+            <Button Grid.Column="3" Content="Open folder" Margin="4,12,8,12" Command="{Binding OpenDiagnosticsFolderCommand}" />
         </Grid>
 
         <TabControl Grid.Row="1" Margin="5" ItemsSource="{Binding Path=(diagnostics:Debug.Data), Mode=OneWay}">

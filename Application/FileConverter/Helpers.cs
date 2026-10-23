@@ -111,7 +111,7 @@ namespace FileConverter
         {
             if (!Application.IsInAdmininstratorPrivileges)
             {
-                Diagnostics.Debug.LogError("File Converter needs administrator privileges to register the shell extension.");
+                Diagnostics.Debug.LogError("ZFileConverter needs administrator privileges to register the shell extension.");
                 return false;
             }
 
@@ -139,11 +139,59 @@ namespace FileConverter
             }
         }
 
+        public static string GetDefaultShellExtensionPath()
+        {
+            string executablePath = Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path);
+            string executableFolder = Path.GetDirectoryName(executablePath);
+            return Path.Combine(executableFolder, "FileConverterExtension.dll");
+        }
+
+        public static bool RepairShellExtension(string shellExtensionPath)
+        {
+            if (!Application.IsInAdmininstratorPrivileges)
+            {
+                Diagnostics.Debug.LogError("ZFileConverter needs administrator privileges to repair the shell extension.");
+                return false;
+            }
+
+            if (!File.Exists(shellExtensionPath))
+            {
+                Diagnostics.Debug.LogError($"Shell extension {shellExtensionPath} does not exists.");
+                return false;
+            }
+
+            Diagnostics.Debug.Log($"Repair shell extension registration: {shellExtensionPath}.");
+
+            var regasm = new RegAsm();
+            if (regasm.Unregister64(shellExtensionPath))
+            {
+                Diagnostics.Debug.Log($"{shellExtensionPath} previous registration removed.");
+                Diagnostics.Debug.Log(regasm.StandardOutput);
+            }
+            else
+            {
+                Diagnostics.Debug.Log("Previous shell extension registration could not be removed. Continuing with fresh registration.");
+                Diagnostics.Debug.Log(regasm.StandardError);
+            }
+
+            bool success = regasm.Register64(shellExtensionPath, true);
+            if (success)
+            {
+                Diagnostics.Debug.Log($"{shellExtensionPath} repaired and registered.");
+                Diagnostics.Debug.Log(regasm.StandardOutput);
+                return true;
+            }
+
+            Diagnostics.Debug.LogError(errorCode: 0x05, $"{shellExtensionPath} failed to register during repair.");
+            Diagnostics.Debug.LogError(regasm.StandardError);
+            return false;
+        }
+
         public static bool UnregisterExtension(string shellExtensionPath)
         {
             if (!Application.IsInAdmininstratorPrivileges)
             {
-                Diagnostics.Debug.LogError("File Converter needs administrator privileges to unregister the shell extension.");
+                Diagnostics.Debug.LogError("ZFileConverter needs administrator privileges to unregister the shell extension.");
                 return false;
             }
 

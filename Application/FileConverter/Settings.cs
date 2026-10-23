@@ -14,6 +14,7 @@ namespace FileConverter
     public class Settings : ObservableObject, IXmlSerializable
     {
         public const int Version = 4;
+        private const int MaximumAllowedSimultaneousConversions = 16;
 
         private bool exitApplicationWhenConversionsFinished = false;
         private float durationBetweenEndOfConversionsAndApplicationExit = 3f;
@@ -26,13 +27,19 @@ namespace FileConverter
 
         public ConversionPreset GetPresetFromName(string presetName)
         {
-            return this.conversionPresets.FirstOrDefault(match => match.FullName == presetName);
+            return this.conversionPresets.FirstOrDefault(match => match != null && match.FullName == presetName);
         }
 
         public void Clean()
         {
-            for (int index = 0; index < this.ConversionPresets.Count; index++)
+            for (int index = this.ConversionPresets.Count - 1; index >= 0; index--)
             {
+                if (this.ConversionPresets[index] == null)
+                {
+                    this.ConversionPresets.RemoveAt(index);
+                    continue;
+                }
+
                 this.ConversionPresets[index].Clean();
             }
         }
@@ -47,7 +54,12 @@ namespace FileConverter
             for (int index = 0; index < settings.conversionPresets.Count; index++)
             {
                 ConversionPreset conversionPreset = settings.conversionPresets[index];
-                if (this.conversionPresets.Any(match => match.FullName == conversionPreset.FullName))
+                if (conversionPreset == null)
+                {
+                    continue;
+                }
+
+                if (this.conversionPresets.Any(match => match != null && match.FullName == conversionPreset.FullName))
                 {
                     continue;
                 }
@@ -112,7 +124,15 @@ namespace FileConverter
                     return;
                 }
 
-                this.ApplicationLanguage = CultureInfo.GetCultureInfo(value);
+                try
+                {
+                    this.ApplicationLanguage = CultureInfo.GetCultureInfo(value);
+                }
+                catch (CultureNotFoundException)
+                {
+                    Diagnostics.Debug.Log($"Unsupported application language '{value}'. Fallback to default culture.");
+                    this.ApplicationLanguage = null;
+                }
             }
         }
 
@@ -186,8 +206,18 @@ namespace FileConverter
 
             set
             {
+                if (value == null)
+                {
+                    return;
+                }
+
                 for (int index = 0; index < value.Length; index++)
                 {
+                    if (value[index] == null)
+                    {
+                        continue;
+                    }
+
                     this.ConversionPresets.Add(value[index]);
                 }
             }
@@ -240,9 +270,18 @@ namespace FileConverter
         public void OnDeserializationComplete()
         {
             this.DurationBetweenEndOfConversionsAndApplicationExit = System.Math.Max(0, System.Math.Min(10, this.DurationBetweenEndOfConversionsAndApplicationExit));
+            this.MaximumNumberOfSimultaneousConversions = System.Math.Max(
+                0,
+                System.Math.Min(MaximumAllowedSimultaneousConversions, this.MaximumNumberOfSimultaneousConversions));
 
-            for (int index = 0; index < this.ConversionPresets.Count; index++)
+            for (int index = this.ConversionPresets.Count - 1; index >= 0; index--)
             {
+                if (this.ConversionPresets[index] == null)
+                {
+                    this.ConversionPresets.RemoveAt(index);
+                    continue;
+                }
+
                 this.ConversionPresets[index].OnDeserializationComplete();
             }
 

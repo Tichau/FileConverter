@@ -12,12 +12,12 @@ namespace FileConverter.ValueConverters
         {
             if (!(value is FileConverter.Version))
             {
-                return "File Converter";
+                return "ZFileConverter";
             }
 
             FileConverter.Version version = (FileConverter.Version)value;
 
-            return $"File Converter v{version}";
+            return $"ZFileConverter v{version}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

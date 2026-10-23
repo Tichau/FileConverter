@@ -8,6 +8,8 @@ namespace FileConverter.Services
 
     public interface IConversionService
     {
+        event System.EventHandler<ConversionJobRegisteredEventArgs> ConversionJobRegistered;
+
         event System.EventHandler<ConversionJobsTerminatedEventArgs> ConversionJobsTerminated;
 
         ReadOnlyCollection<ConversionJob> ConversionJobs
@@ -18,5 +20,7 @@ namespace FileConverter.Services
         void ConvertFilesAsync();
 
         void RegisterConversionJob(ConversionJob conversionJob);
+
+        void RetryConversionJob(ConversionJob conversionJob);
     }
 }

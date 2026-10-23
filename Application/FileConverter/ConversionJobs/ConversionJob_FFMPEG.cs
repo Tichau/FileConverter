@@ -79,7 +79,7 @@ namespace FileConverter.ConversionJobs
             {
                 CreateNoWindow = true, 
                 UseShellExecute = false, 
-                RedirectStandardOutput = true, 
+                RedirectStandardOutput = false,
                 RedirectStandardError = true
             };
 
@@ -88,7 +88,7 @@ namespace FileConverter.ConversionJobs
 
         protected virtual void FillFFMpegArgumentsList()
         {
-            const string baseArgs = "-n -progress pipe:1";
+            const string baseArgs = "-n";
 
             bool customCommandEnabled = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand);
             if (customCommandEnabled)
@@ -166,8 +166,7 @@ namespace FileConverter.ConversionJobs
                     {
                         // http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
                         string fileName = Path.GetFileName(this.InputFilePath);
-                        string tempPath = Path.GetTempPath();
-                        string paletteFilePath = PathHelpers.GenerateUniquePath(tempPath + fileName + " - palette.png");
+                        string paletteFilePath = PathHelpers.GenerateTemporaryFilePath(fileName + " - palette.png");
 
                         string transformArgs = ConversionJob_FFMPEG.ComputeTransformArgs(this.ConversionPreset);
 
@@ -464,12 +463,21 @@ namespace FileConverter.ConversionJobs
                         }
 
                         exeProcess.WaitForExit();
+                        if (exeProcess.ExitCode != 0 && !this.CancelIsRequested && this.State != ConversionState.Failed)
+                        {
+                            this.ConversionFailed($"FFmpeg exited with code {exeProcess.ExitCode}.");
+                        }
                     }
                 }
                 catch
                 {
                     this.ConversionFailed(Properties.Resources.ErrorFailedToLaunchFFMPEG);
                     throw;
+                }
+
+                if (this.State == ConversionState.Failed || this.CancelIsRequested)
+                {
+                    break;
                 }
             }
 
@@ -487,12 +495,17 @@ namespace FileConverter.ConversionJobs
 
                 Diagnostics.Debug.Log($"Delete intermediate file {currentPass.FileToDelete}.");
 
-                File.Delete(currentPass.FileToDelete);
+                this.DeleteFileIfExists(currentPass.FileToDelete);
             }
         }
 
         private void ParseFFMPEGOutput(string input)
         {
+            if (string.IsNullOrEmpty(input))
+            {
+                return;
+            }
+
             Match match = this.durationRegex.Match(input);
             if (match.Success && match.Groups.Count >= 6)
             {

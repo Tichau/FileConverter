@@ -5,12 +5,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FileConverter")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ZFileConverter")]
+[assembly: AssemblyDescription("A maintained, Explorer-first file conversion utility.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FileConverter")]
-[assembly: AssemblyCopyright("Copyright © 2026")]
+[assembly: AssemblyCompany("ZaidNAlAsali")]
+[assembly: AssemblyProduct("ZFileConverter")]
+[assembly: AssemblyCopyright("Copyright © 2026 ZaidNAlAsali and File Converter contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
