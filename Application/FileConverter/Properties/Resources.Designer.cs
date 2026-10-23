@@ -23,6 +23,7 @@ namespace FileConverter.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
+        public static string ProgressiveJpeg { get { return ResourceManager.GetString("ProgressiveJpeg", resourceCulture); } }
         
         private static global::System.Resources.ResourceManager resourceMan;
         

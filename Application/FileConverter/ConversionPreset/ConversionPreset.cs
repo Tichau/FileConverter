@@ -526,6 +526,7 @@ namespace FileConverter
                     break;
 
                 case OutputType.Jpg:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageProgressive, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageQuality, "90");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
@@ -606,6 +607,7 @@ namespace FileConverter
             public const string AudioBitrate = "AudioBitrate";
             public const string AudioChannelCount = "AudioChannelCount";
             public const string ImageQuality = "ImageQuality";
+            public const string ImageProgressive = "ImageProgressive";
             public const string ImageScale = "ImageScale";
             public const string ImageRotation = "ImageRotation";
             public const string ImageClampSizePowerOf2 = "ImageClampSizePowerOf2";

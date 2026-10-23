@@ -229,6 +229,7 @@ namespace FileConverter.ConversionJobs
 
                 case OutputType.Jpg:
                     image.Quality = this.ConversionPreset.GetSettingsValue<uint>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    image.Settings.Interlace = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.ImageProgressive) ? Interlace.Plane : Interlace.NoInterlace;
                     break;
 
                 case OutputType.Pdf:

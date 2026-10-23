@@ -574,4 +574,7 @@ use maj for uppercase version</value>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
     <value>Could not load file converter user settings. Would you like to use default settings ?</value>
   </data>
+  <data name="ProgressiveJpeg" xml:space="preserve">
+    <value>Progressive JPEG</value>
+  </data>
 </root>
