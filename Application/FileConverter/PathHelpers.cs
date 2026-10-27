@@ -16,7 +16,7 @@ namespace FileConverter
         private static Regex pathRegex = new Regex(@"^(?:\\\\[^\\/:*?""<>|\r\n]+\\|[a-zA-Z]:\\)(?:[^\\/:*?""<>|\r\n]+\\)*[^\.\\/:*?""<>|\r\n][^\\/:*?""<>|\r\n]*$");
         private static Regex filenameRegex = new Regex(@"[^\\]*", RegexOptions.RightToLeft);
         private static Regex directoryRegex = new Regex(@"^(?<drive>\\\\[^\\/:*?""""<>|\r\n]+\\|[A-Za-z]:\\)(?:(?<folders>[^\\]*)\\)*");
-        private static Regex dateRegex = new Regex(@"\(d:(?<format>[^)]*)\)");
+        private static Regex templateTokenRegex = new Regex(@"\((?:path|p|filename|f|F|outputext|o|O|inputext|i|I|p:(?:d|documents|m|music|v|videos|p|pictures)|[dD][0-9]+|n:[ic])\)|\(d:(?<format>[^)]*)\)");
 
         public static bool IsPathDriveLetterValid(string path)
         {
@@ -165,50 +165,55 @@ namespace FileConverter
 
             string[] directories = parentDirectory.Substring(0, parentDirectory.Length - 1).Split(System.IO.Path.DirectorySeparatorChar);
 
-            // Generate output path from template.
-            string outputPath = outputFilePathTemplate;
-
-            outputPath = outputPath.Replace("(path)", parentDirectory);
-            outputPath = outputPath.Replace("(p)", parentDirectory);
-
-            outputPath = outputPath.Replace("(filename)", fileName);
-            outputPath = outputPath.Replace("(f)", fileName);
-            outputPath = outputPath.Replace("(F)", fileName.ToUpperInvariant());
-
-            outputPath = outputPath.Replace("(outputext)", outputExtension);
-            outputPath = outputPath.Replace("(o)", outputExtension);
-            outputPath = outputPath.Replace("(O)", outputExtension.ToUpperInvariant());
-
-            outputPath = outputPath.Replace("(inputext)", inputExtension);
-            outputPath = outputPath.Replace("(i)", inputExtension);
-            outputPath = outputPath.Replace("(I)", inputExtension.ToUpperInvariant());
+            var replacements = new Dictionary<string, string>
+            {
+                { "(path)", parentDirectory },
+                { "(p)", parentDirectory },
+                { "(filename)", fileName },
+                { "(f)", fileName },
+                { "(F)", fileName.ToUpperInvariant() },
+                { "(outputext)", outputExtension },
+                { "(o)", outputExtension },
+                { "(O)", outputExtension.ToUpperInvariant() },
+                { "(inputext)", inputExtension },
+                { "(i)", inputExtension },
+                { "(I)", inputExtension.ToUpperInvariant() },
+                { "(n:i)", numberIndex.ToString() },
+                { "(n:c)", numberMax.ToString() },
+            };
 
             string myDocumentsFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "\\";
-            outputPath = outputPath.Replace("(p:d)", myDocumentsFolder);
-            outputPath = outputPath.Replace("(p:documents)", myDocumentsFolder);
+            replacements.Add("(p:d)", myDocumentsFolder);
+            replacements.Add("(p:documents)", myDocumentsFolder);
 
             string myMusicFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyMusic) + "\\";
-            outputPath = outputPath.Replace("(p:m)", myMusicFolder);
-            outputPath = outputPath.Replace("(p:music)", myMusicFolder);
+            replacements.Add("(p:m)", myMusicFolder);
+            replacements.Add("(p:music)", myMusicFolder);
 
             string myVideoFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyVideos) + "\\";
-            outputPath = outputPath.Replace("(p:v)", myVideoFolder);
-            outputPath = outputPath.Replace("(p:videos)", myVideoFolder);
+            replacements.Add("(p:v)", myVideoFolder);
+            replacements.Add("(p:videos)", myVideoFolder);
 
             string myPictureFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures) + "\\";
-            outputPath = outputPath.Replace("(p:p)", myPictureFolder);
-            outputPath = outputPath.Replace("(p:pictures)", myPictureFolder);
+            replacements.Add("(p:p)", myPictureFolder);
+            replacements.Add("(p:pictures)", myPictureFolder);
 
             for (int index = 0; index < directories.Length; index++)
             {
-                outputPath = outputPath.Replace($"(d{directories.Length - index - 1})", directories[index]);
-                outputPath = outputPath.Replace($"(D{directories.Length - index - 1})", directories[index].ToUpperInvariant());
+                replacements.Add($"(d{directories.Length - index - 1})", directories[index]);
+                replacements.Add($"(D{directories.Length - index - 1})", directories[index].ToUpperInvariant());
             }
 
-            outputPath = outputPath.Replace("(n:i)", numberIndex.ToString());
-            outputPath = outputPath.Replace("(n:c)", numberMax.ToString());
+            // Match only the original template. Inserted filenames and folders are literal data.
+            string outputPath = templateTokenRegex.Replace(outputFilePathTemplate, match =>
+            {
+                if (match.Groups["format"].Success)
+                {
+                    return DateTime.Now.ToString(match.Groups["format"].Value).Replace('/', '-').Replace(':', '\'');
+                }
 
-            outputPath = dateRegex.Replace(outputPath, match => DateTime.Now.ToString(match.Groups["format"].Value).Replace('/', '-').Replace(':', '\''));
+                return replacements.TryGetValue(match.Value, out string replacement) ? replacement : match.Value;
+            });
 
             outputPath += "." + outputExtension;
 
