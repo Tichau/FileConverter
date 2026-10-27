@@ -313,6 +313,7 @@
     <ConversionPreset Name="To Wav" OutputType="Wav" IsDefaultSettings="true">
         <InputTypes>aac</InputTypes>
         <InputTypes>aiff</InputTypes>
+        <InputTypes>amr</InputTypes>
         <InputTypes>ape</InputTypes>
         <InputTypes>flac</InputTypes>
         <InputTypes>m4a</InputTypes>
@@ -349,6 +350,7 @@
     <ConversionPreset Name="To Mp3" OutputType="Mp3" IsDefaultSettings="true">
         <InputTypes>aac</InputTypes>
         <InputTypes>aiff</InputTypes>
+        <InputTypes>amr</InputTypes>
         <InputTypes>ape</InputTypes>
         <InputTypes>flac</InputTypes>
         <InputTypes>m4a</InputTypes>
@@ -1983,6 +1985,7 @@
         <InputTypes>wmv</InputTypes>
         <InputTypes>aac</InputTypes>
         <InputTypes>aiff</InputTypes>
+        <InputTypes>amr</InputTypes>
         <InputTypes>ape</InputTypes>
         <InputTypes>flac</InputTypes>
         <InputTypes>m4a</InputTypes>
@@ -2020,6 +2023,7 @@
         <InputTypes>wmv</InputTypes>
         <InputTypes>aac</InputTypes>
         <InputTypes>aiff</InputTypes>
+        <InputTypes>amr</InputTypes>
         <InputTypes>ape</InputTypes>
         <InputTypes>flac</InputTypes>
         <InputTypes>m4a</InputTypes>
@@ -2057,6 +2061,7 @@
         <InputTypes>wmv</InputTypes>
         <InputTypes>aac</InputTypes>
         <InputTypes>aiff</InputTypes>
+        <InputTypes>amr</InputTypes>
         <InputTypes>ape</InputTypes>
         <InputTypes>flac</InputTypes>
         <InputTypes>m4a</InputTypes>
@@ -2094,6 +2099,7 @@
         <InputTypes>wmv</InputTypes>
         <InputTypes>aac</InputTypes>
         <InputTypes>aiff</InputTypes>
+        <InputTypes>amr</InputTypes>
         <InputTypes>ape</InputTypes>
         <InputTypes>flac</InputTypes>
         <InputTypes>m4a</InputTypes>
