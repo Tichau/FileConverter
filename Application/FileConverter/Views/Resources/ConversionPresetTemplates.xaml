@@ -521,6 +521,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <!--Quality-->
             <Label Content="{x:Static project:Resources.Quality}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right"/>
@@ -562,6 +563,7 @@
                 <RadioButton Content="{x:Static project:Resources.TwoSeventyDegreesRotationTitle}" ToolTip="{x:Static project:Resources.TwoSeventyDegreesRotationTooltip}" Margin="7"
                                  IsChecked="{Binding Settings, ConverterParameter=ImageRotation|270, Converter={StaticResource ConversionSettingsEquals}, Mode=TwoWay}"/>
             </StackPanel>
+            <CheckBox Grid.Row="3" Grid.Column="1" Margin="0,5,0,5" Content="{x:Static project:Resources.ProgressiveJpeg}" IsChecked="{Binding Settings, ConverterParameter=ImageProgressive|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" />
         </Grid>
     </DataTemplate>
 
