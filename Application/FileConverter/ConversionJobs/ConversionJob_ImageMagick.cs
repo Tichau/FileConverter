@@ -15,6 +15,16 @@ namespace FileConverter.ConversionJobs
         private bool isInputFilePdf;
         private int pageCount;
 
+        private bool IsInputFileTiff
+        {
+            get
+            {
+                string extension = System.IO.Path.GetExtension(this.InputFilePath);
+                return string.Equals(extension, ".tif", StringComparison.OrdinalIgnoreCase) ||
+                       string.Equals(extension, ".tiff", StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
         public ConversionJob_ImageMagick() : base()
         {
         }
@@ -40,6 +50,15 @@ namespace FileConverter.ConversionJobs
 
         protected override int GetOutputFilesCount()
         {
+            if (this.IsInputFileTiff)
+            {
+                using (MagickImageCollection images = new MagickImageCollection())
+                {
+                    images.Ping(this.InputFilePath);
+                    return images.Count;
+                }
+            }
+
             if (System.IO.Path.GetExtension(this.InputFilePath).ToLowerInvariant() == ".pdf")
             {
                 using (MagickImageCollection images = new MagickImageCollection())
@@ -67,6 +86,10 @@ namespace FileConverter.ConversionJobs
             if (this.isInputFilePdf)
             {
                 this.ConvertPdf();
+            }
+            else if (this.IsInputFileTiff)
+            {
+                this.ConvertTiff();
             }
             else
             {
@@ -105,6 +128,31 @@ namespace FileConverter.ConversionJobs
                 {
                     Debug.Log($"Load image {this.InputFilePath} succeed.");
                     this.ConvertImage(image);
+                }
+            }
+        }
+
+        private void ConvertTiff()
+        {
+            this.UserState = Properties.Resources.ConversionStateReadDocument;
+
+            using (MagickImageCollection images = new MagickImageCollection())
+            {
+                images.Read(this.InputFilePath);
+                Debug.Log($"Load TIFF {this.InputFilePath} succeed.");
+                this.pageCount = images.Count;
+                this.UserState = Properties.Resources.ConversionStateConversion;
+
+                foreach (MagickImage image in images)
+                {
+                    if (this.CancelIsRequested)
+                    {
+                        return;
+                    }
+
+                    Debug.Log($"Write page {this.CurrentOutputFilePathIndex + 1}/{this.pageCount}.");
+                    this.ConvertImage(image);
+                    this.CurrentOutputFilePathIndex++;
                 }
             }
         }
