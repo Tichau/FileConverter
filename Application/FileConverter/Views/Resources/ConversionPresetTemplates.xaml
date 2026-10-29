@@ -651,6 +651,12 @@
             <DataTrigger Binding="{Binding OutputType}" Value="Png">
                 <Setter Property="ContentTemplate" Value="{StaticResource PngSettingsDataTemplate}"/>
             </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Bmp">
+                <Setter Property="ContentTemplate" Value="{StaticResource PngSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Tiff">
+                <Setter Property="ContentTemplate" Value="{StaticResource PngSettingsDataTemplate}"/>
+            </DataTrigger>
             <DataTrigger Binding="{Binding OutputType}" Value="Wav">
                 <Setter Property="ContentTemplate" Value="{StaticResource WavSettingsDataTemplate}"/>
             </DataTrigger>

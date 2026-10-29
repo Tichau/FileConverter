@@ -518,7 +518,21 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoFramesPerSecond, "15");
                     break;
 
+                case OutputType.Bmp:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
+                    break;
+
                 case OutputType.Png:
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
+                    break;
+
+                case OutputType.Tiff:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
