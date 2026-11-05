@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverterExtension", "Application\FileConverterExtension\FileConverterExtension.csproj", "{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter.ModernShell", "Application\ModernShell\FileConverter.ModernShell.csproj", "{7C9ECA93-2F87-4AC1-9F51-8AB135CC5F90}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter", "Application\FileConverter\FileConverter.csproj", "{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}"
 EndProject
 Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Installer", "Installer\Installer.wixproj", "{F14673DF-DF38-44B4-AB1D-99A59182C24C}"
@@ -19,6 +21,10 @@ Global
 		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Debug|x64.Build.0 = Debug|x64
 		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Release|x64.ActiveCfg = Release|x64
 		{0C44CA69-42D6-4357-BDFD-83069D1ABA2F}.Release|x64.Build.0 = Release|x64
+		{7C9ECA93-2F87-4AC1-9F51-8AB135CC5F90}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7C9ECA93-2F87-4AC1-9F51-8AB135CC5F90}.Debug|x64.Build.0 = Debug|Any CPU
+		{7C9ECA93-2F87-4AC1-9F51-8AB135CC5F90}.Release|x64.ActiveCfg = Release|Any CPU
+		{7C9ECA93-2F87-4AC1-9F51-8AB135CC5F90}.Release|x64.Build.0 = Release|Any CPU
 		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Debug|x64.ActiveCfg = Debug|x64
 		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Debug|x64.Build.0 = Debug|x64
 		{D27A76D2-43E4-43CC-9DA3-334B0B46F4E5}.Release|x64.ActiveCfg = Release|x64

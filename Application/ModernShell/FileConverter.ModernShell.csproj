@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <EnableComHosting>true</EnableComHosting>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>FileConverter.ModernShell</AssemblyName>
+    <RootNamespace>FileConverter.ModernShell</RootNamespace>
+  </PropertyGroup>
+</Project>
