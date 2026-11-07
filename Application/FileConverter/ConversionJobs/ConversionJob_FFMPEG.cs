@@ -446,6 +446,11 @@ namespace FileConverter.ConversionJobs
                 {
                     using (Process exeProcess = Process.Start(this.ffmpegProcessStartInfo))
                     {
+                        // ffmpeg writes '-progress pipe:1' data to stdout. It must be drained, otherwise the pipe buffer
+                        // fills up after a few seconds of conversion and ffmpeg blocks forever (conversion hangs).
+                        exeProcess.OutputDataReceived += (sender, args) => { };
+                        exeProcess.BeginOutputReadLine();
+
                         using (StreamReader reader = exeProcess.StandardError)
                         {
                             while (!reader.EndOfStream)
