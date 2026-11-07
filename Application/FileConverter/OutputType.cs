@@ -7,6 +7,7 @@ namespace FileConverter
         None,
 
         Aac,
+        AnimatedWebp,
         Avi,
         Avif,
         Flac,
