@@ -140,7 +140,7 @@ namespace FileConverter.ConversionJobs
                         transformArgs += $"fps={framesPerSecond}";
 
                         string videoFilteringArgs = ConversionJob_FFMPEG.Encapsulate("-vf", transformArgs);
-                        string encoderArgs = $"-c:v libwebp_anim -lossless 0 -quality {videoEncodingQuality} -loop 0 -an {videoFilteringArgs}";
+                        string encoderArgs = $"-c:v libwebp -lossless 0 -quality {videoEncodingQuality} -loop 0 -an {videoFilteringArgs}";
                         string arguments = $"{baseArgs} -i \"{this.InputFilePath}\" {encoderArgs} \"{this.OutputFilePath}\"";
 
                         this.ffmpegArgumentStringByPass.Add(new FFMpegPass(arguments));
@@ -469,6 +469,8 @@ namespace FileConverter.ConversionJobs
                 {
                     using (Process exeProcess = Process.Start(this.ffmpegProcessStartInfo))
                     {
+                        exeProcess.BeginOutputReadLine();
+
                         using (StreamReader reader = exeProcess.StandardError)
                         {
                             while (!reader.EndOfStream)
