@@ -91,6 +91,11 @@ namespace FileConverter.ConversionJobs
                         readSettings.Format = MagickFormat.Dng;
                         break;
 
+                    case ".jxl":
+                        // Explicitly set JXL format for proper reading
+                        readSettings.Format = MagickFormat.Jxl;
+                        break;
+
                     case ".gif":
                         // Get the first frame of the gif for conversion.
                         // Maybe in the future make this user selectable.
@@ -237,6 +242,11 @@ namespace FileConverter.ConversionJobs
                     break;
 
                 case OutputType.Webp:
+                    image.Quality = this.ConversionPreset.GetSettingsValue<uint>(ConversionPreset.ConversionSettingKeys.ImageQuality);
+                    break;
+
+                case OutputType.Jxl:
+                    // The JXL encoder translates quality to distance (quality >= 100 means lossless).
                     image.Quality = this.ConversionPreset.GetSettingsValue<uint>(ConversionPreset.ConversionSettingKeys.ImageQuality);
                     break;
 

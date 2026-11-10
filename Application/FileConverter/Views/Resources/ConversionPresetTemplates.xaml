@@ -633,6 +633,12 @@
             <DataTrigger Binding="{Binding OutputType}" Value="Jpg">
                 <Setter Property="ContentTemplate" Value="{StaticResource JpgSettingsDataTemplate}"/>
             </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Jxl">
+                <Setter Property="ContentTemplate" Value="{StaticResource JpgSettingsDataTemplate}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding OutputType}" Value="Avif">
+                <Setter Property="ContentTemplate" Value="{StaticResource JpgSettingsDataTemplate}"/>
+            </DataTrigger>
             <DataTrigger Binding="{Binding OutputType}" Value="Mkv">
                 <Setter Property="ContentTemplate" Value="{StaticResource MkvSettingsDataTemplate}"/>
             </DataTrigger>

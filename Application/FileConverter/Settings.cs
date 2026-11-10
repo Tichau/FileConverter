@@ -83,8 +83,18 @@ namespace FileConverter
                 this.applicationLanguage = value;
                 if (this.applicationLanguage != null)
                 {
-                    System.Threading.Thread.CurrentThread.CurrentCulture = this.applicationLanguage;
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = this.applicationLanguage;
+                    // Applying the culture can throw on corner cases (e.g. invalid culture
+                    // or satellite assembly missing). We never want this to bubble up and
+                    // cause the Settings window to silently close without saving. See #750.
+                    try
+                    {
+                        System.Threading.Thread.CurrentThread.CurrentCulture = this.applicationLanguage;
+                        System.Threading.Thread.CurrentThread.CurrentUICulture = this.applicationLanguage;
+                    }
+                    catch (System.Exception exception)
+                    {
+                        Diagnostics.Debug.LogError($"Failed to apply application language '{this.applicationLanguage.Name}': {exception.Message}");
+                    }
                 }
 
                 this.OnPropertyChanged();

@@ -77,9 +77,13 @@ namespace FileConverter.ConversionJobs
 
             this.ffmpegProcessStartInfo = new ProcessStartInfo(ffmpegPath)
             {
-                CreateNoWindow = true, 
-                UseShellExecute = false, 
-                RedirectStandardOutput = true, 
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                // Do NOT redirect stdout: ffmpeg does not write to stdout in our usage and
+                // redirecting it without reading would eventually fill the pipe buffer and
+                // deadlock the process. See upstream PR #732 and issues #749 #740 #739
+                // #716 #703 #700 (the "v2.2 converting process is getting stuck" regression).
+                RedirectStandardOutput = false,
                 RedirectStandardError = true
             };
 
@@ -88,7 +92,10 @@ namespace FileConverter.ConversionJobs
 
         protected virtual void FillFFMpegArgumentsList()
         {
-            const string baseArgs = "-n -progress pipe:1";
+            // "-progress pipe:1" would send structured progress data to stdout, but since
+            // stdout is no longer redirected (see above), we must not pass this flag.
+            // Progress is still parsed from stderr via the legacy "size=... time=..." format.
+            const string baseArgs = "-n";
 
             bool customCommandEnabled = this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand);
             if (customCommandEnabled)
