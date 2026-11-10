@@ -68,6 +68,11 @@ namespace FileConverter.Services
                 Diagnostics.Debug.Log($"Failed to check upgrade: {exception.Message}.");
             }
 
+            if (task == null)
+            {
+                return null;
+            }
+
             UpgradeVersionDescription versionDescription = await task;
 
             if (versionDescription == null)
@@ -155,7 +160,7 @@ namespace FileConverter.Services
         private async Task<UpgradeVersionDescription> DownloadLatestVersionDescription()
         {
 #if BUILD32
-            Uri uri = new Uri(Helpers.BaseURI + "version (x86).xml");
+            Uri uri = new Uri(UpgradeService.BaseURI + "version (x86).xml");
 #else
             Uri uri = new Uri(UpgradeService.BaseURI + "version.xml");
 #endif
