@@ -45,6 +45,7 @@ namespace FileConverter.ConversionJobs
 
             if (conversionPreset.OutputType == OutputType.Avif ||
                 conversionPreset.OutputType == OutputType.Jpg ||
+                conversionPreset.OutputType == OutputType.Jxl ||
                 conversionPreset.OutputType == OutputType.Png ||
                 conversionPreset.OutputType == OutputType.Webp)
             {

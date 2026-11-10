@@ -84,6 +84,8 @@ namespace FileConverter.ViewModels
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Avi));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Png));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Jpg));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Jxl));
+            outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Avif));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Webp));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Ico));
             outputTypeViewModels.Add(new OutputTypeViewModel(OutputType.Gif));

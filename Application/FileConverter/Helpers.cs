@@ -21,7 +21,7 @@ namespace FileConverter
     {
         public static readonly string[] CompatibleInputExtensions = {
             "3gp","3gpp","aac","aiff","ape","arw","avi","avif","bik","bmp","cda","cr2","dds","dng","doc","docx",
-            "exr","flac","flv","gif","heic","ico","jfif","jpg","jpeg","m4a","m4b","m4v","mkv","mov","mp3","mp4",
+            "exr","flac","flv","gif","heic","ico","jfif","jpg","jpeg","jxl","m4a","m4b","m4v","mkv","mov","mp3","mp4",
             "mpg","mpeg","nef","odp","ods","odt","oga","ogg","ogv","opus","pdf","png","ppt","pptx","psd",
             "raf", "rm","svg","tga","tif","tiff", "ts", "vob","wav","webm","webp","wma","wmv","xls","xlsx"
         };
@@ -76,6 +76,7 @@ namespace FileConverter
                 case "jfif":
                 case "jpg":
                 case "jpeg":
+                case "jxl":
                 case "nef":
                 case "png":
                 case "psd":
@@ -259,6 +260,7 @@ namespace FileConverter
                 case OutputType.Avif:
                 case OutputType.Ico:
                 case OutputType.Jpg:
+                case OutputType.Jxl:
                 case OutputType.Png:
                 case OutputType.Webp:
                     return category == InputCategoryNames.Image || category == InputCategoryNames.Document || category == InputCategoryNames.AnimatedImage;

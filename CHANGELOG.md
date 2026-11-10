@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+- New: Support new image input and output format: jxl (JPEG XL), available as a "To Jxl" preset.
+- New: Avif output type is now selectable in the Settings window dropdown and shows the quality slider in the preset editor.
+- Tech: Update Magick.NET-Q16-AnyCPU to v14.17.2 (required for JPEG XL support, includes libjxl 0.12.0).
+
 ## Version 2.2.1 (UCHIHAHA103 fork hotfix)
 
 - Fixes: **Language setting has no effect** (upstream #593, #606, #609, #646, #667, #673, #690, #692, #735, #737, #750).

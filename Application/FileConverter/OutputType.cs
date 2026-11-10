@@ -13,6 +13,7 @@ namespace FileConverter
         Gif,
         Ico,
         Jpg,
+        Jxl,
         Mkv,
         Mp3,
         Mp4,
