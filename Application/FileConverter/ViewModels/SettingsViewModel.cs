@@ -9,6 +9,7 @@ namespace FileConverter.ViewModels
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
+    using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -44,6 +45,7 @@ namespace FileConverter.ViewModels
         private RelayCommand removePresetCommand;
         private RelayCommand saveCommand;
         private RelayCommand<CancelEventArgs> closeCommand;
+        private RelayCommand restoreDefaultSettingsCommand;
 
         private ListCollectionView outputTypes;
         private CultureInfo[] supportedCultures;
@@ -67,6 +69,7 @@ namespace FileConverter.ViewModels
             this.removePresetCommand = new RelayCommand(this.RemoveSelectedPreset, this.CanRemoveSelectedPreset);
             this.saveCommand = new RelayCommand(this.SaveSettings, this.CanSaveSettings);
             this.closeCommand = new RelayCommand<CancelEventArgs>(this.CloseSettings);
+            this.restoreDefaultSettingsCommand = new RelayCommand(this.RestoreDefaultSettings);
 
             ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             this.Settings = settingsService.Settings;
@@ -288,6 +291,8 @@ namespace FileConverter.ViewModels
 
         public ICommand CloseCommand => this.closeCommand;
 
+        public ICommand RestoreDefaultSettingsCommand => this.restoreDefaultSettingsCommand;
+
         public TreeViewSelectionBehavior.IsChildOfPredicate PresetsHierarchyPredicate => (object nodeA, object nodeB) =>
             {
                 if (nodeA is PresetNode)
@@ -480,6 +485,30 @@ namespace FileConverter.ViewModels
             // Save changes.
             ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             settingsService.SaveSettings();
+
+            INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
+            navigationService.Close(Pages.Settings, false);
+        }
+
+        private void RestoreDefaultSettings()
+        {
+            MessageBoxResult result = MessageBox.Show(
+                Properties.Resources.RestoreDefaultSettingsConfirmation,
+                Properties.Resources.RestoreDefaultSettings,
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
+            settingsService.ResetSettings();
+
+            // The view model is a singleton, refresh it so the window shows default settings next time it is opened.
+            this.Settings = settingsService.Settings;
+            this.InitializePresetFolders();
 
             INavigationService navigationService = Ioc.Default.GetRequiredService<INavigationService>();
             navigationService.Close(Pages.Settings, false);

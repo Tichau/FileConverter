@@ -115,6 +115,13 @@ namespace FileConverter.Services
             this.Settings = this.Load();
         }
 
+        public void ResetSettings()
+        {
+            // Without user settings file, the application and the shell extension fall back to the default settings.
+            File.Delete(FileConverterExtension.PathHelpers.UserSettingsFilePath);
+            this.Settings = this.Load();
+        }
+
         private Settings Load()
         {
             Settings settings = null;
