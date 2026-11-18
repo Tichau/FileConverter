@@ -14,5 +14,7 @@ namespace FileConverter.Services
         void SaveSettings();
 
         void RevertSettings();
+
+        void ResetSettings();
     }
 }

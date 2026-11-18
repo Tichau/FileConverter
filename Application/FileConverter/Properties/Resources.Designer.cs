@@ -1184,6 +1184,24 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore default settings.
+        /// </summary>
+        public static string RestoreDefaultSettings {
+            get {
+                return ResourceManager.GetString("RestoreDefaultSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All your settings and custom presets will be replaced by the default ones. Do you want to continue?.
+        /// </summary>
+        public static string RestoreDefaultSettingsConfirmation {
+            get {
+                return ResourceManager.GetString("RestoreDefaultSettingsConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rotate :.
         /// </summary>
         public static string Rotate {

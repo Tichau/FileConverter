@@ -589,6 +589,12 @@ use maj for uppercase version</value>
   <data name="ErrorCantLoadSettings" xml:space="preserve">
     <value>Can't load file converter user settings. Do you want to fall back to default settings ?</value>
   </data>
+  <data name="RestoreDefaultSettings" xml:space="preserve">
+    <value>Restore default settings</value>
+  </data>
+  <data name="RestoreDefaultSettingsConfirmation" xml:space="preserve">
+    <value>All your settings and custom presets will be replaced by the default ones. Do you want to continue?</value>
+  </data>
   <data name="CopyFilesInClipboardAfterConversion" xml:space="preserve">
     <value>Copy files in clipboard after conversion</value>
   </data>
