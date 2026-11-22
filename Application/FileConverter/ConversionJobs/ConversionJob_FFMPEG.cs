@@ -446,6 +446,9 @@ namespace FileConverter.ConversionJobs
                 {
                     using (Process exeProcess = Process.Start(this.ffmpegProcessStartInfo))
                     {
+                        // Drain FFmpeg's progress output so it cannot block on a full stdout pipe.
+                        exeProcess.BeginOutputReadLine();
+
                         using (StreamReader reader = exeProcess.StandardError)
                         {
                             while (!reader.EndOfStream)

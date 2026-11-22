@@ -1,6 +1,6 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.2">
   <PropertyGroup>
-    <ProductVersion>2.2.0</ProductVersion>
+    <ProductVersion>2.2.1</ProductVersion>
     <OutputName>FileConverter-setup</OutputName> <!-- https://github.com/firegiant/HeatWaveSupport/issues/73 -->
       <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
@@ -40,6 +40,5 @@
       <SuppressRegistry>true</SuppressRegistry>
     </HarvestDirectory>
   </ItemGroup>
-  <!-- congigure the project to sign the installer. Comment this line to produce an unsigned installer. -->
-  <Import Project=".\Installer.sign" Condition=" '$(Configuration)' == 'Release' " />
+  <Import Project=".\Installer.sign" Condition=" '$(Configuration)' == 'Release' And '$(SkipInstallerSigning)' != 'true' " />
 </Project>

@@ -1,0 +1,57 @@
+name: Publish File Converter MSI
+
+on:
+  push:
+    branches:
+      - codex/fix-ffmpeg-freeze
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.repository == 'Juranik/FileConverter-Fixed'
+    runs-on: windows-2022
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: microsoft/setup-msbuild@v2
+
+      - name: Build unsigned x64 installer
+        run: msbuild FileConverter.sln /restore /m /p:Configuration=Release /p:Platform=x64 /p:SkipInstallerSigning=true
+
+      - name: Verify and name installer
+        shell: pwsh
+        run: |
+          $msi = (Resolve-Path 'Installer/bin/x64/Release/FileConverter-setup.msi').Path
+          $extract = Join-Path $env:RUNNER_TEMP 'FileConverter-msi-check'
+          $log = Join-Path $env:RUNNER_TEMP 'FileConverter-msi-check.log'
+          $arguments = "/a `"$msi`" /qn TARGETDIR=`"$extract`" /l*v `"$log`""
+          $result = Start-Process msiexec.exe -ArgumentList $arguments -Wait -PassThru
+          if ($result.ExitCode -ne 0) {
+            Get-Content -LiteralPath $log -Tail 80 -ErrorAction SilentlyContinue
+            throw "MSI extraction failed with code $($result.ExitCode)."
+          }
+          $built = Get-FileHash 'Application/FileConverter/bin/x64/Release/FileConverter.exe'
+          $packaged = Get-ChildItem -LiteralPath $extract -Recurse -Filter FileConverter.exe |
+            Get-FileHash
+          if (@($packaged).Count -ne 1 -or $built.Hash -ne $packaged.Hash) {
+            throw 'The installer does not contain the executable built by this run.'
+          }
+          Copy-Item -LiteralPath $msi -Destination 'FileConverter-2.2.1-x64-setup.msi'
+          Get-FileHash 'FileConverter-2.2.1-x64-setup.msi'
+
+      - name: Publish GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create v2.2.1 'FileConverter-2.2.1-x64-setup.msi' `
+            --target $env:GITHUB_SHA `
+            --title 'File Converter 2.2.1 (x64)' `
+            --notes 'Fixes a freeze during long FFmpeg conversions by draining the progress output. This fork build includes an unsigned Windows x64 installer.'
