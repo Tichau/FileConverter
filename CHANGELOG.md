@@ -13,6 +13,7 @@
 - Fixes: Issue where wrong preset may be used when trying to convert more than 16 files (issue #614 and #567) (thanks to  cypress-exe)
 - Fixes: Various English grammar corrections and improvements (thanks to One-Hoopy-Frood).
 - Fixes: Traditional Chinese translation issues (thanks to NeKoOuO).
+- Fixes: Scale 720p and 1080p presets stretching portrait and non-16:9 videos (issue #829).
 - Fixes: Vietnamese translation issues (thanks to thaovd).
 - Tech: Update ffmpeg to v8.0.1 and ImageMagick to v14.10.
 - Tech: Remove deprecated dependency (Office). Replace it with NetOffice.
