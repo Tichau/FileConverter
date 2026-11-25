@@ -18,5 +18,7 @@ namespace FileConverter.Services
         void ConvertFilesAsync();
 
         void RegisterConversionJob(ConversionJob conversionJob);
+
+        void RemoveConversionJob(ConversionJob conversionJob);
     }
 }

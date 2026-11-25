@@ -178,6 +178,15 @@ namespace FileConverter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove from queue.
+        /// </summary>
+        public static string RemoveFromQueueTooltip {
+            get {
+                return ResourceManager.GetString("RemoveFromQueueTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Channel count :.
         /// </summary>
         public static string ChannelCountTitle {

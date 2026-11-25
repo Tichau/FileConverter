@@ -16,6 +16,7 @@ namespace FileConverter.Services
     public class ConversionService : ObservableObject, IConversionService
     {
         private readonly List<ConversionJob> conversionJobs = new List<ConversionJob>();
+        private readonly object jobsLock = new object();
 
         private readonly int numberOfConversionThread = 1;
 
@@ -52,7 +53,26 @@ namespace FileConverter.Services
 
         public void RegisterConversionJob(ConversionJob conversionJob)
         {
-            this.conversionJobs.Add(conversionJob);
+            lock (this.jobsLock)
+            {
+                this.conversionJobs.Add(conversionJob);
+            }
+
+            this.OnPropertyChanged(nameof(this.ConversionJobs));
+        }
+
+        public void RemoveConversionJob(ConversionJob conversionJob)
+        {
+            if (conversionJob == null)
+            {
+                throw new ArgumentNullException(nameof(conversionJob));
+            }
+
+            lock (this.jobsLock)
+            {
+                this.conversionJobs.Remove(conversionJob);
+            }
+
             this.OnPropertyChanged(nameof(this.ConversionJobs));
         }
 
@@ -65,9 +85,10 @@ namespace FileConverter.Services
         private void ConvertFiles()
         {
             // Prepare conversions.
-            for (int index = 0; index < this.ConversionJobs.Count; index++)
+            ConversionJob[] jobs = this.GetConversionJobsSnapshot();
+            for (int index = 0; index < jobs.Length; index++)
             {
-                this.ConversionJobs[index].PrepareConversion();
+                jobs[index].PrepareConversion();
             }
 
             System.Collections.Specialized.StringCollection files = new System.Collections.Specialized.StringCollection();
@@ -75,12 +96,14 @@ namespace FileConverter.Services
             Thread[] jobThreads = new Thread[this.numberOfConversionThread];
             while (true)
             {
+                jobs = this.GetConversionJobsSnapshot();
+
                 // Compute conversion flags.
                 ConversionFlags conversionFlags = ConversionFlags.None;
                 bool allJobAreFinished = true;
-                for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
+                for (int jobIndex = 0; jobIndex < jobs.Length; jobIndex++)
                 {
-                    ConversionJob conversionJob = this.conversionJobs[jobIndex];
+                    ConversionJob conversionJob = jobs[jobIndex];
                     allJobAreFinished &= !(conversionJob.State == ConversionState.Ready || conversionJob.State == ConversionState.InProgress);
 
                     if (conversionJob.State == ConversionState.InProgress)
@@ -95,9 +118,9 @@ namespace FileConverter.Services
                 }
 
                 // Start job if possible.
-                for (int jobIndex = 0; jobIndex < this.conversionJobs.Count; jobIndex++)
+                for (int jobIndex = 0; jobIndex < jobs.Length; jobIndex++)
                 {
-                    ConversionJob conversionJob = this.conversionJobs[jobIndex];
+                    ConversionJob conversionJob = jobs[jobIndex];
                     if (conversionJob.State == ConversionState.Ready && conversionJob.CanStartConversion(conversionFlags))
                     {
                         // Find a thread to execute the job.
@@ -145,14 +168,23 @@ namespace FileConverter.Services
             }
 
             bool allConversionsSucceed = true;
-            for (int index = 0; index < this.conversionJobs.Count; index++)
+            ConversionJob[] remainingJobs = this.GetConversionJobsSnapshot();
+            for (int index = 0; index < remainingJobs.Length; index++)
             {
-                allConversionsSucceed &= this.conversionJobs[index].State == ConversionState.Done;
+                allConversionsSucceed &= remainingJobs[index].State == ConversionState.Done;
             }
 
             if (this.ConversionJobsTerminated != null)
             {
                 this.ConversionJobsTerminated.Invoke(this, new ConversionJobsTerminatedEventArgs(allConversionsSucceed));
+            }
+        }
+
+        private ConversionJob[] GetConversionJobsSnapshot()
+        {
+            lock (this.jobsLock)
+            {
+                return this.conversionJobs.ToArray();
             }
         }
 

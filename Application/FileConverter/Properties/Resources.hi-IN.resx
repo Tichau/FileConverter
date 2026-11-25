@@ -556,6 +556,9 @@
   <data name="DuplicatePreset" xml:space="preserve">
     <value>डुप्लिकेट प्रीसेट</value>
   </data>
+  <data name="RemoveFromQueueTooltip" xml:space="preserve">
+    <value>कतार से हटाएँ</value>
+  </data>
   <data name="CancelJobTooltip" xml:space="preserve">
     <value>रद्द करना</value>
   </data>

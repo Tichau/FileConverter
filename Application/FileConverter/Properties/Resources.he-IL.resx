@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -558,6 +558,9 @@ use maj for uppercase version</value>
   </data>
   <data name="DuplicatePreset" xml:space="preserve">
     <value>שכפול קביעה מוגדרת מראש</value>
+  </data>
+  <data name="RemoveFromQueueTooltip" xml:space="preserve">
+    <value>הסר מהתור</value>
   </data>
   <data name="CancelJobTooltip" xml:space="preserve">
     <value>ביטול</value>

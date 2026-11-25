@@ -556,6 +556,9 @@ Sử dụng MAJ để viết hoa phiên bản</value>
   <data name="DuplicatePreset" xml:space="preserve">
     <value>Nhân bản preset</value>
   </data>
+  <data name="RemoveFromQueueTooltip" xml:space="preserve">
+    <value>Xóa khỏi hàng đợi</value>
+  </data>
   <data name="CancelJobTooltip" xml:space="preserve">
     <value>Huỷ bỏ</value>
   </data>
