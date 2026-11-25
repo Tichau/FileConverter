@@ -579,6 +579,9 @@ použijte maj pro verzi s velkými písmeny</value>
   <data name="DuplicatePreset" xml:space="preserve">
     <value>Duplikovat předvolbu</value>
   </data>
+  <data name="RemoveFromQueueTooltip" xml:space="preserve">
+    <value>Odebrat z fronty</value>
+  </data>
   <data name="CancelJobTooltip" xml:space="preserve">
     <value>Zrušit</value>
   </data>

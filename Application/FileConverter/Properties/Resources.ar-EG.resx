@@ -736,6 +736,9 @@ use maj for uppercase version</comment>
     <value>نسخ الضبط</value>
     <comment>Duplicate preset</comment>
   </data>
+  <data name="RemoveFromQueueTooltip" xml:space="preserve">
+    <value>إزالة من قائمة الانتظار</value>
+  </data>
   <data name="CancelJobTooltip" xml:space="preserve">
     <value>إلغاء</value>
     <comment>Cancel</comment>

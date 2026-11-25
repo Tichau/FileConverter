@@ -580,6 +580,9 @@ Use maj para a versão em maiúsculas</value>
   <data name="DuplicatePreset" xml:space="preserve">
     <value>Predefinição duplicada</value>
   </data>
+  <data name="RemoveFromQueueTooltip" xml:space="preserve">
+    <value>Remover da fila</value>
+  </data>
   <data name="CancelJobTooltip" xml:space="preserve">
     <value>Cancelar</value>
   </data>

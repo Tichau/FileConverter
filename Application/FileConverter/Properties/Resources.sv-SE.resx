@@ -529,6 +529,9 @@ det finns en utdatafil.</value>
   <data name="DuplicatePreset" xml:space="preserve">
     <value>Duplicera förinställning</value>
   </data>
+  <data name="RemoveFromQueueTooltip" xml:space="preserve">
+    <value>Ta bort från kö</value>
+  </data>
   <data name="CancelJobTooltip" xml:space="preserve">
     <value>Avbryt</value>
   </data>

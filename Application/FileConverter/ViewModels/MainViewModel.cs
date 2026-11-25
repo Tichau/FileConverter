@@ -24,6 +24,7 @@ namespace FileConverter.ViewModels
         private RelayCommand showSettingsCommand;
         private RelayCommand showDiagnosticsCommand;
         private RelayCommand<CancelEventArgs> closeCommand;
+        private RelayCommand<ConversionJob> removeJobCommand;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -88,6 +89,19 @@ namespace FileConverter.ViewModels
             }
         }
 
+        public ICommand RemoveJobCommand
+        {
+            get
+            {
+                if (this.removeJobCommand == null)
+                {
+                    this.removeJobCommand = new RelayCommand<ConversionJob>(this.RemoveJob, this.CanRemoveJob);
+                }
+
+                return this.removeJobCommand;
+            }
+        }
+
         public ICommand CloseCommand
         {
             get
@@ -99,6 +113,25 @@ namespace FileConverter.ViewModels
 
                 return this.closeCommand;
             }
+        }
+
+        private bool CanRemoveJob(ConversionJob job)
+        {
+            return job != null && job.State == ConversionState.Ready;
+        }
+
+        private void RemoveJob(ConversionJob job)
+        {
+            if (!this.CanRemoveJob(job))
+            {
+                return;
+            }
+
+            IConversionService conversionService = Ioc.Default.GetRequiredService<IConversionService>();
+            conversionService.RemoveConversionJob(job);
+
+            this.ConversionJobs.Remove(job);
+            job.PropertyChanged -= this.ConversionJob_PropertyChanged;
         }
 
         private void Close(CancelEventArgs args)

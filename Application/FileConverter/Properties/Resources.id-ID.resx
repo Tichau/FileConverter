@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 <!--
   Microsoft ResX Schema
@@ -555,6 +555,9 @@ gunakan huruf besar untuk versi kapital</value>
   </data>
   <data name="DuplicatePreset" xml:space="preserve">
     <value>Duplikat preset</value>
+  </data>
+  <data name="RemoveFromQueueTooltip" xml:space="preserve">
+    <value>Hapus dari antrean</value>
   </data>
   <data name="CancelJobTooltip" xml:space="preserve">
     <value>Batal</value>

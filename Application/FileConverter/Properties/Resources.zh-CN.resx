@@ -580,6 +580,9 @@
   <data name="DuplicatePreset" xml:space="preserve">
     <value>复制预设</value>
   </data>
+  <data name="RemoveFromQueueTooltip" xml:space="preserve">
+    <value>从队列中移除</value>
+  </data>
   <data name="CancelJobTooltip" xml:space="preserve">
     <value>取消</value>
   </data>
